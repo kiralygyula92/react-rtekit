@@ -33,25 +33,29 @@
       "type": {
         "name": "string[]"
       },
-      "required": false
+      "required": false,
+      "default": "['http','https','mailto','tel']"
     },
     "allowDataUrls": {
       "type": {
         "name": "boolean | object"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "allowRelative": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "linkRel": {
       "type": {
         "name": "string"
       },
-      "required": false
+      "required": false,
+      "default": "'noopener noreferrer'"
     },
     "transform": {
       "type": {

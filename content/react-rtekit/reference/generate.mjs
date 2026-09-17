@@ -157,13 +157,41 @@ function optionsOf(node) {
   for (const child of node.children ?? []) {
     if (child.kind !== 1024 && child.kind !== 2048) continue;
     const signature = child.signatures?.[0];
+    const fallback = defaultTagOf(child.comment) ?? defaultTagOf(signature?.comment);
     options[child.name] = {
       type: { name: typeName(signature ? { type: 'reflection' } : child.type) },
       required: child.flags?.isOptional !== true,
-      ...(child.defaultValue !== undefined ? { default: child.defaultValue } : {}),
+      ...(child.defaultValue !== undefined
+        ? { default: child.defaultValue }
+        : fallback !== undefined
+          ? { default: fallback }
+          : {}),
     };
   }
   return options;
+}
+
+/**
+ * The value of an `@default` tag.
+ *
+ * `defaultValue` only carries an actual initializer, which an interface property never
+ * has — so reading it alone reported no default for any of the 140 props, and the
+ * reference tables said nothing about what happens if you leave one out.
+ */
+function defaultTagOf(comment) {
+  const tag = comment?.blockTags?.find((entry) => entry.tag === '@default');
+  if (!tag) return undefined;
+  const text = tag.content
+    .map((part) => part.text ?? '')
+    .join('')
+    .trim()
+    // TypeDoc hands back `@default` as a fenced code span when the tag's value looks
+    // like code, which is most of them. The table wants the value, not the fence.
+    .replace(/^```[\w]*\s*/, '')
+    .replace(/\s*```$/, '')
+    .replace(/^`|`$/g, '')
+    .trim();
+  return text === '' ? undefined : text;
 }
 
 // ── build the symbol records ─────────────────────────────────────────────────
@@ -299,6 +327,84 @@ for (const [name, record] of symbols) {
 
 await writeFile(path.join(here, 'index.json'), `${JSON.stringify(index, null, 2)}\n`, 'utf8');
 await writeFile(path.join(here, 'checksums.json'), `${JSON.stringify(checksums, null, 2)}\n`, 'utf8');
+
+// ── the playground's controls, from the same schema ──────────────────────────
+/*
+ * The playground panel is generated, for the reason its own comment used to claim and
+ * could not deliver: "a prop that is not in the schema is a prop nobody can try". A
+ * hand-written control list exposed 40 of 140 props, and nothing noticed the other 100.
+ * Reading `RichTextEditorProps` makes the panel complete by construction, and makes a
+ * new prop appear in it without anyone remembering to add it.
+ */
+const GROUPS = [
+  ['Marks', (name) => /^enable(Bold|Italic|Underline|Strike|Code|SubSup|ClearFormatting)$/.test(name)],
+  ['Blocks', (name) => /^enable(Headings|Lists|CheckList|Blockquote|CodeBlock|HorizontalRule)$/.test(name)],
+  ['Insert', (name) => /^enable(Links|Images|Tables|Emoji|Mentions|MergeTags)$/.test(name)],
+  ['Typography', (name) => /^enable(Color|BackgroundColor|FontFamily|FontSize|Align|Indent)$/.test(name)],
+  ['Tools', (name) => /^enable(History|MarkdownShortcuts|FindReplace|SourceView|Fullscreen|WordCount)$/.test(name)],
+  ['Toolbar', (name) => /^toolbar/i.test(name) || name === 'readOnlyToolbar'],
+  ['Value & sanitization', (name) => /sanitize|paste|autoLink|Protocol|DataUrl/i.test(name)],
+  ['Limits & validation', (name) => /maxLength|required|pastePrompt/i.test(name)],
+  ['State', (name) => /^(disabled|readOnly|fullscreen|defaultFullscreen|autoGrow)$/.test(name)],
+  ['Uploads', (name) => /upload/i.test(name)],
+  ['Accessibility & i18n', (name) => /^(dir|lang|tabIndex|spellCheck|hideLabel|escapeExitsEditor)$/.test(name)],
+  ['Appearance', (name) => /^(unstyled|className|contentClassName|id)$/.test(name)],
+];
+
+/** Which group a prop belongs to; anything unmatched is visible rather than hidden. */
+function groupOf(name) {
+  return GROUPS.find(([, matches]) => matches(name))?.[0] ?? 'Other';
+}
+
+/** A control kind, or `null` for a prop a dropdown cannot drive. */
+function controlFor(type) {
+  if (type === 'boolean') return { kind: 'boolean' };
+  if (type === 'number') return { kind: 'number' };
+  if (type === 'string') return { kind: 'string' };
+  // A union of string literals is a select: `"ltr" | "rtl" | "auto"`.
+  const literals = type.split('|').map((part) => part.trim());
+  if (literals.length > 1 && literals.every((part) => /^"[^"]*"$/.test(part))) {
+    return { kind: 'enum', options: literals.map((part) => part.slice(1, -1)) };
+  }
+  return null;
+}
+
+const propsSchema = symbols.get('RichTextEditorProps');
+const propsStrings = existingStrings.get('RichTextEditorProps.strings.json') ?? {
+  optionDescriptions: {},
+};
+
+const playgroundProps = Object.entries(propsSchema?.schema.options ?? {})
+  .map(([name, option]) => {
+    const control = controlFor(option.type.name);
+    if (!control) return null;
+    return {
+      name,
+      group: groupOf(name),
+      type: option.type.name,
+      ...control,
+      ...(option.default !== undefined ? { default: option.default } : {}),
+      description:
+        propsStrings.optionDescriptions?.[name] ??
+        propsSchema?.prose.optionDescriptions?.[name] ??
+        '',
+    };
+  })
+  .filter((entry) => entry !== null);
+
+// Ordered by the group list, then by the order the interface declares them, which is
+// the order someone reading the props would meet them.
+const order = new Map(GROUPS.map(([name], position) => [name, position]));
+playgroundProps.sort(
+  (a, b) => (order.get(a.group) ?? GROUPS.length) - (order.get(b.group) ?? GROUPS.length),
+);
+
+await mkdir(path.join(root, 'apps/site/src/content'), { recursive: true });
+await writeFile(
+  path.join(root, 'apps/site/src/content/props.json'),
+  `${JSON.stringify(playgroundProps, null, 0)}\n`,
+  'utf8',
+);
 
 /*
  * Missing prose is a warning, not a failure (PPDS §8.5).

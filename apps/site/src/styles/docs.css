@@ -169,10 +169,7 @@
 
 /* A real button: it toggles its section, so it has to be operable and say so. */
 .docs-nav__section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  display: block;
   inline-size: 100%;
   margin: 0;
   padding: 6px 10px;
@@ -193,16 +190,6 @@
 
 .docs-nav__section-title[data-open='true'] {
   background: var(--site-bg-muted);
-}
-
-.docs-nav__chevron {
-  flex: none;
-  color: var(--site-text-muted);
-  transition: transform 120ms ease;
-}
-
-.docs-nav__section-title[data-open='true'] .docs-nav__chevron {
-  transform: rotate(90deg);
 }
 
 /* Indented, and ruled, so a child row reads as belonging to the section above it. */
@@ -742,4 +729,221 @@
     background: var(--site-bg);
     border-right: 0;
   }
+}
+
+/* ── the playground control panel ──────────────────────────────────────────── */
+/*
+ * Generated from `RichTextEditorProps`, so it is 61 controls rather than a handful.
+ * That makes it a list to be searched and filtered rather than read, which is what the
+ * filter row, the collapsible groups and the "changed only" toggle are for.
+ */
+.panel {
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-radius);
+  background: var(--site-bg);
+  overflow: hidden;
+}
+
+.panel__bar {
+  padding: 10px 14px;
+  border-block-end: 1px solid var(--site-border);
+  background: var(--site-bg-muted);
+}
+
+.panel__reset-all {
+  padding: 5px 12px;
+  border: 1px solid var(--site-border);
+  border-radius: 7px;
+  background: var(--site-bg);
+  color: var(--site-text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.panel__reset-all:hover:not(:disabled) {
+  border-color: var(--site-accent);
+  color: var(--site-accent);
+}
+
+.panel__reset-all:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ── sections ──────────────────────────────────────────────────────────────── */
+.panel__section + .panel__section,
+.panel__filter + .panel__groups .panel__section:first-child {
+  border-block-start: 1px solid var(--site-border);
+}
+
+.panel__summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  inline-size: 100%;
+  padding: 9px 14px;
+  border: 0;
+  background: none;
+  color: var(--site-text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  text-align: start;
+  cursor: pointer;
+}
+
+.panel__summary:hover {
+  background: var(--site-bg-muted);
+}
+
+.panel__caret {
+  flex: none;
+  color: var(--site-text-muted);
+  transition: transform 120ms ease;
+}
+
+.panel__caret[data-open='true'] {
+  transform: rotate(90deg);
+}
+
+.panel__summary-count {
+  color: var(--site-text-muted);
+  font-weight: 400;
+}
+
+/* ── the filter row ────────────────────────────────────────────────────────── */
+.panel__filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-block-start: 1px solid var(--site-border);
+}
+
+.panel__count {
+  margin: 0;
+  font-size: 13px;
+  color: var(--site-text-muted);
+  white-space: nowrap;
+}
+
+.panel__count strong {
+  color: var(--site-text);
+  font-weight: 650;
+}
+
+.panel__search {
+  flex: 1;
+  min-inline-size: 180px;
+  padding: 6px 10px;
+  border: 1px solid var(--site-border);
+  border-radius: 7px;
+  background: var(--site-bg);
+  color: var(--site-text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.panel__changed-only {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--site-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* ── the scrolling list ────────────────────────────────────────────────────── */
+.panel__groups {
+  max-block-size: 60vh;
+  overflow-y: auto;
+}
+
+.panel__empty {
+  margin: 0;
+  padding: 20px 14px;
+  font-size: 13px;
+  color: var(--site-text-muted);
+}
+
+.panel__grid,
+.panel__setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px 20px;
+  padding: 6px 14px 18px;
+}
+
+.panel__setup {
+  border-block-start: 1px solid var(--site-border);
+}
+
+/* ── one control ───────────────────────────────────────────────────────────── */
+.control__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-block-end: 5px;
+}
+
+.control__name {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--site-bg-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  color: var(--site-text);
+  cursor: pointer;
+}
+
+/* Only on a changed control, so the panel is not 61 reset buttons. */
+.control__reset {
+  display: grid;
+  place-items: center;
+  inline-size: 20px;
+  block-size: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: var(--site-text-muted);
+  cursor: pointer;
+}
+
+.control__reset:hover {
+  background: var(--site-bg-muted);
+  color: var(--site-accent);
+}
+
+.control__input {
+  inline-size: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--site-border);
+  border-radius: 6px;
+  background: var(--site-bg);
+  color: var(--site-text);
+  font: inherit;
+  font-size: 13px;
+}
+
+/* A changed control is marked on the input, not only by the reset button appearing. */
+.control[data-changed='true'] .control__input {
+  border-color: var(--site-accent);
+}
+
+.control__meta {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--site-text-muted);
+}
+
+.control__meta code {
+  padding: 0 4px;
+  border-radius: 3px;
+  background: var(--site-bg-muted);
+  font-size: 11px;
 }

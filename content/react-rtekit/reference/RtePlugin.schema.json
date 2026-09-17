@@ -105,7 +105,8 @@
       "type": {
         "name": "number"
       },
-      "required": false
+      "required": false,
+      "default": "0"
     }
   },
   "filename": "types/plugin.ts",

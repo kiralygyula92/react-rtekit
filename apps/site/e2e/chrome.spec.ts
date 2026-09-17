@@ -15,6 +15,19 @@ function editor(page: Page) {
   return page.getByRole('textbox', { name: 'Content' });
 }
 
+/**
+ * Chooses a preset in the playground.
+ *
+ * The preset lives in the panel's Setup section, which is collapsed: it is one of the
+ * few choices that remounts the editor, so it sits apart from the props rather than
+ * among them where a change reads as live.
+ */
+async function choosePreset(page: Page, preset: string): Promise<void> {
+  const setup = page.getByRole('button', { name: 'Setup' });
+  if ((await setup.getAttribute('aria-expanded')) === 'false') await setup.click();
+  await page.locator('.panel__setup').getByLabel('Preset').selectOption(preset);
+}
+
 /** Selects the first word of the editor, which is what puts the bubble toolbar up. */
 async function selectFirstWord(page: Page): Promise<void> {
   await editor(page).click();
@@ -216,7 +229,7 @@ test.describe('every button in the full preset does something', () => {
    */
   test.beforeEach(async ({ page }) => {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
   });
 
@@ -260,7 +273,7 @@ test.describe('every button in the full preset does something', () => {
 test.describe('fullscreen', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
   });
 
@@ -315,7 +328,7 @@ test.describe('popovers open under the button that opened them', () => {
    */
   test.beforeEach(async ({ page }) => {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
     await page.locator('.playground__editor [contenteditable="true"]').first().click();
     await page.keyboard.type('anchor me');
@@ -365,7 +378,7 @@ test.describe('popovers open under the button that opened them', () => {
 test.describe('the find and replace panel', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -431,7 +444,7 @@ test.describe('inserting an image from the device', () => {
     // The picker used to appear only when the host supplied `onUpload`, so an editor
     // with no backend had a URL box and no way to use a picture from this machine.
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -458,7 +471,7 @@ test.describe('tables', () => {
   /** Inserts a small table and puts the caret in its first cell. */
   async function insertTable(page: Page) {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -562,7 +575,7 @@ test.describe('check lists', () => {
     // writes `<li data-checked>`, neither with a child element — so a check list was a
     // bulleted list with nothing to tick.
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -617,21 +630,96 @@ test.describe('the playground', () => {
     expect(surface.width).toBeGreaterThan(controls.width - 2);
   });
 
-  test('shows every control in a labelled group', async ({ page }) => {
-    await page.goto('/react-rtekit/demos/playground/');
-    // `toBeVisible` waits for hydration; a bare `count()` does not, and reads zero.
-    await expect(page.getByRole('group', { name: 'Features' })).toBeVisible();
-    expect(await page.locator('.playground__group').count()).toBeGreaterThan(3);
-  });
-
   test('the full preset shows its whole toolbar', async ({ page }) => {
     await page.goto('/react-rtekit/demos/playground/');
-    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
+    await choosePreset(page, 'full');
 
     const toolbar = page.locator('.playground__editor .rte-toolbar');
     await expect(toolbar).toBeVisible();
     // Wrapped onto a second row rather than hidden behind a menu.
     await expect(toolbar.locator('[data-item="overflow"]')).toHaveCount(0);
     expect(await toolbar.locator('[data-toolbar-control]').count()).toBeGreaterThan(20);
+  });
+});
+
+test.describe('the playground control panel', () => {
+  /**
+   * Generated from `RichTextEditorProps`. The old panel was hand-written and exposed 40
+   * of 140 props with nothing noticing the other hundred, so the first assertion here is
+   * about completeness rather than appearance.
+   */
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/react-rtekit/demos/playground/');
+    await expect(page.locator('.panel')).toBeVisible();
+  });
+
+  test('is generated from the props, and says how many there are', async ({ page }) => {
+    await expect(page.locator('.panel__count')).toContainText('Props 61');
+    await expect(page.locator('.panel__count')).toContainText('0 changed');
+  });
+
+  test('groups the props, collapsed except the first', async ({ page }) => {
+    const groups = page.locator('.panel__summary-title');
+    expect(await groups.count()).toBeGreaterThan(8);
+
+    // Only the first group's controls are on screen; the rest are behind a caret.
+    const open = page.locator('.panel__section [aria-expanded="true"]');
+    expect(await open.count()).toBeLessThan(3);
+
+    await page.getByRole('button', { name: /^Toolbar/ }).click();
+    await expect(page.locator('#prop-toolbarPosition')).toBeVisible();
+  });
+
+  test('a control shows its type and its default', async ({ page }) => {
+    await page.getByRole('button', { name: /^Toolbar/ }).click();
+    const control = page.locator('.control').filter({ hasText: 'toolbarPosition' });
+    await expect(control.locator('.control__meta')).toContainText('"bottom" | "top" | "none"');
+    await expect(control.locator('.control__meta')).toContainText("default 'top'");
+  });
+
+  test('a changed value can be reset, and so can all of them', async ({ page }) => {
+    await page.locator('#prop-enableBold').selectOption('false');
+    await expect(page.locator('.panel__count')).toContainText('1 changed');
+
+    // The reset appears only on the control that changed.
+    await expect(page.locator('.control__reset')).toHaveCount(1);
+    await page.locator('.control__reset').click();
+    await expect(page.locator('.panel__count')).toContainText('0 changed');
+
+    await page.locator('#prop-enableBold').selectOption('false');
+    await page.locator('#prop-enableItalic').selectOption('false');
+    await expect(page.locator('.panel__count')).toContainText('2 changed');
+
+    await page.getByRole('button', { name: 'Reset all' }).click();
+    await expect(page.locator('.panel__count')).toContainText('0 changed');
+    await expect(page.locator('#prop-enableBold')).toHaveValue('');
+  });
+
+  test('filtering opens the groups that match', async ({ page }) => {
+    // A filtered list the reader has to open group by group is worse than no filter.
+    await page.getByLabel('Filter props').fill('toolbarOverflow');
+    await expect(page.locator('#prop-toolbarOverflow')).toBeVisible();
+    await expect(page.locator('.control')).toHaveCount(1);
+  });
+
+  test('“changed only” shows just what was touched', async ({ page }) => {
+    // Filtering opens the group it lives in, which is how a reader would reach a prop
+    // that is not in the one group the panel opens with.
+    await page.getByLabel('Filter props').fill('enableTables');
+    await page.locator('#prop-enableTables').selectOption('false');
+    await page.getByLabel('Filter props').fill('');
+    await page.getByLabel('Changed only').check();
+
+    await expect(page.locator('.control')).toHaveCount(1);
+    await expect(page.locator('.control__name')).toHaveText('enableTables');
+  });
+
+  test('a changed prop reaches the editor and the generated code', async ({ page }) => {
+    await page.getByRole('button', { name: /^Toolbar/ }).click();
+    await page.locator('#prop-toolbarPosition').selectOption('none');
+
+    // The toolbar goes, and the snippet says why.
+    await expect(page.locator('.playground__editor .rte-toolbar')).toHaveCount(0);
+    await expect(page.getByTestId('playground-code')).toContainText('toolbarPosition="none"');
   });
 });

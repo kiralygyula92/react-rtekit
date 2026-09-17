@@ -79,16 +79,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                 setOpen(expanded ? null : section.pathname);
               }}
             >
-              <span>{section.title}</span>
-              <svg
-                className="docs-nav__chevron"
-                viewBox="0 0 24 24"
-                width="13"
-                height="13"
-                aria-hidden="true"
-              >
-                <path fill="currentColor" d="M8.6 16.6 13.2 12 8.6 7.4 10 6l6 6-6 6z" />
-              </svg>
+              {section.title}
             </button>
 
             {expanded ? (

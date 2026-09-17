@@ -201,13 +201,15 @@
       "type": {
         "name": "EditorValue"
       },
-      "required": false
+      "required": false,
+      "default": "''"
     },
     "valueFormat": {
       "type": {
         "name": "ValueFormat"
       },
-      "required": false
+      "required": false,
+      "default": "'html'"
     },
     "onChange": {
       "type": {
@@ -225,7 +227,8 @@
       "type": {
         "name": "number"
       },
-      "required": false
+      "required": false,
+      "default": "300"
     },
     "onBlur": {
       "type": {
@@ -267,31 +270,36 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "readOnly": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "autoFocus": {
       "type": {
         "name": "boolean | \"start\" | \"end\""
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "placeholder": {
       "type": {
         "name": "ReactNode"
       },
-      "required": false
+      "required": false,
+      "default": "localization.editor.placeholder"
     },
     "spellCheck": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "dir": {
       "type": {
@@ -309,7 +317,8 @@
       "type": {
         "name": "number"
       },
-      "required": false
+      "required": false,
+      "default": "0"
     },
     "editorRef": {
       "type": {
@@ -321,13 +330,15 @@
       "type": {
         "name": "EditorEngine"
       },
-      "required": false
+      "required": false,
+      "default": "the Lexical adapter"
     },
     "preset": {
       "type": {
         "name": "PresetName"
       },
-      "required": false
+      "required": false,
+      "default": "'standard'"
     },
     "plugins": {
       "type": {
@@ -357,7 +368,8 @@
       "type": {
         "name": "HeadingLevel[]"
       },
-      "required": false
+      "required": false,
+      "default": "[1,2,3]"
     },
     "fontFamilies": {
       "type": {
@@ -375,7 +387,8 @@
       "type": {
         "name": "ColorPaletteConfig"
       },
-      "required": false
+      "required": false,
+      "default": "the 21 classic swatches"
     },
     "mergeTags": {
       "type": {
@@ -393,13 +406,15 @@
       "type": {
         "name": "boolean | SlashMenuConfig"
       },
-      "required": false
+      "required": false,
+      "default": "true in the `full` preset"
     },
     "markdownShortcuts": {
       "type": {
         "name": "boolean | MarkdownShortcutConfig[]"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "maxLength": {
       "type": {
@@ -411,31 +426,36 @@
       "type": {
         "name": "CountUnit"
       },
-      "required": false
+      "required": false,
+      "default": "'characters'"
     },
     "maxLengthBehaviour": {
       "type": {
         "name": "\"warn\" | \"block\""
       },
-      "required": false
+      "required": false,
+      "default": "'block'"
     },
     "showCounter": {
       "type": {
         "name": "boolean | \"always\" | \"nearLimit\""
       },
-      "required": false
+      "required": false,
+      "default": "false, or true when `maxLength` is set"
     },
     "required": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "error": {
       "type": {
         "name": "string | boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "helperText": {
       "type": {
@@ -453,7 +473,8 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "validate": {
       "type": {
@@ -465,19 +486,22 @@
       "type": {
         "name": "SanitizeOption"
       },
-      "required": false
+      "required": false,
+      "default": "'standard'"
     },
     "sanitizeOutput": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "htmlProfile": {
       "type": {
         "name": "HtmlProfile"
       },
-      "required": false
+      "required": false,
+      "default": "'standard'"
     },
     "emailOptions": {
       "type": {
@@ -495,37 +519,43 @@
       "type": {
         "name": "PasteMode | function"
       },
-      "required": false
+      "required": false,
+      "default": "'rich'"
     },
     "pastePrompt": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "autoLinkOnPaste": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "autoLink": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "autoLinkProtocols": {
       "type": {
         "name": "string[]"
       },
-      "required": false
+      "required": false,
+      "default": "['https', 'http', 'mailto']"
     },
     "defaultProtocol": {
       "type": {
         "name": "string"
       },
-      "required": false
+      "required": false,
+      "default": "'https'"
     },
     "linkValidator": {
       "type": {
@@ -537,7 +567,8 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "autosave": {
       "type": {
@@ -549,31 +580,36 @@
       "type": {
         "name": "false | ToolbarConfig"
       },
-      "required": false
+      "required": false,
+      "default": "the preset's toolbar"
     },
     "toolbarPosition": {
       "type": {
         "name": "\"bottom\" | \"top\" | \"none\""
       },
-      "required": false
+      "required": false,
+      "default": "'top'"
     },
     "stickyToolbar": {
       "type": {
         "name": "boolean | object"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "toolbarOverflow": {
       "type": {
         "name": "\"menu\" | \"wrap\" | \"scroll\""
       },
-      "required": false
+      "required": false,
+      "default": "'menu'"
     },
     "floatingToolbar": {
       "type": {
         "name": "boolean | FloatingToolbarConfig"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "bubbleMenuItems": {
       "type": {
@@ -585,7 +621,8 @@
       "type": {
         "name": "string | number"
       },
-      "required": false
+      "required": false,
+      "default": "287 (classic parity)"
     },
     "maxHeight": {
       "type": {
@@ -597,13 +634,15 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "true"
     },
     "resizable": {
       "type": {
         "name": "boolean | \"vertical\""
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "fullscreen": {
       "type": {
@@ -615,7 +654,8 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "footer": {
       "type": {
@@ -627,7 +667,8 @@
       "type": {
         "name": "\"hide\" | \"disable\""
       },
-      "required": false
+      "required": false,
+      "default": "'hide'"
     },
     "renderToolbar": {
       "type": {
@@ -699,13 +740,15 @@
       "type": {
         "name": "string"
       },
-      "required": false
+      "required": false,
+      "default": "'image/*'"
     },
     "maxUploadSize": {
       "type": {
         "name": "number"
       },
-      "required": false
+      "required": false,
+      "default": "5 * 1024 * 1024"
     },
     "onUploadError": {
       "type": {
@@ -789,7 +832,8 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "className": {
       "type": {
@@ -825,13 +869,15 @@
       "type": {
         "name": "TabBehaviour"
       },
-      "required": false
+      "required": false,
+      "default": "'indent' inside lists, otherwise 'focus'"
     },
     "submitOnEnter": {
       "type": {
         "name": "boolean | \"mod\""
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "onSubmit": {
       "type": {
@@ -843,7 +889,8 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     }
   },
   "filename": "types/props.ts",

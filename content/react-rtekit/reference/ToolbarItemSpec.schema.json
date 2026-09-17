@@ -99,13 +99,15 @@
       "type": {
         "name": "ToolbarItemSurface[]"
       },
-      "required": false
+      "required": false,
+      "default": "['toolbar']"
     },
     "order": {
       "type": {
         "name": "number"
       },
-      "required": false
+      "required": false,
+      "default": "0"
     },
     "keywords": {
       "type": {

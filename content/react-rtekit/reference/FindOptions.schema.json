@@ -9,25 +9,29 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "wholeWord": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "regex": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "backwards": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     }
   },
   "filename": "types/editor.ts",

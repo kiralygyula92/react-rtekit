@@ -17,6 +17,7 @@ import {
 import { CodeBlock } from '../components/CodeBlock';
 import { PLAYGROUND_CONTROLS, type ControlSpec, type PlaygroundState } from '../playground/controls';
 import { generateCode, toProps } from '../playground/code';
+import { ControlPanel, type PropState } from '../playground/ControlPanel';
 
 /**
  * The playground.
@@ -41,21 +42,15 @@ function readHash(): Partial<PlaygroundState> {
 }
 
 /**
- * The controls, in their declared groups.
+ * The structural choices, which are not props in the same sense.
  *
- * Every control has carried a `group` since the schema was written and the panel
- * ignored it, so forty options arrived as one undifferentiated column. Computed once at
- * module scope: the schema is static.
+ * A preset, a locale and a theme are resolved when the editor is created, so changing
+ * one remounts it. They live in the panel's Setup section rather than among the props,
+ * where a reader would reasonably expect a change to be live.
  */
-const controlGroups: [string, ControlSpec[]][] = (() => {
-  const byGroup = new Map<string, ControlSpec[]>();
-  for (const control of PLAYGROUND_CONTROLS) {
-    const existing = byGroup.get(control.group);
-    if (existing) existing.push(control);
-    else byGroup.set(control.group, [control]);
-  }
-  return [...byGroup];
-})();
+const SETUP = new Set(['preset', 'locale', 'theme', 'colorScheme', 'density', 'valueFormat']);
+
+const setupControls = PLAYGROUND_CONTROLS.filter((control) => SETUP.has(control.name));
 
 /** The state every control starts in. */
 function initialState(): PlaygroundState {
@@ -67,6 +62,9 @@ function initialState(): PlaygroundState {
 
 export function Playground() {
   const [state, setState] = useState<PlaygroundState>(initialState);
+  // The generated panel's state: only the props that differ from the library's
+  // defaults, so the snippet lists what a reader would actually have to write.
+  const [propState, setPropState] = useState<PropState>({});
   const [value, setValue] = useState<string>('<p>Try the controls on the left.</p>');
   const [events, setEvents] = useState<string[]>([]);
   const [format, setFormat] = useState<FormatState | null>(null);
@@ -75,12 +73,12 @@ export function Playground() {
 
   // The configuration lives in the hash, so a playground link is the whole setup.
   useEffect(() => {
-    const encoded = encodeURIComponent(JSON.stringify(state));
+    const encoded = encodeURIComponent(JSON.stringify({ ...state, ...propState }));
     window.history.replaceState(null, '', `#${encoded}`);
-  }, [state]);
+  }, [state, propState]);
 
-  const props = useMemo(() => toProps(state), [state]);
-  const code = useMemo(() => generateCode(state), [state]);
+  const props = useMemo(() => ({ ...toProps(state), ...propState }), [state, propState]);
+  const code = useMemo(() => generateCode({ ...state, ...propState }), [state, propState]);
   const doc = useMemo(() => htmlToDocument(value), [value]);
 
   const set = (name: string, next: unknown): void => {
@@ -90,14 +88,22 @@ export function Playground() {
   return (
     <div className="playground">
       <aside className="playground__controls" aria-label="Options">
-        {controlGroups.map(([group, controls]) => (
-          <div key={group} className="playground__group" role="group" aria-label={group}>
-            <div className="playground__group-title">{group}</div>
-            {controls.map((control) => (
-              <Control key={control.name} spec={control} value={state[control.name]} onChange={set} />
-            ))}
-          </div>
-        ))}
+        <ControlPanel
+          value={propState}
+          onChange={setPropState}
+          setup={
+            <div className="panel__setup-grid">
+              {setupControls.map((control) => (
+                <Control
+                  key={control.name}
+                  spec={control}
+                  value={state[control.name]}
+                  onChange={set}
+                />
+              ))}
+            </div>
+          }
+        />
       </aside>
 
       <section className="playground__editor" aria-label="Editor">
