@@ -494,11 +494,47 @@ test.describe('tables', () => {
       'Delete column',
       'Delete table',
     ]) {
-      await expect(controls.getByRole('button', { name: label })).toBeVisible();
+      await expect(controls.getByRole('menuitem', { name: label })).toBeVisible();
     }
 
-    await controls.getByRole('button', { name: 'Delete table' }).click();
+    await controls.getByRole('menuitem', { name: 'Delete table' }).click();
     await expect(surface.locator('table')).toHaveCount(0);
+  });
+
+  test('the controls are a stacked menu, not a row of links', async ({ page }) => {
+    // Eight accented text buttons on a wrapping line: every option read as a link, and
+    // nothing separated "Delete table" from "Header row".
+    const surface = await insertTable(page);
+    await surface.locator('td').first().click();
+
+    const controls = page.locator('.rte-table-toolbar');
+    await expect(controls).toBeVisible();
+
+    // Stacked: each row starts at the same x and sits below the one before it.
+    const boxes = [];
+    for (const item of await controls.getByRole('menuitem').all()) {
+      const box = await item.boundingBox();
+      if (box) boxes.push(box);
+    }
+    expect(boxes.length).toBeGreaterThan(6);
+    for (let index = 1; index < boxes.length; index += 1) {
+      expect(boxes[index]!.x).toBeCloseTo(boxes[0]!.x, 0);
+      expect(boxes[index]!.y).toBeGreaterThanOrEqual(boxes[index - 1]!.y + boxes[index - 1]!.height);
+    }
+
+    // And in the ordinary text colour rather than the accent.
+    const accent = await page
+      .locator('.rte-root')
+      .first()
+      .evaluate((element) => getComputedStyle(element).getPropertyValue('--rte-color-accent').trim());
+    const colour = await controls
+      .getByRole('menuitem')
+      .first()
+      .evaluate((element) => getComputedStyle(element).color);
+    expect(colour).not.toBe(accent);
+
+    // Grouped, so the destructive items are set apart from the rest.
+    expect(await controls.locator('[role="separator"]').count()).toBeGreaterThan(1);
   });
 
   test('a row can be added and a column removed', async ({ page }) => {
@@ -507,12 +543,12 @@ test.describe('tables', () => {
     const controls = page.locator('.rte-table-toolbar');
 
     const rows = await surface.locator('tr').count();
-    await controls.getByRole('button', { name: 'Insert row below' }).click();
+    await controls.getByRole('menuitem', { name: 'Insert row below' }).click();
     await expect(surface.locator('tr')).toHaveCount(rows + 1);
 
     const cells = await surface.locator('tr').first().locator('td').count();
     await surface.locator('td').first().click();
-    await controls.getByRole('button', { name: 'Delete column' }).click();
+    await controls.getByRole('menuitem', { name: 'Delete column' }).click();
     await expect(surface.locator('tr').first().locator('td')).toHaveCount(cells - 1);
   });
 });

@@ -541,12 +541,23 @@
     cursor: pointer;
   }
 
+  /*
+   * The table controls, as a menu rather than a row.
+   *
+   * Eight text buttons on a wrapping line read as eight links and gave no hint which
+   * of them removed something. The rows are `.rte-menu__item`, so they look and behave
+   * like every other menu in the editor.
+   */
   .rte-table-toolbar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+    flex-direction: column;
     padding: 4px;
-    max-inline-size: 320px;
+    min-inline-size: 188px;
+  }
+
+  .rte-table-toolbar__separator {
+    block-size: 1px;
+    margin-block: 4px;
   }
 
   /* The image itself, inside the content. */

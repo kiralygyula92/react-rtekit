@@ -90,15 +90,17 @@ export default [
     // did nothing until the cleanup pass found the module unreferenced. Wiring it up cost
     // this budget a kilobyte and gained a feature the documentation already promised.
     //
-    // A further 0.4 kB is the emoji picker. The same story: the emoji set was already in
-    // this graph for the `:` trigger, the toolbar button was already in the `full`
-    // preset, and between them sat a button wired to `insertEmoji` with no character to
-    // insert and a picker slot whose default rendered an empty `<div>`. What the bytes
-    // buy is the panel that joins them.
+    // A further 1 kB is the chrome that was there and did not work. Each piece was
+    // already in this graph — the emoji set for the `:` trigger, the table commands, the
+    // find panel, the toolbar item table — and what was missing was the part that joins
+    // them to a button: a picker behind the emoji item, which was wired to `insertEmoji`
+    // with no character to insert; the rows of the table menu, whose slot default
+    // rendered an empty `<div>`; the grouping and stacking that made both readable. The
+    // bytes are the joins, not new features.
     name: 'RichTextEditor (all chrome, all plugins)',
     path: 'dist/index.js',
     import: '{ RichTextEditor }',
-    limit: '66 kB',
+    limit: '67 kB',
     gzip: true,
     ignore: PEERS,
   },

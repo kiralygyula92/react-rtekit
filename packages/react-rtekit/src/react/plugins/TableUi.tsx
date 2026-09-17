@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useEditorContext, useLocalization, useRteSlots } from '../context.js';
 import { resolveMessage } from '../localization.js';
 import { Popover } from '../ui/Popover.js';
-import { Button } from '../ui/primitives.js';
 import { toolbarControl } from './anchor.js';
 
 /**
@@ -90,27 +89,55 @@ export function TableUi() {
           label={resolveMessage(t.table.insert)}
           noPadding
         >
-          <TableToolbar role="group" aria-label={resolveMessage(t.toolbar.table)}>
+          {/*
+           * A menu, in the same rows every other menu in the editor uses. These were
+           * eight text buttons on a wrapping line: accented, so every option read as a
+           * link, and ordered by nothing in particular, so "Delete table" sat next to
+           * "Header row" and the two destructive items were mixed in with the rest.
+           * Grouped and stacked, the list can be read down rather than searched.
+           */}
+          <TableToolbar role="menu" aria-label={resolveMessage(t.toolbar.table)}>
             {(
               [
-                ['addRowBefore', t.table.addRowBefore],
-                ['addRowAfter', t.table.addRowAfter],
-                ['addColumnBefore', t.table.addColumnBefore],
-                ['addColumnAfter', t.table.addColumnAfter],
-                ['deleteRow', t.table.deleteRow],
-                ['deleteColumn', t.table.deleteColumn],
-                ['toggleHeaderRow', t.table.headerRow],
-                ['deleteTable', t.table.deleteTable],
+                [
+                  ['addRowBefore', t.table.addRowBefore],
+                  ['addRowAfter', t.table.addRowAfter],
+                ],
+                [
+                  ['addColumnBefore', t.table.addColumnBefore],
+                  ['addColumnAfter', t.table.addColumnAfter],
+                ],
+                [['toggleHeaderRow', t.table.headerRow]],
+                [
+                  ['deleteRow', t.table.deleteRow],
+                  ['deleteColumn', t.table.deleteColumn],
+                  ['deleteTable', t.table.deleteTable],
+                ],
               ] as const
-            ).map(([command, label]) => (
-              <Button
-                key={command}
-                onClick={() => {
-                  editor.exec(command);
-                }}
-              >
-                {resolveMessage(label)}
-              </Button>
+            ).map((group, groupIndex) => (
+              // Positional groups; their contents are what identifies them.
+              <Fragment key={`group-${groupIndex}`}>
+                {groupIndex > 0 ? (
+                  <div className="rte-table-toolbar__separator" role="separator" />
+                ) : null}
+                {group.map(([command, label]) => (
+                  <button
+                    key={command}
+                    type="button"
+                    role="menuitem"
+                    className="rte-menu__item"
+                    onMouseDown={(event) => {
+                      // The caret stays in the cell the command applies to.
+                      event.preventDefault();
+                    }}
+                    onClick={() => {
+                      editor.exec(command);
+                    }}
+                  >
+                    {resolveMessage(label)}
+                  </button>
+                ))}
+              </Fragment>
             ))}
           </TableToolbar>
         </Popover>

@@ -433,6 +433,10 @@
     border-block-start: 1px solid var(--rte-color-border-subtle);
   }
 
+  .rte-table-toolbar__separator {
+    background: var(--rte-color-border-subtle);
+  }
+
   .rte-find-panel__count {
     font-size: var(--rte-font-size-sm);
     color: var(--rte-color-text-muted);
