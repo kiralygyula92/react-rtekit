@@ -11,3 +11,4 @@ new ADR that says so, not editing the old one.
 | [004](./004-interop-profiles.md) | HTML interop profiles instead of a Quill engine | Accepted |
 | [005](./005-removing-third-party-dependencies.md) | Removing third-party dependencies | Superseded by 006 |
 | [006](./006-an-in-house-engine.md) | An in-house engine, replacing Lexical | Done |
+| [007](./007-deploying-the-docs-site.md) | Deploying the docs site, and measuring it | Done |
