@@ -104,7 +104,7 @@ const API_TO_PAGE = {
 };
 
 /** One row: the §10 decision for a single legacy URL. */
-function decide(route, page) {
+function decide(route) {
   const to = (slug) => `${NS}/${slug}${slug.endsWith('/') ? '' : '/'}`;
 
   if (route === '/') {
@@ -159,7 +159,7 @@ function decide(route, page) {
 const crawl = JSON.parse(await readFile(path.join(root, 'audit/crawl.json'), 'utf8'));
 const rows = crawl
   .map((page) => {
-    const [type, archetype, to, action] = decide(page.route, page);
+    const [type, archetype, to, action] = decide(page.route);
     const redirect = to === page.route ? '(same URL)' : `301 ${page.route} -> ${to}`;
     return [page.route, type, archetype, to, action, redirect];
   })
