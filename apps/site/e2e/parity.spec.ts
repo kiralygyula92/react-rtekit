@@ -25,10 +25,7 @@ async function css(page: Page, selector: string, property: string): Promise<stri
   return page
     .locator(selector)
     .first()
-    .evaluate(
-      (element, name) => getComputedStyle(element).getPropertyValue(name),
-      property,
-    );
+    .evaluate((element, name) => getComputedStyle(element).getPropertyValue(name), property);
 }
 
 test.beforeEach(async ({ page }) => {
@@ -154,10 +151,14 @@ test.describe('the bugs that only show in a browser', () => {
     expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual(['Align left']);
 
     await page.getByRole('button', { name: 'Align centre' }).click();
-    expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual(['Align centre']);
+    expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual([
+      'Align centre',
+    ]);
   });
 
-  test('the colour picker is a keyboard-navigable radiogroup of 21 swatches (R15)', async ({ page }) => {
+  test('the colour picker is a keyboard-navigable radiogroup of 21 swatches (R15)', async ({
+    page,
+  }) => {
     await editor(page).click();
     await page.keyboard.press('ControlOrMeta+a');
     await page.getByRole('button', { name: 'Text colour' }).click();
@@ -194,7 +195,13 @@ test.describe('the bugs that only show in a browser', () => {
     await page.getByRole('button', { name: 'Bold' }).click();
 
     const html = await page.getByTestId('parity-output-classic').innerText();
-    for (const key of ['first_name', 'due_date', 'report_date', 'company_name', 'company_address']) {
+    for (const key of [
+      'first_name',
+      'due_date',
+      'report_date',
+      'company_name',
+      'company_address',
+    ]) {
       expect(html).toContain(`{${key}}`);
     }
   });

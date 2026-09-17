@@ -31,6 +31,7 @@ import {
   blocksInRange,
   clearMarks,
   deleteBackward as deleteBackwardOp,
+  deleteForward,
   deleteRange,
   hasMark,
   insertBlock,
@@ -40,6 +41,7 @@ import {
   setBlockType,
   setMark,
   shiftIndent,
+  splitBlock,
   toggleList,
   toggleMark,
   type BlockType,
@@ -142,6 +144,24 @@ class Emitter {
     for (const callback of [...(this.#listeners.get(event) ?? [])]) {
       (callback as (...rest: unknown[]) => void)(...args);
     }
+  }
+
+  /**
+   * Emits and reports whether any listener claimed the event by returning `true`.
+   *
+   * The host's keymap listens on `keydown` and returns `true` for the keys it handles
+   * itself, so the engine knows not to handle them a second time — which would toggle the
+   * same format straight back off.
+   */
+  emitClaimable<K extends keyof EngineEvents>(
+    event: K,
+    ...args: Parameters<EngineEvents[K]>
+  ): boolean {
+    let claimed = false;
+    for (const callback of [...(this.#listeners.get(event) ?? [])]) {
+      if ((callback as (...rest: unknown[]) => unknown)(...args) === true) claimed = true;
+    }
+    return claimed;
   }
 
   clear(): void {
@@ -310,6 +330,11 @@ class NativeEngineHandle implements EngineHandle {
     this.#lastSelection = model;
     this.#shownSelection = model;
     writeSelection(this.#index, this.contentElement, model);
+    // Moving the caret changes what the toolbar should show — whether the selection is
+    // inside a link, which block it is in, which marks apply. Without this the link
+    // popover opened against the state from before the selection moved.
+    this.#events.emit('selectionChange', toEditorSelection(this.#tree, model));
+    this.#emitFormat();
   }
 
   saveSelection(): SelectionSnapshot {
@@ -323,6 +348,7 @@ class NativeEngineHandle implements EngineHandle {
     this.#lastSelection = model;
     this.#shownSelection = model;
     writeSelection(this.#index, this.contentElement, model);
+    this.#emitFormat();
   }
 
   getFormatState(): FormatState {
@@ -482,7 +508,11 @@ class NativeEngineHandle implements EngineHandle {
   }
 
   blur(): void {
+    // Cleared here as well as on the event: blurring an element that was never focused
+    // fires nothing, and the toolbar would go on describing the old selection (R8).
+    this.#shownSelection = null;
     this.contentElement.blur();
+    this.#emitFormat();
   }
 
   hasFocus(): boolean {
@@ -584,7 +614,11 @@ class NativeEngineHandle implements EngineHandle {
     reconcile(this.#tree, change, this.#index, this.#signatures, this.#document);
     this.#lastSelection = after;
     this.#shownSelection = after;
-    if (this.hasFocus()) writeSelection(this.#index, this.contentElement, after);
+    // Always, not only when focused. Replacing an element detaches the text node the
+    // browser's selection pointed at, and it collapses to the parent — so the next edit
+    // read a caret at offset 0 instead of the range that was selected, and a second
+    // format command appeared to do nothing. Writing a range does not move focus.
+    writeSelection(this.#index, this.contentElement, after);
 
     const document_ = this.getJSON();
     this.#history.push(document_, toEditorSelection(this.#tree, after), cause);
@@ -633,7 +667,12 @@ class NativeEngineHandle implements EngineHandle {
       // colour commands, `family`, `size` — and `null` means "back to the default",
       // which is the absence of the mark rather than a mark with an empty value.
       const spec = payload as
-        | { color?: string | null; family?: string | null; size?: string | null; value?: string | null }
+        | {
+            color?: string | null;
+            family?: string | null;
+            size?: string | null;
+            value?: string | null;
+          }
         | undefined;
       const raw = spec?.color ?? spec?.family ?? spec?.size ?? spec?.value ?? null;
       // A colour is normalized so `#FF0000`, `#f00` and `rgb(255 0 0)` produce one
@@ -668,7 +707,8 @@ class NativeEngineHandle implements EngineHandle {
         );
       }
       case 'setAlign': {
-        const spec = payload as { align?: 'left' | 'center' | 'right' | 'justify' | null } | undefined;
+        const spec = payload as
+          { align?: 'left' | 'center' | 'right' | 'justify' | null } | undefined;
         return this.#edit(cause, 'api', (context, selection) =>
           setAlign(context, selection, spec?.align ?? 'left'),
         );
@@ -761,16 +801,19 @@ class NativeEngineHandle implements EngineHandle {
         return this.#edit(cause, 'api', (context, selection) => removeLink(context, selection));
       case 'insertTable': {
         const spec = payload as
-          | { rows?: number; cols?: number; options?: { headerRow?: boolean } }
-          | undefined;
+          { rows?: number; cols?: number; options?: { headerRow?: boolean } } | undefined;
         return this.#edit(cause, 'api', (context, selection) =>
           insertTable(context, selection, spec?.rows ?? 2, spec?.cols ?? 2, spec?.options ?? {}),
         );
       }
       case 'addRowBefore':
-        return this.#edit(cause, 'api', (context, selection) => addRow(context, selection, 'before'));
+        return this.#edit(cause, 'api', (context, selection) =>
+          addRow(context, selection, 'before'),
+        );
       case 'addRowAfter':
-        return this.#edit(cause, 'api', (context, selection) => addRow(context, selection, 'after'));
+        return this.#edit(cause, 'api', (context, selection) =>
+          addRow(context, selection, 'after'),
+        );
       case 'addColumnBefore':
         return this.#edit(cause, 'api', (context, selection) =>
           addColumn(context, selection, 'before'),
@@ -858,8 +901,10 @@ class NativeEngineHandle implements EngineHandle {
   /** Everything the toolbar reads to draw itself. */
   #formatState(): FormatState {
     // The shown selection, which a blur clears: the toolbar must not keep describing
-    // text nobody is in any more (fixes R8).
-    this.#readSelection();
+    // text nobody is in any more (fixes R8). It is refreshed from the DOM only while the
+    // editor has focus — reading it unconditionally put back the very selection the blur
+    // had just given up, because blurring leaves the DOM selection exactly where it was.
+    if (this.hasFocus()) this.#readSelection();
     const model = this.#shownSelection;
     const runs =
       model === null ? [] : model.isCollapsed ? [model.focus.key] : this.#runsBetween(model);
@@ -991,7 +1036,9 @@ class NativeEngineHandle implements EngineHandle {
       this.#events.emit('drop', event);
     });
     on(this.contentElement, 'keydown', (event) => {
-      this.#events.emit('keydown', event);
+      const claimed = this.#events.emitClaimable('keydown', event);
+      if (claimed || event.defaultPrevented) return;
+      if (this.#handleKeyDown(event)) event.preventDefault();
     });
 
     on(this.#document as unknown as HTMLElement, 'selectionchange', () => {
@@ -1011,7 +1058,7 @@ class NativeEngineHandle implements EngineHandle {
     on(this.contentElement, 'compositionend', (event) => {
       this.#composing = false;
       this.#events.emit('compositionEnd');
-      const text = (event).data;
+      const text = event.data;
       if (text === undefined || text === '') {
         this.#emitChange('user');
         return;
@@ -1019,9 +1066,7 @@ class NativeEngineHandle implements EngineHandle {
       // The browser has already put the composed text in the DOM. Applying it to the
       // model and reconciling puts the two back in step, and emits the one change event
       // the whole composition is worth.
-      this.#edit('typing', 'user', (context, selection) =>
-        insertTextOp(context, selection, text),
-      );
+      this.#edit('typing', 'user', (context, selection) => insertTextOp(context, selection, text));
     });
 
     // `beforeinput` is where typing is intercepted: the browser is told not to edit the
@@ -1036,6 +1081,45 @@ class NativeEngineHandle implements EngineHandle {
       const handled = this.#handleBeforeInput(input);
       if (handled) input.preventDefault();
     });
+  }
+
+  /**
+   * The keys the engine owns, once the host's keymap has had its turn.
+   *
+   * Deletion is here rather than only on `beforeinput` because `beforeinput` is not
+   * universal: jsdom dispatches none at all, and a browser that has not finished
+   * composing may not either. The model is the source of truth for what was deleted, so
+   * it is the same code either way.
+   */
+  #handleKeyDown(event: KeyboardEvent): boolean {
+    if (!this.#editable) return false;
+    if (event.ctrlKey || event.metaKey || event.altKey) return false;
+
+    if (event.key === 'Backspace') {
+      return this.#edit('deleting', 'user', (context, selection) =>
+        selection.isCollapsed
+          ? deleteBackwardOp(context, selection, 1)
+          : deleteRange(context, selection),
+      );
+    }
+
+    if (event.key === 'Delete') {
+      return this.#edit('deleting', 'user', (context, selection) =>
+        selection.isCollapsed
+          ? deleteForward(context, selection, 1)
+          : deleteRange(context, selection),
+      );
+    }
+
+    if (event.key === 'Enter') {
+      return event.shiftKey
+        ? this.#edit('structure', 'user', (context, selection) =>
+            insertInline(context, selection, { type: 'lineBreak' }),
+          )
+        : this.#edit('structure', 'user', (context, selection) => splitBlock(context, selection));
+    }
+
+    return false;
   }
 
   /** Applies one `beforeinput`, or declines it and lets the browser proceed. */

@@ -80,9 +80,16 @@ export function toModelPoint(
     if (key === undefined) return null;
     const entry = tree.get(key);
     if (entry?.value.type !== 'text') {
-      // A mention or merge tag renders as text but is atomic in the model: the caret
-      // belongs beside it, not inside it.
-      return nearestRun(tree, key, offset > 0);
+      /*
+       * A mention or merge tag renders as text but is atomic in the model, so the caret
+       * belongs beside it rather than inside it — and the point names the *node*, with
+       * offset 0 before it and 1 after.
+       *
+       * Returning the nearest run instead put the end of a select-all one node too early
+       * whenever the message ended in a chip: the chip fell outside the range, survived
+       * being typed over, and went out in the e-mail unsubstituted.
+       */
+      return { key, offset: offset > 0 ? 1 : 0 };
     }
     return { key, offset: Math.min(offset, entry.value.text.length) };
   }
@@ -95,12 +102,34 @@ export function toModelPoint(
   const child = element.childNodes[offset] ?? element.childNodes[element.childNodes.length - 1];
   const ownKey = index.byNode.get(element);
 
+  // An empty block has no run to name, and the nearest one is in a *different* block —
+  // so pressing Enter and typing put the new text back in the old paragraph. The block
+  // itself is the answer; `insertText` knows how to give a block its first run.
+  const empty = emptyBlockPoint(tree, ownKey);
+  if (empty !== null) return empty;
+
   if (child !== undefined && child !== null) {
     const inner = deepestRun(tree, index, child, offset >= element.childNodes.length);
     if (inner !== null) return inner;
   }
   if (ownKey !== undefined) return nearestRun(tree, ownKey, offset > 0);
   return null;
+}
+
+/**
+ * A point on `key` itself when it is a block with no text in it.
+ *
+ * The caret has to be able to rest in an empty paragraph, and every other answer puts it
+ * in a neighbouring block.
+ */
+function emptyBlockPoint(tree: DocumentTree, key: NodeKey | undefined): ModelPoint | null {
+  if (key === undefined) return null;
+  const type = tree.get(key)?.value.type;
+  if (type !== 'paragraph' && type !== 'heading' && type !== 'listItem' && type !== 'blockquote') {
+    return null;
+  }
+  const hasRun = textRuns(tree).some((run) => run === key || tree.ancestors(run).includes(key));
+  return hasRun ? null : { key, offset: 0 };
 }
 
 /** The first or last text run inside `node`'s subtree. */
@@ -111,6 +140,8 @@ function deepestRun(
   atEnd: boolean,
 ): ModelPoint | null {
   const key = index.byNode.get(node);
+  const empty = emptyBlockPoint(tree, key);
+  if (empty !== null) return empty;
   if (key !== undefined) {
     const entry = tree.get(key);
     if (entry?.value.type === 'text') {
@@ -211,7 +242,11 @@ export function readSelection(
   const focus = toModelPoint(tree, index, focusNode, focusOffset);
   if (anchor === null || focus === null) return null;
 
-  const order = textRuns(tree);
+  // Measured over every node in document order, not over text runs alone: an endpoint can
+  // name an atomic chip, which is not a run, and `indexOf` answered -1 for it — so a
+  // forward selection ending in a merge tag was reported as backward, the range came out
+  // inside out, and select-all-and-type deleted nothing at all.
+  const order = documentOrder(tree);
   const anchorAt = order.indexOf(anchor.key);
   const focusAt = order.indexOf(focus.key);
   const isBackward = focusAt < anchorAt || (focusAt === anchorAt && focus.offset < anchor.offset);

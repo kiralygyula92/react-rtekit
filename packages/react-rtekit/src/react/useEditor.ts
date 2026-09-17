@@ -45,7 +45,7 @@ import { findMatches, replaceMatches } from '../core/find.js';
 import { detectOfficeSource } from '../core/interop/office.js';
 import { looksLikeQuill } from '../core/interop/quill.js';
 import { buildKeymap, findKeymapMatch, payloadForShortcut } from '../core/utils/keymap.js';
-import { lexicalEngine } from '../engines/lexical/engine.js';
+import { nativeEngine } from '../engines/native/engine.js';
 import { EditorStore } from './store.js';
 import { setRuntime, type EditorRuntime } from './runtime.js';
 import { useLocalization } from './context.js';
@@ -717,9 +717,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     if (!mounted || !container || engineRef.current) return undefined;
 
     const current = optionsRef.current;
-    // Still the Lexical adapter, until `nativeEngine` passes the browser matrix as well as
-    // the conformance suite (ADR-006 stage 8). Opt in with `engine={nativeEngine}`.
-    const engine = (current.engine ?? lexicalEngine).mount(container, {
+    const engine = (current.engine ?? nativeEngine).mount(container, {
       ...(current.value !== undefined
         ? { initialValue: current.value }
         : current.defaultValue !== undefined

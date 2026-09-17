@@ -85,25 +85,30 @@ export function runsInRange(context: EditContext, selection: ModelSelection): No
   const [start, end] = ordered(selection);
   if (start.key === end.key) {
     if (start.offset === end.offset) return [];
+    if (tree.get(start.key)?.value.type !== 'text') return [];
     // Split the tail first: splitting the head would move the offsets in the tail.
     splitRun(context, start.key, end.offset);
     const middle = splitRun(context, start.key, start.offset);
     return middle === null ? [] : [middle];
   }
 
-  splitRun(context, end.key, end.offset);
-  const head = splitRun(context, start.key, start.offset);
-  if (head === null) return collect(tree, start.key, end.key).slice(1);
-  return collect(tree, head, end.key);
-}
+  // An endpoint can name an atomic chip rather than a run — a browser's select-all puts
+  // it there when the message ends in one — so the ends are split where they are text
+  // and the span is taken in document order either way. Asking `textRuns` for the index
+  // of a chip answered -1, and formatting the whole message then applied to nothing.
+  if (tree.get(end.key)?.value.type === 'text') splitRun(context, end.key, end.offset);
+  const head =
+    tree.get(start.key)?.value.type === 'text'
+      ? (splitRun(context, start.key, start.offset) ?? start.key)
+      : start.key;
 
-/** The runs from `from` to `to` inclusive, in document order. */
-function collect(tree: DocumentTree, from: NodeKey, to: NodeKey): NodeKey[] {
-  const runs = textRuns(tree);
-  const start = runs.indexOf(from);
-  const end = runs.indexOf(to);
-  if (start === -1 || end === -1) return [];
-  return runs.slice(Math.min(start, end), Math.max(start, end) + 1);
+  const order = documentOrder(tree);
+  const fromAt = order.indexOf(head);
+  const toAt = order.indexOf(end.key);
+  if (fromAt === -1 || toAt === -1) return [];
+  const span = order.slice(Math.min(fromAt, toAt), Math.max(fromAt, toAt) + 1);
+  const runs = span.filter((key) => tree.get(key)?.value.type === 'text');
+  return runs;
 }
 
 /** The selection's two ends, in document order. */
@@ -412,41 +417,146 @@ export function insertText(
   return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
 }
 
-/** Deletes everything a selection covers and returns the caret that remains. */
+/**
+ * Deletes everything a selection covers and returns the caret that remains.
+ *
+ * Works in document order over *every* inline node, not over text runs alone. A run-only
+ * version could not express a selection that ends inside a merge tag — which is exactly
+ * where a browser's select-all puts it when the message ends in one — so the chip fell
+ * outside the range and survived being typed over.
+ *
+ * Blocks the selection empties are merged rather than left behind: selecting four
+ * paragraphs and deleting has to leave one, not four empty ones.
+ */
 export function deleteRange(context: EditContext, selection: ModelSelection): ModelSelection {
   const { tree, write } = context;
   if (selection.isCollapsed) return selection;
-  const keys = runsInRange(context, selection);
-  if (keys.length === 0) return selection;
+  const [from, to] = ordered(selection);
 
-  // Where the caret lands: immediately before the first thing removed.
-  const runs = textRuns(tree);
-  const firstAt = runs.indexOf(keys[0]!);
-  const previous = firstAt > 0 ? runs[firstAt - 1] : undefined;
+  // Split the ends so the boundary nodes are wholly in or wholly out. The tail first:
+  // splitting the head would move the offsets in the tail.
+  const endEntry = tree.get(to.key);
+  if (endEntry?.value.type === 'text') splitRun(context, to.key, to.offset);
+  const startEntry = tree.get(from.key);
+  const firstKey =
+    startEntry?.value.type === 'text'
+      ? (splitRun(context, from.key, from.offset) ?? nextInline(tree, from.key))
+      : from.offset > 0
+        ? nextInline(tree, from.key)
+        : from.key;
+  /*
+   * The last node to delete is whichever now ends at `to.offset`.
+   *
+   * When both ends are in the same run the two splits leave three nodes and the original
+   * key keeps the *head* — the part before the selection — so naming `to.key` here
+   * pointed at a node in front of the first one and the range came out empty. In that
+   * case the single middle node is both ends of the range.
+   *
+   * An atomic end point with offset 0 sits *before* its node, so that node survives.
+   */
+  const sameRun = from.key === to.key && startEntry?.value.type === 'text';
+  const lastKey = sameRun
+    ? firstKey
+    : endEntry?.value.type === 'text'
+      ? to.key
+      : to.offset > 0
+        ? to.key
+        : previousInline(tree, to.key);
 
-  // Atomic inline nodes — merge tags, mentions, emoji, line breaks — sit between the
-  // runs and are part of what the user selected, so they go too. Without this, selecting
-  // everything and pressing delete left the chips behind.
-  const removing = new Set<NodeKey>(keys);
-  for (const key of keys) {
-    const parent = tree.parent(key);
-    if (parent === null || parent === undefined) continue;
-    for (const sibling of tree.children(parent)) {
-      const type = tree.get(sibling)?.value.type;
-      if (type === 'text' || type === undefined) continue;
-      if (between(tree, keys, sibling)) removing.add(sibling);
-    }
-  }
+  if (firstKey === undefined || lastKey === undefined) return collapseTo(tree, from);
+
+  const order = documentOrder(tree);
+  const firstAt = order.indexOf(firstKey);
+  const lastAt = order.indexOf(lastKey);
+  if (firstAt === -1 || lastAt === -1 || lastAt < firstAt) return collapseTo(tree, from);
+
+  const startBlock = blockOf(tree, firstKey);
+  const endBlock = blockOf(tree, lastKey);
+
+  // Where the caret ends up: immediately before the first thing removed.
+  const before = previousInline(tree, firstKey);
+
+  const removing = order.slice(firstAt, lastAt + 1).filter((key) => isInline(tree, key));
   for (const key of removing) write.remove(key);
 
-  if (previous !== undefined) {
-    const point = { key: previous, offset: runText(tree, previous).length };
-    return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
+  // Merge what is left of the last block into the first, and drop the blocks between.
+  if (startBlock !== null && endBlock !== null && startBlock !== endBlock) {
+    const between = blocksBetween(tree, startBlock, endBlock);
+    for (const key of tree.children(endBlock)) write.move(key, startBlock);
+    for (const key of between) if (tree.get(key) !== undefined) write.remove(key);
+    if (tree.get(endBlock) !== undefined) write.remove(endBlock);
   }
+
+  if (before !== undefined && tree.get(before) !== undefined) {
+    const entry = tree.get(before);
+    const offset = entry?.value.type === 'text' ? entry.value.text.length : 1;
+    return collapseTo(tree, { key: before, offset });
+  }
+  const block = startBlock ?? blockOf(tree, from.key);
+  if (block !== null && tree.get(block) !== undefined)
+    return collapseTo(tree, { key: block, offset: 0 });
   const remaining = textRuns(tree)[0];
-  if (remaining === undefined) return { ...selection, isCollapsed: true };
-  const point = { key: remaining, offset: 0 };
+  return remaining === undefined
+    ? { ...selection, isCollapsed: true }
+    : collapseTo(tree, { key: remaining, offset: 0 });
+}
+
+/** A collapsed selection at one point. */
+function collapseTo(_tree: DocumentTree, point: { key: NodeKey; offset: number }): ModelSelection {
   return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
+}
+
+/** True for a leaf that lives inside a block: text, and the atomic inline nodes. */
+function isInline(tree: DocumentTree, key: NodeKey): boolean {
+  const type = tree.get(key)?.value.type;
+  return (
+    type === 'text' ||
+    type === 'mergeTag' ||
+    type === 'mention' ||
+    type === 'emoji' ||
+    type === 'lineBreak'
+  );
+}
+
+/** Every inline node in document order. */
+function inlineOrder(tree: DocumentTree): NodeKey[] {
+  return documentOrder(tree).filter((key) => isInline(tree, key));
+}
+
+/** The inline node before `key`, or `undefined` at the start of the document. */
+function previousInline(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
+  const order = inlineOrder(tree);
+  const at = order.indexOf(key);
+  return at > 0 ? order[at - 1] : undefined;
+}
+
+/** The inline node after `key`, or `undefined` at the end. */
+function nextInline(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
+  const order = inlineOrder(tree);
+  const at = order.indexOf(key);
+  return at >= 0 && at < order.length - 1 ? order[at + 1] : undefined;
+}
+
+/** The blocks strictly between two others, in document order. */
+function blocksBetween(tree: DocumentTree, first: NodeKey, last: NodeKey): NodeKey[] {
+  const order = documentOrder(tree);
+  const from = order.indexOf(first);
+  const to = order.indexOf(last);
+  if (from === -1 || to === -1) return [];
+  return order.slice(from + 1, to).filter((key) => blockOf(tree, key) === key);
+}
+
+/** Every key in document order, which is what a range is measured against. */
+function documentOrder(tree: DocumentTree): NodeKey[] {
+  const order: NodeKey[] = [];
+  const walk = (key: NodeKey): void => {
+    for (const child of tree.children(key)) {
+      order.push(child);
+      walk(child);
+    }
+  };
+  walk(ROOT_KEY);
+  return order;
 }
 
 /**
@@ -468,6 +578,20 @@ export function deleteBackward(
   let left = count;
   while (left > 0) {
     const entry = tree.get(at.key);
+
+    // An atomic node goes as one, which is what makes it atomic.
+    if (entry !== undefined && entry.value.type !== 'text' && isInline(tree, at.key)) {
+      const before = previousInline(tree, at.key);
+      write.remove(at.key);
+      left -= 1;
+      at =
+        before === undefined
+          ? { key: blockOf(tree, at.key) ?? at.key, offset: 0 }
+          : { key: before, offset: lengthOf(tree, before) };
+      if (left <= 0) break;
+      continue;
+    }
+
     if (entry?.value.type !== 'text') break;
     const text = entry.value.text;
 
@@ -479,12 +603,12 @@ export function deleteBackward(
       if (remaining === '') {
         // An empty run renders to nothing but would sit in the model for ever, so the
         // caret moves to the end of what comes before and the run goes.
-        const before = previousRun(tree, at.key);
+        const before = previousInline(tree, at.key);
         write.remove(at.key);
         at =
           before === undefined
             ? { key: blockOf(tree, at.key) ?? at.key, offset: 0 }
-            : { key: before, offset: runText(tree, before).length };
+            : { key: before, offset: lengthOf(tree, before) };
         if (left <= 0) break;
         continue;
       }
@@ -493,42 +617,19 @@ export function deleteBackward(
       if (left <= 0) break;
     }
 
-    // At the start of a run: continue in the one before it, if there is one.
-    const previous = previousRun(tree, at.key);
-    if (previous === undefined) break;
-    at = { key: previous, offset: runText(tree, previous).length };
+    // At the start of a node: continue in the one before it, if there is one.
+    const before = previousInline(tree, at.key);
+    if (before === undefined) break;
+    at = { key: before, offset: lengthOf(tree, before) };
   }
 
   return { anchor: at, focus: { ...at }, isCollapsed: true, isBackward: false };
 }
 
-/** Whether `key` falls between the first and last of `keys` in document order. */
-function between(tree: DocumentTree, keys: NodeKey[], key: NodeKey): boolean {
-  const order = documentOrder(tree);
-  const first = order.indexOf(keys[0]!);
-  const last = order.indexOf(keys[keys.length - 1]!);
-  const at = order.indexOf(key);
-  return at > first && at < last;
-}
-
-/** Every key in document order, which is what "between" is measured against. */
-function documentOrder(tree: DocumentTree): NodeKey[] {
-  const order: NodeKey[] = [];
-  const walk = (key: NodeKey): void => {
-    for (const child of tree.children(key)) {
-      order.push(child);
-      walk(child);
-    }
-  };
-  walk(ROOT_KEY);
-  return order;
-}
-
-/** The run before `key` in document order, or `undefined` at the start. */
-function previousRun(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
-  const runs = textRuns(tree);
-  const index = runs.indexOf(key);
-  return index > 0 ? runs[index - 1] : undefined;
+/** How far into a node an offset can go: its characters, or 1 for an atomic node. */
+function lengthOf(tree: DocumentTree, key: NodeKey): number {
+  const value = tree.get(key)?.value;
+  return value?.type === 'text' ? value.text.length : 1;
 }
 
 /** How many clusters a string holds, used to count what a delete actually removed. */
@@ -561,8 +662,16 @@ export function insertInline(
     tail === null || tail === caret.key
       ? tree.children(parent).indexOf(caret.key) + (tail === null ? 1 : 0)
       : tree.children(parent).indexOf(tail);
-  write.insert(parent, node, index);
-  return at;
+  const inserted = write.insert(parent, node, index);
+
+  // After the new node, not where the caret was: typing "second", Shift+Enter, "third"
+  // produced "secondthird<br>" while this returned the old caret.
+  const after = tree.children(parent)[tree.children(parent).indexOf(inserted) + 1];
+  const point =
+    after !== undefined && tree.get(after)?.value.type === 'text'
+      ? { key: after, offset: 0 }
+      : { key: inserted, offset: 0 };
+  return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
 }
 
 /** Inserts a block after the block the caret is in. */
@@ -577,4 +686,129 @@ export function insertBlock(
   const at = block === null ? undefined : tree.children(parent).indexOf(block) + 1;
   write.insert(parent, node, at);
   return selection;
+}
+
+/**
+ * Deletes `count` grapheme clusters after a collapsed caret.
+ *
+ * The Delete key, and the mirror of `deleteBackward`. Running past the end of a run
+ * continues in the next one, so deleting forward at a run boundary works the way holding
+ * the key down implies.
+ */
+export function deleteForward(
+  context: EditContext,
+  selection: ModelSelection,
+  count: number,
+): ModelSelection {
+  const { tree, write } = context;
+  if (count <= 0) return selection;
+  if (!selection.isCollapsed) return deleteRange(context, selection);
+
+  let at = selection.focus;
+  let left = count;
+  while (left > 0) {
+    const entry = tree.get(at.key);
+    if (entry?.value.type !== 'text') break;
+    const text = entry.value.text;
+
+    if (at.offset < text.length) {
+      const end = nextGraphemeBoundary(text, at.offset, left);
+      const removed = countClusters(text.slice(at.offset, end));
+      const remaining = text.slice(0, at.offset) + text.slice(end);
+      left -= removed;
+      if (remaining === '') {
+        const after = nextRun(tree, at.key);
+        write.remove(at.key);
+        at =
+          after === undefined
+            ? { key: blockOf(tree, at.key) ?? at.key, offset: 0 }
+            : { key: after, offset: 0 };
+        if (left <= 0) break;
+        continue;
+      }
+      write.setValue(at.key, { ...entry.value, text: remaining });
+      if (left <= 0) break;
+    }
+
+    const after = nextRun(tree, at.key);
+    if (after === undefined) break;
+    at = { key: after, offset: 0 };
+  }
+
+  return { anchor: at, focus: { ...at }, isCollapsed: true, isBackward: false };
+}
+
+/** The run after `key` in document order, or `undefined` at the end. */
+function nextRun(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
+  const runs = textRuns(tree);
+  const index = runs.indexOf(key);
+  return index >= 0 && index < runs.length - 1 ? runs[index + 1] : undefined;
+}
+
+/** The offset `count` grapheme clusters after `offset`, clamped to the end. */
+function nextGraphemeBoundary(text: string, offset: number, count: number): number {
+  let at = Math.max(0, Math.min(offset, text.length));
+  for (let step = 0; step < count && at < text.length; step += 1) {
+    // Walk forward one code point, then absorb whatever cannot stand alone after it.
+    // `previousGraphemeBoundary` run from the far end would be O(n) per press.
+    const code = text.codePointAt(at);
+    at += code !== undefined && code > 0xffff ? 2 : 1;
+    while (at < text.length && previousGraphemeBoundary(text, at + 1, 1) <= offset) at += 1;
+  }
+  return at;
+}
+
+/**
+ * Splits the caret's block in two — what Enter does.
+ *
+ * The new block is the same kind as the old one, so Enter inside a heading makes another
+ * heading and Enter inside a list item makes another item, which is what every editor
+ * does and what the markup has to keep meaning.
+ */
+export function splitBlock(context: EditContext, selection: ModelSelection): ModelSelection {
+  const { tree, write } = context;
+  let at = selection;
+  if (!at.isCollapsed) at = deleteRange(context, at);
+
+  const caret = at.focus;
+  const block = blockOf(tree, caret.key);
+  if (block === null) return at;
+  const value = tree.get(block)?.value;
+  if (value === undefined) return at;
+
+  const parent = tree.parent(block);
+  if (parent === null || parent === undefined) return at;
+  const index = tree.children(parent).indexOf(block);
+
+  // A code block holds a string rather than inline nodes, so Enter adds a newline to it.
+  if (value.type === 'codeBlock') {
+    write.setValue(block, { ...value, text: `${value.text}\n` });
+    return at;
+  }
+
+  // Everything after the caret moves into the new block, starting with the tail of the
+  // run the caret is in.
+  const tail = splitRun(context, caret.key, caret.offset);
+  const siblings = tree.children(block);
+  const from =
+    tail !== null && tail !== caret.key
+      ? siblings.indexOf(tail)
+      : siblings.indexOf(caret.key) + (caret.offset > 0 ? 1 : 0);
+  const moving = from < 0 ? [] : siblings.slice(from);
+
+  const fresh = write.insert(parent, blankLike(value), index + 1);
+  for (const [offset, key] of moving.entries()) write.move(key, fresh, offset);
+
+  const first = moving[0];
+  const point = first === undefined ? { key: fresh, offset: 0 } : { key: first, offset: 0 };
+  return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
+}
+
+/** An empty block of the same kind, keeping only what describes the block itself. */
+function blankLike(value: AnyNode): AnyNode {
+  if (value.type === 'heading') {
+    return { type: 'heading', level: value.level, content: [] };
+  }
+  if (value.type === 'listItem') return { type: 'listItem', content: [] };
+  return { type: 'paragraph', content: [] };
 }

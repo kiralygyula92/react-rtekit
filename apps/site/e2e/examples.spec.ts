@@ -75,7 +75,9 @@ test('controlled: loading another report replaces the content (R1)', async ({ pa
   await expect(page.getByTestId('controlled-value')).toContainText('<em>May</em>');
 });
 
-test('controlled: typing reports source "user" and setContent reports "api" (R21)', async ({ page }) => {
+test('controlled: typing reports source "user" and setContent reports "api" (R21)', async ({
+  page,
+}) => {
   await page.goto('/react-rtekit/value-formats/');
   await page.getByRole('textbox', { name: 'Message' }).click();
   await page.keyboard.type('!');
@@ -104,7 +106,9 @@ test('toolbar-config: a custom item sits in the toolbar', async ({ page }) => {
   await expect(page.locator('.toolbar-word-count')).toBeVisible();
 });
 
-test('validation-rhf: an empty editor blocks submit, and the old check does not (R2)', async ({ page }) => {
+test('validation-rhf: an empty editor blocks submit, and the old check does not (R2)', async ({
+  page,
+}) => {
   await page.goto('/react-rtekit/integrations/react-hook-form/');
   await page.getByRole('button', { name: 'Send' }).click();
   await expect(page.getByRole('alert')).toContainText('A message is required');

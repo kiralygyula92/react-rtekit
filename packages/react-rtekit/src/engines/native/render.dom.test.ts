@@ -219,13 +219,6 @@ const CASES: [name: string, doc: EditorDocument][] = [
       content: [{ type: 'mention', id: 'u_1', label: 'Dana' }],
     }),
   ],
-  [
-    'a merge tag',
-    doc({
-      type: 'paragraph',
-      content: [{ type: 'mergeTag', key: 'first_name' }],
-    }),
-  ],
   ['an emoji', doc({ type: 'paragraph', content: [{ type: 'emoji', char: '\u{1F44D}' }] })],
   [
     'an empty text run, which renders to nothing',
@@ -238,6 +231,32 @@ const CASES: [name: string, doc: EditorDocument][] = [
     }),
   ],
 ];
+
+describe('a merge tag is the one deliberate difference', () => {
+  // The backend substitutes `{key}`, so that is what gets stored. The author has to see
+  // something they can select and delete as one thing, so the editor renders a chip.
+  const fixture = doc({
+    type: 'paragraph',
+    content: [{ type: 'mergeTag', key: 'first_name', label: 'First name' }],
+  });
+
+  it('stores the bare token', () => {
+    expect(documentToHtml(fixture)).toBe('<p>{first_name}</p>');
+  });
+
+  it('renders a chip carrying the key and the label', () => {
+    const tree = DocumentTree.fromDocument(fixture);
+    const container = document.createElement('div');
+    renderTree(tree, container);
+    const chip = container.querySelector('[data-merge-tag]')!;
+    expect(chip.getAttribute('data-merge-tag')).toBe('first_name');
+    expect(chip.getAttribute('aria-label')).toBe('First name');
+    expect(chip.textContent).toBe('First name');
+    // Not `contenteditable="false"`: Safari's select-all stops at the edge of a
+    // non-editable node, which is the bug the chip exists to avoid.
+    expect(chip.hasAttribute('contenteditable')).toBe(false);
+  });
+});
 
 describe('the renderer writes the same DOM the serializer writes', () => {
   for (const [name, fixture] of CASES) {

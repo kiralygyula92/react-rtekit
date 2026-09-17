@@ -82,7 +82,11 @@ describe('toModelPoint', () => {
     expect(toModelPoint(tree, index, strong, 0)?.key).toBe(textRuns(tree)[0]);
   });
 
-  it('resolves a position on an empty paragraph to a run in the document', () => {
+  it('resolves a position on an empty paragraph to the paragraph itself', () => {
+    // Not to a run in a neighbouring block, which is where the nearest one is. Until this
+    // was fixed, pressing Enter and typing put the new text back in the old paragraph:
+    // the caret had nowhere of its own to be. `insertText` gives an empty block its
+    // first run when it lands on one.
     const { tree, index, container } = mount(
       doc(
         { type: 'paragraph', content: [] },
@@ -91,11 +95,11 @@ describe('toModelPoint', () => {
     );
     const empty = container.querySelector('p')!;
     const point = toModelPoint(tree, index, empty, 0);
-    expect(point).not.toBeNull();
-    expect(textRuns(tree)).toContain(point!.key);
+    expect(point).toEqual({ key: tree.children(ROOT_KEY)[0], offset: 0 });
+    expect(textRuns(tree)).not.toContain(point!.key);
   });
 
-  it('resolves a position on an atomic node to a run beside it', () => {
+  it('resolves a position on an atomic node to the node itself', () => {
     const { tree, index, container } = mount(
       doc({
         type: 'paragraph',
@@ -105,10 +109,14 @@ describe('toModelPoint', () => {
         ],
       }),
     );
+    // Offset 0 is before the chip and anything above is after it, so a selection that
+    // ends inside one still covers it. Resolving to the nearest *run* instead put the
+    // end of a select-all one node too early, and a message ending in a merge tag
+    // survived being typed over.
     const mention = container.querySelector('.rte-mention')!.firstChild!;
     const point = toModelPoint(tree, index, mention, 2);
-    expect(point).not.toBeNull();
-    expect(textRuns(tree)).toContain(point!.key);
+    expect(point).toEqual({ key: tree.children(tree.children(ROOT_KEY)[0]!)[1], offset: 1 });
+    expect(textRuns(tree)).not.toContain(point!.key);
   });
 
   it('returns null for a node that is not the editor’s', () => {

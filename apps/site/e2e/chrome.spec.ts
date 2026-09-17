@@ -42,13 +42,18 @@ test.describe('inline marks', () => {
   });
 
   /**
-   * The engine renders a mark as a class. Bold and italic also get `<strong>` and
-   * `<em>`, so they looked right while every class went unstyled; underline arrives as
-   * a bare span, so it looked like a button that did nothing at all.
+   * A mark has to be *visible*, not merely applied. Bold and italic used to look right
+   * by accident because the Lexical adapter also emitted `<strong>` and `<em>`, while
+   * underline arrived as a bare span and looked like a button that did nothing.
+   *
+   * The selectors name both shapes because both engines are in the tree: the Lexical
+   * adapter labels marks with classes, and the in-house engine renders the elements the
+   * serializer writes, so that the editor and `<RteContentView>` are the same DOM. What
+   * is being asserted either way is what the reader sees.
    */
   for (const [name, shortcut, selector, expected] of [
-    ['underline', 'ControlOrMeta+u', '.rte-underline', 'underline'],
-    ['strikethrough', 'ControlOrMeta+Shift+x', '.rte-strike', 'line-through'],
+    ['underline', 'ControlOrMeta+u', '.rte-underline, u', 'underline'],
+    ['strikethrough', 'ControlOrMeta+Shift+x', '.rte-strike, s', 'line-through'],
   ] as const) {
     test(`${name} is visible, not just applied`, async ({ page }) => {
       await editor(page).click();
@@ -65,20 +70,20 @@ test.describe('inline marks', () => {
     await page.keyboard.press('ControlOrMeta+a');
     await page.keyboard.press('ControlOrMeta+b');
 
-    await expect(editor(page).locator('.rte-bold').first()).toHaveCSS('font-weight', '700');
+    await expect(editor(page).locator('.rte-bold, strong').first()).toHaveCSS('font-weight', '700');
   });
 
   test('underline and strikethrough together show both', async ({ page }) => {
-    // The engine renders the pair through a theme entry of its own, and removes the
-    // classes it was told to use for each mark separately. Naming those two classes as
-    // the pair's value therefore left the text merely struck through — the model held
-    // both marks, the serialized value wrote `<s><u>`, and the screen showed one.
+    // `text-decoration` is one property, so a mark that sets it cannot simply be added
+    // to one that already has: the Lexical adapter needs a class for the pair, and the
+    // in-house engine nests `<s><u>`. Either way the model holds both marks and the
+    // screen has to show both lines.
     await editor(page).click();
     await page.keyboard.press('ControlOrMeta+a');
     await page.keyboard.press('ControlOrMeta+u');
     await page.keyboard.press('ControlOrMeta+Shift+x');
 
-    const both = editor(page).locator('.rte-underline-strike').first();
+    const both = editor(page).locator('.rte-underline-strike, u:has(s), s:has(u)').first();
     await expect(both).toHaveCSS('text-decoration-line', 'underline line-through');
     await expect(page.getByTestId('formatting-html')).toContainText('<s><u>');
   });
@@ -534,14 +539,18 @@ test.describe('tables', () => {
     expect(boxes.length).toBeGreaterThan(6);
     for (let index = 1; index < boxes.length; index += 1) {
       expect(boxes[index]!.x).toBeCloseTo(boxes[0]!.x, 0);
-      expect(boxes[index]!.y).toBeGreaterThanOrEqual(boxes[index - 1]!.y + boxes[index - 1]!.height);
+      expect(boxes[index]!.y).toBeGreaterThanOrEqual(
+        boxes[index - 1]!.y + boxes[index - 1]!.height,
+      );
     }
 
     // And in the ordinary text colour rather than the accent.
     const accent = await page
       .locator('.rte-root')
       .first()
-      .evaluate((element) => getComputedStyle(element).getPropertyValue('--rte-color-accent').trim());
+      .evaluate((element) =>
+        getComputedStyle(element).getPropertyValue('--rte-color-accent').trim(),
+      );
     const colour = await controls
       .getByRole('menuitem')
       .first()

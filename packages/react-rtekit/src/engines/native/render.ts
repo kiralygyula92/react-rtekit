@@ -188,11 +188,31 @@ export function renderNode(
     }
 
     case 'mergeTag': {
-      // Serialized as the bare token, exactly as the backend substitutes it.
-      const text = document_.createTextNode(`{${value.key}}`);
+      /*
+       * A chip in the editor, the bare token in storage.
+       *
+       * This is the one place the editor's DOM and `documentToHtml` differ on purpose.
+       * The backend substitutes `{key}`, so that is what gets stored; the author has to
+       * see a chip they can select and delete as one thing, so that is what gets
+       * rendered. Rendering the token as plain text — which this did — made the tag
+       * indistinguishable from the words around it, and "select all and type a new
+       * message" left the old `{company_address}` in the text.
+       *
+       * Deliberately *not* `contenteditable="false"`: the node is already atomic in the
+       * model, and the attribute breaks Safari, whose select-all stops at the edge of a
+       * non-editable node — which is the bug it was meant to prevent.
+       */
+      const span = make('span');
+      span.className = 'rte-merge-tag';
+      span.setAttribute('data-merge-tag', value.key);
+      // Not `aria-hidden`: the label is meaningful and a screen reader should read it.
+      span.setAttribute('role', 'img');
+      span.setAttribute('aria-label', value.label ?? value.key);
+      const text = document_.createTextNode(value.label ?? `{${value.key}}`);
       index.textByKey.set(key, text);
-      link(index, key, text);
-      return text;
+      index.byNode.set(text, key);
+      span.append(text);
+      return span;
     }
 
     case 'mention': {

@@ -47,7 +47,9 @@ test.describe('performance budgets', () => {
     }
 
     const median = [...times].sort((a, b) => a - b)[Math.floor(times.length / 2)]!;
-    console.log(`mount: ${times.map((time) => time.toFixed(1)).join(', ')} ms (median ${median.toFixed(1)})`);
+    console.log(
+      `mount: ${times.map((time) => time.toFixed(1)).join(', ')} ms (median ${median.toFixed(1)})`,
+    );
 
     expect(median).toBeLessThan(50);
   });
@@ -69,7 +71,9 @@ test.describe('performance budgets', () => {
     const sorted = [...samples].sort((a, b) => a - b);
     const p95 = sorted[Math.floor(sorted.length * 0.95)]!;
     const median = sorted[Math.floor(sorted.length / 2)]!;
-    console.log(`typing: median ${median.toFixed(1)} ms, p95 ${p95.toFixed(1)} ms over ${samples.length} keys`);
+    console.log(
+      `typing: median ${median.toFixed(1)} ms, p95 ${p95.toFixed(1)} ms over ${samples.length} keys`,
+    );
 
     expect(p95).toBeLessThan(16);
   });
