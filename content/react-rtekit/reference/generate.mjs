@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 /**
  * Phase 4 — generates the reference from the package's own source of truth.
@@ -233,6 +233,43 @@ function defaultTagOf(comment) {
   return text === '' ? undefined : text;
 }
 
+
+/**
+ * Which entry point actually exports a symbol.
+ *
+ * Read from the built output rather than assumed. Every API page used to say
+ * `import { X } from 'react-rtekit'`, which is wrong for everything that lives only in a
+ * subpath — `RteContentView` is in `react-rtekit/view`, and five of the sanitizer and
+ * Markdown helpers are in `react-rtekit/core`. Six pages documented an import that
+ * throws.
+ *
+ * Types are a separate matter and need no lookup: they are re-exported from the root, so
+ * `import type` from `react-rtekit` resolves whatever the runtime entry happens to be.
+ */
+const ENTRY_POINTS = [
+  ['react-rtekit', 'dist/index.js'],
+  ['react-rtekit/core', 'dist/core/index.js'],
+  ['react-rtekit/view', 'dist/view/index.js'],
+  ['react-rtekit/meta', 'dist/meta.js'],
+];
+
+/** name -> the first entry point that exports it. */
+const exportedBy = new Map();
+for (const [specifier, relative] of ENTRY_POINTS) {
+  const built = path.join(root, 'packages/react-rtekit', relative);
+  if (!existsSync(built)) continue;
+  const namespace = await import(pathToFileURL(built).href).catch(() => undefined);
+  if (namespace === undefined) continue;
+  for (const name of Object.keys(namespace)) {
+    if (!exportedBy.has(name)) exportedBy.set(name, specifier);
+  }
+}
+
+/** The import line for a symbol, naming the entry point that really has it. */
+function importFor(name) {
+  return `import { ${name} } from '${exportedBy.get(name) ?? 'react-rtekit'}';`;
+}
+
 // ── build the symbol records ─────────────────────────────────────────────────
 const { meta } = require(path.join(root, 'packages/react-rtekit/dist/meta.cjs'));
 // The default catalogue, so the localization reference can quote what it actually says.
@@ -255,7 +292,7 @@ for (const [page, spec] of Object.entries(PAGES)) {
         name: node.name,
         kind:
           node.kind === 256 ? 'interface' : node.kind === 64 ? 'function' : node.kind === 2097152 ? 'type' : 'variable',
-        imports: [`import { ${node.name} } from 'react-rtekit';`],
+        imports: [importFor(node.name)],
         options: optionsOf(node),
         filename: node.sources?.[0]?.fileName ?? '',
         sourceUrl: node.sources?.[0]?.fileName

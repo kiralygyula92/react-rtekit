@@ -2,7 +2,7 @@
   "name": "RteContentView",
   "kind": "function",
   "imports": [
-    "import { RteContentView } from 'react-rtekit';"
+    "import { RteContentView } from 'react-rtekit/view';"
   ],
   "options": {},
   "filename": "view/RteContentView.tsx",

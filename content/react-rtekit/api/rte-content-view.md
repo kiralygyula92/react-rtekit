@@ -25,7 +25,7 @@ section: reference
 ## Import
 
 ```ts
-import { RteContentView } from 'react-rtekit';
+import { RteContentView } from 'react-rtekit/view';
 import { RteContentViewProps } from 'react-rtekit';
 ```
 

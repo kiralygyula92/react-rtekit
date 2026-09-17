@@ -34,7 +34,7 @@ import { documentToText } from 'react-rtekit';
 import { htmlToDocument } from 'react-rtekit';
 import { isEmptyHtml } from 'react-rtekit';
 import { markdownToDocument } from 'react-rtekit';
-import { markdownToHtml } from 'react-rtekit';
+import { markdownToHtml } from 'react-rtekit/core';
 ```
 
 ## Options

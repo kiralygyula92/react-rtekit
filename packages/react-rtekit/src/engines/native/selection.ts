@@ -40,19 +40,15 @@ export interface ModelSelection {
   isBackward: boolean;
 }
 
-/** The text runs of the document, in document order. */
-export function textRuns(tree: DocumentTree): NodeKey[] {
-  const runs: NodeKey[] = [];
-  const walk = (key: NodeKey): void => {
-    for (const child of tree.children(key)) {
-      const entry = tree.get(child);
-      if (entry === undefined) continue;
-      if (entry.value.type === 'text') runs.push(child);
-      else walk(child);
-    }
-  };
-  walk(ROOT_KEY);
-  return runs;
+/**
+ * The text runs of the document, in document order.
+ *
+ * Computed once per tree version rather than per call. This is asked for several times
+ * per keystroke and is O(n) each time, which made typing O(n²) — sixty characters into a
+ * 50 kB document took over a minute.
+ */
+export function textRuns(tree: DocumentTree): readonly NodeKey[] {
+  return tree.textRuns();
 }
 
 /** The characters in a run, or `''` for a node that holds none. */
@@ -148,14 +144,37 @@ function edgePoint(
 ): ModelPoint | null {
   const key = index.byNode.get(element);
   if (key === undefined) return null;
-  const inside = documentOrder(tree).filter(
-    (candidate) => tree.ancestors(candidate).includes(key) && isInlineLeaf(tree, candidate),
-  );
-  const chosen = atEnd ? inside[inside.length - 1] : inside[0];
+  const chosen = edgeLeaf(tree, key, atEnd);
   if (chosen === undefined) return null;
   const value = tree.get(chosen)?.value;
   const length = value?.type === 'text' ? value.text.length : 1;
   return { key: chosen, offset: atEnd ? length : 0 };
+}
+
+/** True when `key` is a text run. */
+function isRun(tree: DocumentTree, key: NodeKey): boolean {
+  return tree.get(key)?.value.type === 'text';
+}
+
+/** The first or last inline leaf under `key`, found by walking rather than by scanning. */
+function edgeLeaf(tree: DocumentTree, key: NodeKey, atEnd: boolean): NodeKey | undefined {
+  const children = tree.children(key);
+  const order = atEnd ? [...children].reverse() : children;
+  for (const child of order) {
+    if (isInlineLeaf(tree, child)) return child;
+    const found = edgeLeaf(tree, child, atEnd);
+    if (found !== undefined) return found;
+  }
+  return undefined;
+}
+
+/** Whether anything under `key` can hold a caret. */
+function hasInlineLeaf(tree: DocumentTree, key: NodeKey): boolean {
+  for (const child of tree.children(key)) {
+    if (isInlineLeaf(tree, child)) return true;
+    if (hasInlineLeaf(tree, child)) return true;
+  }
+  return false;
 }
 
 /** True for a leaf that holds content: text, and the atomic inline nodes. */
@@ -186,10 +205,11 @@ function emptyBlockPoint(tree: DocumentTree, key: NodeKey | undefined): ModelPoi
   // not empty, and treating it as such collapsed WebKit's select-all — whose end point is
   // the paragraph, not a text node — to the start of that paragraph, so most of the
   // document fell outside the range.
-  const hasContent = documentOrder(tree).some(
-    (candidate) => tree.ancestors(candidate).includes(key) && isInlineLeaf(tree, candidate),
-  );
-  return hasContent ? null : { key, offset: 0 };
+  //
+  // Walked downwards from `key`, which is a handful of nodes. Scanning the whole document
+  // and asking each node whether it sits under this one was O(n × depth) on every
+  // selection read.
+  return hasInlineLeaf(tree, key) ? null : { key, offset: 0 };
 }
 
 /** The first or last text run inside `node`'s subtree. */
@@ -228,15 +248,14 @@ function nearestRun(tree: DocumentTree, key: NodeKey, after: boolean): ModelPoin
   if (runs.length === 0) return null;
 
   // Inside the subtree first, which is where the caret visually is.
-  const inside = runs.filter((run) => run === key || tree.ancestors(run).includes(key));
-  if (inside.length > 0) {
-    const chosen = after ? inside[inside.length - 1]! : inside[0]!;
-    return { key: chosen, offset: after ? runText(tree, chosen).length : 0 };
+  const inside = isRun(tree, key) ? key : edgeLeaf(tree, key, after);
+  if (inside !== undefined && isRun(tree, inside)) {
+    return { key: inside, offset: after ? runText(tree, inside).length : 0 };
   }
 
   // Otherwise the nearest run in document order, on the side the offset pointed at.
   const order = documentOrder(tree);
-  const position = order.indexOf(key);
+  const position = tree.positionOf(key);
   if (position === -1) return null;
   let best: NodeKey | null = null;
   if (after) {
@@ -268,17 +287,9 @@ function nearestRun(tree: DocumentTree, key: NodeKey, after: boolean): ModelPoin
   return { key: best, offset: after ? runText(tree, best).length : 0 };
 }
 
-/** Every key in document order, which is what "the next run" is measured against. */
-function documentOrder(tree: DocumentTree): NodeKey[] {
-  const order: NodeKey[] = [];
-  const walk = (key: NodeKey): void => {
-    for (const child of tree.children(key)) {
-      order.push(child);
-      walk(child);
-    }
-  };
-  walk(ROOT_KEY);
-  return order;
+/** Every key in document order, from the tree's per-version cache. */
+function documentOrder(tree: DocumentTree): readonly NodeKey[] {
+  return tree.documentOrder();
 }
 
 /** The DOM position for a model point, ready to hand to a `Range`. */
@@ -326,9 +337,8 @@ export function readSelection(
   // name an atomic chip, which is not a run, and `indexOf` answered -1 for it — so a
   // forward selection ending in a merge tag was reported as backward, the range came out
   // inside out, and select-all-and-type deleted nothing at all.
-  const order = documentOrder(tree);
-  const anchorAt = order.indexOf(anchor.key);
-  const focusAt = order.indexOf(focus.key);
+  const anchorAt = tree.positionOf(anchor.key);
+  const focusAt = tree.positionOf(focus.key);
   const isBackward = focusAt < anchorAt || (focusAt === anchorAt && focus.offset < anchor.offset);
   const isCollapsed = anchor.key === focus.key && anchor.offset === focus.offset;
   return { anchor, focus, isCollapsed, isBackward };

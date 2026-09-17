@@ -81,14 +81,28 @@ test.describe('performance budgets', () => {
   test('settles a 200 KB Word paste in under 400 ms', async ({ page }) => {
     await harness(page);
 
+    const before = await page.evaluate(() => window.__rtePerf!.editor()!.getLength());
     const elapsed = await page.evaluate(() => window.__rtePerf!.pasteWord(200_000));
     console.log(`word paste: ${elapsed.toFixed(0)} ms for 200 KB`);
 
     expect(elapsed).toBeLessThan(400);
 
-    // It has to have actually landed: a fast run that dropped the content is not a
-    // fast run.
-    await expect(editor(page)).toContainText('chlorine');
+    /*
+     * It has to have actually landed: a fast run that dropped the content is not a fast
+     * run.
+     *
+     * Measured on the length rather than on a word, because the guard used to look for
+     * "chlorine" — which the fixture's vocabulary does not contain and never has, so it
+     * failed for any engine and guarded nothing. The length grows only if the paste was
+     * parsed, cleaned and inserted, which is the whole of what this asserts.
+     *
+     * 200 kB of Word markup carries about 42,000 characters of text; the rest is
+     * `mso-*` declarations. 30,000 is comfortably under that and far above anything a
+     * partial paste would produce.
+     */
+    const after = await page.evaluate(() => window.__rtePerf!.editor()!.getLength());
+    expect(after).toBeGreaterThan(before + 30_000);
+    await expect(editor(page)).toContainText('settlement');
   });
 
   test('serializes a 100 KB document without blocking for a frame', async ({ page }) => {

@@ -237,6 +237,80 @@ export class DocumentTree {
     return this.#entries.get(key)?.parent;
   }
 
+  /**
+   * Whether `ancestor` is above `key`.
+   *
+   * Walks up from `key` rather than building its ancestor list and searching it, which is
+   * what a hot loop needs: `ancestors(x).includes(y)` allocates an array per node, and
+   * the callers that ask this question ask it once per node in the document.
+   */
+  isUnder(key: NodeKey, ancestor: NodeKey): boolean {
+    let at = this.#entries.get(key)?.parent ?? null;
+    while (at !== null) {
+      if (at === ancestor) return true;
+      at = this.#entries.get(at)?.parent ?? null;
+    }
+    return false;
+  }
+
+  /**
+   * Every key in document order, and every text run, computed once per version.
+   *
+   * These are the two walks the engine asks for constantly — selection mapping, range
+   * arithmetic, format state — and each is O(n) in the size of the document. Recomputing
+   * them per call made a keystroke O(n²): typing sixty characters into a 50 kB document
+   * took longer than a minute, because a single keystroke walks the tree dozens of times
+   * and each walk is the whole document.
+   *
+   * Keyed on `#revision`, which every structural change bumps — not on `version`, which
+   * only moves when an update *commits*. An operation runs inside an update and reads
+   * these walks between its own mutations: `runsInRange` splits a run and immediately
+   * asks where the new one sits. Keyed on the committed version, the cache handed back a
+   * walk from before the split and the new node was invisible.
+   */
+  #walks: {
+    revision: number;
+    order: NodeKey[];
+    runs: NodeKey[];
+    position: Map<NodeKey, number>;
+  } | null = null;
+
+  /** Bumped by every structural change, committed or not. */
+  #revision = 0;
+
+  #computeWalks(): { order: NodeKey[]; runs: NodeKey[]; position: Map<NodeKey, number> } {
+    if (this.#walks !== null && this.#walks.revision === this.#revision) return this.#walks;
+    const order: NodeKey[] = [];
+    const runs: NodeKey[] = [];
+    const walk = (key: NodeKey): void => {
+      for (const child of this.#entries.get(key)?.children ?? []) {
+        order.push(child);
+        if (this.#entries.get(child)?.value.type === 'text') runs.push(child);
+        walk(child);
+      }
+    };
+    walk(ROOT_KEY);
+    const position = new Map<NodeKey, number>();
+    for (const [index, key] of order.entries()) position.set(key, index);
+    this.#walks = { revision: this.#revision, order, runs, position };
+    return this.#walks;
+  }
+
+  /** Every key in document order. Shared, so callers must not mutate it. */
+  documentOrder(): readonly NodeKey[] {
+    return this.#computeWalks().order;
+  }
+
+  /** Every text run, in document order. Shared, so callers must not mutate it. */
+  textRuns(): readonly NodeKey[] {
+    return this.#computeWalks().runs;
+  }
+
+  /** Where `key` sits in document order, or -1. O(1) rather than a scan. */
+  positionOf(key: NodeKey): number {
+    return this.#computeWalks().position.get(key) ?? -1;
+  }
+
   /** Every ancestor of `key`, nearest first, ending at the root. */
   ancestors(key: NodeKey): NodeKey[] {
     const trail: NodeKey[] = [];
@@ -333,6 +407,7 @@ export class DocumentTree {
       children: [],
     };
     this.#entries.set(key, entry);
+    this.#revision += 1;
 
     const siblings = this.#entries.get(parent)!.children;
     const index = at === undefined || at > siblings.length ? siblings.length : Math.max(0, at);
@@ -374,6 +449,9 @@ export class DocumentTree {
         const entry = this.#entries.get(key);
         if (entry === undefined) return;
         entry.value = withoutChildren(value);
+        // A type change moves a node between "is a run" and "is not", which the walks
+        // record, so even a value-only edit invalidates them.
+        this.#revision += 1;
         collector.updated.add(key);
       },
 
@@ -399,6 +477,7 @@ export class DocumentTree {
           this.#entries.delete(removed);
           collector.removed.add(removed);
         }
+        this.#revision += 1;
         if (entry.parent !== null) {
           const siblings = this.#entries.get(entry.parent);
           if (siblings !== undefined) {
@@ -435,6 +514,7 @@ export class DocumentTree {
         target.children.splice(index, 0, key);
         entry.parent = parent;
         entry.slot = slot ?? defaultSlot(target.value.type) ?? 'content';
+        this.#revision += 1;
         collector.rearranged.add(parent);
       },
     };

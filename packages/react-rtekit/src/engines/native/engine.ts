@@ -61,7 +61,7 @@ import {
   toggleHeaderRow,
   type LinkSpec,
 } from './structure.js';
-import { type RenderIndex, renderTree } from './render.js';
+import { createIndex, type RenderIndex, renderTree } from './render.js';
 import { reconcile, signaturesOf } from './reconcile.js';
 import {
   atEnd,
@@ -73,6 +73,7 @@ import {
   textRuns,
   toEditorSelection,
   writeSelection,
+  type ModelPoint,
   type ModelSelection,
 } from './selection.js';
 import { DocumentTree, ROOT_KEY, type NodeKey } from './tree.js';
@@ -178,7 +179,7 @@ class NativeEngineHandle implements EngineHandle {
   readonly #history: History;
   readonly #commands = new Map<CommandId, Set<CommandHandler>>();
   #tree: DocumentTree;
-  #index: RenderIndex;
+  #index: RenderIndex = createIndex();
   #signatures: Map<NodeKey, string>;
   /** The last selection seen inside the editor, so a command can run after a blur (R5). */
   #lastSelection: ModelSelection | null = null;
@@ -205,6 +206,11 @@ class NativeEngineHandle implements EngineHandle {
   #composing = false;
   /** Whether the host's keymap claimed the keydown that produced the current input. */
   #claimedByKeymap = false;
+  /** True while the engine is writing to its own DOM, so the guard ignores those. */
+  #applying = false;
+  /** Watches for DOM changes the engine did not make. */
+  #observer: MutationObserver | null = null;
+
   readonly #cleanup: (() => void)[] = [];
 
   constructor(container: HTMLElement, options: EngineMountOptions) {
@@ -221,7 +227,9 @@ class NativeEngineHandle implements EngineHandle {
 
     const document_ = this.#parse(options.initialValue ?? '', options.valueFormat ?? 'html');
     this.#tree = DocumentTree.fromDocument(document_);
-    this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    this.#applyToDom(() => {
+      this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    });
     this.#signatures = signaturesOf(this.#tree);
 
     this.#history = new History({
@@ -231,6 +239,7 @@ class NativeEngineHandle implements EngineHandle {
     this.#history.push(document_, null, 'api');
 
     this.#listen();
+    this.#watchDom();
     if (options.autoFocus !== undefined && options.autoFocus !== false) {
       this.focus(options.autoFocus === true ? 'end' : options.autoFocus);
     }
@@ -283,7 +292,9 @@ class NativeEngineHandle implements EngineHandle {
   ): void {
     const next = this.#parse(value, options?.format ?? this.#options.valueFormat ?? 'html');
     this.#tree = DocumentTree.fromDocument(next);
-    this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    this.#applyToDom(() => {
+      this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    });
     this.#signatures = signaturesOf(this.#tree);
     this.#lastSelection = null;
     if (options?.history === false) this.#history.reset(next);
@@ -331,7 +342,9 @@ class NativeEngineHandle implements EngineHandle {
     if (model === null) return;
     this.#lastSelection = model;
     this.#shownSelection = model;
-    writeSelection(this.#index, this.contentElement, model);
+    this.#applyToDom(() => {
+      writeSelection(this.#index, this.contentElement, model);
+    });
     // Moving the caret changes what the toolbar should show — whether the selection is
     // inside a link, which block it is in, which marks apply. Without this the link
     // popover opened against the state from before the selection moved.
@@ -349,7 +362,9 @@ class NativeEngineHandle implements EngineHandle {
     if (model === null || model === undefined) return;
     this.#lastSelection = model;
     this.#shownSelection = model;
-    writeSelection(this.#index, this.contentElement, model);
+    this.#applyToDom(() => {
+      writeSelection(this.#index, this.contentElement, model);
+    });
     this.#emitFormat();
   }
 
@@ -387,7 +402,9 @@ class NativeEngineHandle implements EngineHandle {
     // run from a menu or a dialog may have lost it. The last selection stands in, which
     // is what makes formatting apply to the text the user selected (fixes R5).
     if (!this.hasFocus() && this.#lastSelection !== null) {
-      writeSelection(this.#index, this.contentElement, this.#lastSelection);
+      this.#applyToDom(() => {
+        writeSelection(this.#index, this.contentElement, this.#lastSelection!);
+      });
     }
 
     const handlers = [...(this.#commands.get(command) ?? [])] as unknown as CommandHandler<Id>[];
@@ -505,7 +522,9 @@ class NativeEngineHandle implements EngineHandle {
     if (position === 'start') this.setSelection('start');
     else if (position === 'end') this.setSelection('end');
     else if (position === 'restore' && this.#lastSelection !== null) {
-      writeSelection(this.#index, this.contentElement, this.#lastSelection);
+      this.#applyToDom(() => {
+        writeSelection(this.#index, this.contentElement, this.#lastSelection!);
+      });
     }
   }
 
@@ -613,14 +632,18 @@ class NativeEngineHandle implements EngineHandle {
       after = operation({ tree: this.#tree, write }, before);
     });
 
-    reconcile(this.#tree, change, this.#index, this.#signatures, this.#document);
+    this.#applyToDom(() => {
+      reconcile(this.#tree, change, this.#index, this.#signatures, this.#document);
+    });
     this.#lastSelection = after;
     this.#shownSelection = after;
     // Always, not only when focused. Replacing an element detaches the text node the
     // browser's selection pointed at, and it collapses to the parent — so the next edit
     // read a caret at offset 0 instead of the range that was selected, and a second
     // format command appeared to do nothing. Writing a range does not move focus.
-    writeSelection(this.#index, this.contentElement, after);
+    this.#applyToDom(() => {
+      writeSelection(this.#index, this.contentElement, after);
+    });
 
     const document_ = this.getJSON();
     this.#history.push(document_, toEditorSelection(this.#tree, after), cause);
@@ -632,11 +655,15 @@ class NativeEngineHandle implements EngineHandle {
   /** Replaces the document wholesale, which is what undo and redo do. */
   #applyHistory(document_: EditorDocument, selection: EditorSelection | null): void {
     this.#tree = DocumentTree.fromDocument(document_);
-    this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    this.#applyToDom(() => {
+      this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    });
     this.#signatures = signaturesOf(this.#tree);
     this.#lastSelection = selection === null ? null : this.#fromEditorSelection(selection);
     if (this.#lastSelection !== null && this.hasFocus()) {
-      writeSelection(this.#index, this.contentElement, this.#lastSelection);
+      this.#applyToDom(() => {
+        writeSelection(this.#index, this.contentElement, this.#lastSelection!);
+      });
     }
     this.#emitChange('history');
     this.#emitFormat();
@@ -1002,6 +1029,122 @@ class NativeEngineHandle implements EngineHandle {
 
   #emitFormat(): void {
     this.#events.emit('formatChange', this.#formatState());
+  }
+
+
+  /**
+   * Runs `write`, telling the guard that whatever it does to the DOM was our idea.
+   *
+   * Every path that touches the content element goes through this. Without it the guard
+   * would see the reconciler's own work as a foreign edit and re-read the document on
+   * every keystroke.
+   */
+  #applyToDom(write: () => void): void {
+    this.#applying = true;
+    try {
+      write();
+    } finally {
+      // Mutation records are delivered asynchronously, so anything already queued has to
+      // be drained before the flag drops or the next batch looks foreign. The records
+      // themselves are of no interest — they describe work this engine just did.
+      this.#observer?.takeRecords();
+      this.#applying = false;
+    }
+  }
+
+  /**
+   * Starts watching for DOM changes the engine did not make.
+   *
+   * A `contenteditable` is a shared surface. The browser writes to it for an input type
+   * the engine declined, `document.execCommand` writes to it without a `beforeinput` at
+   * all, and so do autofill, translate and every grammar extension. Each of those leaves
+   * the model describing a document the reader can no longer see: `getHTML()` returns
+   * text that is not on screen, and the next reconcile silently deletes what they typed.
+   *
+   * There is no way to prevent that in general, so the engine notices instead. When the
+   * DOM moves underneath it, the DOM is the truth — it is what the reader is looking at —
+   * and the model is re-read from it.
+   */
+  #watchDom(): void {
+    if (typeof MutationObserver === 'undefined') return;
+    this.#observer = new MutationObserver((records) => {
+      if (this.#applying || this.#destroyed || this.#composing) return;
+      if (records.length === 0) return;
+      this.#adoptDom();
+    });
+    this.#observer.observe(this.contentElement, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+    });
+    this.#cleanup.push(() => {
+      this.#observer?.disconnect();
+      this.#observer = null;
+    });
+  }
+
+  /**
+   * Re-reads the document from its own DOM, after something else changed it.
+   *
+   * The caret is kept by character offset rather than by node: the re-render builds new
+   * nodes, so the position the browser is holding would not survive, and an offset into
+   * the text is the one description of "where the caret is" that both sides agree on.
+   */
+  #adoptDom(): void {
+    const caret = this.#textOffsetOfCaret();
+    const document_ = this.#options.parseHtml(this.contentElement.innerHTML);
+    this.#tree = DocumentTree.fromDocument(document_);
+    this.#applyToDom(() => {
+      this.#applyToDom(() => {
+      this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+    });
+    });
+    this.#signatures = signaturesOf(this.#tree);
+    const restored = caret === null ? null : this.#pointAtTextOffset(caret);
+    this.#lastSelection = restored;
+    this.#shownSelection = restored;
+    if (restored !== null) {
+      this.#applyToDom(() => {
+        writeSelection(this.#index, this.contentElement, restored);
+      });
+    }
+    this.#history.push(document_, null, 'typing');
+    this.#emitChange('user');
+    this.#emitFormat();
+  }
+
+  /** How many characters precede the caret in the whole document, or `null` for none. */
+  #textOffsetOfCaret(): number | null {
+    const model = readSelection(this.#tree, this.#index, this.contentElement);
+    if (model === null) return null;
+    const caret = model.isBackward ? model.anchor : model.focus;
+    let total = 0;
+    for (const key of this.#tree.textRuns()) {
+      const value = this.#tree.get(key)?.value;
+      const length = value?.type === 'text' ? value.text.length : 0;
+      if (key === caret.key) return total + Math.min(caret.offset, length);
+      total += length;
+    }
+    return total;
+  }
+
+  /** The inverse: a collapsed selection at the character offset `target`. */
+  #pointAtTextOffset(target: number): ModelSelection | null {
+    let total = 0;
+    let last: ModelPoint | null = null;
+    for (const key of this.#tree.textRuns()) {
+      const value = this.#tree.get(key)?.value;
+      const length = value?.type === 'text' ? value.text.length : 0;
+      if (target <= total + length) {
+        const point = { key, offset: target - total };
+        return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
+      }
+      total += length;
+      last = { key, offset: length };
+    }
+    return last === null
+      ? null
+      : { anchor: last, focus: { ...last }, isCollapsed: true, isBackward: false };
   }
 
   /** DOM listeners: focus, blur, selection, and the clipboard events the host claims. */

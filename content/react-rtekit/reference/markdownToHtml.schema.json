@@ -2,7 +2,7 @@
   "name": "markdownToHtml",
   "kind": "function",
   "imports": [
-    "import { markdownToHtml } from 'react-rtekit';"
+    "import { markdownToHtml } from 'react-rtekit/core';"
   ],
   "options": {},
   "filename": "core/serialize/markdown.ts",

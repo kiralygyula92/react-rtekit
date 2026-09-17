@@ -2,7 +2,7 @@
   "name": "getProfile",
   "kind": "function",
   "imports": [
-    "import { getProfile } from 'react-rtekit';"
+    "import { getProfile } from 'react-rtekit/core';"
   ],
   "options": {},
   "filename": "core/sanitize/profiles.ts",

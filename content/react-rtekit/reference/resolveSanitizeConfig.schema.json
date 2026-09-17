@@ -2,7 +2,7 @@
   "name": "resolveSanitizeConfig",
   "kind": "function",
   "imports": [
-    "import { resolveSanitizeConfig } from 'react-rtekit';"
+    "import { resolveSanitizeConfig } from 'react-rtekit/core';"
   ],
   "options": {},
   "filename": "core/sanitize/profiles.ts",

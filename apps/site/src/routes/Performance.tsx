@@ -90,10 +90,21 @@ export function Performance() {
           element.dispatchEvent(
             new KeyboardEvent('keydown', { key: 'a', bubbles: true, cancelable: true }),
           );
-          // The one way to make the browser insert text the way a key does. Its
-          // replacement, `beforeinput`, cannot be dispatched with effect from script.
-          // eslint-disable-next-line @typescript-eslint/no-deprecated -- no alternative exists
-          document.execCommand('insertText', false, 'a');
+          // A synthetic `beforeinput`, which is the path a real key takes.
+          //
+          // This used to be `document.execCommand`, because the engine of the day left the
+          // insertion to the browser and only a trusted event would make it happen. The
+          // engine applies `beforeinput` itself now, so it does not care whether the event
+          // is trusted — and this measures the code a keystroke actually runs, rather than
+          // `execCommand`'s much slower path through the DOM-change guard.
+          element.dispatchEvent(
+            new InputEvent('beforeinput', {
+              inputType: 'insertText',
+              data: 'a',
+              bubbles: true,
+              cancelable: true,
+            }),
+          );
 
           await settled;
           samples.push(performance.now() - started);

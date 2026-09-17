@@ -25,7 +25,7 @@ import 'react-rtekit/styles.css';    // everything, including the above
 Render stored HTML with the same styling using [RteContentView](/react-rtekit/content-view/), which sanitizes and applies the same classes:
 
 ```tsx
-import { RteContentView } from 'react-rtekit';
+import { RteContentView } from 'react-rtekit/view';
 
 <RteContentView value={storedHtml} />
 ```

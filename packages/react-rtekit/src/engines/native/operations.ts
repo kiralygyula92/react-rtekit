@@ -103,8 +103,8 @@ export function runsInRange(context: EditContext, selection: ModelSelection): No
       : start.key;
 
   const order = documentOrder(tree);
-  const fromAt = order.indexOf(head);
-  const toAt = order.indexOf(end.key);
+  const fromAt = tree.positionOf(head);
+  const toAt = tree.positionOf(end.key);
   if (fromAt === -1 || toAt === -1) return [];
   const span = order.slice(Math.min(fromAt, toAt), Math.max(fromAt, toAt) + 1);
   const runs = span.filter((key) => tree.get(key)?.value.type === 'text');
@@ -119,7 +119,7 @@ function ordered(selection: ModelSelection): [ModelSelection['anchor'], ModelSel
 }
 
 /** Whether every run in `keys` carries `mark`, which is what presses a toolbar toggle. */
-export function hasMark(tree: DocumentTree, keys: NodeKey[], mark: MarkName): boolean {
+export function hasMark(tree: DocumentTree, keys: readonly NodeKey[], mark: MarkName): boolean {
   if (keys.length === 0) return false;
   return keys.every((key) => runMarks(tree, key).some((one) => one.type === mark));
 }
@@ -534,8 +534,8 @@ export function deleteRange(context: EditContext, selection: ModelSelection): Mo
   if (firstKey === undefined || lastKey === undefined) return collapseTo(tree, from);
 
   const order = documentOrder(tree);
-  const firstAt = order.indexOf(firstKey);
-  const lastAt = order.indexOf(lastKey);
+  const firstAt = tree.positionOf(firstKey);
+  const lastAt = tree.positionOf(lastKey);
   if (firstAt === -1 || lastAt === -1 || lastAt < firstAt) return collapseTo(tree, from);
 
   const startBlock = blockOf(tree, firstKey);
@@ -586,45 +586,46 @@ function isInline(tree: DocumentTree, key: NodeKey): boolean {
   );
 }
 
-/** Every inline node in document order. */
-function inlineOrder(tree: DocumentTree): NodeKey[] {
-  return documentOrder(tree).filter((key) => isInline(tree, key));
-}
-
-/** The inline node before `key`, or `undefined` at the start of the document. */
+/**
+ * The inline node before `key`, or `undefined` at the start of the document.
+ *
+ * Steps through the cached document order from `key`'s own position rather than building
+ * a filtered copy and searching it. Deleting a selection asks for a neighbour per
+ * character, and the filtered copy made that O(n) each time.
+ */
 function previousInline(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
-  const order = inlineOrder(tree);
-  const at = order.indexOf(key);
-  return at > 0 ? order[at - 1] : undefined;
+  const order = documentOrder(tree);
+  for (let at = tree.positionOf(key) - 1; at >= 0; at -= 1) {
+    const candidate = order[at]!;
+    if (isInline(tree, candidate)) return candidate;
+  }
+  return undefined;
 }
 
 /** The inline node after `key`, or `undefined` at the end. */
 function nextInline(tree: DocumentTree, key: NodeKey): NodeKey | undefined {
-  const order = inlineOrder(tree);
-  const at = order.indexOf(key);
-  return at >= 0 && at < order.length - 1 ? order[at + 1] : undefined;
+  const order = documentOrder(tree);
+  const from = tree.positionOf(key);
+  if (from === -1) return undefined;
+  for (let at = from + 1; at < order.length; at += 1) {
+    const candidate = order[at]!;
+    if (isInline(tree, candidate)) return candidate;
+  }
+  return undefined;
 }
 
 /** The blocks strictly between two others, in document order. */
 function blocksBetween(tree: DocumentTree, first: NodeKey, last: NodeKey): NodeKey[] {
   const order = documentOrder(tree);
-  const from = order.indexOf(first);
-  const to = order.indexOf(last);
+  const from = tree.positionOf(first);
+  const to = tree.positionOf(last);
   if (from === -1 || to === -1) return [];
   return order.slice(from + 1, to).filter((key) => blockOf(tree, key) === key);
 }
 
-/** Every key in document order, which is what a range is measured against. */
-function documentOrder(tree: DocumentTree): NodeKey[] {
-  const order: NodeKey[] = [];
-  const walk = (key: NodeKey): void => {
-    for (const child of tree.children(key)) {
-      order.push(child);
-      walk(child);
-    }
-  };
-  walk(ROOT_KEY);
-  return order;
+/** Every key in document order, from the tree's per-version cache. */
+function documentOrder(tree: DocumentTree): readonly NodeKey[] {
+  return tree.documentOrder();
 }
 
 /**

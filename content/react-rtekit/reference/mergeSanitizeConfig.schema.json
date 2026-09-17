@@ -2,7 +2,7 @@
   "name": "mergeSanitizeConfig",
   "kind": "function",
   "imports": [
-    "import { mergeSanitizeConfig } from 'react-rtekit';"
+    "import { mergeSanitizeConfig } from 'react-rtekit/core';"
   ],
   "options": {},
   "filename": "core/sanitize/profiles.ts",
