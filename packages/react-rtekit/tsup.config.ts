@@ -56,6 +56,11 @@ export default defineConfig({
   target: 'es2020',
   platform: 'neutral',
   dts: true,
+  // Source maps are two thirds of the published tarball — 2.2 MB of the 3.8 MB — and
+  // they ship anyway. The failures this library has are in selection handling, paste
+  // cleanup and sanitization: subtle, hard to reproduce, and reported by people who
+  // need a readable stack trace to describe them at all. A one-time 900 kB install for
+  // a library that costs nothing at runtime is the right side of that trade.
   sourcemap: true,
   clean: true,
   splitting: true,
