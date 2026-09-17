@@ -295,25 +295,28 @@ demos, and it is the largest single piece of work left on the site.
 ### G-30 — The editor cannot run without Lexical installed
 The package ships no third-party code — `dependencies: {}`, nothing vendored — and every
 subsystem that could be written in-house already is: the HTML parser, the sanitizer, the
-schema, the serializers and the interop profiles, 6,108 lines of them. `marked` was
+schema, the serializers and the interop profiles, 6,128 lines of them. `marked` was
 removed in the course of this work; the docs now render on the library's own Markdown
 path.
 
 What remains is the document engine. Lexical is a peer dependency, so a consumer
 downloads only this project's code, but the editor does not run without it.
 
-Replacing it is **~41,200 lines** of contenteditable engine — selection normalization
-across three browser engines, `beforeinput`, IME composition, DOM reconciliation, undo
-coalescing — behind a 30-method interface, with 1,121 unit and 335 × 5 browser tests to
-keep passing. Realistically a multi-quarter project rather than a task.
+Replacing it is **28,059 lines** of contenteditable engine across twelve packages —
+selection normalization across three browser engines, `beforeinput`, IME composition, DOM
+reconciliation, undo coalescing — reached through **119 distinct symbols**, behind a
+34-method interface, with 1,183 unit and 348 × 5 browser tests to keep passing.
+Realistically a multi-quarter project rather than a task.
 
 The architecture supports the swap and is not an accident: nothing outside
-`src/engines/lexical/` imports Lexical, verified by a grep that returns nothing. The
-options and their costs are in [ADR-005](docs/adr/005-removing-third-party-dependencies.md).
+`src/engines/lexical/` imports Lexical, verified by a grep that returns nothing.
 
-**Decision needed:** whether to start an in-house engine, and at what scope. If yes, the
-first deliverable is a conformance suite for `EditorEngine` that the Lexical adapter
-passes today, so a second adapter has a definition of done.
+**Decided.** The owner chose to write an engine in-house.
+[ADR-006](docs/adr/006-an-in-house-engine.md) records the analysis and the staged plan;
+[ADR-005](docs/adr/005-removing-third-party-dependencies.md) records the options it was
+chosen from. Stage 0 — the `EngineHandle` conformance suite the Lexical adapter passes,
+so a second adapter has a definition of done — is complete. **Until stage 8 the
+dependency is still required, and nothing should say otherwise.**
 
 ### G-29 — `/react-rtekit/discover-more/showcase/` has no entries
 The page exists and says so. Inventing applications would breach operating rule 4, so it
