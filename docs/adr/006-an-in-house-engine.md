@@ -87,7 +87,7 @@ compared on the same test suite rather than by argument.
 |---|---|---|
 | **0** | An executable definition of done: the `EngineHandle` conformance suite, which the Lexical adapter passes | **Done** — `test/engines/conformance.ts`, 42 tests, 34 methods |
 | **1** | Engine-agnostic primitives moved into `src/core`, each with tests that do not need a browser | **In progress** — `utils/graphemes.ts` |
-| **2** | The live document tree: keyed nodes, an update transaction, and dirty tracking | |
+| **2** | The live document tree: keyed nodes, an update transaction, and dirty tracking | **Done** — `src/engines/native/tree.ts`, 30 tests, no DOM |
 | **3** | The reconciler: model diff → DOM, caret preserved | |
 | **4** | Selection mapping, normalized across engines | |
 | **5** | `beforeinput`, keyboard, and composition | |
