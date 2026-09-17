@@ -13,7 +13,7 @@ has been acted on — Phase 1 restructures nothing.
 | G-15 … G-18 | Phase 4 | reference generation |
 | G-19 … G-24 | Phase 5 | content that has to be written or decided |
 | G-25 … G-27 | Phase 6 | machine surface and QA |
-| G-28 … G-30 | after ship | content, and one architecture decision |
+| G-28 … G-30 | after ship | content, and one architecture decision (**G-30 closed**) |
 
 Twenty-eight items. None is a blocker for Phase 2; four need a decision before it
 (**G-01**, **G-04**, **G-10**, **G-11**), and **G-10** — whether this product is tiered
@@ -292,7 +292,7 @@ shortfall (§5.1), which is what this is.
 cell chrome, a link popover with your own form, a counter rendered your way. That is 50
 demos, and it is the largest single piece of work left on the site.
 
-### G-30 — The editor cannot run without Lexical installed
+### G-30 — The editor cannot run without Lexical installed *(closed)*
 The package ships no third-party code — `dependencies: {}`, nothing vendored — and every
 subsystem that could be written in-house already is: the HTML parser, the sanitizer, the
 schema, the serializers and the interop profiles, 6,128 lines of them. `marked` was

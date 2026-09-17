@@ -102,18 +102,21 @@ compared on the same test suite rather than by argument.
 |---|---|
 | `EngineHandle` conformance | **42 / 42** |
 | Unit tests | **1335 / 1335** |
-| Browser tests | **1637 / 1639** across five browsers |
+| Browser tests | **1638 / 1639** across five browsers |
 | Lexical packages installed | **0** |
 | Peer dependencies | **react, react-dom** |
 
-The two outstanding browser failures are not the engine's: one is a
-Firefox graphics crash that picks a different documentation page each run,
-and the other is a mobile-chrome navigation flow that fails with the
-Lexical adapter too.
+The one outstanding browser failure is not the engine's: a mobile-chrome
+documentation navigation flow that fails with the Lexical adapter too,
+checked by putting the adapter back and running it.
 
 `src/engines/lexical/` is deleted, the twelve peer dependencies are gone,
-and `pnpm install` removes 35 packages. The 323 KB Lexical chunk is no
+and `pnpm install` removes 35 packages. The 323 kB Lexical chunk is no
 longer in the site's bundle.
+
+The replacement is 4,179 lines of source and 2,193 of tests, on top of the
+6,166 lines of `src/core` that were already this project's own. It cost
+the package about 4 kB gzipped, and saved a consumer 103 kB.
 
 #### What the cross-browser work actually was
 
