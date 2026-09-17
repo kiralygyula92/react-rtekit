@@ -15,9 +15,15 @@
   --docs-rail-width: 220px;
   --docs-gutter: 28px;
   --docs-measure: 44rem;
-  /* One step down from the browser default: documentation reads denser than prose. */
-  --docs-font-size: 15px;
-  --docs-line-height: 1.6;
+  /*
+   * The browser default, not a step below it.
+   *
+   * Documentation is long-form reading, and 15px on a 1440px screen is a size people
+   * zoom out of rather than into. The measure cap is what keeps the line length right,
+   * so the type does not have to be small as well.
+   */
+  --docs-font-size: 16px;
+  --docs-line-height: 1.65;
 }
 
 .docs-shell {
@@ -282,7 +288,7 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 10px;
-  font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.2rem);
+  font-size: clamp(2rem, 1.4rem + 1.8vw, 2.6rem);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -296,14 +302,14 @@
 
 .prose h2 {
   margin: 32px 0 12px;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   letter-spacing: -0.01em;
   scroll-margin-top: calc(var(--docs-header-height) + 16px);
 }
 
 .prose h3 {
   margin: 24px 0 8px;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   scroll-margin-top: calc(var(--docs-header-height) + 16px);
 }
 

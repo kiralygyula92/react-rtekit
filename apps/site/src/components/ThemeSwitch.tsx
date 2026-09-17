@@ -12,10 +12,24 @@ export type SiteTheme = 'light' | 'dark' | 'classic';
 
 const STORAGE_KEY = 'rtekit-site-theme';
 
+/**
+ * The theme to start in.
+ *
+ * A stored choice wins; otherwise the system's. Defaulting to light regardless meant a
+ * reader whose machine is dark got a white page until they found the switch, which is
+ * not a preference anybody expressed.
+ */
 function read(): SiteTheme {
-  if (typeof localStorage === 'undefined') return 'light';
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored === 'dark' || stored === 'classic' ? stored : 'light';
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    /* private mode, or no storage at all */
+  }
+  if (stored === 'dark' || stored === 'light' || stored === 'classic') return stored;
+  const prefersDark =
+    typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches;
+  return prefersDark ? 'dark' : 'light';
 }
 
 /** Reads the current site theme and re-renders when it changes. */

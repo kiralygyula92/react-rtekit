@@ -13,13 +13,36 @@
   color-scheme: light;
 }
 
+/*
+ * Dark, written once and applied two ways.
+ *
+ * The media query is what makes the *first paint* right for a reader whose system is
+ * dark: the switch runs in an effect, so until it does the page was white regardless of
+ * the preference, and the reader saw a flash of the wrong theme on every load — or, with
+ * JavaScript off, the wrong theme for good.
+ *
+ * It is guarded on `:not([data-color-scheme='light'])` so that choosing light explicitly
+ * still wins over the system.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-color-scheme='light']) {
+    --site-bg: #0d1117;
+    --site-bg-muted: #161b22;
+    --site-text: #e6edf3;
+    --site-text-muted: #8b949e;
+    --site-border: #232a33;
+    --site-accent: #58a6ff;
+    color-scheme: dark;
+  }
+}
+
 :root[data-color-scheme='dark'] {
-  --site-bg: #0f1115;
-  --site-bg-muted: #161a20;
-  --site-text: #e6e8eb;
-  --site-text-muted: #9aa1ac;
-  --site-border: #262b33;
-  --site-accent: #4da3ff;
+  --site-bg: #0d1117;
+  --site-bg-muted: #161b22;
+  --site-text: #e6edf3;
+  --site-text-muted: #8b949e;
+  --site-border: #232a33;
+  --site-accent: #58a6ff;
   color-scheme: dark;
 }
 
