@@ -1,4 +1,4 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "True when an HTML string holds no visible content (fixes R2).\n\nThe cheap path for callers that only need the boolean and do not want to build a\ndocument: `''`, `'<p></p>'`, `'<p><br></p>'` and whitespace-only markup are empty,\nwhile `'<p>&nbsp;</p>'` is not.",
   "optionDescriptions": {}
 }

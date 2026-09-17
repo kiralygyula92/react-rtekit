@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/
 title: Overview
-description: 'React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.'
+description: 'An accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.'
 archetype: A
 section: getting-started
 ---

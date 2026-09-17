@@ -1,4 +1,4 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Sanitizes an HTML string against a profile or configuration.\n\nRuns at every content boundary in both directions. The hard rules — the blocked tags,\nprotocols and CSS properties — apply regardless of configuration.",
   "optionDescriptions": {}
 }

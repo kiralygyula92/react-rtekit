@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "`<RteContentView>` props.",
   "optionDescriptions": {
     "value": "The stored content to render.",
     "valueFormat": "What `value` is.",

@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Every item the toolbar can render, by name. A layout is an array of these names, with `|` for a separator; a name that nothing provides is dropped rather than rendered disabled, so a layout can name an item its preset does not load.",
   "optionDescriptions": {
     "|": "A group separator.",
     "undo": "Undo.",

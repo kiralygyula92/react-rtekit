@@ -24,7 +24,7 @@ Appending `.md` to any documentation URL returns the authored Markdown:
 /react-rtekit/tables.md     its source
 ```
 
-The twin carries the frontmatter, so an agent reading it gets the capability id, the group and the symbols the page documents, not just the prose.
+The twin carries the front matter, so an agent reading it gets the capability id, the group and the symbols the page documents, not just the prose.
 
 ## Sitemap
 

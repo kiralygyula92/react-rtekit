@@ -1,4 +1,4 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Adds a default scheme to a bare host, as the link popover does.\n\nLeaves anything that already has a scheme, an anchor or a mail-like shape alone.",
   "optionDescriptions": {}
 }

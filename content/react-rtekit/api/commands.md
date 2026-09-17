@@ -30,6 +30,8 @@ import { meta } from 'react-rtekit/meta';
 
 ## Options
 
+Every command the editor can run. Run one with `editor.exec(id, payload)`, ask `canExec` or `isActive` about it, or replace what it does with `commandOverrides`. Keyboard shortcuts and toolbar buttons both go through this list.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `toggleBold` | `entry` | no | Toggles bold on the selection. |

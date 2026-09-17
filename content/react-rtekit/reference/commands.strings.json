@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Every command the editor can run. Run one with `editor.exec(id, payload)`, ask `canExec` or `isActive` about it, or replace what it does with `commandOverrides`. Keyboard shortcuts and toolbar buttons both go through this list.",
   "optionDescriptions": {
     "toggleBold": "Toggles bold on the selection.",
     "toggleItalic": "Toggles italic on the selection.",

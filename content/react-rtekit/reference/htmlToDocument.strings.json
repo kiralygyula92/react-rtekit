@@ -1,4 +1,4 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Parses HTML into the portable document model.\n\nRuns the whole input pipeline: source detection, interop, sanitization,\nschema downgrade and normalization.",
   "optionDescriptions": {}
 }

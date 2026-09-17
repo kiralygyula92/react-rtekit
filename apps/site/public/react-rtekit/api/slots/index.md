@@ -29,6 +29,8 @@ import { meta } from 'react-rtekit/meta';
 
 ## Options
 
+Every part of the editor you can replace, keyed by name. Pass a component for a name to `slots` and it renders in place of the built-in one, receiving the same props. A name absent from `slots` keeps its default.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `Root` | `entry` | no | The outermost element; owns the data attributes. |
@@ -38,7 +40,7 @@ import { meta } from 'react-rtekit/meta';
 | `ToolbarButton` | `entry` | no | A plain toolbar button. |
 | `ToolbarToggle` | `entry` | no | A toolbar button with a pressed state. |
 | `ToolbarDropdown` | `entry` | no | A toolbar control that opens a menu. |
-| `ToolbarOverflow` | `entry` | no | The “more” affordance for hidden items. |
+| `ToolbarOverflow` | `entry` | no | The "more" affordance for hidden items. |
 | `ColorPicker` | `entry` | no | The colour palette, recents and custom input. |
 | `ContentWrapper` | `entry` | no | The bordered box around the editable area. |
 | `Content` | `entry` | no | The host element the engine renders into. |

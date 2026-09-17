@@ -41,25 +41,47 @@ import { markdownToHtml } from 'react-rtekit';
 
 ### documentToHtml
 
+Serializes a document to HTML.
+
 This symbol takes no options.
 
 ### documentToMarkdown
+
+Serializes a document to Markdown.
 
 This symbol takes no options.
 
 ### documentToText
 
+Extracts the visible text of a document.
+
 This symbol takes no options.
 
 ### htmlToDocument
+
+Parses HTML into the portable document model.
+
+Runs the whole input pipeline: source detection, interop, sanitization,
+schema downgrade and normalization.
 
 This symbol takes no options.
 
 ### isEmptyHtml
 
+True when an HTML string holds no visible content (fixes R2).
+
+The cheap path for callers that only need the boolean and do not want to build a
+document: `''`, `'<p></p>'`, `'<p><br></p>'` and whitespace-only markup are empty,
+while `'<p>&nbsp;</p>'` is not.
+
 This symbol takes no options.
 
 ### markdownToDocument
+
+Parses Markdown into a document.
+
+Implemented by converting to HTML and reusing the HTML pipeline, so Markdown input
+gets the same sanitization, interop and schema downgrade as everything else.
 
 This symbol takes no options.
 
@@ -72,11 +94,11 @@ This symbol takes no options.
 ## Source
 
 - [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L412)
-- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L151)
+- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L198)
 - [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307)
 - [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706)
 - [isEmptyHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L773)
-- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L254)
-- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L263)
+- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L301)
+- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L333)
 
 <!-- generated:reference:end -->

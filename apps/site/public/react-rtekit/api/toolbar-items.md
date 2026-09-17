@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/toolbar-items/
 title: Toolbar items
-description: All 42 built-in toolbar items, by name.
+description: All 42 built-in toolbar items by name, for building a layout of your own.
 archetype: E
 section: reference
 ---
@@ -28,6 +28,8 @@ import { meta } from 'react-rtekit/meta';
 ```
 
 ## Options
+
+Every item the toolbar can render, by name. A layout is an array of these names, with `|` for a separator; a name that nothing provides is dropped rather than rendered disabled, so a layout can name an item its preset does not load.
 
 | Name | Type | Required | Description |
 |---|---|---|---|

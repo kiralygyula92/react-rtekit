@@ -39,6 +39,8 @@ import { EditorInstance } from 'react-rtekit';
 
 ## Options
 
+The handle returned by `useEditor` and exposed through `editorRef` / `onReady`.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `getHTML` | `object` | yes | The document as HTML, in the editor's profile unless one is given. |

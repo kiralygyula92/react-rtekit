@@ -13,7 +13,7 @@
     },
     "kind": {
       "type": {
-        "name": "\"custom\" | \"button\" | \"toggle\" | \"dropdown\" | \"colorPicker\" | \"separator\""
+        "name": "\"custom\" | \"button\" | \"toggle\" | \"dropdown\" | \"colorPicker\" | \"emojiPicker\" | \"separator\""
       },
       "required": false
     },

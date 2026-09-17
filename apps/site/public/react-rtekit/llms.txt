@@ -5,7 +5,7 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 
 ## Getting started
 
-- [Overview](/react-rtekit/index.md): React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+- [Overview](/react-rtekit/index.md): An accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
 - [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
 - [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
 - [Requirements](/react-rtekit/getting-started/requirements.md): The React, TypeScript and browser versions this package supports, and what it expects of your bundler.
@@ -87,7 +87,7 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 
 - [API reference](/react-rtekit/api.md): Every public symbol, generated from the TypeScript declarations — components, hooks, the imperative API, the functions and the catalogues.
 - [RichTextEditor](/react-rtekit/api/rich-text-editor.md): The all-in-one component and every prop it takes.
-- [RteContentView](/react-rtekit/api/rte-content-view.md): The read-only renderer for stored HTML.
+- [RteContentView](/react-rtekit/api/rte-content-view.md): The read-only renderer for stored HTML, with the same content styles as the editor.
 - [Composable parts](/react-rtekit/api/composable-parts.md): The eleven parts the all-in-one component is assembled from.
 - [Providers](/react-rtekit/api/providers.md): Theme, locale and defaults providers, for configuring several editors at once.
 - [useEditor](/react-rtekit/api/use-editor.md): The headless hook, and every option it accepts.
@@ -100,9 +100,9 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 - [Plugin API](/react-rtekit/api/plugin-api.md): Defining a plugin, resolving plugin order, and the preset bundles.
 - [Theme API](/react-rtekit/api/theme-api.md): Building a theme, and the five that ship.
 - [Slot catalogue](/react-rtekit/api/slots.md): All 46 replaceable parts and the props each one receives.
-- [Toolbar items](/react-rtekit/api/toolbar-items.md): All 42 built-in toolbar items, by name.
+- [Toolbar items](/react-rtekit/api/toolbar-items.md): All 42 built-in toolbar items by name, for building a layout of your own.
 - [Theme tokens](/react-rtekit/api/theme-tokens.md): All 114 design tokens and the CSS custom property each one writes.
-- [Icon set](/react-rtekit/api/icons.md): All 52 icons, and how to replace one.
+- [Icon set](/react-rtekit/api/icons.md): All 52 icons the toolbar and menus draw from, and how to replace one of them.
 - [Localization keys](/react-rtekit/api/localization-keys.md): All 153 catalogue keys, for translating the editor's own strings.
 - [Plugin catalogue](/react-rtekit/api/plugins.md): Every built-in plugin and the presets it appears in.
 - [Types](/react-rtekit/api/types.md): The exported types you annotate with: values, documents, themes, slots, handlers and configuration.
@@ -149,6 +149,6 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 - [Discover more](/react-rtekit/discover-more.md): Where the project is going, what it has already done, and how it is put together.
 - [Changelog](/react-rtekit/discover-more/changelog.md): Every released version and what changed in it.
 - [Roadmap](/react-rtekit/discover-more/roadmap.md): What is being considered next, and what has been decided against.
-- [Showcase](/react-rtekit/discover-more/showcase.md): Applications built with this editor.
+- [Showcase](/react-rtekit/discover-more/showcase.md): Applications built with this editor, added once their owners are happy to be named.
 - [Architecture](/react-rtekit/discover-more/architecture.md): The decisions behind the engine adapter, the sanitizer, the interop profiles and the slot system.
 - [llms.txt](/react-rtekit/discover-more/llms-txt.md): The machine-readable index of this documentation, and how to point an agent at it.

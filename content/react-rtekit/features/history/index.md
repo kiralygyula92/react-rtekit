@@ -10,7 +10,7 @@ group: Core features
 symbols: [CommandId, EditorInstance]
 ---
 
-# 'Undo & redo'
+# Undo & redo
 
 ## Basics
 

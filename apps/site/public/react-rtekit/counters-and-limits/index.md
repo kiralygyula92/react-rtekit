@@ -10,7 +10,7 @@ group: 'Content & data'
 symbols: [useCharacterCount, RichTextEditorProps, EditorInstance]
 ---
 
-# 'Counters & limits'
+# Counters & limits
 
 ## Basics
 

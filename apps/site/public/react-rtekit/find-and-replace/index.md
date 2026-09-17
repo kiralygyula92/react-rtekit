@@ -10,7 +10,7 @@ group: Interaction
 symbols: [EditorInstance, FindOptions]
 ---
 
-# 'Find & replace'
+# Find & replace
 
 ## Basics
 

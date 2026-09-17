@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Every part of the editor you can replace, keyed by name. Pass a component for a name to `slots` and it renders in place of the built-in one, receiving the same props. A name absent from `slots` keeps its default.",
   "optionDescriptions": {
     "Root": "The outermost element; owns the data attributes.",
     "Toolbar": "The toolbar container.",
@@ -8,7 +8,7 @@
     "ToolbarButton": "A plain toolbar button.",
     "ToolbarToggle": "A toolbar button with a pressed state.",
     "ToolbarDropdown": "A toolbar control that opens a menu.",
-    "ToolbarOverflow": "The “more” affordance for hidden items.",
+    "ToolbarOverflow": "The \"more\" affordance for hidden items.",
     "ColorPicker": "The colour palette, recents and custom input.",
     "ContentWrapper": "The bordered box around the editable area.",
     "Content": "The host element the engine renders into.",

@@ -57,6 +57,10 @@ This symbol takes no options.
 
 ### normalizeUrl
 
+Adds a default scheme to a bare host, as the link popover does.
+
+Leaves anything that already has a scheme, an anchor or a mail-like shape alone.
+
 This symbol takes no options.
 
 ### resolveSanitizeConfig
@@ -70,15 +74,20 @@ This symbol takes no options.
 
 ### sanitizeHtml
 
+Sanitizes an HTML string against a profile or configuration.
+
+Runs at every content boundary in both directions. The hard rules — the blocked tags,
+protocols and CSS properties — apply regardless of configuration.
+
 This symbol takes no options.
 
 ## Source
 
 - [checkUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L80)
-- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L227)
-- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L262)
+- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L249)
+- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L284)
 - [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134)
-- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L256)
+- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L278)
 - [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L268)
 
 <!-- generated:reference:end -->

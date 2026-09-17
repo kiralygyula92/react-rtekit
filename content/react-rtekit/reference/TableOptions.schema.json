@@ -9,13 +9,15 @@
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "headerColumn": {
       "type": {
         "name": "boolean"
       },
-      "required": false
+      "required": false,
+      "default": "false"
     },
     "columnWidths": {
       "type": {

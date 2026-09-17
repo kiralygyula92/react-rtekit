@@ -1,4 +1,4 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Parses Markdown into a document.\n\nImplemented by converting to HTML and reusing the HTML pipeline, so Markdown input\ngets the same sanitization, interop and schema downgrade as everything else.",
   "optionDescriptions": {}
 }

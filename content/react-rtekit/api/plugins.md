@@ -30,6 +30,8 @@ import { meta } from 'react-rtekit/meta';
 
 ## Options
 
+Every plugin the package ships, and the presets that load each one. A preset is a list of these names; pass `plugins` yourself to load a different set. Loading a plugin is what turns its capability on — the toolbar item alone does nothing.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `align` | `entry` | no | In presets: classic, email, full, standard. |

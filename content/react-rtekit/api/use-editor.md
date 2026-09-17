@@ -32,6 +32,8 @@ import { useEditor } from 'react-rtekit';
 
 ### UseEditorOptions
 
+Options accepted by the headless `useEditor` hook.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `enableBold` | `boolean` | no | Bold, with its `Mod+B` binding. |
@@ -178,6 +180,6 @@ This symbol takes no options.
 ## Source
 
 - [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L371)
-- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L176)
+- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L209)
 
 <!-- generated:reference:end -->

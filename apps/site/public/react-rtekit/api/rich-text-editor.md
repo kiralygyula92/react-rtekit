@@ -60,6 +60,8 @@ This symbol takes no options.
 
 ### RichTextEditorProps
 
+The full prop surface of `<RichTextEditor>`.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `enableBold` | `boolean` | no | Bold, with its `Mod+B` binding. |

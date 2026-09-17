@@ -10,7 +10,7 @@ group: Interaction
 symbols: [EditorInstance, RichTextEditorProps]
 ---
 
-# 'Autosave & drafts'
+# Autosave & drafts
 
 ## Basics
 

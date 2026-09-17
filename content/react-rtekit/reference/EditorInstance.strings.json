@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "The handle returned by `useEditor` and exposed through `editorRef` / `onReady`.",
   "optionDescriptions": {
     "getHTML": "The document as HTML, in the editor's profile unless one is given.",
     "getJSON": "The document as the portable JSON shape.",

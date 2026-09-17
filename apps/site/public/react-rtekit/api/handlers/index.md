@@ -29,6 +29,8 @@ import { meta } from 'react-rtekit/meta';
 
 ## Options
 
+Interaction middleware: every point where your own code can sit in front of something the editor is about to do. A handler receives the context and a `next`, so it can inspect, amend, or decline to call on — which is how uploads, link policy and paste treatment are customized.
+
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `onBeforeChange` | `entry` | no | Runs before a change is committed; can veto it. |

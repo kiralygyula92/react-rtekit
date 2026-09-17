@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "Options accepted by the headless `useEditor` hook.",
   "optionDescriptions": {
     "enableBold": "Bold, with its `Mod+B` binding.",
     "enableItalic": "Italic, with its `Mod+I` binding.",

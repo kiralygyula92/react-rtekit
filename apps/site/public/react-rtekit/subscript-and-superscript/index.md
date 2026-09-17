@@ -10,7 +10,7 @@ group: Core features
 symbols: [CommandId, FormatState]
 ---
 
-# 'Subscript & superscript'
+# Subscript & superscript
 
 ## Basics
 

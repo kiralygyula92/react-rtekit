@@ -1,5 +1,5 @@
 {
-  "symbolDescription": "",
+  "symbolDescription": "The full prop surface of `<RichTextEditor>`.",
   "optionDescriptions": {
     "enableBold": "Bold, with its `Mod+B` binding.",
     "enableItalic": "Italic, with its `Mod+I` binding.",

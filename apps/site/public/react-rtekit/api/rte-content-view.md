@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/rte-content-view/
 title: RteContentView
-description: The read-only renderer for stored HTML.
+description: The read-only renderer for stored HTML, with the same content styles as the editor.
 archetype: E
 section: reference
 ---
@@ -38,6 +38,8 @@ Renders stored content read-only.
 This symbol takes no options.
 
 ### RteContentViewProps
+
+`<RteContentView>` props.
 
 | Name | Type | Required | Description |
 |---|---|---|---|

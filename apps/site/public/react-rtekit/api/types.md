@@ -325,7 +325,7 @@ The token tree. Every field is optional in overrides via `DeepPartial`.
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `name` | `string` | yes | Identifies the theme in `data-theme` and in the docs site. |
-| `font` | `object` | yes | The chrome’s typography, which is separate from the content’s. |
+| `font` | `object` | yes | The chrome's typography, which is separate from the content's. |
 | `color` | `object` | yes | The palette every other group draws from. |
 | `editor` | `object` | yes | The content box: its size, its border and its focus ring. |
 | `toolbar` | `object` | yes | The toolbar strip. |
@@ -342,7 +342,7 @@ The token tree. Every field is optional in overrides via `DeepPartial`.
 | `findMatch` | `object` | yes | Search-match highlights, current and otherwise. |
 | `content` | `object` | yes | Prose styles, shipped separately so stored content renders identically anywhere. |
 | `motion` | `object` | yes | Transition timing, which `prefers-reduced-motion` overrides to none. |
-| `z` | `object` | yes | Stacking, so the editor can sit inside an application’s own layers. |
+| `z` | `object` | yes | Stacking, so the editor can sit inside an application's own layers. |
 | `density` | `Density` | yes | A multiplier over sizes and paddings, so it composes with any theme. |
 
 ### SanitizeConfig
@@ -388,7 +388,7 @@ A toolbar item, whether built-in or contributed by a plugin.
 | Name | Type | Required | Description |
 |---|---|---|---|
 | `name` | `string` | yes | Unique within the toolbar. |
-| `kind` | `"custom" \| "button" \| "toggle" \| "dropdown" \| "colorPicker" \| "separator"` | no | `button` (default), `toggle`, `dropdown`, `colorPicker`, `separator` or `custom`. |
+| `kind` | `"custom" \| "button" \| "toggle" \| "dropdown" \| "colorPicker" \| "emojiPicker" \| "separator"` | no | `button` (default), `toggle`, `dropdown`, `colorPicker`, `separator` or `custom`. |
 | `icon` | `ReactNode \| function` | no | The control's icon, statically or derived from the current state. |
 | `label` | `ReactNode \| function` | yes | The accessible name, and the visible one when labels are shown. |
 | `shortcut` | `string` | no | Shown in the tooltip next to the label, e.g. `'Mod+B'`. |
@@ -432,6 +432,6 @@ This symbol takes no options.
 - [SanitizeProfileName](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L16)
 - [TableOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L27)
 - [ToolbarItemSpec](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/toolbar.ts#L90)
-- [UploadHandler](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/config.ts#L154)
+- [UploadHandler](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/config.ts#L164)
 
 <!-- generated:reference:end -->

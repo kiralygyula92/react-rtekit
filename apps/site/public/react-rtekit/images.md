@@ -10,7 +10,7 @@ group: 'Display & layout'
 symbols: [ImageAttrs, UploadHandler, useUpload]
 ---
 
-# 'Images & uploads'
+# Images & uploads
 
 ## Basics
 

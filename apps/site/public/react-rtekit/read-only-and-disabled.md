@@ -10,7 +10,7 @@ group: Interaction
 symbols: [RichTextEditorProps, useEditorState]
 ---
 
-# 'Read-only & disabled'
+# Read-only & disabled
 
 ## Basics
 
