@@ -3,6 +3,7 @@ import {
   $getSelection,
   $isElementNode,
   $isRangeSelection,
+  $isTextNode,
   $setSelection,
   BLUR_COMMAND,
   COMMAND_PRIORITY_LOW,
@@ -49,6 +50,7 @@ import {
 } from '../../core/document.js';
 import { documentToMarkdown, markdownToDocument } from '../../core/serialize/markdown.js';
 import { textToDocument } from '../../core/serialize/text.js';
+import { graphemeLength, previousGraphemeBoundary } from '../../core/utils/graphemes.js';
 import { $documentToRoot } from './convert/from-document.js';
 import { $rootToDocument } from './convert/to-document.js';
 import { ENGINE_COMMANDS, registerHistoryState, type EngineCommandContext } from './commands.js';
@@ -604,12 +606,56 @@ class LexicalEngineHandle implements EngineHandle {
     return rect;
   }
 
+  /**
+   * Deletes `length` grapheme clusters before the caret.
+   *
+   * Done on the model rather than through `RangeSelection.deleteCharacter`, which asks
+   * the browser to move the selection with `Selection.modify`. That call does not exist
+   * in jsdom, so the previous implementation silently did nothing there and every caller
+   * of it — the mention, slash and merge-tag menus, which delete the typed trigger before
+   * inserting — went untested outside a browser. It also made the unit of deletion
+   * whatever each browser thinks a character is.
+   *
+   * `previousGraphemeBoundary` is the same Unicode algorithm applied by us, so one press
+   * removes one thing the reader can see: a whole emoji, a letter with its accent.
+   */
   deleteBackward(length: number): void {
     if (length <= 0) return;
     this.editor.update(() => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return;
-      for (let index = 0; index < length; index += 1) selection.deleteCharacter(true);
+
+      const anchor = selection.anchor;
+      const node = anchor.getNode();
+
+      // Inside one text node this is arithmetic, which is the case the trigger menus hit
+      // and the only one where the browser's answer and ours could differ.
+      if (anchor.type === 'text' && $isTextNode(node)) {
+        const text = node.getTextContent();
+        const start = previousGraphemeBoundary(text, anchor.offset, length);
+        if (start < anchor.offset) {
+          const consumed = graphemeLength(text.slice(start, anchor.offset));
+          selection.setTextNodeRange(node, start, node, anchor.offset);
+          selection.removeText();
+          // A trigger that began in an earlier node leaves a remainder; the generic path
+          // below finishes it, now that the caret sits at this node's start.
+          if (consumed < length) this.deleteBackward(length - consumed);
+          return;
+        }
+      }
+
+      // Across a node or block boundary, one step at a time through the engine, which
+      // knows how to join blocks. `deleteCharacter` is the only way in, so anything it
+      // cannot do in this environment stays undone rather than throwing through the
+      // engine boundary.
+      for (let index = 0; index < length; index += 1) {
+        try {
+          selection.deleteCharacter(true);
+        } catch (error) {
+          this.options.onError?.(error);
+          return;
+        }
+      }
     }, DISCRETE_UPDATE);
   }
 

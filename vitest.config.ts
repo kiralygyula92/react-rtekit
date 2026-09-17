@@ -36,6 +36,7 @@ export default defineConfig({
             'src/plugins/**/*.test.{ts,tsx}',
             'src/view/**/*.test.{ts,tsx}',
             'test/react/**/*.test.{ts,tsx}',
+            'test/engines/**/*.test.{ts,tsx}',
           ],
           globals: true,
         },
