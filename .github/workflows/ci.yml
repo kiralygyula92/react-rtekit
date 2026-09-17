@@ -91,7 +91,7 @@ jobs:
       - name: Recompile the content and the generated reference
         run: pnpm docs:json && pnpm content:reference && pnpm content
       - name: Fail if the generated reference or the content drifted
-        run: git diff --exit-code -- content apps/site/src/content apps/site/public
+        run: git diff --exit-code -- content apps/site/src/content apps/site/public apps/site/vercel.json
       - name: The 26 PPDS conformance checks
         run: pnpm conformance
       - uses: actions/upload-artifact@v4
