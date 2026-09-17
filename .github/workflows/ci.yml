@@ -86,6 +86,8 @@ jobs:
       - run: pnpm build
       - name: The nav, title and URL-map invariants
         run: pnpm content:validate
+      - name: The prose
+        run: pnpm copy:check
       - name: Recompile the content and the generated reference
         run: pnpm docs:json && pnpm content:reference && pnpm content
       - name: Fail if the generated reference or the content drifted

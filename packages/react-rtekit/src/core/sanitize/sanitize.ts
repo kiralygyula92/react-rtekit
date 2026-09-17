@@ -249,8 +249,8 @@ export function sanitizeNodes(nodes: HtmlNode[], options: SanitizeOptions = {}):
 /**
  * Sanitizes an HTML string against a profile or configuration.
  *
- * Runs at every content boundary in both directions. The hard rules in
- * The hard rules apply regardless of configuration.
+ * Runs at every content boundary in both directions. The hard rules — the blocked tags,
+ * protocols and CSS properties — apply regardless of configuration.
  *
  * @param html untrusted HTML
  * @param options profile or config, plus an optional violation reporter

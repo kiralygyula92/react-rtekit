@@ -7,6 +7,7 @@ The Phase 6 artefacts, per §6 of `docs/ppds/03-agent-implementation-brief.md`.
 | `conformance-report.md` | The 26 PPDS §11 checks, each `pass`, `fail` or `n/a` with the exception that makes it so |
 | `flow-walkthroughs.md` | The eight §9 flows, written as the clicks rather than the URLs |
 | `redirect-check.csv` | All 81 legacy URLs, loaded in a browser, with where each one landed |
+| `copy-report.md` | Every proofreading finding across the 123 pages: spelling, terminology, punctuation, front matter, links and undescribed table rows |
 
 ## Regenerating
 
@@ -14,6 +15,7 @@ The Phase 6 artefacts, per §6 of `docs/ppds/03-agent-implementation-brief.md`.
 pnpm build
 pnpm content                  # recompile the Markdown, twins, llms.txt and sitemap
 pnpm conformance              # -> qa/conformance-report.md
+node content/copy-check.mjs --report qa/copy-report.md
 
 pnpm --filter @react-rtekit/site preview &
 pnpm conformance:served       # also probes the machine surface
@@ -25,11 +27,12 @@ pnpm --filter @react-rtekit/site e2e   # includes flows.spec.ts
 
 | | |
 |---|---|
-| Conformance checks | **23 pass · 0 fail · 4 not applicable** |
+| Conformance checks | **22 pass · 0 fail · 4 not applicable** |
+| Copy findings outstanding | **0 errors · 0 warnings** across 123 pages |
 | Flows completable | **7 of 8**; F6 does not exist to complete (E-02) |
 | Redirects verified in a browser | **81 of 81** |
 | Pages | 123, each with one H1 and its own description |
-| Browser tests | 1609 across Chromium, Firefox, WebKit and two mobile emulations |
+| Browser tests | 1740 across Chromium, Firefox, WebKit and two mobile emulations |
 | Visual snapshots | 6 |
 | Unit tests | 1121 |
 

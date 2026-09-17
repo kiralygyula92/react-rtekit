@@ -303,9 +303,14 @@ for (const [name, record] of symbols) {
 
   // Prose: only ever gains keys. An existing value is never replaced, whatever the
   // TSDoc now says — that is the whole point of the split (P6).
+  //
+  // `||`, not `??`: E-07 writes an empty key on first sight of a symbol, and an empty
+  // string is not nullish, so `??` kept the placeholder forever and no TSDoc summary
+  // written afterwards ever reached the page. An empty description is a placeholder,
+  // not an editorial decision; anything non-empty is still untouchable.
   const current = existingStrings.get(stringsFile) ?? {};
   const merged = {
-    symbolDescription: current.symbolDescription ?? record.prose.symbolDescription,
+    symbolDescription: current.symbolDescription || record.prose.symbolDescription,
     optionDescriptions: { ...record.prose.optionDescriptions, ...(current.optionDescriptions ?? {}) },
   };
   for (const key of Object.keys(record.prose.optionDescriptions)) {
@@ -313,6 +318,8 @@ for (const [name, record] of symbols) {
     else seeded += 1;
   }
   await writeFile(path.join(here, stringsFile), `${JSON.stringify(merged, null, 2)}\n`, 'utf8');
+  // What the page will actually show, which is what "missing" has to mean below.
+  record.written = merged;
 
   index[name] = {
     page: `${NS}/api/${record.page}/`,
@@ -411,15 +418,21 @@ await writeFile(
  *
  * A symbol whose TSDoc says nothing worth seeding still gets a strings file with an
  * empty key, ready for someone to fill in; the build does not stop for it.
+ *
+ * Measured on what was written, not on the seed. Reading `record.prose` meant a page
+ * whose description had been hand-written in its strings file — the intended way to
+ * describe a catalogue that is not a TSDoc symbol — stayed on this list permanently.
  */
 const missingProse = [...symbols].filter(
-  ([, record]) => (record.prose.symbolDescription ?? '') === '',
+  ([, record]) => (record.written?.symbolDescription ?? '') === '',
 );
 
 process.stdout.write(
   `${symbols.size} symbols across ${new Set([...symbols.values()].map((r) => r.page)).size} pages\n` +
     `prose: ${seeded} seeded from TSDoc, ${preserved} preserved\n` +
     (missingProse.length > 0
-      ? `warning: ${missingProse.length} symbols have no description yet\n`
+      ? `warning: ${missingProse.length} symbols have no description yet: ${missingProse
+          .map(([name]) => name)
+          .join(', ')}\n`
       : ''),
 );
