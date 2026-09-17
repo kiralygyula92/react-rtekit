@@ -1,3 +1,4 @@
+import { emptyFormatState } from '../../core/format-state.js';
 import {
   $getRoot,
   $getSelection,
@@ -123,32 +124,13 @@ function styleValue(selection: RangeSelection, property: string): string | null 
   return value;
 }
 
-/** The empty state, used before the engine has a selection. */
-export function emptyFormatState(overrides: Partial<FormatState> = {}): FormatState {
-  return {
-    marks: {
-      bold: false,
-      italic: false,
-      underline: false,
-      strike: false,
-      code: false,
-      subscript: false,
-      superscript: false,
-      color: null,
-      backgroundColor: null,
-      fontFamily: null,
-      fontSize: null,
-    },
-    block: { type: 'paragraph', align: 'left', indent: 0 },
-    list: { type: null, depth: 0 },
-    link: null,
-    canUndo: false,
-    canRedo: false,
-    isEmpty: true,
-    isCollapsed: true,
-    ...overrides,
-  };
-}
+/**
+ * The empty state, used before the engine has a selection.
+ *
+ * Defined in `core/format-state` because it is a plain object with nothing engine-
+ * specific in it, and the React store needed it without needing an engine.
+ */
+export { emptyFormatState };
 
 /**
  * Reads the formatting that applies to the current selection.

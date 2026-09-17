@@ -1,5 +1,5 @@
 import type { EditorSnapshot } from '../types/editor.js';
-import { emptyFormatState } from '../engines/lexical/selection.js';
+import { emptyFormatState } from '../core/format-state.js';
 
 /**
  * The subscription store behind `useEditorState`.

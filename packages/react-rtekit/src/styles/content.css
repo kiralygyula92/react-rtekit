@@ -278,6 +278,12 @@
    * The engine renders a mark as a class, not as an element: bold and italic happen to
    * get `<strong>` and `<em>` as well and so inherit the browser's styling, but
    * underline, strikethrough and the rest arrive as a bare `<span class="rte-underline">`.
+   *
+   * The element selectors beside them are for stored HTML, which the serializer writes
+   * as `<strong>`, `<em>`, `<u>` and so on. Without them a mark in `<RteContentView>`
+   * fell back to the browser's default rather than the theme's token, so the editor and
+   * the view did not match — and the in-house engine, which renders the serializer's
+   * shape directly, would have inherited the same mismatch.
    * Without these rules the command applied, the model changed and the button lit
    * up — and nothing on screen looked any different, which reads as a broken button.
    *
@@ -286,27 +292,45 @@
    * that is both underlined and struck through would show only one of them.
    */
   .rte-content .rte-bold,
-  .rte-view .rte-bold {
+  .rte-view .rte-bold,
+  .rte-content strong,
+  .rte-view strong,
+  .rte-content b,
+  .rte-view b {
     font-weight: var(--rte-bold-weight);
   }
 
   .rte-content .rte-italic,
-  .rte-view .rte-italic {
+  .rte-view .rte-italic,
+  .rte-content em,
+  .rte-view em,
+  .rte-content i,
+  .rte-view i {
     font-style: italic;
   }
 
   .rte-content .rte-underline,
-  .rte-view .rte-underline {
+  .rte-view .rte-underline,
+  .rte-content u,
+  .rte-view u {
     text-decoration: underline;
   }
 
   .rte-content .rte-strike,
-  .rte-view .rte-strike {
+  .rte-view .rte-strike,
+  .rte-content s,
+  .rte-view s,
+  .rte-content del,
+  .rte-view del {
     text-decoration: line-through;
   }
 
   .rte-content .rte-underline-strike,
   .rte-view .rte-underline-strike,
+  .rte-content u:has(s),
+  .rte-view u:has(s),
+  .rte-content s:has(u),
+  .rte-view s:has(u),
   .rte-content .rte-underline.rte-strike,
   .rte-view .rte-underline.rte-strike {
     text-decoration: underline line-through;
@@ -315,7 +339,11 @@
   .rte-content .rte-subscript,
   .rte-view .rte-subscript,
   .rte-content .rte-superscript,
-  .rte-view .rte-superscript {
+  .rte-view .rte-superscript,
+  .rte-content sub,
+  .rte-view sub,
+  .rte-content sup,
+  .rte-view sup {
     font-size: 0.75em;
     line-height: 0;
   }

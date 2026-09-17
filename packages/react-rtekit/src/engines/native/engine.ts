@@ -23,6 +23,7 @@ import type {
   SelectionSnapshot,
 } from '../../types/selection.js';
 import { countDocument, documentToText, isEmptyDocument } from '../../core/document.js';
+import { normalizeColor } from '../../core/utils/color.js';
 import { documentToMarkdown, markdownToDocument } from '../../core/serialize/markdown.js';
 import { textToDocument } from '../../core/serialize/text.js';
 import { History, type HistoryCause } from './history.js';
@@ -44,6 +45,20 @@ import {
   type BlockType,
   type EditContext,
 } from './operations.js';
+import {
+  addColumn,
+  addRow,
+  deleteColumn,
+  deleteRow,
+  deleteTable,
+  insertLink,
+  insertTable,
+  linkAt,
+  removeLink,
+  tableAt,
+  toggleHeaderRow,
+  type LinkSpec,
+} from './structure.js';
 import { type RenderIndex, renderTree } from './render.js';
 import { reconcile, signaturesOf } from './reconcile.js';
 import {
@@ -58,7 +73,7 @@ import {
   writeSelection,
   type ModelSelection,
 } from './selection.js';
-import { DocumentTree, type NodeKey } from './tree.js';
+import { DocumentTree, ROOT_KEY, type NodeKey } from './tree.js';
 
 /**
  * The in-house engine — stage 8 of ADR-006.
@@ -147,8 +162,27 @@ class NativeEngineHandle implements EngineHandle {
   #signatures: Map<NodeKey, string>;
   /** The last selection seen inside the editor, so a command can run after a blur (R5). */
   #lastSelection: ModelSelection | null = null;
+  /**
+   * The same selection, but forgotten when the editor is blurred.
+   *
+   * Two readers want different answers. A *command* run from a menu must still apply to
+   * what was selected, so it uses `#lastSelection` and does not care about focus (R5).
+   * The *toolbar* must stop showing the formatting of text nobody is in any more, so it
+   * uses this one, which a blur clears (R8). Reading the DOM selection instead does not
+   * work: blurring leaves it exactly where it was.
+   */
+  #shownSelection: ModelSelection | null = null;
   #editable: boolean;
   #destroyed = false;
+  /**
+   * True between `compositionstart` and `compositionend`.
+   *
+   * An input method writes intermediate states into the document while the user is still
+   * choosing characters — typing "nihon" shows "にほn" before it becomes "日本". Those are
+   * not what anyone meant to type, so a form validating or autosaving against them is
+   * validating against noise. No change event escapes while this is set.
+   */
+  #composing = false;
   readonly #cleanup: (() => void)[] = [];
 
   constructor(container: HTMLElement, options: EngineMountOptions) {
@@ -232,7 +266,7 @@ class NativeEngineHandle implements EngineHandle {
     this.#lastSelection = null;
     if (options?.history === false) this.#history.reset(next);
     else this.#history.push(next, null, 'api');
-    this.#events.emit('change', { source: options?.source ?? 'api' });
+    this.#emitChange(options?.source ?? 'api');
     this.#emitFormat();
   }
 
@@ -274,6 +308,7 @@ class NativeEngineHandle implements EngineHandle {
             : this.#fromEditorSelection(selection);
     if (model === null) return;
     this.#lastSelection = model;
+    this.#shownSelection = model;
     writeSelection(this.#index, this.contentElement, model);
   }
 
@@ -286,6 +321,7 @@ class NativeEngineHandle implements EngineHandle {
     const model = (snapshot as unknown as { value: ModelSelection | null }).value;
     if (model === null || model === undefined) return;
     this.#lastSelection = model;
+    this.#shownSelection = model;
     writeSelection(this.#index, this.contentElement, model);
   }
 
@@ -366,6 +402,13 @@ class NativeEngineHandle implements EngineHandle {
     if (!this.#editable) return command === 'selectAll';
     if (command === 'undo') return this.#history.canUndo();
     if (command === 'redo') return this.#history.canRedo();
+    if (TABLE_COMMANDS.has(command)) {
+      return tableAt(this.#tree, this.#editPoint()?.focus.key ?? '').table !== null;
+    }
+    if (command === 'removeLink') {
+      const at = this.#editPoint();
+      return at !== null && linkAt(this.#tree, at.focus.key) !== null;
+    }
     return this.#commands.has(command) || this.#isKnown(command);
   }
 
@@ -475,8 +518,33 @@ class NativeEngineHandle implements EngineHandle {
   /** The selection to edit at: the live one, or the last one seen (fixes R5). */
   #readSelection(): ModelSelection | null {
     const live = readSelection(this.#tree, this.#index, this.contentElement);
-    if (live !== null) this.#lastSelection = live;
+    if (live !== null) {
+      this.#lastSelection = live;
+      this.#shownSelection = live;
+    }
     return live ?? this.#lastSelection;
+  }
+
+  /**
+   * Where an edit happens when nothing is selected.
+   *
+   * A programmatic insert — a paste into an editor that was never focused, an
+   * `insertContent` from application code — has to land somewhere. The end of the
+   * document is the answer users expect, and refusing instead (which is what returning
+   * `null` here used to do) made every such call silently do nothing.
+   *
+   * The last resort is a point on the first block: an empty document has no text run to
+   * name, and `insertText` knows how to give a block its first one.
+   */
+  #editPoint(): ModelSelection | null {
+    const known = this.#readSelection();
+    if (known !== null) return known;
+    const end = atEnd(this.#tree);
+    if (end !== null) return end;
+    const block = this.#tree.children(ROOT_KEY)[0];
+    if (block === undefined) return null;
+    const point = { key: block, offset: 0 };
+    return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
   }
 
   /** A published selection resolved against this tree. */
@@ -505,7 +573,7 @@ class NativeEngineHandle implements EngineHandle {
     operation: (context: EditContext, selection: ModelSelection) => ModelSelection,
   ): boolean {
     if (this.#destroyed || !this.#editable) return false;
-    const before = this.#readSelection();
+    const before = this.#editPoint();
     if (before === null) return false;
 
     let after = before;
@@ -515,6 +583,7 @@ class NativeEngineHandle implements EngineHandle {
 
     reconcile(this.#tree, change, this.#index, this.#signatures, this.#document);
     this.#lastSelection = after;
+    this.#shownSelection = after;
     if (this.hasFocus()) writeSelection(this.#index, this.contentElement, after);
 
     const document_ = this.getJSON();
@@ -533,7 +602,7 @@ class NativeEngineHandle implements EngineHandle {
     if (this.#lastSelection !== null && this.hasFocus()) {
       writeSelection(this.#index, this.contentElement, this.#lastSelection);
     }
-    this.#events.emit('change', { source: 'history' });
+    this.#emitChange('history');
     this.#emitFormat();
   }
 
@@ -549,6 +618,9 @@ class NativeEngineHandle implements EngineHandle {
 
   /** Runs the engine's own implementation of a command. */
   #runBuiltIn<Id extends CommandId>(command: Id, payload: CommandPayload<Id>): boolean {
+    // A command that cannot apply reports that it did nothing, rather than running an
+    // operation that finds nothing to do and reporting success.
+    if (!this.canExec(command)) return false;
     const cause = causeOf(command);
     const mark = MARK_COMMANDS[command];
     if (mark !== undefined) {
@@ -557,9 +629,21 @@ class NativeEngineHandle implements EngineHandle {
 
     const valued = VALUE_COMMANDS[command];
     if (valued !== undefined) {
-      const value = (payload as { value?: string } | undefined)?.value;
+      // Each valued command names its payload after what it sets — `color` for the two
+      // colour commands, `family`, `size` — and `null` means "back to the default",
+      // which is the absence of the mark rather than a mark with an empty value.
+      const spec = payload as
+        | { color?: string | null; family?: string | null; size?: string | null; value?: string | null }
+        | undefined;
+      const raw = spec?.color ?? spec?.family ?? spec?.size ?? spec?.value ?? null;
+      // A colour is normalized so `#FF0000`, `#f00` and `rgb(255 0 0)` produce one
+      // stored value; stored markup that differs only in case is markup that diffs.
+      const value =
+        raw !== null && (valued === 'color' || valued === 'backgroundColor')
+          ? normalizeColor(raw)
+          : raw;
       return this.#edit(cause, 'api', (context, selection) =>
-        value === undefined || value === ''
+        value === null || value === ''
           ? setMark(context, selection, { type: valued, value: '' }, false)
           : setMark(context, selection, { type: valued, value }, true),
       );
@@ -571,8 +655,12 @@ class NativeEngineHandle implements EngineHandle {
     }
 
     switch (command) {
-      case 'clearFormatting':
-        return this.#edit(cause, 'api', (context, selection) => clearMarks(context, selection));
+      case 'clearFormatting': {
+        const spec = payload as { blocks?: boolean } | undefined;
+        return this.#edit(cause, 'api', (context, selection) =>
+          clearMarks(context, selection, spec?.blocks === true),
+        );
+      }
       case 'setBlockType': {
         const spec = payload as { type?: BlockType; level?: HeadingLevel } | undefined;
         return this.#edit(cause, 'api', (context, selection) =>
@@ -580,7 +668,7 @@ class NativeEngineHandle implements EngineHandle {
         );
       }
       case 'setAlign': {
-        const spec = payload as { align?: 'left' | 'center' | 'right' | 'justify' } | undefined;
+        const spec = payload as { align?: 'left' | 'center' | 'right' | 'justify' | null } | undefined;
         return this.#edit(cause, 'api', (context, selection) =>
           setAlign(context, selection, spec?.align ?? 'left'),
         );
@@ -610,8 +698,96 @@ class NativeEngineHandle implements EngineHandle {
         );
       }
       case 'insertHorizontalRule':
+        return this.#edit(cause, 'api', (context, selection) => {
+          // A rule is atomic: with nothing after it the caret has nowhere to land. The
+          // paragraph goes in first because both inserts target the same index, so the
+          // second one lands in front of it.
+          const at = insertBlock(context, selection, { type: 'paragraph', content: [] });
+          return insertBlock(context, at, { type: 'horizontalRule' });
+        });
+      case 'insertMergeTag': {
+        const key = (payload as { key?: string } | undefined)?.key;
+        if (key === undefined) return false;
         return this.#edit(cause, 'api', (context, selection) =>
-          insertBlock(context, selection, { type: 'horizontalRule' }),
+          insertInline(context, selection, { type: 'mergeTag', key }),
+        );
+      }
+      case 'insertMention': {
+        const spec = payload as { id?: string; label?: string } | undefined;
+        if (spec?.id === undefined || spec.label === undefined) return false;
+        return this.#edit(cause, 'api', (context, selection) =>
+          insertInline(context, selection, { type: 'mention', id: spec.id!, label: spec.label! }),
+        );
+      }
+      case 'insertImage': {
+        const attrs = payload as { src?: string } | undefined;
+        if (attrs?.src === undefined) return false;
+        return this.#edit(cause, 'api', (context, selection) =>
+          insertBlock(context, selection, { ...attrs, type: 'image', src: attrs.src! }),
+        );
+      }
+      case 'insertHTML': {
+        // The host has already sanitized; the engine parses with the parser it was given
+        // and inserts the blocks, which is what keeps paste on one code path.
+        const html = (payload as { html?: string } | undefined)?.html;
+        if (html === undefined || html === '') return false;
+        return this.#insertDocument(this.#options.parseHtml(html), 'paste');
+      }
+      case 'pastePlainText': {
+        const text = (payload as { text?: string } | undefined)?.text;
+        if (text === undefined || text === '') return false;
+        return this.#insertDocument(textToDocument(text), 'paste');
+      }
+      case 'insertContent': {
+        const value = (payload as { value?: EditorValue } | undefined)?.value;
+        if (value === undefined) return false;
+        return this.#insertDocument(this.#parse(value, 'html'), 'paste');
+      }
+      case 'insertLink': {
+        const attrs = payload as LinkSpec | undefined;
+        if (attrs?.href === undefined) return false;
+        return this.#edit(cause, 'api', (context, selection) =>
+          insertLink(context, selection, attrs),
+        );
+      }
+      case 'updateLink': {
+        const attrs = payload as LinkSpec | undefined;
+        if (attrs?.href === undefined) return false;
+        return this.#edit(cause, 'api', (context, selection) =>
+          insertLink(context, selection, attrs),
+        );
+      }
+      case 'removeLink':
+        return this.#edit(cause, 'api', (context, selection) => removeLink(context, selection));
+      case 'insertTable': {
+        const spec = payload as
+          | { rows?: number; cols?: number; options?: { headerRow?: boolean } }
+          | undefined;
+        return this.#edit(cause, 'api', (context, selection) =>
+          insertTable(context, selection, spec?.rows ?? 2, spec?.cols ?? 2, spec?.options ?? {}),
+        );
+      }
+      case 'addRowBefore':
+        return this.#edit(cause, 'api', (context, selection) => addRow(context, selection, 'before'));
+      case 'addRowAfter':
+        return this.#edit(cause, 'api', (context, selection) => addRow(context, selection, 'after'));
+      case 'addColumnBefore':
+        return this.#edit(cause, 'api', (context, selection) =>
+          addColumn(context, selection, 'before'),
+        );
+      case 'addColumnAfter':
+        return this.#edit(cause, 'api', (context, selection) =>
+          addColumn(context, selection, 'after'),
+        );
+      case 'deleteRow':
+        return this.#edit(cause, 'api', (context, selection) => deleteRow(context, selection));
+      case 'deleteColumn':
+        return this.#edit(cause, 'api', (context, selection) => deleteColumn(context, selection));
+      case 'deleteTable':
+        return this.#edit(cause, 'api', (context, selection) => deleteTable(context, selection));
+      case 'toggleHeaderRow':
+        return this.#edit(cause, 'api', (context, selection) =>
+          toggleHeaderRow(context, selection),
         );
       case 'undo':
         if (!this.#history.canUndo()) return false;
@@ -638,9 +814,53 @@ class NativeEngineHandle implements EngineHandle {
     }
   }
 
+  /**
+   * Inserts a parsed document at the selection.
+   *
+   * Shared by paste, drop and `insertContent`. A single leading paragraph merges into the
+   * block the caret is in — pasting a few words in the middle of a sentence should not
+   * break the sentence in two — while anything longer arrives as its own blocks.
+   */
+  #insertDocument(incoming: EditorDocument, source: ChangeSource): boolean {
+    const blocks = incoming.content;
+    if (blocks.length === 0) return false;
+
+    return this.#edit('paste', source, (context, selection) => {
+      let at = selection;
+      const [first, ...rest] = blocks;
+      if (first?.type === 'paragraph') {
+        for (const inline of first.content) {
+          at =
+            inline.type === 'text'
+              ? insertTextOp(context, at, inline.text)
+              : insertInline(context, at, inline);
+          // Text with marks has to keep them, which typing plainly would lose.
+          if (inline.type === 'text' && inline.marks !== undefined) {
+            for (const mark of inline.marks) {
+              const span: ModelSelection = {
+                anchor: { key: at.focus.key, offset: at.focus.offset - inline.text.length },
+                focus: at.focus,
+                isCollapsed: false,
+                isBackward: false,
+              };
+              setMark(context, span, mark, true);
+            }
+          }
+        }
+      } else if (first !== undefined) {
+        at = insertBlock(context, at, first);
+      }
+      for (const block of rest) at = insertBlock(context, at, block);
+      return at;
+    });
+  }
+
   /** Everything the toolbar reads to draw itself. */
   #formatState(): FormatState {
-    const model = this.#readSelection();
+    // The shown selection, which a blur clears: the toolbar must not keep describing
+    // text nobody is in any more (fixes R8).
+    this.#readSelection();
+    const model = this.#shownSelection;
     const runs =
       model === null ? [] : model.isCollapsed ? [model.focus.key] : this.#runsBetween(model);
     const blocks = model === null ? [] : blocksInRange(this.#tree, model);
@@ -691,12 +911,23 @@ class NativeEngineHandle implements EngineHandle {
                 .ancestors(listKey)
                 .filter((key) => this.#tree.get(key)?.value.type === 'list').length + 1,
       },
-      link: null,
+      link: this.#linkAttrs(model),
       canUndo: this.#history.canUndo(),
       canRedo: this.#history.canRedo(),
       isEmpty: this.isEmpty(),
       isCollapsed: model?.isCollapsed ?? true,
     };
+  }
+
+  /** The link the caret is in, as the toolbar wants it, or null outside one. */
+  #linkAttrs(model: ModelSelection | null): FormatState['link'] {
+    if (model === null) return null;
+    const key = linkAt(this.#tree, model.focus.key);
+    if (key === null) return null;
+    const value = this.#tree.get(key)?.value;
+    if (value?.type !== 'link') return null;
+    const { content: _content, type: _type, ...attrs } = value;
+    return attrs;
   }
 
   /** The runs a selection covers, read-only — no splitting, so no edit. */
@@ -709,6 +940,17 @@ class NativeEngineHandle implements EngineHandle {
     const to = runs.indexOf(end.key);
     if (from === -1 || to === -1) return [];
     return runs.slice(Math.min(from, to), Math.max(from, to) + 1);
+  }
+
+  /**
+   * Announces a change, unless a composition is in progress.
+   *
+   * The suppressed events are not queued: the one emitted at `compositionend` carries
+   * the committed document, which is the only state a listener wanted.
+   */
+  #emitChange(source: ChangeSource): void {
+    if (this.#composing) return;
+    this.#events.emit('change', { source });
   }
 
   #emitFormat(): void {
@@ -732,6 +974,8 @@ class NativeEngineHandle implements EngineHandle {
       this.#events.emit('focus');
     });
     on(this.contentElement, 'blur', () => {
+      // The command path keeps its copy; only what the toolbar shows is given up.
+      this.#shownSelection = null;
       this.#events.emit('blur');
     });
     on(this.contentElement, 'paste', (event) => {
@@ -758,6 +1002,26 @@ class NativeEngineHandle implements EngineHandle {
         model === null ? null : toEditorSelection(this.#tree, model),
       );
       this.#emitFormat();
+    });
+
+    on(this.contentElement, 'compositionstart', () => {
+      this.#composing = true;
+      this.#events.emit('compositionStart');
+    });
+    on(this.contentElement, 'compositionend', (event) => {
+      this.#composing = false;
+      this.#events.emit('compositionEnd');
+      const text = (event).data;
+      if (text === undefined || text === '') {
+        this.#emitChange('user');
+        return;
+      }
+      // The browser has already put the composed text in the DOM. Applying it to the
+      // model and reconciling puts the two back in step, and emits the one change event
+      // the whole composition is worth.
+      this.#edit('typing', 'user', (context, selection) =>
+        insertTextOp(context, selection, text),
+      );
     });
 
     // `beforeinput` is where typing is intercepted: the browser is told not to edit the
@@ -825,7 +1089,37 @@ class NativeEngineHandle implements EngineHandle {
 }
 
 /** Commands the engine implements beyond the mark, value and list tables. */
+/** Commands that need a table to act on, so they are disabled outside one. */
+const TABLE_COMMANDS = new Set<CommandId>([
+  'addRowBefore',
+  'addRowAfter',
+  'addColumnBefore',
+  'addColumnAfter',
+  'deleteRow',
+  'deleteColumn',
+  'deleteTable',
+  'toggleHeaderRow',
+]);
+
 const BUILT_INS = new Set<CommandId>([
+  'insertLink',
+  'updateLink',
+  'removeLink',
+  'insertTable',
+  'addRowBefore',
+  'addRowAfter',
+  'addColumnBefore',
+  'addColumnAfter',
+  'deleteRow',
+  'deleteColumn',
+  'deleteTable',
+  'toggleHeaderRow',
+  'insertHTML',
+  'pastePlainText',
+  'insertContent',
+  'insertMergeTag',
+  'insertMention',
+  'insertImage',
   'clearFormatting',
   'setBlockType',
   'setAlign',

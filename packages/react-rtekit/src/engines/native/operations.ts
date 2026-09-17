@@ -119,6 +119,17 @@ export function hasMark(tree: DocumentTree, keys: NodeKey[], mark: MarkName): bo
   return keys.every((key) => runMarks(tree, key).some((one) => one.type === mark));
 }
 
+/**
+ * Marks that cannot apply to the same text at once.
+ *
+ * Subscript and superscript put a character below or above the line; there is no position
+ * that is both, so turning one on turns the other off rather than stacking.
+ */
+const EXCLUSIVE = new Map<MarkName, MarkName>([
+  ['subscript', 'superscript'],
+  ['superscript', 'subscript'],
+]);
+
 /** Adds, removes or replaces a mark across a selection, and reports the new selection. */
 export function setMark(
   context: EditContext,
@@ -128,7 +139,10 @@ export function setMark(
 ): ModelSelection {
   const keys = runsInRange(context, selection);
   for (const key of keys) {
-    const marks = runMarks(context.tree, key).filter((one) => one.type !== mark.type);
+    const excluded = EXCLUSIVE.get(mark.type);
+    const marks = runMarks(context.tree, key).filter(
+      (one) => one.type !== mark.type && !(on && excluded === one.type),
+    );
     if (on) marks.push(mark);
     const value = context.tree.get(key)?.value;
     if (value?.type !== 'text') continue;
@@ -151,15 +165,33 @@ export function toggleMark(
   return setMark(context, next, { type: mark } as Mark, on);
 }
 
-/** Strips every mark from the selection. */
-export function clearMarks(context: EditContext, selection: ModelSelection): ModelSelection {
+/**
+ * Strips every mark from the selection.
+ *
+ * With `blocks`, also returns each touched block to a plain, unaligned, unindented
+ * paragraph — which is what "clear formatting" means to someone who has just turned a
+ * line into a centred heading and wants it undone.
+ */
+export function clearMarks(
+  context: EditContext,
+  selection: ModelSelection,
+  blocks = false,
+): ModelSelection {
   const keys = runsInRange(context, selection);
   for (const key of keys) {
     const value = context.tree.get(key)?.value;
     if (value?.type !== 'text') continue;
     context.write.setValue(key, { type: 'text', text: value.text });
   }
-  return spanning(context.tree, keys, selection);
+  const next = spanning(context.tree, keys, selection);
+  if (blocks) {
+    for (const key of blocksInRange(context.tree, next)) {
+      const value = context.tree.get(key)?.value;
+      if (value === undefined || value.type === 'listItem' || value.type === 'tableCell') continue;
+      context.write.setValue(key, { type: 'paragraph', content: [] });
+    }
+  }
+  return next;
 }
 
 /** A selection covering exactly `keys`, falling back to the one passed in. */
@@ -392,7 +424,20 @@ export function deleteRange(context: EditContext, selection: ModelSelection): Mo
   const firstAt = runs.indexOf(keys[0]!);
   const previous = firstAt > 0 ? runs[firstAt - 1] : undefined;
 
-  for (const key of keys) write.remove(key);
+  // Atomic inline nodes — merge tags, mentions, emoji, line breaks — sit between the
+  // runs and are part of what the user selected, so they go too. Without this, selecting
+  // everything and pressing delete left the chips behind.
+  const removing = new Set<NodeKey>(keys);
+  for (const key of keys) {
+    const parent = tree.parent(key);
+    if (parent === null || parent === undefined) continue;
+    for (const sibling of tree.children(parent)) {
+      const type = tree.get(sibling)?.value.type;
+      if (type === 'text' || type === undefined) continue;
+      if (between(tree, keys, sibling)) removing.add(sibling);
+    }
+  }
+  for (const key of removing) write.remove(key);
 
   if (previous !== undefined) {
     const point = { key: previous, offset: runText(tree, previous).length };
@@ -455,6 +500,28 @@ export function deleteBackward(
   }
 
   return { anchor: at, focus: { ...at }, isCollapsed: true, isBackward: false };
+}
+
+/** Whether `key` falls between the first and last of `keys` in document order. */
+function between(tree: DocumentTree, keys: NodeKey[], key: NodeKey): boolean {
+  const order = documentOrder(tree);
+  const first = order.indexOf(keys[0]!);
+  const last = order.indexOf(keys[keys.length - 1]!);
+  const at = order.indexOf(key);
+  return at > first && at < last;
+}
+
+/** Every key in document order, which is what "between" is measured against. */
+function documentOrder(tree: DocumentTree): NodeKey[] {
+  const order: NodeKey[] = [];
+  const walk = (key: NodeKey): void => {
+    for (const child of tree.children(key)) {
+      order.push(child);
+      walk(child);
+    }
+  };
+  walk(ROOT_KEY);
+  return order;
 }
 
 /** The run before `key` in document order, or `undefined` at the start. */

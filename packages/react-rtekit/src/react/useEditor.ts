@@ -717,6 +717,8 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     if (!mounted || !container || engineRef.current) return undefined;
 
     const current = optionsRef.current;
+    // Still the Lexical adapter, until `nativeEngine` passes the browser matrix as well as
+    // the conformance suite (ADR-006 stage 8). Opt in with `engine={nativeEngine}`.
     const engine = (current.engine ?? lexicalEngine).mount(container, {
       ...(current.value !== undefined
         ? { initialValue: current.value }
