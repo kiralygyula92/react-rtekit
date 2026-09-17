@@ -19,7 +19,18 @@ export default defineConfig({
           name: 'core',
           root: './packages/react-rtekit',
           environment: 'node',
-          include: ['src/core/**/*.test.ts', 'src/themes/**/*.test.ts', 'test/core/**/*.test.ts', 'test/interop/**/*.test.ts', 'test/security/**/*.test.ts'],
+          include: [
+            'src/core/**/*.test.ts',
+            'src/themes/**/*.test.ts',
+            // The native engine's model layer is deliberately DOM-free (ADR-006 stage 2),
+            // and running it in the node project is what proves that rather than asserts
+            // it. Its DOM-bound parts are named `*.dom.test.ts` and run under `react`.
+            'src/engines/native/**/*.test.ts',
+            'test/core/**/*.test.ts',
+            'test/interop/**/*.test.ts',
+            'test/security/**/*.test.ts',
+          ],
+          exclude: ['src/engines/native/**/*.dom.test.ts'],
           globals: true,
         },
       },
@@ -32,7 +43,8 @@ export default defineConfig({
           setupFiles: ['./test/setup.ts'],
           include: [
             'src/react/**/*.test.{ts,tsx}',
-            'src/engines/**/*.test.{ts,tsx}',
+            'src/engines/lexical/**/*.test.{ts,tsx}',
+            'src/engines/native/**/*.dom.test.{ts,tsx}',
             'src/plugins/**/*.test.{ts,tsx}',
             'src/view/**/*.test.{ts,tsx}',
             'test/react/**/*.test.{ts,tsx}',
