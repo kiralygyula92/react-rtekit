@@ -593,17 +593,67 @@
     pointer-events: none;
   }
 
+  /*
+   * Find and replace.
+   *
+   * No padding and no surface of its own: it is rendered inside a popover, which is
+   * already a padded card, and carrying a second one drew a card inside a card.
+   */
   .rte-find-panel {
     display: grid;
-    gap: 8px;
-    padding: 8px;
+    gap: 12px;
   }
 
-  .rte-find-panel__row {
+  /* A field and the buttons that act on it. */
+  .rte-find-panel__group {
+    display: grid;
+    gap: 6px;
+  }
+
+  .rte-find-panel__field {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     align-items: end;
+    gap: 8px;
+  }
+
+  /* The input takes the row; the count keeps only what it needs. */
+  .rte-find-panel__field .rte-field {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  /* First in the action row, pushing the buttons to the other end. */
+  .rte-find-panel__count {
+    flex: none;
+    white-space: nowrap;
+    margin-inline-end: auto;
+  }
+
+  .rte-find-panel__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    min-block-size: 28px;
+  }
+
+  .rte-find-panel__options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 12px;
+  }
+
+  .rte-find-panel__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-block-start: 10px;
+  }
+
+  /* Wider than a menu: two labelled fields and four buttons do not fit in 320px
+     without wrapping into something unreadable. */
+  .rte-popover__panel.rte-popover--find {
+    inline-size: min(380px, calc(100vw - 16px));
+    max-inline-size: none;
   }
 
   .rte-source-view {

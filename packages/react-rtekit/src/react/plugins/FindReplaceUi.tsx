@@ -202,6 +202,7 @@ export function FindReplaceUi() {
         anchor={toolbarControl(editor, 'findReplace') ?? editor.engine.contentElement}
         onClose={close}
         label={resolveMessage(t.find.title)}
+        className="rte-popover--find"
       >
       <Panel
         query={query}
@@ -257,53 +258,75 @@ export function FindReplacePanel({
 
   return (
     <div className="rte-find-panel" role="search" aria-label={resolveMessage(t.find.title)}>
-      <div className="rte-find-panel__row">
-        <TextInput
-          label={resolveMessage(t.find.find)}
-          value={query}
-          onChange={onQueryChange}
-          onKeyDown={(event) => {
-            // Enter walks the matches and Escape closes, which is what every find
-            // field in every application does.
-            if (event.key === 'Enter') {
-              event.preventDefault();
-              if (event.shiftKey) onPrevious();
-              else onNext();
-            }
-            if (event.key === 'Escape') {
-              event.preventDefault();
-              onClose();
-            }
-          }}
-        />
-        <span className="rte-find-panel__count" aria-live="polite">
-          {matches === 0
-            ? resolveMessage(t.find.noResults)
-            : resolveMessage(t.find.results, { index: index + 1, total: matches })}
-        </span>
-        <Button onClick={onPrevious} disabled={matches === 0}>
-          {resolveMessage(t.find.previous)}
-        </Button>
-        <Button onClick={onNext} disabled={matches === 0}>
-          {resolveMessage(t.find.next)}
-        </Button>
+      {/*
+       * Field, then the buttons that act on it, then the options, then the way out.
+       * Each field takes the width and its actions sit under it, rather than the two
+       * sharing a wrapping row — laid out as one flex line, a label, an input, a count
+       * and two buttons broke wherever the widths happened to fall and read as a pile
+       * of controls at slightly different heights.
+       */}
+      <div className="rte-find-panel__group">
+        <div className="rte-find-panel__field">
+          <TextInput
+            label={resolveMessage(t.find.find)}
+            value={query}
+            onChange={onQueryChange}
+            onKeyDown={(event) => {
+              // Enter walks the matches and Escape closes, which is what every find
+              // field in every application does.
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                if (event.shiftKey) onPrevious();
+                else onNext();
+              }
+              if (event.key === 'Escape') {
+                event.preventDefault();
+                onClose();
+              }
+            }}
+          />
+        </div>
+        <div className="rte-find-panel__actions">
+          {/* At the start of the row the buttons are in, rather than beside the input:
+              the field above it is a label and a box, so there is no single edge for a
+              count to line up with, and it sat at a different height in every theme. */}
+          <span className="rte-find-panel__count" aria-live="polite">
+            {/* Nothing until something has been searched for: an empty field reporting
+                "No results" is answering a question nobody asked yet. */}
+            {query === ''
+              ? ''
+              : matches === 0
+                ? resolveMessage(t.find.noResults)
+                : resolveMessage(t.find.results, { index: index + 1, total: matches })}
+          </span>
+          <Button onClick={onPrevious} disabled={matches === 0}>
+            {resolveMessage(t.find.previous)}
+          </Button>
+          <Button onClick={onNext} disabled={matches === 0}>
+            {resolveMessage(t.find.next)}
+          </Button>
+        </div>
       </div>
 
-      <div className="rte-find-panel__row">
-        <TextInput
-          label={resolveMessage(t.find.replace)}
-          value={replacement}
-          onChange={onReplacementChange}
-        />
-        <Button onClick={onReplace} disabled={matches === 0}>
-          {resolveMessage(t.find.replace)}
-        </Button>
-        <Button onClick={onReplaceAll} disabled={matches === 0}>
-          {resolveMessage(t.find.replaceAll)}
-        </Button>
+      <div className="rte-find-panel__group">
+        <div className="rte-find-panel__field">
+          <TextInput
+            label={resolveMessage(t.find.replace)}
+            value={replacement}
+            onChange={onReplacementChange}
+          />
+        </div>
+        <div className="rte-find-panel__actions">
+          <Button onClick={onReplace} disabled={matches === 0}>
+            {resolveMessage(t.find.replace)}
+          </Button>
+          <Button onClick={onReplaceAll} disabled={matches === 0}>
+            {resolveMessage(t.find.replaceAll)}
+          </Button>
+        </div>
       </div>
 
-      <div className="rte-find-panel__row">
+      <div className="rte-find-panel__options">
         <Checkbox
           label={resolveMessage(t.find.matchCase)}
           checked={matchCase}
@@ -325,6 +348,11 @@ export function FindReplacePanel({
             onToggle('regex');
           }}
         />
+      </div>
+
+      {/* On its own line, below a rule: leaving it beside the last checkbox made the
+          way out of the panel look like a fourth option. */}
+      <div className="rte-find-panel__footer">
         <Button onClick={onClose}>{resolveMessage(t.find.close)}</Button>
       </div>
     </div>

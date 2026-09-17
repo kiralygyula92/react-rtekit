@@ -360,6 +360,68 @@ test.describe('popovers open under the button that opened them', () => {
   }
 });
 
+test.describe('the find and replace panel', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    const surface = page.locator('.playground__editor [contenteditable="true"]').first();
+    await expect(surface).toBeVisible();
+    await surface.click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.type('the quick brown fox jumps over the lazy dog');
+    await page.locator('.playground__editor [data-item="findReplace"]').click();
+    await expect(page.locator('.rte-find-panel')).toBeVisible();
+  });
+
+  test('is one card, not a card inside a card', async ({ page }) => {
+    // It kept the surface it needed when it rendered in the flow, and moving it into a
+    // popover — which is already a padded, bordered, raised card — drew a second one
+    // just inside the first.
+    const panel = page.locator('.rte-find-panel');
+    await expect(panel).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    await expect(panel).toHaveCSS('border-top-width', '0px');
+  });
+
+  test('is wide enough not to wrap into a pile', async ({ page }) => {
+    const box = await page.locator('.rte-popover--find').boundingBox();
+    expect(box?.width ?? 0).toBeGreaterThan(340);
+  });
+
+  test('puts Close on a line of its own', async ({ page }) => {
+    // Beside the last checkbox, the way out of the panel read as a fourth option.
+    const close = await page.getByRole('button', { name: 'Close' }).boundingBox();
+    const options = await page.locator('.rte-find-panel__options').boundingBox();
+    expect(close && options).toBeTruthy();
+    if (!close || !options) return;
+
+    expect(close.y).toBeGreaterThanOrEqual(options.y + options.height);
+  });
+
+  test('says nothing about results until something is searched for', async ({ page }) => {
+    const count = page.locator('.rte-find-panel__count');
+    await expect(count).toHaveText('');
+
+    await page.locator('.rte-find-panel').getByRole('textbox', { name: 'Find' }).fill('the');
+    await expect(count).toHaveText('1 of 2');
+
+    await page.locator('.rte-find-panel').getByRole('textbox', { name: 'Find' }).fill('zzz');
+    await expect(count).toHaveText('No results');
+  });
+
+  test('each field takes the width, with its buttons under it', async ({ page }) => {
+    // Laid out as one wrapping flex line, a label, an input, a count and two buttons
+    // broke wherever the widths fell and sat at slightly different heights.
+    const field = await page.locator('.rte-find-panel__field').first().boundingBox();
+    const actions = await page.locator('.rte-find-panel__actions').first().boundingBox();
+    const panel = await page.locator('.rte-find-panel').boundingBox();
+    expect(field && actions && panel).toBeTruthy();
+    if (!field || !actions || !panel) return;
+
+    expect(field.width).toBeGreaterThan(panel.width * 0.9);
+    expect(actions.y).toBeGreaterThanOrEqual(field.y + field.height);
+  });
+});
+
 test.describe('inserting an image from the device', () => {
   test('the picker is offered with no upload handler, and the file is embedded', async ({
     page,

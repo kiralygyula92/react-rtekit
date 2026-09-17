@@ -421,11 +421,16 @@
     background: var(--rte-find-active-bg);
   }
 
-  .rte-find-panel,
+  /* `.rte-find-panel` is deliberately not here: it lives inside a popover, which is
+     already a raised card, so giving it one of its own drew a card inside a card. */
   .rte-draft-prompt {
     background: var(--rte-color-surface-raised);
     border: 1px solid var(--rte-color-border);
     border-radius: var(--rte-radius);
+  }
+
+  .rte-find-panel__footer {
+    border-block-start: 1px solid var(--rte-color-border-subtle);
   }
 
   .rte-find-panel__count {
