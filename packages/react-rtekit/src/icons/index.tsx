@@ -157,6 +157,11 @@ export const defaultIcons: RteIcons = {
     <path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6z" />,
   ),
   fullscreen: /* @__PURE__ */ icon(<path d="M7 14H5v5h5v-2H7Zm-2-4h2V7h3V5H5Zm12 7h-3v2h5v-5h-2ZM14 5v2h3v3h2V5Z" />),
+  // The same four corners pointing inward, shown once fullscreen is on so the button
+  // says what it will do rather than what it just did.
+  exitFullscreen: /* @__PURE__ */ icon(
+    <path d="M5 16h3v3h2v-5H5Zm3-8H5v2h5V5H8ZM14 19h2v-3h3v-2h-5Zm2-11V5h-2v5h5V8Z" />,
+  ),
   print: /* @__PURE__ */ icon(
     <path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3Zm-3 11H8v-5h8Zm3-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM18 3H6v4h12Z" />,
   ),

@@ -55,6 +55,7 @@ const EXPLICIT: Readonly<Record<string, string>> = {
 
   'content.paragraphSpacing': '--rte-paragraph-spacing',
   'content.headingWeight': '--rte-heading-weight',
+  'content.boldWeight': '--rte-bold-weight',
   'content.listIndent': '--rte-list-indent',
   'content.listItemPadding': '--rte-list-item-padding',
   'content.indentStep': '--rte-indent-step',

@@ -49,6 +49,14 @@ export function Toolbar() {
 <RichTextEditor stickyToolbar />                       // stays put while the content scrolls
 <RichTextEditor toolbarPosition="bottom" />            // docks above the keyboard on mobile
 <RichTextEditor floatingToolbar />                     // a bubble over the selection`}</Code>
+        <p>
+          The bubble toolbar is on by default only where no toolbar is docked — with one on
+          screen already, a second rising over the text on every selection just duplicates it.
+          Set <code>floatingToolbar</code> to ask for both, or <code>{'{ false }'}</code> to turn
+          it off in an editor that docks none. It carries the items that name{' '}
+          <code>bubble</code> in their <code>showIn</code>: the marks and the link, not the whole
+          row.
+        </p>
       </Section>
 
       <Section id="keyboard" title="The keyboard model">

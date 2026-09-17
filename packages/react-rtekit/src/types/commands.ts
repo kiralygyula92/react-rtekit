@@ -25,9 +25,9 @@ export interface ImageAttrs {
 
 /** Options for `insertTable`. */
 export interface TableOptions {
-  /** Make the first row a header row. */
+  /** Make the first row a header row. @default false */
   headerRow?: boolean;
-  /** Make the first column a header column. */
+  /** Make the first column a header column. @default false */
   headerColumn?: boolean;
   /** Column widths as percentages, summing to 100. */
   columnWidths?: number[];

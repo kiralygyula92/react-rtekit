@@ -62,8 +62,18 @@ describe('the image dialog', () => {
     expect(editor.getHTML().toLowerCase()).not.toContain('javascript:');
   });
 
-  it('offers the file picker only when there is an upload handler', async () => {
+  it('offers the file picker even with no upload handler', async () => {
+    // It used to appear only when the host supplied `onUpload`, so an editor with no
+    // backend offered a URL box and no way to use a picture from the machine it was
+    // running on. Without a handler the file is embedded rather than sent.
     const editor = await mount();
+    editor.exec('openImageDialog');
+    const dialog = await screen.findByRole('dialog', { name: 'Image' });
+    expect(within(dialog).getByRole('button', { name: 'Upload' })).toBeInTheDocument();
+  });
+
+  it('hides the file picker when local files are turned off', async () => {
+    const editor = await mount({ imageOptions: { allowLocalFiles: false } });
     editor.exec('openImageDialog');
     const dialog = await screen.findByRole('dialog', { name: 'Image' });
     expect(within(dialog).queryByRole('button', { name: 'Upload' })).toBeNull();
@@ -79,6 +89,43 @@ describe('uploads', () => {
 
     await waitFor(() => {
       expect(editor.getHTML()).toContain('https://cdn.example/b.png');
+    });
+  });
+
+  it('embeds the file when there is no handler to send it to', async () => {
+    // The whole point of the change: with no `onUpload`, the bytes have nowhere to go
+    // but the document. `uploadFiles` used to return immediately and the picked file
+    // simply vanished.
+    const editor = await mount();
+
+    await editor.uploadFiles([new File(['x'], 'local.png', { type: 'image/png' })]);
+
+    await waitFor(() => {
+      expect(editor.getHTML()).toContain('data:image/png');
+    });
+  });
+
+  it('keeps an embedded raster image through the sanitizer', async () => {
+    // A profile that dropped every data URL threw the embedded image straight back out.
+    const editor = await mount();
+    const src =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+
+    editor.setContent(`<p><img src="${src}" alt="dot"></p>`, { source: 'api' });
+
+    await waitFor(() => {
+      expect(editor.getHTML()).toContain('data:image/png');
+    });
+  });
+
+  it('still refuses an SVG data URL, which can carry script', async () => {
+    const editor = await mount();
+    const src = 'data:image/svg+xml;base64,PHN2Zz48L3N2Zz4=';
+
+    editor.setContent(`<p><img src="${src}" alt="x"></p>`, { source: 'api' });
+
+    await waitFor(() => {
+      expect(editor.getHTML()).not.toContain('svg+xml');
     });
   });
 

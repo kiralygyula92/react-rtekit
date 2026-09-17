@@ -1,0 +1,537 @@
+import { expect, test, type Page } from '@playwright/test';
+
+/**
+ * The editor's chrome, in a real browser.
+ *
+ * Every case here is a bug that shipped and that no unit test could have caught, because
+ * all four are questions about what the browser actually drew: whether a mark has any
+ * visible effect, whether a floating element is inside the viewport, whether a button
+ * has anything in it. jsdom answers all three the same way — it lays nothing out — so
+ * this file is the only gate on them.
+ */
+
+/** The editable surface of the formatting example. */
+function editor(page: Page) {
+  return page.getByRole('textbox', { name: 'Content' });
+}
+
+/** Selects the first word of the editor, which is what puts the bubble toolbar up. */
+async function selectFirstWord(page: Page): Promise<void> {
+  await editor(page).click();
+  await page.keyboard.press('ControlOrMeta+Home');
+  await page.keyboard.press('Shift+ControlOrMeta+ArrowRight');
+}
+
+test.describe('inline marks', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/examples/formatting');
+    await expect(editor(page)).toBeVisible();
+  });
+
+  /**
+   * The engine renders a mark as a class. Bold and italic also get `<strong>` and
+   * `<em>`, so they looked right while every class went unstyled; underline arrives as
+   * a bare span, so it looked like a button that did nothing at all.
+   */
+  for (const [name, shortcut, selector, expected] of [
+    ['underline', 'ControlOrMeta+u', '.rte-underline', 'underline'],
+    ['strikethrough', 'ControlOrMeta+Shift+x', '.rte-strike', 'line-through'],
+  ] as const) {
+    test(`${name} is visible, not just applied`, async ({ page }) => {
+      await editor(page).click();
+      await page.keyboard.press('ControlOrMeta+a');
+      await page.keyboard.press(shortcut);
+
+      const marked = editor(page).locator(selector).first();
+      await expect(marked).toHaveCSS('text-decoration-line', expected);
+    });
+  }
+
+  test('bold and italic render at their own weight and style', async ({ page }) => {
+    await editor(page).click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.press('ControlOrMeta+b');
+
+    await expect(editor(page).locator('.rte-bold').first()).toHaveCSS('font-weight', '700');
+  });
+
+  test('underline and strikethrough together show both', async ({ page }) => {
+    // The engine renders the pair through a theme entry of its own, and removes the
+    // classes it was told to use for each mark separately. Naming those two classes as
+    // the pair's value therefore left the text merely struck through — the model held
+    // both marks, the serialized value wrote `<s><u>`, and the screen showed one.
+    await editor(page).click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.press('ControlOrMeta+u');
+    await page.keyboard.press('ControlOrMeta+Shift+x');
+
+    const both = editor(page).locator('.rte-underline-strike').first();
+    await expect(both).toHaveCSS('text-decoration-line', 'underline line-through');
+    await expect(page.getByTestId('formatting-html')).toContainText('<s><u>');
+  });
+});
+
+test.describe('the toolbar that follows a selection', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/examples/floating-toolbar');
+    await expect(editor(page)).toBeVisible();
+  });
+
+  test('stays away when a docked toolbar is already there', async ({ page }) => {
+    // The `full` preset asked for both, so selecting anything in an editor that already
+    // had every command on a toolbar above it raised a second toolbar over the text.
+    await page.goto('/examples/formatting');
+    await expect(editor(page)).toBeVisible();
+    await selectFirstWord(page);
+
+    await expect(page.locator('.rte-toolbar').first()).toBeVisible();
+    await expect(page.locator('.rte-floating-toolbar')).toHaveCount(0);
+  });
+
+  test('is a card, not a bare strip of buttons', async ({ page }) => {
+    await selectFirstWord(page);
+
+    const bubble = page.locator('.rte-floating-toolbar');
+    await expect(bubble).toBeVisible();
+    // A surface of its own: it used to inherit nothing and sit transparently over the
+    // prose, which is what made it read as part of the text.
+    await expect(bubble).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    await expect(bubble).not.toHaveCSS('box-shadow', 'none');
+  });
+
+  test('stays inside the viewport', async ({ page }) => {
+    await selectFirstWord(page);
+
+    const box = await page.locator('.rte-floating-layer').boundingBox();
+    const viewport = page.viewportSize();
+    expect(box).not.toBeNull();
+    expect(viewport).not.toBeNull();
+    if (!box || !viewport) return;
+
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
+    expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+  });
+
+  test('flips below a selection with no room above it', async ({ page }) => {
+    // The first line of an editor scrolled to the top of the window has nothing above
+    // it, and a toolbar placed there unconditionally is cut off by the window.
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+    });
+    await selectFirstWord(page);
+
+    const layer = page.locator('.rte-floating-layer');
+    const box = await layer.boundingBox();
+    expect(box?.y ?? -1).toBeGreaterThanOrEqual(0);
+  });
+
+  test('offers the marks and the link, not the whole toolbar', async ({ page }) => {
+    await selectFirstWord(page);
+
+    const bubble = page.locator('.rte-floating-toolbar');
+    await expect(bubble.locator('[data-item="bold"]')).toBeVisible();
+    await expect(bubble.locator('[data-item="link"]')).toBeVisible();
+    // `full` has around forty controls. Putting all of them in a floating strip is what
+    // made it wider than the window.
+    await expect(bubble.locator('[data-item="image"]')).toHaveCount(0);
+    await expect(bubble.locator('[data-item="table"]')).toHaveCount(0);
+    expect(await bubble.locator('[data-toolbar-control]').count()).toBeLessThan(12);
+  });
+
+  test('applies to the selection it is pointing at', async ({ page }) => {
+    await selectFirstWord(page);
+    await page.locator('.rte-floating-toolbar [data-item="bold"]').click();
+
+    await expect(editor(page).locator('.rte-bold').first()).toBeVisible();
+  });
+});
+
+test.describe('the overflow menu', () => {
+  test('its button is drawn', async ({ page }) => {
+    // It had no icon and no label: the only route to the hidden half of the toolbar
+    // was an empty box.
+    await page.setViewportSize({ width: 640, height: 720 });
+    await page.goto('/examples/floating-toolbar');
+    await expect(editor(page)).toBeVisible();
+
+    const more = page.locator('[data-item="overflow"]').first();
+    await expect(more).toBeVisible();
+
+    const box = await more.locator('svg').boundingBox();
+    expect(box?.width ?? 0).toBeGreaterThan(0);
+  });
+
+  test('keeps its buttons inside the card', async ({ page }) => {
+    // The hidden groups are the same non-wrapping flex rows as the docked toolbar, and
+    // in here they are rendered with their labels — so a group of five ran out through
+    // the side of the popover instead of the card growing to hold it.
+    await page.setViewportSize({ width: 620, height: 720 });
+    await page.goto('/examples/floating-toolbar');
+    await expect(editor(page)).toBeVisible();
+
+    await page.locator('[data-item="overflow"]').first().click();
+    const menu = page.locator('.rte-toolbar__overflow');
+    await expect(menu).toBeVisible();
+
+    const card = await menu.boundingBox();
+    expect(card).not.toBeNull();
+    if (!card) return;
+
+    for (const button of await menu.locator('[data-toolbar-control]').all()) {
+      const box = await button.boundingBox();
+      if (!box) continue;
+      expect(box.x).toBeGreaterThanOrEqual(card.x - 1);
+      expect(box.x + box.width).toBeLessThanOrEqual(card.x + card.width + 1);
+    }
+  });
+
+  test('gives the buttons back when there is room again', async ({ page }) => {
+    // The measurement only ever saw the groups still on the row, so it could conclude
+    // that fewer fit but never that more did: narrowing the window once collapsed the
+    // toolbar permanently.
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto('/examples/floating-toolbar');
+    await expect(editor(page)).toBeVisible();
+
+    const toolbar = page.locator('.rte-toolbar').first();
+    const controls = toolbar.locator('.rte-toolbar__group > [data-toolbar-control]');
+    const wide = await controls.count();
+
+    await page.setViewportSize({ width: 560, height: 720 });
+    await expect.poll(async () => controls.count()).toBeLessThan(wide);
+
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await expect.poll(async () => controls.count()).toBe(wide);
+  });
+});
+
+test.describe('every button in the full preset does something', () => {
+  /**
+   * Two of these dispatched a command that nothing handled, which is silent: the
+   * button is enabled, it has a tooltip, it takes the click and nothing happens. The
+   * sweep that found them clicked all twenty-eight and compared the document before
+   * and after; these two are the ones that had no effect.
+   */
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
+  });
+
+  test('the emoji button opens a picker that inserts', async ({ page }) => {
+    // It was wired to `insertEmoji` with no character to insert, and the picker slot
+    // behind it was an empty `<div>`, so the feature was two stubs deep.
+    const surface = page.locator('.playground__editor [contenteditable="true"]').first();
+    await surface.click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.type('hi ');
+
+    await page.locator('.playground__editor [data-item="emoji"]').click();
+    const items = page.locator('.rte-emoji-picker__item');
+    await expect(items.first()).toBeVisible();
+    expect(await items.count()).toBeGreaterThan(20);
+
+    await items.first().click();
+    await expect(surface).toContainText('😀');
+  });
+
+  test('the emoji picker filters as you search', async ({ page }) => {
+    await page.locator('.playground__editor [contenteditable="true"]').first().click();
+    await page.locator('.playground__editor [data-item="emoji"]').click();
+
+    const items = page.locator('.rte-emoji-picker__item');
+    const all = await items.count();
+    await page.getByLabel('Search emoji').fill('heart');
+    await expect.poll(async () => items.count()).toBeLessThan(all);
+  });
+
+  test('the source view button opens the source view', async ({ page }) => {
+    // `toggleSourceView` existed as a method on the editor and as a toolbar item, and
+    // nothing registered it as a command, so the button dispatched into nothing.
+    await page.locator('.playground__editor [contenteditable="true"]').first().click();
+    await page.locator('.playground__editor [data-item="sourceView"]').click();
+
+    await expect(page.locator('.rte-source-view')).toBeVisible();
+  });
+});
+
+test.describe('fullscreen', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
+  });
+
+  test('the button says which way it will go', async ({ page }) => {
+    // A plain button with one glyph: identical whether fullscreen was on or off, so
+    // the only way to know was to look at the window.
+    const button = page.locator('.playground__editor [data-item="fullscreen"]');
+    await expect(button).toHaveAttribute('aria-pressed', 'false');
+    const idle = await button.locator('svg path').getAttribute('d');
+
+    await button.click();
+    await expect(button).toHaveAttribute('aria-pressed', 'true');
+    expect(await button.locator('svg path').getAttribute('d')).not.toBe(idle);
+
+    await button.click();
+    await expect(button).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  test('a popover opened in fullscreen is on top of it', async ({ page }) => {
+    // The fullscreen surface is `position: fixed` over the whole window and a popover
+    // portals to `document.body`, outside the editor's stacking context. Ordered the
+    // other way round, every menu and colour picker opened behind the editor.
+    await page.locator('.playground__editor [data-item="fullscreen"]').click();
+    await expect(page.locator('.rte-root[data-fullscreen="true"]')).toBeVisible();
+
+    await page.locator('.rte-root [data-item="color"]').click();
+    const picker = page.locator('.rte-color-picker').first();
+    await expect(picker).toBeVisible();
+
+    // Visible to Playwright is not the same as painted on top; ask the browser what is
+    // actually at that point.
+    const box = await picker.boundingBox();
+    expect(box).not.toBeNull();
+    if (!box) return;
+    const onTop = await page.evaluate(
+      ([x, y]) => document.elementFromPoint(x, y)?.closest('.rte-color-picker') !== null,
+      [box.x + box.width / 2, box.y + box.height / 2] as const,
+    );
+    expect(onTop).toBe(true);
+  });
+});
+
+test.describe('popovers open under the button that opened them', () => {
+  /**
+   * The colour picker and the dropdowns always did, because their popover is rendered
+   * inside the item that owns it. The link editor, the image dialog, the table picker
+   * and find-and-replace are mounted once beside the editor and reached through a
+   * command, so they had no reference to the control that dispatched it and fell back
+   * to the content element — which put them under the whole text area.
+   */
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
+    await page.locator('.playground__editor [contenteditable="true"]').first().click();
+    await page.keyboard.type('anchor me');
+  });
+
+  for (const [item, panel] of [
+    ['link', '.rte-link-popover'],
+    ['image', '.rte-field'],
+    ['table', '.rte-table-picker'],
+    ['findReplace', '.rte-find-panel'],
+  ] as const) {
+    test(`${item} opens under its toolbar button`, async ({ page }) => {
+      const button = page.locator(`.playground__editor [data-item="${item}"]`).first();
+      await button.click();
+
+      const popover = page.locator('.rte-popover').first();
+      await expect(popover).toBeVisible();
+      await expect(popover.locator(panel).first()).toBeVisible();
+
+      // Both measured after the popover is up: opening it can scroll the page, and a
+      // box taken before the click is relative to a different scroll position.
+      const trigger = await button.boundingBox();
+      const box = await popover.boundingBox();
+      expect(trigger && box).toBeTruthy();
+      if (!trigger || !box) return;
+
+      // Attached to the control — overlapping it horizontally and touching it
+      // vertically — rather than parked under the content area further down the page.
+      // It may sit above rather than below: on a short window that is where it fits.
+      expect(box.x).toBeLessThan(trigger.x + trigger.width + 8);
+      expect(box.x + box.width).toBeGreaterThan(trigger.x - 8);
+
+      const gapBelow = box.y - (trigger.y + trigger.height);
+      const gapAbove = trigger.y - (box.y + box.height);
+      expect(Math.max(gapBelow, gapAbove)).toBeLessThan(24);
+
+      // And on screen, which a panel placed under a low anchor was not. `boundingBox`
+      // is already relative to the viewport.
+      const viewport = page.viewportSize();
+      if (!viewport) return;
+      expect(box.y).toBeGreaterThanOrEqual(0);
+      expect(box.y + box.height).toBeLessThanOrEqual(viewport.height + 1);
+    });
+  }
+});
+
+test.describe('inserting an image from the device', () => {
+  test('the picker is offered with no upload handler, and the file is embedded', async ({
+    page,
+  }) => {
+    // The picker used to appear only when the host supplied `onUpload`, so an editor
+    // with no backend had a URL box and no way to use a picture from this machine.
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    const surface = page.locator('.playground__editor [contenteditable="true"]').first();
+    await expect(surface).toBeVisible();
+    await surface.click();
+
+    await page.locator('.playground__editor [data-item="image"]').click();
+    // Scoped to the dialog: the hidden file input carries the same accessible name.
+    const upload = page.locator('.rte-popover').getByRole('button', { name: 'Upload' });
+    await expect(upload).toBeVisible();
+
+    // A one-pixel PNG, which is a real image the browser will accept.
+    const png = Buffer.from(
+      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      'base64',
+    );
+    const chooser = page.waitForEvent('filechooser');
+    await upload.click();
+    await (await chooser).setFiles({ name: 'dot.png', mimeType: 'image/png', buffer: png });
+
+    await expect(surface.locator('img')).toHaveAttribute('src', /^data:image\/png/);
+  });
+});
+
+test.describe('tables', () => {
+  /** Inserts a small table and puts the caret in its first cell. */
+  async function insertTable(page: Page) {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    const surface = page.locator('.playground__editor [contenteditable="true"]').first();
+    await expect(surface).toBeVisible();
+    await surface.click();
+    await page.keyboard.type('before');
+
+    await page.locator('.playground__editor [data-item="table"]').click();
+    await page.locator('.rte-table-picker__cell').nth(12).click();
+    await expect(surface.locator('table')).toBeVisible();
+    return surface;
+  }
+
+  test('every cell is an ordinary cell', async ({ page }) => {
+    // A bare `true` means "header rows *and* header columns" to the engine, so every
+    // new table arrived with its first row and its first column shaded.
+    const surface = await insertTable(page);
+    await expect(surface.locator('th')).toHaveCount(0);
+    expect(await surface.locator('td').count()).toBeGreaterThan(0);
+  });
+
+  test('the controls appear in the table and can remove it', async ({ page }) => {
+    // The controls were passed to a slot whose default rendered an empty `<div>` and
+    // dropped its children, so the menu was a blank card and a table, once inserted,
+    // could not be deleted.
+    const surface = await insertTable(page);
+    await surface.locator('td').first().click();
+
+    const controls = page.locator('.rte-table-toolbar');
+    await expect(controls).toBeVisible();
+    for (const label of [
+      'Insert row above',
+      'Insert row below',
+      'Insert column left',
+      'Insert column right',
+      'Delete row',
+      'Delete column',
+      'Delete table',
+    ]) {
+      await expect(controls.getByRole('button', { name: label })).toBeVisible();
+    }
+
+    await controls.getByRole('button', { name: 'Delete table' }).click();
+    await expect(surface.locator('table')).toHaveCount(0);
+  });
+
+  test('a row can be added and a column removed', async ({ page }) => {
+    const surface = await insertTable(page);
+    await surface.locator('td').first().click();
+    const controls = page.locator('.rte-table-toolbar');
+
+    const rows = await surface.locator('tr').count();
+    await controls.getByRole('button', { name: 'Insert row below' }).click();
+    await expect(surface.locator('tr')).toHaveCount(rows + 1);
+
+    const cells = await surface.locator('tr').first().locator('td').count();
+    await surface.locator('td').first().click();
+    await controls.getByRole('button', { name: 'Delete column' }).click();
+    await expect(surface.locator('tr').first().locator('td')).toHaveCount(cells - 1);
+  });
+});
+
+test.describe('check lists', () => {
+  test('have a box, and it can be ticked', async ({ page }) => {
+    // The rules looked for a `.rte-checkbox` child of an `li[data-checked]`. The engine
+    // renders `<li role="checkbox" class="rte-list-item--unchecked">` and the serializer
+    // writes `<li data-checked>`, neither with a child element — so a check list was a
+    // bulleted list with nothing to tick.
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+    const surface = page.locator('.playground__editor [contenteditable="true"]').first();
+    await expect(surface).toBeVisible();
+    await surface.click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.type('task one');
+    await page.locator('.playground__editor [data-item="checkList"]').click();
+
+    const item = surface.locator('li').first();
+    await expect(item).toHaveAttribute('aria-checked', 'false');
+
+    // The box is drawn, and the bullet is gone.
+    await expect(item).toHaveCSS('list-style-type', 'none');
+    const drawn = await item.evaluate((element) => {
+      const style = getComputedStyle(element, '::before');
+      return { width: style.width, height: style.height };
+    });
+    expect(drawn.width).not.toBe('auto');
+    expect(parseFloat(drawn.width)).toBeGreaterThan(8);
+    expect(parseFloat(drawn.height)).toBeGreaterThan(8);
+
+    // And clicking it ticks the item, which is what the box is for.
+    const box = await item.boundingBox();
+    expect(box).not.toBeNull();
+    if (!box) return;
+    await page.mouse.click(box.x + 7, box.y + 10);
+    await expect(item).toHaveAttribute('aria-checked', 'true');
+  });
+});
+
+test.describe('the playground', () => {
+  test('puts the options above the editor and the output below it', async ({ page }) => {
+    await page.goto('/playground');
+    const controls = await page.locator('.playground__controls').boundingBox();
+    const surface = await page.locator('.playground__editor').boundingBox();
+    const output = await page.locator('.playground__output').boundingBox();
+    expect(controls && surface && output).toBeTruthy();
+    if (!controls || !surface || !output) return;
+
+    expect(controls.y + controls.height).toBeLessThanOrEqual(surface.y + 1);
+    expect(surface.y + surface.height).toBeLessThanOrEqual(output.y + 1);
+  });
+
+  test('gives the editor the full width of the page', async ({ page }) => {
+    // Squeezed into the middle of a three-column grid, the page whose purpose is to
+    // show every option had room for the fewest.
+    await page.goto('/playground');
+    const surface = await page.locator('.playground__editor').boundingBox();
+    const controls = await page.locator('.playground__controls').boundingBox();
+    expect(surface && controls).toBeTruthy();
+    if (!surface || !controls) return;
+
+    expect(surface.width).toBeGreaterThan(controls.width - 2);
+  });
+
+  test('shows every control in a labelled group', async ({ page }) => {
+    await page.goto('/playground');
+    // `toBeVisible` waits for hydration; a bare `count()` does not, and reads zero.
+    await expect(page.getByRole('group', { name: 'Features' })).toBeVisible();
+    expect(await page.locator('.playground__group').count()).toBeGreaterThan(3);
+  });
+
+  test('the full preset shows its whole toolbar', async ({ page }) => {
+    await page.goto('/playground');
+    await page.getByLabel('Preset').selectOption('full');
+
+    const toolbar = page.locator('.playground__editor .rte-toolbar');
+    await expect(toolbar).toBeVisible();
+    // Wrapped onto a second row rather than hidden behind a menu.
+    await expect(toolbar.locator('[data-item="overflow"]')).toHaveCount(0);
+    expect(await toolbar.locator('[data-toolbar-control]').count()).toBeGreaterThan(20);
+  });
+});

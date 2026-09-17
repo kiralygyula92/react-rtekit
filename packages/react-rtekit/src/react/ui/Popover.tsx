@@ -106,6 +106,35 @@ export function Popover({
     const maxLeft = scrollX + document.documentElement.clientWidth - panelRect.width - 8;
     left = Math.max(scrollX + 8, Math.min(left, maxLeft));
 
+    /*
+     * The same, vertically — which nothing did.
+     *
+     * A panel was placed under its anchor whatever the height of either, so a tall one
+     * near the bottom of a short window was drawn past the end of it: on a phone the
+     * link editor and the image dialog opened off the screen entirely. It flips above
+     * the anchor when there is more room there, and is clamped to the viewport in any
+     * case, so the top of the panel is always reachable.
+     */
+    const viewportHeight = document.documentElement.clientHeight;
+    const below = viewportHeight - rect.bottom - offset;
+    const above = rect.top - offset;
+    const wantsAbove = placement === 'top' || placement === 'top-start';
+    const flip = wantsAbove
+      ? // Asked for above, but there is not room and there is more below.
+        panelRect.height > above && below > above
+      : // Asked for below, but there is not room and there is more above.
+        panelRect.height > below && above > below;
+
+    if (flip) {
+      top = wantsAbove
+        ? rect.bottom + scrollY + offset
+        : rect.top + scrollY - panelRect.height - offset;
+    }
+
+    const minTop = scrollY + 8;
+    const maxTop = scrollY + viewportHeight - panelRect.height - 8;
+    top = Math.max(minTop, maxTop > minTop ? Math.min(top, maxTop) : top);
+
     setPosition({ top, left });
   }, [anchor, offset, placement]);
 

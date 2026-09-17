@@ -37,7 +37,12 @@ export const lexicalTheme: EditorThemeClasses = {
     italic: 'rte-italic',
     underline: 'rte-underline',
     strikethrough: 'rte-strike',
-    underlineStrikethrough: 'rte-underline rte-strike',
+    // A class of its own rather than the other two together. The engine treats this as
+    // the replacement for both, so it adds these names and then removes the ones it
+    // listed under `underline` and `strikethrough` — naming them here meant it added
+    // `rte-underline rte-strike` and immediately took `rte-underline` off again, and
+    // text that was both came out merely struck through.
+    underlineStrikethrough: 'rte-underline-strike',
     code: 'rte-code',
     subscript: 'rte-subscript',
     superscript: 'rte-superscript',

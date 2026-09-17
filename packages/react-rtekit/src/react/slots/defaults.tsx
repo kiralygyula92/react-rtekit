@@ -200,8 +200,18 @@ export const defaultSlots: RteSlots = {
       )}
     </div>
   ),
-  TablePicker: ({ className }) => <div className={cx('rte-table-picker', className)} />,
-  TableToolbar: ({ className }) => <div className={cx('rte-table-toolbar', className)} />,
+  TablePicker: ({ children, className }) => (
+    <div className={cx('rte-table-picker', className)}>{children}</div>
+  ),
+  /*
+   * Renders its children, which it did not. The table controls — insert a row, delete a
+   * column, delete the table — are passed to this slot, and the default dropped them on
+   * the floor and rendered an empty box, so a table in the document had a menu with
+   * nothing in it and no way to remove it.
+   */
+  TableToolbar: ({ children, className }) => (
+    <div className={cx('rte-table-toolbar', className)}>{children}</div>
+  ),
   InlineSuggestMenu: ({ items, activeIndex, onSelect, emptyMessage, className }) => (
     <div className={cx('rte-suggest', className)} role="listbox">
       {items.length === 0 ? (
@@ -260,7 +270,41 @@ export const defaultSlots: RteSlots = {
       ))}
     </div>
   ),
-  EmojiPicker: ({ className }) => <div className={cx('rte-emoji-picker', className)} />,
+  /*
+   * A grid of characters. This was an empty `<div>` — a real slot, a real popover and
+   * nothing inside it — so the emoji button opened a blank box. The rows arrive in the
+   * same shape the `:` trigger menu uses, which is what lets one override serve both.
+   */
+  EmojiPicker: ({ items, activeIndex, onSelect, emptyMessage, className }) =>
+    items.length === 0 ? (
+      <div className={cx('rte-emoji-picker', className)}>
+        <div className="rte-suggest__empty">{emptyMessage}</div>
+      </div>
+    ) : (
+      <div className={cx('rte-emoji-picker', className)} role="listbox" aria-label="Emoji">
+        {items.map((item, index) => (
+          <button
+            key={item.key}
+            type="button"
+            role="option"
+            aria-selected={index === activeIndex}
+            aria-label={typeof item.label === 'string' ? item.label : undefined}
+            title={typeof item.label === 'string' ? item.label : undefined}
+            className="rte-emoji-picker__item"
+            data-highlighted={index === activeIndex}
+            onMouseDown={(event) => {
+              // The editor keeps the selection the emoji is going to be inserted into.
+              event.preventDefault();
+            }}
+            onClick={() => {
+              onSelect(index);
+            }}
+          >
+            {item.icon}
+          </button>
+        ))}
+      </div>
+    ),
   MentionList: ({ className }) => <div className={cx('rte-mention-list', className)} />,
   FloatingToolbar: ({ children, className }) => (
     <div className={cx('rte-floating-toolbar', className)}>{children}</div>

@@ -89,10 +89,16 @@ export default [
     // demoed and documented, and nothing rendered it — `floatingToolbar` was a prop that
     // did nothing until the cleanup pass found the module unreferenced. Wiring it up cost
     // this budget a kilobyte and gained a feature the documentation already promised.
+    //
+    // A further 0.4 kB is the emoji picker. The same story: the emoji set was already in
+    // this graph for the `:` trigger, the toolbar button was already in the `full`
+    // preset, and between them sat a button wired to `insertEmoji` with no character to
+    // insert and a picker slot whose default rendered an empty `<div>`. What the bytes
+    // buy is the panel that joins them.
     name: 'RichTextEditor (all chrome, all plugins)',
     path: 'dist/index.js',
     import: '{ RichTextEditor }',
-    limit: '65 kB',
+    limit: '66 kB',
     gzip: true,
     ignore: PEERS,
   },

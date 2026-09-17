@@ -28,11 +28,58 @@ export interface MarkdownOptions {
   fence?: string;
 }
 
-const ESCAPE_RE = /([\\`*_{}[\]()#+\-.!>|])/g;
+/**
+ * Characters that are syntax wherever they appear.
+ *
+ * Deliberately short. Escaping every character that is *ever* special turned ordinary
+ * prose into `The well\-known result \(see below\) is ready\.` — correct Markdown, and
+ * not something anyone wants handed back from `valueFormat="markdown"`. A full stop, a
+ * hyphen or a bracket is only syntax in a position, and those positions are handled
+ * where the line is assembled.
+ */
+const ESCAPE_RE = /([\\`*_[\]])/g;
+
+/** `!` only matters immediately before a link, where it makes an image. */
+const IMAGE_BANG_RE = /!(?=\[)/g;
+
+/**
+ * A line that would be read back as a block marker rather than as text.
+ *
+ * A paragraph beginning "- " really is a list to a Markdown reader, so the marker is
+ * escaped when it lands at the start of a line and left alone everywhere else.
+ */
+const LEADING_MARKER_RE = /^(\s*)(?:(#{1,6}|[-+>])|(\d{1,9})([.)]))(?=\s|$)/;
+
+/** A line that is nothing but a thematic break: three or more `-`, `_` or `*`. */
+const THEMATIC_BREAK_RE = /^(\s*)([-_*])(?:\s*\2){2,}\s*$/;
 
 /** Escapes Markdown punctuation in a text run. */
 function escapeMarkdown(value: string): string {
-  return value.replace(ESCAPE_RE, '\\$1');
+  return value.replace(ESCAPE_RE, '\\$1').replace(IMAGE_BANG_RE, '\\!');
+}
+
+/**
+ * Escapes a block marker that a line happens to start with.
+ *
+ * A marker counts when it is followed by a space *or by the end of the line*: `-` alone
+ * is a list item and `## #` is a heading, so requiring a space let both through and the
+ * paragraph came back as a different block entirely.
+ *
+ * An ordered marker is escaped at its punctuation rather than at its digits — `1\.`, not
+ * `\1.`. Escaping the digit does neutralize the list, but reading it back produces the
+ * literal text `\1.`, which is escaped again on the next write.
+ */
+function escapeLeadingMarker(line: string): string {
+  const thematic = line.replace(THEMATIC_BREAK_RE, (_match, indent: string, char: string) =>
+    `${indent}\\${char}${line.trimStart().slice(1)}`,
+  );
+  if (thematic !== line) return thematic;
+
+  return line.replace(
+    LEADING_MARKER_RE,
+    (_match, indent: string, simple: string | undefined, digits: string | undefined, punctuation: string | undefined) =>
+      simple === undefined ? `${indent}${digits!}\\${punctuation!}` : `${indent}\\${simple}`,
+  );
 }
 
 function wrap(value: string, marks: Mark[] | undefined): string {
@@ -100,7 +147,7 @@ function listToMarkdown(list: ListNode, options: Required<MarkdownOptions>, dept
 function blockToMarkdown(block: BlockNode, options: Required<MarkdownOptions>): string {
   switch (block.type) {
     case 'paragraph':
-      return inlineToMarkdown(block.content, options);
+      return escapeLeadingMarker(inlineToMarkdown(block.content, options));
     case 'heading':
       return `${'#'.repeat(block.level)} ${inlineToMarkdown(block.content, options)}`;
     case 'list':
@@ -256,7 +303,30 @@ export function markdownToDocument(
   options: HtmlToDocumentOptions & MarkdownOptions = {},
 ): EditorDocument {
   const html = markdownToHtml(markdown, options);
-  return htmlToDocument(html, options);
+
+  // The reader has to look for the delimiters the writer uses. They disagreed by
+  // default — `documentToMarkdown` writes `{{key}}` and the HTML parser looks for
+  // `{key}` — so a merge tag gained a pair of braces on every save-and-load cycle:
+  // `{{name}}` became `{` + tag + `}`, then `{{{name}}}`, and the backend stopped
+  // substituting it.
+  const syntax = mergeTagSyntaxOf(options.mergeTagSyntax ?? '{{key}}');
+
+  return htmlToDocument(html, {
+    ...options,
+    mergeTags: { ...options.mergeTags, ...(syntax ? { syntax } : {}) },
+  });
+}
+
+/**
+ * Splits a `{{key}}`-style template into the delimiters the HTML parser wants.
+ *
+ * Returns `undefined` for a template that does not contain `key`, which leaves the
+ * parser on its own default rather than guessing.
+ */
+function mergeTagSyntaxOf(template: string): { open: string; close: string } | undefined {
+  const at = template.indexOf('key');
+  if (at < 0) return undefined;
+  return { open: template.slice(0, at), close: template.slice(at + 3) };
 }
 
 /** Converts Markdown to HTML. Exported for the interop demo's before/after view. */

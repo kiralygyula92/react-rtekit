@@ -181,6 +181,40 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* ── the toolbar that follows a selection ───────────────────────────────── */
+  /*
+   * The layer is positioned from script and carries nothing visual; the card is the
+   * element inside it. Without a stacking context of its own the strip drew underneath
+   * whatever the page had already placed, and without a width bound it grew past the
+   * edge of the window.
+   */
+  .rte-floating-layer {
+    z-index: var(--rte-z-floating);
+    /* It is placed against the selection, not the element it overlaps. */
+    pointer-events: auto;
+    max-inline-size: min(calc(100vw - 16px), 32rem);
+  }
+
+  .rte-floating-toolbar,
+  .rte-bubble-menu {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+  }
+
+  /*
+   * The docked toolbar's own spacing does not apply inside the card: the bottom margin
+   * separates it from the content it sits above, and there is no content here.
+   */
+  .rte-floating-toolbar .rte-toolbar,
+  .rte-bubble-menu .rte-toolbar {
+    margin-block-end: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    flex-wrap: wrap;
+  }
+
   /* ── popovers, menus, dialogs ───────────────────────────────────────────── */
   .rte-popover {
     position: absolute;
@@ -255,6 +289,39 @@
   .rte-color-picker__actions {
     display: flex;
     gap: 8px;
+  }
+
+  /* ── emoji picker ───────────────────────────────────────────────────────── */
+  .rte-emoji-picker__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    inline-size: 268px;
+  }
+
+  .rte-emoji-picker {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    /* Roughly six rows; the rest scrolls rather than growing a popover taller than
+       the window. */
+    max-block-size: 210px;
+    overflow-y: auto;
+  }
+
+  .rte-emoji-picker__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: var(--rte-button-radius);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
   }
 
   /* ── fullscreen ─────────────────────────────────────────────────────────── */
@@ -600,11 +667,51 @@
     inset-block-end: 0;
   }
 
+  /*
+   * The overflow menu.
+   *
+   * Its groups are the same `.rte-toolbar__group` as the docked row, which is a flex
+   * line that does not wrap — and the items inside it are rendered *with* their labels,
+   * so a group of five ran to several hundred pixels and straight out through the side
+   * of the popover. In here a group is a column, which is what makes the card the size
+   * of its contents instead of the other way round.
+   */
   .rte-toolbar__overflow {
     display: grid;
     gap: 4px;
     padding: 4px;
     min-inline-size: 200px;
+    max-inline-size: 280px;
+    /* A long list scrolls rather than growing taller than the window. */
+    max-block-size: min(60vh, 420px);
+    overflow-y: auto;
+  }
+
+  .rte-toolbar__overflow .rte-toolbar__group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-inline-size: 0;
+  }
+
+  /* A separating rule between groups, since the row's gaps no longer read as one. */
+  .rte-toolbar__overflow .rte-toolbar__group + .rte-toolbar__group {
+    margin-block-start: 4px;
+    padding-block-start: 4px;
+    border-block-start: 1px solid var(--rte-color-border-subtle);
+  }
+
+  .rte-toolbar__overflow .rte-toolbar__button,
+  .rte-toolbar__overflow .rte-toolbar__dropdown {
+    justify-content: flex-start;
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  .rte-toolbar__overflow .rte-toolbar__button-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* Touch targets: 44px is the platform minimum, and `comfortable` honours it. */

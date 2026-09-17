@@ -78,36 +78,80 @@
     padding-inline-start: var(--rte-list-indent);
   }
 
-  /* check lists: an accessible checkbox, and `list-style: none` for e-mail safety */
+  /*
+   * Check lists.
+   *
+   * The box is drawn with `::before` on the item, because that is the only thing there
+   * is to draw it on: the engine renders a check item as an `<li role="checkbox">` with
+   * no child element for the control, and the serializer writes an `<li data-checked>`
+   * with none either. These rules used to look for a `.rte-checkbox` child of an
+   * `li[data-checked]`, which is a shape neither side has ever produced — so a check
+   * list rendered as a bulleted list with nothing to tick.
+   *
+   * The box has to sit inside the first 20px of the item: that strip is what the
+   * engine treats as a click on the checkbox rather than on the text.
+   */
   .rte-content li[data-checked],
-  .rte-view li[data-checked] {
+  .rte-view li[data-checked],
+  .rte-content .rte-list-item--checked,
+  .rte-content .rte-list-item--unchecked {
+    position: relative;
     list-style: none;
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    padding-inline-start: 0;
+    padding-inline-start: 1.5em;
+    outline: none;
   }
 
-  .rte-content li[data-checked] > .rte-checkbox,
-  .rte-view li[data-checked] > .rte-checkbox {
-    flex: none;
+  .rte-content li[data-checked]::before,
+  .rte-view li[data-checked]::before,
+  .rte-content .rte-list-item--checked::before,
+  .rte-content .rte-list-item--unchecked::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0.2em;
     inline-size: 1em;
     block-size: 1em;
-    margin-block-start: 0.25em;
     border: 1px solid var(--rte-color-border);
     border-radius: 2px;
+    background: var(--rte-editor-bg);
     cursor: pointer;
   }
 
-  .rte-content li[data-checked='true'] > .rte-checkbox,
-  .rte-view li[data-checked='true'] > .rte-checkbox {
+  .rte-content li[data-checked='true']::before,
+  .rte-view li[data-checked='true']::before,
+  .rte-content .rte-list-item--checked::before {
     background: var(--rte-color-accent);
     border-color: var(--rte-color-accent);
   }
 
+  /* The tick itself: two borders on a rotated box, so it needs no glyph or image. */
+  .rte-content li[data-checked='true']::after,
+  .rte-view li[data-checked='true']::after,
+  .rte-content .rte-list-item--checked::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.34em;
+    inset-block-start: 0.34em;
+    inline-size: 0.28em;
+    block-size: 0.55em;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+
   .rte-content li[data-checked='true'],
-  .rte-view li[data-checked='true'] {
+  .rte-view li[data-checked='true'],
+  .rte-content .rte-list-item--checked {
     color: var(--rte-color-text-muted);
+    text-decoration: line-through;
+  }
+
+  /* The focus ring belongs on the box, since the item is the checkbox. */
+  .rte-content .rte-list-item--checked:focus-visible::before,
+  .rte-content .rte-list-item--unchecked:focus-visible::before {
+    outline: 2px solid var(--rte-color-accent);
+    outline-offset: 1px;
   }
 
   /* ── alignment and indentation ──────────────────────────────────────────── */
@@ -200,8 +244,68 @@
     cursor: pointer;
   }
 
+  /*
+   * The inline marks, as classes.
+   *
+   * The engine renders a mark as a class, not as an element: bold and italic happen to
+   * get `<strong>` and `<em>` as well and so inherit the browser's styling, but
+   * underline, strikethrough and the rest arrive as a bare `<span class="rte-underline">`.
+   * Without these rules the command applied, the model changed and the button lit
+   * up — and nothing on screen looked any different, which reads as a broken button.
+   *
+   * `.rte-underline.rte-strike` is a separate rule because `text-decoration` is one
+   * property: two rules setting it would leave the more specific one to win, and text
+   * that is both underlined and struck through would show only one of them.
+   */
+  .rte-content .rte-bold,
+  .rte-view .rte-bold {
+    font-weight: var(--rte-bold-weight);
+  }
+
+  .rte-content .rte-italic,
+  .rte-view .rte-italic {
+    font-style: italic;
+  }
+
+  .rte-content .rte-underline,
+  .rte-view .rte-underline {
+    text-decoration: underline;
+  }
+
+  .rte-content .rte-strike,
+  .rte-view .rte-strike {
+    text-decoration: line-through;
+  }
+
+  .rte-content .rte-underline-strike,
+  .rte-view .rte-underline-strike,
+  .rte-content .rte-underline.rte-strike,
+  .rte-view .rte-underline.rte-strike {
+    text-decoration: underline line-through;
+  }
+
+  .rte-content .rte-subscript,
+  .rte-view .rte-subscript,
+  .rte-content .rte-superscript,
+  .rte-view .rte-superscript {
+    font-size: 0.75em;
+    line-height: 0;
+  }
+
+  .rte-content .rte-subscript,
+  .rte-view .rte-subscript {
+    vertical-align: sub;
+  }
+
+  .rte-content .rte-superscript,
+  .rte-view .rte-superscript {
+    vertical-align: super;
+  }
+
   .rte-content code,
-  .rte-view code {
+  .rte-content .rte-code,
+  .rte-view code,
+  .rte-view .rte-code {
     background: var(--rte-code-bg);
     color: var(--rte-code-color);
     font-family: var(--rte-code-font);

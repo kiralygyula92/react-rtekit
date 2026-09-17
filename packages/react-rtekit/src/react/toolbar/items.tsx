@@ -330,6 +330,9 @@ export function createBuiltInItems(
     kind: 'toggle',
     shortcut: 'Mod+K',
     isActive: ({ format }) => format.link !== null,
+    // Linking the words you just selected is the reason most people reach for a
+    // selection toolbar, so it joins the marks on the `bubble` surface.
+    showIn: ['toolbar', 'bubble', 'overflow'],
   });
   add({
     ...button('unlink', icons.unlink, 'unlink', 'removeLink'),
@@ -338,7 +341,17 @@ export function createBuiltInItems(
   add(button('image', icons.image, 'image', 'openImageDialog'));
   add(button('table', icons.table, 'table', 'insertTable'));
   add(button('horizontalRule', icons.horizontalRule, 'horizontalRule', 'insertHorizontalRule'));
-  add(button('emoji', icons.emoji, 'emoji', 'insertEmoji'));
+  // A picker, not a plain button: `insertEmoji` needs a `char`, and a button that
+  // dispatches it without one inserts nothing at all — which is what this was.
+  add({
+    name: 'emoji',
+    kind: 'emojiPicker',
+    icon: icons.emoji,
+    label: (t) => resolveMessage(t.toolbar.emoji),
+    command: 'insertEmoji',
+    group: 'insert',
+    showIn: ['toolbar', 'overflow'],
+  });
   add(button('mergeTag', icons.mergeTag, 'mergeTag', 'openMergeTagMenu'));
   add(button('mention', icons.mention, 'mention', 'insertMention'));
 
@@ -373,7 +386,16 @@ export function createBuiltInItems(
   // ── tools ────────────────────────────────────────────────────────────────
   add({ ...button('findReplace', icons.findReplace, 'findReplace', 'openFindReplace'), group: 'tools' });
   add({ ...button('sourceView', icons.sourceView, 'sourceView', 'toggleSourceView'), group: 'tools' });
-  add({ ...button('fullscreen', icons.fullscreen, 'fullscreen', 'toggleFullscreen'), group: 'tools' });
+  add({
+    ...button('fullscreen', icons.fullscreen, 'fullscreen', 'toggleFullscreen'),
+    group: 'tools',
+    // A toggle, because it is one: it was a plain button that looked identical whether
+    // fullscreen was on or off, so the only way to tell was to look at the window.
+    kind: 'toggle',
+    isActive: ({ editor }) => editor.isFullscreen(),
+    icon: ({ editor }) =>
+      editor.isFullscreen() ? (icons.exitFullscreen ?? icons.fullscreen) : icons.fullscreen,
+  });
   add({ ...button('print', icons.print, 'print', 'print'), group: 'tools' });
 
   return items;

@@ -90,8 +90,18 @@ export interface ToolbarOption {
 export interface ToolbarItemSpec {
   /** Unique within the toolbar. */
   name: string;
-  /** `button` (default), `toggle`, `dropdown`, `colorPicker`, `separator` or `custom`. */
-  kind?: 'button' | 'toggle' | 'dropdown' | 'colorPicker' | 'separator' | 'custom';
+  /**
+   * `button` (default), `toggle`, `dropdown`, `colorPicker`, `emojiPicker`,
+   * `separator` or `custom`.
+   */
+  kind?:
+    | 'button'
+    | 'toggle'
+    | 'dropdown'
+    | 'colorPicker'
+    | 'emojiPicker'
+    | 'separator'
+    | 'custom';
   /** The control's icon, statically or derived from the current state. */
   icon?: ReactNode | ((ctx: ToolbarItemContext) => ReactNode);
   /** The accessible name, and the visible one when labels are shown. */

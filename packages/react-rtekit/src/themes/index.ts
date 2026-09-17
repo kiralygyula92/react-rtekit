@@ -167,6 +167,7 @@ export const lightTheme: ResolvedRteTheme = /* @__PURE__ */ resolve({
     paragraphSpacing: '0.5em',
     headingScale: ['2em', '1.5em', '1.17em', '1em', '0.83em', '0.67em'],
     headingWeight: '600',
+    boldWeight: '700',
     listIndent: '1.5em',
     listItemPadding: '0.5em',
     indentStep: '2em',
@@ -183,7 +184,9 @@ export const lightTheme: ResolvedRteTheme = /* @__PURE__ */ resolve({
     hrColor: 'var(--rte-color-border-subtle)',
   },
   motion: { duration: '150ms', easing: 'cubic-bezier(0.2, 0, 0, 1)' },
-  z: { popover: '1300', fullscreen: '1400' },
+  // Ordered so a popover clears the bubble toolbar, which clears the fullscreen
+  // surface; see the note in `tokens.css`.
+  z: { fullscreen: '1400', floating: '1450', popover: '1500' },
   density: 'standard',
 });
 

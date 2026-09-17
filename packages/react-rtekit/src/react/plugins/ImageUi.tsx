@@ -6,6 +6,7 @@ import { useEditorContext, useLocalization, useRteSlots } from '../context.js';
 import { resolveMessage } from '../localization.js';
 import { Popover } from '../ui/Popover.js';
 import { Button, Checkbox, TextInput } from '../ui/primitives.js';
+import { toolbarControl } from './anchor.js';
 
 /**
  * Image chrome: the insert dialog, the selected-image popover and the resize frame
@@ -36,6 +37,10 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selected, setSelected] = useState<HTMLImageElement | null>(null);
   const fileInput = useRef<HTMLInputElement | null>(null);
+
+  // `canUpload` says a handler exists to send the file to; it is no longer what decides
+  // whether a file can be chosen, because one can now be embedded instead of sent.
+  const canPickFile = canUpload || options?.allowLocalFiles !== false;
 
   // `openImageDialog` is the command every entry point goes through: the toolbar,
   // the slash menu and consumer code.
@@ -74,7 +79,13 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
 
   return (
     <>
-      {canUpload ? (
+      {/*
+       * Always rendered. The picker used to appear only when the host had given an
+       * `onUpload`, so an editor without a backend offered no way to use a picture from
+       * the machine it was running on — a URL box and nothing else. Without a handler
+       * the file is embedded in the document instead of being sent anywhere.
+       */}
+      {canPickFile ? (
         <input
           ref={fileInput}
           type="file"
@@ -96,7 +107,7 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
       {dialogOpen ? (
         <Popover
           open
-          anchor={editor.engine.contentElement}
+          anchor={toolbarControl(editor, 'image') ?? editor.engine.contentElement}
           onClose={() => {
             setDialogOpen(false);
           }}
@@ -104,7 +115,7 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
         >
           <ImageDialogForm
             allowExternalUrl={options?.allowExternalUrl !== false}
-            {...(canUpload
+            {...(canPickFile
               ? {
                   onChooseFile: () => {
                     fileInput.current?.click();

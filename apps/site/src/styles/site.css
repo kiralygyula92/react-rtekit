@@ -1266,10 +1266,25 @@ pre code {
 }
 
 /* ── playground and theme editor ──────────────────────────────────────────── */
-.playground,
+/*
+ * The playground is a stack, not a sidebar: options, then the editor at the full
+ * width of the page, then the output. Squeezed into the middle column of a three-column
+ * grid the editor had roughly 500px to put a toolbar in, so the larger presets spent
+ * most of their buttons in the overflow menu — the page whose job is to show every
+ * option was the page that showed the fewest.
+ */
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
 .theme-editor {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) minmax(0, 380px);
+  grid-template-columns: 300px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
   max-width: var(--site-max);
@@ -1277,19 +1292,40 @@ pre code {
   padding: 32px 20px 64px;
 }
 
-.theme-editor {
-  grid-template-columns: 300px minmax(0, 1fr);
-}
-
-.playground__header {
-  grid-column: 1 / -1;
-}
-
 .playground__header h1 {
   margin-block-end: 4px;
 }
 
-.playground__controls,
+/* The options card. Its groups flow into as many columns as the page can hold. */
+.playground__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px 24px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-radius);
+  background: var(--site-bg-muted);
+  font-size: 13px;
+}
+
+.playground__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.playground__group-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--site-text-muted);
+  padding-block-end: 4px;
+  border-bottom: 1px solid var(--site-border);
+}
+
 .theme-editor__tokens {
   position: sticky;
   top: 24px;
@@ -1312,6 +1348,14 @@ pre code {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+}
+
+/* A select that shrinks to nothing is unreadable; give the control half the row. */
+.playground__controls select,
+.playground__controls input[type='text'],
+.playground__controls input[type='number'] {
+  min-width: 0;
+  flex: 0 1 50%;
 }
 
 .theme-editor__tokens details {
@@ -1347,26 +1391,20 @@ pre code {
   font-size: 12px;
 }
 
+/* Under the editor, at full width — it is the result, so it reads after the thing
+   that produced it rather than beside it. */
 .playground__output {
-  position: sticky;
-  top: 24px;
-  align-self: start;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
   border: 1px solid var(--site-border);
   border-radius: var(--site-radius);
   padding: 12px;
 }
 
 @media (max-width: 1100px) {
-  .playground,
   .theme-editor {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .playground__controls,
-  .theme-editor__tokens,
-  .playground__output {
+  .theme-editor__tokens {
     position: static;
     max-height: none;
   }

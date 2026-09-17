@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import type { SourceViewSlotProps } from '../../types/slots.js';
 import { sanitizeHtml } from '../../core/sanitize/sanitize.js';
 import { isEmptyHtml } from '../../core/serialize/from-html.js';
@@ -23,6 +23,20 @@ export function SourceViewUi() {
   const { slots } = useRteSlots();
   const sourceView = useEditorState((snapshot) => snapshot.sourceView);
   const [error, setError] = useState<string | null>(null);
+
+  // `toggleSourceView` is what the toolbar button dispatches, and nothing registered
+  // it: the command existed as a method on the editor and as an entry in the item
+  // table, and the two were never joined, so the button dispatched into nothing. The
+  // find panel and fullscreen both reach their UI this way.
+  useEffect(
+    () =>
+      editor.registerCommand('toggleSourceView', (_ctx, next) => {
+        editor.toggleSourceView();
+        next();
+        return true;
+      }),
+    [editor],
+  );
 
   // Read at render time rather than stored: the panel is mounted only while the
   // source view is open, and a remount is exactly when the HTML should be re-read.

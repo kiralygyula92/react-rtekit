@@ -137,6 +137,7 @@
     --rte-h5-size: 0.83em;
     --rte-h6-size: 0.67em;
     --rte-heading-weight: 600;
+    --rte-bold-weight: 700;
     --rte-list-indent: 1.5em;
     --rte-list-item-padding: 0.5em;
     --rte-indent-step: 2em;
@@ -156,9 +157,20 @@
     --rte-motion-duration: 150ms;
     --rte-motion-easing: cubic-bezier(0.2, 0, 0, 1);
 
-    /* z-index */
-    --rte-z-popover: 1300;
+    /*
+     * z-index, innermost first.
+     *
+     * The fullscreen surface is a `position: fixed` element covering the window, so
+     * anything that has to appear over the editor has to clear it — and a popover
+     * opens into a portal on `document.body`, outside the editor's own stacking
+     * context. Ordered the other way round, as they were, every menu, colour picker
+     * and dialog opened from a fullscreen editor rendered behind it.
+     */
     --rte-z-fullscreen: 1400;
+    /* The bubble toolbar clears the fullscreen surface it floats over … */
+    --rte-z-floating: 1450;
+    /* … and a popover clears the bubble toolbar that opened it. */
+    --rte-z-popover: 1500;
 
     /* density: scales button size, paddings and min-height */
     --rte-density-scale: 1;

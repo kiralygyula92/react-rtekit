@@ -3,6 +3,7 @@ import { useEditorContext, useLocalization, useRteSlots } from '../context.js';
 import { resolveMessage } from '../localization.js';
 import { Popover } from '../ui/Popover.js';
 import { Button } from '../ui/primitives.js';
+import { toolbarControl } from './anchor.js';
 
 /**
  * Table chrome: the size picker and the controls for the table the caret is in
@@ -62,7 +63,7 @@ export function TableUi() {
       {pickerOpen ? (
         <Popover
           open
-          anchor={editor.engine.contentElement}
+          anchor={toolbarControl(editor, 'table') ?? editor.engine.contentElement}
           onClose={() => {
             setPickerOpen(false);
           }}
@@ -89,30 +90,28 @@ export function TableUi() {
           label={resolveMessage(t.table.insert)}
           noPadding
         >
-          <TableToolbar>
-            <div className="rte-table-toolbar" role="group" aria-label={resolveMessage(t.table.insert)}>
-              {(
-                [
-                  ['addRowBefore', t.table.addRowBefore],
-                  ['addRowAfter', t.table.addRowAfter],
-                  ['addColumnBefore', t.table.addColumnBefore],
-                  ['addColumnAfter', t.table.addColumnAfter],
-                  ['deleteRow', t.table.deleteRow],
-                  ['deleteColumn', t.table.deleteColumn],
-                  ['toggleHeaderRow', t.table.headerRow],
-                  ['deleteTable', t.table.deleteTable],
-                ] as const
-              ).map(([command, label]) => (
-                <Button
-                  key={command}
-                  onClick={() => {
-                    editor.exec(command);
-                  }}
-                >
-                  {resolveMessage(label)}
-                </Button>
-              ))}
-            </div>
+          <TableToolbar role="group" aria-label={resolveMessage(t.toolbar.table)}>
+            {(
+              [
+                ['addRowBefore', t.table.addRowBefore],
+                ['addRowAfter', t.table.addRowAfter],
+                ['addColumnBefore', t.table.addColumnBefore],
+                ['addColumnAfter', t.table.addColumnAfter],
+                ['deleteRow', t.table.deleteRow],
+                ['deleteColumn', t.table.deleteColumn],
+                ['toggleHeaderRow', t.table.headerRow],
+                ['deleteTable', t.table.deleteTable],
+              ] as const
+            ).map(([command, label]) => (
+              <Button
+                key={command}
+                onClick={() => {
+                  editor.exec(command);
+                }}
+              >
+                {resolveMessage(label)}
+              </Button>
+            ))}
           </TableToolbar>
         </Popover>
       ) : null}

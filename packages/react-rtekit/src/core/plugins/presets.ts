@@ -184,7 +184,10 @@ export const presets: Record<PresetName, PresetDefinition> = {
         ['findReplace', 'sourceView', 'fullscreen'],
       ],
       slashMenu: true,
-      floatingToolbar: true,
+      // No `floatingToolbar` here on purpose. `full` docks a toolbar with everything on
+      // it, and a second toolbar rising over the text on every selection duplicates it
+      // for no gain. It defaults on only where there is no docked toolbar to duplicate;
+      // `floatingToolbar` asks for it explicitly.
     },
   },
 };

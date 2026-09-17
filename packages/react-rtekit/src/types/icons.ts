@@ -20,6 +20,8 @@ export type RteIcons = Partial<Record<Exclude<ToolbarItemName, '|'>, ReactNode>>
   external?: ReactNode;
   more?: ReactNode;
   alert?: ReactNode;
+  /** Shown on the fullscreen button while fullscreen is on. */
+  exitFullscreen?: ReactNode;
 };
 
 /** Every icon key, used by the docs site's icon gallery. */

@@ -508,7 +508,14 @@ export const ENGINE_COMMANDS: Partial<Record<CommandId, Implementation>> = {
     let applied = false;
     editor.update(() => {
       if (!$ensureInsertionPoint()) return;
-      const table = $createTableNodeWithDimensions(rows, cols, options?.headerRow !== false);
+      // Both flags, stated. Passing a bare `true` here means "header rows *and* header
+      // columns" to the engine, so every new table came out with its first row and its
+      // first column shaded — a heading down the side of a table that has no headings.
+      // Neither is on unless it is asked for; `toggleHeaderRow` adds one after the fact.
+      const table = $createTableNodeWithDimensions(rows, cols, {
+        rows: options?.headerRow === true,
+        columns: options?.headerColumn === true,
+      });
       $insertNodes([table, $createParagraphNode()]);
       applied = true;
     }, DISCRETE);

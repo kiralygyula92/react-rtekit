@@ -40,6 +40,23 @@ function readHash(): Partial<PlaygroundState> {
   }
 }
 
+/**
+ * The controls, in their declared groups.
+ *
+ * Every control has carried a `group` since the schema was written and the panel
+ * ignored it, so forty options arrived as one undifferentiated column. Computed once at
+ * module scope: the schema is static.
+ */
+const controlGroups: [string, ControlSpec[]][] = (() => {
+  const byGroup = new Map<string, ControlSpec[]>();
+  for (const control of PLAYGROUND_CONTROLS) {
+    const existing = byGroup.get(control.group);
+    if (existing) existing.push(control);
+    else byGroup.set(control.group, [control]);
+  }
+  return [...byGroup];
+})();
+
 /** The state every control starts in. */
 function initialState(): PlaygroundState {
   const defaults = Object.fromEntries(
@@ -81,8 +98,13 @@ export function Playground() {
       </header>
 
       <aside className="playground__controls" aria-label="Options">
-        {PLAYGROUND_CONTROLS.map((control) => (
-          <Control key={control.name} spec={control} value={state[control.name]} onChange={set} />
+        {controlGroups.map(([group, controls]) => (
+          <div key={group} className="playground__group" role="group" aria-label={group}>
+            <div className="playground__group-title">{group}</div>
+            {controls.map((control) => (
+              <Control key={control.name} spec={control} value={state[control.name]} onChange={set} />
+            ))}
+          </div>
         ))}
       </aside>
 

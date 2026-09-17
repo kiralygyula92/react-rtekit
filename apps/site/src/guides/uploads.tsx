@@ -29,6 +29,18 @@ export function Uploads() {
         </p>
       </Section>
 
+      <Section id="no-handler" title="With no handler">
+        <p>
+          Without an <code>onUpload</code> there is nowhere to send the file, so it is embedded
+          in the document as a <code>data:</code> URL instead. The file picker is offered either
+          way, and <code>maxUploadSize</code> and <code>uploadAccept</code> are checked before
+          anything is read — an embedded image is base64, so it costs the document about a third
+          more than the file on disk. For anything but small pictures, give it a handler.
+        </p>
+
+        <Code label="Turning it off">{`<RichTextEditor imageOptions={{ allowLocalFiles: false }} />  // URL only`}</Code>
+      </Section>
+
       <Section id="constraints" title="Constraints">
         <p>
           <code>uploadAccept</code> and <code>maxUploadSize</code> are enforced <em>before</em> the upload

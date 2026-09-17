@@ -39,9 +39,17 @@ export interface FeatureUiProps {
   keymap: Record<string, CommandId>;
   /** The resolved toolbar groups, for the toolbar that follows the selection. */
   groups?: ToolbarItemSpec[][];
+  /** Whether a docked toolbar is on screen, which decides the bubble toolbar's default. */
+  toolbarVisible?: boolean;
 }
 
-export function FeatureUi({ props, features, keymap, groups = [] }: FeatureUiProps) {
+export function FeatureUi({
+  props,
+  features,
+  keymap,
+  groups = [],
+  toolbarVisible = true,
+}: FeatureUiProps) {
   // Nothing here can touch the imperative API before the engine exists.
   const ready = useEditorReady();
   const links = props.enableLinks ?? features.has('link');
@@ -52,9 +60,20 @@ export function FeatureUi({ props, features, keymap, groups = [] }: FeatureUiPro
   const fullscreen = props.enableFullscreen ?? features.has('fullscreen');
 
   // The bubble toolbar shows its own item list when one is given, and otherwise the
-  // same items as the docked toolbar.
-  const floating = props.floatingToolbar;
-  const floatingItems = props.bubbleMenuItems ? [props.bubbleMenuItems] : groups;
+  // items that asked for the `bubble` surface — the marks and the link, not the whole
+  // docked toolbar. Handing it every group put forty controls in a floating strip wider
+  // than the viewport; `showIn` has always described which items belong here, and this
+  // is what reads it.
+  // Off by default wherever a docked toolbar is already on screen: two toolbars
+  // offering the same commands, one of them jumping over the text as the selection
+  // moves, is noise rather than a feature. Setting `floatingToolbar` asks for it
+  // regardless, which is what the editors that dock no toolbar at all rely on.
+  const floating = props.floatingToolbar ?? !toolbarVisible;
+  const floatingItems = props.bubbleMenuItems
+    ? [props.bubbleMenuItems]
+    : groups
+        .map((group) => group.filter((item) => (item.showIn ?? ['toolbar']).includes('bubble')))
+        .filter((group) => group.length > 0);
 
   if (!ready) return null;
 

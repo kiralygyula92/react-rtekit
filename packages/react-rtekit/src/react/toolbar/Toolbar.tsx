@@ -1,4 +1,13 @@
-import { Fragment, memo, useCallback, useMemo, useRef, useState, type ReactNode } from 'react';
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import type { ToolbarItemContext, ToolbarItemSpec } from '../../types/toolbar.js';
 import type { CommandId } from '../../types/commands.js';
 import type { RteHandlers, ToolbarCommandContext } from '../../types/handlers.js';
@@ -7,6 +16,8 @@ import { useEditorState, useFormatState } from '../hooks.js';
 import { resolveMessage } from '../localization.js';
 import { Popover } from '../ui/Popover.js';
 import { Menu } from '../ui/Menu.js';
+import { TextInput } from '../ui/primitives.js';
+import { DEFAULT_EMOJI } from '../../core/emoji.js';
 import { runHandler } from '../useEditor.js';
 import { useToolbarOverflow } from './useToolbarOverflow.js';
 
@@ -60,11 +71,16 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
 }: ToolbarProps) {
   const editor = useEditorContext();
   const t = useLocalization();
-  const { slots } = useRteSlots();
+  const { slots, icons } = useRteSlots();
   const config = useRteConfig();
   const toolbarRef = useRef<HTMLDivElement | null>(null);
   const format = useFormatState();
   const editable = useEditorState((snapshot) => snapshot.editable);
+  // An item whose `isActive` or `icon` asks the editor about state outside the format —
+  // fullscreen is the one built-in that does — is re-read only when this renders again,
+  // and nothing here was subscribed to it. Also exposed on the element, so a preset can
+  // style the row differently once it fills the window.
+  const fullscreen = useEditorState((snapshot) => snapshot.fullscreen);
 
   const ctx: ToolbarItemContext = useMemo(() => ({ editor, format, t }), [editor, format, t]);
 
@@ -177,6 +193,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
       aria-orientation="horizontal"
       data-overflow={overflow}
       data-size={size}
+      {...(fullscreen ? { 'data-fullscreen': 'true' } : {})}
       tabIndex={containerIsTabStop ? 0 : undefined}
       {...(sticky ? { 'data-sticky': 'true' } : {})}
       style={sticky ? ({ '--rte-toolbar-sticky-offset': `${stickyOffset}px` } as React.CSSProperties) : undefined}
@@ -223,7 +240,9 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
             aria-label={resolveMessage(t.toolbar.more)}
             aria-haspopup="menu"
             aria-expanded={overflowOpen}
-            icon={null}
+            // Without the glyph this is a blank box: the only way to the items the
+            // toolbar has hidden, drawn as nothing at all.
+            icon={icons.more ?? null}
             showLabel={false}
             tabIndex={-1}
             type="button"
@@ -447,6 +466,49 @@ function ToolbarItem({
     );
   }
 
+  // ── emoji picker ─────────────────────────────────────────────────────────
+  if (item.kind === 'emojiPicker') {
+    const Toggle = slots.ToolbarButton;
+
+    return (
+      <>
+        <Toggle
+          {...shared}
+          ref={setAnchor}
+          onMouseDown={(event) => {
+            event.preventDefault();
+          }}
+          onClick={() => {
+            setOpen((previous) => !previous);
+          }}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          data-toolbar-control
+          data-item={item.name}
+        />
+        <Popover
+          open={open}
+          anchor={anchor}
+          onClose={() => {
+            setOpen(false);
+          }}
+          label={text}
+          noPadding
+        >
+          <EmojiPickerPanel
+            slots={slots}
+            ctx={ctx}
+            onPick={(char) => {
+              ctx.editor.exec('insertEmoji', { char });
+              setOpen(false);
+              ctx.editor.focus('restore');
+            }}
+          />
+        </Popover>
+      </>
+    );
+  }
+
   // ── button and toggle ────────────────────────────────────────────────────
   const Control = item.kind === 'toggle' ? slots.ToolbarToggle : slots.ToolbarButton;
   return (
@@ -464,5 +526,73 @@ function ToolbarItem({
       data-toolbar-control
       data-item={item.name}
     />
+  );
+}
+
+/** Props for {@link EmojiPickerPanel}. */
+interface EmojiPickerPanelProps {
+  slots: ReturnType<typeof useRteSlots>['slots'];
+  ctx: ToolbarItemContext;
+  onPick: (char: string) => void;
+}
+
+/**
+ * The emoji picker behind the toolbar button.
+ *
+ * It owns the search box and hands the filtered rows to the `EmojiPicker` slot, which
+ * is the same contract the `:` trigger menu uses — so an override written for one works
+ * in the other.
+ */
+function EmojiPickerPanel({ slots, ctx, onPick }: EmojiPickerPanelProps) {
+  const [query, setQuery] = useState('');
+  const [active, setActive] = useState(-1);
+  const searchRef = useRef<HTMLInputElement | null>(null);
+  const EmojiPicker = slots.EmojiPicker;
+
+  // Focused on open, so the picker can be driven by typing. Done with a ref rather
+  // than `autoFocus`, which is a blunt instrument the moment the element is rendered
+  // anywhere other than a popover the author has just asked for.
+  useEffect(() => {
+    searchRef.current?.focus();
+  }, []);
+
+  const matches = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    const entries = needle
+      ? DEFAULT_EMOJI.filter(
+          (entry) =>
+            entry.name.includes(needle) ||
+            entry.keywords.some((word) => word.includes(needle)),
+        )
+      : DEFAULT_EMOJI;
+    return entries.map((entry) => ({
+      key: entry.name,
+      label: entry.name.replace(/_/g, ' '),
+      icon: entry.char,
+      group: entry.group,
+      data: entry.char,
+    }));
+  }, [query]);
+
+  return (
+    <div className="rte-emoji-picker__panel">
+      <TextInput
+        ref={searchRef}
+        label={resolveMessage(ctx.t.emoji.search)}
+        value={query}
+        onChange={setQuery}
+      />
+      <EmojiPicker
+        items={matches}
+        query={query}
+        activeIndex={active}
+        onActiveIndexChange={setActive}
+        onSelect={(index: number) => {
+          const picked = matches[index];
+          if (picked) onPick(picked.data);
+        }}
+        emptyMessage={resolveMessage(ctx.t.emoji.noResults)}
+      />
+    </div>
   );
 }

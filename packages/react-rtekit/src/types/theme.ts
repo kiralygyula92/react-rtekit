@@ -136,6 +136,8 @@ export interface RteTheme {
     /** `--rte-h1-size` … `--rte-h6-size`, in order. */
     headingScale: readonly [TokenValue, TokenValue, TokenValue, TokenValue, TokenValue, TokenValue];
     headingWeight: TokenValue;
+    /** The weight a bold mark renders at. */
+    boldWeight: TokenValue;
     listIndent: TokenValue;
     listItemPadding: TokenValue;
     indentStep: TokenValue;
@@ -154,7 +156,7 @@ export interface RteTheme {
   /** Transition timing, which `prefers-reduced-motion` overrides to none. */
   motion: { duration: TokenValue; easing: TokenValue };
   /** Stacking, so the editor can sit inside an application’s own layers. */
-  z: { popover: TokenValue; fullscreen: TokenValue };
+  z: { floating: TokenValue; popover: TokenValue; fullscreen: TokenValue };
   /** A multiplier over sizes and paddings, so it composes with any theme. */
   density: Density;
 }

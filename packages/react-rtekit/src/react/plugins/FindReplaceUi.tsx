@@ -6,6 +6,8 @@ import { useEditorContext, useLocalization, useRteSlots } from '../context.js';
 import { useEditorState } from '../hooks.js';
 import { resolveMessage } from '../localization.js';
 import { Button, Checkbox, TextInput } from '../ui/primitives.js';
+import { Popover } from '../ui/Popover.js';
+import { toolbarControl } from './anchor.js';
 
 /**
  * Find and replace.
@@ -189,6 +191,18 @@ export function FindReplaceUi() {
         ))}
       </div>
 
+      {/*
+       * In a popover under the button that opened it, like the link editor and the
+       * image dialog. It used to render in the flow, which pushed the editor down the
+       * page the moment the panel appeared and left it nowhere near the control that
+       * asked for it.
+       */}
+      <Popover
+        open
+        anchor={toolbarControl(editor, 'findReplace') ?? editor.engine.contentElement}
+        onClose={close}
+        label={resolveMessage(t.find.title)}
+      >
       <Panel
         query={query}
         replacement={replacement}
@@ -216,6 +230,7 @@ export function FindReplaceUi() {
         }}
         onClose={close}
       />
+      </Popover>
     </>
   );
 }

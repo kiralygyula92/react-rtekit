@@ -146,6 +146,16 @@ export interface ImageOptions {
   maxWidth?: number;
   /** Offer the "paste a URL" tab in the insert dialog. @default true */
   allowExternalUrl?: boolean;
+  /**
+   * Offer the file picker in the insert dialog.
+   *
+   * With an `onUpload` the chosen file goes to it; without one it is embedded in the
+   * document as a `data:` URL, so picking a picture works with no backend behind it.
+   * Set `false` for an editor that should only ever reference images it does not host.
+   *
+   * @default true
+   */
+  allowLocalFiles?: boolean;
   /** Refuse to insert an image with no alt text. @default false */
   requireAltText?: boolean;
 }

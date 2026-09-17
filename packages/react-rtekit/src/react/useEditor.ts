@@ -108,6 +108,39 @@ const DEFAULT_MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
  *
  * Returns the reason it was refused, or `null` when it is acceptable.
  */
+/**
+ * Reads a file into a `data:` URL.
+ *
+ * Used when there is no `onUpload` to send it to, so the only place the bytes can live
+ * is the document itself.
+ */
+function readAsDataUrl(file: File, signal: AbortSignal): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    const onAbort = (): void => {
+      reader.abort();
+    };
+    signal.addEventListener('abort', onAbort);
+    const done = (): void => {
+      signal.removeEventListener('abort', onAbort);
+    };
+    reader.onload = () => {
+      done();
+      if (typeof reader.result === 'string') resolve(reader.result);
+      else reject(new Error(`"${file.name}" could not be read`));
+    };
+    reader.onerror = () => {
+      done();
+      reject(reader.error ?? new Error(`"${file.name}" could not be read`));
+    };
+    reader.onabort = () => {
+      done();
+      reject(new Error(`Reading "${file.name}" was cancelled`));
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 function checkUploadable(file: File, options: UseEditorOptions): string | null {
   const max = options.maxUploadSize ?? DEFAULT_MAX_UPLOAD_SIZE;
   if (file.size > max) {
@@ -461,7 +494,6 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
       },
       uploadFiles: async (files: File[]) => {
         const upload = optionsRef.current.onUpload;
-        if (!upload) return;
         for (const file of files) {
           // The constraints are checked before the upload starts, not after it
           // returns: a 30 MB file should never leave the browser.
@@ -493,6 +525,38 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
           if (!proceed) {
             uploadsRef.current = uploadsRef.current.filter((current) => current.id !== entry.id);
             store.update({ uploads: uploadsRef.current });
+            continue;
+          }
+
+          // No `onUpload`, so there is nowhere to put the file but the document. The
+          // picture the author chose is embedded as a data URL, which is what makes
+          // "insert an image from this device" work without a backend behind it. The
+          // size and type checks above have already run, and the sanitizer keeps only
+          // the raster types — `data:image/svg+xml` stays blocked in every profile,
+          // because an SVG is a document that can carry script.
+          if (!upload) {
+            try {
+              const src = await readAsDataUrl(file, controller.signal);
+              uploadsRef.current = uploadsRef.current.map((current) =>
+                current.id === entry.id
+                  ? { ...current, status: 'done', progress: 100, url: src }
+                  : current,
+              );
+              store.update({ uploads: uploadsRef.current });
+              api.insertImage({ src, alt: file.name });
+            } catch (error) {
+              uploadsRef.current = uploadsRef.current.map((current) =>
+                current.id === entry.id ? { ...current, status: 'error', error } : current,
+              );
+              store.update({ uploads: uploadsRef.current });
+              runHandler<UploadErrorContext>(
+                optionsRef.current.handlers?.onUploadError,
+                { editor: api, file, error },
+                (ctx) => {
+                  optionsRef.current.onUploadError?.(ctx.error, ctx.file);
+                },
+              );
+            }
             continue;
           }
 

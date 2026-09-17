@@ -170,7 +170,19 @@ const STANDARD_ATTRS: Record<string, string[]> = {
 };
 
 /** Class names the `standard` profile keeps: ours, plus the legacy Quill ones. */
-const STANDARD_CLASSES: (string | RegExp)[] = [/^rte-[\w-]+$/, /^ql-(align|indent|size|font)-[\w-]+$/];
+/**
+ * Classes the standard profile keeps.
+ *
+ * `language-*` is the HTML convention for a code block's language, and both serializers
+ * write it — without it here the sanitizer stripped it on the way in *and* on the way
+ * out, so a `ts` block round-tripped to an unlabelled one and lost its highlighting. A
+ * class name is inert: it cannot execute anything.
+ */
+const STANDARD_CLASSES: (string | RegExp)[] = [
+  /^rte-[\w-]+$/,
+  /^ql-(align|indent|size|font)-[\w-]+$/,
+  /^language-[\w+-]+$/,
+];
 
 const EMAIL_TAGS = STANDARD_TAGS.filter((tag) => tag !== 'pre' && tag !== 'code' && tag !== 'kbd' && tag !== 'samp');
 
@@ -192,7 +204,17 @@ const PROFILES: Record<SanitizeProfileName, Omit<ResolvedSanitizeConfig, 'profil
     allowStyles: STANDARD_SAFE_PROPERTIES,
     allowClasses: STANDARD_CLASSES,
     allowProtocols: DEFAULT_PROTOCOLS,
-    allowDataUrls: false,
+    // The four raster types, and only those.
+    //
+    // This is what lets an author insert a picture from their own machine into an
+    // editor with no upload endpoint behind it: with no `onUpload` the file is embedded
+    // rather than sent, and a profile that dropped every data URL threw it away again.
+    //
+    // A PNG, JPEG, GIF or WebP is pixels — there is nothing in one for a parser to
+    // execute. The dangerous data URLs are `text/html` and `image/svg+xml`, which are
+    // documents that can carry script, and `checkUrl` refuses both in every profile
+    // whatever this list says. `strict` and `email` still take none at all.
+    allowDataUrls: { mimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'] },
     allowRelative: true,
     linkRel: 'noopener noreferrer',
   },

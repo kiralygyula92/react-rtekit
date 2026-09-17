@@ -77,7 +77,9 @@ export const PLAYGROUND_CONTROLS: ControlSpec[] = [
 
   // ── chrome ────────────────────────────────────────────────────────────────
   select('toolbarPosition', 'Toolbar position', ['top', 'bottom', 'none'], 'top', 'Chrome'),
-  select('toolbarOverflow', 'Toolbar overflow', ['menu', 'wrap', 'scroll'], 'menu', 'Chrome'),
+  // `wrap` rather than the library's own `menu` default: on the page whose purpose is
+  // to show what a preset contains, a second row is better than a hidden one.
+  select('toolbarOverflow', 'Toolbar overflow', ['menu', 'wrap', 'scroll'], 'wrap', 'Chrome'),
   toggle('stickyToolbar', 'Sticky toolbar', false, 'Chrome'),
   toggle('floatingToolbar', 'Bubble toolbar', false, 'Chrome'),
   text('placeholder', 'Placeholder', 'Write something…', 'Chrome'),

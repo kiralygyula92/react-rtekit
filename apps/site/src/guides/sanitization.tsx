@@ -34,6 +34,16 @@ sanitizeHtml(html, { sanitize: 'email' });
 
 // Or tune one:
 <RichTextEditor sanitize={{ profile: 'standard', allowTags: ['abbr'], allowAttributes: { abbr: ['title'] } }} />`}</Code>
+        <p>
+          <strong>standard</strong> keeps <code>data:</code> URLs for the four raster image
+          types — PNG, JPEG, GIF and WebP — which is what lets an author insert a picture from
+          their own machine into an editor with no upload endpoint behind it. They are pixels;
+          there is nothing in one to execute. <code>data:image/svg+xml</code> and{' '}
+          <code>data:text/html</code> are documents that can carry script, and both stay blocked
+          in every profile. <strong>strict</strong> and <strong>email</strong> take no data URL
+          at all; pass <code>{'{ allowDataUrls: false }'}</code> to hold <strong>standard</strong>{' '}
+          to the same line.
+        </p>
       </Section>
 
       <Section id="hard-rules" title="The rules configuration cannot reach">

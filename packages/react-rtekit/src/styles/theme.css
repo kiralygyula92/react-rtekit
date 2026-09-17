@@ -117,6 +117,22 @@
     color: var(--rte-counter-over-color);
   }
 
+  /* ── the toolbar that follows a selection ───────────────────────────────── */
+  /*
+   * A raised card, like every other floating surface. It used to inherit nothing at
+   * all: a transparent strip of buttons over the prose, which is what made it read as
+   * part of the text rather than as something on top of it.
+   */
+  .rte-floating-toolbar,
+  .rte-bubble-menu {
+    background: var(--rte-popover-bg);
+    border: var(--rte-popover-border);
+    border-radius: var(--rte-popover-radius);
+    box-shadow: var(--rte-popover-shadow);
+    color: var(--rte-color-text);
+    font-size: var(--rte-font-size);
+  }
+
   /* ── popovers, menus, dialogs ───────────────────────────────────────────── */
   .rte-popover__panel,
   .rte-dialog__panel {
@@ -143,7 +159,9 @@
   }
 
   .rte-menu__item:hover:not(:disabled),
-  .rte-menu__item[data-highlighted='true'] {
+  .rte-menu__item[data-highlighted='true'],
+  .rte-emoji-picker__item:hover,
+  .rte-emoji-picker__item[data-highlighted='true'] {
     background: var(--rte-menu-item-hover-bg);
   }
 

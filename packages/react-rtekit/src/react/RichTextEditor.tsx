@@ -519,7 +519,13 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
         </ErrorText>
       ) : null}
 
-      <FeatureUi props={props} features={features} keymap={keymap} groups={groups} />
+      <FeatureUi
+        props={props}
+        features={features}
+        keymap={keymap}
+        groups={groups}
+        toolbarVisible={toolbarVisible}
+      />
 
       <div
         id={runtime.ids.announcer}

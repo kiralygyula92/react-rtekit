@@ -35,6 +35,13 @@ export function useToolbarOverflow<Group>(
 ): OverflowState<Group> {
   const [count, setCount] = useState(groups.length);
   const container = useRef<HTMLElement | null>(null);
+  /** What each group measured the last time it was on the row, by index. */
+  const widths = useRef<(number | undefined)[]>([]);
+
+  // A different set of groups makes the remembered widths meaningless.
+  useEffect(() => {
+    widths.current = [];
+  }, [groups.length]);
 
   useEffect(() => {
     if (!enabled) {
@@ -59,10 +66,24 @@ export function useToolbarOverflow<Group>(
           child instanceof HTMLElement && child.classList.contains('rte-toolbar__group'),
       );
 
+      // Only the visible groups are in the DOM, so their widths are the only ones that
+      // can be measured — and a pass over just those can never conclude that more would
+      // fit now. Widening the window left the toolbar collapsed for good, which is the
+      // shape most people met as "the full preset does not show all its buttons".
+      // Remembering what each group measured lets a later pass reason about a group
+      // that is currently in the overflow menu.
+      children.forEach((child, index) => {
+        widths.current[index] = child.offsetWidth;
+      });
+
       let used = 0;
       let fits = 0;
-      for (const child of children) {
-        used += child.offsetWidth;
+      for (let index = 0; index < groups.length; index += 1) {
+        const width = widths.current[index];
+        // Never measured, so it cannot be reasoned about: stop here and let the next
+        // pass, with this group rendered, decide.
+        if (width === undefined) break;
+        used += width;
         if (used > available && fits > 0) break;
         fits += 1;
         // Separators sit between groups and cost a few pixels each.
@@ -77,7 +98,11 @@ export function useToolbarOverflow<Group>(
     return () => {
       observer.disconnect();
     };
-  }, [enabled, groups.length]);
+    // `count` is a dependency so that a pass which reveals a group measures it for
+    // real on the next one, rather than trusting the estimate that revealed it. It
+    // settles: once every width is recorded the pass returns the same count and React
+    // stops re-rendering.
+  }, [enabled, groups.length, count]);
 
   return {
     visible: enabled ? groups.slice(0, count) : groups,

@@ -7,6 +7,7 @@ import { useFormatState } from '../hooks.js';
 import { resolveMessage } from '../localization.js';
 import { Popover } from '../ui/Popover.js';
 import { runHandler } from '../useEditor.js';
+import { toolbarControl } from './anchor.js';
 
 /**
  * The link popover and link click behaviour.
@@ -57,6 +58,9 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
   const open = useCallback(() => {
     snapshot.current = editor.saveSelection();
     const existing = editor.getLinkAtSelection();
+    // Under the button that opened it, the way the colour picker and the dropdowns
+    // behave. Clicking a link in the text sets its own anchor and keeps it.
+    setAnchor(toolbarControl(editor, 'link'));
     setDraft({
       href: existing?.href ?? '',
       // The text field only appears for a caret; with a range selected, the selected
