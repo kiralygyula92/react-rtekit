@@ -44,10 +44,10 @@ import { documentToHtml } from '../core/serialize/to-html.js';
 import { htmlToDocument } from '../core/serialize/from-html.js';
 
 /**
- * Composable parts (06 §6).
+ * Composable parts.
  *
  * `<Rte.Root>` provides the context; every other part reads it. Arranging them in a
- * custom layout is the third of the four entry points in 02 §3.
+ * custom layout is the third of the four entry points.
  *
  * @module
  */
@@ -68,9 +68,9 @@ export interface RteRootProps {
   style?: CSSProperties;
   /** The parts you are composing. */
   children?: ReactNode;
-  /** Sets `data-theme`, which is how the CSS presets are selected (07 §2). */
+  /** Sets `data-theme`, which is how the CSS presets are selected. */
   dataTheme?: string;
-  /** Replacement components, by slot name (06 §1). */
+  /** Replacement components, by slot name. */
   slots?: Partial<RteSlots>;
   /** Replacement icons, by icon name. */
   icons?: RteIcons;
@@ -246,7 +246,7 @@ function RteRootElement({
 
 /**
  * The static markup the server emits, so the field is not a blank box before the
- * engine mounts (02 §8).
+ * engine mounts.
  *
  * The same serializer `<RteContentView>` uses, so what the server sends and what the
  * editor shows a moment later are the same content. React does not track
@@ -273,7 +273,7 @@ export interface RteContentProps {
   'aria-labelledby'?: string;
   /** Shown over an empty document. */
   placeholder?: ReactNode;
-  /** HTML rendered on the server, before the engine mounts (02 §8). */
+  /** HTML rendered on the server, before the engine mounts. */
   ssrValue?: string;
 }
 
@@ -355,7 +355,7 @@ export interface RteCounterProps {
   warnThreshold?: number;
 }
 
-/** The live character or word counter (05 §12). */
+/** The live character or word counter. */
 export const RteCounter = /* @__PURE__ */ memo(function RteCounter({
   max,
   unit = 'characters',
@@ -578,7 +578,7 @@ export interface RtePortalsProps {
 const DEFAULT_PORTAL_FEATURES: NonNullable<RtePortalsProps['features']> = ['link', 'image'];
 
 /**
- * The popovers, menus and dialogs the features own (06 §6).
+ * The popovers, menus and dialogs the features own.
  *
  * A composed layout renders this once, anywhere inside `<Rte.Root>`. Without it the
  * link popover, the image dialog and the suggestion menus have nowhere to mount, and

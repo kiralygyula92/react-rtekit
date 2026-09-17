@@ -6,7 +6,7 @@ import { DEFAULT_EMOJI, findEmoji } from '../../src/core/emoji.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * The trigger menus (05 §10).
+ * The trigger menus.
  *
  * `matchTrigger` is the whole decision about when a menu opens, so it is tested on its
  * own; the mounted tests cover the wiring from typing to inserted node.
@@ -94,8 +94,8 @@ async function mount(props: Parameters<typeof RichTextEditor>[0]): Promise<Edito
 
 describe('the merge-tag menu', () => {
   const TAGS = [
-    { key: 'contact_first_name', label: 'Contact first name', group: 'Contact' },
-    { key: 'org_name', label: 'Organization name', group: 'Organization' },
+    { key: 'first_name', label: 'First name', group: 'Contact' },
+    { key: 'company_name', label: 'Company name', group: 'Organization' },
   ];
 
   it('opens on the trigger and lists the tags', async () => {
@@ -111,7 +111,7 @@ describe('the merge-tag menu', () => {
     await waitFor(() => {
       expect(screen.getByRole('listbox')).toBeInTheDocument();
     });
-    expect(screen.getByText('Contact first name')).toBeInTheDocument();
+    expect(screen.getByText('First name')).toBeInTheDocument();
   });
 
   it('filters as the query grows', async () => {
@@ -122,12 +122,12 @@ describe('the merge-tag menu', () => {
     });
     editor.focus('end');
     editor.setSelection('end');
-    editor.exec('insertText', { text: '{{org' });
+    editor.exec('insertText', { text: '{{comp' });
 
     await waitFor(() => {
-      expect(screen.getByText('Organization name')).toBeInTheDocument();
+      expect(screen.getByText('Company name')).toBeInTheDocument();
     });
-    expect(screen.queryByText('Contact first name')).toBeNull();
+    expect(screen.queryByText('First name')).toBeNull();
   });
 });
 

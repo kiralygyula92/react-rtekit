@@ -22,7 +22,7 @@ function savedAgo(savedAt: number): string {
   return `${Math.round(minutes / 60)}h`;
 }
 
-/** "Restore draft?" (03 §7). */
+/** "Restore draft?". */
 export function RestoreDraftPrompt({ savedAt, restore, discard }: RestoreDraftPromptSlotProps) {
   const t = useLocalization();
 
@@ -48,7 +48,7 @@ export interface ShortcutHelpDialogProps {
   onClose: () => void;
 }
 
-/** The shortcut reference (05 §13). */
+/** The shortcut reference. */
 export function ShortcutHelpDialog({ shortcuts, onClose }: ShortcutHelpDialogProps) {
   const t = useLocalization();
   const { slots } = useRteSlots();

@@ -6,11 +6,11 @@ import {
   plainTextAlternative,
   type EditorValue,
 } from 'react-rtekit';
-import { DEFAULT_WATER_TEST_EMAIL_MESSAGE } from '../../fixtures';
+import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The e-mail profile and the multipart alternative (03 §5.3).
+ * The e-mail profile and the multipart alternative.
  *
  * What an e-mail needs that a web page does not: inline styles, absolute URLs, a
  * table wrapper for the old clients, and a `text/plain` part for the ones that refuse
@@ -18,15 +18,15 @@ import { CodeBlock } from '../../components/CodeBlock';
  */
 
 const MERGE_TAGS = [
-  { key: 'contact_first_name', label: 'Contact first name', sample: 'Dana' },
-  { key: 'next_test_date', label: 'Next test date', sample: '14 October 2026' },
+  { key: 'first_name', label: 'First name', sample: 'Dana' },
+  { key: 'due_date', label: 'Due date', sample: '14 October 2026' },
   { key: 'report_date', label: 'Report date', sample: '16 September 2026' },
-  { key: 'org_name', label: 'Organization name', sample: 'Clearwater Pools' },
-  { key: 'org_address', label: 'Organization address', sample: '1 Marina Way, Tampa FL' },
+  { key: 'company_name', label: 'Company name', sample: 'Northwind Ltd' },
+  { key: 'company_address', label: 'Company address', sample: '14 Canal Street, Bristol' },
 ];
 
 export default function EmailOutputExample() {
-  const [value, setValue] = useState<string>(DEFAULT_WATER_TEST_EMAIL_MESSAGE);
+  const [value, setValue] = useState<string>(DEFAULT_EMAIL_BODY);
   const [wrapInTable, setWrapInTable] = useState(true);
   const [preview, setPreview] = useState(true);
   const [width, setWidth] = useState(600);
@@ -49,7 +49,7 @@ export default function EmailOutputExample() {
           : {}),
       }),
       // The `text/plain` part of a multipart message: links become "text (url)" and
-      // block structure becomes blank lines (03 §5.3).
+      // block structure becomes blank lines.
       text: plainTextAlternative(doc),
     };
   }, [preview, value, width, wrapInTable]);

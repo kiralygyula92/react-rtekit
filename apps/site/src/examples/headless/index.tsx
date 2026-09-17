@@ -11,9 +11,9 @@ import {
 } from 'react-rtekit';
 
 /**
- * `useEditor` with a UI built from nothing (06 §7).
+ * `useEditor` with a UI built from nothing.
  *
- * The fourth entry point in 02 §3: no `<RichTextEditor>`, no slots, no theme. What
+ * The fourth entry point: no `<RichTextEditor>`, no slots, no theme. What
  * remains is the editor instance, the subscription hooks and `<Rte.Content>` — which
  * exists because the contenteditable element belongs to the engine and has to be
  * attached rather than rendered.

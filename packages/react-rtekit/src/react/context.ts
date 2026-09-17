@@ -10,7 +10,7 @@ import type { EditorStore } from './store.js';
 import { en } from '../locales/en.js';
 
 /**
- * React contexts (02 §1).
+ * React contexts.
  *
  * Four separate contexts rather than one: a theme change must not re-render every
  * toolbar button, and a slot override must not invalidate the editor instance.
@@ -25,7 +25,7 @@ import { en } from '../locales/en.js';
  * bundler can prove is safe to drop — so the context, the module and everything it
  * imports stay in every graph that touches this file. Doing the same work inside a
  * function marked `@__PURE__` lets an unused context disappear, which is what keeps
- * `useEditor` from dragging the whole React chrome behind it (09 §4).
+ * `useEditor` from dragging the whole React chrome behind it.
  */
 function namedContext<T>(name: string, initial: T): Context<T> {
   const context = createContext(initial);
@@ -202,7 +202,7 @@ const DefaultsContext = /* @__PURE__ */ namedContext<Partial<RichTextEditorProps
 /** Provides app-wide prop defaults. */
 export const DefaultsContextProvider = DefaultsContext.Provider;
 
-/** App-wide prop defaults from `<RteDefaultsProvider>`. Props still win (06 §0). */
+/** App-wide prop defaults from `<RteDefaultsProvider>`. Props still win. */
 export function useRteDefaults(): Partial<RichTextEditorProps> {
   return useContext(DefaultsContext);
 }

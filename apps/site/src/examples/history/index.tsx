@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rte
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * History (05 §9, fixes R25).
+ * History (fixes R25).
  *
  * Typing coalesces into one entry per burst; every command is its own. Loading server
  * content clears the stack, so the author cannot undo into somebody else's document.

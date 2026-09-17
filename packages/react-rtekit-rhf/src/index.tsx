@@ -19,7 +19,7 @@ import {
 } from 'react-rtekit';
 
 /**
- * `react-rtekit-rhf` — the react-hook-form adapter (04 §8).
+ * `react-rtekit-rhf` — the react-hook-form adapter.
  *
  * The core library has no form-library dependency (fixes R13); everything that knows
  * about react-hook-form lives here. The reason this package exists at all is the

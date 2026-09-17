@@ -6,10 +6,10 @@ import type { HeadingLevel } from '../../types/document.js';
 import { resolveMessage } from '../localization.js';
 
 /**
- * The built-in toolbar items (04 §2.5).
+ * The built-in toolbar items.
  *
  * Each one is an ordinary {@link ToolbarItemSpec} — the same shape a plugin or a
- * consumer contributes — so nothing about the built-ins is privileged (06 §2).
+ * consumer contributes — so nothing about the built-ins is privileged.
  *
  * @module
  */
@@ -145,7 +145,7 @@ export function createBuiltInItems(
     name: 'color',
     kind: 'colorPicker',
     // The glyph is tinted with the active colour, exactly as the old editor did
-    // (01 §5); `--rte-current-color` is set by the button and read by the preset CSS.
+    //; `--rte-current-color` is set by the button and read by the preset CSS.
     icon: icons.color,
     label: (t) => resolveMessage(t.toolbar.color),
     command: 'setColor',

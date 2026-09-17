@@ -9,7 +9,7 @@ import {
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The four HTML output profiles (03 §5).
+ * The four HTML output profiles.
  *
  * Load legacy Quill markup, edit it, and see what each profile writes. The point of
  * `quill-compatible` is a phased rollout: what this editor saves stays readable by
@@ -35,12 +35,12 @@ const PROFILES: { name: HtmlProfile; summary: string }[] = [
  * AA, and the interop behaviour is identical either way.
  */
 const LEGACY_QUILL_HTML =
-  '<p class="ql-align-center"><strong>Water test results</strong></p>' +
-  '<p>Hi {contact_first_name},</p>' +
-  '<p><span style="color: #C81E1E">Action needed:</span> your chlorine is low.</p>' +
-  '<ul><li data-list="bullet">Add 2 lbs of shock</li><li data-list="bullet">Re-test in 24h</li></ul>' +
+  '<p class="ql-align-center"><strong>Quarterly summary</strong></p>' +
+  '<p>Hi {first_name},</p>' +
+  '<p><span style="color: #C81E1E">Action needed:</span> your account needs attention.</p>' +
+  '<ul><li data-list="bullet">Review the attached figures</li><li data-list="bullet">Reply by Friday</li></ul>' +
   '<p><br></p>' +
-  '<p>Thank you,</p><p>{org_name}</p>';
+  '<p>Thank you,</p><p>{company_name}</p>';
 
 export default function HtmlInteropExample() {
   const [value, setValue] = useState<string>(LEGACY_QUILL_HTML);

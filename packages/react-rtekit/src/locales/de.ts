@@ -1,7 +1,7 @@
 import type { RteLocalization } from '../types/localization.js';
 
 /**
- * German (06 §8).
+ * German.
  *
  * German compounds run long, which is why the toolbar has to cope with labels twice
  * the width of the English ones — the overflow menu is not a hypothetical here.

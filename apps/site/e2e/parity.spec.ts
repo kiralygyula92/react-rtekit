@@ -2,16 +2,16 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * Skimmer parity (01 §7, 07 §4, 09 §1).
+ * Parity with the legacy editor.
  *
- * The acceptance test for M2: the reproduction has to match the reference measurements
- * exactly, and every bug from 01 §9 that only shows in a real browser has to be fixed
- * here rather than reproduced.
+ * The reproduction has to match the reference measurements exactly, and every defect in
+ * `docs/regressions.md` that only shows in a real browser has to be fixed here rather
+ * than reproduced.
  */
 
-// 01 §7's reference measurements are of a desktop editor, and the reproduction is
+// The reference measurements are of a desktop editor, and the reproduction is
 // deliberately not pixel-identical on a phone: a coarse pointer gets 44px touch
-// targets rather than the original 40px (05 §15, 07 §6). Asserting the desktop
+// targets rather than the original 40px. Asserting the desktop
 // numbers on a phone would be asserting that the accessibility rule is a regression.
 test.skip(({ isMobile }) => isMobile, 'the parity measurements are desktop-only');
 
@@ -32,11 +32,11 @@ async function css(page: Page, selector: string, property: string): Promise<stri
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/parity-skimmer-email');
+  await page.goto('/examples/legacy-parity');
   await expect(editor(page)).toBeVisible();
 });
 
-test.describe('the reference measurements (01 §7)', () => {
+test.describe('the reference measurements', () => {
   test('the editor box is 287px tall with 12px padding and a 4px radius', async ({ page }) => {
     const box = await page.locator('.rte-content-wrapper').first().boundingBox();
     expect(box?.height).toBeGreaterThanOrEqual(287);
@@ -73,7 +73,7 @@ test.describe('the reference measurements (01 §7)', () => {
   });
 });
 
-test.describe('the eight-button toolbar (01 §5)', () => {
+test.describe('the eight-button toolbar', () => {
   test('is exactly the original set, in the original order', async ({ page }) => {
     const labels = await page
       .getByRole('toolbar')
@@ -194,7 +194,7 @@ test.describe('the bugs that only show in a browser', () => {
     await page.getByRole('button', { name: 'Bold' }).click();
 
     const html = await page.getByTestId('parity-output-classic').innerText();
-    for (const key of ['contact_first_name', 'next_test_date', 'report_date', 'org_name', 'org_address']) {
+    for (const key of ['first_name', 'due_date', 'report_date', 'company_name', 'company_address']) {
       expect(html).toContain(`{${key}}`);
     }
   });
@@ -215,24 +215,26 @@ test.describe('the bugs that only show in a browser', () => {
     await page.keyboard.press('ControlOrMeta+a');
     await page.getByRole('button', { name: 'Bold' }).click();
 
-    // The markup is far longer than five characters; the counter is not.
-    await expect(page.locator('.rte-counter')).toContainText('5');
+    // The markup is far longer than five characters; the counter is not. Asserted
+    // exactly: `toContainText('5')` was satisfied by a leftover count of 25, which is
+    // how a Safari bug that left a merge tag behind stayed green for three milestones.
+    await expect(page.locator('.rte-counter')).toHaveText('5 / 2048');
     await expect(page.getByTestId('parity-output-classic')).toContainText('<strong>');
   });
 
-  test('the differences panel lists all 26 fixed bugs (01 §9)', async ({ page }) => {
+  test('the differences panel lists all 26 fixed bugs', async ({ page }) => {
     await page.getByRole('button', { name: 'Show differences' }).click();
     await expect(page.getByTestId('parity-differences').getByRole('listitem')).toHaveCount(26);
   });
 
-  test('the two output profiles differ as documented (03 §5)', async ({ page }) => {
+  test('the two output profiles differ as documented', async ({ page }) => {
     const classic = await page.getByTestId('parity-output-classic').innerText();
     const email = await page.getByTestId('parity-output-email').innerText();
 
     // The e-mail profile previews the merge tags; the stored profile keeps them.
-    expect(classic).toContain('{contact_first_name}');
+    expect(classic).toContain('{first_name}');
     expect(email).toContain('Dana');
-    expect(email).not.toContain('{contact_first_name}');
+    expect(email).not.toContain('{first_name}');
   });
 });
 
@@ -245,4 +247,28 @@ test('the parity page has no serious accessibility violations', async ({ page })
     (violation) => violation.impact === 'serious' || violation.impact === 'critical',
   );
   expect(blocking.map((violation) => violation.id)).toEqual([]);
+});
+
+test.describe('atomic chips and the selection', () => {
+  test('typing over the whole message replaces the merge tags too', async ({ page }) => {
+    await editor(page).click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.type('replaced');
+
+    // Safari's select-all stops at the edge of a non-editable node, so a merge tag at
+    // the end of the message used to survive being typed over — and went out in the
+    // e-mail, unsubstituted. The chips are atomic in the model rather than in the DOM
+    // for exactly this reason.
+    await expect(editor(page)).toHaveText('replaced');
+    await expect(editor(page).locator('[data-merge-tag]')).toHaveCount(0);
+  });
+
+  test('deleting the whole message removes the merge tags too', async ({ page }) => {
+    await editor(page).click();
+    await page.keyboard.press('ControlOrMeta+a');
+    await page.keyboard.press('Delete');
+
+    await expect(editor(page).locator('[data-merge-tag]')).toHaveCount(0);
+    await expect(page.getByTestId('parity-status')).toContainText('empty');
+  });
 });

@@ -16,7 +16,7 @@ import { HARD_BLOCKED_TAGS, URL_ATTRIBUTES, UNWRAP_TAGS, getProfile, resolveSani
 import { checkUrl, isExternalUrl } from './url.js';
 
 /**
- * The sanitizer (03 §4, ADR-003).
+ * The sanitizer (ADR-003).
  *
  * Runs at every content boundary in both directions. The hard rules below cannot be
  * turned off by configuration, and `sanitize: false` is handled by the caller so that
@@ -180,7 +180,7 @@ function sanitizeNodeList(nodes: HtmlNode[], run: SanitizeRun, depth: number): H
     if (!allowed && !shouldUnwrap) {
       run.report({ tag, reason: 'tag-not-allowed' });
       // Keep the text, drop the markup: this is what makes a disabled feature degrade
-      // rather than delete the author's words (03 §2).
+      // rather than delete the author's words.
       out.push(...sanitizeNodeList(node.children, run, depth + 1));
       continue;
     }
@@ -249,8 +249,8 @@ export function sanitizeNodes(nodes: HtmlNode[], options: SanitizeOptions = {}):
 /**
  * Sanitizes an HTML string against a profile or configuration.
  *
- * Runs at every content boundary in both directions (03 §4.1). The hard rules in
- * 03 §4.3 apply regardless of configuration.
+ * Runs at every content boundary in both directions. The hard rules in
+ * The hard rules apply regardless of configuration.
  *
  * @param html untrusted HTML
  * @param options profile or config, plus an optional violation reporter

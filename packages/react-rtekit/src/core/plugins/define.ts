@@ -2,7 +2,7 @@ import type { RtePlugin } from '../../types/plugin.js';
 import type { ToolbarItemSpec } from '../../types/toolbar.js';
 
 /**
- * The plugin authoring API (06 §5).
+ * The plugin authoring API.
  *
  * `definePlugin` is an identity function with a type parameter: it exists so authors
  * get inference and autocomplete on every field without annotating the whole object.
@@ -83,11 +83,11 @@ export function resolvePluginOrder(
   };
 
   for (const plugin of byName.values()) visit(plugin);
-  // Higher priority last, so its command handlers are reached first (02 §4).
+  // Higher priority last, so its command handlers are reached first.
   return ordered.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
 }
 
-/** The feature ids a plugin list enables, for the schema downgrade (03 §2). */
+/** The feature ids a plugin list enables, for the schema downgrade. */
 export function featuresOf(plugins: RtePlugin[]): string[] {
   return plugins.flatMap((plugin) => plugin.provides ?? [plugin.name]);
 }

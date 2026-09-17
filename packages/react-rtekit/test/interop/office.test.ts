@@ -11,7 +11,7 @@ import {
 import { FORBIDDEN_AFTER_CLEANUP, OFFICE_FIXTURES, officeFixture } from '../fixtures/office.js';
 
 /**
- * Office paste cleanup (03 §3, 09 §2).
+ * Office paste cleanup.
  *
  * The bar: no `mso-*`, no `<o:p>`, no Office class names, no empty spans, and the
  * structure the author actually meant — especially lists, which Word does not write as
@@ -135,7 +135,7 @@ describe('Excel', () => {
     if (table?.type !== 'table') throw new Error('expected a table');
     expect(table.rows).toHaveLength(2);
     expect(table.rows[0]?.cells).toHaveLength(2);
-    expect(documentToHtml(doc)).toContain('Chlorine');
+    expect(documentToHtml(doc)).toContain('Revenue');
     expect(documentToHtml(doc)).toContain('1.5');
   });
 });

@@ -5,11 +5,11 @@ import { RichTextEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * Command overrides and handler middleware (06 §3, §4).
+ * Command overrides and handler middleware.
  *
  * Both are the same shape — `(ctx, next) => …` — and both have the same contract:
  * calling `next` runs what would have happened, not calling it cancels, and passing
- * an override changes what happens. Every entry in 06 §4 is reachable.
+ * an override changes what happens. Every handler is reachable.
  */
 
 async function mount(props: Parameters<typeof RichTextEditor>[0] = {}): Promise<EditorInstance> {

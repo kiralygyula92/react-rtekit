@@ -2,7 +2,7 @@ import type { LocalizedString, RteLocalization } from '../types/localization.js'
 import { en } from './en.js';
 
 /**
- * The pseudo-locale (09 §2).
+ * The pseudo-locale.
  *
  * Every string is accented and padded by 30%, which surfaces two classes of bug that
  * no amount of reading finds: a string that was never routed through `localization`

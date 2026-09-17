@@ -1,7 +1,7 @@
 import { decodeEntitiesDeep } from '../html/entities.js';
 
 /**
- * URL policy (03 §4.3).
+ * URL policy.
  *
  * The rule that matters: decide on the *decoded* value. `jav&#x09;ascript:alert(1)`
  * and `java\nscript:alert(1)` both reach the browser as `javascript:`, so both have to
@@ -120,7 +120,7 @@ export function checkUrl(raw: string, policy: UrlPolicy): UrlVerdict {
 }
 
 /**
- * Adds a default scheme to a bare host, as the link popover does (05 §6).
+ * Adds a default scheme to a bare host, as the link popover does.
  *
  * Leaves anything that already has a scheme, an anchor or a mail-like shape alone.
  *

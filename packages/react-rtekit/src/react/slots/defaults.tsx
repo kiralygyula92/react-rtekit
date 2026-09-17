@@ -24,7 +24,7 @@ import {
 import { defaultIcons } from '../../icons/index.js';
 
 /**
- * The default slot implementations (06 §1).
+ * The default slot implementations.
  *
  * Every one is a plain element that spreads the props it is given, so an override that
  * spreads them back keeps all the behaviour — including the `mousedown` prevention that

@@ -5,7 +5,7 @@ import { Rte, presets, useEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * The composable parts (06 §6).
+ * The composable parts.
  *
  * The contract this file exists to hold: a field assembled from parts behaves like
  * `<RichTextEditor>`. The toolbar is a real toolbar, the label is bound to the content

@@ -32,7 +32,7 @@ export function useSiteTheme(): SiteTheme {
   return theme;
 }
 
-/** Light / dark / classic switch in the top bar (08 §1). */
+/** Light / dark / classic switch in the top bar. */
 export function ThemeSwitch() {
   const [theme, setTheme] = useState<SiteTheme>(read);
 

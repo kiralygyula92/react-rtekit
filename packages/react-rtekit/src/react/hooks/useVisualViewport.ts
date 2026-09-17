@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Tracks the visual viewport, for a toolbar docked above the keyboard (05 §15).
+ * Tracks the visual viewport, for a toolbar docked above the keyboard.
  *
  * On a phone the on-screen keyboard covers the bottom of the layout viewport without
  * resizing it, so a bottom-docked toolbar positioned with `bottom: 0` ends up behind

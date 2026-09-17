@@ -3,7 +3,7 @@ import type { LocalizedString, RteLocalization } from '../types/localization.js'
 import { en } from '../locales/en.js';
 
 /**
- * Message resolution (06 §8).
+ * Message resolution.
  *
  * A message is either a string with `{name}` placeholders or a function of its values,
  * which is how plural rules and locale-specific ordering are expressed without a

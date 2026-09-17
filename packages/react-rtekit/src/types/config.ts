@@ -4,9 +4,9 @@ import type { EditorValue, ValueFormat } from './common.js';
 import type { EditorDocument } from './document.js';
 import type { RteLocalization } from './localization.js';
 
-/** Configuration object shapes referenced by props (04 §2). @group Configuration */
+/** Configuration object shapes referenced by props. @group Configuration */
 
-/** The colour picker's palette and behaviour (05 §2). */
+/** The colour picker's palette and behaviour. */
 export interface ColorPaletteConfig {
   /** Swatch colours, in render order. */
   palette?: readonly string[];
@@ -36,7 +36,7 @@ export interface MergeTagDefinition {
   group?: string;
 }
 
-/** Merge-tag behaviour (03 §6). */
+/** Merge-tag behaviour. */
 export interface MergeTagsConfig {
   /** The tags this editor knows; anything else is an unknown tag. */
   tags: MergeTagDefinition[];
@@ -58,7 +58,7 @@ export interface MergeTagsConfig {
   lengthMode?: 'label' | 'key' | 'zero';
 }
 
-/** Mention behaviour (05 §10). */
+/** Mention behaviour. */
 export interface MentionsConfig {
   /** The character that opens the menu. @default '@' */
   trigger?: string;
@@ -96,7 +96,7 @@ export interface SlashMenuConfig {
   items?: string[];
 }
 
-/** One markdown input rule (05 §5). */
+/** One markdown input rule. */
 export interface MarkdownShortcutConfig {
   /** Matched against the text before the caret. */
   pattern: RegExp;
@@ -106,7 +106,7 @@ export interface MarkdownShortcutConfig {
   payload?: unknown;
 }
 
-/** Autosave / draft behaviour (03 §7). */
+/** Autosave / draft behaviour. */
 export interface AutosaveConfig {
   /** Namespaces the draft. Required. */
   key: string;
@@ -124,7 +124,7 @@ export interface AutosaveConfig {
   onRestore?: (draft: EditorValue, meta: { savedAt: number }) => void | false;
 }
 
-/** Floating / bubble toolbar behaviour (05 §10). */
+/** Floating / bubble toolbar behaviour. */
 export interface FloatingToolbarConfig {
   /** Only show for non-collapsed selections. @default true */
   selectionOnly?: boolean;
@@ -134,7 +134,7 @@ export interface FloatingToolbarConfig {
   placement?: 'top' | 'bottom' | 'auto';
 }
 
-/** Image behaviour (05 §7). */
+/** Image behaviour. */
 export interface ImageOptions {
   /** Drag handles on the selected image. @default true */
   resizable?: boolean;
@@ -150,7 +150,7 @@ export interface ImageOptions {
   requireAltText?: boolean;
 }
 
-/** `onUpload` signature (04 §2.6). */
+/** `onUpload` signature. */
 export type UploadHandler = (
   file: File,
   ctx: { signal: AbortSignal; onProgress: (percent: number) => void },

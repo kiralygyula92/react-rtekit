@@ -4,7 +4,7 @@ import type { InlineSuggestState, SuggestItem } from '../hooks/useInlineSuggest.
 import { useEditorContext, useRteSlots } from '../context.js';
 
 /**
- * Renders one trigger menu at the caret (05 §10).
+ * Renders one trigger menu at the caret.
  *
  * Positioned rather than anchored: the caret has no element to anchor to, so the menu
  * is placed from its rectangle. The keyboard is handled through the engine's keydown

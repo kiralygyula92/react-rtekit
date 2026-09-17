@@ -84,10 +84,15 @@ export default [
     // a bundler drops what a given editor cannot reach. What it cannot drop is the
     // possibility: `<RichTextEditor>` reads its feature set from props at runtime, so
     // every branch is reachable from this entry point by construction.
+    //
+    // The last 0.3 kB is the toolbar that follows the selection. It was written, spec'd,
+    // demoed and documented, and nothing rendered it — `floatingToolbar` was a prop that
+    // did nothing until the cleanup pass found the module unreferenced. Wiring it up cost
+    // this budget a kilobyte and gained a feature the documentation already promised.
     name: 'RichTextEditor (all chrome, all plugins)',
     path: 'dist/index.js',
     import: '{ RichTextEditor }',
-    limit: '64 kB',
+    limit: '65 kB',
     gzip: true,
     ignore: PEERS,
   },

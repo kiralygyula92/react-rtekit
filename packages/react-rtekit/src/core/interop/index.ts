@@ -2,7 +2,7 @@ import { detectOfficeSource } from './office.js';
 import { looksLikeQuill } from './quill.js';
 
 /**
- * HTML interop (03 §5, ADR-004).
+ * HTML interop (ADR-004).
  *
  * @module
  */
@@ -17,7 +17,7 @@ export { cleanOfficeMarkup, detectOfficeSource } from './office.js';
 export type PasteSource = 'word' | 'gdocs' | 'excel' | 'quill' | 'rtekit' | 'plain' | 'unknown';
 
 /**
- * Identifies the origin of a clipboard payload (03 §3).
+ * Identifies the origin of a clipboard payload.
  *
  * Detection drives which cleanup runs, and it is also surfaced to `handlers.onPaste`
  * so a consumer can apply a different policy to an office paste than to plain text.

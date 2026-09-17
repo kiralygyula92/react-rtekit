@@ -13,16 +13,16 @@ import type { Align } from '../../../types/document.js';
 import type { ImageAttrs } from '../../../types/commands.js';
 
 /**
- * The image node (05 §6).
+ * The image node.
  *
  * A `DecoratorNode` that builds its own `<img>` — and, when there is a caption, a
  * `<figure>` around it — rather than decorating through React, so the engine adapter
- * stays independent of the renderer (02 §2). Resize handles and the alt-text dialog
+ * stays independent of the renderer. Resize handles and the alt-text dialog
  * are chrome, and live in the React layer above.
  *
  * The `src` a node holds has already been through the sanitizer's URL rules: the node
  * is constructed from an `ImageAttrs`, and every path that builds one — command,
- * upload, paste, HTML import — sanitizes first (03 §4).
+ * upload, paste, HTML import — sanitizes first.
  *
  * @module
  */
@@ -190,7 +190,7 @@ export class ImageNode extends DecoratorNode<null> {
     const image = document.createElement('img');
     image.setAttribute('src', this.__src);
     // Always written, even when empty: an empty `alt` is how you mark an image
-    // decorative, and a missing one is an accessibility defect (05 §16).
+    // decorative, and a missing one is an accessibility defect.
     image.setAttribute('alt', this.__alt);
     if (this.__title !== null) image.setAttribute('title', this.__title);
     if (this.__width !== null) image.setAttribute('width', String(this.__width));

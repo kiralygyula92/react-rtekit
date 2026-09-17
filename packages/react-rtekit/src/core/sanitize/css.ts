@@ -1,7 +1,7 @@
 import { decodeEntitiesDeep } from '../html/entities.js';
 
 /**
- * Inline-style policy (03 §4.3).
+ * Inline-style policy.
  *
  * Inline CSS is a real attack surface — `expression()`, `url(javascript:)`, `@import`
  * and IE's `behavior:` all execute — and it is also where Word and Quill put most of
@@ -32,7 +32,7 @@ const HARD_BLOCKED_PROPERTIES = new Set([
   '-o-link-source',
 ]);
 
-/** The properties the `email` profile permits (03 §5.3). */
+/** The properties the `email` profile permits. */
 export const EMAIL_SAFE_PROPERTIES = [
   'color',
   'background-color',

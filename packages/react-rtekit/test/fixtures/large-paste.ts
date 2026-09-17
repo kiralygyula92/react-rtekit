@@ -1,5 +1,5 @@
 /**
- * A large Word clipboard payload, for the paste budget in 09 §4.
+ * A large Word clipboard payload, for the paste performance budget.
  *
  * Generated rather than checked in, for the same reason as the 100 KB document: a
  * 200 KB fixture in the repository is a 200 KB diff nobody can read. The shape is what
@@ -9,8 +9,8 @@
  */
 
 const WORDS = [
-  'chlorine', 'alkalinity', 'filter', 'pump', 'skimmer', 'calcium', 'stabilizer', 'backwash',
-  'cartridge', 'phosphate', 'algae', 'shock', 'salinity', 'cyanuric', 'circulation',
+  'invoice', 'quarterly', 'schedule', 'account', 'summary', 'contract', 'allocation', 'forecast',
+  'dispatch', 'inventory', 'renewal', 'draft', 'reference', 'settlement', 'distribution',
 ];
 
 /** Deterministic filler, so a run is comparable with the one before it. */
@@ -37,7 +37,7 @@ const MSO_PARAGRAPH =
 /**
  * Builds roughly `targetBytes` of Word clipboard HTML.
  *
- * @param targetBytes how much markup to produce; 09 §4's paste budget uses 200 KB
+ * @param targetBytes how much markup to produce; the paste budget uses 200 KB
  */
 export function buildLargeWordPaste(targetBytes = 200_000): string {
   const head =

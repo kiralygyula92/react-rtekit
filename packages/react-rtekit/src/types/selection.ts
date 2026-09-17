@@ -62,7 +62,7 @@ export interface LinkAttrs {
 }
 
 /**
- * The formatting that applies to the current selection (04 §9).
+ * The formatting that applies to the current selection.
  *
  * A value-carrying mark is `null` when the selection is mixed, so a toolbar can render
  * an indeterminate state rather than lying about one of the values.

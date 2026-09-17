@@ -9,7 +9,7 @@ import { useInlineSuggest, type SuggestItem } from '../hooks/useInlineSuggest.js
 import { SuggestPopover } from '../ui/SuggestPopover.js';
 
 /**
- * The four trigger menus (05 §10).
+ * The four trigger menus.
  *
  * Merge tags, mentions, emoji and the slash palette, all through one hook and one
  * slot, so they cannot drift apart in behaviour or in accessibility. Only the menus
@@ -51,7 +51,7 @@ function toRows<Item extends SuggestItem>(items: Item[]): InlineSuggestMenuItem<
   }));
 }
 
-/** `{{` — insert a merge tag (03 §6). */
+/** `{{` — insert a merge tag. */
 function MergeTagSuggest({ config }: { config: NonNullable<RichTextEditorProps['mergeTags']> }) {
   const editor = useEditorContext();
   const t = useLocalization();
@@ -86,7 +86,7 @@ function MergeTagSuggest({ config }: { config: NonNullable<RichTextEditorProps['
   );
 }
 
-/** `@` — mention someone (05 §10). */
+/** `@` — mention someone. */
 function MentionSuggest({ config }: { config: NonNullable<RichTextEditorProps['mentions']> }) {
   const editor = useEditorContext();
   const t = useLocalization();
@@ -123,7 +123,7 @@ function MentionSuggest({ config }: { config: NonNullable<RichTextEditorProps['m
   );
 }
 
-/** `:` — insert an emoji character (05 §10). */
+/** `:` — insert an emoji character. */
 function EmojiSuggest() {
   const editor = useEditorContext();
   const t = useLocalization();
@@ -161,7 +161,7 @@ function EmojiSuggest() {
   );
 }
 
-/** `/` — the command palette (05 §10). */
+/** `/` — the command palette. */
 function SlashSuggest({ config }: { config: SlashMenuConfig }) {
   const editor = useEditorContext();
   const t = useLocalization();

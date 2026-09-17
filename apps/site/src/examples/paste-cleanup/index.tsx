@@ -4,7 +4,7 @@ import { OFFICE_FIXTURES, QUILL_FIXTURES } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * What the paste pipeline does to markup from other editors (03 §3, fixes R20).
+ * What the paste pipeline does to markup from other editors (fixes R20).
  *
  * The fixtures are the same corpus the library's own tests run against, so what this
  * page shows is exactly what the test suite asserts.

@@ -14,7 +14,7 @@ import type { RteLocalization } from './localization.js';
 import type { ResolvedRteTheme, RteTheme } from './theme.js';
 import type { SlashItemSpec, ToolbarItemSpec } from './toolbar.js';
 
-/** Plugin system (02 §4, 06 §5). @group Plugins */
+/** Plugin system. @group Plugins */
 
 /** What a plugin's `setup` receives. Everything registered here is cleaned up for you. */
 export interface PluginContext<Options = unknown> {
@@ -92,7 +92,7 @@ export interface RtePlugin<Options = unknown> {
   name: string;
   /** Names of plugins that must be set up first. */
   dependsOn?: string[];
-  /** Feature ids this plugin adds to the active schema (03 §2). Defaults to `[name]`. */
+  /** Feature ids this plugin adds to the active schema. Defaults to `[name]`. */
   provides?: string[];
   /** Runs once on mount; anything it returns is called on teardown. */
   setup?(ctx: PluginContext<Options>): void | (() => void);
@@ -124,5 +124,5 @@ export interface RtePlugin<Options = unknown> {
   priority?: number;
 }
 
-/** The shipped preset names (05 §1.1). */
+/** The shipped preset names. */
 export type PresetName = 'minimal' | 'classic' | 'standard' | 'email' | 'comment' | 'full';

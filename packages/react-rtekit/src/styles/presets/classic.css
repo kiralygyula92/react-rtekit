@@ -1,10 +1,10 @@
 /**
- * The `classic` preset: 1:1 parity with the Skimmer editor (01 §7, 07 §4).
+ * The `classic` preset: 1:1 parity with the legacy editor.
  *
  * Applied with `data-theme="classic"` on the root, or by passing `theme={classicTheme}`,
  * which writes the same values as inline custom properties.
  *
- * These values are frozen: the parity guarantee is part of the semver contract (09 §7).
+ * These values are frozen: the parity guarantee is part of the semver contract.
  */
 @layer rtekit.theme {
   .rte-root[data-theme='classic'],
@@ -18,7 +18,7 @@
     --rte-color-border-subtle: #e9eaeb;
     --rte-color-accent: #2196f3;
     /*
-     * The one deliberate deviation from 07 §4's colour list. #f04438 is 3.8:1 on white:
+     * The one deliberate deviation from the reference palette. #f04438 is 3.8:1 on white:
      * enough for the 1px invalid border below, which is a UI component, and not enough
      * for the error text under the field. The border keeps the parity value.
      */
@@ -69,7 +69,7 @@
     --rte-indent-step: 3em;
   }
 
-  /* The colour button's glyph is tinted with the active colour (01 §5). */
+  /* The colour button's glyph is tinted with the active colour. */
   .rte-root[data-theme='classic'] .rte-toolbar__button[data-item='color'] svg {
     fill: var(--rte-current-color, var(--rte-button-color));
   }

@@ -23,13 +23,13 @@ export type ChangeSource = 'user' | 'api' | 'paste' | 'drop' | 'history' | 'init
 /** Unit used by `getLength`, `maxLength` and the counter. */
 export type CountUnit = 'characters' | 'words';
 
-/** The wire format of `value` / `defaultValue` / `onChange` (03 §1). */
+/** The wire format of `value` / `defaultValue` / `onChange`. */
 export type ValueFormat = 'html' | 'json' | 'markdown' | 'text';
 
 /** A value in the currently configured {@link ValueFormat}. */
 export type EditorValue = string | EditorDocument;
 
-/** Output HTML dialect (03 §5.2). */
+/** Output HTML dialect. */
 export type HtmlProfile = 'standard' | 'quill-compatible' | 'email' | 'minimal';
 
 /** A generic middleware: run before/around the default behaviour, or cancel it. */
@@ -38,7 +38,7 @@ export type Middleware<Ctx> = (
   next: (override?: Partial<Ctx>) => void | Promise<void>,
 ) => void | Promise<void>;
 
-/** Something dropped or downgraded while parsing content (03 §2). */
+/** Something dropped or downgraded while parsing content. */
 export interface ContentWarning {
   /** Machine-readable reason. */
   code:

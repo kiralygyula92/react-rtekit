@@ -11,7 +11,7 @@ const ROUTES = [
   { path: '/changelog', heading: /changelog/i },
 ];
 
-/** Every route renders, has an h1, and logs nothing to the console (08 §8). */
+/** Every route renders, has an h1, and logs nothing to the console. */
 for (const route of ROUTES) {
   test(`renders ${route.path} without console errors`, async ({ page }) => {
     const errors: string[] = [];

@@ -1,7 +1,7 @@
 import type { BlockNodeName, MarkName } from '../types/document.js';
 
 /**
- * The node and mark catalogue (03 §2).
+ * The node and mark catalogue.
  *
  * The schema is what turns feature flags into content rules: when the heading plugin
  * is off, `heading` is not in the active schema, and a pasted `<h2>` is downgraded to
@@ -102,7 +102,7 @@ export const ALWAYS_ENABLED: FeatureId[] = ['paragraph', 'lineBreak'];
 
 /**
  * The maximum indent level, matching Quill's `ql-indent-1..8` range so imported
- * content maps exactly (03 §5.1).
+ * content maps exactly.
  */
 export const MAX_INDENT = 8;
 

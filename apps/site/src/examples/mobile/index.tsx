@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RichTextEditor, type EditorValue } from 'react-rtekit';
 
 /**
- * The editor at phone width (05 §15).
+ * The editor at phone width.
  *
  * The frame is 375px wide, which is where the toolbar has to start making decisions:
  * scroll the row, collapse it into a menu, or dock it at the bottom above the

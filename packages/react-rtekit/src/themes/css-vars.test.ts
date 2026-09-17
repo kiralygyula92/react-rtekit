@@ -6,7 +6,7 @@ import { themeToCssVars } from './css-vars.js';
 import { classicTheme, compactTheme, createTheme, darkTheme, lightTheme } from './index.js';
 
 /**
- * The theme ↔ stylesheet contract (07 §3).
+ * The theme ↔ stylesheet contract.
  *
  * The theme names tokens by owner and the CSS names them by use, so the two can drift
  * without either side erroring: the variable just resolves to nothing and the token
@@ -42,7 +42,7 @@ function variablesRead(): Set<string> {
  * not produce it is correct.
  */
 const RUNTIME_ONLY = new Set([
-  // Set on the colour button so the glyph can show the active colour (01 §5).
+  // Set on the colour button so the glyph can show the active colour.
   '--rte-current-color',
   // Set by the toolbar when `sticky` is on.
   '--rte-toolbar-sticky-offset',
@@ -53,7 +53,7 @@ const RUNTIME_ONLY = new Set([
 /**
  * Tokens the shipped stylesheets do not read.
  *
- * 07 §3 lists them, so they exist for consumer CSS and for presets that opt into them.
+ * They exist for consumer CSS and for presets that opt into them.
  * Anything else in this direction is a token that does nothing and should be deleted.
  */
 const CONSUMER_ONLY = new Set([
@@ -82,7 +82,7 @@ describe('every variable the stylesheets read is produced by a theme', () => {
   });
 });
 
-describe('the documented mapping (07 §3)', () => {
+describe('the documented mapping', () => {
   it.each([
     ['editor.minHeight', '--rte-min-height', '287px'],
     ['editor.padding', '--rte-content-padding', '12px'],

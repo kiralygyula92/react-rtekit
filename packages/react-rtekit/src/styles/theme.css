@@ -1,8 +1,8 @@
 /**
- * Visual rules (07 §1).
+ * Visual rules.
  *
  * Every declaration in this layer reads a `--rte-*` token and nothing else — that
- * invariant is enforced by a lint script (09 §2), which is what guarantees the theme
+ * invariant is enforced by a lint script, which is what guarantees the theme
  * editor can reach every visual property.
  */
 @layer rtekit.base, rtekit.content, rtekit.theme;
@@ -322,7 +322,7 @@
     font-size: var(--rte-font-size-sm);
   }
 
-  /* Unstyled mode keeps structure and prose, drops the chrome visuals (07 §7). */
+  /* Unstyled mode keeps structure and prose, drops the chrome visuals. */
   .rte-root--unstyled .rte-content-wrapper,
   .rte-root--unstyled .rte-toolbar,
   .rte-root--unstyled .rte-toolbar__button {

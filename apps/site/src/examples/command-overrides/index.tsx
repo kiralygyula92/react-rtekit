@@ -3,7 +3,7 @@ import { RichTextEditor, type CommandOverrides } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Command overrides (06 §3).
+ * Command overrides.
  *
  * An override is middleware around a command: it sees the payload, can replace it,
  * and decides whether the built-in runs at all. That is enough to enforce a policy

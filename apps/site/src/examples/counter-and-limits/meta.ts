@@ -7,6 +7,6 @@ export const meta: ExampleMeta = {
     "maxLength that blocks versus one that only warns, characters versus words, and every counter state.",
   tags: ["validation","limits"],
   features: ["maxLength","counter"],
-  related: ["validation-rhf","parity-skimmer-email"],
+  related: ["validation-rhf","legacy-parity"],
   priority: 13,
 };

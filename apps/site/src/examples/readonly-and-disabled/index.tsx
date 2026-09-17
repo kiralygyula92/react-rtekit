@@ -3,7 +3,7 @@ import { RichTextEditor } from 'react-rtekit';
 import { RteContentView } from 'react-rtekit/view';
 
 /**
- * Read-only, disabled, and the view renderer (05 §17, fixes R18).
+ * Read-only, disabled, and the view renderer (fixes R18).
  *
  * The two states are not the same thing: read-only content stays selectable and
  * copyable, disabled content is inert and marked so. The old editor mapped both onto
@@ -11,8 +11,8 @@ import { RteContentView } from 'react-rtekit/view';
  */
 
 const SAMPLE =
-  '<h2>Water test report</h2><p>The <strong>April</strong> results are <em>within range</em>.</p>' +
-  '<ul><li>Chlorine: normal</li><li>pH: high</li></ul>';
+  '<h2>Quarterly report</h2><p>The <strong>April</strong> results are <em>within range</em>.</p>' +
+  '<ul><li>Revenue: on target</li><li>Costs: above plan</li></ul>';
 
 export default function ReadonlyAndDisabledExample() {
   const [value] = useState(SAMPLE);

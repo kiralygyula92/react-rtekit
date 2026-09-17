@@ -8,7 +8,7 @@ import {
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Controlled usage (04 §2.2, fixes R1 and R21).
+ * Controlled usage (fixes R1 and R21).
  *
  * The parent owns the value. Loading a different report replaces the content, which
  * the old editor could not do at all, and every change says where it came from, so a
@@ -17,7 +17,7 @@ import { CodeBlock } from '../../components/CodeBlock';
 
 /** Two stored reports, as a form would load them. */
 const REPORTS: Record<string, string> = {
-  'Report A': '<p>Hi Dana, your <strong>April</strong> water test looks good.</p>',
+  'Report A': '<p>Hi Dana, your <strong>April</strong> figures look good.</p>',
   'Report B': '<p>Hi Dana, your <em>May</em> results need a follow-up call.</p>',
 };
 

@@ -3,7 +3,7 @@ import { RichTextEditor, countText, type RteHandlers } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Handler middleware (06 §4).
+ * Handler middleware.
  *
  * Every interaction the editor has goes through a handler you can wrap. Call `next()`
  * to let it happen, pass an override to change it, or do neither to cancel — the same

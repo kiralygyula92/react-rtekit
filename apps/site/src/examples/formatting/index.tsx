@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rte
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Every mark and block, over mixed selections (05 §2, §3).
+ * Every mark and block, over mixed selections.
  *
  * The state panel is the point: it shows what the editor thinks is active at the
  * caret, which is the thing the old implementation got wrong in four different ways
@@ -11,9 +11,9 @@ import { CodeBlock } from '../../components/CodeBlock';
  */
 
 const SAMPLE =
-  '<h2>Water test report</h2>' +
+  '<h2>Quarterly report</h2>' +
   '<p>The <strong>April</strong> results are <em>within range</em>, with <u>one</u> ' +
-  '<s>exception</s> — pH at <code>7.8</code>.</p>' +
+  '<s>exception</s> — costs at <code>0.9m</code>.</p>' +
   '<blockquote><p>Retest within two weeks.</p></blockquote>' +
   '<p>H<sub>2</sub>O · 25 m<sup>3</sup></p>';
 

@@ -5,7 +5,7 @@ import source from './highlight?raw';
 import { highlight } from './highlight';
 
 /**
- * A plugin, end to end (06 §5).
+ * A plugin, end to end.
  *
  * Six declarations make a feature: the mark so the document can hold it, the command
  * so something can apply it, the keymap and the toolbar item so a person can reach it,

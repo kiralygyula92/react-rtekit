@@ -45,7 +45,7 @@
       "type": "boolean",
       "optional": true,
       "default": "``ts\ntrue\n``",
-      "description": "Turn typed URLs and e-mail addresses into links (05 §6).",
+      "description": "Turn typed URLs and e-mail addresses into links.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -145,7 +145,7 @@
       "type": "CommandOverrides",
       "optional": true,
       "default": "",
-      "description": "Replacement command implementations, by command id (06 §3).",
+      "description": "Replacement command implementations, by command id.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -645,7 +645,7 @@
       "type": "Partial<RteHandlers>",
       "optional": true,
       "default": "",
-      "description": "Interaction middleware; each wraps one interaction (06 §4).",
+      "description": "Interaction middleware; each wraps one interaction.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -685,7 +685,7 @@
       "type": "HtmlProfile",
       "optional": true,
       "default": "``ts\n'standard'\n``",
-      "description": "The HTML dialect `getHTML` produces (03 §5).",
+      "description": "The HTML dialect `getHTML` produces.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -765,7 +765,7 @@
       "type": "function",
       "optional": true,
       "default": "",
-      "description": "Rejects or rewrites a URL before it becomes a link (05 §6).\n\nReturn a message to reject, or `null` to accept. Sanitization runs regardless: a\nvalidator can tighten the rules but never loosens them (03 §4.3).",
+      "description": "Rejects or rewrites a URL before it becomes a link.\n\nReturn a message to reject, or `null` to accept. Sanitization runs regardless: a\nvalidator can tighten the rules but never loosens them.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nlinkValidator={(url) => (url.startsWith('https://intra.example/') ? null : 'Internal links only')}\n``"
@@ -845,7 +845,7 @@
       "type": "MergeTagsConfig",
       "optional": true,
       "default": "",
-      "description": "The merge tags this editor knows, and how they are triggered (05 §10).",
+      "description": "The merge tags this editor knows, and how they are triggered.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1185,7 +1185,7 @@
       "type": "SanitizeOption",
       "optional": true,
       "default": "``ts\n'standard'\n``",
-      "description": "The input sanitization profile, or an explicit config (03 §4).",
+      "description": "The input sanitization profile, or an explicit config.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1235,7 +1235,7 @@
       "type": "Partial<RteSlots>",
       "optional": true,
       "default": "",
-      "description": "Replacement components, by slot name (06 §1).",
+      "description": "Replacement components, by slot name.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1315,7 +1315,7 @@
       "type": "RteTheme | object",
       "optional": true,
       "default": "",
-      "description": "Theme tokens, merged over the preset's (07 §2).",
+      "description": "Theme tokens, merged over the preset's.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1355,7 +1355,7 @@
       "type": "boolean",
       "optional": true,
       "default": "``ts\nfalse\n``",
-      "description": "Structure and prose styles only, no chrome visuals (07 §7).",
+      "description": "Structure and prose styles only, no chrome visuals.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1477,7 +1477,7 @@
       "type": "() => void",
       "optional": false,
       "default": "",
-      "description": "Drops the undo stack, so loaded content cannot be undone away (05 §9).",
+      "description": "Drops the undo stack, so loaded content cannot be undone away.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1487,7 +1487,7 @@
       "type": "EngineHandle",
       "optional": false,
       "default": "",
-      "description": "The engine adapter. Escape hatch (02 §2.2).",
+      "description": "The engine adapter. Escape hatch.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1547,7 +1547,7 @@
       "type": "() => EditorDocument",
       "optional": false,
       "default": "",
-      "description": "The document as the portable JSON shape (02 §3).",
+      "description": "The document as the portable JSON shape.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -1597,7 +1597,7 @@
       "type": "() => string",
       "optional": false,
       "default": "",
-      "description": "The `text/plain` alternative for a multipart e-mail (03 §5.3).",
+      "description": "The `text/plain` alternative for a multipart e-mail.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2019,7 +2019,7 @@
       "type": "() => Partial<RichTextEditorProps>",
       "optional": false,
       "default": "",
-      "description": "App-wide prop defaults from `<RteDefaultsProvider>`. Props still win (06 §0).",
+      "description": "App-wide prop defaults from `<RteDefaultsProvider>`. Props still win.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2049,7 +2049,7 @@
       "type": "() => UploadBinding",
       "optional": false,
       "default": "",
-      "description": "In-flight uploads plus the function that starts one (05 §7).",
+      "description": "In-flight uploads plus the function that starts one.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2101,7 +2101,7 @@
       "type": "(a: string, b: string) => number",
       "optional": false,
       "default": "",
-      "description": "Contrast ratio between two colours, 1–21.\n\nUsed by the theme editor's AA badge and by the theming tests (07 §8).",
+      "description": "Contrast ratio between two colours, 1–21.\n\nUsed by the theme editor's AA badge and by the theming tests.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\ncontrastRatio('#212121', '#ffffff'); // 15.9…\n``"
@@ -2128,7 +2128,7 @@
     },
     {
       "name": "createBuiltInItems",
-      "type": "(options: ToolbarItemFactoryOptions) => Map<ToolbarItemName, ToolbarItemSpec>",
+      "type": "(options: ToolbarItemFactoryOptions) => ReadonlyMap<string, ToolbarItemSpec>",
       "optional": false,
       "default": "",
       "description": "Builds every built-in item.",
@@ -2251,7 +2251,7 @@
       "type": "(html: string, text: string) => PasteSource",
       "optional": false,
       "default": "",
-      "description": "Identifies the origin of a clipboard payload (03 §3).\n\nDetection drives which cleanup runs, and it is also surfaced to `handlers.onPaste`\nso a consumer can apply a different policy to an office paste than to plain text.",
+      "description": "Identifies the origin of a clipboard payload.\n\nDetection drives which cleanup runs, and it is also surfaced to `handlers.onPaste`\nso a consumer can apply a different policy to an office paste than to plain text.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\ndetectPasteSource('<p class=MsoNormal>x</p>', 'x'); // 'word'\ndetectPasteSource('', 'just text');                 // 'plain'\n``"
@@ -2331,7 +2331,7 @@
       "type": "(plugins: RtePlugin<unknown>[]) => string[]",
       "optional": false,
       "default": "",
-      "description": "The feature ids a plugin list enables, for the schema downgrade (03 §2).",
+      "description": "The feature ids a plugin list enables, for the schema downgrade.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2401,7 +2401,7 @@
       "type": "(html: string, options: HtmlToDocumentOptions) => EditorDocument",
       "optional": false,
       "default": "",
-      "description": "Parses HTML into the portable document model.\n\nRuns the whole input pipeline from 03 §3: source detection, interop, sanitization,\nschema downgrade and normalization.",
+      "description": "Parses HTML into the portable document model.\n\nRuns the whole input pipeline: source detection, interop, sanitization,\nschema downgrade and normalization.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nhtmlToDocument('<p class=\"ql-align-center\">hi</p>');\n// { type: 'doc', version: 1, content: [{ type: 'paragraph', align: 'center', … }] }\n``"
@@ -2591,7 +2591,7 @@
       "type": "(doc: EditorDocument, options: NormalizeOptions) => EditorDocument",
       "optional": false,
       "default": "",
-      "description": "Applies the normalization rules from 03 §2.\n\nRuns after every parse and paste: merges adjacent identical marks, drops empty inline\nnodes, optionally collapses empty blocks, and keeps a trailing paragraph so the user\ncan always get out of a table or a quote.",
+      "description": "Applies the schema normalization rules.\n\nRuns after every parse and paste: merges adjacent identical marks, drops empty inline\nnodes, optionally collapses empty blocks, and keeps a trailing paragraph so the user\ncan always get out of a table or a quote.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2601,7 +2601,7 @@
       "type": "(raw: string, defaultProtocol: string) => string",
       "optional": false,
       "default": "",
-      "description": "Adds a default scheme to a bare host, as the link popover does (05 §6).\n\nLeaves anything that already has a scheme, an anchor or a mail-like shape alone.",
+      "description": "Adds a default scheme to a bare host, as the link popover does.\n\nLeaves anything that already has a scheme, an anchor or a mail-like shape alone.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nnormalizeUrl('example.com');        // 'https://example.com'\nnormalizeUrl('a@b.com');            // 'mailto:a@b.com'\nnormalizeUrl('/internal');          // '/internal'\n``"
@@ -2671,7 +2671,7 @@
       "type": "(doc: EditorDocument, options: object) => string",
       "optional": false,
       "default": "",
-      "description": "The `text/plain` alternative for a multipart e-mail (03 §5.3).\n\nLinks become `text (url)` and list items get markers, so the message still reads\ncorrectly in a client that refuses HTML.",
+      "description": "The `text/plain` alternative for a multipart e-mail.\n\nLinks become `text (url)` and list items get markers, so the message still reads\ncorrectly in a client that refuses HTML.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nplainTextAlternative(doc);\n// 'Hi Jane\\n\\n- Add 2 lbs of shock\\n- Re-test in 24h\\n\\nSee our site (https://example.com)'\n``"
@@ -2731,7 +2731,7 @@
       "type": "(props: object) => RtePlugin<unknown>[]",
       "optional": false,
       "default": "",
-      "description": "Resolves the plugin list for a set of props.\n\nOrder of precedence: `plugins` replaces the preset entirely, then `removePlugins`\ndrops names, then `addPlugins` appends, then the `enableX` flags turn individual\nfeatures off (04 §2.3).",
+      "description": "Resolves the plugin list for a set of props.\n\nOrder of precedence: `plugins` replaces the preset entirely, then `removePlugins`\ndrops names, then `addPlugins` appends, then the `enableX` flags turn individual\nfeatures off.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -2741,7 +2741,7 @@
       "type": "(option: SanitizeConfig | SanitizeProfileName) => ResolvedSanitizeConfig",
       "optional": false,
       "default": "",
-      "description": "Turns the `sanitize` prop into a resolved configuration.\n\nA config object is merged onto `standard`; `false` is handled by the caller, which\nalso emits the development warning (03 §4.2).",
+      "description": "Turns the `sanitize` prop into a resolved configuration.\n\nA config object is merged onto `standard`; `false` is handled by the caller, which\nalso emits the development warning.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nresolveSanitizeConfig('email');\nresolveSanitizeConfig({ allowTags: ['p', 'b'] });   // merged onto `standard`\n``"
@@ -2761,7 +2761,7 @@
       "type": "(html: string, options: SanitizeOptions) => string",
       "optional": false,
       "default": "",
-      "description": "Sanitizes an HTML string against a profile or configuration.\n\nRuns at every content boundary in both directions (03 §4.1). The hard rules in\n03 §4.3 apply regardless of configuration.",
+      "description": "Sanitizes an HTML string against a profile or configuration.\n\nRuns at every content boundary in both directions. The hard rules in\nThe hard rules apply regardless of configuration.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\nsanitizeHtml('<img src=x onerror=alert(1)>');\n// '<img src=\"x\">'\n\nsanitizeHtml('<p class=\"ql-align-center\">hi</p>', { sanitize: 'email' });\n// '<p>hi</p>'  — the email profile keeps no classes\n``"
@@ -2851,7 +2851,7 @@
       "type": "(text: string) => EditorDocument",
       "optional": false,
       "default": "",
-      "description": "Turns plain text into a document.\n\nDouble newlines become paragraphs and single newlines become line breaks, which is\nwhat a plain-text paste should produce (03 §3).",
+      "description": "Turns plain text into a document.\n\nDouble newlines become paragraphs and single newlines become line breaks, which is\nwhat a plain-text paste should produce.",
       "group": "General",
       "deprecated": "",
       "example": "``ts\ntextToDocument('one\\ntwo\\n\\nthree');\n// two paragraphs, the first holding a line break\n``"
@@ -2871,10 +2871,10 @@
       "type": "(doc: EditorDocument, allowedKeys: string[]) => string[]",
       "optional": false,
       "default": "",
-      "description": "Reports merge-tag keys that are not in the allowed list (03 §6).",
+      "description": "Reports merge-tag keys that are not in the allowed list.",
       "group": "General",
       "deprecated": "",
-      "example": "``ts\nvalidateMergeTagKeys(doc, ['org_name']); // ['contact_frist_name']\n``"
+      "example": "``ts\nvalidateMergeTagKeys(doc, ['company_name']); // ['contact_frist_name']\n``"
     },
     {
       "name": "walkBlocks",
@@ -2923,7 +2923,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Autosave / draft behaviour (03 §7).",
+      "description": "Autosave / draft behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3043,7 +3043,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "The colour picker's palette and behaviour (05 §2).",
+      "description": "The colour picker's palette and behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3053,7 +3053,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Context for the `ColorPicker` slot: palette, recents and the clear action (05 §2).",
+      "description": "Context for the `ColorPicker` slot: palette, recents and the clear action.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3153,7 +3153,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Something dropped or downgraded while parsing content (03 §2).",
+      "description": "Something dropped or downgraded while parsing content.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3323,7 +3323,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Extra shaping applied by the `email` HTML profile (03 §5.3).",
+      "description": "Extra shaping applied by the `email` HTML profile.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3343,7 +3343,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Events the engine emits.\n\n02 §2.2 lists all of these except `formatChange`, `copy`, `cut`, `compositionStart`\nand `compositionEnd`. Those exist because the product layer genuinely needs them:\nundo availability changes without the content or the selection changing, the\nclipboard needs its own hooks, and no change event may fire mid-composition\n(05 §15).",
+      "description": "Events the engine emits.\n\nThe adapter boundary needs all of these. `formatChange`, `copy`, `cut`, `compositionStart`\nand `compositionEnd`. Those exist because the product layer genuinely needs them:\nundo availability changes without the content or the selection changing, the\nclipboard needs its own hooks, and no change event may fire mid-composition\n.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3373,7 +3373,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Feature toggles, sugar over plugin inclusion (04 §2.3).\n\nEach flag adds or removes the plugin that provides it, so turning one off also takes\nits toolbar item, keymap entry and schema rules with it. A format the schema does not\nknow is downgraded rather than dropped when content arrives carrying it.",
+      "description": "Feature toggles, sugar over plugin inclusion.\n\nEach flag adds or removes the plugin that provides it, so turning one off also takes\nits toolbar item, keymap entry and schema rules with it. A format the schema does not\nknow is downgraded rather than dropped when content arrives carrying it.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3423,7 +3423,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Floating / bubble toolbar behaviour (05 §10).",
+      "description": "Floating / bubble toolbar behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3443,7 +3443,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "The formatting that applies to the current selection (04 §9).\n\nA value-carrying mark is `null` when the selection is mixed, so a toolbar can render\nan indeterminate state rather than lying about one of the values.",
+      "description": "The formatting that applies to the current selection.\n\nA value-carrying mark is `null` when the selection is mixed, so a toolbar can render\nan indeterminate state rather than lying about one of the values.",
       "group": "Selection",
       "deprecated": "",
       "example": ""
@@ -3563,7 +3563,7 @@
       "type": "'standard' | 'quill-compatible' | 'email' | 'minimal'",
       "optional": false,
       "default": "",
-      "description": "Output HTML dialect (03 §5.2).",
+      "description": "Output HTML dialect.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3643,7 +3643,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Image behaviour (05 §7).",
+      "description": "Image behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3673,7 +3673,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Context for the `InlineSuggestMenu` slot.\n\nThe slash menu, mentions, emoji and merge tags all render through this one\nprimitive, so their popovers, keyboard model and a11y are identical (05 §10).",
+      "description": "Context for the `InlineSuggestMenu` slot.\n\nThe slash menu, mentions, emoji and merge tags all render through this one\nprimitive, so their popovers, keyboard model and a11y are identical.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3703,7 +3703,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "`interop` prop (04 §2.4).",
+      "description": "`interop` prop.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3773,7 +3773,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Context for the `LinkPopover` slot: the link being edited and its actions (05 §6).",
+      "description": "Context for the `LinkPopover` slot: the link being edited and its actions.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3843,7 +3843,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "One markdown input rule (05 §5).",
+      "description": "One markdown input rule.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3913,7 +3913,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Mention behaviour (05 §10).",
+      "description": "Mention behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3963,7 +3963,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "An atomic `{key}` placeholder that the backend substitutes (03 §6).",
+      "description": "An atomic `{key}` placeholder that the backend substitutes.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -3983,7 +3983,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Merge-tag behaviour (03 §6).",
+      "description": "Merge-tag behaviour.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4023,7 +4023,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Word / Google Docs / Excel paste cleanup knobs (03 §3).",
+      "description": "Word / Google Docs / Excel paste cleanup knobs.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4173,7 +4173,7 @@
       "type": "'minimal' | 'classic' | 'standard' | 'email' | 'comment' | 'full'",
       "optional": false,
       "default": "",
-      "description": "The shipped preset names (05 §1.1).",
+      "description": "The shipped preset names.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4183,7 +4183,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Legacy Quill parsing / emitting knobs (03 §5.1).",
+      "description": "Legacy Quill parsing / emitting knobs.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4193,7 +4193,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Raw HTML preserved verbatim.\n\nOnly produced by the `permissive` sanitization profile; every other profile drops\nunknown markup instead (03 §4.2).",
+      "description": "Raw HTML preserved verbatim.\n\nOnly produced by the `permissive` sanitization profile; every other profile drops\nunknown markup instead.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4213,7 +4213,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "A theme with every token resolved, plus the prop defaults it carries (07 §4).",
+      "description": "A theme with every token resolved, plus the prop defaults it carries.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4303,7 +4303,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "`<RteContentView>` props (04 §6).",
+      "description": "`<RteContentView>` props.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4353,8 +4353,18 @@
       "type": "Partial<Record<Exclude<ToolbarItemName, '|'>, ReactNode>> & object",
       "optional": false,
       "default": "",
-      "description": "Replaceable icons (06 §9).\n\nDefaults are in-house 24px inline SVGs drawn with `currentColor`, sized from\n`--rte-icon-size`, so no icon package is ever pulled into a consumer's bundle.",
+      "description": "Replaceable icons.\n\nDefaults are in-house 24px inline SVGs drawn with `currentColor`, sized from\n`--rte-icon-size`, so no icon package is ever pulled into a consumer's bundle.",
       "group": "Customization",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteLabelProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteLabel.",
+      "group": "General",
       "deprecated": "",
       "example": ""
     },
@@ -4389,6 +4399,16 @@
       "example": ""
     },
     {
+      "name": "RtePortalsProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RtePortals.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
       "name": "RteRootProps",
       "type": "interface",
       "optional": false,
@@ -4413,7 +4433,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Every replaceable component.\n\nThe last dozen entries are primitives; overriding just those re-skins the whole\neditor for a design system (06 §10).",
+      "description": "Every replaceable component.\n\nThe last dozen entries are primitives; overriding just those re-skins the whole\neditor for a design system.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4449,11 +4469,21 @@
       "example": ""
     },
     {
+      "name": "RteToolbarProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteToolbar.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
       "name": "SanitizeConfig",
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "Fine-grained sanitizer configuration.\n\nAnything omitted falls back to the profile the config is merged onto (`standard` by\ndefault). The hard rules in 03 §4.3 cannot be re-enabled from here.",
+      "description": "Fine-grained sanitizer configuration.\n\nAnything omitted falls back to the profile the config is merged onto (`standard` by\ndefault). The hard rules cannot be re-enabled from here.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4473,7 +4503,7 @@
       "type": "HtmlElement",
       "optional": false,
       "default": "",
-      "description": "The element a SanitizeConfig.transform hook receives.\n\n03 §4.3 writes this as a DOM `Element`. It cannot be one: the sanitizer also runs\non a server and in a worker, where there is no DOM, and `<RteContentView>` sanitizes\nduring SSR. The portable node carries the same three things a transform needs -- tag\nname, attributes and children -- and is what both parser frontends produce.",
+      "description": "The element a SanitizeConfig.transform hook receives.\n\nIt is tempting to type this as a DOM `Element`. It cannot be one: the sanitizer also runs\non a server and in a worker, where there is no DOM, and `<RteContentView>` sanitizes\nduring SSR. The portable node carries the same three things a transform needs -- tag\nname, attributes and children -- and is what both parser frontends produce.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4593,7 +4623,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "An entry in the slash-command palette (05 §10).",
+      "description": "An entry in the slash-command palette.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4693,7 +4723,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "A table. Column widths serialize as percentages for e-mail robustness (05 §8).",
+      "description": "A table. Column widths serialize as percentages for e-mail robustness.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4790,7 +4820,7 @@
     },
     {
       "name": "ToolbarConfig",
-      "type": "ToolbarItemName | ToolbarItemSpec[] | ToolbarItemName | ToolbarItemSpec[][] | ToolbarConfigObject",
+      "type": "ToolbarEntry[] | ToolbarEntry[][] | ToolbarConfigObject",
       "optional": false,
       "default": "",
       "description": "`toolbar` prop: a flat list, groups, or the full object.",
@@ -4814,6 +4844,16 @@
       "optional": false,
       "default": "",
       "description": "Context for the `ToolbarDropdown` slot: a button plus its menu state.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarEntry",
+      "type": "ToolbarItemName | string & object | ToolbarItemSpec",
+      "optional": false,
+      "default": "",
+      "description": "A toolbar entry: a built-in name, a plugin's item name, or an item spec.\n\nThe `string & {}` arm is what lets a plugin's own item be referenced by name —\n`toolbar={[['bold', 'highlight']]}` — while keeping autocomplete on the built-ins,\nwhich a plain `string` would throw away.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4853,7 +4893,7 @@
       "type": "interface",
       "optional": false,
       "default": "",
-      "description": "A toolbar item, whether built-in or contributed by a plugin (06 §2).",
+      "description": "A toolbar item, whether built-in or contributed by a plugin.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -4943,7 +4983,7 @@
       "type": "function",
       "optional": false,
       "default": "",
-      "description": "`onUpload` signature (04 §2.6).",
+      "description": "`onUpload` signature.",
       "group": "General",
       "deprecated": "",
       "example": ""
@@ -5033,7 +5073,7 @@
       "type": "'html' | 'json' | 'markdown' | 'text'",
       "optional": false,
       "default": "",
-      "description": "The wire format of `value` / `defaultValue` / `onChange` (03 §1).",
+      "description": "The wire format of `value` / `defaultValue` / `onChange`.",
       "group": "General",
       "deprecated": "",
       "example": ""

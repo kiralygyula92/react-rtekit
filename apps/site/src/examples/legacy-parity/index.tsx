@@ -7,32 +7,32 @@ import {
   type ChangeMeta,
   type EditorValue,
 } from 'react-rtekit';
-import { DEFAULT_WATER_TEST_EMAIL_MESSAGE } from '../../fixtures';
+import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { FIXED_BUGS } from './fixed-bugs';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The Skimmer "Send report e-mail" form, reproduced 1:1 (01 §7, 08 §3.1).
+ * A legacy "send report" form, reproduced 1:1.
  *
  * Same eight buttons in the same order, same 287px box, same 21 swatches, same
- * default merge-tag body. Everything that differs is a bug from 01 §9 that is fixed
+ * default merge-tag body. Everything that differs is a listed defect that is fixed
  * here rather than reproduced — the "show differences" toggle lists them all.
  */
 
-/** The five merge tags the backend substitutes; they must survive editing (01 §2). */
+/** The five merge tags the backend substitutes; they must survive editing. */
 const MERGE_TAGS = [
-  { key: 'contact_first_name', label: 'Contact first name', sample: 'Dana' },
-  { key: 'next_test_date', label: 'Next test date', sample: '14 October 2026' },
+  { key: 'first_name', label: 'First name', sample: 'Dana' },
+  { key: 'due_date', label: 'Due date', sample: '14 October 2026' },
   { key: 'report_date', label: 'Report date', sample: '16 September 2026' },
-  { key: 'org_name', label: 'Organization name', sample: 'Clearwater Pools' },
-  { key: 'org_address', label: 'Organization address', sample: '1 Marina Way, Tampa FL' },
+  { key: 'company_name', label: 'Company name', sample: 'Northwind Ltd' },
+  { key: 'company_address', label: 'Company address', sample: '14 Canal Street, Bristol' },
 ];
 
 /** The original limit, now counted in text characters rather than markup (fixes R3). */
 const MESSAGE_MAX_LENGTH = 2048;
 
-export default function ParitySkimmerEmailExample() {
-  const [message, setMessage] = useState<string>(DEFAULT_WATER_TEST_EMAIL_MESSAGE);
+export default function LegacyParityExample() {
+  const [message, setMessage] = useState<string>(DEFAULT_EMAIL_BODY);
   const [meta, setMeta] = useState<ChangeMeta | null>(null);
   const [to, setTo] = useState<string[]>(['dana@example.com']);
   const [cc, setCc] = useState<string[]>([]);
@@ -40,7 +40,7 @@ export default function ParitySkimmerEmailExample() {
   const [showDifferences, setShowDifferences] = useState(false);
   const [showOutput, setShowOutput] = useState(true);
 
-  // The same document, serialized for storage and for an e-mail client (03 §5).
+  // The same document, serialized for storage and for an e-mail client.
   const outputs = useMemo(() => {
     const doc = htmlToDocument(message, { mergeTags: { knownKeys: MERGE_TAGS.map((tag) => tag.key) } });
     return {

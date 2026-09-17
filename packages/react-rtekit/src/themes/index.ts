@@ -3,14 +3,14 @@ import type { ResolvedRteTheme, RteTheme } from '../types/theme.js';
 import { CLASSIC_COLORS, CLASSIC_TOOLBAR } from '../core/classic-parity.js';
 import { themeToCssVars } from './css-vars.js';
 
-// One mapping table, shared by `theme.toCssVars()` and the React tree (07 §3).
+// One mapping table, shared by `theme.toCssVars()` and the React tree.
 export { themeToCssVars } from './css-vars.js';
 
 /**
- * The shipped themes (07 §3–§5).
+ * The shipped themes.
  *
  * Every visual the library has is one of these tokens, which is what makes the theme
- * editor's list exhaustive and the `classic` parity guarantee checkable (07 §8).
+ * editor's list exhaustive and the `classic` parity guarantee checkable.
  *
  * @module
  */
@@ -43,7 +43,7 @@ function merge<T extends object>(base: T, override: DeepPartial<T> | undefined):
   return result as T;
 }
 
-/** Attaches `toCssVars` so a theme can be written out for SSR or static use (07 §2). */
+/** Attaches `toCssVars` so a theme can be written out for SSR or static use. */
 function resolve(theme: RteTheme & { defaults?: Record<string, unknown> }): ResolvedRteTheme {
   return {
     ...theme,
@@ -52,7 +52,7 @@ function resolve(theme: RteTheme & { defaults?: Record<string, unknown> }): Reso
 }
 
 /**
- * The default theme (07 §5).
+ * The default theme.
  *
  * Subtle toolbar hover states, a visible placeholder, paragraph spacing — the modern
  * look, as opposed to `classic`'s reproduction of the old editor.
@@ -78,7 +78,7 @@ export const lightTheme: ResolvedRteTheme = /* @__PURE__ */ resolve({
     // A solid button puts #FFFFFF on this, so it is the text contrast that sets the
     // shade: the brighter #2196F3 is 3.1:1, which is a UI-component ratio rather than
     // a text one. `classic` keeps #2196F3, because its accent is a parity value used
-    // for a border and a focus ring (07 §4).
+    // for a border and a focus ring.
     accent: '#1976D2',
     accentSoft: '#1976D21A',
     accentBorder: '#1976D280',
@@ -208,10 +208,10 @@ export function createTheme(
 }
 
 /**
- * 1:1 parity with the Skimmer editor (01 §7, 07 §4).
+ * 1:1 parity with the legacy editor.
  *
- * **These values are frozen.** The parity guarantee is part of the semver contract
- * (09 §7): changing one is a major change. Other presets may move in a minor.
+ * **These values are frozen.** The parity guarantee is part of the versioning contract:
+ * changing one is a major release. Other presets may move in a minor.
  *
  * Deliberate deviations, documented on the parity page:
  * the focus ring replaces the 1px→2px border swap so focusing shifts nothing (R10),
@@ -231,7 +231,7 @@ export const classicTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightT
     border: '#D5D7DA',
     borderSubtle: '#E9EAEB',
     accent: '#2196F3',
-    // The one deliberate deviation from 07 §4's colour list. #F04438 is 3.8:1 on white,
+    // The one deliberate deviation from the reference palette. #F04438 is 3.8:1 on white,
     // which is fine for the 1px invalid border below — a UI component needs 3:1 — and
     // fails for the error text that sits under the field. The border keeps the parity
     // value; the text gets a shade that can actually be read.
@@ -280,7 +280,7 @@ export const classicTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightT
   },
 });
 
-/** The prop defaults the `classic` theme implies (07 §4). */
+/** The prop defaults the `classic` theme implies. */
 export const classicDefaults = {
   preset: 'classic' as const,
   minHeight: 287,
@@ -297,7 +297,7 @@ export const classicDefaults = {
   showCounter: false,
 };
 
-/** The dark theme (07 §5). Contrast pairs are AA-verified against text and surface. */
+/** The dark theme. Contrast pairs are AA-verified against text and surface. */
 export const darkTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightTheme, {
   name: 'dark',
   color: {
@@ -335,7 +335,7 @@ export const darkTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightThem
   content: { codeBg: '#161A20', codeColor: '#FF9D8A', tableHeaderBg: '#161A20' },
 });
 
-/** A denser theme: 32px buttons, 20px icons, a 160px minimum (07 §5). */
+/** A denser theme: 32px buttons, 20px icons, a 160px minimum. */
 export const compactTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightTheme, {
   name: 'compact',
   density: 'compact',
@@ -344,7 +344,7 @@ export const compactTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightT
   toolbar: { marginBottom: '6px' },
 });
 
-/** Toolbar and content share one bounding box, and the toolbar sticks (07 §5). */
+/** Toolbar and content share one bounding box, and the toolbar sticks. */
 export const borderedTheme: ResolvedRteTheme = /* @__PURE__ */ createTheme(lightTheme, {
   name: 'bordered',
   toolbar: {

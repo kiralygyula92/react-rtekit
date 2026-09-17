@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { RteField, isRteValueEmpty, type RteFieldProps } from '../src/index.js';
 
 /**
- * The react-hook-form adapter (04 §8).
+ * The react-hook-form adapter.
  *
  * The bug this package exists to fix: `required` has to reject `<p><br></p>`, which
  * plain truthiness does not (R2). The old field also wrote its value twice, through

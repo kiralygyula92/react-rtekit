@@ -7,7 +7,7 @@ import { HARD_BLOCKED_TAGS } from '../../src/core/sanitize/profiles.js';
 import { FORBIDDEN_IN_OUTPUT, XSS_PAYLOADS } from '../fixtures/xss.js';
 
 /**
- * The security gate (09 §2, §5).
+ * The security gate.
  *
  * Every payload is run through every profile, with both parser frontends. The
  * assertion is not "looks safe" but "contains nothing that can execute": no blocked

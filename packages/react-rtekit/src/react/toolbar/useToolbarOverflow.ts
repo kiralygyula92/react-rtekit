@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Splits toolbar groups into what fits and what does not (05 §14, §15).
+ * Splits toolbar groups into what fits and what does not.
  *
  * Measured rather than guessed: how many buttons fit depends on the container, the
  * density, the font and whether labels are showing, and every guess at that is wrong

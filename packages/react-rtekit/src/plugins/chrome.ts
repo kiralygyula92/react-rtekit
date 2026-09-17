@@ -11,13 +11,13 @@ export const placeholder = /* @__PURE__ */ definePlugin({
   name: 'placeholder',
 });
 
-/** The live character or word counter (05 §12). */
+/** The live character or word counter. */
 export const counter = /* @__PURE__ */ definePlugin({
   name: 'counter',
 });
 
 /**
- * The paste pipeline (03 §3).
+ * The paste pipeline.
  *
  * Source detection, office cleanup, interop parsing, sanitization and normalization,
  * all landing as one history entry.
@@ -27,7 +27,7 @@ export const paste = /* @__PURE__ */ definePlugin({
   keymap: { 'Mod+Shift+V': 'pastePlainText' },
 });
 
-/** Links, with the popover, autolinking and protocol normalization (05 §6). */
+/** Links, with the popover, autolinking and protocol normalization. */
 export const link = /* @__PURE__ */ definePlugin({
   name: 'link',
   keymap: { 'Mod+K': 'openLinkEditor' },
@@ -37,7 +37,7 @@ export const link = /* @__PURE__ */ definePlugin({
   },
 });
 
-/** Images and the upload flow (05 §7). */
+/** Images and the upload flow. */
 export const image = /* @__PURE__ */ definePlugin({
   name: 'image',
   sanitize: {
@@ -46,7 +46,7 @@ export const image = /* @__PURE__ */ definePlugin({
   },
 });
 
-/** Tables (05 §8). */
+/** Tables. */
 export const table = /* @__PURE__ */ definePlugin({
   name: 'table',
   sanitize: {
@@ -58,55 +58,55 @@ export const table = /* @__PURE__ */ definePlugin({
   },
 });
 
-/** Merge tags: atomic `{key}` chips that survive editing (03 §6, fixes R23). */
+/** Merge tags: atomic `{key}` chips that survive editing (fixes R23). */
 export const mergeTag = /* @__PURE__ */ definePlugin({
   name: 'mergeTag',
   sanitize: { allowAttributes: { span: ['data-merge-tag'] } },
 });
 
-/** `@`-mentions with async search (05 §10). */
+/** `@`-mentions with async search. */
 export const mention = /* @__PURE__ */ definePlugin({
   name: 'mention',
   sanitize: { allowAttributes: { span: ['data-mention-id'] } },
 });
 
-/** Emoji, inserted as plain characters rather than images (05 §10). */
+/** Emoji, inserted as plain characters rather than images. */
 export const emoji = /* @__PURE__ */ definePlugin({
   name: 'emoji',
 });
 
-/** Markdown input rules: `- `, `1. `, `# `, `> ` and friends (05 §5). */
+/** Markdown input rules: `- `, `1. `, `# `, `> ` and friends. */
 export const markdownShortcuts = /* @__PURE__ */ definePlugin({
   name: 'markdownShortcuts',
 });
 
-/** Find and replace (05 §16). */
+/** Find and replace. */
 export const findReplace = /* @__PURE__ */ definePlugin({
   name: 'findReplace',
   keymap: { 'Mod+F': 'openFindReplace' },
 });
 
-/** The HTML source view, sanitized on apply (05 §16). */
+/** The HTML source view, sanitized on apply. */
 export const sourceView = /* @__PURE__ */ definePlugin({
   name: 'sourceView',
 });
 
-/** Fullscreen (05 §16). */
+/** Fullscreen. */
 export const fullscreen = /* @__PURE__ */ definePlugin({
   name: 'fullscreen',
 });
 
-/** Draft autosave and the restore prompt (03 §7). */
+/** Draft autosave and the restore prompt. */
 export const autosave = /* @__PURE__ */ definePlugin({
   name: 'autosave',
 });
 
-/** The `/` command palette (05 §10). */
+/** The `/` command palette. */
 export const slashMenu = /* @__PURE__ */ definePlugin({
   name: 'slashMenu',
 });
 
-/** The selection bubble toolbar (05 §10). */
+/** The selection bubble toolbar. */
 export const floatingToolbar = /* @__PURE__ */ definePlugin({
   name: 'floatingToolbar',
 });

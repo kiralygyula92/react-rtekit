@@ -3,7 +3,7 @@ import type { LexicalEditor } from 'lexical';
 import type { Unregister } from '../../types/common.js';
 
 /**
- * Automatic linking of typed URLs and e-mail addresses (05 §6).
+ * Automatic linking of typed URLs and e-mail addresses.
  *
  * The matchers are deliberately conservative: a full URL with a scheme, a bare host
  * with a recognizable TLD, or an e-mail address. Matching more than that turns every
@@ -12,7 +12,7 @@ import type { Unregister } from '../../types/common.js';
  *
  * The protocol a match is given is checked against the allowed list, so a deployment
  * that only wants `https` never produces anything else — and the sanitizer still has
- * the final say on the way out (03 §4.3).
+ * the final say on the way out.
  *
  * @module
  */

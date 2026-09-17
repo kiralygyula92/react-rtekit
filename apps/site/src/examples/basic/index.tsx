@@ -7,7 +7,7 @@ import { CodeBlock } from '../../components/CodeBlock';
  * The smallest possible editor, plus the read-only view of the same value.
  *
  * Proves the two render identically: that is what makes `<RteContentView>` the right
- * way to show stored content outside a form (04 §6).
+ * way to show stored content outside a form.
  */
 export default function BasicExample() {
   const [html, setHtml] = useState('<p>Type something, and watch the preview follow.</p>');

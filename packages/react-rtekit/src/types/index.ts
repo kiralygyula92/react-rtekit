@@ -1,7 +1,7 @@
 /**
- * The complete public type surface (04 §9).
+ * The complete public type surface.
  *
- * Everything here is covered by the semver policy in 09 §7: changing a name, a
+ * Everything here is covered by the versioning policy in VERSIONING.md: changing a name, a
  * signature or a default is a major change.
  *
  * @module

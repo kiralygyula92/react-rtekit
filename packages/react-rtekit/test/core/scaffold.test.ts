@@ -3,7 +3,7 @@ import { en } from '../../src/locales/en.js';
 import { VERSION } from '../../src/version.js';
 import { meta } from '../../src/meta.js';
 import {
-  DEFAULT_WATER_TEST_EMAIL_MESSAGE,
+  DEFAULT_EMAIL_BODY,
   OFFICE_FIXTURES,
   QUILL_FIXTURES,
   RTE_PREDEFINED_COLORS,
@@ -86,11 +86,11 @@ describe('fixture corpus', () => {
   });
 
   it('keeps the exact default e-mail body, merge tags included', () => {
-    expect(DEFAULT_WATER_TEST_EMAIL_MESSAGE).toContain('{contact_first_name}');
-    expect(DEFAULT_WATER_TEST_EMAIL_MESSAGE).toContain('{next_test_date}');
-    expect(DEFAULT_WATER_TEST_EMAIL_MESSAGE).toContain('{report_date}');
-    expect(DEFAULT_WATER_TEST_EMAIL_MESSAGE).toContain('{org_name}');
-    expect(DEFAULT_WATER_TEST_EMAIL_MESSAGE).toContain('{org_address}');
+    expect(DEFAULT_EMAIL_BODY).toContain('{first_name}');
+    expect(DEFAULT_EMAIL_BODY).toContain('{due_date}');
+    expect(DEFAULT_EMAIL_BODY).toContain('{report_date}');
+    expect(DEFAULT_EMAIL_BODY).toContain('{company_name}');
+    expect(DEFAULT_EMAIL_BODY).toContain('{company_address}');
   });
 
   it('throws loudly for an unknown fixture id', () => {

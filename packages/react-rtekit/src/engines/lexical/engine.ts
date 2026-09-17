@@ -251,7 +251,7 @@ class LexicalEngineHandle implements EngineHandle {
     );
 
     // History is registered separately because `clearHistory` re-registers it with a
-    // fresh state, which is Lexical's only way to drop the undo stack (05 §9).
+    // fresh state, which is Lexical's only way to drop the undo stack.
     this.historyCleanup = registerHistory(
       this.editor,
       createEmptyHistoryState(),
@@ -293,7 +293,7 @@ class LexicalEngineHandle implements EngineHandle {
         this.refreshFormatState();
         // No change event mid-composition: an IME emits intermediate states that are
         // not what the user meant to type, and forms would validate against them
-        // (05 §15).
+        //.
         if (contentChanged && !this.composing) {
           emitter.emit('change', { source: this.pendingSource });
           this.pendingSource = 'user';
@@ -333,7 +333,7 @@ class LexicalEngineHandle implements EngineHandle {
         // Paste and drop are claimed the moment a listener calls `preventDefault()`.
         // The engine's own handler would otherwise import the clipboard's HTML with
         // Lexical's DOM importer, which never sees our sanitizer — the one thing
-        // 03 §4 says must not happen.
+        // the sanitizer exists to prevent.
         editor.registerCommand(
           PASTE_COMMAND,
           (event: ClipboardEvent) => {
@@ -364,7 +364,7 @@ class LexicalEngineHandle implements EngineHandle {
         // and the rest — runs *after* this command and only if no handler claimed the
         // event, so a listener that calls `preventDefault()` has to stop it here.
         // Otherwise our keymap and Lexical's both fire and the format toggles twice,
-        // which looks exactly like the shortcut doing nothing (05 §13).
+        // which looks exactly like the shortcut doing nothing.
         editor.registerCommand(
           KEY_DOWN_COMMAND,
           (event: KeyboardEvent) => {
@@ -377,7 +377,7 @@ class LexicalEngineHandle implements EngineHandle {
     );
 
     // Lexical exposes no composition command, so IME boundaries come from the DOM.
-    // They matter because no change event may fire mid-composition (05 §15).
+    // They matter because no change event may fire mid-composition.
     const onCopy = (event: Event): void => {
       emitter.emit('copy', event as ClipboardEvent);
     };
@@ -417,7 +417,7 @@ class LexicalEngineHandle implements EngineHandle {
       });
     });
     // Emitting only on a real change keeps a toolbar of individually-subscribed
-    // buttons from re-rendering on every keystroke (02 §7).
+    // buttons from re-rendering on every keystroke.
     if (!formatStateEqual(previous, this.formatState)) {
       this.emitter.emit('formatChange', this.formatState);
     }
@@ -480,7 +480,7 @@ class LexicalEngineHandle implements EngineHandle {
       () => {
         $documentToRoot($getRoot(), doc);
       },
-      // Discrete so `getHTML()` on the next line already sees the new content: 05 §4
+      // Discrete so `getHTML()` on the next line already sees the new content: a command
       // requires content and command APIs to be synchronous (fixes R7).
       { discrete: true, ...(options.history === false ? { tag: 'history-merge' } : {}) },
     );
@@ -552,7 +552,7 @@ class LexicalEngineHandle implements EngineHandle {
    * The items are checkboxes, and a checkbox is not a list item: a `<ul>` whose
    * children carry `role="checkbox"` is an ARIA violation, and screen readers
    * announce the mismatch. `group` is what a set of related checkboxes is, so the
-   * element says that instead of claiming to be a list (05 §14).
+   * element says that instead of claiming to be a list.
    */
   private normalizeCheckLists(): void {
     for (const list of this.contentElement.querySelectorAll('ul.rte-list--check')) {
@@ -637,12 +637,12 @@ class LexicalEngineHandle implements EngineHandle {
 
     if (!registered || registered.length === 0) return runBuiltIn(payload!);
 
-    // A handler that runs its own command again — which is how 06 §3 shows replacing
+    // A handler that runs its own command again — which is how an override replaces
     // one — must reach the built-in rather than itself.
     if (this.running.has(command)) return runBuiltIn(payload!);
 
     // Handlers are middleware: the last registered with the highest priority runs
-    // first and may call `next` to reach the one before it (06 §3).
+    // first and may call `next` to reach the one before it.
     const ordered = [...registered].sort(
       (a, b) => b.priority - a.priority || b.order - a.order,
     );
@@ -736,7 +736,7 @@ class LexicalEngineHandle implements EngineHandle {
 
   clearHistory(): void {
     // Re-registering history with a fresh state is Lexical's way of clearing it, and
-    // is what stops a user undoing into content the server loaded (05 §9).
+    // is what stops a user undoing into content the server loaded.
     this.canUndoState = false;
     this.canRedoState = false;
     this.historyCleanup?.();

@@ -2,7 +2,7 @@ import type { EditorSnapshot } from '../types/editor.js';
 import { emptyFormatState } from '../engines/lexical/selection.js';
 
 /**
- * The subscription store behind `useEditorState` (02 §5).
+ * The subscription store behind `useEditorState`.
  *
  * Derived state lives in one immutable snapshot and components subscribe with a
  * selector, so a toolbar button re-renders only when the piece of state it reads

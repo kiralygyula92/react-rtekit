@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 /**
- * The recently used colours, remembered across sessions (05 §2).
+ * The recently used colours, remembered across sessions.
  *
  * Shared by `<RichTextEditor>` and `<Rte.Root>` so the two entry points cannot end up
  * with different storage keys or different eviction rules. Every access is guarded:

@@ -11,7 +11,7 @@ import type {
 import type { CountUnit } from '../types/common.js';
 
 /**
- * Document-model helpers (03 §1.1).
+ * Document-model helpers.
  *
  * This is where the two most damaging bugs of the old editor are fixed: `isEmpty`
  * ignores empty blocks rather than trusting string truthiness (R2), and length counts
@@ -34,11 +34,11 @@ export interface TextOptions {
   /** Renders links as `text (url)`, as `getPlainTextAlternative` does. @default false */
   linkUrls?: boolean;
   /**
-   * Renders merge tags with their delimiters, e.g. `{org_name}`.
+   * Renders merge tags with their delimiters, e.g. `{company_name}`.
    *
    * The e-mail `text/plain` part needs this, because the backend substitutes the same
    * tokens in both parts of the message. Counting does not: there, a tag is worth its
-   * label (03 §1.1).
+   * label.
    */
   mergeTagSyntax?: { open: string; close: string };
 }
@@ -48,7 +48,7 @@ export interface TextOptions {
  *
  * `String.prototype.trim` also removes U+00A0, which would make `<p>&nbsp;</p>` look
  * empty — but the author typed that character and it renders, so emptiness has to be
- * decided on ASCII whitespace only (03 §8).
+ * decided on ASCII whitespace only.
  */
 // eslint-disable-next-line no-control-regex -- matching whitespace control characters is the point
 const BLANK = /^[\u0009\u000A\u000B\u000C\u000D\u0020\u2028\u2029]*$/;
@@ -369,13 +369,13 @@ export function collectMergeTags(doc: EditorDocument): string[] {
 }
 
 /**
- * Reports merge-tag keys that are not in the allowed list (03 §6).
+ * Reports merge-tag keys that are not in the allowed list.
  *
  * @returns the unknown keys, in document order
  *
  * @example
  * ```ts
- * validateMergeTagKeys(doc, ['org_name']); // ['contact_frist_name']
+ * validateMergeTagKeys(doc, ['company_name']); // ['contact_frist_name']
  * ```
  */
 export function validateMergeTagKeys(doc: EditorDocument, allowedKeys: string[]): string[] {
@@ -477,14 +477,14 @@ function normalizeBlock(block: BlockNode): BlockNode {
 
 /** Options for {@link normalizeDocument}. */
 export interface NormalizeOptions {
-  /** Append a final empty paragraph so the caret can always escape (03 §2). @default true */
+  /** Append a final empty paragraph so the caret can always escape. @default true */
   trailingParagraph?: boolean;
   /** Collapse runs of empty paragraphs into one. @default false */
   collapseEmptyBlocks?: boolean;
 }
 
 /**
- * Applies the normalization rules from 03 §2.
+ * Applies the schema normalization rules.
  *
  * Runs after every parse and paste: merges adjacent identical marks, drops empty inline
  * nodes, optionally collapses empty blocks, and keeps a trailing paragraph so the user

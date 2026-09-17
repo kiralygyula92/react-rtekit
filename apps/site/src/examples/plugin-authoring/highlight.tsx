@@ -1,7 +1,7 @@
 import { createToolbarItem, definePlugin, resolveMessage } from 'react-rtekit';
 
 /**
- * A highlight plugin (06 §5).
+ * A highlight plugin.
  *
  * Deliberately complete rather than minimal: a plugin that adds markup without adding
  * a sanitizer rule loses its formatting on the next paste, and one that hard-codes its
@@ -23,7 +23,7 @@ function HighlightIcon() {
 
 export const highlight = definePlugin({
   name: 'highlight',
-  // The schema feature this adds. Without it the mark is stripped as unknown (03 §2).
+  // The schema feature this adds. Without it the mark is stripped as unknown.
   provides: ['highlight'],
 
   marks: [

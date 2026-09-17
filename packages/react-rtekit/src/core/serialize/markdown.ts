@@ -9,7 +9,7 @@ import { createDocument, normalizeDocument } from '../document.js';
 import { htmlToDocument, type HtmlToDocumentOptions } from './from-html.js';
 
 /**
- * Markdown (03 §5.4).
+ * Markdown.
  *
  * CommonMark plus the GFM extensions the editor can actually produce: tables,
  * strikethrough and task lists. Merge tags serialize to a configurable syntax
@@ -65,7 +65,7 @@ function inlineToMarkdown(nodes: InlineNode[], options: Required<MarkdownOptions
         break;
       case 'mergeTag':
         // The template's literal `key` is the placeholder, so the default `{{key}}`
-        // yields `{{org_name}}` rather than eating one pair of braces.
+        // yields `{{company_name}}` rather than eating one pair of braces.
         out += options.mergeTagSyntax.replace('key', node.key);
         break;
       case 'mention':
@@ -168,7 +168,7 @@ export function documentToMarkdown(doc: EditorDocument, options: MarkdownOptions
  * Inline rules, applied in order.
  *
  * `_` emphasis requires a non-word boundary on both sides, as CommonMark does, so a
- * merge tag like `{{contact_first_name}}` is not shredded into italics.
+ * merge tag like `{{first_name}}` is not shredded into italics.
  */
 const INLINE_RULES: { pattern: RegExp; render: (groups: string[]) => string }[] = [
   {

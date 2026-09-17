@@ -4,7 +4,7 @@ import { documentToHtml } from './serialize/to-html.js';
 import { buildFindPattern, blockText, findMatches, replaceMatches } from './find.js';
 
 /**
- * Find and replace (05 §16).
+ * Find and replace.
  *
  * The interesting cases are the ones the DOM gets wrong: a match that straddles a
  * formatting boundary, a regex the author has not finished typing, and a replacement
@@ -46,8 +46,8 @@ describe('blockText', () => {
   });
 
   it('renders a merge tag as its stored form', () => {
-    const block = doc('<p>Hi {contact_first_name}</p>').content[0]!;
-    expect(blockText(block)).toBe('Hi {contact_first_name}');
+    const block = doc('<p>Hi {first_name}</p>').content[0]!;
+    expect(blockText(block)).toBe('Hi {first_name}');
   });
 
   it('joins list items with newlines', () => {
@@ -118,11 +118,16 @@ describe('replaceMatches', () => {
   });
 
   it('never cuts a merge tag in half', () => {
-    const source = doc('<p>Hi {contact_first_name}</p>');
-    const { document, replaced } = replaceMatches(source, 'contact', 'client', {}, 'all');
-    // The tag is one atom: the text inside it is not editable text (03 §6).
+    // The same word inside the tag and outside it: only the one outside is text.
+    const source = doc('<p>first {first_name}</p>');
+    const { document, replaced } = replaceMatches(source, 'first', 'last', {}, 'all');
+
+    // One replacement, not two: the match inside the tag is found and then skipped,
+    // and the count has to report what was done rather than what was found.
     expect(replaced).toBe(1);
-    expect(documentToHtml(document)).toContain('{contact_first_name}');
+    // The tag is one atom, so its key survives the replacement whole.
+    expect(documentToHtml(document)).toContain('{first_name}');
+    expect(documentToHtml(document)).toContain('last ');
   });
 
   it('replaces inside a list item', () => {

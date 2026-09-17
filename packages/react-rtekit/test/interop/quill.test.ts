@@ -12,7 +12,7 @@ import {
 import { QUILL_FIXTURES, quillFixture } from '../fixtures/quill.js';
 
 /**
- * The interop contract (03 §5.1, 09 §2, ADR-004).
+ * The interop contract (ADR-004).
  *
  * Every fixture is real markup the old editor produced. The assertion is not that the
  * bytes match, but that nothing an author can see is lost on the way in or out.
@@ -233,58 +233,58 @@ describe('merge tags (R23)', () => {
     if (first?.type !== 'paragraph') throw new Error('expected a paragraph');
     expect(first.content).toEqual([
       { type: 'text', text: 'Hi ' },
-      { type: 'mergeTag', key: 'contact_first_name' },
+      { type: 'mergeTag', key: 'first_name' },
       { type: 'text', text: ', ' },
     ]);
   });
 
   it('serializes back to exactly {key}, so the backend is unaffected', () => {
     const out = documentToHtml(htmlToDocument(body));
-    expect(out).toContain('{contact_first_name}');
-    expect(out).toContain('{org_address}');
+    expect(out).toContain('{first_name}');
+    expect(out).toContain('{company_address}');
   });
 
   it('substitutes sample values in preview mode without changing the document', () => {
     const doc = htmlToDocument(body);
-    const preview = documentToHtml(doc, { mergeTagPreview: { contact_first_name: 'Jane' } });
+    const preview = documentToHtml(doc, { mergeTagPreview: { first_name: 'Jane' } });
     expect(preview).toContain('Hi Jane');
-    expect(preview).not.toContain('{contact_first_name}');
+    expect(preview).not.toContain('{first_name}');
     // The document itself is untouched.
-    expect(documentToHtml(doc)).toContain('{contact_first_name}');
+    expect(documentToHtml(doc)).toContain('{first_name}');
   });
 
   it('survives a markdown round-trip', () => {
     const doc = htmlToDocument(body);
     const markdown = documentToMarkdown(doc);
-    expect(markdown).toContain('{{contact_first_name}}');
+    expect(markdown).toContain('{{first_name}}');
     const back = markdownToDocument(markdown, {
       mergeTags: { syntax: { open: '{{', close: '}}' } },
     });
     const first = back.content[0];
     if (first?.type !== 'paragraph') throw new Error('expected a paragraph');
-    expect(first.content.some((node) => node.type === 'mergeTag' && node.key === 'contact_first_name')).toBe(
+    expect(first.content.some((node) => node.type === 'mergeTag' && node.key === 'first_name')).toBe(
       true,
     );
   });
 
   it('reports unknown keys', () => {
     const warnings: string[] = [];
-    htmlToDocument('<p>{org_name} and {typo_key}</p>', {
-      mergeTags: { knownKeys: ['org_name'] },
+    htmlToDocument('<p>{company_name} and {typo_key}</p>', {
+      mergeTags: { knownKeys: ['company_name'] },
       onWarning: (warning) => warnings.push(warning.message),
     });
     expect(warnings).toContain('Unknown merge tag "typo_key"');
   });
 
   it('can be turned off, leaving the braces as text', () => {
-    const doc = htmlToDocument('<p>{org_name}</p>', { mergeTags: { parseOnInput: false } });
+    const doc = htmlToDocument('<p>{company_name}</p>', { mergeTags: { parseOnInput: false } });
     const first = doc.content[0];
     if (first?.type !== 'paragraph') throw new Error('expected a paragraph');
-    expect(first.content).toEqual([{ type: 'text', text: '{org_name}' }]);
+    expect(first.content).toEqual([{ type: 'text', text: '{company_name}' }]);
   });
 });
 
-describe('e-mail output (03 §5.3)', () => {
+describe('e-mail output', () => {
   const html = quillFixture('full-message').html;
 
   it('emits no class and no id', () => {
@@ -350,8 +350,8 @@ describe('e-mail output (03 §5.3)', () => {
   it('produces a readable text/plain alternative', () => {
     const doc = htmlToDocument(html);
     const text = plainTextAlternative(doc);
-    expect(text).toContain('- Add 2 lbs of shock');
-    expect(text).toContain('{org_name}');
+    expect(text).toContain('- Review the attached figures');
+    expect(text).toContain('{company_name}');
     expect(text).not.toContain('<');
   });
 

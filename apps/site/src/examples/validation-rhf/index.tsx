@@ -4,7 +4,7 @@ import { RteField } from 'react-rtekit-rhf';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * react-hook-form validation (04 §8, fixes R2 and R12).
+ * react-hook-form validation (fixes R2 and R12).
  *
  * The bug this page exists for: an empty editor serializes to `<p><br></p>`, which is
  * a truthy string, so `required` passed and an empty e-mail went out. `RteField`

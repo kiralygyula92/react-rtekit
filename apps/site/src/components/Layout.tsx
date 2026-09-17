@@ -11,7 +11,7 @@ const NAV = [
   { to: '/theme-editor', label: 'Theme editor' },
 ];
 
-/** Global chrome: top bar, content column and footer (08 §1). */
+/** Global chrome: top bar, content column and footer. */
 export function Layout() {
   return (
     <div className="site">
@@ -49,8 +49,15 @@ export function Layout() {
       </main>
       <footer className="site-footer">
         <p>
-          MIT licensed. Built to replace a 514-line Quill wrapper and fix all 26 of its known
-          bugs.
+          Built to replace a hand-rolled Quill wrapper and fix all 26 of its known defects.{' '}
+          <a
+            href="https://github.com/kiralygyula92/react-rtekit/blob/main/LICENSE"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            MIT licensed
+          </a>
+          .
         </p>
       </footer>
     </div>

@@ -1,7 +1,7 @@
 import type { RteLocalization } from '../types/localization.js';
 
 /**
- * Spanish (06 §8).
+ * Spanish.
  *
  * The whole catalogue, not a patch over English: a partial one falls back silently,
  * and a half-translated editor reads like a broken one.

@@ -1,6 +1,6 @@
 /**
- * The `dark` preset (07 §5). Contrast pairs are AA-verified against `color.text`
- * and `color.surface`; the check runs in the theme editor and in CI (09 §2).
+ * The `dark` preset. Contrast pairs are AA-verified against `color.text`
+ * and `color.surface`; the check runs in the theme editor and in CI.
  */
 @layer rtekit.theme {
   .rte-root[data-color-scheme='dark'],

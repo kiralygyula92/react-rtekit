@@ -9,7 +9,7 @@ const root = path.resolve(here, '..');
 const srcStyles = path.join(root, 'src', 'styles');
 const dist = path.join(root, 'dist');
 
-/** 09 §6: last 2 evergreen versions, Safari/iOS >= 15.4. */
+/** The support target: the last two evergreen versions, Safari/iOS >= 15.4. */
 const targets = browserslistToTargets(
   browserslist(['last 2 chrome versions', 'last 2 firefox versions', 'last 2 edge versions', 'safari >= 15.4', 'ios_saf >= 15.4']),
 );
@@ -33,7 +33,7 @@ async function main() {
       filename: path.join(srcStyles, from),
       minify: true,
       targets,
-      // `@layer` and custom properties must survive verbatim: they are public API (07 §1).
+      // `@layer` and custom properties must survive verbatim: they are public API.
       drafts: { customMedia: false },
     });
     const out = path.join(dist, to);

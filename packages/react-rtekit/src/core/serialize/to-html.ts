@@ -17,7 +17,7 @@ import { serializeStyle, type CssDeclaration } from '../sanitize/css.js';
 import { sortMarks } from '../document.js';
 
 /**
- * The portable document model to HTML, in four dialects (03 §5.2, ADR-004).
+ * The portable document model to HTML, in four dialects (ADR-004).
  *
  * | Profile | Alignment | Lists | Styles |
  * |---|---|---|---|
@@ -97,7 +97,7 @@ function applyMarks(node: HtmlNode, marks: Mark[] | undefined): HtmlNode {
 function mergeTagNode(node: Extract<InlineNode, { type: 'mergeTag' }>, ctx: Ctx): HtmlNode {
   const preview = ctx.mergeTagPreview[node.key];
   if (preview !== undefined) return textNode(preview);
-  // Serialized as plain text, exactly as the backend expects it (03 §6).
+  // Serialized as plain text, exactly as the backend expects it.
   return textNode(`${ctx.mergeTagSyntax.open}${node.key}${ctx.mergeTagSyntax.close}`);
 }
 
@@ -171,7 +171,7 @@ function mergeAttrs(...parts: Record<string, string>[]): Record<string, string> 
   for (const part of parts) {
     for (const [name, value] of Object.entries(part)) {
       // An empty `alt` is meaningful — it marks an image decorative — so it is the one
-      // attribute worth writing empty (05 §16).
+      // attribute worth writing empty.
       if (value === '' && name !== 'alt') continue;
       const existing = result[name];
       if (!existing) {
@@ -209,7 +209,7 @@ function listToHtml(list: ListNode, ctx: Ctx, topLevel = true): HtmlElement {
     if (list.listType === 'check') {
       itemAttrs['data-checked'] = String(item.checked === true);
       // `list-style: none` keeps the bullet from doubling up with the checkbox in
-      // clients that ignore our stylesheet (05 §5).
+      // clients that ignore our stylesheet.
       itemAttrs.style = 'list-style-type: none';
     }
     if (ctx.profile === 'quill-compatible') {
@@ -275,7 +275,7 @@ function cellToHtml(cell: TableCellNode, ctx: Ctx): HtmlElement {
   const attrs: Record<string, string> = {};
   if (cell.colSpan && cell.colSpan > 1) attrs.colspan = String(cell.colSpan);
   if (cell.rowSpan && cell.rowSpan > 1) attrs.rowspan = String(cell.rowSpan);
-  // Widths serialize as percentages so e-mail clients keep the proportions (05 §8).
+  // Widths serialize as percentages so e-mail clients keep the proportions.
   if (cell.width) attrs.width = `${cell.width}%`;
   if (ctx.profile === 'email') attrs.style = EMAIL_CELL_STYLE;
   return element(

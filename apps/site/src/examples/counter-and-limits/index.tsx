@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Counting and limits (05 §12, fixes R3).
+ * Counting and limits (fixes R3).
  *
  * The limit counts text, not markup: formatting a message must never make it "too
  * long". Switch between blocking and warning to feel the difference.

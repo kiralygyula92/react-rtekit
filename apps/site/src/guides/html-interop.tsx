@@ -51,7 +51,7 @@ editor.getHTML({ profile: 'email', email: { wrapInTable: true, containerWidth: 6
         </p>
       </Section>
 
-      <SeeAlso examples={['html-interop', 'paste-cleanup', 'email-output']} guides={['sanitization', 'migration-skimmer']} />
+      <SeeAlso examples={['html-interop', 'paste-cleanup', 'email-output']} guides={['sanitization', 'migration-from-quill']} />
     </>
   );
 }

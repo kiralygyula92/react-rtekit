@@ -3,7 +3,7 @@ import type { LinkAttrs } from './selection.js';
 import type { EditorValue } from './common.js';
 import type { EditorInstance } from './editor.js';
 
-/** Command types (04 §4). @group Commands */
+/** Command types. @group Commands */
 
 /** Image attributes as stored on an image node. */
 export interface ImageAttrs {
@@ -136,7 +136,7 @@ export interface CommandRegistry {
   insertMention: { id: string; label: string };
   /** Inserts plain text at the selection. */
   insertText: { text: string };
-  /** Inserts HTML, which is sanitized first whatever its origin (03 §4). */
+  /** Inserts HTML, which is sanitized first whatever its origin. */
   insertHTML: { html: string };
   /** Inserts a value in the editor's own `valueFormat`. */
   insertContent: { value: EditorValue };

@@ -1,5 +1,5 @@
 /**
- * A synthetic ~100 KB document for the performance budget tests (09 §4) and the
+ * A synthetic ~100 KB document for the performance budget tests and the
  * `large-document` demo page.
  *
  * Generated rather than checked in, so the repository stays small and the shape can
@@ -7,8 +7,8 @@
  */
 
 const WORDS = [
-  'chlorine', 'alkalinity', 'filter', 'pump', 'skimmer', 'calcium', 'stabilizer', 'backwash',
-  'cartridge', 'phosphate', 'algae', 'shock', 'salinity', 'cyanuric', 'circulation',
+  'invoice', 'quarterly', 'schedule', 'account', 'summary', 'contract', 'allocation', 'forecast',
+  'dispatch', 'inventory', 'renewal', 'draft', 'reference', 'settlement', 'distribution',
 ];
 
 function sentence(seed: number): string {

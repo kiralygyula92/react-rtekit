@@ -7,7 +7,7 @@ import { quillFixture } from '../fixtures/quill.js';
 import { XSS_PAYLOADS } from '../fixtures/xss.js';
 
 /**
- * The paste pipeline (03 §3, fixes R19 and R20).
+ * The paste pipeline (fixes R19 and R20).
  *
  * The bug this exists for: an engine will happily import the clipboard's HTML with
  * its own DOM importer, which never sees our sanitizer. Every paste has to come back
@@ -112,7 +112,7 @@ describe('office and legacy sources are cleaned (R20)', () => {
   });
 });
 
-describe('paste modes (03 §3)', () => {
+describe('paste modes', () => {
   it('text drops every tag', async () => {
     const editor = await mount({ pasteMode: 'text' });
     paste(editor, { html: '<p><strong>bold</strong> text</p>', text: 'bold text' });
@@ -148,7 +148,7 @@ describe('paste modes (03 §3)', () => {
   });
 });
 
-describe('the onPaste middleware (06 §4)', () => {
+describe('the onPaste middleware', () => {
   it('sees the payload and its detected source', async () => {
     const onPaste = vi.fn((_ctx: unknown, next: () => void) => {
       next();

@@ -1,11 +1,11 @@
 import type { HtmlProfile } from './common.js';
 
-/** HTML interop types (03 §5). @group Interop */
+/** HTML interop types. @group Interop */
 
 /** Which foreign dialects the input parser recognizes. */
 export type InteropInput = 'quill' | 'office' | 'standard';
 
-/** Word / Google Docs / Excel paste cleanup knobs (03 §3). */
+/** Word / Google Docs / Excel paste cleanup knobs. */
 export interface OfficeCleanupOptions {
   /** Strip `mso-*` CSS declarations and `<o:p>` elements. @default true */
   stripMsoStyles?: boolean;
@@ -21,7 +21,7 @@ export interface OfficeCleanupOptions {
   keepColors?: boolean;
 }
 
-/** Legacy Quill parsing / emitting knobs (03 §5.1). */
+/** Legacy Quill parsing / emitting knobs. */
 export interface QuillInteropOptions {
   /**
    * `ql-size-*` class → CSS length.
@@ -37,7 +37,7 @@ export interface QuillInteropOptions {
   emitDataList?: boolean;
 }
 
-/** `interop` prop (04 §2.4). */
+/** `interop` prop. */
 export interface InteropOptions {
   /** Dialects recognized on input. @default ['quill','office','standard'] */
   input?: InteropInput[];
@@ -47,7 +47,7 @@ export interface InteropOptions {
   quill?: QuillInteropOptions;
 }
 
-/** Extra shaping applied by the `email` HTML profile (03 §5.3). */
+/** Extra shaping applied by the `email` HTML profile. */
 export interface EmailOutputOptions {
   /** Wrap the body in a fixed-width centring table. @default false */
   wrapInTable?: boolean;

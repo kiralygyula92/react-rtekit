@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- * Turns TypeDoc's JSON into the per-page data the API routes render (08 §6).
+ * Turns TypeDoc's JSON into the per-page data the API routes render.
  *
  * TypeDoc's output is a whole compiler's worth of detail; the site needs a name, a
  * type, a default, a description and a group. Doing the reduction here rather than in

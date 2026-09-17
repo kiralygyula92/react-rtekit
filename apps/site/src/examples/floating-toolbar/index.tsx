@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RichTextEditor, type EditorValue } from 'react-rtekit';
 
 /**
- * Floating, sticky and overflowing toolbars (05 §14, §15).
+ * Floating, sticky and overflowing toolbars.
  *
  * All three are the same `Toolbar` component: one roving-focus implementation, one
  * set of slots, three placements.

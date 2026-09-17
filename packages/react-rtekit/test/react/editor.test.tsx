@@ -7,7 +7,7 @@ import { Rte, useEditor } from '../../src/index.js';
 import { quillFixture } from '../fixtures/quill.js';
 
 /**
- * The React layer against the real Lexical engine (09 §1).
+ * The React layer against the real Lexical engine.
  *
  * jsdom cannot drive a contenteditable, so nothing here types: every assertion goes
  * through the programmatic API. Caret behaviour is covered by the Playwright suite.
@@ -106,12 +106,12 @@ describe('content', () => {
     const body = quillFixture('default-email-body').html;
     const { editor } = await mountEditor({
       defaultValue: body,
-      mergeTags: { tags: [{ key: 'contact_first_name' }, { key: 'org_name' }] },
+      mergeTags: { tags: [{ key: 'first_name' }, { key: 'company_name' }] },
     });
     const html = editor.getHTML();
-    expect(html).toContain('{contact_first_name}');
-    expect(html).toContain('{org_address}');
-    expect(editor.getMergeTags()).toContain('contact_first_name');
+    expect(html).toContain('{first_name}');
+    expect(html).toContain('{company_address}');
+    expect(editor.getMergeTags()).toContain('first_name');
   });
 
   it('keeps alignment through a setContent round-trip', async () => {
@@ -268,14 +268,14 @@ describe('commands', () => {
   it('inserts a merge tag as one atomic unit (R23)', async () => {
     const { editor } = await mountEditor({
       defaultValue: '<p>Hi </p>',
-      mergeTags: { tags: [{ key: 'contact_first_name', label: 'Contact first name' }] },
+      mergeTags: { tags: [{ key: 'first_name', label: 'First name' }] },
     });
     act(() => {
       editor.focus('end');
-      editor.exec('insertMergeTag', { key: 'contact_first_name' });
+      editor.exec('insertMergeTag', { key: 'first_name' });
     });
-    expect(editor.getHTML()).toContain('{contact_first_name}');
-    expect(editor.getMergeTags()).toEqual(['contact_first_name']);
+    expect(editor.getHTML()).toContain('{first_name}');
+    expect(editor.getMergeTags()).toEqual(['first_name']);
   });
 
   it('inserts a link', async () => {

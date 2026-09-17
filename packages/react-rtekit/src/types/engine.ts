@@ -4,7 +4,7 @@ import type { EditorSelection, FormatState, Position, SelectionSnapshot } from '
 import type { CommandHandler, CommandId, CommandPayload } from './commands.js';
 import type { SerializeOptions } from './interop.js';
 
-/** The engine adapter boundary (02 §2). @group Engine */
+/** The engine adapter boundary. @group Engine */
 
 /** Declares a custom node type to the engine and the serializers. */
 export interface NodeSpec {
@@ -76,11 +76,11 @@ export interface MarkdownRule {
 /**
  * Events the engine emits.
  *
- * 02 §2.2 lists all of these except `formatChange`, `copy`, `cut`, `compositionStart`
+ * The adapter boundary needs all of these. `formatChange`, `copy`, `cut`, `compositionStart`
  * and `compositionEnd`. Those exist because the product layer genuinely needs them:
  * undo availability changes without the content or the selection changing, the
  * clipboard needs its own hooks, and no change event may fire mid-composition
- * (05 §15).
+ *.
  */
 export interface EngineEvents {
   /** The document changed, tagged with what caused it. */
@@ -108,7 +108,7 @@ export interface EngineEvents {
    * is what Tab needs when it should move focus rather than indent.
    */
   keydown: (event: KeyboardEvent) => boolean | void;
-  /** An IME composition started; no change event fires until it ends (05 §15). */
+  /** An IME composition started; no change event fires until it ends. */
   compositionStart: () => void;
   /** An IME composition finished. */
   compositionEnd: () => void;
@@ -126,13 +126,13 @@ export interface EngineMountOptions {
   editable?: boolean;
   /** Take focus on mount, optionally placing the caret. @default false */
   autoFocus?: boolean | 'start' | 'end';
-  /** Feature names the schema should accept; everything else is downgraded (03 §2). */
+  /** Feature names the schema should accept; everything else is downgraded. */
   enabledFeatures?: ReadonlySet<string>;
   /** Grouping window for undo coalescing, in ms. @default 300 */
   historyGroupMs?: number;
   /** Maximum number of history entries. @default 200 */
   historyLimit?: number;
-  /** Parses HTML into the portable document model. Supplied by the host (03 §3). */
+  /** Parses HTML into the portable document model. Supplied by the host. */
   parseHtml: (html: string) => EditorDocument;
   /** Serializes the portable document model to HTML. Supplied by the host. */
   serializeHtml: (doc: EditorDocument, options?: SerializeOptions) => string;
@@ -140,9 +140,9 @@ export interface EngineMountOptions {
   onError?: (error: unknown) => void;
   /** Namespace used for engine-internal ids; keeps multiple editors independent (fixes R4). */
   namespace: string;
-  /** Markdown input rules (05 §5). Off unless the host turns them on. */
+  /** Markdown input rules. Off unless the host turns them on. */
   markdownShortcuts?: boolean;
-  /** Automatic linking of typed URLs and e-mail addresses (05 §6). */
+  /** Automatic linking of typed URLs and e-mail addresses. */
   autoLink?: {
     /** @default true */
     enabled?: boolean;
@@ -203,7 +203,7 @@ export interface EngineHandle {
    *
    * What every trigger menu needs: `{{`, `@`, `:` and `/` are all decided by looking
    * back from the caret, and doing that through the DOM would mean the React layer
-   * reaching into the engine's element (05 §10).
+   * reaching into the engine's element.
    */
   getTextBeforeCaret(maxLength?: number): string;
   /** The caret's viewport rectangle, for positioning a menu. `null` with no caret. */
@@ -238,7 +238,7 @@ export interface EngineHandle {
   canUndo(): boolean;
   /** Whether there is anything to redo. */
   canRedo(): boolean;
-  /** Drops the undo stack, so loaded content cannot be undone away (05 §9). */
+  /** Drops the undo stack, so loaded content cannot be undone away. */
   clearHistory(): void;
   /** Focuses the content element, optionally placing the caret. */
   focus(position?: 'start' | 'end' | 'restore'): void;

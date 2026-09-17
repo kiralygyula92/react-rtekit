@@ -1,5 +1,5 @@
 /**
- * `react-rtekit/meta` — runtime metadata for the documentation site (08 §6.4).
+ * `react-rtekit/meta` — runtime metadata for the documentation site.
  *
  * The API pages list slots, commands, handlers, toolbar items, tokens, localization
  * keys and icons from *this* object, not from a hand-maintained page, so a symbol
@@ -110,7 +110,7 @@ const SLOT_GROUPS: Record<keyof RteSlots, Described> = {
 // ── commands ─────────────────────────────────────────────────────────────────
 
 /**
- * Every command id (04 §4).
+ * Every command id.
  *
  * A `Record<CommandId, …>`: adding a command to `CommandRegistry` without a line here
  * is a type error, which is what stops the catalogue drifting.
@@ -177,7 +177,7 @@ const COMMANDS: Record<CommandId, Described> = {
 
 // ── handlers ─────────────────────────────────────────────────────────────────
 
-/** Every middleware entry point (06 §4), as a `Record<HandlerName, …>`. */
+/** Every middleware entry point, as a `Record<HandlerName, …>`. */
 const HANDLERS: Record<HandlerName, Described> = {
   onBeforeChange: { group: 'content', description: 'Runs before a change is committed; can veto it.' },
   onPaste: { group: 'clipboard', description: 'Wraps the paste pipeline.' },
@@ -202,7 +202,7 @@ const HANDLERS: Record<HandlerName, Described> = {
 // ── toolbar items ────────────────────────────────────────────────────────────
 
 /**
- * Toolbar item names (05 §14).
+ * Toolbar item names.
  *
  * `ToolbarItemName` is a string union, and `createBuiltInItems` needs icons and
  * option lists to build the real specs, so the catalogue is a `Record` of that union
@@ -256,7 +256,7 @@ const TOOLBAR_ITEMS: Record<ToolbarItemName, Described> = {
 // ── tokens, localization, icons, plugins ─────────────────────────────────────
 
 /**
- * Every theme token, as the CSS variable it becomes (07 §3).
+ * Every theme token, as the CSS variable it becomes.
  *
  * Enumerated from `lightTheme`, so a token that exists is listed and a token that is
  * renamed is renamed here too. The group is the variable's own prefix.

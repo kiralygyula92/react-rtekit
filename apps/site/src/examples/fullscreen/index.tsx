@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { RichTextEditor, type EditorInstance } from 'react-rtekit';
 
 /**
- * Fullscreen (05 §16).
+ * Fullscreen.
  *
  * The root is promoted in place rather than moved into a portal: moving it would
  * unmount the engine's content element and take the selection and undo stack with it.

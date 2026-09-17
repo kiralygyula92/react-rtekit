@@ -8,7 +8,7 @@ import { resolveMessage } from '../localization.js';
 import { Button, Checkbox, TextInput } from '../ui/primitives.js';
 
 /**
- * Find and replace (05 §16).
+ * Find and replace.
  *
  * Matches are highlighted with an overlay rather than by marking up the document:
  * a search must not change what the author would save, and it must not push an entry
@@ -220,7 +220,7 @@ export function FindReplaceUi() {
   );
 }
 
-/** The default panel (05 §16). */
+/** The default panel. */
 export function FindReplacePanel({
   query,
   replacement,

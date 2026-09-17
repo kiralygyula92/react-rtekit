@@ -3,7 +3,7 @@ import { documentToText, type TextOptions } from '../document.js';
 import { createDocument } from '../document.js';
 
 /**
- * Plain text (03 §1, §5.3).
+ * Plain text.
  *
  * @module
  */
@@ -21,7 +21,7 @@ export function documentToPlainText(doc: EditorDocument, options: TextOptions = 
 }
 
 /**
- * The `text/plain` alternative for a multipart e-mail (03 §5.3).
+ * The `text/plain` alternative for a multipart e-mail.
  *
  * Links become `text (url)` and list items get markers, so the message still reads
  * correctly in a client that refuses HTML.
@@ -52,7 +52,7 @@ export function plainTextAlternative(
  * Turns plain text into a document.
  *
  * Double newlines become paragraphs and single newlines become line breaks, which is
- * what a plain-text paste should produce (03 §3).
+ * what a plain-text paste should produce.
  *
  * @example
  * ```ts

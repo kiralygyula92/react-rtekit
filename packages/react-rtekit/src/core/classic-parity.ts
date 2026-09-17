@@ -1,7 +1,7 @@
 import type { ToolbarConfig } from '../types/toolbar.js';
 
 /**
- * The two frozen lists the `classic` preset reproduces (01 §2, 01 §5).
+ * The two frozen lists the `classic` preset reproduces.
  *
  * They live in their own leaf module because three unrelated places need them — the
  * theme, the preset table and the colour picker — and importing any one of those from
@@ -9,19 +9,19 @@ import type { ToolbarConfig } from '../types/toolbar.js';
  * `classicTheme` should not also get every plugin.
  *
  * **These lists are frozen**: the order and the values are part of the parity
- * guarantee, and changing either is a major version (09 §7).
+ * guarantee, and changing either is a major version.
  *
  * @module
  */
 
-/** The toolbar the Skimmer editor had, in its original order (01 §5). */
+/** The toolbar the legacy editor had, in its original order. */
 export const CLASSIC_TOOLBAR: ToolbarConfig = [
   ['bold', 'italic', 'underline'],
   ['color'],
   ['alignLeft', 'alignCenter', 'alignRight', 'bulletList'],
 ];
 
-/** The 21 swatches the old editor shipped, in its original order (01 §2). */
+/** The 21 swatches the old editor shipped, in its original order. */
 export const CLASSIC_COLORS = [
   '#000000',
   '#FF0000',

@@ -30,7 +30,7 @@ import { classicTheme, createTheme } from 'react-rtekit';
 
       <Section id="presets" title="The shipped themes">
         <p>
-          <code>light</code> is the default. <code>classic</code> reproduces the Skimmer editor exactly and is
+          <code>light</code> is the default. <code>classic</code> reproduces a typical Quill wrapper exactly and is
           frozen — changing one of its values is a major version. <code>dark</code> is AA-verified,
           <code>compact</code> scales everything down, and <code>bordered</code> puts the toolbar and the
           editor in one box.

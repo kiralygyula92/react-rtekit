@@ -103,9 +103,11 @@ carries no engine at all.
   and migrating off a Quill wrapper.
 - [API reference](https://kiralygyula92.github.io/react-rtekit/api) — generated from
   TypeDoc and the library's runtime metadata, so the lists cannot drift.
-- [`docs/`](docs/) — the specification this library was built from: architecture, the
-  content model, the behavioural spec, the override system, theming, the testing and
-  release strategy.
+- [`docs/adr/`](docs/adr/) — why the engine sits behind an adapter, why the sanitizer
+  is in-house, and why legacy markup is handled with interop profiles rather than a
+  second engine.
+- [`docs/regressions.md`](docs/regressions.md) — the twenty-six behaviours this library
+  fixes relative to a typical Quill wrapper, each one a named regression test.
 
 ## Packages
 

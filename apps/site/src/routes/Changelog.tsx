@@ -4,7 +4,7 @@ import libraryChangelog from '../../../../packages/react-rtekit/CHANGELOG.md?raw
 import adapterChangelog from '../../../../packages/react-rtekit-rhf/CHANGELOG.md?raw';
 
 /**
- * The changelog (08 §1).
+ * The changelog.
  *
  * Rendered through the library's own Markdown pipeline rather than a Markdown
  * component: `<RteContentView valueFormat="markdown">` parses it into the portable

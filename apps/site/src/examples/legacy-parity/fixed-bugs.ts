@@ -1,5 +1,5 @@
 /**
- * The 26 defects of the original `CustomRte`, as listed in 01 §9.
+ * The 26 defects of the legacy wrapper, as listed in `docs/regressions.md`.
  *
  * The parity page shows this list behind the "show differences" toggle: the visuals
  * match the old editor, and every entry here is a way the behaviour deliberately

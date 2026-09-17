@@ -3,7 +3,7 @@ import { Link, NavLink, useParams } from 'react-router';
 import { GUIDES, findGuide, guideHeadings } from '../guides';
 
 /**
- * One guide page: the sidebar, the guide itself and an "on this page" list (08 §1).
+ * One guide page: the sidebar, the guide itself and an "on this page" list.
  *
  * The guide list is the reading order, so "previous" and "next" come from it rather
  * than from a second table that could disagree with the sidebar.

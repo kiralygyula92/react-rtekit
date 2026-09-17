@@ -5,7 +5,7 @@ import { RichTextEditor, Rte, useEditor } from '../../src/index.js';
 import { RteContentView } from '../../src/view/index.js';
 
 /**
- * Server rendering (02 §8).
+ * Server rendering.
  *
  * Two things have to hold for a form with an editor in it to be server-rendered. The
  * field has to produce markup rather than throw — nothing may touch `window` or
@@ -112,7 +112,7 @@ describe('server rendering the editor', () => {
 
   it('suppresses the hydration warning on both content hosts', () => {
     // The engine normalizes markup on mount, so the client's first tree differs from
-    // the server's by design (02 §8). React does not serialize the flag into markup,
+    // the server's by design. React does not serialize the flag into markup,
     // so this asserts on the source instead — the one place where reading the
     // implementation is the only way to check a contract that has no output.
     const root = 'packages/react-rtekit/src/react';

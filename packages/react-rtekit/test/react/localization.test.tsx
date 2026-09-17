@@ -4,7 +4,7 @@ import { RichTextEditor, de, en, es, hu, pseudo, pseudoize } from '../../src/ind
 import type { RteLocalization } from '../../src/types/localization.js';
 
 /**
- * Localization (06 §8, 05 §19, fixes R17).
+ * Localization (fixes R17).
  *
  * Two things are checked here. Every shipped catalogue is *complete* — a partial one
  * falls back to English silently, which reads as a bug rather than as a gap — and

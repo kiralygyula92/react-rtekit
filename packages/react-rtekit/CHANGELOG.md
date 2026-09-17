@@ -68,8 +68,8 @@
   Playwright, tsup (ESM + CJS + d.ts), Lightning CSS builds that preserve the `rtekit`
   cascade layers, size-limit budgets, Changesets and CI. Adds the public type surface,
   the default English catalogue, the token and structural stylesheets with the `classic`
-  and `dark` presets, the fixture corpus (Quill, Word, Google Docs, Excel, XSS, the
-  Skimmer defaults) and the demo/docs site shell.
+  and `dark` presets, the fixture corpus (Quill, Word, Google Docs, Excel, XSS and the
+  legacy editor defaults) and the demo/docs site shell.
 - Core, engine adapter and content model.
 
   - `EditorEngine` / `EngineHandle` plus the Lexical adapter: content, selection, commands,

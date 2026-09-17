@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 
-/** Metadata that accompanies every example page (08 §2). */
+/** Metadata that accompanies every example page. */
 export interface ExampleMeta {
   slug: string;
   title: string;

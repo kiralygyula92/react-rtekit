@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Links (05 §6).
+ * Links.
  *
  * The popover, autolinking, and a validator. Switch the validator on to see a policy
  * that only accepts internal URLs — the sanitizer's own rules apply either way, so a

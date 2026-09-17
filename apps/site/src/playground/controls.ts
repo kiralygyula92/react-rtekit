@@ -1,5 +1,5 @@
 /**
- * The playground's control schema (08 §4).
+ * The playground's control schema.
  *
  * Generated rather than hand-written: a prop missing from this list is a prop nobody
  * can try, so the list is the thing to keep in step with the API — not a panel full

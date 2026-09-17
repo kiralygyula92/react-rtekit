@@ -10,7 +10,7 @@ import {
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The four value formats (04 §2.2).
+ * The four value formats.
  *
  * The same document, serialized four ways. `valueFormat` decides which one
  * `onChange` hands back; the others are always a function call away.
@@ -18,7 +18,7 @@ import { CodeBlock } from '../../components/CodeBlock';
 
 const SAMPLE =
   '<h2>Summary</h2><p>The <strong>April</strong> results are <em>within range</em>.</p>' +
-  '<ul><li>Chlorine: normal</li><li>pH: high</li></ul>' +
+  '<ul><li>Revenue: on target</li><li>Costs: above plan</li></ul>' +
   '<p><a href="https://example.com/report">Full report</a></p>';
 
 export default function ValueFormatsExample() {

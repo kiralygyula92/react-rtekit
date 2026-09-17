@@ -5,7 +5,7 @@ import type { EditorInstance } from './editor.js';
 import type { FormatState } from './selection.js';
 import type { RteLocalization } from './localization.js';
 
-/** Toolbar composition (04 §2.5, 06 §2). @group Toolbar */
+/** Toolbar composition. @group Toolbar */
 
 /**
  * A toolbar entry: a built-in name, a plugin's item name, or an item spec.
@@ -86,7 +86,7 @@ export interface ToolbarOption {
   shortLabel?: ReactNode;
 }
 
-/** A toolbar item, whether built-in or contributed by a plugin (06 §2). */
+/** A toolbar item, whether built-in or contributed by a plugin. */
 export interface ToolbarItemSpec {
   /** Unique within the toolbar. */
   name: string;
@@ -145,7 +145,7 @@ export interface ToolbarConfigObject {
 /** `toolbar` prop: a flat list, groups, or the full object. */
 export type ToolbarConfig = ToolbarEntry[] | ToolbarEntry[][] | ToolbarConfigObject;
 
-/** An entry in the slash-command palette (05 §10). */
+/** An entry in the slash-command palette. */
 export interface SlashItemSpec {
   /** Unique within the palette. */
   name: string;

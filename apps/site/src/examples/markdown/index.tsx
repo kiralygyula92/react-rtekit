@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Markdown input rules and the Markdown value format (05 §5).
+ * Markdown input rules and the Markdown value format.
  *
  * The rules rewrite as you type; the value format decides what `onChange` hands back.
  */

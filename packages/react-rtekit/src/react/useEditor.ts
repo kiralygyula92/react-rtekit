@@ -52,11 +52,11 @@ import { useLocalization } from './context.js';
 import { resolveMessage } from './localization.js';
 
 /**
- * The headless editor (04 §5).
+ * The headless editor.
  *
  * Creates the engine, owns the derived-state store, and exposes the documented
  * {@link EditorInstance}. `<RichTextEditor>` uses this internally; consumers who want
- * their own UI use it directly (06 §7).
+ * their own UI use it directly.
  *
  * @module
  */
@@ -72,14 +72,14 @@ function runHandler<Ctx extends object>(
     return;
   }
   // Not calling `next` cancels the default behaviour, which is the documented way to
-  // veto an interaction (06 §4). The promise is not awaited: an async handler that
+  // veto an interaction. The promise is not awaited: an async handler that
   // calls `next` later still reaches the fallback.
   void handler(ctx, (override) => {
     fallback(override ? { ...ctx, ...override } : ctx);
   });
 }
 
-/** Where a pasted payload came from, for the middleware context (03 §3). */
+/** Where a pasted payload came from, for the middleware context. */
 function detectSource(html: string): PasteHandlerContext['source'] {
   if (html === '') return 'plain';
   if (html.includes('data-rtekit')) return 'rtekit';
@@ -94,13 +94,13 @@ function detectSource(html: string): PasteHandlerContext['source'] {
  *
  * Structure is kept — paragraphs, lists, links and the semantic marks all survive —
  * and only the source's own look is dropped, which is what "paste without formatting"
- * means to an author who still wants their bullet list (03 §3).
+ * means to an author who still wants their bullet list.
  */
 function stripInlineStyles(html: string): string {
   return html.replace(/\s(?:style|class|align|bgcolor|face|color)="[^"]*"/gi, '');
 }
 
-/** Default upload ceiling: 5 MB, as documented in 04 §2.6. */
+/** Default upload ceiling: 5 MB. */
 const DEFAULT_MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
 
 /**
@@ -129,7 +129,7 @@ function checkUploadable(file: File, options: UseEditorOptions): string | null {
   return allowed ? null : `"${file.name}" is not an accepted file type`;
 }
 
-/** The features a set of options enables, for the schema downgrade (03 §2). */
+/** The features a set of options enables, for the schema downgrade. */
 function resolveFeatures(options: UseEditorOptions): ReadonlySet<string> {
   const enabled: string[] = [];
   const flag = (value: boolean | undefined, ...features: string[]): void => {
@@ -223,7 +223,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
         warnings.push(warning);
       },
       // Every removal is a chance for a consumer to notice that content is being
-      // refused — a security log, a metric, a message to the author (06 §4).
+      // refused — a security log, a metric, a message to the author.
       onViolation: (violation) => {
         const editor = instanceRef.current;
         if (!editor) return;
@@ -307,7 +307,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
         isEmpty: isEmptyDocument(doc),
         length: countDocument(doc, countUnit, lengthMode),
         wordCount: countDocument(doc, 'words', lengthMode),
-        // Lazy by contract (02 §7); the document is already built here, so reading it
+        // Lazy by contract; the document is already built here, so reading it
         // is free and the getter keeps the documented shape.
         get document(): EditorDocument {
           return doc;
@@ -464,7 +464,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
         if (!upload) return;
         for (const file of files) {
           // The constraints are checked before the upload starts, not after it
-          // returns: a 30 MB file should never leave the browser (05 §7).
+          // returns: a 30 MB file should never leave the browser.
           const rejection = checkUploadable(file, optionsRef.current);
           if (rejection) {
             optionsRef.current.onUploadError?.(new Error(rejection), file);
@@ -575,7 +575,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
       },
       isSourceView: () => store.getSnapshot().sourceView,
       find: (query: string, findOptions?: FindOptions): FindResult => {
-        // Counting is the whole of the public contract (04 §5); moving between
+        // Counting is the whole of the public contract; moving between
         // matches and highlighting them belongs to the panel, which owns that state.
         const matches = findMatches(readDocument(), query, findOptions ?? {});
         return { total: matches.length, index: matches.length > 0 ? 0 : -1 };
@@ -640,7 +640,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
 
   const attachContent = useCallback((container: HTMLElement | null) => {
     // Clearing removes the server-rendered preview, which React does not track because
-    // it came from `dangerouslySetInnerHTML` (02 §8).
+    // it came from `dangerouslySetInnerHTML`.
     if (container) container.replaceChildren();
     containerRef.current = container;
     // A ref callback runs during commit, so this is not a setState-in-effect: it is the
@@ -778,7 +778,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     );
 
     /**
-     * The paste pipeline (03 §3).
+     * The paste pipeline.
      *
      * Everything the clipboard carries goes through `insertHTML` or `pastePlainText`,
      * both of which parse and sanitize first. Claiming the event is what stops the
@@ -814,7 +814,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
             return;
           }
           // `clean` drops the source's own formatting and keeps the structure, which
-          // is what the office profiles already do on the way in (03 §3).
+          // is what the office profiles already do on the way in.
           engine.exec('insertHTML', { html: ctx.mode === 'clean' ? stripInlineStyles(ctx.html) : ctx.html });
         },
       );
@@ -848,7 +848,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     }
 
     // `maxLengthBehaviour: 'block'` has to stop the character before it lands, which
-    // means intercepting the input rather than reacting to the change (05 §12).
+    // means intercepting the input rather than reacting to the change.
     const onBeforeInput = (event: Event): void => {
       const config = optionsRef.current;
       if (config.maxLength === undefined || config.maxLengthBehaviour === 'warn') return;
@@ -874,7 +874,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
 
     // The keymap listener lives here rather than in the component because only this
     // scope knows the engine has mounted; a component effect would run a render too
-    // early (05 §13). It listens to the engine rather than the DOM so that it runs
+    // early. It listens to the engine rather than the DOM so that it runs
     // *before* the engine's own shortcut handling, which would otherwise toggle the
     // same format straight back.
     const onKeyDown = (event: KeyboardEvent): boolean | void => {
@@ -886,7 +886,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
       const match = findKeymapMatch(entries, event);
       // `disableShortcuts` has to disable the shortcut, not just unbind our command:
       // the engine binds `Mod+B` and friends itself, so a key we merely ignore would
-      // still format the selection (05 §13).
+      // still format the selection.
       const disabled = findKeymapMatch(
         buildKeymap(Object.fromEntries((config.disableShortcuts ?? []).map((key) => [key, true]))),
         event,
@@ -916,7 +916,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
 
     /**
      * The keys that are not commands: Tab, Enter, Escape and the two
-     * accessibility shortcuts (05 §13).
+     * accessibility shortcuts.
      *
      * They are handled here rather than in the keymap because what they do depends on
      * where the caret is — Tab indents inside a list and moves focus everywhere else —
@@ -960,7 +960,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
 
         // The default indents where indenting means something and moves focus
         // everywhere else, which is what keeps the editor usable inside a form
-        // (05 §13).
+        //.
         if (tabBehaviour === 'indent' || (tabBehaviour !== 'focus' && inList)) {
           event.preventDefault();
           engine.exec(event.shiftKey ? 'outdent' : 'indent');
@@ -992,7 +992,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     cleanupsRef.current.push(engine.on('keydown', onKeyDown));
 
     // Consumer overrides run before anything a plugin registered: they are the
-    // deployment's policy, and policy wins (06 §0).
+    // deployment's policy, and policy wins.
     for (const [command, handler] of Object.entries(optionsRef.current.commandOverrides ?? {})) {
       if (!handler) continue;
       cleanupsRef.current.push(
@@ -1042,7 +1042,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     if (incoming === lastEmittedRef.current) return;
 
     // Only apply a value that actually differs, and keep the caret where it is: that
-    // is what stops the cursor jumping on every parent render (02 §5).
+    // is what stops the cursor jumping on every parent render.
     lastEmittedRef.current = incoming;
     engine.setContent(controlledValue, {
       format: valueFormat,

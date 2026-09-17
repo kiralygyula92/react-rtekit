@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { skipUndrivableShortcuts } from './mod-key';
 
 /**
- * The keyboard model in a real browser (05 §13, §14).
+ * The keyboard model in a real browser.
  *
  * jsdom has no focus order and no scrolling, so the parts of the keyboard contract
  * that are about moving around — Tab, Alt+F10, roving focus, Escape — can only be

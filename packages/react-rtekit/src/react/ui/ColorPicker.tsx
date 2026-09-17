@@ -6,7 +6,7 @@ import { resolveMessage } from '../localization.js';
 import { Button } from './primitives.js';
 
 /**
- * The colour picker (05 §2).
+ * The colour picker.
  *
  * The old implementation's swatches were `<Box onClick>`: not focusable, no keyboard,
  * no names, no selected state (R15). These are real buttons in a `grid`, with roving

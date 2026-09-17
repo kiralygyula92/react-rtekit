@@ -1,9 +1,9 @@
 /**
- * Light token defaults (07 §3).
+ * Light token defaults.
  *
  * Every visual in `theme.css` and `content.css` reads one of these. Nothing else in
  * the library contains a literal colour or length, which is what makes the theme
- * editor's token list exhaustive (07 §8).
+ * editor's token list exhaustive.
  */
 @layer rtekit.theme {
   .rte-root,

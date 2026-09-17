@@ -9,7 +9,7 @@ import { CLASSIC_TOOLBAR } from '../classic-parity.js';
 export { CLASSIC_TOOLBAR } from '../classic-parity.js';
 
 /**
- * Presets (05 §1.1).
+ * Presets.
  *
  * A preset is an array of plugins plus the prop defaults they imply — nothing more.
  * `addPlugins` and `removePlugins` adjust one; `plugins` replaces it entirely.
@@ -43,10 +43,10 @@ const MINIMAL: RtePlugin[] = [
 ];
 
 /**
- * Exactly the Skimmer feature set, plus history (05 §1.1).
+ * Exactly the legacy editor's feature set, plus history.
  *
  * Undo and redo exist but are deliberately **not** on the toolbar: the old editor had
- * no history buttons, and the parity page documents the shortcut instead (07 §4).
+ * no history buttons, and the parity page documents the shortcut instead.
  */
 const CLASSIC: RtePlugin[] = [
   blocks.paragraph,
@@ -194,7 +194,7 @@ export const presets: Record<PresetName, PresetDefinition> = {
  *
  * Order of precedence: `plugins` replaces the preset entirely, then `removePlugins`
  * drops names, then `addPlugins` appends, then the `enableX` flags turn individual
- * features off (04 §2.3).
+ * features off.
  */
 export function resolvePlugins(props: {
   preset?: PresetName;

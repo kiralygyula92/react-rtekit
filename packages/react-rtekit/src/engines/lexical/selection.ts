@@ -17,7 +17,7 @@ import { parseStyle } from '../../core/sanitize/css.js';
 import { normalizeColor } from '../../core/utils/color.js';
 
 /**
- * Selection and format state (02 §2.2).
+ * Selection and format state.
  *
  * Format state is recomputed on **every** selection and content change, including the
  * collapse to no selection, which is what keeps the toolbar honest after a blur

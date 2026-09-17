@@ -4,7 +4,7 @@ import { classicTheme, darkTheme, lightTheme, themes } from './index.js';
 import type { ResolvedRteTheme } from '../types/theme.js';
 
 /**
- * Every shipped theme meets WCAG AA (07 §5, §8).
+ * Every shipped theme meets WCAG AA.
  *
  * This exists because the failure mode is silent: a token can be changed to a nicer
  * shade, look fine to the person changing it, and quietly drop the error message below
@@ -24,7 +24,7 @@ const SURFACES = ['surface', 'surfaceMuted'] as const;
  * UI components, which WCAG 1.4.11 puts at 3:1.
  *
  * The resting field border is deliberately not in this list. `#D5D7DA` is 1.4:1 on
- * white — a parity value that 07 §4 pins — and it is not what identifies the field or
+ * white — a frozen parity value — and it is not what identifies the field or
  * its state: the 2px accent focus ring is, and that is what is checked here. Raising
  * the resting border would change every theme's look to satisfy a criterion the focus
  * ring already meets.
@@ -82,7 +82,7 @@ describe('the theme registry', () => {
   });
 
   it('keeps the classic invalid border at its parity value', () => {
-    // The deviation is the error *text*; the 1px border stays exactly as 07 §4 pins it,
+    // The deviation is the error *text*; the 1px border keeps its frozen parity value,
     // and 3.8:1 clears the component threshold it has to meet.
     expect(classicTheme.editor.invalidBorderColor).toBe('#F04438');
     expect(contrastRatio('#F04438', classicTheme.color.surface)).toBeGreaterThanOrEqual(3);

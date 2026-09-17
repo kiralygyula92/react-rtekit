@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { RichTextEditor, de, en, es, hu, pseudo, type RteLocalization } from 'react-rtekit';
 
 /**
- * Four catalogues, a pseudo-locale and right-to-left (05 §19, 06 §8).
+ * Four catalogues, a pseudo-locale and right-to-left.
  *
  * Every visible string, tooltip, `aria-label` and announcement comes from the
  * catalogue — which is what the pseudo-locale is for: anything that comes out in plain

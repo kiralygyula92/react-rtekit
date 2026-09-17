@@ -7,6 +7,6 @@ export const meta: ExampleMeta = {
     "Atomic tag chips: the insert menu, the {{ trigger, preview mode and unknown-tag warnings.",
   tags: ["merge tags"],
   features: ["mergeTags","atomic nodes"],
-  related: ["parity-skimmer-email","email-output"],
+  related: ["legacy-parity","email-output"],
   priority: 17,
 };

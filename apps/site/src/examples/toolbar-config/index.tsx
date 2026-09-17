@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from 'react-rtekit';
 
 /**
- * Every shape the `toolbar` prop takes (04 §2.5, 05 §14).
+ * Every shape the `toolbar` prop takes.
  *
  * The same registry backs all of them: a flat list, groups, or the object form with
  * overflow, labels and a size. Anything not in the registry is a spec of your own,
@@ -28,7 +28,7 @@ const signatureItem: ToolbarItemSpec = {
   kind: 'button',
   label: 'Insert signature',
   onClick: ({ editor }) => {
-    editor.insertContent('<p>— Clearwater Pools support</p>');
+    editor.insertContent('<p>— Northwind Ltd support</p>');
   },
 };
 

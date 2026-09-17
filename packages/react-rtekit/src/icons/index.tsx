@@ -2,12 +2,12 @@ import type { ReactNode } from 'react';
 import type { RteIcons } from '../types/icons.js';
 
 /**
- * The default icon set (06 §9).
+ * The default icon set.
  *
  * In-house inline SVGs so no icon package ever reaches a consumer's bundle. Every glyph
  * is drawn on Material's 24×24 grid with `currentColor`, which is what lets the
  * `classic` preset match the MUI icons the old editor used at the same size and colour
- * (07 §4).
+ *.
  *
  * @module
  */

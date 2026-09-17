@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance } from 'react-rtekit';
 import { buildLargeDocument, buildLargeWordPaste } from '../fixtures';
 
 /**
- * The performance harness (09 §4).
+ * The performance harness.
  *
  * Not linked from the navigation and not in the search index: it exists so the e2e
  * suite can measure the three budgets in a real browser, against the same build a
@@ -123,7 +123,7 @@ export function Performance() {
     <div className="page">
       <h1>Performance harness</h1>
       <p className="page__lead">
-        A fixed page for the budget measurements in 09 §4. Not part of the documentation
+        A fixed page for the performance budget measurements. Not part of the documentation
         — it is here so the e2e suite can measure typing latency, mount time and paste
         cost against the same build everyone else gets.
       </p>

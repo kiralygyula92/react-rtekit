@@ -108,7 +108,7 @@ editorRef.current?.getHTML();`}</Code>
 <RichTextEditor preset="email" />     // what an e-mail client renders
 <RichTextEditor preset="comment" />   // compact, submit on Ctrl+Enter
 <RichTextEditor preset="full" />      // everything, including tables and images
-<RichTextEditor preset="classic" />   // the Skimmer parity bundle`}</Code>
+<RichTextEditor preset="classic" />   // the legacy parity bundle`}</Code>
       </Section>
 
       <Callout>

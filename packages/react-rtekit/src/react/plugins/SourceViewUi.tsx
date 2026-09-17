@@ -8,11 +8,11 @@ import { resolveMessage } from '../localization.js';
 import { Button } from '../ui/primitives.js';
 
 /**
- * The HTML source view (05 §16).
+ * The HTML source view.
  *
  * Editing the source is editing the document, so what comes back out of the textarea
  * goes through the same sanitizer as a paste or a `value` — the source view is not a
- * way around the rules, it is another way in (03 §4).
+ * way around the rules, it is another way in.
  *
  * @module
  */
@@ -60,7 +60,7 @@ export function SourceViewUi() {
   );
 }
 
-/** The default source view: a plain textarea, replaceable by a code editor (06 §1). */
+/** The default source view: a plain textarea, replaceable by a code editor. */
 export function SourceViewPanel({ html, error, onApply, onCancel }: SourceViewSlotProps) {
   const t = useLocalization();
   const [value, setValue] = useState(html);

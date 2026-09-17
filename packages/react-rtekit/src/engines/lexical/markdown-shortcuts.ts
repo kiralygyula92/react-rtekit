@@ -20,7 +20,7 @@ import type { LexicalEditor } from 'lexical';
 import type { Unregister } from '../../types/common.js';
 
 /**
- * Markdown input rules (05 §5).
+ * Markdown input rules.
  *
  * Typing `# `, `- `, `> ` or `**bold**` produces the block or mark rather than the
  * characters. The set is filtered by the editor's enabled features, so a `classic`

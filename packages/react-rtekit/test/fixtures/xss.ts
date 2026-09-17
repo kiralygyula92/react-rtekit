@@ -1,5 +1,5 @@
 /**
- * The XSS corpus (09 §2).
+ * The XSS corpus.
  *
  * Every payload is run through every sanitization profile; the assertion is that the
  * output contains no script element, no event-handler attribute, no dangerous URL

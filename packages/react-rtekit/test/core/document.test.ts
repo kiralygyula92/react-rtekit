@@ -19,7 +19,7 @@ import {
 } from '../../src/core/index.js';
 
 /**
- * The document model (03 §1.1, 09 §2).
+ * The document model.
  *
  * The counting rules here are what fix R3: a 2 000-character message is 2 000
  * characters however much markup it carries.
@@ -61,11 +61,11 @@ describe('counting (R3)', () => {
   });
 
   it('counts a merge tag per the configured mode', () => {
-    const doc = htmlToDocument('<p>{org_name}</p>', {
-      mergeTags: { labels: { org_name: 'Company name' } },
+    const doc = htmlToDocument('<p>{company_name}</p>', {
+      mergeTags: { labels: { company_name: 'Company name' } },
     });
     expect(countDocument(doc, 'characters', 'label')).toBe('Company name'.length);
-    expect(countDocument(doc, 'characters', 'key')).toBe('org_name'.length);
+    expect(countDocument(doc, 'characters', 'key')).toBe('company_name'.length);
     expect(countDocument(doc, 'characters', 'zero')).toBe(0);
   });
 });
@@ -90,7 +90,7 @@ describe('emptiness truth table (R2)', () => {
   it('an atomic node with no text is content', () => {
     expect(isEmptyDocument(htmlToDocument('<p><img src="a.png" alt=""></p>'))).toBe(false);
     expect(isEmptyDocument(htmlToDocument('<hr>'))).toBe(false);
-    expect(isEmptyDocument(htmlToDocument('<p>{org_name}</p>'))).toBe(false);
+    expect(isEmptyDocument(htmlToDocument('<p>{company_name}</p>'))).toBe(false);
   });
 });
 
@@ -107,7 +107,7 @@ describe('merge-tag helpers', () => {
   });
 });
 
-describe('normalization (03 §2)', () => {
+describe('normalization', () => {
   it('merges adjacent runs carrying the same marks', () => {
     const doc: EditorDocument = {
       type: 'doc',

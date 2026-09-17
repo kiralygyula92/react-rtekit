@@ -5,7 +5,7 @@ import { RichTextEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * The pro chrome (05 §16, §18).
+ * The pro chrome.
  *
  * Find and replace, the source view, fullscreen, drafts and the shortcut reference.
  * The theme through all of them: none may change the document behind the author's
@@ -328,7 +328,7 @@ describe('the shortcut reference', () => {
   });
 
   it('shows a consumer binding alongside the built-in one', async () => {
-    // `keymap` adds bindings rather than replacing them (05 §13), so both ways of
+    // `keymap` adds bindings rather than replacing them, so both ways of
     // reaching bold are listed — which is exactly what the author needs to know.
     const editor = await mount({ keymap: { 'Mod+Shift+B': 'toggleBold' } });
     editor.exec('openShortcutHelp');
@@ -345,5 +345,57 @@ describe('the shortcut reference', () => {
 
     const dialog = await screen.findByRole('dialog', { name: 'Keyboard shortcuts' });
     expect(within(dialog).queryByText('Bold')).toBeNull();
+  });
+});
+
+describe('the toolbar that follows the selection', () => {
+  it('appears for a range selection and not for a caret', async () => {
+    const editor = await mount({
+      preset: 'standard',
+      defaultValue: '<p>select these words</p>',
+      floatingToolbar: true,
+    });
+
+    // One toolbar to begin with: the docked one.
+    expect(screen.getAllByRole('toolbar')).toHaveLength(1);
+
+    editor.focus('end');
+    editor.setSelection('all');
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('toolbar')).toHaveLength(2);
+    });
+  });
+
+  it('shows its own item list when one is given', async () => {
+    const editor = await mount({
+      preset: 'standard',
+      defaultValue: '<p>select these words</p>',
+      floatingToolbar: true,
+      bubbleMenuItems: [{ name: 'bold', label: 'Bold', command: 'toggleBold', kind: 'toggle' }],
+    });
+
+    editor.focus('end');
+    editor.setSelection('all');
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('toolbar')).toHaveLength(2);
+    });
+
+    const floating = screen.getAllByRole('toolbar')[1]!;
+    // Just the one control, rather than everything the docked toolbar carries.
+    expect(within(floating).getAllByRole('button')).toHaveLength(1);
+  });
+
+  it('stays hidden when the feature is off', async () => {
+    const editor = await mount({ preset: 'standard', defaultValue: '<p>words</p>' });
+
+    editor.focus('end');
+    editor.setSelection('all');
+
+    await waitFor(() => {
+      expect(editor.getSelection()?.isCollapsed).toBe(false);
+    });
+    expect(screen.getAllByRole('toolbar')).toHaveLength(1);
   });
 });

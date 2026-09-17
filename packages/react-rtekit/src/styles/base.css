@@ -1,9 +1,9 @@
 /**
- * Structural CSS (07 §1, §6).
+ * Structural CSS.
  *
  * Layout, contenteditable resets, popover positioning and the visually-hidden helper.
  * No colours, no fonts — those live in `theme.css` and read tokens. Importing only
- * this file plus `content.css` gives "unstyled" mode (07 §7).
+ * this file plus `content.css` gives "unstyled" mode.
  */
 @layer rtekit.base, rtekit.content, rtekit.theme;
 
@@ -421,7 +421,7 @@
 }
 
 @layer rtekit.base {
-  /* ── link, image and table chrome (05 §6–§8) ────────────────────────────── */
+  /* ── link, image and table chrome ────────────────────────────── */
   .rte-link-popover,
   .rte-image-dialog,
   .rte-image-popover {
@@ -495,7 +495,7 @@
 }
 
 @layer rtekit.base {
-  /* ── milestone 4 chrome (05 §15, §16) ───────────────────────────────────── */
+  /* ── milestone 4 chrome ───────────────────────────────────── */
   .rte-root[data-fullscreen='true'] {
     position: fixed;
     inset: 0;

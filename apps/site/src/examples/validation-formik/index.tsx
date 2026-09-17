@@ -3,7 +3,7 @@ import { RichTextEditor, isEmptyHtml, countText } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Formik, with no adapter package (04 §8, fixes R13).
+ * Formik, with no adapter package (fixes R13).
  *
  * The point of this page is what is *not* here: there is no `react-rtekit-formik`.
  * The editor is a controlled input with a value and an `onChange`, so binding it to a

@@ -3,7 +3,7 @@ import { RichTextEditor, documentToHtml, htmlToDocument, type EditorValue } from
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Tables (05 §8).
+ * Tables.
  *
  * Insert with the picker, move between cells with Tab, and use the controls that
  * appear when the caret is inside one. The e-mail column shows why a table serializes
@@ -13,8 +13,8 @@ import { CodeBlock } from '../../components/CodeBlock';
 const SAMPLE =
   '<table><tbody>' +
   '<tr><th>Reading</th><th>Value</th><th>Range</th></tr>' +
-  '<tr><td>Chlorine</td><td>1.8 ppm</td><td>1-3 ppm</td></tr>' +
-  '<tr><td>pH</td><td>7.8</td><td>7.2-7.6</td></tr>' +
+  '<tr><td>Revenue</td><td>1.8m</td><td>1.5-2.0m</td></tr>' +
+  '<tr><td>Costs</td><td>0.9m</td><td>0.7-0.8m</td></tr>' +
   '</tbody></table>';
 
 export default function TablesExample() {

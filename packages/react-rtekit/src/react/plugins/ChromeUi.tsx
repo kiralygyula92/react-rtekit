@@ -9,7 +9,7 @@ import { runHandler } from '../useEditor.js';
 import { resolveMessage } from '../localization.js';
 
 /**
- * Fullscreen, printing and autosave (05 §16, §18, 03 §7).
+ * Fullscreen, printing and autosave.
  *
  * Three small pieces of chrome that share one property: they are all about the
  * editor's relationship with the page around it rather than with its content.
@@ -75,7 +75,7 @@ export function FullscreenUi({ fullscreen }: FullscreenUiProps) {
 }
 
 /**
- * Printing (05 §16).
+ * Printing.
  *
  * Prints the content, not the page: the editor's chrome, the surrounding form and the
  * site's navigation are all irrelevant to what the author wants on paper. A hidden
@@ -136,7 +136,7 @@ export function PrintUi() {
 /** Props for {@link AutosaveUi}. */
 export interface AutosaveUiProps {
   config: AutosaveConfig;
-  /** Interaction middleware (06 §4). */
+  /** Interaction middleware. */
   handlers?: Partial<RteHandlers>;
 }
 
@@ -160,7 +160,7 @@ function readDraft(storage: Storage | null, key: string): StoredDraft | null {
 }
 
 /**
- * Autosave and drafts (03 §7).
+ * Autosave and drafts.
  *
  * The draft is written on a debounce and read once on mount. Restoring is a prompt
  * rather than a silent overwrite: content appearing out of nowhere is alarming, and

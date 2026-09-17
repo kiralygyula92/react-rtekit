@@ -6,11 +6,11 @@ import {
   type EditorInstance,
   type EditorValue,
 } from 'react-rtekit';
-import { DEFAULT_WATER_TEST_EMAIL_MESSAGE } from '../../fixtures';
+import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Merge tags (03 §6, fixes R23).
+ * Merge tags (fixes R23).
  *
  * A tag is one atomic node: select the whole message and bold it, and the tags come
  * through unchanged. Preview mode substitutes the samples without touching the stored
@@ -18,15 +18,15 @@ import { CodeBlock } from '../../components/CodeBlock';
  */
 
 const TAGS = [
-  { key: 'contact_first_name', label: 'Contact first name', group: 'Contact', sample: 'Dana' },
-  { key: 'next_test_date', label: 'Next test date', group: 'Dates', sample: '14 October 2026' },
+  { key: 'first_name', label: 'First name', group: 'Contact', sample: 'Dana' },
+  { key: 'due_date', label: 'Due date', group: 'Dates', sample: '14 October 2026' },
   { key: 'report_date', label: 'Report date', group: 'Dates', sample: '16 September 2026' },
-  { key: 'org_name', label: 'Organization name', group: 'Organization', sample: 'Clearwater Pools' },
-  { key: 'org_address', label: 'Organization address', group: 'Organization', sample: '1 Marina Way' },
+  { key: 'company_name', label: 'Company name', group: 'Organization', sample: 'Northwind Ltd' },
+  { key: 'company_address', label: 'Company address', group: 'Organization', sample: '1 Marina Way' },
 ];
 
 export default function MergeTagsExample() {
-  const [value, setValue] = useState(DEFAULT_WATER_TEST_EMAIL_MESSAGE);
+  const [value, setValue] = useState(DEFAULT_EMAIL_BODY);
   const [preview, setPreview] = useState(false);
   const editorRef = useRef<EditorInstance | null>(null);
 

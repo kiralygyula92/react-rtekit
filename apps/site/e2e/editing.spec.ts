@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * Editing behaviour in a real browser (09 §1).
+ * Editing behaviour in a real browser.
  *
  * This is the primary gate for anything involving a caret: jsdom cannot drive a
  * contenteditable, so typing, selection and formatting are only ever proved here.

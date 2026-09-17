@@ -148,7 +148,7 @@ export {
 export { en as defaultLocalization } from './locales/en.js';
 
 /**
- * The shipped catalogues (06 §8).
+ * The shipped catalogues.
  *
  * Each one is complete: a partial catalogue falls back to English silently, which
  * reads as a bug rather than as a translation gap.

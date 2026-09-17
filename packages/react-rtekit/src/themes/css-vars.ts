@@ -2,12 +2,12 @@ import type { DeepPartial } from '../types/common.js';
 import type { RteTheme } from '../types/theme.js';
 
 /**
- * Theme token → CSS custom property (07 §3).
+ * Theme token → CSS custom property.
  *
  * The mapping is not a mechanical kebab-case of the token path. The stylesheet names
  * tokens by what they *style* (`--rte-border-width`, `--rte-content-padding`), while
  * the theme groups them by what owns them (`editor.borderWidth`, `editor.padding`),
- * and 07 §3 is the contract between the two. A generic flatten produces
+ * and this map is the contract between the two. A generic flatten produces
  * `--rte-editor-border-width`, which no rule reads, so the token silently does
  * nothing — the whole theme looks applied and none of it is.
  *
@@ -81,7 +81,7 @@ const EXPLICIT: Readonly<Record<string, string>> = {
   density: '--rte-density-scale',
 };
 
-/** `density` is a keyword in the theme and a multiplier in CSS (07 §3). */
+/** `density` is a keyword in the theme and a multiplier in CSS. */
 const DENSITY_SCALE: Readonly<Record<string, string>> = {
   compact: '0.85',
   standard: '1',

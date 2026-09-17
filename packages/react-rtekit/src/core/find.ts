@@ -2,7 +2,7 @@ import type { BlockNode, EditorDocument, InlineNode } from '../types/document.js
 import type { FindOptions } from '../types/editor.js';
 
 /**
- * Find and replace over the portable document (05 §16).
+ * Find and replace over the portable document.
  *
  * Working on the document rather than the DOM means a match is found wherever it
  * really is — including one that straddles a formatting boundary, where the DOM has
@@ -134,16 +134,21 @@ export function findMatches(
  * Ranges are in the block's text coordinates and are applied from the end, so earlier
  * offsets stay valid. The formatting of the run a match starts in is what the
  * replacement inherits.
+ *
+ * Returns how many ranges were actually rewritten, which is not always how many were
+ * given: a match that lands on a merge tag or a mention is skipped, and the caller's
+ * count has to say so or `editor.replace()` reports replacements it did not make.
  */
 function replaceInInline(
   nodes: InlineNode[],
   ranges: { start: number; end: number; replacement: string }[],
-): InlineNode[] {
-  if (ranges.length === 0) return nodes;
+): { nodes: InlineNode[]; replaced: number } {
+  if (ranges.length === 0) return { nodes, replaced: 0 };
 
   // Flatten to (node, offset) so a match spanning several runs can be handled.
   const result: InlineNode[] = nodes.map((node) => ({ ...node }));
   const ordered = [...ranges].sort((a, b) => b.start - a.start);
+  let replaced = 0;
 
   for (const range of ordered) {
     let cursor = 0;
@@ -169,16 +174,20 @@ function replaceInInline(
     const first = result[startNode]!;
     const last = result[endNode]!;
     // Only plain text runs are rewritten: replacing half of a merge tag or a mention
-    // would produce a chip whose label no longer matches its key (03 §6).
+    // would produce a chip whose label no longer matches its key.
     if (first.type !== 'text' || last.type !== 'text') continue;
 
     const head = first.text.slice(0, startOffset);
     const tail = last.text.slice(endOffset);
     const merged: InlineNode = { ...first, text: `${head}${range.replacement}${tail}` };
     result.splice(startNode, endNode - startNode + 1, merged);
+    replaced += 1;
   }
 
-  return result.filter((node) => node.type !== 'text' || node.text !== '');
+  return {
+    nodes: result.filter((node) => node.type !== 'text' || node.text !== ''),
+    replaced,
+  };
 }
 
 /**
@@ -234,18 +243,20 @@ export function replaceMatches(
           .map((range) => ({ ...range, start: range.start - offset, end: range.end - offset }));
         offset += length + 1;
         if (itemRanges.length === 0) return item;
-        replaced += itemRanges.length;
-        return { ...item, content: replaceInInline(item.content, itemRanges) };
+        const rewritten = replaceInInline(item.content, itemRanges);
+        replaced += rewritten.replaced;
+        return { ...item, content: rewritten.nodes };
       });
       return { ...block, items };
     }
 
     const nodes = inlineContent(block);
     if (nodes.length === 0) return block;
-    replaced += ranges.length;
+    const rewritten = replaceInInline(nodes, ranges);
+    replaced += rewritten.replaced;
     // Narrowed by `inlineContent`: only blocks whose content is inline reach here,
     // and rewriting their runs cannot change which kind of block it is.
-    return { ...block, content: replaceInInline(nodes, ranges) } as BlockNode;
+    return { ...block, content: rewritten.nodes } as BlockNode;
   });
 
   return { document: { ...doc, content }, replaced };

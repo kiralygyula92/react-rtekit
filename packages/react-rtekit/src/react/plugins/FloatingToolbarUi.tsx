@@ -5,7 +5,7 @@ import { useEditorContext, useRteSlots } from '../context.js';
 import { Toolbar } from '../toolbar/Toolbar.js';
 
 /**
- * The bubble toolbar that follows a selection (05 §14).
+ * The bubble toolbar that follows a selection.
  *
  * Shown for a range selection and placed above it, so it never covers the text the
  * author is looking at. It is the same `Toolbar` as the docked one — same roving
@@ -21,7 +21,7 @@ export interface FloatingToolbarUiProps {
   items: ToolbarItemSpec[][];
 }
 
-/** Default gap between the selection and the toolbar, in pixels (04 §2.5). */
+/** Default gap between the selection and the toolbar, in pixels. */
 const DEFAULT_OFFSET = 8;
 
 export function FloatingToolbarUi({ config, items }: FloatingToolbarUiProps) {

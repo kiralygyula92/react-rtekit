@@ -1,5 +1,5 @@
 /**
- * Word, Google Docs and Excel clipboard payloads (03 §3, 09 §2).
+ * Word, Google Docs and Excel clipboard payloads.
  *
  * Trimmed but structurally faithful: the `mso-*` declarations, the `<o:p>` elements,
  * the conditional comments, the `mso-list` paragraph lists and the Google Docs
@@ -69,7 +69,7 @@ export const OFFICE_FIXTURES: OfficeFixture[] = [
 <table border=0 cellpadding=0 cellspacing=0 width=192 style='border-collapse:collapse;table-layout:fixed;width:144pt'>
 <col width=96 span=2 style='width:72pt'>
 <tr height=20 style='height:15.0pt'><td height=20 class=xl65 width=96 style='height:15.0pt;width:72pt'>Name</td><td class=xl65 width=96>Value</td></tr>
-<tr height=20><td class=xl66>Chlorine</td><td class=xl66 align=right x:num>1.5</td></tr>
+<tr height=20><td class=xl66>Revenue</td><td class=xl66 align=right x:num>1.5</td></tr>
 </table></body></html>`,
   },
 ];

@@ -13,7 +13,7 @@ import {
 import { CodeBlock } from '../components/CodeBlock';
 
 /**
- * The theme editor (07 §8, 08 §5).
+ * The theme editor.
  *
  * The token list is read off the theme itself rather than written out here, which is
  * the acceptance test for token coverage: a visual that is not a token cannot appear
@@ -26,7 +26,7 @@ const BASES: Record<string, ResolvedRteTheme> = {
   dark: darkTheme,
 };
 
-/** Pairs whose contrast has to hold, whatever the author does to them (05 §14). */
+/** Pairs whose contrast has to hold, whatever the author does to them. */
 const CONTRAST_PAIRS: { label: string; foreground: string; background: string }[] = [
   { label: 'Body text on the editor', foreground: 'color.text', background: 'color.surface' },
   { label: 'Placeholder on the editor', foreground: 'color.placeholder', background: 'color.surface' },
@@ -64,7 +64,7 @@ export function ThemeEditor() {
 
   const vars = useMemo(() => themeToCssVars(theme), [theme]);
 
-  /** Every token, grouped the way 07 §3 groups them. */
+  /** Every token, grouped as the theme groups them. */
   const groups = useMemo(() => {
     const result = new Map<string, { path: string; value: string }[]>();
     for (const [group, section] of Object.entries(theme) as [string, unknown][]) {

@@ -1,7 +1,7 @@
 import type { EditorThemeClasses } from 'lexical';
 
 /**
- * Lexical's class-name map, pointed at our own stable class names (07 §1).
+ * Lexical's class-name map, pointed at our own stable class names.
  *
  * Lexical does not ship CSS; it only puts these classes on the DOM it creates. Naming
  * them `rte-*` means the content stylesheet styles the live editor and stored HTML with

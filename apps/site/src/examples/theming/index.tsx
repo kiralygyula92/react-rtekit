@@ -10,7 +10,7 @@ import {
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Themes, schemes and densities (07 §2–§5).
+ * Themes, schemes and densities.
  *
  * A theme is data. There is no visual in the library that is not one of these tokens,
  * which is what lets the theme editor list them all and what makes a brand theme three
@@ -36,7 +36,7 @@ const brandTheme = createTheme(themes.light, {
 const SAMPLE =
   '<h2>Quarterly summary</h2>' +
   '<p>The <strong>April</strong> results are <em>within range</em>, with one exception.</p>' +
-  '<ul><li>Chlorine: normal</li><li>pH: <span style="color: #C81E1E">high</span></li></ul>' +
+  '<ul><li>Revenue: on target</li><li>Costs: <span style="color: #C81E1E">above plan</span></li></ul>' +
   '<p><a href="https://example.com/report">Full report</a></p>';
 
 export default function ThemingExample() {
@@ -48,7 +48,7 @@ export default function ThemingExample() {
   const base: ResolvedRteTheme = name === 'brand' ? brandTheme : themes[name];
 
   // Density is a multiplier rather than a second set of numbers, so it composes with
-  // whichever theme is selected instead of replacing it (07 §6).
+  // whichever theme is selected instead of replacing it.
   const theme = useMemo(() => createTheme(base, { density }), [base, density]);
 
   const vars = useMemo(() => theme.toCssVars(), [theme]);

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
 import { listExamples } from '../examples';
 
-/** The examples gallery with a tag filter (08 §3). */
+/** The examples gallery with a tag filter. */
 export function ExamplesGallery() {
   const all = useMemo(() => listExamples(), []);
   const [tag, setTag] = useState<string | null>(null);
@@ -53,7 +53,7 @@ export function ExamplesGallery() {
 
       {visible.length === 0 ? (
         <p className="empty-state">
-          No examples yet. They land with milestone 2, starting with the Skimmer parity page.
+          No examples yet. They land with milestone 2, starting with the legacy parity page.
         </p>
       ) : (
         <ul className="card-grid">

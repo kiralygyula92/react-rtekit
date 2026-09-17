@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Emoji and the slash palette (05 §10).
+ * Emoji and the slash palette.
  *
  * Both are the same primitive as mentions and merge tags, so their keyboard model is
  * identical: arrows move, Enter or Tab inserts, Escape closes.

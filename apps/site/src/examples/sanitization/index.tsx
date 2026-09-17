@@ -5,7 +5,7 @@ import { XSS_PAYLOADS } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * What each sanitization profile strips (03 §4).
+ * What each sanitization profile strips.
  *
  * Read-only by construction: the payloads are rendered as *text*, and the only thing
  * this page ever puts in the DOM as markup is the sanitizer's output. A demo that
@@ -19,7 +19,7 @@ const PROFILES: { name: SanitizeProfileName; summary: string }[] = [
   { name: 'permissive', summary: 'Widest allowlist — and still no scripts, no event handlers, no javascript: URLs.' },
 ];
 
-/** Things that must never appear in output, whatever the profile (03 §4.3). */
+/** Things that must never appear in output, whatever the profile. */
 const FORBIDDEN = ['<script', 'onerror', 'onload', 'javascript:', '<iframe', '<object', 'srcdoc'];
 
 export default function SanitizationExample() {

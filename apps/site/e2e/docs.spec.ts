@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 /**
- * The guides and the search palette (08 §1, §8).
+ * The guides and the search palette.
  *
  * Read from disk rather than listed here, for the same reason as the examples: a guide
  * that is added and never opened is a guide nobody notices is broken.

@@ -1,7 +1,7 @@
 import type { RteLocalization } from '../types/localization.js';
 
 /**
- * Hungarian (06 §8).
+ * Hungarian.
  *
  * Hungarian is agglutinative and puts the definite article before the noun, so the
  * toolbar labels are nouns rather than the imperative verbs English uses.

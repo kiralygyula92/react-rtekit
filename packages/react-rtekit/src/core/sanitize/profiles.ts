@@ -8,7 +8,7 @@ import { DEFAULT_PROTOCOLS } from './url.js';
 import { EMAIL_SAFE_PROPERTIES, STANDARD_SAFE_PROPERTIES } from './css.js';
 
 /**
- * The four sanitization profiles (03 §4.2).
+ * The four sanitization profiles.
  *
  * @module
  */
@@ -16,7 +16,7 @@ import { EMAIL_SAFE_PROPERTIES, STANDARD_SAFE_PROPERTIES } from './css.js';
 /**
  * Tags removed along with their contents, in every profile.
  *
- * No configuration can re-enable these (03 §4.3). `noscript` and `template` are here
+ * No configuration can re-enable these. `noscript` and `template` are here
  * because they re-parse their contents in a different context, which is the classic
  * mutation-XSS vector; `svg` and `math` because of `use`, `foreignObject` and
  * `annotation-xml`.
@@ -201,7 +201,7 @@ const PROFILES: Record<SanitizeProfileName, Omit<ResolvedSanitizeConfig, 'profil
     allowAttributes: {
       ...STANDARD_ATTRS,
       // No `class` and no `id`: e-mail clients strip stylesheets, so classes are dead
-      // weight, and ids collide with the host document (03 §5.3).
+      // weight, and ids collide with the host document.
       '*': ['style', 'dir', 'lang', 'title'],
     },
     allowStyles: EMAIL_SAFE_PROPERTIES,
@@ -245,7 +245,7 @@ export function getProfile(name: SanitizeProfileName): ResolvedSanitizeConfig {
  * Turns the `sanitize` prop into a resolved configuration.
  *
  * A config object is merged onto `standard`; `false` is handled by the caller, which
- * also emits the development warning (03 §4.2).
+ * also emits the development warning.
  *
  * @example
  * ```ts

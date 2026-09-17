@@ -9,7 +9,7 @@ import type { EditorDocument } from '../types/document.js';
 import { themeToCssVars as flattenTheme } from '../themes/css-vars.js';
 
 /**
- * The read-only renderer (04 §6, 05 §17).
+ * The read-only renderer.
  *
  * The right way to render stored content outside an editor: it loads no engine, it
  * sanitizes before rendering, and it applies the same content styles, so a preview,
@@ -26,7 +26,7 @@ import { themeToCssVars as flattenTheme } from '../themes/css-vars.js';
  * <RteContentView
  *   value={storedHtml}
  *   sanitize="email"
- *   mergeTagPreview={{ contact_first_name: 'Jane' }}
+ *   mergeTagPreview={{ first_name: 'Jane' }}
  * />
  * ```
  */
@@ -74,7 +74,7 @@ export function RteContentView({
       style={{ ...themeVars, ...style }}
       {...(colorScheme && colorScheme !== 'auto' ? { 'data-color-scheme': colorScheme } : {})}
       // Safe by construction: the string was produced by our own serializer from a
-      // sanitized document, and is never the caller's raw input (03 §4.1).
+      // sanitized document, and is never the caller's raw input.
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

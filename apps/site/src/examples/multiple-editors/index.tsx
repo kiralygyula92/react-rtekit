@@ -3,7 +3,7 @@ import { RichTextEditor, type ChangeMeta, type EditorValue } from 'react-rtekit'
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Three editors on one page (08 §3.2, regression demo for R4 and R10).
+ * Three editors on one page (regression demo for R4 and R10).
  *
  * The old component gave its toolbar a hard-coded `id="toolbar"`, so two editors on
  * one page produced duplicate ids and ambiguous label targets. Here every id comes
@@ -13,9 +13,9 @@ import { CodeBlock } from '../../components/CodeBlock';
 
 /** The three fields, each with its own preset, so the isolation is visible. */
 const FIELDS = [
-  { id: 'subject', label: 'Subject line', preset: 'minimal' as const, value: '<p>Your April water test</p>' },
+  { id: 'subject', label: 'Subject line', preset: 'minimal' as const, value: '<p>Your April report</p>' },
   { id: 'body', label: 'Message body', preset: 'classic' as const, value: '<p>Hi Dana,</p><p>Your results are ready.</p>' },
-  { id: 'footer', label: 'Footer', preset: 'comment' as const, value: '<p>Clearwater Pools · Tampa FL</p>' },
+  { id: 'footer', label: 'Footer', preset: 'comment' as const, value: '<p>Northwind Ltd · Tampa FL</p>' },
 ];
 
 export default function MultipleEditorsExample() {

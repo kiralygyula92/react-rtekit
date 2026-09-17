@@ -1,5 +1,5 @@
 /**
- * Serialization: HTML, Markdown, plain text and JSON (03 §1).
+ * Serialization: HTML, Markdown, plain text and JSON.
  *
  * @module
  */

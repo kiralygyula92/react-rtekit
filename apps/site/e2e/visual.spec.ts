@@ -1,11 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * Visual regression (09 §1).
+ * Visual regression.
  *
  * The parity guarantee is a visual one, so it gets pixel snapshots: idle, focused,
  * with the colour popover open, and in an error state. A diff here is either a bug or
- * a deliberate change to a frozen preset — which 09 §7 makes a major version.
+ * a deliberate change to a frozen preset — which is a major version.
  */
 
 /**
@@ -13,7 +13,7 @@ import { expect, test, type Page } from '@playwright/test';
  * macOS and the Linux container CI uses, so a baseline taken on one machine fails
  * everywhere else. The suite therefore runs on request — `VISUAL=1 pnpm e2e` after
  * `pnpm e2e:update` has produced baselines for the current platform. M6 adds the
- * Linux baseline set and turns this on in CI (09 §1).
+ * Linux baseline set and turns this on in CI.
  */
 test.skip(!process.env.VISUAL, 'Set VISUAL=1 to run the pixel comparison (see the note above).');
 
@@ -28,7 +28,7 @@ function field(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/parity-skimmer-email');
+  await page.goto('/examples/legacy-parity');
   await expect(editor(page)).toBeVisible();
   // Web fonts change metrics; waiting keeps the snapshots stable.
   await page.evaluate(() => document.fonts.ready);

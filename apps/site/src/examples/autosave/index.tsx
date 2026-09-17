@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rte
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Autosave and drafts (03 §7).
+ * Autosave and drafts.
  *
  * The storage is an in-memory one, so the page does not leave anything behind. A real
  * deployment passes `localStorage` — or a server-backed `Storage` of its own.

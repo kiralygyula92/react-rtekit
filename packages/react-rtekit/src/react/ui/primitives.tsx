@@ -8,11 +8,11 @@ import {
 } from 'react';
 
 /**
- * The small primitives (06 §1).
+ * The small primitives.
  *
  * Roughly a dozen components that every other part of the UI is built from. Overriding
  * just these through `slots` re-skins the entire editor for a design system, which is
- * the point of keeping them this plain (06 §10).
+ * the point of keeping them this plain.
  *
  * @module
  */

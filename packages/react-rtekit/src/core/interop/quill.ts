@@ -4,7 +4,7 @@ import { parseStyle, serializeStyle } from '../sanitize/css.js';
 import { MAX_INDENT } from '../schema.js';
 
 /**
- * Legacy Quill markup (03 §5.1, ADR-004).
+ * Legacy Quill markup (ADR-004).
  *
  * Converts what Quill 2 emits into ordinary HTML that the generic tree-to-document
  * converter already understands: `ql-align-*` becomes `text-align`, flat list items

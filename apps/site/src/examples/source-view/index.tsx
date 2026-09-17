@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rte
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The HTML source view (05 §16).
+ * The HTML source view.
  *
  * Try applying something hostile. The source view runs the same sanitizer as a paste
  * or a `value`, so it is not a way around the rules.

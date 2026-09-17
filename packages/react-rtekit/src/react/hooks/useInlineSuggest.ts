@@ -3,7 +3,7 @@ import { useEditorContext } from '../context.js';
 
 /**
  * The trigger-menu engine behind merge tags, mentions, emoji and the slash menu
- * (05 §10).
+ *.
  *
  * All four are the same interaction: a trigger string typed at a word boundary opens
  * a list, further typing filters it, the arrow keys move, Enter or Tab inserts, and

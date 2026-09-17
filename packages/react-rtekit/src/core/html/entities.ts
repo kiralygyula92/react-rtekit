@@ -3,7 +3,7 @@
  *
  * Decoding is security-relevant: `&#106;avascript:` and `jav&#x09;ascript:` are the
  * classic ways to smuggle a dangerous URL past a naive check, so URLs are always
- * decoded before their scheme is inspected (03 §4.3).
+ * decoded before their scheme is inspected.
  *
  * Only the named entities that actually occur in editor content are tabulated;
  * everything else goes through the numeric path or is left alone, which keeps this

@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue, type MentionCandidate } from 'react-r
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Mentions (05 §10).
+ * Mentions.
  *
  * The search is asynchronous and deliberately slow, so the loading and empty states
  * are visible rather than theoretical. A mention is an atomic node carrying an id,

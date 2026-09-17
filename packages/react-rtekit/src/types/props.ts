@@ -37,13 +37,13 @@ import type {
 } from './config.js';
 import type { PasteMode, PasteHandlerContext } from './handlers.js';
 
-/** `<RichTextEditor>` props (04 §2). @group Component */
+/** `<RichTextEditor>` props. @group Component */
 
 /** How `Tab` behaves outside lists. */
 export type TabBehaviour = 'indent' | 'focus' | 'insertTab';
 
 /**
- * Feature toggles, sugar over plugin inclusion (04 §2.3).
+ * Feature toggles, sugar over plugin inclusion.
  *
  * Each flag adds or removes the plugin that provides it, so turning one off also takes
  * its toolbar item, keymap entry and schema rules with it. A format the schema does not
@@ -183,7 +183,7 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   fontSizes?: { label: string; value: string }[];
   /** Swatches, columns and the custom-colour option. @default the 21 classic swatches */
   colors?: ColorPaletteConfig;
-  /** The merge tags this editor knows, and how they are triggered (05 §10). */
+  /** The merge tags this editor knows, and how they are triggered. */
   mergeTags?: MergeTagsConfig;
   /** The mention provider, trigger and rendering. */
   mentions?: MentionsConfig;
@@ -213,11 +213,11 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   hideLabel?: boolean;
   /** Returns a message for invalid content, or `null` when it is acceptable. */
   validate?: (ctx: ValidateContext) => string | null;
-  /** The input sanitization profile, or an explicit config (03 §4). @default 'standard' */
+  /** The input sanitization profile, or an explicit config. @default 'standard' */
   sanitize?: SanitizeOption;
   /** Sanitize again on the way out, so a bug upstream cannot leak. @default true */
   sanitizeOutput?: boolean;
-  /** The HTML dialect `getHTML` produces (03 §5). @default 'standard' */
+  /** The HTML dialect `getHTML` produces. @default 'standard' */
   htmlProfile?: HtmlProfile;
   /** Inlining, width and table-layout choices for the `email` profile. */
   emailOptions?: EmailOutputOptions;
@@ -229,17 +229,17 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   pastePrompt?: boolean;
   /** Turn pasted URLs into links. @default true */
   autoLinkOnPaste?: boolean;
-  /** Turn typed URLs and e-mail addresses into links (05 §6). @default true */
+  /** Turn typed URLs and e-mail addresses into links. @default true */
   autoLink?: boolean;
   /** Protocols a typed URL may be linked with. @default ['https', 'http', 'mailto'] */
   autoLinkProtocols?: string[];
   /** Protocol given to a bare host, in the popover and in autolinking. @default 'https' */
   defaultProtocol?: string;
   /**
-   * Rejects or rewrites a URL before it becomes a link (05 §6).
+   * Rejects or rewrites a URL before it becomes a link.
    *
    * Return a message to reject, or `null` to accept. Sanitization runs regardless: a
-   * validator can tighten the rules but never loosens them (03 §4.3).
+   * validator can tighten the rules but never loosens them.
    *
    * @example
    * ```ts
@@ -321,7 +321,7 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   imageOptions?: ImageOptions;
 
   // ── 2.7 customization and theming ────────────────────────────────────────
-  /** Replacement components, by slot name (06 §1). */
+  /** Replacement components, by slot name. */
   slots?: Partial<RteSlots>;
   /** Extra props merged into each slot, statically or per render. */
   slotProps?: RteSlotProps;
@@ -329,21 +329,21 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   classNames?: RteClassNames;
   /** Per-slot inline styles. */
   styles?: RteStyles;
-  /** Interaction middleware; each wraps one interaction (06 §4). */
+  /** Interaction middleware; each wraps one interaction. */
   handlers?: Partial<RteHandlers>;
-  /** Replacement command implementations, by command id (06 §3). */
+  /** Replacement command implementations, by command id. */
   commandOverrides?: CommandOverrides;
   /** Replacement icons, by icon name. */
   icons?: RteIcons;
   /** Message catalogue, merged over the default. */
   localization?: DeepPartial<RteLocalization>;
-  /** Theme tokens, merged over the preset's (07 §2). */
+  /** Theme tokens, merged over the preset's. */
   theme?: RteTheme | DeepPartial<RteTheme>;
   /** Light, dark, or follow the operating system. */
   colorScheme?: ColorScheme;
   /** Applied to `.rte-content`, for prose overrides. */
   contentClassName?: string;
-  /** Structure and prose styles only, no chrome visuals (07 §7). @default false */
+  /** Structure and prose styles only, no chrome visuals. @default false */
   unstyled?: boolean;
   /** Applied to the root element. */
   className?: string;
@@ -377,7 +377,7 @@ export interface UseEditorOptions
   initialChangeSource?: ChangeSource;
 }
 
-/** `<RteContentView>` props (04 §6). */
+/** `<RteContentView>` props. */
 export interface RteContentViewProps {
   /** The stored content to render. */
   value: EditorValue;

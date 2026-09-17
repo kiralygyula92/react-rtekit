@@ -1,5 +1,5 @@
 /**
- * Every visible string, tooltip, aria-label and announcement (06 §8).
+ * Every visible string, tooltip, aria-label and announcement.
  *
  * Interpolation uses `{name}` placeholders. Any value may instead be a function, which
  * is how plural rules and locale-specific ordering are expressed.
@@ -109,7 +109,7 @@ export interface RteLocalization {
     invalidUrl: LocalizedString;
     upload: LocalizedString;
     alt: LocalizedString;
-    /** Marks an image decorative, which is what an empty alt means (05 §16). */
+    /** Marks an image decorative, which is what an empty alt means. */
     decorative: LocalizedString;
     width: LocalizedString;
     resize: LocalizedString;

@@ -9,7 +9,7 @@ import {
 } from 'lexical';
 
 /**
- * The mention node (05 §10).
+ * The mention node.
  *
  * The same shape as the merge tag: a `TextNode` in `token` mode, so selection,
  * deletion and formatting treat it as one unit and a copy to a plain-text field still
@@ -54,11 +54,18 @@ export class MentionNode extends TextNode {
     return { ...super.exportJSON(), type: MENTION_NODE_TYPE, mentionId: this.__mentionId };
   }
 
+  /**
+   * The chip's element.
+   *
+   * Deliberately *not* `contenteditable="false"`, for the same reason as the merge tag:
+   * token mode already makes it atomic in the model, and the attribute stops Safari's
+   * select-all at the chip's edge — so typing over a selection that ends in a mention
+   * leaves the mention behind.
+   */
   override createDOM(config: EditorConfig): HTMLElement {
     const dom = super.createDOM(config);
     dom.className = 'rte-mention';
     dom.setAttribute('data-mention-id', this.__mentionId);
-    dom.setAttribute('contenteditable', 'false');
     return dom;
   }
 

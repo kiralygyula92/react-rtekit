@@ -3,7 +3,7 @@
  *
  * Every DOM id the library writes is namespaced by an instance id, so putting three
  * editors on one page cannot produce a duplicate (fixes R4). Nothing here touches
- * `window`, so it is safe at module scope during SSR (02 §8).
+ * `window`, so it is safe at module scope during SSR.
  */
 
 let counter = 0;

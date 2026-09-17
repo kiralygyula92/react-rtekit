@@ -36,9 +36,9 @@ import { useKeyboardInset } from './hooks/useVisualViewport.js';
 import { useRecentColors } from './hooks/useRecentColors.js';
 
 /**
- * The all-in-one component (04 §2).
+ * The all-in-one component.
  *
- * The first of the four entry points in 02 §3: props in, a complete field out. The
+ * The first of the four entry points: props in, a complete field out. The
  * other three — the same plus overrides, the composable parts, and `useEditor` with no
  * UI — are all reachable from the same pieces this assembles.
  *
@@ -86,7 +86,7 @@ function toolbarGroups(config: ToolbarConfig | false | undefined): ToolbarEntry[
  *
  * A preset is a plugin bundle and its prop defaults; a theme is tokens, and the two
  * stay separate — except for `classic`, which exists to reproduce one specific editor
- * and is defined by its look as much as by its plugin list (07 §4).
+ * and is defined by its look as much as by its plugin list.
  */
 const PRESET_THEMES: Partial<Record<PresetName, ResolvedRteTheme>> = { classic: classicTheme };
 
@@ -109,7 +109,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
   const appDefaults = useRteDefaults();
   const themeContext = useRteTheme();
 
-  // Precedence: props > provider > preset defaults > library defaults (06 §0).
+  // Precedence: props > provider > preset defaults > library defaults.
   const presetName = props.preset ?? appDefaults.preset ?? 'standard';
   const resolved: RichTextEditorProps = useMemo(
     () => ({ ...presets[presetName].defaults, ...appDefaults, ...props }),
@@ -129,7 +129,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
 
   const enabledFeatures = useMemo(() => new Set(featuresOf(plugins)), [plugins]);
 
-  // Plugin bindings first, then the consumer's, which win (06 §0). `useEditor` installs
+  // Plugin bindings first, then the consumer's, which win. `useEditor` installs
   // the listener, because only it knows when the engine has mounted.
   const keymap = useMemo(() => {
     const bindings: Record<string, CommandId> = {};
@@ -145,7 +145,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
     ...resolved,
     keymap,
     // The plugin list decides which features the schema accepts, so a `classic` editor
-    // downgrades a pasted heading instead of keeping markup it cannot edit (03 §2).
+    // downgrades a pasted heading instead of keeping markup it cannot edit.
     enableHeadings: resolved.enableHeadings ?? enabledFeatures.has('heading'),
     enableStrike: resolved.enableStrike ?? enabledFeatures.has('strike'),
     enableCode: resolved.enableCode ?? enabledFeatures.has('code'),
@@ -163,7 +163,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
     enableHorizontalRule: resolved.enableHorizontalRule ?? enabledFeatures.has('horizontalRule'),
     enableCheckList: resolved.enableCheckList ?? enabledFeatures.has('checkList'),
     // Configuring merge tags or mentions turns the feature on, whatever the preset
-    // says: the Skimmer field is `classic` *plus* merge tags (10 §3.2).
+    // says: the legacy field is `classic` *plus* merge tags.
     enableMergeTags:
       resolved.enableMergeTags ?? (enabledFeatures.has('mergeTag') || resolved.mergeTags !== undefined),
     enableMentions:
@@ -267,7 +267,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
   // ── rendering ────────────────────────────────────────────────────────────
   // An explicit `theme` wins, then an app-wide provider, then whatever the preset
   // implies. Only `classic` implies one: its whole purpose is a visual reproduction,
-  // so `preset="classic"` has to look classic without a second prop (07 §4).
+  // so `preset="classic"` has to look classic without a second prop.
   const theme = resolved.theme ?? themeContext?.theme ?? PRESET_THEMES[presetName];
 
   const themeVars = useMemo(() => (theme ? themeToCssVars(theme) : undefined), [theme]);
@@ -313,7 +313,7 @@ interface EditorChromeProps {
  * The field chrome: label, toolbar, content, footer and error.
  *
  * Split from `RichTextEditor` so it can subscribe to editor state without re-rendering
- * the providers above it on every keystroke (02 §7).
+ * the providers above it on every keystroke.
  */
 function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme, themeName }: EditorChromeProps) {
   const editorContext = useEditorContextValue();
@@ -393,7 +393,7 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
   );
 
   // A bottom-docked toolbar has to sit above the on-screen keyboard, which does not
-  // resize the layout viewport on either mobile platform (05 §15).
+  // resize the layout viewport on either mobile platform.
   const keyboardInset = useKeyboardInset(props.toolbarPosition === 'bottom');
 
   const toolbarVisible =
@@ -455,7 +455,7 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
       // The whole field mirrors, not only the text: the toolbar order, the indent
       // direction, the alignment defaults and the popover placement all follow the
       // root's direction, and the stylesheet is written in logical properties so
-      // that it does (05 §19).
+      // that it does.
       dir={props.dir ?? t.dir}
       {...(themeName ? { 'data-theme': themeName } : {})}
       {...(colorScheme && colorScheme !== 'auto' ? { 'data-color-scheme': colorScheme } : {})}
@@ -519,7 +519,7 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
         </ErrorText>
       ) : null}
 
-      <FeatureUi props={props} features={features} keymap={keymap} />
+      <FeatureUi props={props} features={features} keymap={keymap} groups={groups} />
 
       <div
         id={runtime.ids.announcer}
@@ -569,7 +569,7 @@ function EditorContent({
         ref={attachContent}
         className="rte-content-host"
         // The engine normalizes markup when it takes the element over, so the client's
-        // first tree differs from the server's by design (02 §8). Without this, every
+        // first tree differs from the server's by design. Without this, every
         // server-rendered application logs a hydration warning it cannot act on.
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: previewHtml }}

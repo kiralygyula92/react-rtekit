@@ -88,7 +88,7 @@ function luminance(hex: string): number {
 /**
  * Contrast ratio between two colours, 1–21.
  *
- * Used by the theme editor's AA badge and by the theming tests (07 §8).
+ * Used by the theme editor's AA badge and by the theming tests.
  *
  * @example
  * ```ts

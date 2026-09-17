@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router';
 import { examples } from '../examples';
 
 /**
- * One example: the live demo, its source, and a width switcher (08 §2).
+ * One example: the live demo, its source, and a width switcher.
  *
  * The Value and Events tabs arrive with the playground in M5; they need the example
  * to expose its editor instance, which the demos deliberately do not do yet.

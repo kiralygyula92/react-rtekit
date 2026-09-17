@@ -1,5 +1,5 @@
 /**
- * Fails the build when a public symbol has no TSDoc description (08 §6.5).
+ * Fails the build when a public symbol has no TSDoc description.
  *
  * Reads the TypeDoc JSON produced by `pnpm docs:json`, walks every exported
  * declaration and reports anything without a `comment.summary`.

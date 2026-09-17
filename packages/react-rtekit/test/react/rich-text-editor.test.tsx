@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import type { EditorInstance } from '../../src/types/editor.js';
 import { RichTextEditor, classicTheme } from '../../src/index.js';
-import { RTE_PREDEFINED_COLORS } from '../fixtures/skimmer.js';
-import { DEFAULT_WATER_TEST_EMAIL_MESSAGE } from '../fixtures/quill.js';
+import { RTE_PREDEFINED_COLORS } from '../fixtures/legacy.js';
+import { DEFAULT_EMAIL_BODY } from '../fixtures/quill.js';
 
 /**
- * The assembled component (04 §2, 05 §14, 07 §4).
+ * The assembled component.
  *
  * jsdom drives the chrome — toolbar, popovers, ARIA, validation — while typing and
  * selection live in the Playwright suite.
@@ -33,7 +33,7 @@ async function mount(
   return { editor: instance! };
 }
 
-describe('the classic preset reproduces the Skimmer toolbar (07 §4)', () => {
+describe(`the classic preset reproduces the legacy editor's toolbar`, () => {
   it('renders exactly the eight controls, in order', async () => {
     await mount({ preset: 'classic', theme: classicTheme });
     const toolbar = await screen.findByRole('toolbar');
@@ -110,7 +110,7 @@ describe('toolbar behaviour', () => {
     });
   });
 
-  it('is one tab stop, with arrows moving between controls (05 §14)', async () => {
+  it('is one tab stop, with arrows moving between controls', async () => {
     const user = userEvent.setup();
     await mount({ preset: 'classic' });
     const toolbar = await screen.findByRole('toolbar');
@@ -231,7 +231,7 @@ describe('field chrome', () => {
   });
 
   it('renders the counter against the limit and flags the over-limit state', async () => {
-    //  hides the counter by default, exactly as the old editor did (07 §4).
+    //  hides the counter by default, exactly as the old editor did.
     await mount({
       preset: 'classic',
       defaultValue: '<p>12345678</p>',
@@ -279,7 +279,7 @@ describe('presets', () => {
     expect(editor.getHTML()).toContain('data-list="bullet"');
   });
 
-  it('classic downgrades a pasted heading, because it has no heading plugin (03 §2)', async () => {
+  it('classic downgrades a pasted heading, because it has no heading plugin', async () => {
     const { editor } = await mount({ preset: 'classic', defaultValue: '<h2>Title</h2>' });
     expect(editor.getHTML()).toBe('<p>Title</p>');
   });
@@ -359,34 +359,34 @@ describe('localization (R17)', () => {
   });
 });
 
-describe('the Skimmer default message body', () => {
+describe(`the legacy editor's default message body`, () => {
   it('loads, keeps its merge tags and reports the right length', async () => {
     const onChange = vi.fn();
     const { editor } = await mount({
       preset: 'classic',
-      defaultValue: DEFAULT_WATER_TEST_EMAIL_MESSAGE,
+      defaultValue: DEFAULT_EMAIL_BODY,
       maxLength: 2048,
       showCounter: true,
       mergeTags: {
         tags: [
-          { key: 'contact_first_name', label: 'Contact first name' },
-          { key: 'next_test_date', label: 'Next test date' },
+          { key: 'first_name', label: 'First name' },
+          { key: 'due_date', label: 'Due date' },
           { key: 'report_date', label: 'Report date' },
-          { key: 'org_name', label: 'Company name' },
-          { key: 'org_address', label: 'Company address' },
+          { key: 'company_name', label: 'Company name' },
+          { key: 'company_address', label: 'Company address' },
         ],
       },
       onChange,
     });
 
     expect(editor.getMergeTags()).toEqual([
-      'contact_first_name',
-      'next_test_date',
+      'first_name',
+      'due_date',
       'report_date',
-      'org_name',
-      'org_address',
+      'company_name',
+      'company_address',
     ]);
-    expect(editor.getHTML()).toContain('{contact_first_name}');
+    expect(editor.getHTML()).toContain('{first_name}');
     expect(editor.validate()).toBeNull();
   });
 });

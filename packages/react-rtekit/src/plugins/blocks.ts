@@ -1,7 +1,7 @@
 import { definePlugin } from '../core/plugins/define.js';
 
 /**
- * The block and structure plugins (05 §3, §4, §5, §9).
+ * The block and structure plugins.
  *
  * @module
  */
@@ -33,7 +33,7 @@ export const blockquote = /* @__PURE__ */ definePlugin({
   sanitize: { allowTags: ['blockquote'] },
 });
 
-/** Fenced code blocks. No rich marks inside (05 §3). */
+/** Fenced code blocks. No rich marks inside. */
 export const codeBlock = /* @__PURE__ */ definePlugin({
   name: 'codeBlock',
   sanitize: { allowTags: ['pre', 'code'] },
@@ -62,7 +62,7 @@ export const align = /* @__PURE__ */ definePlugin({
   sanitize: { allowStyles: ['text-align'], allowClasses: [/^rte-align-/, /^ql-align-/] },
 });
 
-/** Indent and outdent, 0–8 levels (05 §4). */
+/** Indent and outdent, 0–8 levels. */
 export const indent = /* @__PURE__ */ definePlugin({
   name: 'indent',
   sanitize: { allowAttributes: { '*': ['data-indent'] }, allowClasses: [/^ql-indent-\d$/] },
@@ -78,7 +78,7 @@ export const list = /* @__PURE__ */ definePlugin({
   },
 });
 
-/** Check lists, with an accessible checkbox per item (05 §5). */
+/** Check lists, with an accessible checkbox per item. */
 export const checkList = /* @__PURE__ */ definePlugin({
   name: 'checkList',
   dependsOn: ['list'],
@@ -86,7 +86,7 @@ export const checkList = /* @__PURE__ */ definePlugin({
   sanitize: { allowAttributes: { li: ['data-checked'] } },
 });
 
-/** Undo and redo, with typing coalesced inside `historyGroupMs` (05 §9). */
+/** Undo and redo, with typing coalesced inside `historyGroupMs`. */
 export const history = /* @__PURE__ */ definePlugin({
   name: 'history',
   keymap: { 'Mod+Z': 'undo', 'Mod+Shift+Z': 'redo', 'Ctrl+Y': 'redo' },
@@ -96,7 +96,7 @@ export const history = /* @__PURE__ */ definePlugin({
  * Keeps a final empty paragraph after a table, rule or code block.
  *
  * Without it the caret has nowhere to go once the last block is atomic, and the author
- * cannot type after it (03 §2).
+ * cannot type after it.
  */
 export const trailingParagraph = /* @__PURE__ */ definePlugin({
   name: 'trailingParagraph',

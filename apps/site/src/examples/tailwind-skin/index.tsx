@@ -3,7 +3,7 @@ import { RichTextEditor } from 'react-rtekit';
 import './utilities.css';
 
 /**
- * Unstyled mode with a utility-class skin (07 §7).
+ * Unstyled mode with a utility-class skin.
  *
  * `unstyled` drops the chrome visuals and keeps two things: the structural CSS, so the
  * layout still works, and the prose styles, so stored content renders the same here as

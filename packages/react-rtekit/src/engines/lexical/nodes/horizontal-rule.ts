@@ -9,12 +9,12 @@ import {
 } from 'lexical';
 
 /**
- * The horizontal-rule node (05 §4).
+ * The horizontal-rule node.
  *
  * A `DecoratorNode` whose decoration is nothing: the `<hr>` *is* the node's own DOM,
  * built in `createDOM`. Lexical's own horizontal rule lives in `@lexical/react` and
  * renders through React, which would tie the engine adapter to a renderer; this one
- * keeps the adapter renderer-agnostic (02 §2).
+ * keeps the adapter renderer-agnostic.
  *
  * @module
  */

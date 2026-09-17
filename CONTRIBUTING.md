@@ -37,17 +37,18 @@ Rich-text editors fail in ways unit tests miss, so the weighting is deliberate
   cannot drive contenteditable, so a jsdom test that claims to is lying.
 - **Security** has its own CI job. Every change to `src/core/sanitize` or
   `src/core/interop` needs a corresponding fixture.
-- Every bug in `docs/01-current-implementation.md` section 9 has a named regression
-  test (`R1`-`R26`). Do not remove one.
+- Every entry in [`docs/regressions.md`](docs/regressions.md) has a named regression
+  test (`R1`-`R26`). Do not remove one: each records a behaviour this library exists to
+  fix, and the name is the contract.
 
 ## Definition of done
 
-`docs/10-roadmap-and-migration.md` section 2 is the checklist. In short: implemented as
-a plugin where applicable, names exactly as in `docs/04-api-reference.md`, TSDoc on
-every public symbol, strings localized, visuals tokenized, state exposed through data
-attributes, keyboard and ARIA support, sanitizer and serializer rules in both
-directions, tests, a demo example, a guide section, playground controls, and a
-changeset.
+A feature is done when it is: implemented as a plugin where that applies; named as the
+API reference names it; documented with TSDoc on every public symbol; localized rather
+than hard-coded; tokenized rather than styled inline; exposed through data attributes
+for CSS; reachable by keyboard and described to assistive technology; given sanitizer
+and serializer rules in *both* directions; tested; shown in an example; explained in a
+guide; wired into the playground; and accompanied by a changeset.
 
 ## Commits and releases
 
@@ -61,5 +62,6 @@ parity guarantee.
 
 ## Architecture
 
-Read `docs/02-architecture.md` first, then the ADRs in `docs/adr/`. The one rule worth
-repeating here: nothing outside `src/engines/` may import Lexical.
+Read the ADRs in [`docs/adr/`](docs/adr/) — they carry the reasoning behind the engine
+boundary, the sanitizer and the interop profiles. The one rule worth repeating here:
+nothing outside `src/engines/` may import Lexical.

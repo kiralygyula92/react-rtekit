@@ -3,13 +3,13 @@ import { RichTextEditor, type EditorValue } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Lists, nesting and the shortcuts that create them (05 §5).
+ * Lists, nesting and the shortcuts that create them.
  *
  * Tab indents a list item and Shift+Tab outdents it; `- `, `1. ` and `[] ` at the
  * start of a line create the three kinds.
  */
 
-const SAMPLE = '<ul><li>Chlorine</li><li>pH<ul><li>morning</li><li>evening</li></ul></li></ul>' +
+const SAMPLE = '<ul><li>Revenue</li><li>Costs<ul><li>fixed</li><li>variable</li></ul></li></ul>' +
     '<ol><li>Collect the sample</li><li>Label it</li></ol>' +
     '<ul><li data-checked="true">Sampled</li><li data-checked="false">Reported</li></ul>';
 

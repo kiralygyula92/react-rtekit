@@ -11,7 +11,7 @@ import { runHandler } from '../useEditor.js';
 import { useToolbarOverflow } from './useToolbarOverflow.js';
 
 /**
- * The toolbar (05 §14).
+ * The toolbar.
  *
  * A real `role="toolbar"` with roving tabindex: one tab stop, arrows move between
  * controls, Home/End jump, and Escape returns focus to the editor. Buttons prevent
@@ -68,7 +68,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
 
   const ctx: ToolbarItemContext = useMemo(() => ({ editor, format, t }), [editor, format, t]);
 
-  /** Runs an item, through the `onToolbarCommand` middleware (06 §4). */
+  /** Runs an item, through the `onToolbarCommand` middleware. */
   const activate = useCallback(
     (item: ToolbarItemSpec) => {
       const fallback = (resolved: ToolbarCommandContext): void => {
@@ -145,7 +145,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
   };
 
   // Only the `menu` behaviour hides anything; `wrap` and `scroll` leave the
-  // browser to it (05 §14).
+  // browser to it.
   const { visible, hidden, containerRef } = useToolbarOverflow(groups, overflow === 'menu');
   const [overflowOpen, setOverflowOpen] = useState(false);
   const [overflowAnchor, setOverflowAnchor] = useState<HTMLButtonElement | null>(null);
@@ -154,7 +154,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
   const [rovingName, setRovingName] = useState<string | null>(null);
   const flatItems = useMemo(() => groups.flat(), [groups]);
   // In `scroll` mode the container holds the tab stop, so the items must not also
-  // hold one — a toolbar is one stop either way (05 §14).
+  // hold one — a toolbar is one stop either way.
   const containerIsTabStop = overflow === 'scroll';
   const tabStop = containerIsTabStop
     ? null
@@ -192,7 +192,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
         // Groups are positional; their contents are what identifies them.
         <Fragment key={`group-${groupIndex}`}>
           {/* A group boundary *is* the separator: the classic toolbar's two dividers
-              are the two gaps in its three groups (01 §5). */}
+              are the two gaps in its three groups. */}
           {groupIndex > 0 ? <slots.ToolbarSeparator /> : null}
           <div className="rte-toolbar__group" role="group">
             {group.map((item) => (
@@ -400,7 +400,7 @@ function ToolbarItem({
           {...shared}
           ref={setAnchor}
           // Read by the classic preset to tint the glyph with the active colour,
-          // exactly as the old editor did (01 §5).
+          // exactly as the old editor did.
           style={current ? ({ '--rte-current-color': current } as React.CSSProperties) : undefined}
           onMouseDown={(event) => {
             event.preventDefault();

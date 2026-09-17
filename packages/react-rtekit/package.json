@@ -16,13 +16,19 @@
     "accessibility"
   ],
   "license": "MIT",
+  "author": {
+    "name": "kiralygyula92",
+    "url": "https://github.com/kiralygyula92"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
     "directory": "packages/react-rtekit"
   },
   "homepage": "https://github.com/kiralygyula92/react-rtekit#readme",
-  "bugs": "https://github.com/kiralygyula92/react-rtekit/issues",
+  "bugs": {
+    "url": "https://github.com/kiralygyula92/react-rtekit/issues"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"

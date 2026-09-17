@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-/** The generated API reference index (08 §1, §6). */
+/** The generated API reference index. */
 export const API_PAGES = [
   { slug: 'rich-text-editor', title: '<RichTextEditor>', description: 'Every prop, grouped and searchable.' },
   { slug: 'editor-instance', title: 'EditorInstance', description: 'The imperative handle.' },

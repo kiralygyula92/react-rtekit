@@ -1,5 +1,5 @@
 /**
- * The site's search index (08 §1).
+ * The site's search index.
  *
  * Built once, in memory, from the same sources the pages themselves render: guide
  * headings are parsed from the guide modules, example metadata comes from the example
@@ -8,7 +8,7 @@
  *
  * Every source is imported dynamically. The palette lives in the site header, so a
  * static import would pull the guides, the examples and the API data into the entry
- * chunk and undo the route splitting (08 §8).
+ * chunk and undo the route splitting.
  */
 
 /** What kind of thing a result is, which is also how results are grouped. */

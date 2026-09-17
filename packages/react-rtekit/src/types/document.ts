@@ -1,5 +1,5 @@
 /**
- * The portable document model (02 §2.4).
+ * The portable document model.
  *
  * This shape is owned by the library and is independent of the engine, so it can be
  * stored, diffed, asserted against in tests and round-tripped through every
@@ -65,7 +65,7 @@ export interface LinkNode {
   content: InlineNode[];
 }
 
-/** An atomic `{key}` placeholder that the backend substitutes (03 §6). */
+/** An atomic `{key}` placeholder that the backend substitutes. */
 export interface MergeTagNode {
   /** Discriminator. */
   type: 'mergeTag';
@@ -224,7 +224,7 @@ export interface TableCellNode {
   rowSpan?: number;
   /** Horizontal alignment of the cell's content. */
   align?: Align;
-  /** Column width, serialized as a percentage for e-mail robustness (05 §8). */
+  /** Column width, serialized as a percentage for e-mail robustness. */
   width?: number;
   /** The blocks inside the cell. */
   content: BlockNode[];
@@ -238,7 +238,7 @@ export interface TableRowNode {
   cells: TableCellNode[];
 }
 
-/** A table. Column widths serialize as percentages for e-mail robustness (05 §8). */
+/** A table. Column widths serialize as percentages for e-mail robustness. */
 export interface TableNode {
   /** Discriminator. */
   type: 'table';
@@ -250,7 +250,7 @@ export interface TableNode {
  * Raw HTML preserved verbatim.
  *
  * Only produced by the `permissive` sanitization profile; every other profile drops
- * unknown markup instead (03 §4.2).
+ * unknown markup instead.
  */
 export interface RawHtmlNode {
   /** Discriminator. */

@@ -1,5 +1,6 @@
 import type { RichTextEditorProps } from '../../types/props.js';
 import type { CommandId } from '../../types/commands.js';
+import type { ToolbarItemSpec } from '../../types/toolbar.js';
 import { useEditorReady } from '../hooks.js';
 import { LinkUi } from './LinkUi.js';
 import { ImageUi } from './ImageUi.js';
@@ -9,12 +10,13 @@ import { AutosaveUi, FullscreenUi, PrintUi } from './ChromeUi.js';
 import { FindReplaceUi } from './FindReplaceUi.js';
 import { SourceViewUi } from './SourceViewUi.js';
 import { ShortcutHelp } from './ShortcutHelp.js';
+import { FloatingToolbarUi } from './FloatingToolbarUi.js';
 
 /**
- * The chrome the feature plugins own (05 §6–§10).
+ * The chrome the feature plugins own.
  *
  * Popovers and menus live here rather than in the engine adapter: they are React, and
- * the engine is deliberately renderer-agnostic (02 §2). One host keeps the mounting
+ * the engine is deliberately renderer-agnostic. One host keeps the mounting
  * rules in one place — each piece renders only when its feature is on, so a `classic`
  * editor pays nothing for the link popover it cannot open.
  *
@@ -35,9 +37,11 @@ export interface FeatureUiProps {
   features: ReadonlySet<string>;
   /** The keymap in force, for the shortcut reference. */
   keymap: Record<string, CommandId>;
+  /** The resolved toolbar groups, for the toolbar that follows the selection. */
+  groups?: ToolbarItemSpec[][];
 }
 
-export function FeatureUi({ props, features, keymap }: FeatureUiProps) {
+export function FeatureUi({ props, features, keymap, groups = [] }: FeatureUiProps) {
   // Nothing here can touch the imperative API before the engine exists.
   const ready = useEditorReady();
   const links = props.enableLinks ?? features.has('link');
@@ -46,6 +50,11 @@ export function FeatureUi({ props, features, keymap }: FeatureUiProps) {
   const findReplace = props.enableFindReplace ?? features.has('findReplace');
   const sourceView = props.enableSourceView ?? features.has('sourceView');
   const fullscreen = props.enableFullscreen ?? features.has('fullscreen');
+
+  // The bubble toolbar shows its own item list when one is given, and otherwise the
+  // same items as the docked toolbar.
+  const floating = props.floatingToolbar;
+  const floatingItems = props.bubbleMenuItems ? [props.bubbleMenuItems] : groups;
 
   if (!ready) return null;
 
@@ -74,6 +83,12 @@ export function FeatureUi({ props, features, keymap }: FeatureUiProps) {
       ) : null}
       {props.autosave ? (
         <AutosaveUi config={props.autosave} {...(props.handlers ? { handlers: props.handlers } : {})} />
+      ) : null}
+      {floating && floatingItems.length > 0 ? (
+        <FloatingToolbarUi
+          config={typeof floating === 'object' ? floating : {}}
+          items={floatingItems}
+        />
       ) : null}
       <PrintUi />
       <ShortcutHelp keymap={keymap} {...(props.disableShortcuts ? { disabled: props.disableShortcuts } : {})} />

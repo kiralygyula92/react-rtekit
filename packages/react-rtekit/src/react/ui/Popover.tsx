@@ -14,7 +14,7 @@ import { createPortal } from 'react-dom';
  *
  * Every floating surface in the library — the colour picker, the link editor, the
  * overflow menu, the slash menu — is one of these, so focus trapping, Escape handling
- * and focus return are implemented once (05 §14).
+ * and focus return are implemented once.
  *
  * @module
  */

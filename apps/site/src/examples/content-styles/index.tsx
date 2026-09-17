@@ -3,7 +3,7 @@ import { RichTextEditor } from 'react-rtekit';
 import { RteContentView } from 'react-rtekit/view';
 
 /**
- * One stylesheet, two places (07 §7).
+ * One stylesheet, two places.
  *
  * `content.css` ships on its own precisely so that stored HTML looks the same in the
  * editor that produced it, on the list page that shows it and in the preview that
@@ -13,9 +13,9 @@ import { RteContentView } from 'react-rtekit/view';
 
 const SAMPLE =
   '<h2>Sampling notes</h2>' +
-  '<p>Readings were <strong>within range</strong> except for <em>pH</em>, which was ' +
+  '<p>Figures were <strong>within plan</strong> except for <em>costs</em>, which were ' +
   '<span style="color: #C81E1E">high</span>.</p>' +
-  '<ul><li>Chlorine: normal</li><li>Alkalinity: normal</li></ul>' +
+  '<ul><li>Revenue: on target</li><li>Headcount: stable</li></ul>' +
   '<blockquote><p>Re-test before the next visit.</p></blockquote>' +
   '<p><a href="https://example.com/report">Full report</a> · <code>ph=8.2</code></p>';
 

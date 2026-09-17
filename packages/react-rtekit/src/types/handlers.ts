@@ -7,7 +7,7 @@ import type { SanitizeViolation } from './sanitize.js';
 import type { ChangeMeta } from './editor.js';
 import type { EditorValue } from './common.js';
 
-/** Interaction middleware (06 §4). @group Customization */
+/** Interaction middleware. @group Customization */
 
 /** Every handler context carries the editor so middleware can read state. */
 export interface BaseHandlerContext {
@@ -181,7 +181,7 @@ export interface RteHandlers {
   onSelectionChange: Middleware<SelectionChangeContext>;
   /** Wraps what happens when input would pass `maxLength`. */
   onMaxLengthExceeded: Middleware<MaxLengthContext>;
-  /** Wraps the reporting of something the sanitizer refused (03 §4). */
+  /** Wraps the reporting of something the sanitizer refused. */
   onSanitizeViolation: Middleware<SanitizeViolationContext>;
   /** Wraps entering and leaving fullscreen. */
   onFullscreenChange: Middleware<OpenStateContext>;

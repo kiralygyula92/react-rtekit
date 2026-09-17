@@ -12,8 +12,8 @@ export function MergeTags() {
         <Code label="Merge tags">{`<RichTextEditor
   mergeTags={{
     tags: [
-      { key: 'contact_first_name', label: 'Contact first name', group: 'Contact', sample: 'Dana' },
-      { key: 'org_name', label: 'Organization name', group: 'Organization', sample: 'Clearwater' },
+      { key: 'first_name', label: 'First name', group: 'Contact', sample: 'Dana' },
+      { key: 'company_name', label: 'Company name', group: 'Organization', sample: 'Clearwater' },
     ],
     trigger: '{{',
     unknownTagBehaviour: 'warn',
@@ -29,7 +29,7 @@ export function MergeTags() {
           key has been half-deleted is a backend substitution that silently does nothing.
         </p>
 
-        <Code label="Reading them back">{`editor.getMergeTags();                 // ['contact_first_name', 'org_name']
+        <Code label="Reading them back">{`editor.getMergeTags();                 // ['first_name', 'company_name']
 validateMergeTagKeys(html, knownKeys); // the ones you do not recognize`}</Code>
       </Section>
 
@@ -39,10 +39,10 @@ validateMergeTagKeys(html, knownKeys); // the ones you do not recognize`}</Code>
           carries the keys:
         </p>
 
-        <Code label="Preview">{`editor.getHTML({ mergeTagPreview: { contact_first_name: 'Dana' } });`}</Code>
+        <Code label="Preview">{`editor.getHTML({ mergeTagPreview: { first_name: 'Dana' } });`}</Code>
       </Section>
 
-      <SeeAlso examples={['merge-tags', 'parity-skimmer-email', 'email-output']} guides={['html-interop']} />
+      <SeeAlso examples={['merge-tags', 'legacy-parity', 'email-output']} guides={['html-interop']} />
     </>
   );
 }

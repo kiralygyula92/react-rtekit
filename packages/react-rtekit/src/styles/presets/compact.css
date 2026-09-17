@@ -1,5 +1,5 @@
 /**
- * The `compact` preset (07 §5).
+ * The `compact` preset.
  *
  * Density is a multiplier rather than a second set of numbers: every size that scales
  * is written as `calc(base * var(--rte-density-scale))`, so a consumer can dial it

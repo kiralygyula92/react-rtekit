@@ -216,7 +216,7 @@ function createBlock(block: BlockNode): ElementNode[] {
     case 'table':
       return [createTable(block)];
     case 'html': {
-      // Raw HTML only reaches here from the `permissive` profile (03 §4.2). It has no
+      // Raw HTML only reaches here from the `permissive` profile. It has no
       // editable representation, so it becomes its text — losing the markup is the
       // point of every other profile, and this keeps the words.
       const paragraph = $createParagraphNode();

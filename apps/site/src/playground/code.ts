@@ -4,7 +4,7 @@ import { PLAYGROUND_CONTROLS, type PlaygroundState } from './controls';
 
 /**
  * Turns playground state into props and into the code that would produce them
- * (08 §4).
+ *.
  *
  * The generated snippet lists only what differs from the defaults, because a wall of
  * props that happen to equal their defaults teaches nothing and is not what anyone

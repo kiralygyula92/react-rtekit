@@ -9,7 +9,7 @@ import { Popover } from '../ui/Popover.js';
 import { runHandler } from '../useEditor.js';
 
 /**
- * The link popover and link click behaviour (05 §6).
+ * The link popover and link click behaviour.
  *
  * Rendered inside the editor root whenever links are enabled. It owns three things
  * the engine deliberately does not: when the popover is open, what a click on a link
@@ -24,7 +24,7 @@ export interface LinkUiProps {
   validator?: (url: string) => string | null;
   /** Protocol added to a bare host. @default 'https' */
   defaultProtocol?: string;
-  /** Interaction middleware (06 §4). */
+  /** Interaction middleware. */
   handlers?: Partial<RteHandlers>;
 }
 
@@ -60,7 +60,7 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
     setDraft({
       href: existing?.href ?? '',
       // The text field only appears for a caret; with a range selected, the selected
-      // text is the link text (05 §6).
+      // text is the link text.
       text: '',
       target: existing?.target ?? null,
       editing: existing !== null,
@@ -79,7 +79,7 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
   );
 
   // `openLinkEditor` is a command so the toolbar, the keymap and consumer code all
-  // reach the same popover (04 §4).
+  // reach the same popover.
   useEffect(
     () =>
       editor.registerCommand('openLinkEditor', (_ctx, next) => {
@@ -90,7 +90,7 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
     [editor, open],
   );
 
-  /** Opening a link is its own interaction, so a policy can confirm it (06 §4). */
+  /** Opening a link is its own interaction, so a policy can confirm it. */
   const openHref = useCallback(
     (href: string) => {
       if (!href) return;
@@ -102,7 +102,7 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
   );
 
   // Clicking a link inside the editor opens the popover rather than navigating;
-  // Ctrl/Cmd+click follows it, which is what every other editor does (05 §6).
+  // Ctrl/Cmd+click follows it, which is what every other editor does.
   useEffect(() => {
     const content = editor.engine.contentElement;
 
@@ -120,7 +120,7 @@ export function LinkUi({ validator, defaultProtocol = 'https', handlers }: LinkU
         handlersRef.current?.onLinkClick,
         { editor, event, href, attrs },
         (ctx) => {
-          // Ctrl/Cmd+click follows the link; a plain click edits it (05 §6).
+          // Ctrl/Cmd+click follows the link; a plain click edits it.
           if (ctx.event.metaKey || ctx.event.ctrlKey) {
             openHref(ctx.href);
             return;

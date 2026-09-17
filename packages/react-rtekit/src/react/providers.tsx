@@ -13,10 +13,10 @@ import { mergeLocalization } from './localization.js';
 import { en } from '../locales/en.js';
 
 /**
- * App-wide providers (04 §7).
+ * App-wide providers.
  *
  * Precedence, highest first: props, then the nearest provider, then the preset's
- * defaults, then the library's (06 §0). Nested providers merge.
+ * defaults, then the library's. Nested providers merge.
  *
  * @module
  */
@@ -101,7 +101,7 @@ export interface RteDefaultsProviderProps {
  */
 export function RteDefaultsProvider({ value, children }: RteDefaultsProviderProps) {
   const inherited = useRteDefaults();
-  // Nested providers merge, with the inner one winning (06 §0).
+  // Nested providers merge, with the inner one winning.
   const merged = useMemo(() => ({ ...inherited, ...value }), [inherited, value]);
   return <DefaultsContextProvider value={merged}>{children}</DefaultsContextProvider>;
 }

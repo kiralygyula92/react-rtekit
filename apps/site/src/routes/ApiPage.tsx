@@ -5,7 +5,7 @@ import { API_PAGES } from './ApiIndex';
 import apiPages from '../api/pages.json';
 
 /**
- * One API page (08 §6).
+ * One API page.
  *
  * Two sources feed these tables, and the difference matters. Props and types come from
  * TypeDoc, so they carry the real signatures. Slots, commands, handlers, tokens,

@@ -3,17 +3,17 @@ import { RichTextEditor, documentToHtml, htmlToDocument, type PresetName } from 
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The six presets, switched live (04 §2.3, 08 §3.2).
+ * The six presets, switched live.
  *
  * A preset is a plugin bundle plus prop defaults — a toolbar, a theme, an HTML
  * profile and a set of limits. Switching one remounts the editor with the same
  * content, which is also the easiest way to see what each one keeps.
  */
 
-/** What each preset is for, in the order 04 §2.3 lists them. */
+/** What each preset is for. */
 const PRESETS: { name: PresetName; summary: string }[] = [
   { name: 'minimal', summary: 'Bold, italic, links. For a comment box that should stay small.' },
-  { name: 'classic', summary: 'The Skimmer parity bundle: eight buttons, 287px, quill-compatible output.' },
+  { name: 'classic', summary: 'The legacy parity bundle: eight buttons, 287px, quill-compatible output.' },
   { name: 'standard', summary: 'The general-purpose bundle: marks, headings, lists, links, history.' },
   { name: 'email', summary: 'Everything an e-mail client renders, and nothing it does not.' },
   { name: 'comment', summary: 'Compact chrome, no block formatting, counter always visible.' },
@@ -23,7 +23,7 @@ const PRESETS: { name: PresetName; summary: string }[] = [
 const SAMPLE =
   '<h2>Quarterly summary</h2>' +
   '<p>The <strong>April</strong> results are <em>within range</em>, with one exception.</p>' +
-  '<ul><li>Chlorine: normal</li><li>pH: <span style="color: #C81E1E">high</span></li></ul>' +
+  '<ul><li>Revenue: on target</li><li>Costs: <span style="color: #C81E1E">above plan</span></li></ul>' +
   '<p><a href="https://example.com/report">Full report</a></p>';
 
 export default function PresetsExample() {

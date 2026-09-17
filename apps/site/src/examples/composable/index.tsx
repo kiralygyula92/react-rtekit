@@ -3,9 +3,9 @@ import { Rte, classicTheme, presets, useEditor } from 'react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * The parts, arranged into somebody else's layout (06 §6).
+ * The parts, arranged into somebody else's layout.
  *
- * The third entry point in 02 §3. `<RichTextEditor>` puts the toolbar above the
+ * The third entry point. `<RichTextEditor>` puts the toolbar above the
  * content and the counter below it; when that is the wrong shape, the same pieces can
  * be placed anywhere — and `<Rte.Portals>` gives the popovers and menus somewhere to
  * mount.

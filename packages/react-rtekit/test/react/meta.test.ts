@@ -6,7 +6,7 @@ import { lightTheme } from '../../src/themes/index.js';
 import { en } from '../../src/locales/en.js';
 
 /**
- * Runtime metadata (08 §6.4).
+ * Runtime metadata.
  *
  * The docs site builds its slot, command, handler, token, locale and icon pages from
  * `meta`. If it goes out of step with the implementation the pages silently lie, so

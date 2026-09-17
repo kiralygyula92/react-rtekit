@@ -5,7 +5,7 @@ import { RichTextEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * Image and table chrome (05 §7, §8).
+ * Image and table chrome.
  *
  * The nodes are covered by `blocks.test.tsx`; this is the part an author touches —
  * the dialogs, the constraints and the controls.

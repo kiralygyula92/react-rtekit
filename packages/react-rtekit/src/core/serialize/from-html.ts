@@ -35,7 +35,7 @@ import { looksLikeQuill, parseQuillMarkup } from '../interop/quill.js';
 import { normalizeColor } from '../utils/color.js';
 
 /**
- * HTML to the portable document model (03 §3).
+ * HTML to the portable document model.
  *
  * The full input pipeline: parse, interop, sanitize, schema downgrade, normalize. Every
  * piece of content entering the editor goes through here, whether it came from the
@@ -62,7 +62,7 @@ export interface HtmlToDocumentOptions {
   sanitize?: SanitizeOption;
   /** Which dialects to recognize, and how to clean them. */
   interop?: InteropOptions;
-  /** Active features; anything outside the set is downgraded (03 §2). */
+  /** Active features; anything outside the set is downgraded. */
   features?: ReadonlySet<string>;
   /** How `{key}` text becomes tag nodes. */
   mergeTags?: MergeTagParseOptions;
@@ -74,7 +74,7 @@ export interface HtmlToDocumentOptions {
    * Receives each sanitizer removal, unconverted.
    *
    * `onWarning` flattens a violation into the schema's vocabulary; this one keeps the
-   * sanitizer's own, which is what a security log wants (06 §4).
+   * sanitizer's own, which is what a security log wants.
    */
   onViolation?: (violation: SanitizeViolation) => void;
   /** Normalization settings, or `false` to skip it. */
@@ -694,7 +694,7 @@ function convertBlocks(nodes: HtmlNode[], ctx: Context): BlockNode[] {
 /**
  * Parses HTML into the portable document model.
  *
- * Runs the whole input pipeline from 03 §3: source detection, interop, sanitization,
+ * Runs the whole input pipeline: source detection, interop, sanitization,
  * schema downgrade and normalization.
  *
  * @example

@@ -7,11 +7,11 @@ import { useEditorContext, useEditorStore } from './context.js';
 import { getRuntime } from './runtime.js';
 
 /**
- * Subscription hooks (04 §5).
+ * Subscription hooks.
  *
  * Every hook here subscribes through one selector, so a component re-renders only when
  * the slice it reads changes. Toolbar buttons use `useCommand`, which is why typing
- * does not re-render the toolbar (02 §5).
+ * does not re-render the toolbar.
  *
  * @module
  */
@@ -147,7 +147,7 @@ export interface UploadBinding {
   uploads: UploadState[];
 }
 
-/** In-flight uploads plus the function that starts one (05 §7). */
+/** In-flight uploads plus the function that starts one. */
 export function useUpload(): UploadBinding {
   const editor = useEditorContext();
   const uploads = useEditorState(selectUploads);

@@ -1,7 +1,7 @@
 import type { RteLocalization } from '../types/localization.js';
 
 /**
- * The default English catalogue (06 §8).
+ * The default English catalogue.
  *
  * Every visible string in the library resolves through this object, including
  * `aria-label`s and live-region announcements — nothing is hard-coded in a component

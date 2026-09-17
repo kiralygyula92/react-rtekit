@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { KIND_LABEL, loadSearchIndex, search, type SearchEntry } from '../lib/search';
 
 /**
- * The Ctrl+K palette (08 §1).
+ * The Ctrl+K palette.
  *
  * Built as a combobox rather than a list of links: the input keeps focus while the
  * arrows move a virtual highlight, which is the one pattern screen readers announce
@@ -90,7 +90,7 @@ export function SearchDialog() {
     if (!open) return;
     inputRef.current?.focus();
     // The index pulls in the guides, the examples and the API data, so it is fetched
-    // when the palette first opens rather than on every page load (08 §8).
+    // when the palette first opens rather than on every page load.
     let cancelled = false;
     void loadSearchIndex().then((loaded) => {
       if (!cancelled) setEntries(loaded);

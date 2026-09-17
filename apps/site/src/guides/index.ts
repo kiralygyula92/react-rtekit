@@ -14,10 +14,10 @@ import { Accessibility } from './accessibility';
 import { Localization } from './localization';
 import { Performance } from './performance';
 import { Ssr } from './ssr';
-import { MigrationSkimmer } from './migration-skimmer';
+import { MigrationFromQuill } from './migration-from-quill';
 
 /**
- * The guide registry (08 §1).
+ * The guide registry.
  *
  * The order here is the reading order, which is also the sidebar order and the
  * previous/next order — so there is one list rather than three that can disagree.
@@ -50,7 +50,7 @@ export const GUIDES: readonly GuideEntry[] = [
   { slug: 'localization', title: 'Localization', Component: Localization },
   { slug: 'performance', title: 'Performance', Component: Performance },
   { slug: 'ssr', title: 'SSR', Component: Ssr },
-  { slug: 'migration-skimmer', title: 'Migration from CustomRte', Component: MigrationSkimmer },
+  { slug: 'migration-from-quill', title: 'Migrating from Quill', Component: MigrationFromQuill },
 ];
 
 /** One guide, by slug. */

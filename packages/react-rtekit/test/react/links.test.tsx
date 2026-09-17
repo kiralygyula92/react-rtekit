@@ -5,7 +5,7 @@ import { RichTextEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * Links (05 §6).
+ * Links.
  *
  * The popover, its validation and what a click on a link does. The sanitizer's own
  * rules are tested separately; what matters here is that nothing in this layer can
@@ -69,7 +69,7 @@ describe('the link popover', () => {
     const user = userEvent.setup();
     const editor = await mount({
       defaultValue: '<p>site</p>',
-      // A validator that accepts everything still cannot open this hole (03 §4.3).
+      // A validator that accepts everything still cannot open this hole.
       linkValidator: () => null,
     });
     editor.setSelection('all');

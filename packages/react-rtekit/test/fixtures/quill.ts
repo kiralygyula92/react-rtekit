@@ -1,5 +1,5 @@
 /**
- * Legacy Quill markup captured from the Skimmer app (01 §2, 03 §5.1).
+ * Legacy Quill markup captured from the legacy application.
  *
  * These strings are the contract: whatever the interop layer does, every one of them
  * must open, edit and save without visible loss. Round-trip tests in
@@ -17,11 +17,11 @@ export interface QuillFixture {
 export const QUILL_FIXTURES: QuillFixture[] = [
   {
     id: 'default-email-body',
-    description: 'The shipped default water-test e-mail body, merge tags and all',
+    description: 'The default e-mail body the legacy editor shipped, merge tags and all',
     html:
-      '<p>Hi {contact_first_name}, </p><p>Your next water test is due {next_test_date}. Here is your ' +
-      'water test report from {report_date}. A support specialist will get in touch with you to discuss ' +
-      'the results soon. </p><p>Thank you, </p><p>{org_name} </p><p>{org_address}</p>',
+      '<p>Hi {first_name}, </p><p>Your next review is due {due_date}. Here is your ' +
+      'summary from {report_date}. Someone from the team will be in touch to go through ' +
+      'it with you. </p><p>Thank you, </p><p>{company_name} </p><p>{company_address}</p>',
   },
   {
     id: 'align-classes',
@@ -116,14 +116,14 @@ export const QUILL_FIXTURES: QuillFixture[] = [
   },
   {
     id: 'full-message',
-    description: 'A realistic message combining everything the old editor could produce',
+    description: 'A realistic message combining everything the legacy editor could produce',
     html:
-      '<p class="ql-align-center"><strong>Water test results</strong></p>' +
-      '<p>Hi {contact_first_name},</p>' +
-      '<p><span style="color: #FF0000">Action needed:</span> your chlorine is low.</p>' +
-      '<ul><li data-list="bullet">Add 2 lbs of shock</li><li data-list="bullet">Re-test in 24h</li></ul>' +
+      '<p class="ql-align-center"><strong>Quarterly summary</strong></p>' +
+      '<p>Hi {first_name},</p>' +
+      '<p><span style="color: #FF0000">Action needed:</span> your account needs attention.</p>' +
+      '<ul><li data-list="bullet">Review the attached figures</li><li data-list="bullet">Reply by Friday</li></ul>' +
       '<p><br></p>' +
-      '<p>Thank you,</p><p>{org_name}</p>',
+      '<p>Thank you,</p><p>{company_name}</p>',
   },
 ];
 
@@ -134,5 +134,5 @@ export function quillFixture(id: string): QuillFixture {
   return found;
 }
 
-/** The exact default message body shipped by the Skimmer app (01 §2). */
-export const DEFAULT_WATER_TEST_EMAIL_MESSAGE = quillFixture('default-email-body').html;
+/** The exact default message body shipped by the legacy application. */
+export const DEFAULT_EMAIL_BODY = quillFixture('default-email-body').html;

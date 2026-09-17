@@ -1,5 +1,5 @@
 /**
- * The built-in emoji set (05 §10).
+ * The built-in emoji set.
  *
  * A curated list rather than the full Unicode table: the whole set is ~1,900 entries
  * and several hundred kilobytes, which no editor should pay for by default. These are
@@ -7,7 +7,7 @@
  * entirely for anyone who wants more.
  *
  * Characters only — never images — so an emoji survives copy, plain-text export and
- * every e-mail client (05 §10).
+ * every e-mail client.
  *
  * @module
  */

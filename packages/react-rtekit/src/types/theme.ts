@@ -1,9 +1,9 @@
 /**
- * Design tokens (07 §3).
+ * Design tokens.
  *
  * Every token maps 1:1 to a `--rte-*` custom property. Theme CSS reads only these
  * variables, so a theme is fully describable as data and reachable from the theme
- * editor — which is the acceptance test for token coverage (07 §8).
+ * editor — which is the acceptance test for token coverage.
  *
  * @group Theming
  */
@@ -159,7 +159,7 @@ export interface RteTheme {
   density: Density;
 }
 
-/** A theme with every token resolved, plus the prop defaults it carries (07 §4). */
+/** A theme with every token resolved, plus the prop defaults it carries. */
 export interface ResolvedRteTheme extends RteTheme {
   /** Prop defaults the theme implies, e.g. `classic`'s toolbar and palette. */
   defaults?: Record<string, unknown>;

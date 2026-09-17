@@ -5,7 +5,7 @@ import { useEditorContext, useLocalization, useRteSlots } from '../context.js';
 import { resolveMessage } from '../localization.js';
 
 /**
- * The keyboard shortcut reference (05 §13, fixes R25).
+ * The keyboard shortcut reference (fixes R25).
  *
  * Built from the keymap that is actually in force, not from a written list: an editor
  * whose consumer rebound `Mod+K` should say so, and a help dialog that can disagree
@@ -18,7 +18,7 @@ import { resolveMessage } from '../localization.js';
 export interface ShortcutHelpProps {
   /** The resolved bindings: shortcut → command. */
   keymap: Record<string, CommandId>;
-  /** Shortcuts the consumer turned off; listing one would be a lie (05 §13). */
+  /** Shortcuts the consumer turned off; listing one would be a lie. */
   disabled?: string[];
 }
 

@@ -1,11 +1,11 @@
 import type { HtmlElement } from '../core/html/nodes.js';
 
-/** Sanitization types (03 §4). @group Security */
+/** Sanitization types. @group Security */
 
 /**
  * The element a {@link SanitizeConfig.transform} hook receives.
  *
- * 03 §4.3 writes this as a DOM `Element`. It cannot be one: the sanitizer also runs
+ * It is tempting to type this as a DOM `Element`. It cannot be one: the sanitizer also runs
  * on a server and in a worker, where there is no DOM, and `<RteContentView>` sanitizes
  * during SSR. The portable node carries the same three things a transform needs -- tag
  * name, attributes and children -- and is what both parser frontends produce.
@@ -48,7 +48,7 @@ export interface SanitizeViolation {
  * Fine-grained sanitizer configuration.
  *
  * Anything omitted falls back to the profile the config is merged onto (`standard` by
- * default). The hard rules in 03 §4.3 cannot be re-enabled from here.
+ * default). The hard rules cannot be re-enabled from here.
  */
 export interface SanitizeConfig {
   /** Tag allowlist. Replaces the profile's list when given. */

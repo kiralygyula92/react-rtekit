@@ -3,7 +3,7 @@ import { element, textContent, type HtmlElement, type HtmlNode } from '../html/n
 import { parseStyle, readStyleProperty, serializeStyle } from '../sanitize/css.js';
 
 /**
- * Word, Google Docs and Excel cleanup (03 §3).
+ * Word, Google Docs and Excel cleanup.
  *
  * Office pastes are mostly noise: `mso-*` declarations, `<o:p>` fillers, conditional
  * comments, class-only spans, and lists that are not lists at all but styled
@@ -222,7 +222,7 @@ function cleanNode(node: HtmlNode, options: Required<OfficeCleanupOptions>): Htm
  * Turns Word's run of list paragraphs into real lists.
  *
  * Each paragraph carries its level, so consecutive ones are folded into a tree in the
- * same way Quill's flat lists are (03 §5.1).
+ * same way Quill's flat lists are.
  */
 function buildWordLists(nodes: HtmlNode[]): HtmlNode[] {
   const out: HtmlNode[] = [];

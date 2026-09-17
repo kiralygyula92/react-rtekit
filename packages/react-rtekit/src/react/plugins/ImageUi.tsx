@@ -9,7 +9,7 @@ import { Button, Checkbox, TextInput } from '../ui/primitives.js';
 
 /**
  * Image chrome: the insert dialog, the selected-image popover and the resize frame
- * (05 §7).
+ *.
  *
  * The node itself is the engine's; everything an author touches is here. Resizing
  * works on the DOM element for feedback and commits one `updateImage` at the end, so
@@ -26,7 +26,7 @@ export interface ImageUiProps {
   accept: string;
 }
 
-/** Smallest an image may be dragged to, so it never disappears (05 §7). */
+/** Smallest an image may be dragged to, so it never disappears. */
 const MIN_WIDTH = 32;
 
 export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
@@ -38,7 +38,7 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   // `openImageDialog` is the command every entry point goes through: the toolbar,
-  // the slash menu and consumer code (04 §4).
+  // the slash menu and consumer code.
   useEffect(
     () =>
       editor.registerCommand('openImageDialog', (_ctx, next) => {
@@ -80,7 +80,7 @@ export function ImageUi({ options, canUpload, accept }: ImageUiProps) {
           type="file"
           accept={accept}
           // Visually hidden, but still a control: without a name a screen reader
-          // announces an unlabelled file input (05 §16).
+          // announces an unlabelled file input.
           aria-label={resolveMessage(t.image.upload)}
           multiple
           className="rte-visually-hidden"
@@ -150,7 +150,7 @@ interface ImageDialogFormProps {
   onClose: () => void;
 }
 
-/** URL, alt text and a file button (05 §7). */
+/** URL, alt text and a file button. */
 function ImageDialogForm({ allowExternalUrl, onChooseFile, onInsert, onClose }: ImageDialogFormProps) {
   const t = useLocalization();
   const [url, setUrl] = useState('');

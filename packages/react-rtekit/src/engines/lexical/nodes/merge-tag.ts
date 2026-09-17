@@ -9,15 +9,15 @@ import {
 } from 'lexical';
 
 /**
- * The merge-tag node (03 §6, fixes R23).
+ * The merge-tag node (fixes R23).
  *
  * A `TextNode` in `token` mode: Lexical then treats it as one unit for selection,
- * deletion and formatting, which is exactly what a `{contact_first_name}` placeholder
+ * deletion and formatting, which is exactly what a `{first_name}` placeholder
  * needs. Making it a decorator instead would pull in Lexical's React layer and would
  * not survive copy/paste as text.
  *
  * The rendered label may differ from the stored key — the chip can read
- * "Contact first name" — but serialization always writes `{key}`, so the backend
+ * "First name" — but serialization always writes `{key}`, so the backend
  * substitution is unchanged.
  *
  * @module
@@ -64,11 +64,20 @@ export class MergeTagNode extends TextNode {
     return { ...super.exportJSON(), type: MERGE_TAG_NODE_TYPE, tagKey: this.__tagKey, label: this.__label };
   }
 
+  /**
+   * The chip's element.
+   *
+   * Deliberately *not* `contenteditable="false"`. Token mode already makes the node one
+   * unit for selection, deletion and formatting, so the attribute added nothing to the
+   * model — and it broke Safari, whose select-all stops at the edge of a non-editable
+   * node. The model range then excluded a trailing tag, so "select all and type a new
+   * message" left the old `{company_address}` in the text, and the counter reported a
+   * length the author could not see.
+   */
   override createDOM(config: EditorConfig): HTMLElement {
     const dom = super.createDOM(config);
     dom.className = 'rte-merge-tag';
     dom.setAttribute('data-merge-tag', this.__tagKey);
-    dom.setAttribute('contenteditable', 'false');
     // Not `aria-hidden`: the label is meaningful, and a screen reader should read it.
     dom.setAttribute('role', 'img');
     dom.setAttribute('aria-label', this.__label ?? this.__tagKey);

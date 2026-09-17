@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
 
 /**
- * The keyboard and screen-reader model (05 §13, §14).
+ * The keyboard and screen-reader model.
  *
  * Every control is reachable, every icon has a name, and everything the editor
  * announces is shown in the log so you can see what a screen reader would hear.

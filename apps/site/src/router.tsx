@@ -3,11 +3,11 @@ import { Layout } from './components/Layout';
 import { Home } from './routes/Home';
 
 /**
- * Route table for the demo + docs site (08 §1).
+ * Route table for the demo + docs site.
  *
  * Every route but the landing page is loaded on demand. The examples alone pull in 44
  * live editors and the whole Lexical bundle, so keeping them in the entry chunk would
- * make the landing page pay for pages most visitors never open (08 §8).
+ * make the landing page pay for pages most visitors never open.
  */
 export const router = createBrowserRouter(
   [
@@ -56,7 +56,7 @@ export const router = createBrowserRouter(
           lazy: async () => ({ Component: (await import('./routes/ApiPage')).ApiPage }),
         },
         {
-          // Not linked from the navigation: the e2e suite's performance harness (09 §4).
+          // Not linked from the navigation: the e2e suite's performance harness.
           path: 'internal/performance',
           lazy: async () => ({ Component: (await import('./routes/Performance')).Performance }),
         },

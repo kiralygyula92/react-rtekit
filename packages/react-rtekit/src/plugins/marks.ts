@@ -1,7 +1,7 @@
 import { definePlugin } from '../core/plugins/define.js';
 
 /**
- * The inline-mark plugins (05 §2).
+ * The inline-mark plugins.
  *
  * Each is a separate module export so `react-rtekit/plugins/marks` can be imported
  * piecemeal and a preset that leaves one out does not pay for it. The commands
@@ -46,7 +46,7 @@ export const code = /* @__PURE__ */ definePlugin({
   sanitize: { allowTags: ['code', 'kbd', 'samp'] },
 });
 
-/** Subscript and superscript. Mutually exclusive (05 §2). */
+/** Subscript and superscript. Mutually exclusive. */
 export const subSup = /* @__PURE__ */ definePlugin({
   name: 'subSup',
   provides: ['subscript', 'superscript'],
@@ -77,7 +77,7 @@ export const fontSize = /* @__PURE__ */ definePlugin({
   sanitize: { allowStyles: ['font-size'] },
 });
 
-/** Removes every mark in the selection. `Mod+\` (05 §2). */
+/** Removes every mark in the selection. `Mod+\`. */
 export const clearFormatting = /* @__PURE__ */ definePlugin({
   name: 'clearFormatting',
   keymap: { 'Mod+\\': 'clearFormatting' },

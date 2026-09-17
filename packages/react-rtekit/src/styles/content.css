@@ -1,5 +1,5 @@
 /**
- * Prose styles for `.rte-content` (07 §1).
+ * Prose styles for `.rte-content`.
  *
  * Shipped standalone as `content.css` so anything rendering stored HTML — a list
  * page, an e-mail preview, `<RteContentView>` — looks exactly like the editor.
@@ -142,7 +142,7 @@
     text-align: justify;
   }
 
-  /* 0–8 indent levels (05 §4). Quill's legacy `ql-indent-N` maps onto the same steps. */
+  /* 0–8 indent levels. Quill's legacy `ql-indent-N` maps onto the same steps. */
   .rte-content [data-indent='1'],
   .rte-view [data-indent='1'],
   .rte-content .ql-indent-1,

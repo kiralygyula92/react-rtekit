@@ -1,5 +1,5 @@
 /**
- * The example registry's single registration point (08 §3).
+ * The example registry's single registration point.
  *
  * Each example lives in `src/examples/<slug>/`, exporting a default component and a
  * `meta` object; the raw source is imported with Vite's `?raw` suffix so the Code tab

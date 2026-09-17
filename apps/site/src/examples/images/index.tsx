@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorValue, type UploadResult } from 'react-rteki
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Images and uploads (05 §7).
+ * Images and uploads.
  *
  * The upload service is a mock that reports progress over two seconds and can be made
  * to fail, because the interesting states — in flight, failed, retried — are the ones

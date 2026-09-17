@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { RichTextEditor, type RteSlots } from 'react-rtekit';
 
 /**
- * Re-skinning through the twelve primitives (06 §10).
+ * Re-skinning through the twelve primitives.
  *
  * This is the argument for having primitives at all. Replace `Button`, `Popover`,
  * `Dialog`, `TextInput` and the rest, and every feature that uses them follows — the

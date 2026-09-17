@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 /**
- * The modal dialog primitive (05 §14).
+ * The modal dialog primitive.
  *
  * The same contract as {@link Popover}: focus moves in, Tab is trapped, Escape closes,
  * and focus returns to whatever had it. A dialog without those is a keyboard trap, and

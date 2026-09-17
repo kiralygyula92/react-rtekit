@@ -17,7 +17,7 @@ import { XSS_PAYLOADS } from '../fixtures/xss.js';
 import { officeFixture } from '../fixtures/office.js';
 
 /**
- * One named regression test per bug in 01 §9 (09 §2).
+ * One named regression test per entry in `docs/regressions.md`.
  *
  * These are the reason the library exists. Do not delete one: each records a way the
  * previous implementation was wrong, and the name is the contract.
@@ -219,7 +219,7 @@ describe('R7: commands needed setTimeout(() => quill.update(), 10)', () => {
     editor.exec('toggleBulletList');
     // No await, no timer.
     // The classic preset serializes with the quill-compatible profile, so a list item
-    // carries its `data-list` attribute (03 §5).
+    // carries its `data-list` attribute.
     expect(editor.getHTML()).toContain('<li');
     expect(editor.getFormatState().list.type).toBe('bullet');
   });
@@ -488,7 +488,7 @@ describe('R21: onChange had no source, so controlled usage could loop', () => {
 describe('R22: 287px was a magic number repeated three times', () => {
   it('the height is a token the theme owns', async () => {
     // No theme prop: the classic preset is a visual reproduction, so it carries its
-    // own tokens and the 287px lives in exactly one place (07 §4).
+    // own tokens and the 287px lives in exactly one place.
     await mount({ preset: 'classic' });
     const root = document.querySelector<HTMLElement>('.rte-root');
     expect(root?.style.getPropertyValue('--rte-min-height')).toBe('287px');
@@ -508,16 +508,16 @@ describe('R23: merge tags were raw text, so formatting could split them', () => 
     const { editor } = await mount({
       preset: 'classic',
       defaultValue: quillFixture('default-email-body').html,
-      mergeTags: { tags: [{ key: 'contact_first_name', label: 'Contact first name' }] },
+      mergeTags: { tags: [{ key: 'first_name', label: 'First name' }] },
     });
 
-    expect(editor.getMergeTags()).toContain('contact_first_name');
+    expect(editor.getMergeTags()).toContain('first_name');
 
     // Formatting the whole document must not break the tag apart.
     editor.setSelection('all');
     editor.exec('toggleBold');
-    expect(editor.getHTML()).toContain('{contact_first_name}');
-    expect(editor.getMergeTags()).toContain('contact_first_name');
+    expect(editor.getHTML()).toContain('{first_name}');
+    expect(editor.getMergeTags()).toContain('first_name');
   });
 });
 
@@ -583,7 +583,7 @@ describe('R26: the component re-created its handlers on every keystroke', () => 
 describe('the editor survives its own server-rendered preview', () => {
   it('keeps the content element when a controlled value changes', async () => {
     // The content host carries the server's static preview as `dangerouslySetInnerHTML`
-    // so the field is not a blank box before hydration (02 §8). Feeding that from the
+    // so the field is not a blank box before hydration. Feeding that from the
     // live `value` made React replace the host's children on every keystroke — and by
     // then those children were the engine's contenteditable element, so the editor
     // vanished mid-sentence.

@@ -3,7 +3,7 @@ import { RichTextEditor, type EditorInstance } from 'react-rtekit';
 import { buildLargeDocument } from '../../fixtures';
 
 /**
- * A 100 KB document, measured (09 §4).
+ * A 100 KB document, measured.
  *
  * Two costs are separated here because they behave differently. Keystroke handling is
  * bounded — the engine touches the block the caret is in — while serialization is

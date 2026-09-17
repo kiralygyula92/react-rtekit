@@ -4,7 +4,7 @@ import { RichTextEditor } from '../../src/index.js';
 import type { EditorInstance } from '../../src/types/editor.js';
 
 /**
- * The keyboard model (05 §13).
+ * The keyboard model.
  *
  * The bug these tests exist for: the engine has shortcuts of its own, and for a while
  * both it and our keymap handled `Mod+B` — so the format toggled twice and the
@@ -120,7 +120,7 @@ describe('keymap configuration', () => {
   });
 
   it('lets an onKeyDown handler veto a shortcut', async () => {
-    // Not calling `next` is how middleware vetoes: the built-in never runs (06 §4).
+    // Not calling `next` is how middleware vetoes: the built-in never runs.
     const onKeyDown = vi.fn((ctx: { event: KeyboardEvent }, next: () => void): void => {
       if (ctx.event.key === 'b') return;
       next();

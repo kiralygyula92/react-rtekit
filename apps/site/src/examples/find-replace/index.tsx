@@ -3,16 +3,16 @@ import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rte
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
- * Find and replace (05 §16).
+ * Find and replace.
  *
  * Highlighting is an overlay, not markup: searching must not change what you would
  * save, and it must not put an entry on the undo stack.
  */
 
 const SAMPLE =
-  '<h2>Water test report</h2>' +
+  '<h2>Quarterly report</h2>' +
   '<p>The water sample was clear. Re-test the water in two weeks.</p>' +
-  '<ul><li>Chlorine: normal</li><li>pH: high</li></ul>' +
+  '<ul><li>Revenue: on target</li><li>Costs: above plan</li></ul>' +
   '<p>Water hardness is within range.</p>';
 
 export default function FindReplaceExample() {

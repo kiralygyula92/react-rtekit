@@ -5,7 +5,7 @@ import type { EditorValue } from '../../src/types/common.js';
 import type { ChangeMeta, EditorInstance } from '../../src/types/editor.js';
 
 /**
- * IME composition (05 §15).
+ * IME composition.
  *
  * A Japanese or Korean input method puts intermediate states into the document while
  * the user is still choosing characters: typing "nihon" shows "にほn" before it becomes

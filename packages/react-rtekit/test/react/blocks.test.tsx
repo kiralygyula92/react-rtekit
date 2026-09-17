@@ -5,7 +5,7 @@ import type { EditorInstance } from '../../src/types/editor.js';
 import type { EditorDocument } from '../../src/types/document.js';
 
 /**
- * Block-level content through the engine (05 §3–§8).
+ * Block-level content through the engine.
  *
  * Every one of these node types has to survive the round trip the editor actually
  * performs — HTML in, Lexical nodes, portable document out — because that is the trip

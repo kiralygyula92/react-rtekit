@@ -19,7 +19,7 @@ import { PLAYGROUND_CONTROLS, type ControlSpec, type PlaygroundState } from '../
 import { generateCode, toProps } from '../playground/code';
 
 /**
- * The playground (08 §4).
+ * The playground.
  *
  * The control panel is generated from a schema rather than hand-written, which is what
  * keeps it honest: a prop that is not in the schema is a prop nobody can try, and the

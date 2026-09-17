@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RichTextEditor, type RteSlots } from 'react-rtekit';
 
 /**
- * Four replaced slots (06 §1).
+ * Four replaced slots.
  *
  * The rule each replacement follows: spread the props you were given. They carry the
  * behaviour — the `mousedown` that keeps the selection alive (fixes R5), the ARIA the

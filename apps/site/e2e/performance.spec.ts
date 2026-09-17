@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * The performance budgets (09 §4).
+ * The performance budgets.
  *
  * | Metric                            | Budget          |
  * |-----------------------------------|-----------------|
@@ -34,7 +34,7 @@ function editor(page: Page) {
 // default config ignores this file for that reason.
 test.describe.configure({ mode: 'serial' });
 
-test.describe('performance budgets (09 §4)', () => {
+test.describe('performance budgets', () => {
   test('mounts a standard editor in under 50 ms', async ({ page }) => {
     await harness(page);
 

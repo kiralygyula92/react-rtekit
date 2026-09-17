@@ -3,7 +3,7 @@ import type { EditorInstance, UploadState } from './editor.js';
 import type { LinkAttrs } from './selection.js';
 import type { ToolbarItemSpec } from './toolbar.js';
 
-/** Slot system (06 §1). @group Customization */
+/** Slot system. @group Customization */
 
 /** Props every slot receives on top of its own. */
 export interface SlotBaseProps {
@@ -96,7 +96,7 @@ export interface ToolbarDropdownSlotProps extends Omit<ToolbarButtonSlotProps, '
   'aria-haspopup': 'menu' | 'listbox' | 'dialog';
 }
 
-/** Context for the `ColorPicker` slot: palette, recents and the clear action (05 §2). */
+/** Context for the `ColorPicker` slot: palette, recents and the clear action. */
 export interface ColorPickerSlotProps {
   /** The colour at the selection, or `null` when there is none or it is mixed. */
   value: string | null;
@@ -158,7 +158,7 @@ export interface CounterSlotProps {
   text: string;
 }
 
-/** Context for the `LinkPopover` slot: the link being edited and its actions (05 §6). */
+/** Context for the `LinkPopover` slot: the link being edited and its actions. */
 export interface LinkPopoverSlotProps {
   /** The current URL, or an empty string when creating a link. */
   href: string;
@@ -210,7 +210,7 @@ export interface InlineSuggestMenuItem<T = unknown> {
  * Context for the `InlineSuggestMenu` slot.
  *
  * The slash menu, mentions, emoji and merge tags all render through this one
- * primitive, so their popovers, keyboard model and a11y are identical (05 §10).
+ * primitive, so their popovers, keyboard model and a11y are identical.
  */
 export interface InlineSuggestMenuSlotProps<T = unknown> {
   /** The rows to show, already filtered by `query`. */
@@ -289,7 +289,7 @@ export interface RestoreDraftPromptSlotProps {
  * Every replaceable component.
  *
  * The last dozen entries are primitives; overriding just those re-skins the whole
- * editor for a design system (06 §10).
+ * editor for a design system.
  */
 export interface RteSlots {
   /** The outermost element, carrying every state attribute the CSS keys off. */

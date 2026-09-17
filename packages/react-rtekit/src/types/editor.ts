@@ -12,7 +12,7 @@ import type { CommandHandler, CommandId, CommandPayload, ImageAttrs, TableOption
 import type { EngineHandle } from './engine.js';
 import type { SerializeOptions } from './interop.js';
 
-/** The public editor handle (04 §3). @group Editor */
+/** The public editor handle. @group Editor */
 
 /** Metadata passed alongside every `onChange`. */
 export interface ChangeMeta {
@@ -24,7 +24,7 @@ export interface ChangeMeta {
   length: number;
   /** Words in the document, whatever `countUnit` is set to. */
   wordCount: number;
-  /** Lazily built — the getter only runs if the consumer reads it (02 §7). */
+  /** Lazily built — the getter only runs if the consumer reads it. */
   readonly document: EditorDocument;
 }
 
@@ -36,7 +36,7 @@ export interface SetContentOptions {
   source?: ChangeSource;
   /** Keep the caret where it is, which is what makes controlled mode caret-stable. @default false */
   keepSelection?: boolean;
-  /** Record an undo entry. Pass `false` for content loaded from a server (05 §9). @default true */
+  /** Record an undo entry. Pass `false` for content loaded from a server. @default true */
   history?: boolean;
 }
 
@@ -165,13 +165,13 @@ export interface EditorInstance {
   // ── content ──────────────────────────────────────────────────────────────
   /** The document as HTML, in the editor's profile unless one is given. */
   getHTML(options?: SerializeOptions): string;
-  /** The document as the portable JSON shape (02 §3). */
+  /** The document as the portable JSON shape. */
   getJSON(): EditorDocument;
   /** The document as Markdown; anything Markdown cannot express is downgraded. */
   getMarkdown(options?: SerializeOptions): string;
   /** The document's text, with blocks joined by `blockSeparator`. */
   getText(options?: { blockSeparator?: string }): string;
-  /** The `text/plain` alternative for a multipart e-mail (03 §5.3). */
+  /** The `text/plain` alternative for a multipart e-mail. */
   getPlainTextAlternative(): string;
   /** Replaces the whole document. */
   setContent(value: EditorValue, options?: SetContentOptions): void;
@@ -225,7 +225,7 @@ export interface EditorInstance {
   canUndo(): boolean;
   /** Whether there is anything to redo. */
   canRedo(): boolean;
-  /** Drops the undo stack, so loaded content cannot be undone away (05 §9). */
+  /** Drops the undo stack, so loaded content cannot be undone away. */
   clearHistory(): void;
 
   // ── links, media, tags ───────────────────────────────────────────────────
@@ -276,7 +276,7 @@ export interface EditorInstance {
   /** Current derived state; the same object `useEditorState` selects from. */
   getSnapshot(): EditorSnapshot;
 
-  /** The engine adapter. Escape hatch (02 §2.2). */
+  /** The engine adapter. Escape hatch. */
   readonly engine: EngineHandle;
   /** Stable per-instance id, used to namespace DOM ids (fixes R4). */
   readonly id: string;

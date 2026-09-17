@@ -1,5 +1,5 @@
 /**
- * Keyboard shortcut parsing and matching (05 §13).
+ * Keyboard shortcut parsing and matching.
  *
  * `Mod` is Cmd on macOS and Ctrl everywhere else, so one binding table covers both and
  * the help dialog and tooltips can render the right glyphs per platform.
@@ -106,7 +106,7 @@ export interface KeymapEntry<Handler> {
  * Builds a lookup table from a binding map.
  *
  * Later entries win, so a consumer's `keymap` overrides a plugin's, which overrides the
- * built-ins (06 §0).
+ * built-ins.
  */
 export function buildKeymap<Handler>(
   bindings: Record<string, Handler>,
@@ -135,7 +135,7 @@ export function findKeymapMatch<Handler>(
  *
  * `Mod+Shift+E` means "align center" and `Mod+Alt+2` means "heading 2": the command id
  * alone does not say which, so the binding string is the only place the argument can
- * come from (05 §13).
+ * come from.
  *
  * @example
  * ```ts

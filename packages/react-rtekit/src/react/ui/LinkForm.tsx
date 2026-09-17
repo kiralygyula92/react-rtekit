@@ -5,11 +5,11 @@ import { resolveMessage } from '../localization.js';
 import { Button, Checkbox, TextInput } from './primitives.js';
 
 /**
- * The default link popover (05 §6).
+ * The default link popover.
  *
  * URL, optional text, "open in new tab", and Apply / Remove / Open. Focus moves into
  * the URL field when it opens and Escape closes it, because a popover you cannot
- * reach or leave from the keyboard is not a popover, it is a trap (05 §14).
+ * reach or leave from the keyboard is not a popover, it is a trap.
  *
  * @module
  */

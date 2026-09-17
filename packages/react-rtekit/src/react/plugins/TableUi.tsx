@@ -6,7 +6,7 @@ import { Button } from '../ui/primitives.js';
 
 /**
  * Table chrome: the size picker and the controls for the table the caret is in
- * (05 §8).
+ *.
  *
  * Cell navigation, selection and column resizing belong to the engine — Lexical's
  * table plugin already does them, and reimplementing them here would be a second,
@@ -15,7 +15,7 @@ import { Button } from '../ui/primitives.js';
  * @module
  */
 
-/** The picker's maximum, per 05 §8. */
+/** The picker's maximum size. */
 const MAX_DIMENSION = 10;
 
 export function TableUi() {
@@ -120,7 +120,7 @@ export function TableUi() {
   );
 }
 
-/** A 10×10 hover grid, which is how every editor asks for a table size (05 §8). */
+/** A 10×10 hover grid, which is how every editor asks for a table size. */
 function TableSizePicker({ onPick }: { onPick: (rows: number, cols: number) => void }) {
   const t = useLocalization();
   const [hover, setHover] = useState({ rows: 1, cols: 1 });

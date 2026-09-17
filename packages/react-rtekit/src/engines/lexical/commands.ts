@@ -46,7 +46,7 @@ import { $createImageNode, $isImageNode, type ImageNode } from './nodes/image.js
 import { $createHorizontalRuleNode } from './nodes/horizontal-rule.js';
 
 /**
- * Built-in command implementations (04 §4).
+ * Built-in command implementations.
  *
  * Every command is synchronous and state flows back through Lexical's own update
  * listener, so nothing here needs a timer to settle (fixes R7).
@@ -68,7 +68,7 @@ type Implementation = (ctx: EngineCommandContext, payload: unknown) => boolean;
 /**
  * Forces Lexical to flush the update synchronously.
  *
- * Lexical batches updates by default. 05 §4 requires commands to be synchronous — the
+ * Lexical batches updates by default. Commands have to be synchronous — the
  * toolbar updates from the engine's own change event, with no timers (fixes R7) — so
  * every command commits before it returns and `getHTML()` on the next line sees it.
  */
@@ -159,7 +159,7 @@ function toggleList(
  *
  * An upload that finishes after focus has moved has no selection left, and an image
  * that uploads successfully and then silently vanishes is worse than one that lands
- * at the end of the document (05 §7). Call inside an update.
+ * at the end of the document. Call inside an update.
  */
 function $ensureInsertionPoint(): boolean {
   if ($isRangeSelection($getSelection())) return true;
@@ -398,7 +398,7 @@ export const ENGINE_COMMANDS: Partial<Record<CommandId, Implementation>> = {
     editor.update(() => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return;
-      // Double newlines become paragraphs, single ones line breaks (03 §3).
+      // Double newlines become paragraphs, single ones line breaks.
       const paragraphs = text.replace(/\r\n?/g, '\n').split(/\n{2,}/);
       paragraphs.forEach((paragraph, index) => {
         if (index > 0) selection.insertParagraph();

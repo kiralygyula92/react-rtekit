@@ -7,7 +7,7 @@ import { QUILL_FIXTURES, quillFixture } from '../fixtures/quill.js';
 import { XSS_PAYLOADS } from '../fixtures/xss.js';
 
 /**
- * The read-only renderer (04 §6, 05 §17).
+ * The read-only renderer.
  *
  * The contract that matters: what it renders is what the editor would show, and it
  * sanitizes before rendering — this is the component list pages and e-mail previews
@@ -48,11 +48,11 @@ describe('rendering', () => {
     const { container } = render(
       <RteContentView
         value={quillFixture('default-email-body').html}
-        mergeTagPreview={{ contact_first_name: 'Jane' }}
+        mergeTagPreview={{ first_name: 'Jane' }}
       />,
     );
     expect(container.textContent).toContain('Hi Jane');
-    expect(container.textContent).not.toContain('{contact_first_name}');
+    expect(container.textContent).not.toContain('{first_name}');
   });
 
   it('honours the element type and unstyled mode', () => {
@@ -110,7 +110,7 @@ describe('editor and view agree (content-styles parity)', () => {
   });
 });
 
-describe('server rendering (02 §8)', () => {
+describe('server rendering', () => {
   it('renders to a string without touching the DOM', () => {
     const html = renderToString(<RteContentView value="<p>server</p>" />);
     expect(html).toContain('<p>server</p>');

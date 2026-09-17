@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 /**
- * Every example page renders, works and is accessible (08 §8).
+ * Every example page renders, works and is accessible.
  *
  * The gallery is the library's own regression surface: an example that throws, logs
  * an error or fails axe is a bug in the library, not in the page.
@@ -133,5 +133,5 @@ test('multiple-editors: formatting one leaves the others alone', async ({ page }
 
   await expect(page.getByTestId('multiple-values')).toContainText('<strong>');
   // The subject editor is untouched.
-  await expect(page.getByTestId('multiple-values')).toContainText('<p>Your April water test</p>');
+  await expect(page.getByTestId('multiple-values')).toContainText('<p>Your April report</p>');
 });
