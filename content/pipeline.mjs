@@ -27,6 +27,9 @@ const STEPS = [
   ['content/react-rtekit/reference/generate.mjs', 'generate reference'],
   ['content/react-rtekit/reference/render.mjs', 'render reference into pages'],
   ['content/build.mjs', 'recompile'],
+  // Last, and from the compiled redirect table rather than the CSV, so the host's 301s
+  // and the router's client-side fallback are the same list.
+  ['content/vercel-config.mjs', 'write vercel.json'],
 ];
 
 for (const [script, label] of STEPS) {

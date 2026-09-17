@@ -19,6 +19,7 @@
     "conformance": "node content/conformance.mjs",
     "conformance:served": "node content/conformance.mjs --served",
     "redirects:check": "node content/redirect-check.mjs",
+    "vercel:config": "node content/vercel-config.mjs",
     "dev": "pnpm --filter @react-rtekit/site dev",
     "clean": "pnpm -r exec rimraf dist coverage .vite && rimraf node_modules/.vite",
     "lint": "eslint .",

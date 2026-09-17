@@ -3,5 +3,414 @@
   "framework": "vite",
   "buildCommand": "pnpm -w run build && pnpm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/((?!_vercel/).*)", "destination": "/index.html" }]
+  "trailingSlash": true,
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/react-rtekit/",
+      "permanent": true
+    },
+    {
+      "source": "/api",
+      "destination": "/react-rtekit/api/",
+      "permanent": true
+    },
+    {
+      "source": "/api/commands",
+      "destination": "/react-rtekit/api/commands/",
+      "permanent": true
+    },
+    {
+      "source": "/api/editor-instance",
+      "destination": "/react-rtekit/api/editor-instance/",
+      "permanent": true
+    },
+    {
+      "source": "/api/handlers",
+      "destination": "/react-rtekit/api/handlers/",
+      "permanent": true
+    },
+    {
+      "source": "/api/hooks",
+      "destination": "/react-rtekit/api/editor-hooks/",
+      "permanent": true
+    },
+    {
+      "source": "/api/icons",
+      "destination": "/react-rtekit/api/icons/",
+      "permanent": true
+    },
+    {
+      "source": "/api/localization",
+      "destination": "/react-rtekit/api/localization-keys/",
+      "permanent": true
+    },
+    {
+      "source": "/api/plugins",
+      "destination": "/react-rtekit/api/plugins/",
+      "permanent": true
+    },
+    {
+      "source": "/api/rich-text-editor",
+      "destination": "/react-rtekit/api/rich-text-editor/",
+      "permanent": true
+    },
+    {
+      "source": "/api/slots",
+      "destination": "/react-rtekit/api/slots/",
+      "permanent": true
+    },
+    {
+      "source": "/api/theme-tokens",
+      "destination": "/react-rtekit/api/theme-tokens/",
+      "permanent": true
+    },
+    {
+      "source": "/api/types",
+      "destination": "/react-rtekit/api/types/",
+      "permanent": true
+    },
+    {
+      "source": "/api/utilities",
+      "destination": "/react-rtekit/api/serialization/",
+      "permanent": true
+    },
+    {
+      "source": "/changelog",
+      "destination": "/react-rtekit/discover-more/changelog/",
+      "permanent": true
+    },
+    {
+      "source": "/docs",
+      "destination": "/react-rtekit/getting-started/usage/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/getting-started",
+      "destination": "/react-rtekit/getting-started/usage/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/accessibility",
+      "destination": "/react-rtekit/guides/accessibility/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/forms",
+      "destination": "/react-rtekit/forms/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/getting-started",
+      "destination": "/react-rtekit/getting-started/usage/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/html-interop",
+      "destination": "/react-rtekit/html-interop/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/localization",
+      "destination": "/react-rtekit/guides/localization/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/merge-tags",
+      "destination": "/react-rtekit/merge-tags/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/migration-from-quill",
+      "destination": "/react-rtekit/migration/from-quill/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/performance",
+      "destination": "/react-rtekit/guides/performance/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/plugins",
+      "destination": "/react-rtekit/guides/writing-a-plugin/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/sanitization",
+      "destination": "/react-rtekit/sanitization/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/slots-and-handlers",
+      "destination": "/react-rtekit/slots/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/ssr",
+      "destination": "/react-rtekit/guides/server-rendering/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/theming",
+      "destination": "/react-rtekit/customization/theme-tokens/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/toolbar",
+      "destination": "/react-rtekit/toolbar/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/uploads",
+      "destination": "/react-rtekit/images/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/guides/value-and-formats",
+      "destination": "/react-rtekit/value-formats/",
+      "permanent": true
+    },
+    {
+      "source": "/examples",
+      "destination": "/react-rtekit/all-features/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/accessibility",
+      "destination": "/react-rtekit/accessibility/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/autosave",
+      "destination": "/react-rtekit/autosave/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/basic",
+      "destination": "/react-rtekit/getting-started/usage/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/command-overrides",
+      "destination": "/react-rtekit/commands/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/composable",
+      "destination": "/react-rtekit/composable-parts/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/content-styles",
+      "destination": "/react-rtekit/content-view/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/controlled",
+      "destination": "/react-rtekit/value-formats/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/counter-and-limits",
+      "destination": "/react-rtekit/counters-and-limits/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/design-system-skin",
+      "destination": "/react-rtekit/customization/design-system-skin/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/email-output",
+      "destination": "/react-rtekit/email-output/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/emoji-and-slash",
+      "destination": "/react-rtekit/emoji/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/find-replace",
+      "destination": "/react-rtekit/find-and-replace/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/floating-toolbar",
+      "destination": "/react-rtekit/selection-toolbar/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/formatting",
+      "destination": "/react-rtekit/text-formatting/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/fullscreen",
+      "destination": "/react-rtekit/fullscreen/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/handlers-middleware",
+      "destination": "/react-rtekit/handler-middleware/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/headless",
+      "destination": "/react-rtekit/headless/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/history",
+      "destination": "/react-rtekit/history/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/html-interop",
+      "destination": "/react-rtekit/html-interop/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/images",
+      "destination": "/react-rtekit/images/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/large-document",
+      "destination": "/react-rtekit/demos/large-document/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/legacy-parity",
+      "destination": "/react-rtekit/demos/legacy-parity/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/links",
+      "destination": "/react-rtekit/links/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/lists",
+      "destination": "/react-rtekit/lists/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/localization",
+      "destination": "/react-rtekit/localization/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/markdown",
+      "destination": "/react-rtekit/markdown-shortcuts/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/mentions",
+      "destination": "/react-rtekit/mentions/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/merge-tags",
+      "destination": "/react-rtekit/merge-tags/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/mobile",
+      "destination": "/react-rtekit/mobile/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/multiple-editors",
+      "destination": "/react-rtekit/demos/cms-body-field/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/paste-cleanup",
+      "destination": "/react-rtekit/paste-cleanup/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/plugin-authoring",
+      "destination": "/react-rtekit/plugin-authoring/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/presets",
+      "destination": "/react-rtekit/presets/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/readonly-and-disabled",
+      "destination": "/react-rtekit/read-only-and-disabled/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/sanitization",
+      "destination": "/react-rtekit/sanitization/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/slots-custom",
+      "destination": "/react-rtekit/slots/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/source-view",
+      "destination": "/react-rtekit/source-view/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/tables",
+      "destination": "/react-rtekit/tables/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/tailwind-skin",
+      "destination": "/react-rtekit/integrations/tailwind/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/theming",
+      "destination": "/react-rtekit/theming/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/toolbar-config",
+      "destination": "/react-rtekit/toolbar/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/validation-formik",
+      "destination": "/react-rtekit/integrations/formik/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/validation-rhf",
+      "destination": "/react-rtekit/integrations/react-hook-form/",
+      "permanent": true
+    },
+    {
+      "source": "/examples/value-formats",
+      "destination": "/react-rtekit/value-formats/",
+      "permanent": true
+    },
+    {
+      "source": "/playground",
+      "destination": "/react-rtekit/demos/playground/",
+      "permanent": true
+    },
+    {
+      "source": "/theme-editor",
+      "destination": "/react-rtekit/demos/theme-editor/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!_vercel/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
