@@ -6,12 +6,13 @@
  * emoji is several emoji joined by zero-width joiners, and `é` may be `e` followed by a
  * combining acute. Deleting a code unit at a time splits those and leaves debris.
  *
- * The engines get this right by asking the browser: Lexical's `deleteCharacter` calls
- * `Selection.modify('extend', 'backward', 'character')` and lets the DOM decide. That
+ * The usual way to get this right is to ask the browser:
+ * `Selection.modify('extend', 'backward', 'character')` and let the DOM decide. That
  * works in a browser and only in a browser — jsdom has no `Selection.modify` at all, so
  * every caller of it is untestable outside the Playwright matrix — and it makes the
  * behaviour the browser's rather than ours, which is the same class of inconsistency
- * this library exists to hide.
+ * this library exists to hide. The engine this replaced did exactly that, and its
+ * backward delete silently did nothing outside a real browser as a result.
  *
  * `Intl.Segmenter` is the same Unicode algorithm, available to us directly, in Node and
  * in every current browser. Where it is missing, the fallback below keeps surrogate

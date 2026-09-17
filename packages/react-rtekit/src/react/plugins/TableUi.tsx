@@ -8,7 +8,7 @@ import { toolbarControl } from './anchor.js';
  * Table chrome: the size picker and the controls for the table the caret is in
  *.
  *
- * Cell navigation, selection and column resizing belong to the engine — Lexical's
+ * Cell navigation, selection and column resizing belong to the engine — the
  * table plugin already does them, and reimplementing them here would be a second,
  * worse copy. This is the part an author points at.
  *

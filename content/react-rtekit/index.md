@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/
 title: Overview
-description: 'An accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.'
+description: 'An accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.'
 archetype: A
 section: getting-started
 ---
@@ -11,7 +11,7 @@ section: getting-started
 
 ## Introduction
 
-React RTE Kit is a React component and a set of building blocks for editing rich text. It renders with [Lexical](https://lexical.dev), Meta's editor engine, and wraps it in a complete field: a real ARIA toolbar, a sanitizer on every content boundary, HTML interop that reads legacy Quill markup, and 114 design tokens instead of a UI-kit dependency.
+React RTE Kit is a React component and a set of building blocks for editing rich text. The editing engine is its own — no third-party editor underneath — and it arrives as a complete field: a real ARIA toolbar, a sanitizer on every content boundary, HTML interop that reads legacy Quill markup, and 114 design tokens instead of a UI-kit dependency.
 
 Everything is controlled through props, CSS variables, slots and handler middleware, so the editor fits into your design system and your state management rather than the other way round. When the all-in-one component is the wrong shape, the same editor is available as eleven composable parts and as a headless hook.
 
@@ -21,7 +21,7 @@ The package edits text. It does not manage documents, collaborate in real time, 
 
 - **Sanitized at every boundary:** the initial value, every paste, every drop, every programmatic insert and the output all pass an allowlist sanitizer with four profiles and hard rules no configuration can switch off.
 - **Your stored HTML keeps working:** interop profiles read legacy Quill markup and emit standards-compliant, Quill-compatible or e-mail-safe HTML, so existing content needs no migration in either direction.
-- **An engine adapter, not a wrapper:** an `EditorEngine` interface owns the document layer. Nothing outside `src/engines/` imports Lexical, and none of it reaches the public API.
+- **No dependencies at all:** React and React DOM are the only peers. The document model, the engine, the parser, the sanitizer and every serializer are this project's own code, behind an `EditorEngine` interface that keeps the engine swappable.
 - **Emptiness is a first-class concept:** `isEmpty()` ignores `<p><br></p>` and limits count text rather than markup, so `required` actually means required.
 - **Accessible by construction:** a real ARIA toolbar with roving focus, a named textbox, errors linked with `aria-describedby`, live announcements, and every shipped theme meeting WCAG AA with a test enforcing it.
 - **Replaceable at ten levels:** theme tokens, class names, slot props, toolbar config, custom items, slots, handler middleware, command overrides, composable parts and a headless hook. Use the lowest level that does the job.

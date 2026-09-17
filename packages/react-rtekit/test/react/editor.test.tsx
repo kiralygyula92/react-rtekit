@@ -7,7 +7,7 @@ import { Rte, useEditor } from '../../src/index.js';
 import { quillFixture } from '../fixtures/quill.js';
 
 /**
- * The React layer against the real Lexical engine.
+ * The React layer against the real engine.
  *
  * jsdom cannot drive a contenteditable, so nothing here types: every assertion goes
  * through the programmatic API. Caret behaviour is covered by the Playwright suite.

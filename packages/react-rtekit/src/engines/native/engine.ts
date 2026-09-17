@@ -80,8 +80,8 @@ import { DocumentTree, ROOT_KEY, type NodeKey } from './tree.js';
 /**
  * The in-house engine — stage 8 of ADR-006.
  *
- * Implements the same `EngineHandle` the Lexical adapter does, so it is graded by the
- * same conformance suite, and imports nothing outside this project.
+ * Implements `EngineHandle`, so it is graded by the conformance suite in
+ * `test/engines/`, and imports nothing outside this project.
  *
  * The shape of an edit is the same every time: read the selection out of the DOM, run a
  * model operation inside one `tree.update`, reconcile the change the update reports, put
@@ -403,7 +403,7 @@ class NativeEngineHandle implements EngineHandle {
       const result = handler(
         {
           // The editor instance is injected by the product layer; the engine owns only
-          // the payload and the chain, exactly as the Lexical adapter has it.
+          // the payload and the chain.
           editor: undefined as never,
           command,
           payload: current,
@@ -1125,9 +1125,9 @@ class NativeEngineHandle implements EngineHandle {
     /*
      * Undo and redo are the engine's, not the keymap's.
      *
-     * `buildKeymap` binds no shortcut for them — the Lexical adapter took them from
-     * Lexical's own history plugin, so the host never needed to — which meant Ctrl+Z
-     * reached this engine and fell straight through to the browser.
+     * `buildKeymap` binds no shortcut for them: the engine this replaced inherited undo
+     * from its own history plugin, so the host never needed a binding — which meant
+     * Ctrl+Z reached this engine and fell straight through to the browser.
      */
     if ((event.ctrlKey || event.metaKey) && !event.altKey) {
       const key = event.key.toLowerCase();

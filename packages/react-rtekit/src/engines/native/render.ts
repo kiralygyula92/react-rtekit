@@ -8,10 +8,10 @@ import { ROOT_KEY } from './tree.js';
  *
  * The editor's DOM is the *same* DOM `documentToHtml` writes. That is a decision, not a
  * coincidence: `<RteContentView>` renders stored HTML, the editor renders the live model,
- * and the promise the library makes is that the two look identical. Lexical could not
- * quite keep it — it labels marks with classes (`rte-bold`) where the serializer emits
- * elements (`<strong>`), so the content stylesheet has to know both dialects. Rendering
- * the serializer's shape here retires that difference.
+ * and the promise the library makes is that the two look identical. The engine this
+ * replaced could not quite keep it: it labelled marks with classes (`rte-bold`) where the
+ * serializer emits elements (`<strong>`), so the content stylesheet had to know both
+ * dialects. Rendering the serializer's shape retires that difference.
  *
  * `render.test.ts` holds the two representations to it: for a corpus of documents, the
  * HTML this produces must equal `documentToHtml(doc)` exactly. If the serializer changes

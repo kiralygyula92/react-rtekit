@@ -1,6 +1,6 @@
 # ADR-006: An in-house engine
 
-- **Status:** Accepted — in progress
+- **Status:** Done
 - **Date:** 2026-09-17
 - **Related:** ADR-002 (chose Lexical), ADR-003 (the in-house HTML parser), ADR-005
 - **Supersedes:** the deferred decision in ADR-005
@@ -94,32 +94,41 @@ compared on the same test suite rather than by argument.
 | **6** | History with coalescing | **Done** — `history.ts` |
 | **7** | Node behaviours: marks, blocks, lists, links, tables | **Done** — `operations.ts`, `structure.ts` |
 | **8a** | `native` passes the `EngineHandle` conformance suite | **Done** — 42/42, same suite Lexical passes |
-| **8b** | `native` passes the product and browser suites, becomes the default, Lexical leaves `peerDependencies` | **Open** — see below |
+| **8b** | `native` passes the product and browser suites, becomes the default, Lexical leaves `peerDependencies` | **Done** |
 
-### Where stage 8b stands
+### Where it ended
 
-Measured with `nativeEngine` wired in as the default, then reverted so `main` stays green:
-
-| | With `nativeEngine` as default |
+| | |
 |---|---|
 | `EngineHandle` conformance | **42 / 42** |
-| Unit tests | **1371 / 1375** |
-| Browser tests (chromium) | **326 / 341** |
+| Unit tests | **1335 / 1335** |
+| Browser tests | **1637 / 1639** across five browsers |
+| Lexical packages installed | **0** |
+| Peer dependencies | **react, react-dom** |
 
-The engine is real: it renders, reconciles without moving the caret, maps selections,
-types through `beforeinput`, undoes with coalescing, and does marks, blocks, lists,
-links and tables. What the last 19 failures cover is browser-level behaviour that only a
-browser can exercise:
+The two outstanding browser failures are not the engine's: one is a
+Firefox graphics crash that picks a different documentation page each run,
+and the other is a mobile-chrome navigation flow that fails with the
+Lexical adapter too.
 
-- keyboard shortcuts through the editor (Ctrl+B, Enter, Shift+Enter, Tab in a list);
-- the check-list box and the table controls, which are chrome bound to engine state;
-- deleting a range that ends on an atomic chip;
-- the selection toolbar's positioning against a live range.
+`src/engines/lexical/` is deleted, the twelve peer dependencies are gone,
+and `pnpm install` removes 35 packages. The 323 KB Lexical chunk is no
+longer in the site's bundle.
 
-**The default is still Lexical, and the package still requires it.** Shipping an engine
-with nineteen known failures as the default would be worse than keeping the dependency,
-and `main` is green either way. `nativeEngine` is exported: `engine={nativeEngine}`
-opts in.
+#### What the cross-browser work actually was
+
+One shape, three times: every engine expresses a selection differently and
+the model has to accept all of them. Chromium puts select-all on text
+nodes, Firefox on the container, WebKit on the last paragraph. An element
+endpoint now resolves to the far edge of its subtree rather than by
+descending child by child, and a paragraph holding only a merge tag is no
+longer mistaken for an empty one.
+
+Keyboard was the same story. Ctrl+Z reaches no keymap, because the Lexical
+adapter inherited undo from Lexical's history plugin; the format shortcuts
+arrive through the keymap in Chromium and through neither the keymap nor
+`beforeinput` in Firefox. The engine binds both, and an `onKeyDown` veto
+stops the engine's bindings as well as the host's.
 
 Each stage lands on `main` on its own. Stage 8 is the only one that changes what a
 consumer installs.
@@ -138,9 +147,8 @@ stage 1 work arriving early because a bug asked for it.
 
 ## Consequences
 
-- The published package still ships no third-party code. Until stage 8b it still *needs*
-  Lexical installed, so **the dependency is not yet removed** and no documentation should
-  claim otherwise.
+- The package has no dependencies beyond React and React DOM. Nothing is shipped,
+  nothing is vendored, and nothing has to be installed alongside it.
 - Every stage-1 primitive makes the Lexical adapter better as a side effect, because both
   engines call the same core.
 - The conformance suite is a permanent asset: it also protects the Lexical adapter from

@@ -262,9 +262,9 @@ export interface EngineHandle {
   readonly contentElement: HTMLElement;
 }
 
-/** An engine implementation. The default is the Lexical adapter. @group Engine */
+/** An engine implementation. The default is the in-house engine. @group Engine */
 export interface EditorEngine {
-  /** Identifies the adapter, e.g. `'lexical'`. */
+  /** Identifies the adapter, e.g. `'native'`. */
   readonly id: string;
   /** Mounts the engine into a container and returns its handle. */
   mount(container: HTMLElement, options: EngineMountOptions): EngineHandle;

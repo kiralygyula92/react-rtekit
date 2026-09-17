@@ -17,9 +17,9 @@ None.
 
 See [Installation](/react-rtekit/getting-started/installation/).
 
-## Does it work without Lexical?
+## What does it depend on?
 
-No. Lexical is the document engine and a required peer dependency. The `EditorEngine` interface exists so that nothing outside `src/engines/` depends on it and so the engine could be replaced — not because a second adapter ships today.
+React and React DOM, and nothing else. The document model, the editing engine, the HTML parser, the sanitizer and every serializer are this project's own code. The `EditorEngine` interface keeps the engine replaceable, and the package ships one — its own.
 
 ## Can it edit Markdown directly?
 
@@ -31,7 +31,7 @@ The output passes the sanitizer, and the hard rules — no `<script>`, no `on*` 
 
 ## Does it do collaborative editing?
 
-No. Lexical supports collaboration and this package does not expose it.
+No. There is no CRDT or presence layer, and adding one would be a different product.
 
 ## Why is the bundle that size?
 

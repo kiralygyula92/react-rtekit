@@ -3,7 +3,7 @@
  *
  * This shape is owned by the library and is independent of the engine, so it can be
  * stored, diffed, asserted against in tests and round-tripped through every
- * serializer without dragging Lexical types into the public API.
+ * serializer without dragging an engine's own types into the public API.
  *
  * @group Content model
  */

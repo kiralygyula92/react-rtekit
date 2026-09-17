@@ -9,7 +9,7 @@ import { defineConfig } from 'tsup';
  * they work inside React Server Component graphs. `core` and `view` stay server-safe
  * (02 §8, 09 §6), so the directive is added per entry rather than as a global banner.
  */
-const CLIENT_ENTRIES = ['index', 'engines/lexical/index'];
+const CLIENT_ENTRIES = ['index'];
 
 const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'dist');
 
@@ -31,7 +31,6 @@ export default defineConfig({
     'src/index.ts',
     'src/core/index.ts',
     'src/view/index.ts',
-    'src/engines/lexical/index.ts',
     'src/meta.ts',
     'src/plugins/*.ts',
     'src/plugins/*.tsx',
@@ -71,8 +70,6 @@ export default defineConfig({
     'react-dom',
     'react/jsx-runtime',
     'react/jsx-dev-runtime',
-    'lexical',
-    /^@lexical\//,
     'isomorphic-dompurify',
   ],
   esbuildOptions(options) {

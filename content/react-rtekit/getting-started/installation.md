@@ -17,14 +17,14 @@ section: getting-started
 
 ## Installation
 
-Lexical is a peer dependency, so you install it alongside rather than inheriting a pinned copy:
+One package. React and React DOM are the only peer dependencies, and there is nothing else to install:
 
 ```bash
-npm install react-rtekit lexical @lexical/react @lexical/rich-text @lexical/list @lexical/link @lexical/table @lexical/code @lexical/html @lexical/markdown @lexical/selection @lexical/utils @lexical/history
+npm install react-rtekit
 ```
 
 ```bash
-pnpm add react-rtekit lexical @lexical/react @lexical/rich-text @lexical/list @lexical/link @lexical/table @lexical/code @lexical/html @lexical/markdown @lexical/selection @lexical/utils @lexical/history
+pnpm add react-rtekit
 ```
 
 Then import the stylesheet once, wherever you import your application's other global CSS:
@@ -53,7 +53,7 @@ export function Editor() {
 
 You should see a bordered field with a toolbar above it, the word *Hello* inside, and a caret when you click into it. Typing should update `value`; pressing Mod+B should embolden the selection.
 
-If the field appears but has no styling, the stylesheet import is missing. If the toolbar is there but nothing happens when you type, a Lexical peer is not installed.
+If the field appears but has no styling, the stylesheet import is missing.
 
 ## Next steps
 

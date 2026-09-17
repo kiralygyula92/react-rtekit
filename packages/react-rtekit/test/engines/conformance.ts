@@ -5,15 +5,16 @@ import type { EditorEngine, EngineHandle, EngineMountOptions } from '../../src/t
 /**
  * The `EngineHandle` contract, as executable tests.
  *
- * Written because ADR-005 asks for it: replacing the engine is only a contained piece of
+ * Written because ADR-006 asks for it: replacing the engine is only a contained piece of
  * work if "contained" has a definition. Without this, a second adapter is finished when
  * somebody decides it looks finished, and every disagreement about behaviour is settled
- * by reading the Lexical adapter — which makes Lexical the specification rather than the
- * implementation.
+ * by reading whichever engine happens to ship — which makes that engine the
+ * specification rather than the implementation.
  *
  * So: every one of the 34 methods, exercised against the interface and never against an
- * engine's internals. The Lexical adapter passes it today, which is what makes it a
- * description of the contract rather than a wish list.
+ * engine's internals. It was written against the engine this replaced and passed by it
+ * before a line of the replacement existed, which is what makes it a description of the
+ * contract rather than a wish list.
  *
  * Deliberately not in here:
  *   - geometry (`getCaretRect`), beyond "returns a rect or null" — jsdom has no layout;
@@ -61,7 +62,7 @@ const editable = (element: HTMLElement): boolean =>
  *
  * @example
  * ```ts
- * describeEngineConformance({ id: 'lexical', engine: lexicalEngine });
+ * describeEngineConformance({ id: 'native', engine: nativeEngine });
  * ```
  */
 export function describeEngineConformance({ id, engine }: ConformanceTarget): void {

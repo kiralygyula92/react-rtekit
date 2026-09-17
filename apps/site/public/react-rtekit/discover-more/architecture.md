@@ -13,9 +13,9 @@ The decisions that shaped the package, each recorded as an ADR in the repository
 
 ## An engine adapter, not a wrapper
 
-An `EditorEngine` interface owns the document layer, and Lexical is the default adapter behind it. Nothing outside `src/engines/` imports Lexical and none of it reaches the public API — verified by a grep that returns nothing.
+An `EditorEngine` interface owns the document layer, and the engine behind it is this project's own. Nothing outside `src/engines/` knows how the document is edited, and none of it reaches the public API — verified by a grep that returns nothing.
 
-The point is not that a second engine is coming. It is that the public API describes editing rather than describing Lexical, so a change in the engine is not a breaking change in the package.
+The point is that the public API describes editing rather than describing an engine, so a change in the engine is not a breaking change in the package. That boundary earned itself: the engine behind it has already been replaced once, and nothing above it moved.
 
 ## An in-house HTML parser
 

@@ -311,12 +311,19 @@ Realistically a multi-quarter project rather than a task.
 The architecture supports the swap and is not an accident: nothing outside
 `src/engines/lexical/` imports Lexical, verified by a grep that returns nothing.
 
-**Decided.** The owner chose to write an engine in-house.
-[ADR-006](docs/adr/006-an-in-house-engine.md) records the analysis and the staged plan;
-[ADR-005](docs/adr/005-removing-third-party-dependencies.md) records the options it was
-chosen from. Stage 0 — the `EngineHandle` conformance suite the Lexical adapter passes,
-so a second adapter has a definition of done — is complete. **Until stage 8 the
-dependency is still required, and nothing should say otherwise.**
+**Closed.** The engine was written and Lexical is gone.
+
+`src/engines/native/` implements the same `EngineHandle` the adapter did and is graded
+by the same 42-test conformance suite. `src/engines/lexical/` is deleted, the twelve peer
+dependencies with it, and `pnpm install` removes 35 packages. The package's peers are
+`react` and `react-dom`, and the site's bundle no longer carries a 323 KB Lexical chunk.
+
+1335 unit tests and 1637 of 1639 browser tests pass; the two that do not are a Firefox
+graphics crash on a different documentation page each run, and a mobile-chrome navigation
+flow that failed with the Lexical adapter too.
+
+[ADR-006](docs/adr/006-an-in-house-engine.md) records the analysis, the plan and what the
+cross-browser work turned out to be.
 
 ### G-29 — `/react-rtekit/discover-more/showcase/` has no entries
 The page exists and says so. Inventing applications would breach operating rule 4, so it

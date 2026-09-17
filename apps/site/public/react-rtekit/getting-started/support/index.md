@@ -31,7 +31,7 @@ This is a free, MIT-licensed project maintained in the open. There is no paid su
 
 A report that can be reproduced gets fixed; one that cannot, usually does not. Include:
 
-- the version of `react-rtekit`, React and Lexical;
+- the version of `react-rtekit` and React;
 - the browser, since most editor bugs are engine-specific;
 - the props you passed, or a link to a [playground](/react-rtekit/demos/playground/) URL, which carries the whole configuration in its hash;
 - what you did, what happened, and what you expected instead.

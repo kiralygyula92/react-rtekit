@@ -1,11 +1,11 @@
 # React RTE Kit
 
 A production-grade React rich-text editor you can actually own.
-React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
 ## Getting started
 
-- [Overview](/react-rtekit/index.md): An accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
+- [Overview](/react-rtekit/index.md): An accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
 - [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
 - [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
 - [Requirements](/react-rtekit/getting-started/requirements.md): The React, TypeScript and browser versions this package supports, and what it expects of your bundler.
@@ -64,7 +64,7 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 - [Headless](/react-rtekit/headless.md): useEditor with no chrome at all: the document, the commands and the state, and you draw the rest.
 - [Plugin authoring](/react-rtekit/plugin-authoring.md): Add a mark, a block, a command or a toolbar item with definePlugin, in the same shape the built-ins use.
 - [Presets](/react-rtekit/presets.md): Six bundles — minimal, comment, standard, classic, email and full — each a plugin list plus prop defaults.
-- [Engine adapter](/react-rtekit/engine-adapter.md): An EditorEngine interface owns the document layer, with Lexical as the default adapter behind it.
+- [Engine adapter](/react-rtekit/engine-adapter.md): An EditorEngine interface owns the document layer, so the engine behind it can change without the public API moving.
 - [Icons](/react-rtekit/icons.md): Fifty-two inline SVGs drawn with currentColor, each replaceable, and no icon package in your bundle.
 - [Localization](/react-rtekit/localization.md): Every string in one catalogue: five locales ship, 153 keys, and a pseudo-locale for finding the ones you missed.
 - [Accessibility](/react-rtekit/accessibility.md): A named textbox, a real ARIA toolbar with roving focus, linked errors, live announcements and AA contrast.

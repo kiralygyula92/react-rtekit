@@ -6,7 +6,7 @@ import { afterEach, beforeEach } from 'vitest';
  * jsdom setup for the adapter's tests.
  *
  * The adapter renders a real editor, so jsdom needs the same measurement stubs the
- * library's own setup installs: Lexical reconciles against `getBoundingClientRect`
+ * library's own setup installs: the engine reconciles against `getBoundingClientRect`
  * and `getClientRects`, which jsdom leaves unimplemented on `Range` and `Text`.
  */
 
@@ -41,7 +41,7 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
 /**
  * jsdom has no layout engine, so nothing has a box.
  *
- * Lexical scrolls the caret into view after an update and asks the selection's target
+ * The engine scrolls the caret into view after an update and asks the selection's target
  * for its rect. In a browser that target is a `Range`; in jsdom it can be a `Text`,
  * which has no `getBoundingClientRect` at all. An empty rect is the honest answer
  * here — these tests assert document state, never geometry.

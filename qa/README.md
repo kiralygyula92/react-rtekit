@@ -34,7 +34,9 @@ pnpm --filter @react-rtekit/site e2e   # includes flows.spec.ts
 | Pages | 123, each with one H1 and its own description |
 | Browser tests | 1740 across Chromium, Firefox, WebKit and two mobile emulations |
 | Visual snapshots | 6 |
-| Unit tests | 1121 |
+| Unit tests | 1335 |
+| Engine conformance | **42 of 42**, the contract every engine is graded against |
+| Third-party dependencies | **none**; `react` and `react-dom` are the only peers |
 
 ## Why these check bodies, not status codes
 

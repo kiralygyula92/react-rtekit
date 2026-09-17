@@ -9,7 +9,7 @@ variable to the whole UI, and able to round-trip the markup your old editor alre
 stored.
 
 ```bash
-pnpm add react-rtekit lexical @lexical/react
+pnpm add react-rtekit
 ```
 
 ```tsx
@@ -48,9 +48,10 @@ export function MessageField() {
   Quill-compatible or e-mail-safe HTML, so existing content needs no migration in
   either direction ([ADR-004](docs/adr/004-interop-profiles.md)).
 - **An engine adapter, not a wrapper.** An `EditorEngine` interface owns the document
-  layer, and Lexical is the default adapter behind it. Nothing outside
-  `src/engines/` imports Lexical, and none of it reaches the public API
-  ([ADR-002](docs/adr/002-engine-lexical.md)).
+  layer, and the engine behind it is this project's own. Nothing above
+  `src/engines/` knows how the document is edited, which is what let the
+  engine be replaced without the public API moving
+  ([ADR-006](docs/adr/006-an-in-house-engine.md)).
 - **Emptiness is a first-class concept.** `isEmpty()` ignores `<p><br></p>`, and length
   limits count text rather than markup — so `required` actually means required, and a
   bold word does not eat your character budget.
@@ -80,10 +81,9 @@ during server rendering.
 
 ## Requirements
 
-React 18 or 19, and Lexical as a peer dependency so your application controls its
-version. TypeScript is optional but the types are first-class: command payloads, slot
-context props and theme tokens are all typed, and the command registry is open for
-augmentation.
+React 18 or 19. Nothing else — there are no other dependencies, peer or otherwise.
+TypeScript is optional but the types are first-class: command payloads, slot context
+props and theme tokens are all typed, and the command registry is open for augmentation.
 
 Browsers: the last two versions of Chrome, Firefox, Edge and Safari, plus iOS Safari
 and Chrome for Android. The end-to-end suite runs against all of them.

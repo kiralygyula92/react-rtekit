@@ -21,7 +21,7 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |
 
-All min+gzip, with the Lexical peers excluded because the consumer already has them.
+All min+gzip. There are no peers to exclude: React and React DOM are the only ones, and the consumer already has them.
 
 ## Why the component is larger than the hook
 

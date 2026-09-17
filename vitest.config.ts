@@ -43,7 +43,6 @@ export default defineConfig({
           setupFiles: ['./test/setup.ts'],
           include: [
             'src/react/**/*.test.{ts,tsx}',
-            'src/engines/lexical/**/*.test.{ts,tsx}',
             'src/engines/native/**/*.dom.test.{ts,tsx}',
             'src/plugins/**/*.test.{ts,tsx}',
             'src/view/**/*.test.{ts,tsx}',

@@ -47,14 +47,7 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: true,
-    rollupOptions: {
-      output: {
-        // Route-level splitting plus one shared chunk for the engine peers.
-        manualChunks(id) {
-          if (id.includes('/lexical@') || id.includes('/@lexical+')) return 'lexical';
-          return undefined;
-        },
-      },
-    },
+    // No `manualChunks`: the only shared chunk this ever carved out was the engine's
+    // peer dependencies, and there are none left to split.
   },
 });

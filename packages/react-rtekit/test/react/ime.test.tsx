@@ -14,8 +14,8 @@ import type { ChangeMeta, EditorInstance } from '../../src/types/editor.js';
  * between `compositionstart` and `compositionend`.
  *
  * jsdom has no input method, so composition is driven through the DOM events a real
- * one dispatches. That is exactly the contract the engine implements: Lexical exposes
- * no composition command, so the boundaries come from the element's own events.
+ * one dispatches. That is exactly the contract the engine implements: the boundaries
+ * come from the element's own `compositionstart` and `compositionend`.
  */
 
 interface Mounted {

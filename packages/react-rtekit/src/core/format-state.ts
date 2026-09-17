@@ -4,9 +4,7 @@ import type { FormatState } from '../types/selection.js';
  * The format state of a caret in an empty paragraph.
  *
  * Engine-independent on purpose: the toolbar needs something to draw before any engine
- * has mounted, and both adapters need a base to fill in. It lived in the Lexical
- * adapter's selection module, which meant the store imported from `engines/lexical` to
- * get a plain object with no Lexical in it.
+ * has mounted, and an engine needs a base to fill in.
  *
  * @module
  */

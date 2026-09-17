@@ -161,7 +161,7 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   tabIndex?: number;
   /** Receives the {@link EditorInstance} once the engine has mounted. */
   editorRef?: Ref<EditorInstance>;
-  /** Swap the document engine. @default the Lexical adapter */
+  /** Swap the document engine. @default the in-house engine */
   engine?: EditorEngine;
 
   // ── 2.3 features and plugins ─────────────────────────────────────────────

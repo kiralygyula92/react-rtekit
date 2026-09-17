@@ -1,6 +1,6 @@
 {
   "RichTextEditor.schema.json": "d787b6f01e4a8633612f0a9e79cc400e4b47a3cb561168a0d711c8b031d7deb4",
-  "RichTextEditorProps.schema.json": "1d157790e41e8bd250209459e6abfd6901361700fae8ab08942973ae8b4b0e94",
+  "RichTextEditorProps.schema.json": "ed5311f3b9cf28c9925544afb20997d949d21ec74a5be502b3a73e4cd4c69bf1",
   "RteContentViewProps.schema.json": "8d281b55730f9e1092fa1f2edcb8328c1dd989e8cd064174f6e07e76e2aa4d3d",
   "RteContentView.schema.json": "bf081a70522c94ebd601c2fa9bb90a84bf613a68498ef947a6501930ef3027f7",
   "RteRoot.schema.json": "d8c70839f74582237c100dcdbaccfffc5974d279358adea461e5e3c04b3c9d36",
@@ -17,7 +17,7 @@
   "RteLocaleProvider.schema.json": "1755bc3dc152afb1918b1a93d7065fe05b700fb5674d492af3956e92701cfe7d",
   "RteDefaultsProvider.schema.json": "5df9a0a5f08290ec20d78f6f9d00fcca12ee16d15274f25c7a157d778e29eed7",
   "useEditor.schema.json": "e0445a4f88ad29630868da5b4c0ece9dc14a523a19fefa8cc085074d28053f10",
-  "UseEditorOptions.schema.json": "28952ce4cb0a83910cdb83dc57eae0d0881327f22b027df2b04d1ce6ada365c7",
+  "UseEditorOptions.schema.json": "773cc3c7c794a3085dcb40f7bb7b78eb61f21263b4c7744f120db83e76a366b8",
   "useEditorContext.schema.json": "a8ebbd0c20d8cc04a55338fb96413079a4ef0a03b48f25db1aef171121a19536",
   "useRteSlots.schema.json": "2ebc880e1c499861fbc1db05b45ee7ef6793c50c644cac2e373c10602078662e",
   "useLocalization.schema.json": "aa6a8276d937281195b83ea622eea5eaa7e6bdbb678128b00b419c23e39b7f8a",

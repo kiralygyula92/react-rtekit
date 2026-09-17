@@ -6,7 +6,7 @@ variable to the whole UI, and able to round-trip the markup your old editor alre
 stored.
 
 ```bash
-pnpm add react-rtekit lexical @lexical/react
+pnpm add react-rtekit
 ```
 
 ```tsx
@@ -45,7 +45,7 @@ export function MessageField() {
   Quill-compatible or e-mail-safe HTML, so existing content needs no migration in
   either direction.
 - **An engine adapter, not a wrapper.** An `EditorEngine` interface owns the document
-  layer, and Lexical is the default adapter behind it. None of it reaches the public
+  layer, and the engine behind it is this project's own. None of it reaches the public
   API, so the engine can be replaced without rewriting your integration.
 - **Emptiness is a first-class concept.** `isEmpty()` ignores `<p><br></p>`, and length
   limits count text rather than markup — so `required` actually means required, and a
@@ -75,8 +75,7 @@ during server rendering.
 
 ## Requirements
 
-React 18 or 19, and Lexical as a peer dependency so your application controls its
-version. TypeScript is optional but the types are first-class: command payloads, slot
+React 18 or 19. Nothing else — there are no other dependencies, peer or otherwise. TypeScript is optional but the types are first-class: command payloads, slot
 context props and theme tokens are all typed, and the command registry is open for
 augmentation.
 

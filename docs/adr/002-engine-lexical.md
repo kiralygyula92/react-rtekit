@@ -1,6 +1,6 @@
 # ADR-002: Lexical as the default engine adapter
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-006 — the engine was replaced with an in-house one
 - **Date:** 2026-09-16
 - **Related:** ADR-001, ADR-004
 

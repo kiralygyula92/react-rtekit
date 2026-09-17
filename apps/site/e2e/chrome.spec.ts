@@ -43,13 +43,12 @@ test.describe('inline marks', () => {
 
   /**
    * A mark has to be *visible*, not merely applied. Bold and italic used to look right
-   * by accident because the Lexical adapter also emitted `<strong>` and `<em>`, while
+   * by accident under the old engine, which also emitted `<strong>` and `<em>`, while
    * underline arrived as a bare span and looked like a button that did nothing.
    *
-   * The selectors name both shapes because both engines are in the tree: the Lexical
-   * adapter labels marks with classes, and the in-house engine renders the elements the
-   * serializer writes, so that the editor and `<RteContentView>` are the same DOM. What
-   * is being asserted either way is what the reader sees.
+   * The selectors name both shapes — the class the old engine used and the element the
+   * current one renders — because what is being asserted is what the reader sees, not
+   * how a particular engine spells it.
    */
   for (const [name, shortcut, selector, expected] of [
     ['underline', 'ControlOrMeta+u', '.rte-underline, u', 'underline'],
@@ -75,9 +74,8 @@ test.describe('inline marks', () => {
 
   test('underline and strikethrough together show both', async ({ page }) => {
     // `text-decoration` is one property, so a mark that sets it cannot simply be added
-    // to one that already has: the Lexical adapter needs a class for the pair, and the
-    // in-house engine nests `<s><u>`. Either way the model holds both marks and the
-    // screen has to show both lines.
+    // to one that already has, so a mark for the pair needs a rule of its own. The model
+    // holds both marks and the screen has to show both lines.
     await editor(page).click();
     await page.keyboard.press('ControlOrMeta+a');
     await page.keyboard.press('ControlOrMeta+u');

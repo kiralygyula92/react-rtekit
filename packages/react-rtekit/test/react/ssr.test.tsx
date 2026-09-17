@@ -104,10 +104,14 @@ describe('server rendering the editor', () => {
   });
 
   it('mounts no engine on the server', () => {
-    // The engine writes `data-lexical-editor` onto the element it takes over. Its
-    // absence is what "renders as static HTML, mounts in an effect" looks like.
+    // The engine builds a `contenteditable` and stamps `data-rte-key` on every node it
+    // renders. The absence of both is what "renders as static HTML, mounts in an effect"
+    // looks like — and asserting on what *this* engine writes is the point: the previous
+    // version named an attribute of the engine that was replaced, so it would have passed
+    // whatever the server did.
     const html = renderToString(<ComposedField value="<p>Hello</p>" />);
-    expect(html).not.toContain('data-lexical-editor');
+    expect(html).not.toContain('contenteditable');
+    expect(html).not.toContain('data-rte-key');
   });
 
   it('suppresses the hydration warning on both content hosts', () => {

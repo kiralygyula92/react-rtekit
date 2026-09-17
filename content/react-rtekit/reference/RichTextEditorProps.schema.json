@@ -331,7 +331,7 @@
         "name": "EditorEngine"
       },
       "required": false,
-      "default": "the Lexical adapter"
+      "default": "the in-house engine"
     },
     "preset": {
       "type": {

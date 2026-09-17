@@ -8,7 +8,7 @@ import type { EditorDocument } from '../../src/types/document.js';
  * Block-level content through the engine.
  *
  * Every one of these node types has to survive the round trip the editor actually
- * performs — HTML in, Lexical nodes, portable document out — because that is the trip
+ * performs — HTML in, engine nodes, portable document out — because that is the trip
  * a stored value makes every time someone opens a form.
  */
 

@@ -1,6 +1,6 @@
 # ADR-005: Removing third-party dependencies
 
-- **Status:** Partially accepted — the engine decision is deferred to the owner
+- **Status:** Superseded by ADR-006 — option C was chosen and carried out
 - **Date:** 2026-09-17
 - **Related:** ADR-001, ADR-002
 - **Supersedes:** nothing; revisits ADR-002's engine choice

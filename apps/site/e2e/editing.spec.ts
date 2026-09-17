@@ -98,7 +98,7 @@ test('an empty editor reports itself empty even though the DOM is not (R2)', asy
   await page.keyboard.press('ControlOrMeta+a');
   await page.keyboard.press('Delete');
 
-  // Lexical leaves an empty paragraph behind, exactly as Quill did.
+  // The engine leaves an empty paragraph behind, exactly as Quill did.
   await expect(surface.locator('p')).toHaveCount(1);
   await expect(page.locator('.rte-root')).toHaveAttribute('data-empty', 'true');
 });

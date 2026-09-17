@@ -20,7 +20,7 @@ What is **being considered**, in no order and with no commitment:
 
 What has been **decided against**:
 
-- **Real-time collaboration.** Lexical supports it; exposing it well is a project of its own, and doing it badly is worse than not doing it.
+- **Real-time collaboration.** A CRDT and a presence layer are a project of their own, and doing it badly is worse than not doing it.
 - **Document management.** This edits text and hands it back.
 - **A CSS-in-JS build.** Tokens in a cascade layer do the same job without the runtime.
 

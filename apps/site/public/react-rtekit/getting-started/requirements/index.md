@@ -24,7 +24,7 @@ See [Installation](/react-rtekit/getting-started/installation/).
 | React | 18.2 and later, including 19 |
 | TypeScript | 5.0 and later |
 | Node (for the build) | 18 and later |
-| Lexical | 0.21 and later, as a peer dependency |
+| Other dependencies | none |
 
 ## Browsers
 

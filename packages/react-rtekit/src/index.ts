@@ -114,7 +114,6 @@ export {
 
 // ── engine ──────────────────────────────────────────────────────────────────
 export { nativeEngine } from './engines/native/engine.js';
-export { lexicalEngine } from './engines/lexical/engine.js';
 
 // ── core utilities, re-exported for convenience ─────────────────────────────
 export {
