@@ -70,7 +70,8 @@ export function ThemeSwitch() {
    * the parity demo needs and is reachable from the theme editor, not from the header.
    * A two-state control is one click rather than two, and reads as a toggle.
    */
-  const next: SiteTheme = theme === 'dark' ? 'light' : 'dark';
+  const isDark = theme === 'dark';
+  const next: SiteTheme = isDark ? 'light' : 'dark';
 
   return (
     <button
@@ -82,18 +83,28 @@ export function ThemeSwitch() {
         setTheme(next);
       }}
     >
-      {theme === 'dark' ? (
+      {/*
+       * The glyph is the theme you are in, not the one you would move to.
+       *
+       * The two conventions both exist and the icon alone is ambiguous under either, so
+       * the accessible name and the tooltip carry the action — "Switch to light theme" —
+       * while the moon or sun reports the current state. That is also why the name is not
+       * derived from the glyph: a button is named for what it does.
+       */}
+      {isDark ? (
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          {/* moon */}
           <path
             fill="currentColor"
-            d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1m0 17a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1M4.2 4.2a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1-1.4 1.4L4.2 5.6a1 1 0 0 1 0-1.4m12.8 12.8a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1-1.4 1.4L17 18.4a1 1 0 0 1 0-1.4M2 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1m17 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1M7 17a1 1 0 0 1 0 1.4l-1.4 1.4a1 1 0 0 1-1.4-1.4L5.6 17A1 1 0 0 1 7 17m12.8-12.8a1 1 0 0 1 0 1.4L18.4 7A1 1 0 0 1 17 5.6l1.4-1.4a1 1 0 0 1 1.4 0"
+            d="M21.64 13a1 1 0 0 0-1.05-.14 8 8 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8 8 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05"
           />
         </svg>
       ) : (
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          {/* sun */}
           <path
             fill="currentColor"
-            d="M21.64 13a1 1 0 0 0-1.05-.14 8 8 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8 8 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05"
+            d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1m0 17a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1M4.2 4.2a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1-1.4 1.4L4.2 5.6a1 1 0 0 1 0-1.4m12.8 12.8a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1-1.4 1.4L17 18.4a1 1 0 0 1 0-1.4M2 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1m17 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1M7 17a1 1 0 0 1 0 1.4l-1.4 1.4a1 1 0 0 1-1.4-1.4L5.6 17A1 1 0 0 1 7 17m12.8-12.8a1 1 0 0 1 0 1.4L18.4 7A1 1 0 0 1 17 5.6l1.4-1.4a1 1 0 0 1 1.4 0"
           />
         </svg>
       )}
