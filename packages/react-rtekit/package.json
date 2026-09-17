@@ -1,0 +1,201 @@
+{
+  "name": "react-rtekit",
+  "version": "1.0.0",
+  "description": "Production-grade React rich-text editor: engine-adapter architecture, slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop profiles.",
+  "keywords": [
+    "react",
+    "rich-text-editor",
+    "wysiwyg",
+    "editor",
+    "lexical",
+    "contenteditable",
+    "html",
+    "sanitize",
+    "email",
+    "quill",
+    "accessibility"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
+    "directory": "packages/react-rtekit"
+  },
+  "homepage": "https://github.com/kiralygyula92/react-rtekit#readme",
+  "bugs": "https://github.com/kiralygyula92/react-rtekit/issues",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./core": {
+      "import": {
+        "types": "./dist/core/index.d.ts",
+        "default": "./dist/core/index.js"
+      },
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      }
+    },
+    "./view": {
+      "import": {
+        "types": "./dist/view/index.d.ts",
+        "default": "./dist/view/index.js"
+      },
+      "require": {
+        "types": "./dist/view/index.d.cts",
+        "default": "./dist/view/index.cjs"
+      }
+    },
+    "./engines/lexical": {
+      "import": {
+        "types": "./dist/engines/lexical/index.d.ts",
+        "default": "./dist/engines/lexical/index.js"
+      },
+      "require": {
+        "types": "./dist/engines/lexical/index.d.cts",
+        "default": "./dist/engines/lexical/index.cjs"
+      }
+    },
+    "./plugins/*": {
+      "import": {
+        "types": "./dist/plugins/*.d.ts",
+        "default": "./dist/plugins/*.js"
+      },
+      "require": {
+        "types": "./dist/plugins/*.d.cts",
+        "default": "./dist/plugins/*.cjs"
+      }
+    },
+    "./locales/*": {
+      "import": {
+        "types": "./dist/locales/*.d.ts",
+        "default": "./dist/locales/*.js"
+      },
+      "require": {
+        "types": "./dist/locales/*.d.cts",
+        "default": "./dist/locales/*.cjs"
+      }
+    },
+    "./meta": {
+      "import": {
+        "types": "./dist/meta.d.ts",
+        "default": "./dist/meta.js"
+      },
+      "require": {
+        "types": "./dist/meta.d.cts",
+        "default": "./dist/meta.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./base.css": "./dist/base.css",
+    "./content.css": "./dist/content.css",
+    "./presets/classic.css": "./dist/presets/classic.css",
+    "./presets/dark.css": "./dist/presets/dark.css",
+    "./presets/compact.css": "./dist/presets/compact.css",
+    "./presets/bordered.css": "./dist/presets/bordered.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "pnpm build:js && pnpm build:css",
+    "build:js": "tsup",
+    "build:css": "node scripts/build-css.mjs",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "size": "size-limit",
+    "docs:json": "typedoc --options typedoc.json",
+    "docs:check": "node scripts/check-docs.mjs --strict",
+    "publint": "publint",
+    "attw": "attw --pack . --profile esm-only --exclude-entrypoints styles.css base.css content.css presets/classic.css presets/dark.css presets/compact.css presets/bordered.css",
+    "prebuild": "node scripts/sync-version.mjs"
+  },
+  "peerDependencies": {
+    "@lexical/code": ">=0.21",
+    "@lexical/history": ">=0.21",
+    "@lexical/html": ">=0.21",
+    "@lexical/link": ">=0.21",
+    "@lexical/list": ">=0.21",
+    "@lexical/markdown": ">=0.21",
+    "@lexical/react": ">=0.21",
+    "@lexical/rich-text": ">=0.21",
+    "@lexical/selection": ">=0.21",
+    "@lexical/table": ">=0.21",
+    "@lexical/utils": ">=0.21",
+    "lexical": ">=0.21",
+    "react": ">=18.2",
+    "react-dom": ">=18.2"
+  },
+  "peerDependenciesMeta": {
+    "lexical": {
+      "optional": false
+    },
+    "@lexical/react": {
+      "optional": true
+    },
+    "@lexical/markdown": {
+      "optional": true
+    },
+    "@lexical/table": {
+      "optional": true
+    },
+    "@lexical/code": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@lexical/code": "^0.38.0",
+    "@lexical/history": "^0.38.0",
+    "@lexical/html": "^0.38.0",
+    "@lexical/link": "^0.38.0",
+    "@lexical/list": "^0.38.0",
+    "@lexical/markdown": "^0.38.0",
+    "@lexical/react": "^0.38.0",
+    "@lexical/rich-text": "^0.38.0",
+    "@lexical/selection": "^0.38.0",
+    "@lexical/table": "^0.38.0",
+    "@lexical/utils": "^0.38.0",
+    "@size-limit/preset-small-lib": "^11.2.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "browserslist": "^4.26.3",
+    "fast-check": "^4.3.0",
+    "lexical": "^0.38.0",
+    "lightningcss": "^1.30.2",
+    "publint": "^0.3.14",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "size-limit": "^11.2.0",
+    "tsup": "^8.5.0",
+    "typedoc": "^0.28.14",
+    "vitest-axe": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

@@ -1,0 +1,447 @@
+/**
+ * Visual rules (07 §1).
+ *
+ * Every declaration in this layer reads a `--rte-*` token and nothing else — that
+ * invariant is enforced by a lint script (09 §2), which is what guarantees the theme
+ * editor can reach every visual property.
+ */
+@layer rtekit.base, rtekit.content, rtekit.theme;
+
+@layer rtekit.theme {
+  .rte-root {
+    font-family: var(--rte-font-family);
+    font-size: var(--rte-font-size);
+    line-height: var(--rte-line-height);
+    color: var(--rte-color-text);
+  }
+
+  /* ── toolbar ────────────────────────────────────────────────────────────── */
+  .rte-toolbar {
+    background: var(--rte-toolbar-bg);
+    border: var(--rte-toolbar-border);
+    border-radius: var(--rte-toolbar-radius);
+  }
+
+  .rte-toolbar__separator {
+    background: var(--rte-toolbar-separator);
+  }
+
+  .rte-toolbar__button {
+    color: var(--rte-button-color);
+    border-radius: var(--rte-button-radius);
+    transition:
+      background-color var(--rte-motion-duration) var(--rte-motion-easing),
+      color var(--rte-motion-duration) var(--rte-motion-easing);
+  }
+
+  .rte-toolbar__button:hover:not(:disabled) {
+    background: var(--rte-button-hover-bg);
+  }
+
+  .rte-toolbar__button[data-active='true'] {
+    color: var(--rte-button-active-color);
+    background: var(--rte-button-active-bg);
+  }
+
+  .rte-toolbar__button:disabled {
+    color: var(--rte-button-disabled-color);
+  }
+
+  .rte-toolbar__button:focus-visible {
+    outline: none;
+    box-shadow: var(--rte-button-focus-ring);
+  }
+
+  /* ── content box ────────────────────────────────────────────────────────── */
+  .rte-content-wrapper {
+    background: var(--rte-editor-bg);
+    border: var(--rte-border-width) solid var(--rte-border-color);
+    transition: border-color var(--rte-motion-duration) var(--rte-motion-easing);
+  }
+
+  /* An inset ring, so focus never reflows the content by a pixel (fixes R10). */
+  .rte-root[data-focused='true'] .rte-content-wrapper {
+    box-shadow: var(--rte-focus-ring);
+  }
+
+  .rte-root[data-invalid='true'] .rte-content-wrapper {
+    border-color: var(--rte-invalid-border-color);
+  }
+
+  .rte-root[data-disabled='true'] .rte-content-wrapper {
+    background: var(--rte-disabled-bg);
+  }
+
+  .rte-root[data-disabled='true'] .rte-content {
+    color: var(--rte-color-text-disabled);
+  }
+
+  .rte-placeholder {
+    color: var(--rte-color-placeholder);
+    font-family: var(--rte-content-font-family);
+    font-size: var(--rte-content-font-size);
+    line-height: var(--rte-content-line-height);
+  }
+
+  /* ── field chrome ───────────────────────────────────────────────────────── */
+  .rte-label {
+    font-size: var(--rte-font-size);
+    color: var(--rte-color-text);
+  }
+
+  .rte-label[data-required='true']::after {
+    content: ' *';
+    color: var(--rte-color-danger);
+  }
+
+  .rte-helper {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-helper-color);
+  }
+
+  .rte-error {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-danger);
+  }
+
+  .rte-counter {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-counter-color);
+  }
+
+  .rte-counter[data-near-limit='true'] {
+    color: var(--rte-counter-warn-color);
+  }
+
+  .rte-counter[data-over-limit='true'] {
+    color: var(--rte-counter-over-color);
+  }
+
+  /* ── popovers, menus, dialogs ───────────────────────────────────────────── */
+  .rte-popover__panel,
+  .rte-dialog__panel {
+    background: var(--rte-popover-bg);
+    border: var(--rte-popover-border);
+    border-radius: var(--rte-popover-radius);
+    box-shadow: var(--rte-popover-shadow);
+    padding: var(--rte-popover-padding);
+    color: var(--rte-color-text);
+    font-size: var(--rte-font-size);
+  }
+
+  .rte-popover__panel[data-padding='none'] {
+    padding: 0;
+  }
+
+  .rte-dialog {
+    background: rgb(0 0 0 / 32%);
+  }
+
+  .rte-menu__item {
+    border-radius: var(--rte-button-radius);
+    color: var(--rte-color-text);
+  }
+
+  .rte-menu__item:hover:not(:disabled),
+  .rte-menu__item[data-highlighted='true'] {
+    background: var(--rte-menu-item-hover-bg);
+  }
+
+  .rte-menu__item[aria-selected='true'],
+  .rte-menu__item[data-active='true'] {
+    background: var(--rte-menu-item-active-bg);
+  }
+
+  .rte-menu__item:disabled {
+    color: var(--rte-color-text-disabled);
+  }
+
+  .rte-menu__group-label {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+    padding: 4px 12px;
+  }
+
+  /* ── colour picker ──────────────────────────────────────────────────────── */
+  .rte-color-picker__swatch {
+    border: 1px solid var(--rte-swatch-border-color);
+    border-radius: var(--rte-swatch-radius);
+  }
+
+  .rte-color-picker__swatch:hover {
+    border-width: 2px;
+  }
+
+  .rte-color-picker__swatch[aria-selected='true'] {
+    box-shadow: var(--rte-swatch-selected-ring);
+  }
+
+  .rte-color-picker__swatch:focus-visible {
+    outline: none;
+    box-shadow: var(--rte-swatch-selected-ring);
+  }
+
+  /* ── primitives ─────────────────────────────────────────────────────────── */
+  .rte-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-block-size: var(--rte-menu-item-height);
+    padding: 0 10px;
+    border: 1px solid transparent;
+    border-radius: var(--rte-button-radius);
+    background: none;
+    color: var(--rte-color-accent);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .rte-button[data-variant='solid'] {
+    background: var(--rte-color-accent);
+    color: var(--rte-color-accent-contrast);
+  }
+
+  .rte-button[data-variant='outline'] {
+    border-color: var(--rte-color-border);
+    color: var(--rte-color-text);
+  }
+
+  .rte-button:hover:not(:disabled) {
+    background: var(--rte-button-hover-bg);
+  }
+
+  .rte-button[data-variant='solid']:hover:not(:disabled) {
+    filter: brightness(0.95);
+  }
+
+  .rte-button:disabled {
+    color: var(--rte-color-text-disabled);
+    cursor: default;
+  }
+
+  .rte-button:focus-visible {
+    outline: none;
+    box-shadow: var(--rte-button-focus-ring);
+  }
+
+  .rte-input {
+    inline-size: 100%;
+    min-block-size: var(--rte-menu-item-height);
+    padding: 4px 8px;
+    border: 1px solid var(--rte-color-border);
+    border-radius: var(--rte-button-radius);
+    background: var(--rte-color-surface);
+    color: var(--rte-color-text);
+    font: inherit;
+  }
+
+  .rte-input:focus-visible {
+    outline: none;
+    border-color: var(--rte-color-accent);
+    box-shadow: var(--rte-button-focus-ring);
+  }
+
+  .rte-input[aria-invalid='true'] {
+    border-color: var(--rte-color-danger);
+  }
+
+  .rte-field-label {
+    display: block;
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+    margin-block-end: 4px;
+  }
+
+  .rte-spinner {
+    inline-size: 1em;
+    block-size: 1em;
+    border: 2px solid var(--rte-color-border);
+    border-block-start-color: var(--rte-color-accent);
+    border-radius: 50%;
+    animation: rte-spin 0.8s linear infinite;
+  }
+
+  @keyframes rte-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ── fullscreen / source view ───────────────────────────────────────────── */
+  .rte-root[data-fullscreen='true'] {
+    background: var(--rte-color-surface);
+  }
+
+  .rte-source-view {
+    background: var(--rte-code-bg);
+    color: var(--rte-color-text);
+    font-family: var(--rte-code-font);
+    font-size: var(--rte-font-size-sm);
+  }
+
+  /* ── density ────────────────────────────────────────────────────────────── */
+  .rte-root[data-density='compact'] {
+    --rte-density-scale: 0.85;
+  }
+
+  .rte-root[data-density='comfortable'] {
+    --rte-density-scale: 1.15;
+  }
+
+  .rte-root[data-density]:not([data-density='standard']) {
+    --rte-button-size: calc(40px * var(--rte-density-scale));
+    --rte-icon-size: calc(24px * var(--rte-density-scale));
+    --rte-button-padding: calc(8px * var(--rte-density-scale));
+    --rte-content-padding: calc(12px * var(--rte-density-scale));
+  }
+}
+
+@layer rtekit.theme {
+  /* ── toolbar dropdowns and sections ───────────────────────────────────── */
+  .rte-toolbar__dropdown-value {
+    font-size: var(--rte-font-size-sm);
+    /* The value is text, not a glyph, so it reads at the text colour rather than the
+       inactive-icon colour it would otherwise inherit from the button. */
+    color: var(--rte-color-text);
+  }
+
+  .rte-color-picker__section-label {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+  }
+
+  .rte-menu__description {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+  }
+
+  .rte-suggest__empty {
+    padding: 8px 12px;
+    color: var(--rte-color-text-muted);
+    font-size: var(--rte-font-size-sm);
+  }
+
+  /* Unstyled mode keeps structure and prose, drops the chrome visuals (07 §7). */
+  .rte-root--unstyled .rte-content-wrapper,
+  .rte-root--unstyled .rte-toolbar,
+  .rte-root--unstyled .rte-toolbar__button {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: inherit;
+  }
+}
+
+@layer rtekit.theme {
+  /* ── link, image and table chrome ───────────────────────────────────────── */
+  .rte-link-popover__error,
+  .rte-image-dialog__error {
+    margin: 0;
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-danger);
+  }
+
+  .rte-image-handle {
+    border: 1px solid var(--rte-color-border);
+    border-radius: var(--rte-button-radius);
+    background: var(--rte-color-surface);
+    color: var(--rte-color-text);
+    padding: 2px 8px;
+  }
+
+  .rte-table-picker__cell {
+    border: 1px solid var(--rte-color-border);
+    border-radius: 2px;
+    background: var(--rte-color-surface);
+  }
+
+  .rte-table-picker__cell[data-active='true'] {
+    background: var(--rte-color-accent-soft);
+    border-color: var(--rte-color-accent);
+  }
+
+  .rte-table-picker__label {
+    margin: 0;
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+  }
+
+  .rte-content .rte-image[data-align='center'],
+  .rte-view .rte-image[data-align='center'],
+  .rte-figure[data-align='center'] {
+    margin-inline: auto;
+    display: block;
+  }
+
+  .rte-content .rte-image[data-align='right'],
+  .rte-view .rte-image[data-align='right'],
+  .rte-figure[data-align='right'] {
+    margin-inline-start: auto;
+    display: block;
+  }
+
+  .rte-figure figcaption {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+    padding-block-start: 4px;
+  }
+}
+
+@layer rtekit.theme {
+  /* ── milestone 4 chrome ─────────────────────────────────────────────────── */
+  .rte-root[data-fullscreen='true'] {
+    background: var(--rte-color-surface);
+  }
+
+  .rte-find-highlight {
+    background: var(--rte-find-bg);
+    border-radius: 2px;
+  }
+
+  .rte-find-highlight[data-current='true'] {
+    background: var(--rte-find-active-bg);
+  }
+
+  .rte-find-panel,
+  .rte-draft-prompt {
+    background: var(--rte-color-surface-raised);
+    border: 1px solid var(--rte-color-border);
+    border-radius: var(--rte-radius);
+  }
+
+  .rte-find-panel__count {
+    font-size: var(--rte-font-size-sm);
+    color: var(--rte-color-text-muted);
+    align-self: center;
+  }
+
+  .rte-source-view__textarea {
+    background: var(--rte-code-bg);
+    color: var(--rte-color-text);
+    border: 1px solid var(--rte-color-border);
+    border-radius: var(--rte-radius);
+    padding: 8px;
+  }
+
+  .rte-source-view__error,
+  .rte-image-dialog__error {
+    color: var(--rte-color-danger);
+    font-size: var(--rte-font-size-sm);
+    margin: 0;
+  }
+
+  .rte-shortcuts kbd {
+    font-family: var(--rte-code-font);
+    font-size: var(--rte-font-size-sm);
+    background: var(--rte-code-bg);
+    border: 1px solid var(--rte-color-border);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+
+  .rte-toolbar-dock {
+    background: var(--rte-color-surface);
+    border-block-start: 1px solid var(--rte-color-border-subtle);
+  }
+}

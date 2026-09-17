@@ -1,0 +1,628 @@
+/**
+ * Structural CSS (07 §1, §6).
+ *
+ * Layout, contenteditable resets, popover positioning and the visually-hidden helper.
+ * No colours, no fonts — those live in `theme.css` and read tokens. Importing only
+ * this file plus `content.css` gives "unstyled" mode (07 §7).
+ */
+@layer rtekit.base, rtekit.content, rtekit.theme;
+
+@layer rtekit.base {
+  .rte-root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .rte-root *,
+  .rte-root *::before,
+  .rte-root *::after {
+    box-sizing: border-box;
+  }
+
+  /* ── toolbar ────────────────────────────────────────────────────────────── */
+  .rte-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--rte-toolbar-gap);
+    padding: var(--rte-toolbar-padding);
+    margin-block-end: var(--rte-toolbar-margin-bottom);
+    min-width: 0;
+  }
+
+  .rte-toolbar[data-overflow='scroll'] {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .rte-toolbar[data-sticky] {
+    position: sticky;
+    inset-block-start: var(--rte-toolbar-sticky-offset, 0);
+    z-index: 1;
+  }
+
+  .rte-toolbar__group {
+    display: flex;
+    align-items: center;
+    gap: var(--rte-toolbar-gap);
+    min-width: 0;
+  }
+
+  .rte-toolbar__separator {
+    flex: none;
+    inline-size: 1px;
+    block-size: calc(var(--rte-button-size) * 0.6);
+    margin-inline: var(--rte-toolbar-separator-margin);
+  }
+
+  .rte-toolbar__spacer {
+    flex: 1 1 auto;
+  }
+
+  .rte-toolbar__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: none;
+    inline-size: var(--rte-button-size);
+    block-size: var(--rte-button-size);
+    padding: var(--rte-button-padding);
+    border: 0;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .rte-toolbar__button[data-show-label] {
+    inline-size: auto;
+    padding-inline: 10px;
+  }
+
+  .rte-toolbar__button:disabled {
+    cursor: default;
+  }
+
+  .rte-toolbar__button svg {
+    inline-size: var(--rte-icon-size);
+    block-size: var(--rte-icon-size);
+    flex: none;
+    pointer-events: none;
+  }
+
+  .rte-toolbar__dropdown {
+    inline-size: auto;
+    min-inline-size: var(--rte-button-size);
+    padding-inline: 8px;
+  }
+
+  /* ── content ────────────────────────────────────────────────────────────── */
+  .rte-content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border-radius: var(--rte-radius);
+    overflow: hidden;
+  }
+
+  /*
+   * The element the engine mounts into. `display: contents` keeps it out of the layout
+   * entirely, so the contenteditable the engine creates is laid out by the wrapper
+   * exactly as the server-rendered preview it replaces was.
+   */
+  .rte-content-host {
+    display: contents;
+  }
+
+  .rte-content {
+    flex: 1 1 auto;
+    outline: none;
+    min-block-size: var(--rte-min-height);
+    max-block-size: var(--rte-max-height);
+    overflow-y: auto;
+    padding: var(--rte-content-padding);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .rte-root[data-autogrow='false'] .rte-content {
+    block-size: var(--rte-min-height);
+  }
+
+  .rte-root[data-resizable='vertical'] .rte-content {
+    resize: vertical;
+  }
+
+  .rte-placeholder {
+    position: absolute;
+    inset-block-start: var(--rte-content-padding);
+    inset-inline-start: var(--rte-content-padding);
+    pointer-events: none;
+    user-select: none;
+    max-inline-size: calc(100% - var(--rte-content-padding) * 2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ── field chrome ───────────────────────────────────────────────────────── */
+  .rte-label {
+    display: block;
+    margin-block-end: 6px;
+  }
+
+  .rte-footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--rte-footer-gap);
+    padding: var(--rte-footer-padding);
+    flex-wrap: wrap;
+  }
+
+  .rte-footer__start,
+  .rte-footer__end {
+    display: flex;
+    align-items: baseline;
+    gap: var(--rte-footer-gap);
+    min-width: 0;
+  }
+
+  .rte-counter {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── popovers, menus, dialogs ───────────────────────────────────────────── */
+  .rte-popover {
+    position: absolute;
+    z-index: var(--rte-z-popover);
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    max-inline-size: min(320px, calc(100vw - 16px));
+  }
+
+  .rte-menu {
+    display: flex;
+    flex-direction: column;
+    max-block-size: 320px;
+    overflow-y: auto;
+    padding: 4px;
+    margin: 0;
+    list-style: none;
+  }
+
+  .rte-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: var(--rte-menu-item-height);
+    padding: var(--rte-menu-item-padding);
+    border: 0;
+    background: none;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    inline-size: 100%;
+  }
+
+  .rte-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: var(--rte-z-fullscreen);
+    display: grid;
+    place-items: center;
+    padding: 16px;
+  }
+
+  .rte-dialog__panel {
+    max-inline-size: min(480px, 100%);
+    max-block-size: 90vh;
+    overflow: auto;
+  }
+
+  /* ── colour picker ──────────────────────────────────────────────────────── */
+  .rte-color-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-inline-size: 100px;
+  }
+
+  .rte-color-picker__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--rte-swatch-columns, 7), var(--rte-swatch-size));
+    gap: var(--rte-swatch-gap);
+  }
+
+  .rte-color-picker__swatch {
+    inline-size: var(--rte-swatch-size);
+    block-size: var(--rte-swatch-size);
+    padding: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .rte-color-picker__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* ── fullscreen ─────────────────────────────────────────────────────────── */
+  .rte-root[data-fullscreen='true'] {
+    position: fixed;
+    inset: 0;
+    z-index: var(--rte-z-fullscreen);
+    padding: 16px;
+    overflow: auto;
+  }
+
+  .rte-root[data-fullscreen='true'] .rte-content {
+    max-block-size: none;
+    block-size: 100%;
+  }
+
+  /* ── source view ────────────────────────────────────────────────────────── */
+  .rte-source-view {
+    display: block;
+    inline-size: 100%;
+    min-block-size: var(--rte-min-height);
+    padding: var(--rte-content-padding);
+    border: 0;
+    resize: vertical;
+  }
+
+  /* ── misc ───────────────────────────────────────────────────────────────── */
+  .rte-visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .rte-root[data-disabled='true'] {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .rte-root[data-disabled='true'] .rte-toolbar {
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rte-root *,
+    .rte-portal * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer rtekit.base {
+  /* ── fields and primitives ────────────────────────────────────────────── */
+  .rte-field {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+
+  .rte-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .rte-tooltip {
+    display: contents;
+  }
+
+  .rte-toolbar__button-label {
+    white-space: nowrap;
+  }
+
+  .rte-toolbar__dropdown-value {
+    max-inline-size: 10ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rte-toolbar__dropdown svg:last-child {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+
+  .rte-toolbar__adornment {
+    display: flex;
+    align-items: center;
+  }
+
+  .rte-toolbar__adornment:last-child {
+    margin-inline-start: auto;
+  }
+
+  .rte-menu__section {
+    display: contents;
+  }
+
+  .rte-menu__label {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rte-menu__icon {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .rte-menu__icon svg {
+    inline-size: 1em;
+    block-size: 1em;
+  }
+
+  .rte-color-picker__custom {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rte-color-picker__input {
+    block-size: 32px;
+    padding: 2px;
+    cursor: pointer;
+  }
+
+  .rte-color-picker__close {
+    margin-inline-start: auto;
+  }
+
+  .rte-suggest {
+    display: flex;
+    flex-direction: column;
+    max-block-size: 280px;
+    overflow-y: auto;
+  }
+}
+
+@layer rtekit.base {
+  /*
+   * A real button behind the dialog panel, so dismissing by clicking away is reachable
+   * from the keyboard and announces what it does.
+   */
+  .rte-dialog__backdrop {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    border: 0;
+    background: none;
+    cursor: default;
+  }
+
+  .rte-dialog__panel {
+    position: relative;
+  }
+}
+
+@layer rtekit.base {
+  /* ── link, image and table chrome (05 §6–§8) ────────────────────────────── */
+  .rte-link-popover,
+  .rte-image-dialog,
+  .rte-image-popover {
+    display: grid;
+    gap: 12px;
+    min-inline-size: 240px;
+  }
+
+  .rte-link-popover__actions,
+  .rte-image-dialog__actions,
+  .rte-image-popover__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .rte-image-popover__resize {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rte-image-handle {
+    font: inherit;
+    cursor: ew-resize;
+    touch-action: none;
+  }
+
+  .rte-table-picker {
+    display: grid;
+    gap: 8px;
+    justify-items: center;
+  }
+
+  .rte-table-picker__grid {
+    display: grid;
+    gap: 2px;
+  }
+
+  .rte-table-picker__row {
+    display: flex;
+    gap: 2px;
+  }
+
+  .rte-table-picker__cell {
+    inline-size: 16px;
+    block-size: 16px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .rte-table-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+    max-inline-size: 320px;
+  }
+
+  /* The image itself, inside the content. */
+  .rte-content .rte-image,
+  .rte-view .rte-image {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  .rte-figure {
+    margin: 0;
+  }
+}
+
+@layer rtekit.base {
+  /* ── milestone 4 chrome (05 §15, §16) ───────────────────────────────────── */
+  .rte-root[data-fullscreen='true'] {
+    position: fixed;
+    inset: 0;
+    z-index: var(--rte-z-fullscreen);
+    margin: 0;
+    padding: 16px;
+    overflow: auto;
+  }
+
+  .rte-root[data-fullscreen='true'] .rte-content {
+    max-block-size: none;
+  }
+
+  /* The find overlay sits behind the text and never takes a pointer event. */
+  .rte-content-wrapper {
+    position: relative;
+  }
+
+  .rte-find-highlights {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .rte-find-highlight {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .rte-find-panel {
+    display: grid;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .rte-find-panel__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: end;
+  }
+
+  .rte-source-view {
+    display: grid;
+    gap: 8px;
+  }
+
+  .rte-source-view__textarea {
+    inline-size: 100%;
+    font-family: var(--rte-code-font);
+    font-size: var(--rte-font-size-sm);
+    resize: vertical;
+  }
+
+  .rte-source-view__actions,
+  .rte-draft-prompt__actions,
+  .rte-shortcuts__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .rte-draft-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .rte-draft-prompt__text {
+    display: grid;
+  }
+
+  .rte-shortcuts {
+    display: grid;
+    gap: 12px;
+    max-block-size: 60vh;
+    overflow: auto;
+  }
+
+  .rte-shortcuts__list {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .rte-shortcuts__row {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  .rte-shortcuts__row dd {
+    margin: 0;
+  }
+
+  /* A bottom-docked toolbar tracks the keyboard rather than the layout viewport. */
+  .rte-toolbar-dock {
+    position: sticky;
+    inset-block-end: 0;
+  }
+
+  .rte-toolbar__overflow {
+    display: grid;
+    gap: 4px;
+    padding: 4px;
+    min-inline-size: 200px;
+  }
+
+  /* Touch targets: 44px is the platform minimum, and `comfortable` honours it. */
+  @media (pointer: coarse) {
+    .rte-toolbar__button,
+    .rte-toolbar__dropdown {
+      min-inline-size: 44px;
+      min-block-size: 44px;
+    }
+  }
+
+  /* Popover and placeholder animation is motion, and some people ask for none. */
+  @media (prefers-reduced-motion: reduce) {
+    .rte-root *,
+    .rte-popover,
+    .rte-placeholder {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

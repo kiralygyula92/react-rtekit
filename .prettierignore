@@ -1,0 +1,6 @@
+dist
+coverage
+pnpm-lock.yaml
+*.md
+playwright-report
+test-results

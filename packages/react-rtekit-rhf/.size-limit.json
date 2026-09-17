@@ -1,0 +1,8 @@
+[
+  {
+    "name": "react-rtekit-rhf",
+    "path": "dist/index.js",
+    "limit": "3 kB",
+    "ignore": ["react", "react-dom", "react-hook-form", "react-rtekit"]
+  }
+]

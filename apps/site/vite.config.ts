@@ -1,0 +1,60 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { copyFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+/**
+ * Where the site is served from.
+ *
+ * A GitHub Pages *project* site lives under `/<repo>/`, so every asset URL and every
+ * route has to carry that prefix — without it the deploy is a blank page with four
+ * 404s in the console. Local dev and `preview` serve from the root, so the prefix comes
+ * from the environment rather than being hard-coded.
+ */
+const base = process.env.SITE_BASE ?? '/';
+
+/**
+ * Copies `index.html` to `404.html`.
+ *
+ * GitHub Pages serves static files, so a deep link like `/docs/guides/theming` has no
+ * file behind it and returns 404. Pages renders `404.html` for those, and serving the
+ * application from there lets the client router take over — the standard fallback for
+ * a single-page application on static hosting.
+ */
+function spaFallback() {
+  return {
+    name: 'spa-fallback',
+    closeBundle() {
+      const dist = fileURLToPath(new URL('./dist', import.meta.url));
+      copyFileSync(`${dist}/index.html`, `${dist}/404.html`);
+    },
+  };
+}
+
+export default defineConfig({
+  base,
+  plugins: [react(), spaFallback()],
+  resolve: {
+    alias: {
+      // The fixture corpus is shared with the library's tests so the two cannot drift.
+      '@fixtures': fileURLToPath(
+        new URL('../../packages/react-rtekit/test/fixtures', import.meta.url),
+      ),
+    },
+  },
+  server: { port: 5189 },
+  preview: { port: 4189, strictPort: true },
+  build: {
+    target: 'es2022',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        // Route-level splitting plus one shared chunk for the engine peers.
+        manualChunks(id) {
+          if (id.includes('/lexical@') || id.includes('/@lexical+')) return 'lexical';
+          return undefined;
+        },
+      },
+    },
+  },
+});

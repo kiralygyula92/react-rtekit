@@ -1,0 +1,13 @@
+/**
+ * The default stylesheet: structure + prose + light theme tokens + visuals.
+ *
+ * `import 'react-rtekit/styles.css'` is all most consumers need. A preset is layered
+ * on top with a second import (07 §2).
+ */
+@layer rtekit.base, rtekit.content, rtekit.theme;
+
+@import './base.css';
+@import './content.css';
+@import './tokens.css';
+@import './theme.css';
+@import './print.css';

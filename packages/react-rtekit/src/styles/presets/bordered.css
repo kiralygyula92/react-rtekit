@@ -1,0 +1,29 @@
+/**
+ * The `bordered` preset (07 §5).
+ *
+ * Toolbar and editor share one bounding box, which is the look most modern editors
+ * have settled on. The toolbar is sticky by default here: it is visually part of the
+ * field, so it should not scroll away from the text it formats.
+ */
+@layer rtekit.theme {
+  .rte-root[data-theme='bordered'],
+  .rte-view[data-theme='bordered'] {
+    --rte-toolbar-bg: var(--rte-color-surface-muted);
+    --rte-toolbar-border: 1px solid var(--rte-color-border);
+    --rte-toolbar-padding: 4px;
+    --rte-toolbar-margin-bottom: 0;
+    --rte-toolbar-radius: 4px 4px 0 0;
+    --rte-radius: 0 0 4px 4px;
+  }
+
+  /* The seam between the two boxes would otherwise be a double border. */
+  .rte-root[data-theme='bordered'] .rte-content-wrapper {
+    border-block-start: 0;
+  }
+
+  .rte-root[data-theme='bordered'] .rte-toolbar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 1;
+  }
+}

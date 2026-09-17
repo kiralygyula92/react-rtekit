@@ -1,0 +1,233 @@
+import { useMemo, useState } from 'react';
+import {
+  RichTextEditor,
+  documentToHtml,
+  htmlToDocument,
+  isEmptyHtml,
+  type ChangeMeta,
+  type EditorValue,
+} from 'react-rtekit';
+import { DEFAULT_WATER_TEST_EMAIL_MESSAGE } from '../../fixtures';
+import { FIXED_BUGS } from './fixed-bugs';
+import { CodeBlock } from '../../components/CodeBlock';
+
+/**
+ * The Skimmer "Send report e-mail" form, reproduced 1:1 (01 §7, 08 §3.1).
+ *
+ * Same eight buttons in the same order, same 287px box, same 21 swatches, same
+ * default merge-tag body. Everything that differs is a bug from 01 §9 that is fixed
+ * here rather than reproduced — the "show differences" toggle lists them all.
+ */
+
+/** The five merge tags the backend substitutes; they must survive editing (01 §2). */
+const MERGE_TAGS = [
+  { key: 'contact_first_name', label: 'Contact first name', sample: 'Dana' },
+  { key: 'next_test_date', label: 'Next test date', sample: '14 October 2026' },
+  { key: 'report_date', label: 'Report date', sample: '16 September 2026' },
+  { key: 'org_name', label: 'Organization name', sample: 'Clearwater Pools' },
+  { key: 'org_address', label: 'Organization address', sample: '1 Marina Way, Tampa FL' },
+];
+
+/** The original limit, now counted in text characters rather than markup (fixes R3). */
+const MESSAGE_MAX_LENGTH = 2048;
+
+export default function ParitySkimmerEmailExample() {
+  const [message, setMessage] = useState<string>(DEFAULT_WATER_TEST_EMAIL_MESSAGE);
+  const [meta, setMeta] = useState<ChangeMeta | null>(null);
+  const [to, setTo] = useState<string[]>(['dana@example.com']);
+  const [cc, setCc] = useState<string[]>([]);
+  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [showDifferences, setShowDifferences] = useState(false);
+  const [showOutput, setShowOutput] = useState(true);
+
+  // The same document, serialized for storage and for an e-mail client (03 §5).
+  const outputs = useMemo(() => {
+    const doc = htmlToDocument(message, { mergeTags: { knownKeys: MERGE_TAGS.map((tag) => tag.key) } });
+    return {
+      classic: documentToHtml(doc, { profile: 'quill-compatible' }),
+      email: documentToHtml(doc, {
+        profile: 'email',
+        email: { fontFallback: 'Arial, Helvetica, sans-serif' },
+        mergeTagPreview: Object.fromEntries(MERGE_TAGS.map((tag) => [tag.key, tag.sample])),
+      }),
+    };
+  }, [message]);
+
+  const empty = isEmptyHtml(message);
+
+  return (
+    <div className="parity">
+      <form
+        className="parity__form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          // The old form sent this even when the body was `<p><br></p>` (R2).
+          if (empty) return;
+          setSubmitted(new Date().toLocaleTimeString());
+        }}
+      >
+        <h2 className="parity__title">Send report e-mail</h2>
+
+        <ChipInput label="To" values={to} onChange={setTo} placeholder="name@example.com" />
+        <ChipInput label="CC" values={cc} onChange={setCc} placeholder="Add a CC recipient" />
+
+        <RichTextEditor
+          preset="classic"
+          label="Message"
+          value={message}
+          onChange={(value: EditorValue, changeMeta: ChangeMeta) => {
+            setMessage(value as string);
+            setMeta(changeMeta);
+          }}
+          required
+          maxLength={MESSAGE_MAX_LENGTH}
+          maxLengthBehaviour="warn"
+          showCounter
+          placeholder="Write the message that goes out with the report…"
+          mergeTags={{ tags: MERGE_TAGS, unknownTagBehaviour: 'warn' }}
+          helperText="Merge tags are replaced by the backend when the e-mail is sent."
+        />
+
+        <div className="parity__actions">
+          <button type="submit" className="button button--solid" disabled={empty}>
+            Send
+          </button>
+          <span className="parity__status" data-testid="parity-status">
+            {submitted
+              ? `Sent at ${submitted} to ${[...to, ...cc].join(', ')}`
+              : empty
+                ? 'The message is empty — Send is disabled (R2)'
+                : `${meta?.length ?? 0} characters of text`}
+          </span>
+        </div>
+      </form>
+
+      <section className="parity__panel">
+        <div className="parity__panel-head">
+          <h2>Output HTML</h2>
+          <button
+            type="button"
+            className="button"
+            aria-expanded={showOutput}
+            onClick={() => {
+              setShowOutput((previous) => !previous);
+            }}
+          >
+            {showOutput ? 'Hide' : 'Show'}
+          </button>
+        </div>
+        {showOutput ? (
+          <div className="parity__outputs">
+            <figure>
+              <figcaption>
+                <code>quill-compatible</code> — what the old API stored
+              </figcaption>
+              <CodeBlock label="Parity output classic" testId="parity-output-classic">
+            {outputs.classic}
+          </CodeBlock>
+            </figure>
+            <figure>
+              <figcaption>
+                <code>email</code> — inline styles, merge tags previewed
+              </figcaption>
+              <CodeBlock label="Parity output email" testId="parity-output-email">
+            {outputs.email}
+          </CodeBlock>
+            </figure>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="parity__panel">
+        <div className="parity__panel-head">
+          <h2>Differences from the original</h2>
+          <button
+            type="button"
+            className="button"
+            aria-expanded={showDifferences}
+            aria-controls="parity-differences"
+            onClick={() => {
+              setShowDifferences((previous) => !previous);
+            }}
+          >
+            {showDifferences ? 'Hide differences' : 'Show differences'}
+          </button>
+        </div>
+        <p className="parity__note">
+          The visuals are identical to the original. Everything listed here is a bug from the old
+          implementation that this page fixes rather than reproduces.
+        </p>
+        {showDifferences ? (
+          <ol id="parity-differences" className="parity__bugs" data-testid="parity-differences">
+            {FIXED_BUGS.map((bug) => (
+              <li key={bug.id}>
+                <strong>{bug.id}</strong> <span className="parity__bug-was">{bug.was}</span>
+                <span className="parity__bug-now">{bug.now}</span>
+              </li>
+            ))}
+          </ol>
+        ) : null}
+      </section>
+    </div>
+  );
+}
+
+/** Props for {@link ChipInput}. */
+interface ChipInputProps {
+  label: string;
+  values: string[];
+  placeholder: string;
+  onChange: (values: string[]) => void;
+}
+
+/** The recipient chips the original form rendered around the editor. */
+function ChipInput({ label, values, placeholder, onChange }: ChipInputProps) {
+  const [draft, setDraft] = useState('');
+
+  const commit = (): void => {
+    const value = draft.trim().replace(/,$/, '');
+    if (!value) return;
+    onChange([...values, value]);
+    setDraft('');
+  };
+
+  return (
+    <div className="parity__field">
+      <span className="parity__label" id={`chips-${label}`}>
+        {label}
+      </span>
+      <div className="parity__chips">
+        {values.map((value) => (
+          <span key={value} className="parity__chip">
+            {value}
+            <button
+              type="button"
+              aria-label={`Remove ${value}`}
+              onClick={() => {
+                onChange(values.filter((entry) => entry !== value));
+              }}
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        <input
+          className="parity__chip-input"
+          aria-labelledby={`chips-${label}`}
+          placeholder={placeholder}
+          value={draft}
+          onChange={(event) => {
+            setDraft(event.target.value);
+          }}
+          onBlur={commit}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ',') {
+              event.preventDefault();
+              commit();
+            }
+          }}
+        />
+      </div>
+    </div>
+  );
+}

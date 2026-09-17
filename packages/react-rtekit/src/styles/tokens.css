@@ -1,0 +1,166 @@
+/**
+ * Light token defaults (07 §3).
+ *
+ * Every visual in `theme.css` and `content.css` reads one of these. Nothing else in
+ * the library contains a literal colour or length, which is what makes the theme
+ * editor's token list exhaustive (07 §8).
+ */
+@layer rtekit.theme {
+  .rte-root,
+  .rte-view,
+  .rte-portal {
+    /* typography (chrome) */
+    --rte-font-family: inherit;
+    --rte-font-size: 14px;
+    --rte-font-size-sm: 12px;
+    --rte-line-height: 1.5;
+
+    /* surfaces */
+    --rte-color-surface: #ffffff;
+    --rte-color-surface-muted: #fafafa;
+    --rte-color-surface-raised: #ffffff;
+
+    /* text */
+    --rte-color-text: #212121;
+    /*
+     * Every token below that is rendered as text meets AA against both surfaces —
+     * #fafafa as well as #ffffff, since the toolbar and the footer sit on the muted one.
+     */
+    --rte-color-text-muted: #667085;
+    --rte-color-text-disabled: #a4a7ae;
+    /* Placeholder text has to meet AA against the surface; #a4a7ae is 2.4:1. */
+    --rte-color-placeholder: #667085;
+
+    /* lines */
+    --rte-color-border: #d5d7da;
+    --rte-color-border-subtle: #e9eaeb;
+
+    /* accent / status */
+    /* A solid button puts #ffffff on the accent, so the text ratio sets the shade. */
+    --rte-color-accent: #1976d2;
+    --rte-color-accent-soft: #1976d21a;
+    --rte-color-accent-border: #1976d280;
+    --rte-color-accent-contrast: #ffffff;
+    --rte-color-danger: #d92d20;
+    --rte-color-success: #067647;
+    --rte-color-warning: #b54708;
+
+    /* editor box */
+    --rte-min-height: 287px;
+    --rte-max-height: none;
+    --rte-content-padding: 12px;
+    --rte-radius: 4px;
+    --rte-border-width: 1px;
+    --rte-border-color: var(--rte-color-border);
+    --rte-focus-ring: inset 0 0 0 2px var(--rte-color-accent);
+    --rte-invalid-border-color: var(--rte-color-danger);
+    --rte-editor-bg: var(--rte-color-surface);
+    --rte-disabled-bg: #fafafa;
+
+    /* toolbar */
+    --rte-toolbar-bg: transparent;
+    --rte-toolbar-border: none;
+    --rte-toolbar-padding: 0;
+    --rte-toolbar-gap: 0px;
+    --rte-toolbar-margin-bottom: 8px;
+    --rte-toolbar-radius: var(--rte-radius);
+    --rte-toolbar-separator: var(--rte-color-border-subtle);
+    --rte-toolbar-separator-margin: 4px;
+
+    /* toolbar buttons */
+    --rte-button-size: 40px;
+    --rte-button-padding: 8px;
+    --rte-button-radius: 4px;
+    --rte-icon-size: 24px;
+    --rte-button-color: #a4a7ae;
+    --rte-button-active-color: var(--rte-color-text);
+    --rte-button-active-bg: transparent;
+    --rte-button-hover-bg: rgb(0 0 0 / 4%);
+    --rte-button-disabled-color: var(--rte-color-text-disabled);
+    --rte-button-focus-ring: 0 0 0 2px var(--rte-color-accent-border);
+
+    /* popover / menu */
+    --rte-popover-bg: var(--rte-color-surface-raised);
+    --rte-popover-border: 1px solid var(--rte-color-border);
+    --rte-popover-radius: 4px;
+    --rte-popover-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+    --rte-popover-padding: 16px;
+    --rte-menu-item-height: 32px;
+    --rte-menu-item-hover-bg: rgb(0 0 0 / 4%);
+    --rte-menu-item-active-bg: var(--rte-color-accent-soft);
+    --rte-menu-item-padding: 0 12px;
+
+    /* colour picker */
+    --rte-swatch-size: 24px;
+    --rte-swatch-gap: 4px;
+    --rte-swatch-radius: 4px;
+    --rte-swatch-border-color: var(--rte-color-border);
+    --rte-swatch-selected-ring: 0 0 0 2px var(--rte-color-accent);
+
+    /* footer / counter / helper */
+    --rte-footer-gap: 8px;
+    --rte-footer-padding: 4px 0 0;
+    --rte-helper-color: var(--rte-color-text-muted);
+    --rte-counter-color: var(--rte-color-text-muted);
+    --rte-counter-warn-color: var(--rte-color-warning);
+    --rte-counter-over-color: var(--rte-color-danger);
+
+    /* merge tag chip */
+    --rte-mergetag-bg: #eaf6ff;
+    --rte-mergetag-color: #175cd3;
+    --rte-mergetag-border: 1px solid #b2ddff;
+    --rte-mergetag-radius: 4px;
+    --rte-mergetag-padding: 1px 4px;
+    --rte-mergetag-selected-bg: #b2ddff;
+
+    /* mention chip */
+    --rte-mention-bg: #f3e8ff;
+    --rte-mention-color: #6941c6;
+    --rte-mention-radius: 4px;
+    --rte-mention-padding: 1px 4px;
+
+    /* selection and decorations */
+    --rte-selection-bg: #b2ddff;
+    --rte-find-bg: #fff3a3;
+    --rte-find-active-bg: #ffc0cb;
+
+    /* content (prose) */
+    --rte-content-font-family: inherit;
+    --rte-content-font-size: 14px;
+    --rte-content-line-height: 1.5;
+    --rte-content-color: var(--rte-color-text);
+    --rte-paragraph-spacing: 0;
+    --rte-h1-size: 2em;
+    --rte-h2-size: 1.5em;
+    --rte-h3-size: 1.17em;
+    --rte-h4-size: 1em;
+    --rte-h5-size: 0.83em;
+    --rte-h6-size: 0.67em;
+    --rte-heading-weight: 600;
+    --rte-list-indent: 1.5em;
+    --rte-list-item-padding: 0.5em;
+    --rte-indent-step: 2em;
+    --rte-link-color: var(--rte-color-accent);
+    --rte-link-decoration: underline;
+    --rte-quote-border: 3px solid var(--rte-color-border);
+    --rte-quote-padding: 12px;
+    --rte-code-bg: #f5f5f5;
+    --rte-code-color: #b91c1c;
+    --rte-code-font: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --rte-table-border: 1px solid var(--rte-color-border-subtle);
+    --rte-table-header-bg: #fafafa;
+    --rte-cell-padding: 6px 8px;
+    --rte-hr-color: var(--rte-color-border-subtle);
+
+    /* motion */
+    --rte-motion-duration: 150ms;
+    --rte-motion-easing: cubic-bezier(0.2, 0, 0, 1);
+
+    /* z-index */
+    --rte-z-popover: 1300;
+    --rte-z-fullscreen: 1400;
+
+    /* density: scales button size, paddings and min-height */
+    --rte-density-scale: 1;
+  }
+}

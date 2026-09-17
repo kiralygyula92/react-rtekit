@@ -1,0 +1,76 @@
+/**
+ * The `classic` preset: 1:1 parity with the Skimmer editor (01 §7, 07 §4).
+ *
+ * Applied with `data-theme="classic"` on the root, or by passing `theme={classicTheme}`,
+ * which writes the same values as inline custom properties.
+ *
+ * These values are frozen: the parity guarantee is part of the semver contract (09 §7).
+ */
+@layer rtekit.theme {
+  .rte-root[data-theme='classic'],
+  .rte-view[data-theme='classic'] {
+    --rte-font-family: 'Open Sans Variable', 'Open Sans', Arial, sans-serif;
+    --rte-font-size: 14px;
+    --rte-line-height: 1.5;
+
+    --rte-color-text: #212121;
+    --rte-color-border: #d5d7da;
+    --rte-color-border-subtle: #e9eaeb;
+    --rte-color-accent: #2196f3;
+    /*
+     * The one deliberate deviation from 07 §4's colour list. #f04438 is 3.8:1 on white:
+     * enough for the 1px invalid border below, which is a UI component, and not enough
+     * for the error text under the field. The border keeps the parity value.
+     */
+    --rte-color-danger: #d92d20;
+    /* White on #2196f3 is 3.1:1, so a solid button here needs a dark label. */
+    --rte-color-accent-contrast: #06121f;
+
+    --rte-min-height: 287px;
+    --rte-content-padding: 12px;
+    --rte-radius: 4px;
+    --rte-border-width: 1px;
+    /* Visually equal to the old 1px -> 2px border swap, with no layout shift (R10). */
+    --rte-focus-ring: inset 0 0 0 2px #2196f3;
+    --rte-invalid-border-color: #f04438;
+
+    --rte-toolbar-bg: transparent;
+    --rte-toolbar-border: none;
+    --rte-toolbar-padding: 0;
+    --rte-toolbar-gap: 0px;
+    --rte-toolbar-margin-bottom: 8px;
+    --rte-toolbar-separator-margin: 4px;
+
+    --rte-button-size: 40px;
+    --rte-button-padding: 8px;
+    --rte-icon-size: 24px;
+    --rte-button-color: #a4a7ae;
+    --rte-button-active-color: #212121;
+    --rte-button-active-bg: transparent;
+    --rte-button-hover-bg: rgb(0 0 0 / 4%);
+
+    --rte-popover-bg: #ffffff;
+    --rte-popover-border: 1px solid #d5d7da;
+    --rte-popover-radius: 4px;
+    --rte-popover-padding: 16px;
+
+    --rte-swatch-size: 24px;
+    --rte-swatch-gap: 4px;
+    --rte-swatch-radius: 4px;
+    --rte-swatch-border-color: #d5d7da;
+
+    --rte-content-font-size: 14px;
+    --rte-content-line-height: 1.5;
+    /* Quill puts no margin on paragraphs; matching it is part of the 1:1 requirement. */
+    --rte-paragraph-spacing: 0;
+    --rte-list-indent: 1.5em;
+    --rte-list-item-padding: 0.5em;
+    /* Quill's ql-indent-N step is 3em. */
+    --rte-indent-step: 3em;
+  }
+
+  /* The colour button's glyph is tinted with the active colour (01 §5). */
+  .rte-root[data-theme='classic'] .rte-toolbar__button[data-item='color'] svg {
+    fill: var(--rte-current-color, var(--rte-button-color));
+  }
+}

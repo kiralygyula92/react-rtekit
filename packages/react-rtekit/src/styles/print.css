@@ -1,0 +1,60 @@
+/**
+ * Print styles (05 §16).
+ *
+ * `editor.exec('print')` renders the content into a frame that loads this file, so
+ * what prints is the prose and nothing else: no toolbar, no popovers, no page chrome.
+ * Imported by `styles.css` so a consumer printing the page directly gets it too.
+ */
+@layer rtekit.base, rtekit.content, rtekit.theme;
+
+@layer rtekit.base {
+  @media print {
+    .rte-toolbar,
+    .rte-footer,
+    .rte-find-panel,
+    .rte-find-highlights,
+    .rte-draft-prompt,
+    .rte-popover,
+    .rte-placeholder {
+      display: none !important;
+    }
+
+    .rte-content-wrapper {
+      border: 0;
+      box-shadow: none;
+    }
+
+    .rte-content,
+    .rte-view {
+      min-block-size: 0;
+      max-block-size: none;
+      overflow: visible;
+      padding: 0;
+    }
+
+    /* A link's destination is invisible on paper unless it is written out. */
+    .rte-content a[href^='http']::after,
+    .rte-view a[href^='http']::after {
+      content: ' (' attr(href) ')';
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+
+    /* Breaking a heading away from its text, or a row in half, reads badly. */
+    .rte-content h1,
+    .rte-content h2,
+    .rte-content h3,
+    .rte-view h1,
+    .rte-view h2,
+    .rte-view h3 {
+      break-after: avoid;
+    }
+
+    .rte-content tr,
+    .rte-view tr,
+    .rte-content img,
+    .rte-view img {
+      break-inside: avoid;
+    }
+  }
+}

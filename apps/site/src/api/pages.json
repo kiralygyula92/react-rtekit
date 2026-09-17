@@ -1,0 +1,5042 @@
+{
+  "rich-text-editor": [
+    {
+      "name": "addPlugins",
+      "type": "RtePlugin<unknown>[]",
+      "optional": true,
+      "default": "",
+      "description": "Plugins added on top of the preset's list.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "allowDataUrlImages",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Allow `data:` image sources, which bloat stored content.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean | 'start' | 'end'",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Take focus on mount, optionally placing the caret.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autoGrow",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Grow with the content rather than scrolling immediately.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autoLink",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Turn typed URLs and e-mail addresses into links (05 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autoLinkOnPaste",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Turn pasted URLs into links.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autoLinkProtocols",
+      "type": "string[]",
+      "optional": true,
+      "default": "``ts\n['https', 'http', 'mailto']\n``",
+      "description": "Protocols a typed URL may be linked with.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "autosave",
+      "type": "AutosaveConfig",
+      "optional": true,
+      "default": "",
+      "description": "Draft saving, its key, its TTL and its restore prompt.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "bubbleMenuItems",
+      "type": "ToolbarItemSpec[]",
+      "optional": true,
+      "default": "",
+      "description": "What the bubble menu offers, when it differs from the floating toolbar.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "changeDebounceMs",
+      "type": "number",
+      "optional": true,
+      "default": "``ts\n300\n``",
+      "description": "How long the typing has to stop before `onChangeDebounced` runs.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "optional": true,
+      "default": "",
+      "description": "Applied to the root element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "classNames",
+      "type": "RteClassNames",
+      "optional": true,
+      "default": "",
+      "description": "Per-slot class names.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "colors",
+      "type": "ColorPaletteConfig",
+      "optional": true,
+      "default": "``ts\nthe 21 classic swatches\n``",
+      "description": "Swatches, columns and the custom-colour option.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "colorScheme",
+      "type": "ColorScheme",
+      "optional": true,
+      "default": "",
+      "description": "Light, dark, or follow the operating system.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "commandOverrides",
+      "type": "CommandOverrides",
+      "optional": true,
+      "default": "",
+      "description": "Replacement command implementations, by command id (06 §3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "contentClassName",
+      "type": "string",
+      "optional": true,
+      "default": "",
+      "description": "Applied to `.rte-content`, for prose overrides.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "countUnit",
+      "type": "CountUnit",
+      "optional": true,
+      "default": "``ts\n'characters'\n``",
+      "description": "What `maxLength` and the counter measure.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "defaultFullscreen",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Start in fullscreen, for an uncontrolled editor.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "defaultProtocol",
+      "type": "string",
+      "optional": true,
+      "default": "``ts\n'https'\n``",
+      "description": "Protocol given to a bare host, in the popover and in autolinking.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "defaultValue",
+      "type": "EditorValue",
+      "optional": true,
+      "default": "``ts\n''\n``",
+      "description": "Uncontrolled initial value.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "dir",
+      "type": "'ltr' | 'rtl' | 'auto'",
+      "optional": true,
+      "default": "",
+      "description": "Writing direction; `rtl` mirrors the whole field, including the toolbar.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Not focusable, dimmed, `aria-disabled`. What forms should use.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "disableShortcuts",
+      "type": "string[]",
+      "optional": true,
+      "default": "",
+      "description": "Bindings to drop, so the surrounding app can claim them.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "editorRef",
+      "type": "Ref<EditorInstance>",
+      "optional": true,
+      "default": "",
+      "description": "Receives the EditorInstance once the engine has mounted.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "emailOptions",
+      "type": "EmailOutputOptions",
+      "optional": true,
+      "default": "",
+      "description": "Inlining, width and table-layout choices for the `email` profile.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableAlign",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Block alignment, with `left` as the canonical default (fixes R6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableBackgroundColor",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Background colour, with the same palette.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableBlockquote",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Blockquotes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableBold",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Bold, with its `Mod+B` binding.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableCheckList",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Checklists, which need `enableLists` as well.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableClearFormatting",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The \"clear formatting\" command.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableCode",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Inline code, as a mark rather than a block.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableCodeBlock",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Fenced code blocks with syntax highlighting.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableColor",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Text colour, with the palette from `colors`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableEmoji",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The emoji picker and its `:` trigger.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableFindReplace",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The find-and-replace panel.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableFontFamily",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The font-family dropdown, populated from `fontFamilies`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableFontSize",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The font-size dropdown, populated from `fontSizes`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableFullscreen",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The fullscreen toggle.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableHeadings",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Headings at the levels given by `headingLevels`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableHistory",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Undo and redo, with their bindings and toolbar controls.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableHorizontalRule",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Horizontal rules.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableImages",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Images, including upload, drag-and-drop and paste.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableIndent",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Block indent and outdent.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableItalic",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Italic, with its `Mod+I` binding.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableLinks",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Links, the link popover and URL validation.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableLists",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Bulleted and numbered lists, with nesting.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableMarkdownShortcuts",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Markdown input rules, such as `# ` for a heading.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableMentions",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Mentions and their `@` trigger, configured through `mentions`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableMergeTags",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Merge tags as atomic nodes, configured through `mergeTags` (fixes R23).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableSourceView",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "The HTML source view, which sanitizes on apply.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableStrike",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Strikethrough.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableSubSup",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Subscript and superscript, which are mutually exclusive.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableTables",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Tables and their editing controls.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableUnderline",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Underline, with its `Mod+U` binding.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "enableWordCount",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Word counting, which `countUnit: 'words'` needs.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "engine",
+      "type": "EditorEngine",
+      "optional": true,
+      "default": "``ts\nthe Lexical adapter\n``",
+      "description": "Swap the document engine.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "error",
+      "type": "string | boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "`true` sets the error state; a string also renders as the message.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "escapeExitsEditor",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Let Escape move focus out of the editor.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "floatingToolbar",
+      "type": "boolean | FloatingToolbarConfig",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "A toolbar that follows the selection.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "fontFamilies",
+      "type": "object[]",
+      "optional": true,
+      "default": "",
+      "description": "The font-family dropdown's options.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "fontSizes",
+      "type": "object[]",
+      "optional": true,
+      "default": "",
+      "description": "The font-size dropdown's options.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "footer",
+      "type": "ReactNode | function",
+      "optional": true,
+      "default": "",
+      "description": "Extra footer content next to the counter.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "fullscreen",
+      "type": "boolean",
+      "optional": true,
+      "default": "",
+      "description": "Controlled fullscreen.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "handlers",
+      "type": "Partial<RteHandlers>",
+      "optional": true,
+      "default": "",
+      "description": "Interaction middleware; each wraps one interaction (06 §4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "headingLevels",
+      "type": "HeadingLevel[]",
+      "optional": true,
+      "default": "``ts\n[1,2,3]\n``",
+      "description": "Which heading levels the dropdown and the schema allow.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "helperText",
+      "type": "ReactNode",
+      "optional": true,
+      "default": "",
+      "description": "Description below the field, linked with `aria-describedby` (fixes R16).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "hideLabel",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Visually hidden but still announced.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "htmlProfile",
+      "type": "HtmlProfile",
+      "optional": true,
+      "default": "``ts\n'standard'\n``",
+      "description": "The HTML dialect `getHTML` produces (03 §5).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "icons",
+      "type": "RteIcons",
+      "optional": true,
+      "default": "",
+      "description": "Replacement icons, by icon name.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "optional": true,
+      "default": "",
+      "description": "Base for the generated element ids; one is derived when absent (fixes R4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "imageOptions",
+      "type": "ImageOptions",
+      "optional": true,
+      "default": "",
+      "description": "Resizing, alignment and caption behaviour for images.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "interop",
+      "type": "InteropOptions",
+      "optional": true,
+      "default": "",
+      "description": "How legacy markup, such as Quill's, is read and written back.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "keymap",
+      "type": "Record<string, CommandId | function>",
+      "optional": true,
+      "default": "",
+      "description": "Extra or replacement bindings, keyed by shortcut string.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "label",
+      "type": "ReactNode",
+      "optional": true,
+      "default": "",
+      "description": "Renders a `<label>` bound to the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "lang",
+      "type": "string",
+      "optional": true,
+      "default": "",
+      "description": "The content language, for spell-checking and screen-reader pronunciation.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "linkValidator",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Rejects or rewrites a URL before it becomes a link (05 §6).\n\nReturn a message to reject, or `null` to accept. Sanitization runs regardless: a\nvalidator can tighten the rules but never loosens them (03 §4.3).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nlinkValidator={(url) => (url.startsWith('https://intra.example/') ? null : 'Internal links only')}\n``"
+    },
+    {
+      "name": "localization",
+      "type": "object",
+      "optional": true,
+      "default": "",
+      "description": "Message catalogue, merged over the default.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "markdownShortcuts",
+      "type": "boolean | MarkdownShortcutConfig[]",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Markdown input rules, or an explicit list of them.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "maxHeight",
+      "type": "string | number",
+      "optional": true,
+      "default": "",
+      "description": "Height at which the content starts scrolling instead of growing.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "optional": true,
+      "default": "",
+      "description": "Counts text in `countUnit`, never markup (fixes R3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "maxLengthBehaviour",
+      "type": "'warn' | 'block'",
+      "optional": true,
+      "default": "``ts\n'block'\n``",
+      "description": "Whether the limit refuses further input or only warns.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "maxUploadSize",
+      "type": "number",
+      "optional": true,
+      "default": "``ts\n5 * 1024 * 1024\n``",
+      "description": "Size ceiling, enforced before the file leaves the browser.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "mentions",
+      "type": "MentionsConfig",
+      "optional": true,
+      "default": "",
+      "description": "The mention provider, trigger and rendering.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "mergeTags",
+      "type": "MergeTagsConfig",
+      "optional": true,
+      "default": "",
+      "description": "The merge tags this editor knows, and how they are triggered (05 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "minHeight",
+      "type": "string | number",
+      "optional": true,
+      "default": "``ts\n287 (classic parity)\n``",
+      "description": "Height of the content box before it grows.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onBlur",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Focus left the editor for something outside it (fixes R9).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onChange",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Every content change, with the source that caused it (fixes R21).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onChangeDebounced",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Same payload as `onChange`, debounced by `changeDebounceMs`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onContentWarning",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Content that was dropped or downgraded on input. A development aid.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onError",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Anything the engine, a plugin or a serializer threw.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onFocus",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Focus entered the editor.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onReady",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Fired once, when the engine has mounted.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onSelectionChange",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "The selection moved, or collapsed to nothing (fixes R8).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onSubmit",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Called when a submit binding fires, with the current value.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onUpload",
+      "type": "UploadHandler",
+      "optional": true,
+      "default": "",
+      "description": "Hands a file to your own service and returns the attributes to insert.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "onUploadError",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "A rejected or failed upload, with the file it concerned.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "pasteMode",
+      "type": "PasteMode | function",
+      "optional": true,
+      "default": "``ts\n'rich'\n``",
+      "description": "Rich, plain or cleaned paste, statically or per paste.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "pastePrompt",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Offer \"Keep / Remove formatting\" after a rich office paste.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "placeholder",
+      "type": "ReactNode",
+      "optional": true,
+      "default": "``ts\nlocalization.editor.placeholder\n``",
+      "description": "Shown over an empty document (fixes R24).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "pluginOptions",
+      "type": "Record<string, unknown>",
+      "optional": true,
+      "default": "",
+      "description": "Per-plugin options, keyed by plugin name.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "plugins",
+      "type": "RtePlugin<unknown>[]",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the preset's plugin list entirely.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "preset",
+      "type": "PresetName",
+      "optional": true,
+      "default": "``ts\n'standard'\n``",
+      "description": "The plugin bundle and the props it implies.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Selection and copy still work; editing does not.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "readOnlyToolbar",
+      "type": "'hide' | 'disable'",
+      "optional": true,
+      "default": "``ts\n'hide'\n``",
+      "description": "Hide or disable the toolbar in `readOnly` mode.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "removePlugins",
+      "type": "string[]",
+      "optional": true,
+      "default": "",
+      "description": "Names of plugins the preset included that this editor does not want.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderColorPicker",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the colour palette.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderFooter",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the footer row.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderImagePopover",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the controls shown when an image is selected.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderLinkPopover",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the link popover.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderMergeTagMenu",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the merge-tag menu.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderPlaceholder",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the placeholder.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderRestoreDraftPrompt",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the prompt offering to restore an autosaved draft.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderSlashMenu",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the `/` command palette.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderSourceView",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the HTML source view.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "renderToolbar",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Replaces the toolbar, with the resolved items and the default renderer to hand.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Drives `aria-required` and the `isEmpty` check (fixes R2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "resizable",
+      "type": "boolean | 'vertical'",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Offer a drag handle for resizing the content box (fixes R22).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "sanitize",
+      "type": "SanitizeOption",
+      "optional": true,
+      "default": "``ts\n'standard'\n``",
+      "description": "The input sanitization profile, or an explicit config (03 §4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "sanitizeOutput",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Sanitize again on the way out, so a bug upstream cannot leak.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "showCounter",
+      "type": "boolean | 'always' | 'nearLimit'",
+      "optional": true,
+      "default": "false, or true when `maxLength` is set",
+      "description": "When to show the counter.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "slashMenu",
+      "type": "boolean | SlashMenuConfig",
+      "optional": true,
+      "default": "true in the `full` preset",
+      "description": "The `/` command palette.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "slotProps",
+      "type": "RteSlotProps",
+      "optional": true,
+      "default": "",
+      "description": "Extra props merged into each slot, statically or per render.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "slots",
+      "type": "Partial<RteSlots>",
+      "optional": true,
+      "default": "",
+      "description": "Replacement components, by slot name (06 §1).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "spellCheck",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\ntrue\n``",
+      "description": "Browser spell-checking inside the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "stickyToolbar",
+      "type": "boolean | object",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Keep the toolbar visible while a long document scrolls.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "style",
+      "type": "CSSProperties",
+      "optional": true,
+      "default": "",
+      "description": "Applied to the root element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "styles",
+      "type": "RteStyles",
+      "optional": true,
+      "default": "",
+      "description": "Per-slot inline styles.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "submitOnEnter",
+      "type": "boolean | 'mod'",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "`'mod'` makes Ctrl/Cmd+Enter call `onSubmit`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "tabBehaviour",
+      "type": "TabBehaviour",
+      "optional": true,
+      "default": "``ts\n'indent' inside lists, otherwise 'focus'\n``",
+      "description": "What `Tab` does outside a list.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "optional": true,
+      "default": "``ts\n0\n``",
+      "description": "Tab order of the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "theme",
+      "type": "RteTheme | object",
+      "optional": true,
+      "default": "",
+      "description": "Theme tokens, merged over the preset's (07 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "toolbar",
+      "type": "false | ToolbarConfig",
+      "optional": true,
+      "default": "``ts\nthe preset's toolbar\n``",
+      "description": "`false` hides the toolbar entirely.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "toolbarOverflow",
+      "type": "'menu' | 'wrap' | 'scroll'",
+      "optional": true,
+      "default": "``ts\n'menu'\n``",
+      "description": "What happens to items that do not fit at this width.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "toolbarPosition",
+      "type": "'bottom' | 'top' | 'none'",
+      "optional": true,
+      "default": "``ts\n'top'\n``",
+      "description": "Which side of the content the toolbar sits on.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "unstyled",
+      "type": "boolean",
+      "optional": true,
+      "default": "``ts\nfalse\n``",
+      "description": "Structure and prose styles only, no chrome visuals (07 §7).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "uploadAccept",
+      "type": "string",
+      "optional": true,
+      "default": "``ts\n'image/*'\n``",
+      "description": "Accepted file types, enforced before the upload starts.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "validate",
+      "type": "function",
+      "optional": true,
+      "default": "",
+      "description": "Returns a message for invalid content, or `null` when it is acceptable.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "value",
+      "type": "EditorValue",
+      "optional": true,
+      "default": "",
+      "description": "Controlled value, in `valueFormat`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "valueFormat",
+      "type": "ValueFormat",
+      "optional": true,
+      "default": "``ts\n'html'\n``",
+      "description": "What `value`, `defaultValue` and `onChange` speak.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    }
+  ],
+  "editor-instance": [
+    {
+      "name": "announce",
+      "type": "(message: string) => void",
+      "optional": false,
+      "default": "",
+      "description": "Announce a message through the editor's polite live region.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "blur",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Moves focus out of the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "canExec",
+      "type": "(command: Id, payload?: CommandPayload<Id>) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether the command could run right now, which is what disables a control.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "canRedo",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether there is anything to redo.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "canUndo",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether there is anything to undo.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "clear",
+      "type": "(options?: object) => void",
+      "optional": false,
+      "default": "",
+      "description": "Empties the document, optionally clearing the undo stack with it.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "clearDraft",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Removes the autosaved draft, which is what a successful submit should do.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "clearHistory",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Drops the undo stack, so loaded content cannot be undone away (05 §9).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "engine",
+      "type": "EngineHandle",
+      "optional": false,
+      "default": "",
+      "description": "The engine adapter. Escape hatch (02 §2.2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "exec",
+      "type": "(command: Id, payload?: CommandPayload<Id>) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Runs a command through its middleware chain; returns whether it did anything.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "find",
+      "type": "(query: string, options?: FindOptions) => FindResult",
+      "optional": false,
+      "default": "",
+      "description": "Searches the document and selects the first match from the caret.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "focus",
+      "type": "(position?: 'start' | 'end' | 'restore') => void",
+      "optional": false,
+      "default": "",
+      "description": "Focuses the content element, optionally placing the caret.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getFormatState",
+      "type": "() => FormatState",
+      "optional": false,
+      "default": "",
+      "description": "Every mark and block format at the selection.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getHTML",
+      "type": "(options?: SerializeOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "The document as HTML, in the editor's profile unless one is given.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getJSON",
+      "type": "() => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "The document as the portable JSON shape (02 §3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getLength",
+      "type": "(unit?: CountUnit) => number",
+      "optional": false,
+      "default": "",
+      "description": "The document's length in `unit`, defaulting to the configured `countUnit`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getLinkAtSelection",
+      "type": "() => LinkAttrs | null",
+      "optional": false,
+      "default": "",
+      "description": "The link the caret is inside, or `null`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getMarkdown",
+      "type": "(options?: SerializeOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "The document as Markdown; anything Markdown cannot express is downgraded.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getMergeTags",
+      "type": "() => string[]",
+      "optional": false,
+      "default": "",
+      "description": "The keys of every merge tag currently in the document.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getPlainTextAlternative",
+      "type": "() => string",
+      "optional": false,
+      "default": "",
+      "description": "The `text/plain` alternative for a multipart e-mail (03 §5.3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getSelection",
+      "type": "() => EditorSelection | null",
+      "optional": false,
+      "default": "",
+      "description": "Where the selection is, or `null` when the editor is not focused.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getSnapshot",
+      "type": "() => EditorSnapshot",
+      "optional": false,
+      "default": "",
+      "description": "Current derived state; the same object `useEditorState` selects from.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getText",
+      "type": "(options?: object) => string",
+      "optional": false,
+      "default": "",
+      "description": "The document's text, with blocks joined by `blockSeparator`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "hasFocus",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True while the caret is inside the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "optional": false,
+      "default": "",
+      "description": "Stable per-instance id, used to namespace DOM ids (fixes R4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "insertContent",
+      "type": "(value: EditorValue, options?: InsertOptions) => void",
+      "optional": false,
+      "default": "",
+      "description": "Inserts content at the selection, or at `at`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "insertImage",
+      "type": "(attrs: ImageAttrs) => void",
+      "optional": false,
+      "default": "",
+      "description": "Inserts an image from attributes you already have.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "insertLink",
+      "type": "(attrs: LinkAttrs) => void",
+      "optional": false,
+      "default": "",
+      "description": "Links the selection, or inserts a new link when it is collapsed.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "insertMergeTag",
+      "type": "(key: string) => void",
+      "optional": false,
+      "default": "",
+      "description": "Inserts a merge tag as an atomic node (fixes R23).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "insertTable",
+      "type": "(rows: number, cols: number, options?: TableOptions) => void",
+      "optional": false,
+      "default": "",
+      "description": "Inserts a table and places the caret in its first cell.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isActive",
+      "type": "(command: Id, payload?: CommandPayload<Id>) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether the command's effect is already applied, which is what presses a toggle.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isEditable",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether the content can currently be edited.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isEmpty",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True for `''`, `<p></p>`, `<p><br></p>` and whitespace-only content (fixes R2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isFullscreen",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether the editor is in fullscreen.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isSourceView",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "Whether the HTML source view is open.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "on",
+      "type": "(event: K, cb: EditorEvents[…]) => Unregister",
+      "optional": false,
+      "default": "",
+      "description": "Subscribes to one editor event; returns its unregister function.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "redo",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Steps forward one undo entry.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "registerCommand",
+      "type": "(id: Id, handler: CommandHandler<Id>, priority?: number) => Unregister",
+      "optional": false,
+      "default": "",
+      "description": "Adds a handler to a command's middleware chain; returns its unregister function.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "removeLink",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Unwraps the link at the selection, leaving its text.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "replace",
+      "type": "(query: string, replacement: string, options?: FindOptions) => number",
+      "optional": false,
+      "default": "",
+      "description": "Replaces every match in one undo step; returns how many were replaced.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "restoreSelection",
+      "type": "(snapshot: SelectionSnapshot) => void",
+      "optional": false,
+      "default": "",
+      "description": "Puts back a selection captured by EditorInstance.saveSelection.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "saveDraft",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Writes an autosave draft now rather than waiting for the interval.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "saveSelection",
+      "type": "() => SelectionSnapshot",
+      "optional": false,
+      "default": "",
+      "description": "Captures the selection so it survives focus moving to a popover.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "setContent",
+      "type": "(value: EditorValue, options?: SetContentOptions) => void",
+      "optional": false,
+      "default": "",
+      "description": "Replaces the whole document.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "setEditable",
+      "type": "(editable: boolean) => void",
+      "optional": false,
+      "default": "",
+      "description": "Turns editing on or off without changing the disabled or read-only props.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "setFullscreen",
+      "type": "(on: boolean) => void",
+      "optional": false,
+      "default": "",
+      "description": "Enters or leaves fullscreen.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "setSelection",
+      "type": "(sel: EditorSelection | 'start' | 'end' | 'all') => void",
+      "optional": false,
+      "default": "",
+      "description": "Moves the selection, either to a range or to a named position.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "toggleSourceView",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Opens or closes the HTML source view.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "undo",
+      "type": "() => void",
+      "optional": false,
+      "default": "",
+      "description": "Steps back one undo entry.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "uploadFiles",
+      "type": "(files: File[]) => Promise<void>",
+      "optional": false,
+      "default": "",
+      "description": "Runs files through the upload handler and inserts the results.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "validate",
+      "type": "() => string | null",
+      "optional": false,
+      "default": "",
+      "description": "Runs `required`, `maxLength` and the `validate` prop. Returns the message or `null`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    }
+  ],
+  "hooks": [
+    {
+      "name": "useCharacterCount",
+      "type": "(unit: CountUnit) => number",
+      "optional": false,
+      "default": "",
+      "description": "The live character or word count.\n\nCounts text, never markup (fixes R3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useCommand",
+      "type": "(id: Id, payload?: CommandPayload<Id>) => CommandBinding",
+      "optional": false,
+      "default": "",
+      "description": "Binds a toolbar control to a command.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst bold = useCommand('toggleBold');\n<button aria-pressed={bold.isActive} onMouseDown={(e) => e.preventDefault()} onClick={bold.exec} />\n``"
+    },
+    {
+      "name": "useEditor",
+      "type": "(options: UseEditorOptions) => EditorInstance",
+      "optional": false,
+      "default": "",
+      "description": "Creates an editor.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst editor = useEditor({ defaultValue: '<p>Hi</p>', valueFormat: 'html' });\nreturn <Rte.Root editor={editor}><Rte.Content /></Rte.Root>;\n``"
+    },
+    {
+      "name": "useEditorContext",
+      "type": "() => EditorInstance",
+      "optional": false,
+      "default": "",
+      "description": "The editor instance for the nearest `<Rte.Root>` or `<RichTextEditor>`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useEditorState",
+      "type": "(selector: function, isEqual: function) => T",
+      "optional": false,
+      "default": "",
+      "description": "Subscribes to a slice of editor state.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst isBold = useEditorState((state) => state.format.marks.bold);\n``"
+    },
+    {
+      "name": "useFormatState",
+      "type": "() => FormatState",
+      "optional": false,
+      "default": "",
+      "description": "The formatting that applies to the current selection.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst { marks, block, list } = useFormatState();\n``"
+    },
+    {
+      "name": "useIsEmpty",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when the editor holds nothing a reader would see (fixes R2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useIsFocused",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True while the editor has focus. Drives `:focus-within` styling (fixes R9).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useLocalization",
+      "type": "() => RteLocalization",
+      "optional": false,
+      "default": "",
+      "description": "The active message catalogue. Falls back to the shipped English one.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useRteConfig",
+      "type": "() => RteConfigValue",
+      "optional": false,
+      "default": "",
+      "description": "The resolved configuration for the nearest editor.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useRteDefaults",
+      "type": "() => Partial<RichTextEditorProps>",
+      "optional": false,
+      "default": "",
+      "description": "App-wide prop defaults from `<RteDefaultsProvider>`. Props still win (06 §0).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useRteSlots",
+      "type": "() => SlotsContextValue",
+      "optional": false,
+      "default": "",
+      "description": "The slot table, including the defaults.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst MyButton: RteSlots['ToolbarButton'] = (props) => {\n  const { ToolbarButton: Default } = useRteSlots().defaults;\n  return <Tooltip title={props.label}><Default {...props} /></Tooltip>;\n};\n``"
+    },
+    {
+      "name": "useRteTheme",
+      "type": "() => ThemeContextValue | null",
+      "optional": false,
+      "default": "",
+      "description": "The active theme, or `null` when no provider is above.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useUpload",
+      "type": "() => UploadBinding",
+      "optional": false,
+      "default": "",
+      "description": "In-flight uploads plus the function that starts one (05 §7).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "useValidationError",
+      "type": "() => string | null",
+      "optional": false,
+      "default": "",
+      "description": "The current validation message, or `null`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    }
+  ],
+  "utilities": [
+    {
+      "name": "checkUrl",
+      "type": "(raw: string, policy: UrlPolicy) => UrlVerdict",
+      "optional": false,
+      "default": "",
+      "description": "Applies the URL policy to one attribute value.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "cleanOfficeMarkup",
+      "type": "(nodes: HtmlNode[], options: OfficeCleanupOptions) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Cleans an Office paste.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ncleanOfficeMarkup(parseHtml(wordHtml));\n// mso-* declarations, <o:p>, empty spans and Mso classes are gone; lists are real lists\n``"
+    },
+    {
+      "name": "collectMergeTags",
+      "type": "(doc: EditorDocument) => string[]",
+      "optional": false,
+      "default": "",
+      "description": "Every merge-tag key present in the document, in document order, de-duplicated.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "contrastRatio",
+      "type": "(a: string, b: string) => number",
+      "optional": false,
+      "default": "",
+      "description": "Contrast ratio between two colours, 1–21.\n\nUsed by the theme editor's AA badge and by the theming tests (07 §8).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ncontrastRatio('#212121', '#ffffff'); // 15.9…\n``"
+    },
+    {
+      "name": "countDocument",
+      "type": "(doc: EditorDocument, unit: CountUnit, mergeTagLengthMode: MergeTagLengthMode) => number",
+      "optional": false,
+      "default": "",
+      "description": "Counts a document's visible content, never its markup (fixes R3).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\n// 2 000 characters of heavily formatted text still counts as 2 000.\ncountDocument(doc, 'characters');\n``"
+    },
+    {
+      "name": "countText",
+      "type": "(text: string, unit: CountUnit) => number",
+      "optional": false,
+      "default": "",
+      "description": "Counts characters or words in a string.\n\nCharacters are counted by code point, so an emoji counts as one and not two.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ncountText('hello world');            // 11\ncountText('hello world', 'words');   // 2\n``"
+    },
+    {
+      "name": "createBuiltInItems",
+      "type": "(options: ToolbarItemFactoryOptions) => Map<ToolbarItemName, ToolbarItemSpec>",
+      "optional": false,
+      "default": "",
+      "description": "Builds every built-in item.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nconst items = createBuiltInItems({ icons, headingLevels: [1, 2, 3], … });\nitems.get('bold');\n``"
+    },
+    {
+      "name": "createDocument",
+      "type": "(content: BlockNode[]) => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "Wraps blocks in a document envelope.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "createEmptyDocument",
+      "type": "() => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "An empty document: one empty paragraph, which is what an empty editor holds.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "createFeatureSet",
+      "type": "(enabled: Iterable<string>) => ReadonlySet<string>",
+      "optional": false,
+      "default": "",
+      "description": "Builds the active feature set from a list of enabled feature ids.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nconst features = createFeatureSet(['bold', 'italic']);\nfeatures.has('paragraph'); // true — always enabled\nfeatures.has('heading');   // false\n``"
+    },
+    {
+      "name": "createId",
+      "type": "(prefix: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Returns a process-unique id with the given prefix, e.g. `rte-3`.\n\nDeliberately not random: a stable, monotonic id keeps server and client markup\nidentical for the first render, and React's `useId` supplies the uniqueness that\nactually matters across concurrent trees.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "createTheme",
+      "type": "(base: RteTheme | ResolvedRteTheme, overrides: object[]) => ResolvedRteTheme",
+      "optional": false,
+      "default": "",
+      "description": "Merges overrides onto a base theme.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nconst brand = createTheme(classicTheme, { color: { accent: '#7C3AED' } });\n``"
+    },
+    {
+      "name": "createToolbarItem",
+      "type": "(item: ToolbarItemSpec) => ToolbarItemSpec",
+      "optional": false,
+      "default": "",
+      "description": "Declares a toolbar item.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nconst signature = createToolbarItem({\n  name: 'insertSignature',\n  icon: <SignatureIcon />,\n  label: (t) => t.custom.insertSignature,\n  onClick: ({ editor }) => editor.insertContent(signatureHtml),\n  showIn: ['toolbar', 'slash'],\n});\n``"
+    },
+    {
+      "name": "decodeEntities",
+      "type": "(input: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Decodes HTML entities in a string.\n\nApplied repeatedly by decodeEntitiesDeep where double-encoding could hide a\npayload.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "decodeEntitiesDeep",
+      "type": "(input: string, maxPasses: number) => string",
+      "optional": false,
+      "default": "",
+      "description": "Decodes until the string stops changing, so `&amp;#106;` cannot hide a `j`.\n\nCapped at five passes: that is far more nesting than any real content has, and it\nbounds the work an attacker can force.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "definePlugin",
+      "type": "(plugin: RtePlugin<Options>) => RtePlugin<Options>",
+      "optional": false,
+      "default": "",
+      "description": "Declares a plugin.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``tsx\nexport const highlight = definePlugin({\n  name: 'highlight',\n  marks: [{ name: 'highlight', tag: 'mark' }],\n  keymap: { 'Mod+Shift+H': 'toggleHighlight' },\n  sanitize: { allowTags: ['mark'] },\n});\n``"
+    },
+    {
+      "name": "describeProfile",
+      "type": "(name: SanitizeProfileName) => ResolvedSanitizeConfig",
+      "optional": false,
+      "default": "",
+      "description": "The profile a name resolves to, for tests and for the docs site's profile table.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndescribeProfile('strict').allowTags; // ['p','br','strong', …]\n``"
+    },
+    {
+      "name": "detectOfficeSource",
+      "type": "(html: string) => 'word' | 'gdocs' | 'excel' | null",
+      "optional": false,
+      "default": "",
+      "description": "True when the markup came from Word, Google Docs or Excel.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndetectOfficeSource('<p class=MsoNormal>x</p>'); // 'word'\n``"
+    },
+    {
+      "name": "detectPasteSource",
+      "type": "(html: string, text: string) => PasteSource",
+      "optional": false,
+      "default": "",
+      "description": "Identifies the origin of a clipboard payload (03 §3).\n\nDetection drives which cleanup runs, and it is also surfaced to `handlers.onPaste`\nso a consumer can apply a different policy to an office paste than to plain text.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndetectPasteSource('<p class=MsoNormal>x</p>', 'x'); // 'word'\ndetectPasteSource('', 'just text');                 // 'plain'\n``"
+    },
+    {
+      "name": "documentToHtml",
+      "type": "(doc: EditorDocument, options: DocumentToHtmlOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Serializes a document to HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndocumentToHtml(doc);                              // standard\ndocumentToHtml(doc, { profile: 'quill-compatible' });\ndocumentToHtml(doc, { profile: 'email', sanitizeWith: 'email' });\n``"
+    },
+    {
+      "name": "documentToMarkdown",
+      "type": "(doc: EditorDocument, options: MarkdownOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Serializes a document to Markdown.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndocumentToMarkdown(doc);\n// '# Title\\n\\nHi **Jane**\\n\\n- one\\n- two'\n``"
+    },
+    {
+      "name": "documentToPlainText",
+      "type": "(doc: EditorDocument, options: TextOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "The visible text of a document.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndocumentToPlainText(doc);                  // 'Hi Jane\\nSecond line'\n``"
+    },
+    {
+      "name": "documentToText",
+      "type": "(doc: EditorDocument, options: TextOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Extracts the visible text of a document.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ndocumentToText(doc);                       // 'Hi Jane\\nSecond line'\ndocumentToText(doc, { listMarkers: true, linkUrls: true }); // e-mail text/plain part\n``"
+    },
+    {
+      "name": "element",
+      "type": "(tag: string, attrs: Record<string, string>, children: HtmlNode[]) => HtmlElement",
+      "optional": false,
+      "default": "",
+      "description": "Builds an element node.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "escapeAttribute",
+      "type": "(input: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Escapes a value for a double-quoted attribute.\n\n`<` and `>` are escaped too. They are not strictly required inside an attribute,\nbut escaping them removes a whole class of mutation bugs if the output is ever\nre-parsed in a different context.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "escapeText",
+      "type": "(input: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Escapes text for a text node: `&`, `<` and `>`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "featuresOf",
+      "type": "(plugins: RtePlugin<unknown>[]) => string[]",
+      "optional": false,
+      "default": "",
+      "description": "The feature ids a plugin list enables, for the schema downgrade (03 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "findElement",
+      "type": "(nodes: HtmlNode[], tag: string) => HtmlElement | null",
+      "optional": false,
+      "default": "",
+      "description": "The first descendant element matching `tag`, in document order.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "findMark",
+      "type": "(marks: Mark[] | undefined, type: T) => Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | Extract<object, object> | undefined",
+      "optional": false,
+      "default": "",
+      "description": "Looks a mark up on an inline node.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "formatShortcut",
+      "type": "(shortcut: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Renders a binding for display, with the platform's glyphs.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getProfile",
+      "type": "(name: SanitizeProfileName) => ResolvedSanitizeConfig",
+      "optional": false,
+      "default": "",
+      "description": "Returns a profile by name. The returned object is a fresh copy.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "getProtocol",
+      "type": "(raw: string) => string | null",
+      "optional": false,
+      "default": "",
+      "description": "Extracts the scheme of a URL, or `null` when it is relative.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ngetProtocol('HTTPS://example.com'); // 'https'\ngetProtocol('/images/a.png');       // null\n``"
+    },
+    {
+      "name": "hasDomParser",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when this environment can parse HTML with `DOMParser`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "htmlToDocument",
+      "type": "(html: string, options: HtmlToDocumentOptions) => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "Parses HTML into the portable document model.\n\nRuns the whole input pipeline from 03 §3: source detection, interop, sanitization,\nschema downgrade and normalization.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nhtmlToDocument('<p class=\"ql-align-center\">hi</p>');\n// { type: 'doc', version: 1, content: [{ type: 'paragraph', align: 'center', … }] }\n``"
+    },
+    {
+      "name": "isApplePlatform",
+      "type": "() => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when the current platform uses Cmd for `Mod`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isBlockEnabled",
+      "type": "(type: 'paragraph' | 'heading' | 'list' | 'blockquote' | 'codeBlock' | 'horizontalRule' | 'image' | 'table' | 'html', features: ReadonlySet<string>) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when a block type may appear with this feature set.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isEditorDocument",
+      "type": "(value: unknown) => value",
+      "optional": false,
+      "default": "",
+      "description": "True for a well-formed document object.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isElement",
+      "type": "(node: HtmlNode) => node",
+      "optional": false,
+      "default": "",
+      "description": "Type guard for elements.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isEmptyDocument",
+      "type": "(doc: EditorDocument) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when the document holds nothing a reader would see (fixes R2).\n\n`''`, `<p></p>`, `<p><br></p>`, whitespace-only content and a document of nothing but\nempty blocks are all empty. `<p>&nbsp;</p>` is **not**: the author typed a character.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nisEmptyDocument(htmlToDocument('<p><br></p>'));   // true\nisEmptyDocument(htmlToDocument('<p>&nbsp;</p>')); // false\n``"
+    },
+    {
+      "name": "isEmptyHtml",
+      "type": "(html: string) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when an HTML string holds no visible content (fixes R2).\n\nThe cheap path for callers that only need the boolean and do not want to build a\ndocument: `''`, `'<p></p>'`, `'<p><br></p>'` and whitespace-only markup are empty,\nwhile `'<p>&nbsp;</p>'` is not.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nisEmptyHtml('<p><br></p>');   // true\nisEmptyHtml('<p>&nbsp;</p>'); // false\n``"
+    },
+    {
+      "name": "isExternalUrl",
+      "type": "(raw: string) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when a URL points somewhere outside the current origin.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isMarkEnabled",
+      "type": "(type: 'bold' | 'italic' | 'underline' | 'strike' | 'code' | 'subscript' | 'superscript' | 'color' | 'backgroundColor' | 'fontFamily' | 'fontSize', features: ReadonlySet<string>) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when a mark may appear with this feature set.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "isText",
+      "type": "(node: HtmlNode) => node",
+      "optional": false,
+      "default": "",
+      "description": "Type guard for text nodes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "looksLikeQuill",
+      "type": "(html: string) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when the markup looks like it came from Quill.\n\nUsed by source detection so a paste from the old editor is cleaned rather than\ntreated as arbitrary HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "markdownToDocument",
+      "type": "(markdown: string, options: HtmlToDocumentOptions & MarkdownOptions) => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "Parses Markdown into a document.\n\nImplemented by converting to HTML and reusing the HTML pipeline, so Markdown input\ngets the same sanitization, interop and schema downgrade as everything else.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nmarkdownToDocument('# Title\\n\\n- one\\n- two');\n``"
+    },
+    {
+      "name": "markdownToHtml",
+      "type": "(markdown: string, options: MarkdownOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Converts Markdown to HTML. Exported for the interop demo's before/after view.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "marksEqual",
+      "type": "(a: Mark[] | undefined, b: Mark[] | undefined) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when two mark lists are equivalent, ignoring order.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "matchesShortcut",
+      "type": "(event: KeyboardEvent, shortcut: ParsedShortcut) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when a keyboard event matches a parsed binding.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "meetsContrastAA",
+      "type": "(foreground: string, background: string, largeText: boolean) => boolean",
+      "optional": false,
+      "default": "",
+      "description": "True when the pair meets WCAG AA for the given text size.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "mergeLocalization",
+      "type": "(base: RteLocalization, override: object | undefined) => RteLocalization",
+      "optional": false,
+      "default": "",
+      "description": "Deep-merges a partial catalogue onto a base one.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "mergeSanitizeConfig",
+      "type": "(base: ResolvedSanitizeConfig, override: SanitizeConfig) => ResolvedSanitizeConfig",
+      "optional": false,
+      "default": "",
+      "description": "Merges a partial config onto a resolved one.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "normalizeColor",
+      "type": "(input: string | null | undefined) => string | null",
+      "optional": false,
+      "default": "",
+      "description": "Normalizes a CSS colour to lower-case `#rrggbb`.\n\nReturns `null` for a missing value or one that means \"no colour\", which is what makes\nthe picker's Reset remove the format instead of forcing black (fixes R14).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nnormalizeColor('#F00');            // '#ff0000'\nnormalizeColor('rgb(255, 0, 0)');  // '#ff0000'\nnormalizeColor('inherit');         // null\n``"
+    },
+    {
+      "name": "normalizeDocument",
+      "type": "(doc: EditorDocument, options: NormalizeOptions) => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "Applies the normalization rules from 03 §2.\n\nRuns after every parse and paste: merges adjacent identical marks, drops empty inline\nnodes, optionally collapses empty blocks, and keeps a trailing paragraph so the user\ncan always get out of a table or a quote.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "normalizeUrl",
+      "type": "(raw: string, defaultProtocol: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Adds a default scheme to a bare host, as the link popover does (05 §6).\n\nLeaves anything that already has a scheme, an anchor or a mail-like shape alone.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nnormalizeUrl('example.com');        // 'https://example.com'\nnormalizeUrl('a@b.com');            // 'mailto:a@b.com'\nnormalizeUrl('/internal');          // '/internal'\n``"
+    },
+    {
+      "name": "parseHtml",
+      "type": "(html: string, parser: HtmlParserChoice) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Parses an HTML fragment into the internal tree.\n\n`auto` (the default) uses the browser's `DOMParser` when one exists and the in-house\ntokenizer otherwise. Passing `builtin` explicitly forces the portable path, which is\nwhat the security tests use to exercise it inside a browser-like environment.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nconst nodes = parseHtml('<p class=\"ql-align-center\">hi</p>');\n``"
+    },
+    {
+      "name": "parseHtmlFragment",
+      "type": "(html: string) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Parses an HTML fragment into the internal tree.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nparseHtmlFragment('<p>hi<br>there');\n// [{ type: 'element', tag: 'p', attrs: {}, children: [ … ] }]\n``"
+    },
+    {
+      "name": "parseHtmlWithDom",
+      "type": "(html: string) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Parses an HTML fragment with the browser's parser.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "parseQuillMarkup",
+      "type": "(nodes: HtmlNode[], options: QuillInteropOptions) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Converts legacy Quill markup into ordinary HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nconst nodes = parseHtml('<ul><li data-list=\"bullet\">a</li><li data-list=\"bullet\" class=\"ql-indent-1\">b</li></ul>');\nparseQuillMarkup(nodes);\n// <ul><li>a<ul><li>b</li></ul></li></ul>\n``"
+    },
+    {
+      "name": "parseShortcut",
+      "type": "(shortcut: string) => ParsedShortcut",
+      "optional": false,
+      "default": "",
+      "description": "Parses a binding such as `'Mod+Shift+X'`.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nparseShortcut('Mod+B'); // { key: 'b', mod: true, … }\n``"
+    },
+    {
+      "name": "parseStyle",
+      "type": "(style: string) => CssDeclaration[]",
+      "optional": false,
+      "default": "",
+      "description": "Splits an inline `style` value into declarations.\n\nSemicolons inside `url(…)` and quoted strings do not terminate a declaration, which\nis exactly where a naive `split(';')` goes wrong.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "plainTextAlternative",
+      "type": "(doc: EditorDocument, options: object) => string",
+      "optional": false,
+      "default": "",
+      "description": "The `text/plain` alternative for a multipart e-mail (03 §5.3).\n\nLinks become `text (url)` and list items get markers, so the message still reads\ncorrectly in a client that refuses HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nplainTextAlternative(doc);\n// 'Hi Jane\\n\\n- Add 2 lbs of shock\\n- Re-test in 24h\\n\\nSee our site (https://example.com)'\n``"
+    },
+    {
+      "name": "pseudoize",
+      "type": "(value: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Accents and pads one string.\n\nInterpolated values are left alone — `{count}` has to survive, and so does anything\nthe caller substitutes in.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "readStyleProperty",
+      "type": "(style: string | undefined, property: string) => string | null",
+      "optional": false,
+      "default": "",
+      "description": "Reads one declaration out of an inline `style` value.\n\nUsed by the interop parsers, which need `text-align` and `color` before the document\nmodel exists.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "resolveIcons",
+      "type": "(overrides: RteIcons | undefined) => RteIcons",
+      "optional": false,
+      "default": "",
+      "description": "Merges consumer overrides onto the defaults.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "resolveMessage",
+      "type": "(message: LocalizedString | undefined, values: Record<string, string | number>) => string",
+      "optional": false,
+      "default": "",
+      "description": "Resolves a message to a string.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nresolveMessage(t.counter.limit, { count: 231, max: 2048 }); // '231 / 2048'\nresolveMessage('Hello {name}', { name: 'Jane' });           // 'Hello Jane'\n``"
+    },
+    {
+      "name": "resolvePluginOrder",
+      "type": "(plugins: RtePlugin<unknown>[], onMissingDependency?: function) => RtePlugin<unknown>[]",
+      "optional": false,
+      "default": "",
+      "description": "Resolves a plugin list: dependencies first, duplicates removed.\n\nA plugin registered twice keeps its last definition, which is what makes\n`addPlugins` able to replace a built-in by name.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "resolvePlugins",
+      "type": "(props: object) => RtePlugin<unknown>[]",
+      "optional": false,
+      "default": "",
+      "description": "Resolves the plugin list for a set of props.\n\nOrder of precedence: `plugins` replaces the preset entirely, then `removePlugins`\ndrops names, then `addPlugins` appends, then the `enableX` flags turn individual\nfeatures off (04 §2.3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "resolveSanitizeConfig",
+      "type": "(option: SanitizeConfig | SanitizeProfileName) => ResolvedSanitizeConfig",
+      "optional": false,
+      "default": "",
+      "description": "Turns the `sanitize` prop into a resolved configuration.\n\nA config object is merged onto `standard`; `false` is handled by the caller, which\nalso emits the development warning (03 §4.2).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nresolveSanitizeConfig('email');\nresolveSanitizeConfig({ allowTags: ['p', 'b'] });   // merged onto `standard`\n``"
+    },
+    {
+      "name": "resolveSlots",
+      "type": "(overrides: Partial<RteSlots> | undefined) => RteSlots",
+      "optional": false,
+      "default": "",
+      "description": "Merges consumer slot overrides onto the defaults.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "sanitizeHtml",
+      "type": "(html: string, options: SanitizeOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Sanitizes an HTML string against a profile or configuration.\n\nRuns at every content boundary in both directions (03 §4.1). The hard rules in\n03 §4.3 apply regardless of configuration.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nsanitizeHtml('<img src=x onerror=alert(1)>');\n// '<img src=\"x\">'\n\nsanitizeHtml('<p class=\"ql-align-center\">hi</p>', { sanitize: 'email' });\n// '<p>hi</p>'  — the email profile keeps no classes\n``"
+    },
+    {
+      "name": "sanitizeNodes",
+      "type": "(nodes: HtmlNode[], options: SanitizeOptions) => HtmlNode[]",
+      "optional": false,
+      "default": "",
+      "description": "Sanitizes an already-parsed tree.\n\nUsed by the interop parsers, which have a tree in hand and would otherwise have to\nserialize and re-parse.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "sanitizeStyle",
+      "type": "(style: string, allowed: readonly string[], onViolation?: function) => string",
+      "optional": false,
+      "default": "",
+      "description": "Filters an inline `style` value against an allowlist.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "scopedId",
+      "type": "(instanceId: string, part: string) => string",
+      "optional": false,
+      "default": "",
+      "description": "Builds a DOM id scoped to one editor instance.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nscopedId('rte-4', 'content'); // 'rte-4-content'\n``"
+    },
+    {
+      "name": "serializeHtmlNodes",
+      "type": "(nodes: HtmlNode[], options: SerializeHtmlOptions) => string",
+      "optional": false,
+      "default": "",
+      "description": "Serializes a list of nodes to an HTML string.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "serializeStyle",
+      "type": "(declarations: CssDeclaration[]) => string",
+      "optional": false,
+      "default": "",
+      "description": "Joins declarations back into an inline `style` value.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "sortMarks",
+      "type": "(marks: Mark[]) => Mark[]",
+      "optional": false,
+      "default": "",
+      "description": "Returns the marks in canonical order.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "text",
+      "type": "(value: string) => HtmlText",
+      "optional": false,
+      "default": "",
+      "description": "Builds a text node.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "textContent",
+      "type": "(node: HtmlNode | HtmlNode[]) => string",
+      "optional": false,
+      "default": "",
+      "description": "Concatenates every text descendant of a node, in document order.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "textToDocument",
+      "type": "(text: string) => EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "Turns plain text into a document.\n\nDouble newlines become paragraphs and single newlines become line breaks, which is\nwhat a plain-text paste should produce (03 §3).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\ntextToDocument('one\\ntwo\\n\\nthree');\n// two paragraphs, the first holding a line break\n``"
+    },
+    {
+      "name": "themeToCssVars",
+      "type": "(theme: RteTheme | object) => Record<string, string>",
+      "optional": false,
+      "default": "",
+      "description": "Flattens a theme — or a partial override — into `--rte-*` custom properties.\n\nUnknown paths fall through to the kebab-cased default, so a theme extended with\ntokens of its own still produces variables its own CSS can read.",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nthemeToCssVars({ editor: { borderWidth: '2px' } }); // { '--rte-border-width': '2px' }\n``"
+    },
+    {
+      "name": "validateMergeTagKeys",
+      "type": "(doc: EditorDocument, allowedKeys: string[]) => string[]",
+      "optional": false,
+      "default": "",
+      "description": "Reports merge-tag keys that are not in the allowed list (03 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": "``ts\nvalidateMergeTagKeys(doc, ['org_name']); // ['contact_frist_name']\n``"
+    },
+    {
+      "name": "walkBlocks",
+      "type": "(doc: EditorDocument) => Generator<BlockNode>",
+      "optional": false,
+      "default": "",
+      "description": "Every block in the document, including those nested in quotes, lists and tables.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "walkElements",
+      "type": "(nodes: HtmlNode[], visit: function, parent: HtmlElement | null) => void",
+      "optional": false,
+      "default": "",
+      "description": "Depth-first walk over every element in a tree.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "walkInline",
+      "type": "(doc: EditorDocument) => Generator<InlineNode>",
+      "optional": false,
+      "default": "",
+      "description": "Every inline node in the document, in document order.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    }
+  ],
+  "types": [
+    {
+      "name": "Align",
+      "type": "'left' | 'center' | 'right' | 'justify'",
+      "optional": false,
+      "default": "",
+      "description": "Block-level horizontal alignment. `left` is the default and serializes as no attribute.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "AutosaveConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Autosave / draft behaviour (03 §7).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BaseHandlerContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Every handler context carries the editor so middleware can read state.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BeforeChangeContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onBeforeChange`: the change that is about to be committed.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BlockNode",
+      "type": "ParagraphNode | HeadingNode | ListNode | BlockquoteNode | CodeBlockNode | HorizontalRuleNode | ImageNode | TableNode | RawHtmlNode",
+      "optional": false,
+      "default": "",
+      "description": "Anything that can live at the top level of a document.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BlockNodeName",
+      "type": "BlockNode[…]",
+      "optional": false,
+      "default": "",
+      "description": "The `type` discriminator of every BlockNode.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BlockquoteNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A block quote, which may contain other blocks.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "BlockSchemaEntry",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What a block type needs in order to exist.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ButtonProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Button.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ChangeMeta",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Metadata passed alongside every `onChange`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ChangeSource",
+      "type": "'user' | 'api' | 'paste' | 'drop' | 'history' | 'init'",
+      "optional": false,
+      "default": "",
+      "description": "Where a change came from. Lets controlled consumers avoid feedback loops (R21).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CheckboxProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Checkbox.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CodeBlockNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A fenced code block. Rich marks are not allowed inside.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ColorPaletteConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The colour picker's palette and behaviour (05 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ColorPickerSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `ColorPicker` slot: palette, recents and the clear action (05 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ColorScheme",
+      "type": "'light' | 'dark' | 'auto'",
+      "optional": false,
+      "default": "",
+      "description": "`colorScheme` prop. `'auto'` follows `prefers-color-scheme`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandBinding",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What useCommand returns.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What a command handler receives.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandHandler",
+      "type": "function",
+      "optional": false,
+      "default": "",
+      "description": "A command handler, written as middleware.\n\nCall `next()` to run the handler registered before this one (ultimately the\nbuilt-in). Return `false`, or simply do not call `next`, to cancel.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandId",
+      "type": "Extract<keyof CommandRegistry, string>",
+      "optional": false,
+      "default": "",
+      "description": "Every known command id.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandOverrides",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "`commandOverrides` prop shape.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandPayload",
+      "type": "CommandRegistry[…]",
+      "optional": false,
+      "default": "",
+      "description": "The payload a given command takes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CommandRegistry",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The built-in command catalogue, mapping each id to its payload.\n\nConsumers add their own by augmenting this interface:",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ContentSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `Content` slot: the contenteditable surface and its textbox semantics.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ContentWarning",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Something dropped or downgraded while parsing content (03 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CounterSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `Counter` slot: the count, the limit and the two threshold flags.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CountUnit",
+      "type": "'characters' | 'words'",
+      "optional": false,
+      "default": "",
+      "description": "Unit used by `getLength`, `maxLength` and the counter.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "CssDeclaration",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One parsed declaration.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "DeepPartial",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "Recursively optional. Used for theme and localization overrides.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "Density",
+      "type": "'compact' | 'standard' | 'comfortable'",
+      "optional": false,
+      "default": "",
+      "description": "Layout density; scales button size, paddings and min-height.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "DocumentToHtmlOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for documentToHtml.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "DraftContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onDraftSave` and `onDraftRestore`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "DropHandlerContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onDrop`: what was dropped onto the content element.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorDocument",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A whole document.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorEngine",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An engine implementation. The default is the Lexical adapter.",
+      "group": "Engine",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorEvents",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Events emitted by the editor instance (a superset of the engine's).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorInstance",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The handle returned by `useEditor` and exposed through `editorRef` / `onReady`.",
+      "group": "Editor",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorPoint",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A normalized selection.\n\nPaths address a node by its index chain from the document root, which keeps the\nshape engine-independent and serializable.",
+      "group": "Selection",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorSelection",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A selection range plus the flags toolbars care about.",
+      "group": "Selection",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorSnapshot",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The snapshot `useEditorState` selects from.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EditorValue",
+      "type": "string | EditorDocument",
+      "optional": false,
+      "default": "",
+      "description": "A value in the currently configured ValueFormat.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EmailOutputOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Extra shaping applied by the `email` HTML profile (03 §5.3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EmojiNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A single emoji character. Emoji are plain text, never images.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EngineEvents",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Events the engine emits.\n\n02 §2.2 lists all of these except `formatChange`, `copy`, `cut`, `compositionStart`\nand `compositionEnd`. Those exist because the product layer genuinely needs them:\nundo availability changes without the content or the selection changing, the\nclipboard needs its own hooks, and no change event may fire mid-composition\n(05 §15).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EngineHandle",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A mounted engine. Everything the product layer is allowed to call.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "EngineMountOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What the host hands the engine when mounting it.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FeatureFlagProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Feature toggles, sugar over plugin inclusion (04 §2.3).\n\nEach flag adds or removes the plugin that provides it, so turning one off also takes\nits toolbar item, keymap entry and schema rules with it. A format the schema does not\nknow is downgraded rather than dropped when content arrives carrying it.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FeatureId",
+      "type": "'bold' | 'italic' | 'underline' | 'strike' | 'code' | 'subscript' | 'superscript' | 'color' | 'backgroundColor' | 'fontFamily' | 'fontSize' | 'paragraph' | 'heading' | 'blockquote' | 'codeBlock' | 'horizontalRule' | 'list' | 'checkList' | 'align' | 'indent' | 'link' | 'image' | 'table' | 'mergeTag' | 'mention' | 'emoji' | 'lineBreak' | 'rawHtml'",
+      "optional": false,
+      "default": "",
+      "description": "A feature id, as used by `enableX` props and by `RtePlugin.provides`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FindOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Find & replace options.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FindReplacePanelSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `FindReplacePanel` slot: query state, match position and actions.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FindResult",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Result of a `find` call.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FloatingToolbarConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Floating / bubble toolbar behaviour (05 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FocusHandlerContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onFocus` and `onBlur`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "FormatState",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The formatting that applies to the current selection (04 §9).\n\nA value-carrying mark is `null` when the selection is mixed, so a toolbar can render\nan indeterminate state rather than lying about one of the values.",
+      "group": "Selection",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HandlerContext",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "The context type a given handler receives.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HandlerName",
+      "type": "keyof RteHandlers",
+      "optional": false,
+      "default": "",
+      "description": "The name of any handler in RteHandlers.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HeadingLevel",
+      "type": "1 | 2 | 3 | 4 | 5 | 6",
+      "optional": false,
+      "default": "",
+      "description": "Heading level, 1–6.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HeadingNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A heading, `level` 1–6.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HorizontalRuleNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A thematic break.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlComment",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A comment. Kept during parsing so conditional comments can be recognized.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlElement",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An element. `tag` is always lower-case; attribute names are always lower-case.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlNode",
+      "type": "HtmlElement | HtmlText | HtmlComment",
+      "optional": false,
+      "default": "",
+      "description": "Anything in the tree.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlOutputSpec",
+      "type": "[string, unknown, unknown]",
+      "optional": false,
+      "default": "",
+      "description": "`['tag', attrs, ...children]`, mirroring the ProseMirror/TipTap convention.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlParserChoice",
+      "type": "'auto' | 'dom' | 'builtin'",
+      "optional": false,
+      "default": "",
+      "description": "Which parser parseHtml should use.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlParserRule",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A DOM match used when parsing foreign HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlProfile",
+      "type": "'standard' | 'quill-compatible' | 'email' | 'minimal'",
+      "optional": false,
+      "default": "",
+      "description": "Output HTML dialect (03 §5.2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlSerializerRule",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Rules for a serializer contributed by a plugin.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlText",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A text run. Already entity-decoded.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "HtmlToDocumentOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for htmlToDocument.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "IconButtonProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for IconButton.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "IconName",
+      "type": "keyof RteIcons",
+      "optional": false,
+      "default": "",
+      "description": "Every icon key, used by the docs site's icon gallery.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ImageAttrs",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Image attributes as stored on an image node.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ImageNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An image. `width`/`height` are intrinsic pixels and serialize as attributes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ImageOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Image behaviour (05 §7).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InlineNode",
+      "type": "TextNode | LinkNode | MergeTagNode | MentionNode | EmojiNode | LineBreakNode",
+      "optional": false,
+      "default": "",
+      "description": "Anything that can live inside a block.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InlineSuggestMenuItem",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One row of an InlineSuggestMenuSlotProps list.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InlineSuggestMenuSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `InlineSuggestMenu` slot.\n\nThe slash menu, mentions, emoji and merge tags all render through this one\nprimitive, so their popovers, keyboard model and a11y are identical (05 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InsertOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for `insertContent`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InteropInput",
+      "type": "'quill' | 'office' | 'standard'",
+      "optional": false,
+      "default": "",
+      "description": "Which foreign dialects the input parser recognizes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "InteropOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "`interop` prop (04 §2.4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "KeyDownContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onKeyDown`: a key, and the command the keymap matched.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LineBreakNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A soft line break (`<br>`), as opposed to a new block.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LinkAttrs",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Link attributes as stored on a link node and edited in the link popover.",
+      "group": "Links",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LinkClickContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onLinkClick`: a link inside the content was clicked.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LinkNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An anchor. `rel` is normalized by the sanitizer when `target` is `_blank`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LinkOpenContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onLinkOpen`: a link is about to be followed.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LinkPopoverSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `LinkPopover` slot: the link being edited and its actions (05 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ListItemNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One item of a ListNode; may itself contain nested lists.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ListNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A bullet, ordered or check list.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "LocalizedString",
+      "type": "string | function",
+      "optional": false,
+      "default": "",
+      "description": "A string, or a function of its interpolation values.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "Mark",
+      "type": "object | object | object | object | object | object | object | object | object | object | object",
+      "optional": false,
+      "default": "",
+      "description": "An inline formatting mark.\n\nBoolean marks carry no value; the value-carrying marks (`color`, `fontSize`, …)\nkeep their value as a CSS-ready string.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkdownOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for documentToMarkdown.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkdownRule",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Rules for a Markdown serializer contributed by a plugin.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkdownShortcutConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One markdown input rule (05 §5).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkName",
+      "type": "Mark[…]",
+      "optional": false,
+      "default": "",
+      "description": "The `type` discriminator of every Mark.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkSchemaEntry",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What a mark needs in order to exist.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MarkSpec",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Declares a custom inline mark.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MaxLengthContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onMaxLengthExceeded`: input that would pass the limit.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MentionCandidate",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One mention search result.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MentionNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An atomic `@mention` chip.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MentionsConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Mention behaviour (05 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MenuOption",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One row of a Menu.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MenuProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Menu.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MergeTagDefinition",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One substitutable `{key}` token.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MergeTagLengthMode",
+      "type": "'label' | 'key' | 'zero'",
+      "optional": false,
+      "default": "",
+      "description": "How a merge tag contributes to the character count.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MergeTagNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An atomic `{key}` placeholder that the backend substitutes (03 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MergeTagParseOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Merge-tag parsing settings used while reading HTML.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "MergeTagsConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Merge-tag behaviour (03 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "Middleware",
+      "type": "function",
+      "optional": false,
+      "default": "",
+      "description": "A generic middleware: run before/around the default behaviour, or cancel it.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "NodeSpec",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Declares a custom node type to the engine and the serializers.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "NormalizeOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for normalizeDocument.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "OfficeCleanupOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Word / Google Docs / Excel paste cleanup knobs (03 §3).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "OpenStateContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the handlers that wrap an open/closed transition.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "OrderedListStyle",
+      "type": "'1' | 'a' | 'A' | 'i' | 'I'",
+      "optional": false,
+      "default": "",
+      "description": "Ordered-list numbering style, mirroring the HTML `type` attribute.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ParagraphNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A paragraph.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ParsedShortcut",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A parsed binding.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PasteHandlerContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onPaste`: what is on the clipboard and how it will be treated.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PasteMode",
+      "type": "'rich' | 'clean' | 'text'",
+      "optional": false,
+      "default": "",
+      "description": "How a paste should be treated.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PasteSource",
+      "type": "'word' | 'gdocs' | 'excel' | 'quill' | 'rtekit' | 'plain' | 'unknown'",
+      "optional": false,
+      "default": "",
+      "description": "Where a clipboard payload came from.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PluginContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What a plugin's `setup` receives. Everything registered here is cleaned up for you.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PluginSanitizeRules",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Sanitizer additions. These widen the allowlist; they can never widen a hard rule.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PluginSerializers",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Serializer contributions.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PopoverPlacement",
+      "type": "'bottom-start' | 'bottom' | 'bottom-end' | 'top-start' | 'top'",
+      "optional": false,
+      "default": "",
+      "description": "Where the popover sits relative to its anchor.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PopoverProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Popover.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "Position",
+      "type": "'start' | 'end' | 'selection' | EditorPoint",
+      "optional": false,
+      "default": "",
+      "description": "Where to insert content relative to the current document.",
+      "group": "Selection",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PresetDefinition",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A preset: its plugins plus the props it implies.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "PresetName",
+      "type": "'minimal' | 'classic' | 'standard' | 'email' | 'comment' | 'full'",
+      "optional": false,
+      "default": "",
+      "description": "The shipped preset names (05 §1.1).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "QuillInteropOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Legacy Quill parsing / emitting knobs (03 §5.1).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RawHtmlNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Raw HTML preserved verbatim.\n\nOnly produced by the `permissive` sanitization profile; every other profile drops\nunknown markup instead (03 §4.2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RenderContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What `footer` and `renderX` render props receive.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ResolvedRteTheme",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A theme with every token resolved, plus the prop defaults it carries (07 §4).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ResolvedSanitizeConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A fully expanded profile: every field resolved, ready to run.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ResponsiveValue",
+      "type": "T | object",
+      "optional": false,
+      "default": "",
+      "description": "A value that can vary by breakpoint. Breakpoints match the demo site's scale.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RestoreDraftPromptSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `RestoreDraftPrompt` slot: when the draft was saved, and what to do.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RichTextEditorProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The full prop surface of `<RichTextEditor>`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RootSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `Root` slot: the editor plus every state flag CSS keys off.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteClassNames",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "Per-slot class names, either static or derived.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteConfigValue",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The parts of the resolved props that UI components need.\n\nKept separate from the editor instance so a colour-palette change re-renders the\npicker and nothing else, and so a slot never has to reach into the editor for\nconfiguration that is really a prop.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteContentProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteContent.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteContentViewProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "`<RteContentView>` props (04 §6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteCounterProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteCounter.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteDefaultsProviderProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteDefaultsProvider.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteFormatters",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Number, date and file-size formatting hooks used by counters and the draft prompt.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteHandlers",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The overridable interaction surface.\n\nEach handler is `(ctx, next) => void`. Call `next()` (optionally with a partial\ncontext override) to run the built-in behaviour; skip it to cancel.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteIcons",
+      "type": "Partial<Record<Exclude<ToolbarItemName, '|'>, ReactNode>> & object",
+      "optional": false,
+      "default": "",
+      "description": "Replaceable icons (06 §9).\n\nDefaults are in-house 24px inline SVGs drawn with `currentColor`, sized from\n`--rte-icon-size`, so no icon package is ever pulled into a consumer's bundle.",
+      "group": "Customization",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteLocaleProviderProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteLocaleProvider.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteLocalization",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The full message catalogue.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RtePlugin",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A plugin.\n\nEvery built-in feature is one of these, which is what makes `enableX` props,\npresets and third-party extensions the same mechanism.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteRootProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteRoot.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteSlotProps",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "Per-slot extra props, either static or derived from the slot's own props.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteSlots",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Every replaceable component.\n\nThe last dozen entries are primitives; overriding just those re-skins the whole\neditor for a design system (06 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteStyles",
+      "type": "unknown",
+      "optional": false,
+      "default": "",
+      "description": "Per-slot inline styles, either static or derived.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteTheme",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "The token tree. Every field is optional in overrides via `DeepPartial`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "RteThemeProviderProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for RteThemeProvider.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Fine-grained sanitizer configuration.\n\nAnything omitted falls back to the profile the config is merged onto (`standard` by\ndefault). The hard rules in 03 §4.3 cannot be re-enabled from here.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context handed to a SanitizeConfig.transform hook.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeElement",
+      "type": "HtmlElement",
+      "optional": false,
+      "default": "",
+      "description": "The element a SanitizeConfig.transform hook receives.\n\n03 §4.3 writes this as a DOM `Element`. It cannot be one: the sanitizer also runs\non a server and in a worker, where there is no DOM, and `<RteContentView>` sanitizes\nduring SSR. The portable node carries the same three things a transform needs -- tag\nname, attributes and children -- and is what both parser frontends produce.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeOption",
+      "type": "SanitizeProfileName | SanitizeConfig | false",
+      "optional": false,
+      "default": "",
+      "description": "The `sanitize` prop: a profile name, a config object, or `false` (unsafe).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for sanitizeHtml and sanitizeNodes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeProfileName",
+      "type": "'strict' | 'standard' | 'email' | 'permissive'",
+      "optional": false,
+      "default": "",
+      "description": "One of the four shipped profiles.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeViolation",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A removal performed by the sanitizer.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SanitizeViolationContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onSanitizeViolation`: something the sanitizer refused.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SelectionChangeContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onSelectionChange`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SelectionSnapshot",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An opaque snapshot that survives focus leaving the editor.\n\nToolbar controls save one on `mousedown` and the engine restores it before running\na command, which is what makes clicking a toolbar button apply to the text that was\nselected (fixes R5).",
+      "group": "Selection",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SelectProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Select.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SerializeHtmlOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for serializeHtmlNodes.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SerializeOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options accepted by every HTML/Markdown serializer entry point.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SetContentOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for `setContent`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlashItemSpec",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "An entry in the slash-command palette (05 §10).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlashMenuConfig",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Slash-menu behaviour.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlotBaseProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props every slot receives on top of its own.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlotComponent",
+      "type": "ComponentType<P & SlotBaseProps>",
+      "optional": false,
+      "default": "",
+      "description": "A replaceable component. Spreading the props it receives keeps all behaviour.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlotName",
+      "type": "keyof RteSlots",
+      "optional": false,
+      "default": "",
+      "description": "Every slot name.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SlotsContextValue",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What useRteSlots returns.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SourceViewSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `SourceView` slot: the current HTML and the apply/cancel actions.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "SpinnerProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Spinner.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TabBehaviour",
+      "type": "'indent' | 'focus' | 'insertTab'",
+      "optional": false,
+      "default": "",
+      "description": "How `Tab` behaves outside lists.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TableCellNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One table cell.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TableNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A table. Column widths serialize as percentages for e-mail robustness (05 §8).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TableOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for `insertTable`.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TableRowNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One table row.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TextInputProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for TextInput.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TextNode",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A run of text plus the marks that apply to it.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TextOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options for documentToText and the counting helpers.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ThemeContextValue",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What useRteTheme returns.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TokenValue",
+      "type": "string",
+      "optional": false,
+      "default": "",
+      "description": "A CSS length, colour, shadow or keyword, written exactly as it appears in CSS.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarButtonSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context shared by the `ToolbarButton` and `ToolbarToggle` slots.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarCommandContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onToolbarCommand`: a toolbar control was activated.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarConfig",
+      "type": "ToolbarItemName | ToolbarItemSpec[] | ToolbarItemName | ToolbarItemSpec[][] | ToolbarConfigObject",
+      "optional": false,
+      "default": "",
+      "description": "`toolbar` prop: a flat list, groups, or the full object.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarConfigObject",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Full toolbar configuration object form.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarDropdownSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `ToolbarDropdown` slot: a button plus its menu state.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarItemContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What a toolbar item's callbacks receive.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarItemFactoryOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What the registry needs in order to build the items.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarItemName",
+      "type": "'undo' | 'redo' | 'bold' | 'italic' | 'underline' | 'strike' | 'code' | 'subscript' | 'superscript' | 'color' | 'backgroundColor' | 'clearFormatting' | 'fontFamily' | 'fontSize' | 'heading' | 'blockType' | 'alignLeft' | 'alignCenter' | 'alignRight' | 'alignJustify' | 'align' | 'indent' | 'outdent' | 'bulletList' | 'orderedList' | 'checkList' | 'blockquote' | 'codeBlock' | 'link' | 'unlink' | 'image' | 'table' | 'horizontalRule' | 'emoji' | 'mergeTag' | 'mention' | 'findReplace' | 'sourceView' | 'fullscreen' | 'print' | 'wordCount' | '|'",
+      "optional": false,
+      "default": "",
+      "description": "The built-in toolbar items. `'|'` inserts a separator.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarItemSpec",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A toolbar item, whether built-in or contributed by a plugin (06 §2).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarItemSurface",
+      "type": "'toolbar' | 'slash' | 'bubble' | 'overflow' | 'contextMenu'",
+      "optional": false,
+      "default": "",
+      "description": "Where a contributed item may appear.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarOption",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "One option of a dropdown item.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Toolbar.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ToolbarSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `Toolbar` slot: the resolved item groups and the ARIA wiring.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "TooltipProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Props for Tooltip.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "Unregister",
+      "type": "function",
+      "optional": false,
+      "default": "",
+      "description": "Cancels a registration made through `on`, `registerCommand`, `registerNode`, …",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadBinding",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What useUpload returns.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadErrorContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onUploadError`: a rejected or failed upload.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadHandler",
+      "type": "function",
+      "optional": false,
+      "default": "",
+      "description": "`onUpload` signature (04 §2.6).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadPlaceholderSlotProps",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for the `UploadPlaceholder` slot: one in-flight upload and its controls.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadResult",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What `onUpload` resolves to.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadStartContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Context for `onUploadStart`: a file about to leave the browser.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UploadState",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "A single in-flight or finished upload.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UrlPolicy",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options accepted by checkUrl.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UrlVerdict",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What checkUrl decided, and why.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "UseEditorOptions",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "Options accepted by the headless `useEditor` hook.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ValidateContext",
+      "type": "interface",
+      "optional": false,
+      "default": "",
+      "description": "What `validate` receives.",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    },
+    {
+      "name": "ValueFormat",
+      "type": "'html' | 'json' | 'markdown' | 'text'",
+      "optional": false,
+      "default": "",
+      "description": "The wire format of `value` / `defaultValue` / `onChange` (03 §1).",
+      "group": "General",
+      "deprecated": "",
+      "example": ""
+    }
+  ]
+}

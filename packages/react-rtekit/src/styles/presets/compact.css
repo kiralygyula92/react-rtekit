@@ -1,0 +1,22 @@
+/**
+ * The `compact` preset (07 §5).
+ *
+ * Density is a multiplier rather than a second set of numbers: every size that scales
+ * is written as `calc(base * var(--rte-density-scale))`, so a consumer can dial it
+ * anywhere between compact and comfortable without a third stylesheet.
+ */
+@layer rtekit.theme {
+  .rte-root[data-theme='compact'],
+  .rte-view[data-theme='compact'] {
+    --rte-density-scale: 0.85;
+
+    --rte-button-size: 32px;
+    --rte-icon-size: 20px;
+    --rte-button-padding: 6px;
+
+    --rte-min-height: 160px;
+    --rte-content-padding: 8px;
+    --rte-toolbar-margin-bottom: 6px;
+    --rte-footer-padding: 2px 0 0;
+  }
+}
