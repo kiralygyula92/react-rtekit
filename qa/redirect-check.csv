@@ -1,0 +1,82 @@
+legacy_url,expected,landed,h1_on_arrival,action,result
+/,/react-rtekit/,/react-rtekit/,React RTE Kit — Overview,rewrite,pass
+/api,/react-rtekit/api/,/react-rtekit/api/,API reference,generate,pass
+/api/commands,/react-rtekit/api/commands/,/react-rtekit/api/commands/,Command catalogue,generate,pass
+/api/editor-instance,/react-rtekit/api/editor-instance/,/react-rtekit/api/editor-instance/,EditorInstance,generate,pass
+/api/handlers,/react-rtekit/api/handlers/,/react-rtekit/api/handlers/,Handler catalogue,generate,pass
+/api/hooks,/react-rtekit/api/editor-hooks/,/react-rtekit/api/editor-hooks/,Editor hooks,generate,pass
+/api/icons,/react-rtekit/api/icons/,/react-rtekit/api/icons/,Icon set,generate,pass
+/api/localization,/react-rtekit/api/localization-keys/,/react-rtekit/api/localization-keys/,Localization keys,generate,pass
+/api/plugins,/react-rtekit/api/plugins/,/react-rtekit/api/plugins/,Plugin catalogue,generate,pass
+/api/rich-text-editor,/react-rtekit/api/rich-text-editor/,/react-rtekit/api/rich-text-editor/,RichTextEditor,generate,pass
+/api/slots,/react-rtekit/api/slots/,/react-rtekit/api/slots/,Slot catalogue,generate,pass
+/api/theme-tokens,/react-rtekit/api/theme-tokens/,/react-rtekit/api/theme-tokens/,Theme tokens,generate,pass
+/api/types,/react-rtekit/api/types/,/react-rtekit/api/types/,Types,generate,pass
+/api/utilities,/react-rtekit/api/serialization/,/react-rtekit/api/serialization/,Serialization,generate,pass
+/changelog,/react-rtekit/discover-more/changelog/,/react-rtekit/discover-more/changelog/,Changelog,port,pass
+/docs,/react-rtekit/getting-started/usage/,/react-rtekit/getting-started/usage/,Usage,port,pass
+/docs/getting-started,/react-rtekit/getting-started/usage/,/react-rtekit/getting-started/usage/,Usage,merge,pass
+/docs/guides/accessibility,/react-rtekit/guides/accessibility/,/react-rtekit/guides/accessibility/,Accessibility,split,pass
+/docs/guides/forms,/react-rtekit/forms/,/react-rtekit/forms/,Forms,split,pass
+/docs/guides/getting-started,/react-rtekit/getting-started/usage/,/react-rtekit/getting-started/usage/,Usage,split,pass
+/docs/guides/html-interop,/react-rtekit/html-interop/,/react-rtekit/html-interop/,HTML interop,split,pass
+/docs/guides/localization,/react-rtekit/guides/localization/,/react-rtekit/guides/localization/,Localization,split,pass
+/docs/guides/merge-tags,/react-rtekit/merge-tags/,/react-rtekit/merge-tags/,Merge tags,split,pass
+/docs/guides/migration-from-quill,/react-rtekit/migration/from-quill/,/react-rtekit/migration/from-quill/,From Quill,split,pass
+/docs/guides/performance,/react-rtekit/guides/performance/,/react-rtekit/guides/performance/,Performance,split,pass
+/docs/guides/plugins,/react-rtekit/guides/writing-a-plugin/,/react-rtekit/guides/writing-a-plugin/,Writing a plugin,split,pass
+/docs/guides/sanitization,/react-rtekit/sanitization/,/react-rtekit/sanitization/,Sanitization,split,pass
+/docs/guides/slots-and-handlers,/react-rtekit/slots/,/react-rtekit/slots/,Slots,split,pass
+/docs/guides/ssr,/react-rtekit/guides/server-rendering/,/react-rtekit/guides/server-rendering/,Server rendering,split,pass
+/docs/guides/theming,/react-rtekit/customization/theme-tokens/,/react-rtekit/customization/theme-tokens/,Theming & tokens,split,pass
+/docs/guides/toolbar,/react-rtekit/toolbar/,/react-rtekit/toolbar/,Toolbar,split,pass
+/docs/guides/uploads,/react-rtekit/images/,/react-rtekit/images/,Images & uploads,split,pass
+/docs/guides/value-and-formats,/react-rtekit/value-formats/,/react-rtekit/value-formats/,Value formats,split,pass
+/examples,/react-rtekit/all-features/,/react-rtekit/all-features/,All features,split,pass
+/examples/accessibility,/react-rtekit/accessibility/,/react-rtekit/accessibility/,Accessibility,port,pass
+/examples/autosave,/react-rtekit/autosave/,/react-rtekit/autosave/,Autosave & drafts,port,pass
+/examples/basic,/react-rtekit/getting-started/usage/,/react-rtekit/getting-started/usage/,Usage,port,pass
+/examples/command-overrides,/react-rtekit/commands/,/react-rtekit/commands/,Commands,port,pass
+/examples/composable,/react-rtekit/composable-parts/,/react-rtekit/composable-parts/,Composable parts,port,pass
+/examples/content-styles,/react-rtekit/content-view/,/react-rtekit/content-view/,Content view,port,pass
+/examples/controlled,/react-rtekit/value-formats/,/react-rtekit/value-formats/,Value formats,port,pass
+/examples/counter-and-limits,/react-rtekit/counters-and-limits/,/react-rtekit/counters-and-limits/,Counters & limits,port,pass
+/examples/design-system-skin,/react-rtekit/customization/design-system-skin/,/react-rtekit/customization/design-system-skin/,Design-system skin,port,pass
+/examples/email-output,/react-rtekit/email-output/,/react-rtekit/email-output/,E-mail output,port,pass
+/examples/emoji-and-slash,/react-rtekit/emoji/,/react-rtekit/emoji/,Emoji,port,pass
+/examples/find-replace,/react-rtekit/find-and-replace/,/react-rtekit/find-and-replace/,Find & replace,port,pass
+/examples/floating-toolbar,/react-rtekit/selection-toolbar/,/react-rtekit/selection-toolbar/,Selection toolbar,port,pass
+/examples/formatting,/react-rtekit/text-formatting/,/react-rtekit/text-formatting/,Text formatting,port,pass
+/examples/fullscreen,/react-rtekit/fullscreen/,/react-rtekit/fullscreen/,Fullscreen,port,pass
+/examples/handlers-middleware,/react-rtekit/handler-middleware/,/react-rtekit/handler-middleware/,Handler middleware,port,pass
+/examples/headless,/react-rtekit/headless/,/react-rtekit/headless/,Headless,port,pass
+/examples/history,/react-rtekit/history/,/react-rtekit/history/,Undo & redo,port,pass
+/examples/html-interop,/react-rtekit/html-interop/,/react-rtekit/html-interop/,HTML interop,port,pass
+/examples/images,/react-rtekit/images/,/react-rtekit/images/,Images & uploads,port,pass
+/examples/large-document,/react-rtekit/demos/large-document/,/react-rtekit/demos/large-document/,Large document,port,pass
+/examples/legacy-parity,/react-rtekit/demos/legacy-parity/,/react-rtekit/demos/legacy-parity/,Legacy parity,port,pass
+/examples/links,/react-rtekit/links/,/react-rtekit/links/,Links,port,pass
+/examples/lists,/react-rtekit/lists/,/react-rtekit/lists/,Lists,port,pass
+/examples/localization,/react-rtekit/localization/,/react-rtekit/localization/,Localization,port,pass
+/examples/markdown,/react-rtekit/markdown-shortcuts/,/react-rtekit/markdown-shortcuts/,Markdown shortcuts,port,pass
+/examples/mentions,/react-rtekit/mentions/,/react-rtekit/mentions/,Mentions,port,pass
+/examples/merge-tags,/react-rtekit/merge-tags/,/react-rtekit/merge-tags/,Merge tags,port,pass
+/examples/mobile,/react-rtekit/mobile/,/react-rtekit/mobile/,Mobile,port,pass
+/examples/multiple-editors,/react-rtekit/demos/cms-body-field/,/react-rtekit/demos/cms-body-field/,CMS body field,port,pass
+/examples/paste-cleanup,/react-rtekit/paste-cleanup/,/react-rtekit/paste-cleanup/,Paste clean-up,port,pass
+/examples/plugin-authoring,/react-rtekit/plugin-authoring/,/react-rtekit/plugin-authoring/,Plugin authoring,port,pass
+/examples/presets,/react-rtekit/presets/,/react-rtekit/presets/,Presets,port,pass
+/examples/readonly-and-disabled,/react-rtekit/read-only-and-disabled/,/react-rtekit/read-only-and-disabled/,Read-only & disabled,port,pass
+/examples/sanitization,/react-rtekit/sanitization/,/react-rtekit/sanitization/,Sanitization,port,pass
+/examples/slots-custom,/react-rtekit/slots/,/react-rtekit/slots/,Slots,port,pass
+/examples/source-view,/react-rtekit/source-view/,/react-rtekit/source-view/,Source view,port,pass
+/examples/tables,/react-rtekit/tables/,/react-rtekit/tables/,Tables,port,pass
+/examples/tailwind-skin,/react-rtekit/integrations/tailwind/,/react-rtekit/integrations/tailwind/,Tailwind CSS,port,pass
+/examples/theming,/react-rtekit/theming/,/react-rtekit/theming/,Theming,port,pass
+/examples/toolbar-config,/react-rtekit/toolbar/,/react-rtekit/toolbar/,Toolbar,port,pass
+/examples/validation-formik,/react-rtekit/integrations/formik/,/react-rtekit/integrations/formik/,Formik,port,pass
+/examples/validation-rhf,/react-rtekit/integrations/react-hook-form/,/react-rtekit/integrations/react-hook-form/,React Hook Form,port,pass
+/examples/value-formats,/react-rtekit/value-formats/,/react-rtekit/value-formats/,Value formats,port,pass
+/internal/performance,/internal/performance,/internal/performance,Performance harness,port,pass
+/playground,/react-rtekit/demos/playground/,/react-rtekit/demos/playground/,Playground,port,pass
+/theme-editor,/react-rtekit/demos/theme-editor/,/react-rtekit/demos/theme-editor/,Theme editor,port,pass
