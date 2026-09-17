@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/tables/
 title: Tables
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Tables with a size picker, per-cell editing, and controls for adding and removing rows, columns and the table itself.
 archetype: B
 section: features
 capabilityId: tables
 group: 'Display & layout'
-symbols: []
+symbols: [TableOptions, CommandId]
 ---
 
 # Tables
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+tables
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+No merged cells. `colspan` and `rowspan` survive a round trip through stored HTML, but nothing in the editor creates them.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [TableOptions](/react-rtekit/api/types/)
+- [CommandId](/react-rtekit/api/types/)

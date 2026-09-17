@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/history/
 title: 'Undo & redo'
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Undo and redo with coalesced typing, so a sentence is one entry rather than forty.
 archetype: B
 section: features
 capabilityId: history
 group: Core features
-symbols: []
+symbols: [CommandId, EditorInstance]
 ---
 
-# Undo & redo
+# 'Undo & redo'
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+history
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+History is per editor instance and is not persisted. A remount — including one caused by changing `preset` or `locale` — starts a new stack.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [EditorInstance](/react-rtekit/api/editor-instance/)

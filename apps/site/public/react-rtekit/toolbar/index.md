@@ -2,28 +2,33 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/toolbar/
 title: Toolbar
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'A real ARIA toolbar: one tab stop, arrows between controls, configurable groups, and three overflow behaviours.'
 archetype: B
 section: features
 capabilityId: toolbar
 group: Interaction
-symbols: []
+symbols: [ToolbarItemSpec, toolbar-items, createToolbarItem, RteToolbar]
 ---
 
 # Toolbar
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+toolbar-config
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+`overflow="menu"` measures the row to decide what fits, so it needs a laid-out container. In a hidden tab or a zero-width parent every group stays visible until the container has a width.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [ToolbarItemSpec](/react-rtekit/api/types/)
+- [toolbar-items](/react-rtekit/api/toolbar-items/)
+- [createToolbarItem](/react-rtekit/api/plugin-api/)
+- [RteToolbar](/react-rtekit/api/composable-parts/)

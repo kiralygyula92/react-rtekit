@@ -2,28 +2,33 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/plugin-authoring/
 title: Plugin authoring
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Add a mark, a block, a command or a toolbar item with definePlugin, in the same shape the built-ins use.
 archetype: B
 section: features
 capabilityId: plugin-authoring
 group: Developer tools
-symbols: []
+symbols: [RtePlugin, definePlugin, resolvePluginOrder, featuresOf]
 ---
 
 # Plugin authoring
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+plugin-authoring
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+A plugin whose `dependsOn` names something absent still loads, with a warning — a missing dependency should not hand the reader an editor with a feature silently gone.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RtePlugin](/react-rtekit/api/types/)
+- [definePlugin](/react-rtekit/api/plugin-api/)
+- [resolvePluginOrder](/react-rtekit/api/plugin-api/)
+- [featuresOf](/react-rtekit/api/plugin-api/)

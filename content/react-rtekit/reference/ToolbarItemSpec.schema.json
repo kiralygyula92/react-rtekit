@@ -116,5 +116,9 @@
   },
   "filename": "types/toolbar.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/toolbar.ts#L90",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/toolbar/",
+    "/react-rtekit/selection-toolbar/",
+    "/react-rtekit/slash-menu/"
+  ]
 }

@@ -848,5 +848,28 @@
   },
   "filename": "types/props.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L118",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/headings/",
+    "/react-rtekit/html-interop/",
+    "/react-rtekit/paste-cleanup/",
+    "/react-rtekit/merge-tags/",
+    "/react-rtekit/markdown-shortcuts/",
+    "/react-rtekit/counters-and-limits/",
+    "/react-rtekit/colours/",
+    "/react-rtekit/fonts/",
+    "/react-rtekit/selection-toolbar/",
+    "/react-rtekit/slash-menu/",
+    "/react-rtekit/emoji/",
+    "/react-rtekit/mentions/",
+    "/react-rtekit/fullscreen/",
+    "/react-rtekit/keyboard-shortcuts/",
+    "/react-rtekit/autosave/",
+    "/react-rtekit/read-only-and-disabled/",
+    "/react-rtekit/mobile/",
+    "/react-rtekit/engine-adapter/",
+    "/react-rtekit/accessibility/",
+    "/react-rtekit/server-rendering/",
+    "/react-rtekit/performance/",
+    "/react-rtekit/forms/"
+  ]
 }

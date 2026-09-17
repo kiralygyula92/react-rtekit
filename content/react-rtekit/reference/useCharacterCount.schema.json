@@ -7,5 +7,7 @@
   "options": {},
   "filename": "react/hooks.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L131",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/counters-and-limits/"
+  ]
 }

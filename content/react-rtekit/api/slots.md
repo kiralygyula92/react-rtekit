@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/slots/
 title: Slot catalogue
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: All 46 replaceable parts and the props each one receives.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,7 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Slots](/react-rtekit/slots/)
 
 ## Import
 

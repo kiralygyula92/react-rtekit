@@ -67,7 +67,9 @@ function archetypeOf(page) {
   if (slug === '') return 'A';
   if (slug === 'all-features') return 'C';
   if (page.capabilityId !== undefined) return 'B';
-  if (slug.startsWith('api')) return 'E';
+  // `/api/` is the section index and routes; `/api/{symbol}/` is a generated reference
+  // page. Treating both as E asked the index for an Options table it has no symbol for.
+  if (slug.startsWith('api/')) return 'E';
   if (slug.startsWith('getting-started/')) return 'F';
   if (slug.startsWith('demos/')) return 'B';
   return 'I';

@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/forms/
 title: Forms
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Validation, dirty state and submission, with an adapter for React Hook Form and a worked Formik example.
 archetype: B
 section: features
 capabilityId: forms
 group: Developer tools
-symbols: []
+symbols: [RichTextEditorProps, useValidationError, useIsEmpty]
 ---
 
 # Forms
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+validation-rhf
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+`required` uses `isEmpty()`, which ignores `<p><br></p>`. A form library checking the raw HTML string instead will think an empty editor has content.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [useValidationError](/react-rtekit/api/editor-hooks/)
+- [useIsEmpty](/react-rtekit/api/editor-hooks/)

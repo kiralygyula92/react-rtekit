@@ -20,7 +20,7 @@ function editor(page: Page) {
 test.skip(({ isMobile }) => isMobile, 'the keyboard model is desktop-only');
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/accessibility');
+  await page.goto('/react-rtekit/accessibility/');
   await expect(editor(page)).toBeVisible();
   await skipUndrivableShortcuts(page);
 });
@@ -69,24 +69,30 @@ test('Mod+/ opens the shortcut reference and Escape closes it', async ({ page })
 });
 
 test('Tab indents inside a list and moves focus outside one', async ({ page }) => {
-  await editor(page).click();
+  // The lists page rather than the accessibility one: this needs a list button, and the
+  // accessibility demo's toolbar deliberately has a small item set.
+  await page.goto('/react-rtekit/lists/');
+  const list = page.getByRole('textbox', { name: 'Lists' });
+  await expect(list).toBeVisible();
+  await list.click();
   await page.keyboard.press('ControlOrMeta+a');
   await page.keyboard.type('first');
-  await page.getByRole('button', { name: 'Bulleted list' }).click();
-  // Each step is waited for: the list has to exist before there is anything to nest.
-  await expect(editor(page).locator('ul > li')).toHaveCount(1);
 
-  await editor(page).click();
+  // The demo opens with a list, so selecting all and typing leaves the caret inside one
+  // — clicking the list button here would toggle it *off*. Asserted rather than
+  // created: the precondition for this test is a list, not a button press.
+  await expect(list.locator('ul > li')).toHaveCount(1);
+
   await page.keyboard.press('End');
   await page.keyboard.press('Enter');
   await page.keyboard.type('second');
-  await expect(editor(page).locator('ul > li')).toHaveCount(2);
+  await expect(list.locator('ul > li')).toHaveCount(2);
 
   await page.keyboard.press('Tab');
-  await expect(editor(page).locator('ul ul')).toHaveCount(1);
+  await expect(list.locator('ul ul')).toHaveCount(1);
 
   // Outside a list, Tab is what it is everywhere else on the web: it moves focus.
-  await page.goto('/examples/basic');
+  await page.goto('/react-rtekit/getting-started/usage/');
   const basic = page.getByRole('textbox', { name: 'Message' });
   await basic.click();
   // The precondition, asserted rather than assumed: a Tab sent before the click's

@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/accessibility/
 title: Accessibility
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: A named textbox, a real ARIA toolbar with roving focus, linked errors, live announcements and AA contrast.
 archetype: B
 section: features
 capabilityId: accessibility
 group: Developer tools
-symbols: []
+symbols: [RichTextEditorProps, useValidationError]
 ---
 
 # Accessibility
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+accessibility
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Every shipped theme meets WCAG AA and a test enforces it. A theme you write does not inherit that — and a slot you replace does not inherit the semantics either.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [useValidationError](/react-rtekit/api/editor-hooks/)

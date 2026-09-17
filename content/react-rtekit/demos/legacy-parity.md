@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/demos/legacy-parity/
 title: Legacy parity
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: The legacy editor this package replaces, side by side with the replacement, and the 26 bugs that are fixed.
 archetype: B
 section: demos
 ---
@@ -11,16 +11,21 @@ section: demos
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+The legacy editor this package was written to replace, reproduced exactly — the same eight toolbar buttons, the same 287px box, the same 1px border — and then the 26 bugs it had, each one fixed.
+
+```demo
+legacy-parity
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+The `classic` preset and theme exist so a migration can be done in two steps: first look identical, then change what you want. Nothing about the parity is hard-coded — it is tokens and a toolbar list.
 
 ## Limitations
 
-None known.
+Parity is visual and behavioural, not internal. Code that reached into the old editor's DOM or its instance will not find the same things here.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [classicTheme](/react-rtekit/api/theme-api/)
+- [Presets](/react-rtekit/api/plugin-api/)

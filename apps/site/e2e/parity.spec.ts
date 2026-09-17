@@ -32,7 +32,7 @@ async function css(page: Page, selector: string, property: string): Promise<stri
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/legacy-parity');
+  await page.goto('/react-rtekit/demos/legacy-parity/');
   await expect(editor(page)).toBeVisible();
 });
 
@@ -181,7 +181,7 @@ test.describe('the bugs that only show in a browser', () => {
     await expect(page.getByTestId('parity-output-classic')).toContainText(/#ff0000/i);
 
     await page.getByRole('button', { name: 'Text color' }).click();
-    await page.getByRole('button', { name: 'Reset' }).click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Reset' }).click();
 
     const html = await page.getByTestId('parity-output-classic').innerText();
     expect(html).not.toContain('color:');

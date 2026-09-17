@@ -89,14 +89,6 @@ export function Playground() {
 
   return (
     <div className="playground">
-      <header className="playground__header">
-        <h1>Playground</h1>
-        <p className="page__lead">
-          Every option, live. The configuration lives in the URL, so a link is the whole
-          setup — and the Code tab is what you would write to reproduce it.
-        </p>
-      </header>
-
       <aside className="playground__controls" aria-label="Options">
         {controlGroups.map(([group, controls]) => (
           <div key={group} className="playground__group" role="group" aria-label={group}>

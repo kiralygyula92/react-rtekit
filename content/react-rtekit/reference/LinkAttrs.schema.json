@@ -38,5 +38,7 @@
   },
   "filename": "types/selection.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L51",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/links/"
+  ]
 }

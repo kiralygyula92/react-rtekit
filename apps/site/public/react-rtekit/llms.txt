@@ -5,150 +5,150 @@ React RTE Kit is an accessible, themeable React rich-text editor built on Lexica
 
 ## Getting started
 
-- [Overview](/react-rtekit/index.md): TODO: one line, reused in nav, meta and llms.txt
-- [Installation](/react-rtekit/getting-started/installation.md): TODO: one line, reused in nav, meta and llms.txt
-- [Usage](/react-rtekit/getting-started/usage.md): TODO: one line, reused in nav, meta and llms.txt
-- [Requirements](/react-rtekit/getting-started/requirements.md): TODO: one line, reused in nav, meta and llms.txt
-- [FAQ](/react-rtekit/getting-started/faq.md): TODO: one line, reused in nav, meta and llms.txt
-- [Support](/react-rtekit/getting-started/support.md): TODO: one line, reused in nav, meta and llms.txt
-- [Versions](/react-rtekit/getting-started/versions.md): TODO: one line, reused in nav, meta and llms.txt
+- [Overview](/react-rtekit/index.md): React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+- [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
+- [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
+- [Requirements](/react-rtekit/getting-started/requirements.md): The React, TypeScript and browser versions this package supports, and what it expects of your bundler.
+- [FAQ](/react-rtekit/getting-started/faq.md): The questions that come up while adopting it: bundle size, engine choice, server rendering, and what it deliberately does not do.
+- [Support](/react-rtekit/getting-started/support.md): Where to ask a question, where to file a bug, and what to include so it can be answered.
+- [Versions](/react-rtekit/getting-started/versions.md): Which versions are supported, how they are numbered, and where the documentation for older ones lives.
 
 ## Features
 
-- [All features](/react-rtekit/all-features.md): TODO: one line, reused in nav, meta and llms.txt
-- [Text formatting](/react-rtekit/text-formatting.md): TODO: one line, reused in nav, meta and llms.txt
-- [Headings](/react-rtekit/headings.md): TODO: one line, reused in nav, meta and llms.txt
-- [Lists](/react-rtekit/lists.md): TODO: one line, reused in nav, meta and llms.txt
-- [Check lists](/react-rtekit/check-lists.md): TODO: one line, reused in nav, meta and llms.txt
-- [Links](/react-rtekit/links.md): TODO: one line, reused in nav, meta and llms.txt
-- [Blockquotes](/react-rtekit/blockquotes.md): TODO: one line, reused in nav, meta and llms.txt
-- [Code blocks](/react-rtekit/code-blocks.md): TODO: one line, reused in nav, meta and llms.txt
-- [Dividers](/react-rtekit/dividers.md): TODO: one line, reused in nav, meta and llms.txt
-- [Subscript & superscript](/react-rtekit/subscript-and-superscript.md): TODO: one line, reused in nav, meta and llms.txt
-- [Clear formatting](/react-rtekit/clear-formatting.md): TODO: one line, reused in nav, meta and llms.txt
-- [Undo & redo](/react-rtekit/history.md): TODO: one line, reused in nav, meta and llms.txt
-- [Empty state](/react-rtekit/empty-state.md): TODO: one line, reused in nav, meta and llms.txt
-- [Value formats](/react-rtekit/value-formats.md): TODO: one line, reused in nav, meta and llms.txt
-- [Sanitization](/react-rtekit/sanitization.md): TODO: one line, reused in nav, meta and llms.txt
-- [HTML interop](/react-rtekit/html-interop.md): TODO: one line, reused in nav, meta and llms.txt
-- [E-mail output](/react-rtekit/email-output.md): TODO: one line, reused in nav, meta and llms.txt
-- [Paste clean-up](/react-rtekit/paste-cleanup.md): TODO: one line, reused in nav, meta and llms.txt
-- [Merge tags](/react-rtekit/merge-tags.md): TODO: one line, reused in nav, meta and llms.txt
-- [Markdown shortcuts](/react-rtekit/markdown-shortcuts.md): TODO: one line, reused in nav, meta and llms.txt
-- [Counters & limits](/react-rtekit/counters-and-limits.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theming](/react-rtekit/theming.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theme presets](/react-rtekit/theme-presets.md): TODO: one line, reused in nav, meta and llms.txt
-- [Colours](/react-rtekit/colours.md): TODO: one line, reused in nav, meta and llms.txt
-- [Fonts](/react-rtekit/fonts.md): TODO: one line, reused in nav, meta and llms.txt
-- [Alignment](/react-rtekit/alignment.md): TODO: one line, reused in nav, meta and llms.txt
-- [Indentation](/react-rtekit/indentation.md): TODO: one line, reused in nav, meta and llms.txt
-- [Tables](/react-rtekit/tables.md): TODO: one line, reused in nav, meta and llms.txt
-- [Images & uploads](/react-rtekit/images.md): TODO: one line, reused in nav, meta and llms.txt
-- [Content view](/react-rtekit/content-view.md): TODO: one line, reused in nav, meta and llms.txt
-- [Toolbar](/react-rtekit/toolbar.md): TODO: one line, reused in nav, meta and llms.txt
-- [Selection toolbar](/react-rtekit/selection-toolbar.md): TODO: one line, reused in nav, meta and llms.txt
-- [Slash menu](/react-rtekit/slash-menu.md): TODO: one line, reused in nav, meta and llms.txt
-- [Emoji](/react-rtekit/emoji.md): TODO: one line, reused in nav, meta and llms.txt
-- [Mentions](/react-rtekit/mentions.md): TODO: one line, reused in nav, meta and llms.txt
-- [Find & replace](/react-rtekit/find-and-replace.md): TODO: one line, reused in nav, meta and llms.txt
-- [Fullscreen](/react-rtekit/fullscreen.md): TODO: one line, reused in nav, meta and llms.txt
-- [Source view](/react-rtekit/source-view.md): TODO: one line, reused in nav, meta and llms.txt
-- [Keyboard shortcuts](/react-rtekit/keyboard-shortcuts.md): TODO: one line, reused in nav, meta and llms.txt
-- [Autosave & drafts](/react-rtekit/autosave.md): TODO: one line, reused in nav, meta and llms.txt
-- [Read-only & disabled](/react-rtekit/read-only-and-disabled.md): TODO: one line, reused in nav, meta and llms.txt
-- [Mobile](/react-rtekit/mobile.md): TODO: one line, reused in nav, meta and llms.txt
-- [Slots](/react-rtekit/slots.md): TODO: one line, reused in nav, meta and llms.txt
-- [Handler middleware](/react-rtekit/handler-middleware.md): TODO: one line, reused in nav, meta and llms.txt
-- [Commands](/react-rtekit/commands.md): TODO: one line, reused in nav, meta and llms.txt
-- [Composable parts](/react-rtekit/composable-parts.md): TODO: one line, reused in nav, meta and llms.txt
-- [Headless](/react-rtekit/headless.md): TODO: one line, reused in nav, meta and llms.txt
-- [Plugin authoring](/react-rtekit/plugin-authoring.md): TODO: one line, reused in nav, meta and llms.txt
-- [Presets](/react-rtekit/presets.md): TODO: one line, reused in nav, meta and llms.txt
-- [Engine adapter](/react-rtekit/engine-adapter.md): TODO: one line, reused in nav, meta and llms.txt
-- [Icons](/react-rtekit/icons.md): TODO: one line, reused in nav, meta and llms.txt
-- [Localization](/react-rtekit/localization.md): TODO: one line, reused in nav, meta and llms.txt
-- [Accessibility](/react-rtekit/accessibility.md): TODO: one line, reused in nav, meta and llms.txt
-- [Server rendering](/react-rtekit/server-rendering.md): TODO: one line, reused in nav, meta and llms.txt
-- [Performance](/react-rtekit/performance.md): TODO: one line, reused in nav, meta and llms.txt
-- [Forms](/react-rtekit/forms.md): TODO: one line, reused in nav, meta and llms.txt
+- [All features](/react-rtekit/all-features.md): Every capability in the package, grouped the way the sidebar groups them, with a line on each.
+- [Text formatting](/react-rtekit/text-formatting.md): Bold, italic, underline, strikethrough and inline code, as marks on the selection rather than tags in a string.
+- [Headings](/react-rtekit/headings.md): Six heading levels, restricted to the set your schema allows and reachable from the block-type dropdown or Markdown shortcuts.
+- [Lists](/react-rtekit/lists.md): Bulleted and numbered lists, nested to any depth, with Tab and Shift+Tab moving items between levels.
+- [Check lists](/react-rtekit/check-lists.md): Task lists whose items can be ticked in place, serialized as data-checked so stored HTML keeps the state.
+- [Links](/react-rtekit/links.md): Adding, editing and removing links, with every URL checked against the protocol allowlist before it reaches the document.
+- [Blockquotes](/react-rtekit/blockquotes.md): Block quotations, indentable and nestable, serialized as an ordinary blockquote element.
+- [Code blocks](/react-rtekit/code-blocks.md): Fenced code blocks that keep their language through every format, so a snippet survives a round trip to Markdown and back.
+- [Dividers](/react-rtekit/dividers.md): Horizontal rules, inserted from the toolbar or by typing three dashes.
+- [Subscript & superscript](/react-rtekit/subscript-and-superscript.md): Subscript and superscript marks, for formulae and footnote references.
+- [Clear formatting](/react-rtekit/clear-formatting.md): Strips every inline mark from the selection, leaving the text and the block structure.
+- [Undo & redo](/react-rtekit/history.md): Undo and redo with coalesced typing, so a sentence is one entry rather than forty.
+- [Empty state](/react-rtekit/empty-state.md): What counts as empty, and why an empty paragraph does not: isEmpty() reads content, so required means required.
+- [Value formats](/react-rtekit/value-formats.md): HTML, JSON, Markdown or plain text — one valueFormat prop decides what value takes and what onChange hands back.
+- [Sanitization](/react-rtekit/sanitization.md): An allowlist sanitizer on every content boundary — the initial value, every paste, every drop, every programmatic insert and the output.
+- [HTML interop](/react-rtekit/html-interop.md): Reads legacy Quill markup and emits standards-compliant, Quill-compatible or e-mail-safe HTML, so stored content needs no migration.
+- [E-mail output](/react-rtekit/email-output.md): An output profile that inlines styles and drops what e-mail clients strip, so the HTML you store is the HTML that sends.
+- [Paste clean-up](/react-rtekit/paste-cleanup.md): Three paste modes — rich, clean and text — each running the same sanitizer, so a paste from Word cannot smuggle anything in.
+- [Merge tags](/react-rtekit/merge-tags.md): Template variables as atomic chips: one delete removes the whole tag, and formatting the message never splits it.
+- [Markdown shortcuts](/react-rtekit/markdown-shortcuts.md): Typing ##  or -  or >  turns the block into the thing it looks like, as you type.
+- [Counters & limits](/react-rtekit/counters-and-limits.md): Character or word counts that measure text rather than markup, with a hard or soft limit and a live counter.
+- [Theming](/react-rtekit/theming.md): 114 CSS custom properties in a cascade layer — every colour, size and radius, with no CSS-in-JS and no UI kit.
+- [Theme presets](/react-rtekit/theme-presets.md): Five ready themes — light, dark, classic, compact and bordered — each a token set you can extend rather than fight.
+- [Colours](/react-rtekit/colours.md): Text and background colour from a configurable palette, with a recent-colours row and a reset that removes the declaration.
+- [Fonts](/react-rtekit/fonts.md): Font family and size as inline styles, from lists you supply, for editors whose output has to carry its own typography.
+- [Alignment](/react-rtekit/alignment.md): Left, centre, right and justify, applied to blocks and serialized so legacy Quill alignment classes still read.
+- [Indentation](/react-rtekit/indentation.md): Block indentation in steps, for quotes and nested structure, with the legacy ql-indent-* classes read on the way in.
+- [Tables](/react-rtekit/tables.md): Tables with a size picker, per-cell editing, and controls for adding and removing rows, columns and the table itself.
+- [Images & uploads](/react-rtekit/images.md): Images by URL, by file picker or by drag-and-drop, resizable in place, with captions and an upload handler of your own.
+- [Content view](/react-rtekit/content-view.md): A read-only renderer for stored HTML that applies the same content stylesheet, so a list page looks like the editor.
+- [Toolbar](/react-rtekit/toolbar.md): A real ARIA toolbar: one tab stop, arrows between controls, configurable groups, and three overflow behaviours.
+- [Selection toolbar](/react-rtekit/selection-toolbar.md): A bubble toolbar over the selection, carrying the marks and the link rather than the whole row.
+- [Slash menu](/react-rtekit/slash-menu.md): A command palette on /, listing the blocks and inserts the current configuration actually has.
+- [Emoji](/react-rtekit/emoji.md): A searchable picker in the toolbar and a : trigger in the text, inserting characters rather than images.
+- [Mentions](/react-rtekit/mentions.md): An @ trigger backed by your own async search, inserting an atomic chip that carries an id.
+- [Find & replace](/react-rtekit/find-and-replace.md): Find and replace over the document, with match case, whole word and regular expressions, highlighted by overlay.
+- [Fullscreen](/react-rtekit/fullscreen.md): Fills the window without remounting the editor, so the selection, the undo stack and every listener survive.
+- [Source view](/react-rtekit/source-view.md): Edit the HTML directly, with everything you type going through the same sanitizer as a paste.
+- [Keyboard shortcuts](/react-rtekit/keyboard-shortcuts.md): A complete keyboard model, and a shortcut reference built from the keymap that is actually in force.
+- [Autosave & drafts](/react-rtekit/autosave.md): Drafts written on a debounce to storage you choose, with a restore prompt on the way back and a TTL.
+- [Read-only & disabled](/react-rtekit/read-only-and-disabled.md): Two different states: read-only keeps the content selectable and copyable, disabled takes it out of the tab order.
+- [Mobile](/react-rtekit/mobile.md): Touch targets at the platform minimum, a toolbar that docks above the on-screen keyboard, and no layout jumps on focus.
+- [Slots](/react-rtekit/slots.md): Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.
+- [Handler middleware](/react-rtekit/handler-middleware.md): Eighteen interception points, each (ctx, next) => void, so you can wrap, veto or replace a behaviour without forking it.
+- [Commands](/react-rtekit/commands.md): Fifty-seven commands, each overridable, dispatched by the toolbar, the shortcuts and your own code alike.
+- [Composable parts](/react-rtekit/composable-parts.md): The same editor as eleven separate components, for layouts the all-in-one shape cannot make.
+- [Headless](/react-rtekit/headless.md): useEditor with no chrome at all: the document, the commands and the state, and you draw the rest.
+- [Plugin authoring](/react-rtekit/plugin-authoring.md): Add a mark, a block, a command or a toolbar item with definePlugin, in the same shape the built-ins use.
+- [Presets](/react-rtekit/presets.md): Six bundles — minimal, comment, standard, classic, email and full — each a plugin list plus prop defaults.
+- [Engine adapter](/react-rtekit/engine-adapter.md): An EditorEngine interface owns the document layer, with Lexical as the default adapter behind it.
+- [Icons](/react-rtekit/icons.md): Fifty-two inline SVGs drawn with currentColor, each replaceable, and no icon package in your bundle.
+- [Localization](/react-rtekit/localization.md): Every string in one catalogue: five locales ship, 153 keys, and a pseudo-locale for finding the ones you missed.
+- [Accessibility](/react-rtekit/accessibility.md): A named textbox, a real ARIA toolbar with roving focus, linked errors, live announcements and AA contrast.
+- [Server rendering](/react-rtekit/server-rendering.md): Renders the content on the server and hydrates without a flash, so the field is not an empty box on first paint.
+- [Performance](/react-rtekit/performance.md): What a large document costs, what is measured on every build, and which props are worth memoising.
+- [Forms](/react-rtekit/forms.md): Validation, dirty state and submission, with an adapter for React Hook Form and a worked Formik example.
 
 ## Demos
 
-- [All demos](/react-rtekit/demos.md): TODO: one line, reused in nav, meta and llms.txt
-- [Playground](/react-rtekit/demos/playground.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theme editor](/react-rtekit/demos/theme-editor.md): TODO: one line, reused in nav, meta and llms.txt
-- [Comment box](/react-rtekit/demos/comment-box.md): TODO: one line, reused in nav, meta and llms.txt
-- [E-mail composer](/react-rtekit/demos/email-composer.md): TODO: one line, reused in nav, meta and llms.txt
-- [CMS body field](/react-rtekit/demos/cms-body-field.md): TODO: one line, reused in nav, meta and llms.txt
-- [Legacy parity](/react-rtekit/demos/legacy-parity.md): TODO: one line, reused in nav, meta and llms.txt
-- [Large document](/react-rtekit/demos/large-document.md): TODO: one line, reused in nav, meta and llms.txt
+- [All demos](/react-rtekit/demos.md): Complete editors for real situations — a comment box, an e-mail composer, a CMS body field — rather than one feature at a time.
+- [Playground](/react-rtekit/demos/playground.md): Every prop, live: change the configuration and read the code that produces it.
+- [Theme editor](/react-rtekit/demos/theme-editor.md): Edit the theme tokens against a running editor and copy the result out as a theme object.
+- [Comment box](/react-rtekit/demos/comment-box.md): A small editor for short replies: a few marks, a link, a character limit and nothing else.
+- [E-mail composer](/react-rtekit/demos/email-composer.md): Merge tags, an e-mail output profile and inline styles, producing HTML that survives an e-mail client.
+- [CMS body field](/react-rtekit/demos/cms-body-field.md): A full-height body field with headings, images, tables and autosave, as a CMS would use it.
+- [Legacy parity](/react-rtekit/demos/legacy-parity.md): The legacy editor this package replaces, side by side with the replacement, and the 26 bugs that are fixed.
+- [Large document](/react-rtekit/demos/large-document.md): A document large enough to make performance visible, with the numbers the budget is measured against.
 
 ## Reference
 
-- [API reference](/react-rtekit/api.md): TODO: one line, reused in nav, meta and llms.txt
-- [RichTextEditor](/react-rtekit/api/rich-text-editor.md): TODO: one line, reused in nav, meta and llms.txt
-- [RteContentView](/react-rtekit/api/rte-content-view.md): TODO: one line, reused in nav, meta and llms.txt
-- [Composable parts](/react-rtekit/api/composable-parts.md): TODO: one line, reused in nav, meta and llms.txt
-- [Providers](/react-rtekit/api/providers.md): TODO: one line, reused in nav, meta and llms.txt
-- [useEditor](/react-rtekit/api/use-editor.md): TODO: one line, reused in nav, meta and llms.txt
-- [Editor hooks](/react-rtekit/api/editor-hooks.md): TODO: one line, reused in nav, meta and llms.txt
-- [EditorInstance](/react-rtekit/api/editor-instance.md): TODO: one line, reused in nav, meta and llms.txt
-- [Command catalogue](/react-rtekit/api/commands.md): TODO: one line, reused in nav, meta and llms.txt
-- [Handler catalogue](/react-rtekit/api/handlers.md): TODO: one line, reused in nav, meta and llms.txt
-- [Serialization](/react-rtekit/api/serialization.md): TODO: one line, reused in nav, meta and llms.txt
-- [Sanitizer](/react-rtekit/api/sanitize.md): TODO: one line, reused in nav, meta and llms.txt
-- [Plugin API](/react-rtekit/api/plugin-api.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theme API](/react-rtekit/api/theme-api.md): TODO: one line, reused in nav, meta and llms.txt
-- [Slot catalogue](/react-rtekit/api/slots.md): TODO: one line, reused in nav, meta and llms.txt
-- [Toolbar items](/react-rtekit/api/toolbar-items.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theme tokens](/react-rtekit/api/theme-tokens.md): TODO: one line, reused in nav, meta and llms.txt
-- [Icon set](/react-rtekit/api/icons.md): TODO: one line, reused in nav, meta and llms.txt
-- [Localization keys](/react-rtekit/api/localization-keys.md): TODO: one line, reused in nav, meta and llms.txt
-- [Plugin catalogue](/react-rtekit/api/plugins.md): TODO: one line, reused in nav, meta and llms.txt
-- [Types](/react-rtekit/api/types.md): TODO: one line, reused in nav, meta and llms.txt
+- [API reference](/react-rtekit/api.md): Every public symbol, generated from the TypeScript declarations — components, hooks, the imperative API, the functions and the catalogues.
+- [RichTextEditor](/react-rtekit/api/rich-text-editor.md): The all-in-one component and every prop it takes.
+- [RteContentView](/react-rtekit/api/rte-content-view.md): The read-only renderer for stored HTML.
+- [Composable parts](/react-rtekit/api/composable-parts.md): The eleven parts the all-in-one component is assembled from.
+- [Providers](/react-rtekit/api/providers.md): Theme, locale and defaults providers, for configuring several editors at once.
+- [useEditor](/react-rtekit/api/use-editor.md): The headless hook, and every option it accepts.
+- [Editor hooks](/react-rtekit/api/editor-hooks.md): The hooks that read editor state: focus, emptiness, counts, format and validation.
+- [EditorInstance](/react-rtekit/api/editor-instance.md): The imperative API on the editor ref: content, selection, commands, drafts and find.
+- [Command catalogue](/react-rtekit/api/commands.md): All 57 commands, their payloads and what each one does.
+- [Handler catalogue](/react-rtekit/api/handlers.md): All 18 middleware points, and the context each one receives.
+- [Serialization](/react-rtekit/api/serialization.md): Converting between HTML, the document model, Markdown and plain text.
+- [Sanitizer](/react-rtekit/api/sanitize.md): The sanitizer, its four profiles, and the URL checker every href and src passes through.
+- [Plugin API](/react-rtekit/api/plugin-api.md): Defining a plugin, resolving plugin order, and the preset bundles.
+- [Theme API](/react-rtekit/api/theme-api.md): Building a theme, and the five that ship.
+- [Slot catalogue](/react-rtekit/api/slots.md): All 46 replaceable parts and the props each one receives.
+- [Toolbar items](/react-rtekit/api/toolbar-items.md): All 42 built-in toolbar items, by name.
+- [Theme tokens](/react-rtekit/api/theme-tokens.md): All 114 design tokens and the CSS custom property each one writes.
+- [Icon set](/react-rtekit/api/icons.md): All 52 icons, and how to replace one.
+- [Localization keys](/react-rtekit/api/localization-keys.md): All 153 catalogue keys, for translating the editor's own strings.
+- [Plugin catalogue](/react-rtekit/api/plugins.md): Every built-in plugin and the presets it appears in.
+- [Types](/react-rtekit/api/types.md): The exported types you annotate with: values, documents, themes, slots, handlers and configuration.
 
 ## Customization
 
-- [How to customize](/react-rtekit/customization.md): TODO: one line, reused in nav, meta and llms.txt
-- [Theming & tokens](/react-rtekit/customization/theme-tokens.md): TODO: one line, reused in nav, meta and llms.txt
-- [Overriding structure](/react-rtekit/customization/overriding-slots.md): TODO: one line, reused in nav, meta and llms.txt
-- [Toolbar layout](/react-rtekit/customization/toolbar-layout.md): TODO: one line, reused in nav, meta and llms.txt
-- [Design-system skin](/react-rtekit/customization/design-system-skin.md): TODO: one line, reused in nav, meta and llms.txt
-- [Content styles](/react-rtekit/customization/content-styles.md): TODO: one line, reused in nav, meta and llms.txt
-- [Recipes](/react-rtekit/customization/recipes.md): TODO: one line, reused in nav, meta and llms.txt
+- [How to customize](/react-rtekit/customization.md): The ten levels of customization, from a theme token to a fully headless editor, and how to pick the lowest one that does the job.
+- [Theming & tokens](/react-rtekit/customization/theme-tokens.md): Changing colours, sizes and radii with tokens, and building a theme that keeps its contrast.
+- [Overriding structure](/react-rtekit/customization/overriding-slots.md): Replacing a part with your own component without losing the behaviour that came with it.
+- [Toolbar layout](/react-rtekit/customization/toolbar-layout.md): Choosing items, grouping them, adding your own, and deciding what happens when they do not fit.
+- [Design-system skin](/react-rtekit/customization/design-system-skin.md): Making the editor look like the rest of your application, with your components and your tokens.
+- [Content styles](/react-rtekit/customization/content-styles.md): Styling the prose itself, so stored HTML renders the same inside the editor and out.
+- [Recipes](/react-rtekit/customization/recipes.md): Short worked answers to the customizations people actually ask for.
 
 ## Guides
 
-- [All guides](/react-rtekit/guides.md): TODO: one line, reused in nav, meta and llms.txt
-- [Best practices](/react-rtekit/guides/best-practices.md): TODO: one line, reused in nav, meta and llms.txt
-- [Security](/react-rtekit/guides/security.md): TODO: one line, reused in nav, meta and llms.txt
-- [Performance](/react-rtekit/guides/performance.md): TODO: one line, reused in nav, meta and llms.txt
-- [Testing](/react-rtekit/guides/testing.md): TODO: one line, reused in nav, meta and llms.txt
-- [Accessibility](/react-rtekit/guides/accessibility.md): TODO: one line, reused in nav, meta and llms.txt
-- [Localization](/react-rtekit/guides/localization.md): TODO: one line, reused in nav, meta and llms.txt
-- [Server rendering](/react-rtekit/guides/server-rendering.md): TODO: one line, reused in nav, meta and llms.txt
-- [Writing a plugin](/react-rtekit/guides/writing-a-plugin.md): TODO: one line, reused in nav, meta and llms.txt
+- [All guides](/react-rtekit/guides.md): Longer pieces on doing a whole job well, rather than on one capability.
+- [Best practices](/react-rtekit/guides/best-practices.md): The habits that keep an editor fast, accessible and predictable as an application grows around it.
+- [Security](/react-rtekit/guides/security.md): Where untrusted HTML enters, what the sanitizer guarantees, and what remains your responsibility.
+- [Performance](/react-rtekit/guides/performance.md): What costs what, what is measured on every build, and which props are worth memoising.
+- [Testing](/react-rtekit/guides/testing.md): Testing an editor: what unit tests can reach, what needs a real browser, and why.
+- [Accessibility](/react-rtekit/guides/accessibility.md): The keyboard model, the ARIA semantics, and what an override has to keep.
+- [Localization](/react-rtekit/guides/localization.md): Translating the editor's strings, handling direction, and finding the keys you missed.
+- [Server rendering](/react-rtekit/guides/server-rendering.md): Rendering the content on the server and hydrating without a flash or a mismatch.
+- [Writing a plugin](/react-rtekit/guides/writing-a-plugin.md): Building a plugin end to end: a mark, a command, a keyboard shortcut and a toolbar item.
 
 ## Integrations
 
-- [All integrations](/react-rtekit/integrations.md): TODO: one line, reused in nav, meta and llms.txt
-- [React Hook Form](/react-rtekit/integrations/react-hook-form.md): TODO: one line, reused in nav, meta and llms.txt
-- [Formik](/react-rtekit/integrations/formik.md): TODO: one line, reused in nav, meta and llms.txt
-- [Next.js](/react-rtekit/integrations/next-js.md): TODO: one line, reused in nav, meta and llms.txt
-- [Remix](/react-rtekit/integrations/remix.md): TODO: one line, reused in nav, meta and llms.txt
-- [Tailwind CSS](/react-rtekit/integrations/tailwind.md): TODO: one line, reused in nav, meta and llms.txt
-- [TypeScript](/react-rtekit/integrations/typescript.md): TODO: one line, reused in nav, meta and llms.txt
+- [All integrations](/react-rtekit/integrations.md): Working with the libraries and frameworks this editor most often sits inside.
+- [React Hook Form](/react-rtekit/integrations/react-hook-form.md): The dedicated adapter package: registration, validation and dirty state.
+- [Formik](/react-rtekit/integrations/formik.md): Wiring the editor to a Formik field, including validation and submission.
+- [Next.js](/react-rtekit/integrations/next-js.md): App Router and Pages Router, client boundaries, and rendering content on the server.
+- [Remix](/react-rtekit/integrations/remix.md): Loading and submitting editor content with Remix's data conventions.
+- [Tailwind CSS](/react-rtekit/integrations/tailwind.md): Using the editor inside a Tailwind project without the two stylesheets fighting.
+- [TypeScript](/react-rtekit/integrations/typescript.md): What the types give you, how to extend the command and slot catalogues, and the strictness settings this package assumes.
 
 ## Migration
 
-- [Migration](/react-rtekit/migration.md): TODO: one line, reused in nav, meta and llms.txt
-- [From Quill](/react-rtekit/migration/from-quill.md): TODO: one line, reused in nav, meta and llms.txt
+- [Migration](/react-rtekit/migration.md): Moving to this package from another editor, and between its own versions.
+- [From Quill](/react-rtekit/migration/from-quill.md): A field-by-field migration from Quill, with the stored markup read as it is rather than converted.
 
 ## Discover more
 
-- [Discover more](/react-rtekit/discover-more.md): TODO: one line, reused in nav, meta and llms.txt
-- [Changelog](/react-rtekit/discover-more/changelog.md): TODO: one line, reused in nav, meta and llms.txt
-- [Roadmap](/react-rtekit/discover-more/roadmap.md): TODO: one line, reused in nav, meta and llms.txt
-- [Showcase](/react-rtekit/discover-more/showcase.md): TODO: one line, reused in nav, meta and llms.txt
-- [Architecture](/react-rtekit/discover-more/architecture.md): TODO: one line, reused in nav, meta and llms.txt
-- [llms.txt](/react-rtekit/discover-more/llms-txt.md): TODO: one line, reused in nav, meta and llms.txt
+- [Discover more](/react-rtekit/discover-more.md): Where the project is going, what it has already done, and how it is put together.
+- [Changelog](/react-rtekit/discover-more/changelog.md): Every released version and what changed in it.
+- [Roadmap](/react-rtekit/discover-more/roadmap.md): What is being considered next, and what has been decided against.
+- [Showcase](/react-rtekit/discover-more/showcase.md): Applications built with this editor.
+- [Architecture](/react-rtekit/discover-more/architecture.md): The decisions behind the engine adapter, the sanitizer, the interop profiles and the slot system.
+- [llms.txt](/react-rtekit/discover-more/llms-txt.md): The machine-readable index of this documentation, and how to point an agent at it.

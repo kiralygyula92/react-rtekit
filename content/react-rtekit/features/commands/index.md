@@ -2,28 +2,33 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/commands/
 title: Commands
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Fifty-seven commands, each overridable, dispatched by the toolbar, the shortcuts and your own code alike.
 archetype: B
 section: features
 capabilityId: commands
 group: Developer tools
-symbols: []
+symbols: [CommandId, commands, useCommand, EditorInstance]
 ---
 
 # Commands
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+command-overrides
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+A command runs against the current selection. Calling one while the editor has no focus applies it to the saved selection, and if there is none, to nothing.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [commands](/react-rtekit/api/commands/)
+- [useCommand](/react-rtekit/api/editor-hooks/)
+- [EditorInstance](/react-rtekit/api/editor-instance/)

@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/images/
 title: 'Images & uploads'
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Images by URL, by file picker or by drag-and-drop, resizable in place, with captions and an upload handler of your own.
 archetype: B
 section: features
 capabilityId: images
 group: 'Display & layout'
-symbols: []
+symbols: [ImageAttrs, UploadHandler, useUpload]
 ---
 
-# Images & uploads
+# 'Images & uploads'
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+images
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Without an `onUpload` the file is embedded as a `data:` URL, which is what makes the picker work with no backend and what makes a large image a large document. Give it a handler for anything but small pictures.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [ImageAttrs](/react-rtekit/api/types/)
+- [UploadHandler](/react-rtekit/api/types/)
+- [useUpload](/react-rtekit/api/editor-hooks/)

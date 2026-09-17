@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/demos/cms-body-field/
 title: CMS body field
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: A full-height body field with headings, images, tables and autosave, as a CMS would use it.
 archetype: B
 section: demos
 ---
@@ -11,16 +11,21 @@ section: demos
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+The large case: headings, images, tables, autosave and a full-height field, with several editors on one page behaving independently.
+
+```demo
+multiple-editors
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Each editor gets its own id namespace, its own history and its own draft key, so nothing is shared between them by accident.
 
 ## Limitations
 
-None known.
+Every editor on a page carries its own engine instance. Ten on one screen is fine; a hundred is a virtualisation problem, not a configuration one.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [EditorInstance](/react-rtekit/api/editor-instance/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

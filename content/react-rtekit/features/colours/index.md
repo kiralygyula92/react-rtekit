@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/colours/
 title: Colours
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Text and background colour from a configurable palette, with a recent-colours row and a reset that removes the declaration.
 archetype: B
 section: features
 capabilityId: colours
 group: 'Display & layout'
-symbols: []
+symbols: [CommandId, FormatState, RichTextEditorProps]
 ---
 
 # Colours
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+toolbar-config
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Reset removes the colour rather than writing black, so text returns to whatever the theme says. A document that relied on an explicit black will look different after a reset.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [FormatState](/react-rtekit/api/types/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

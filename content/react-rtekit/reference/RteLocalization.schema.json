@@ -134,5 +134,7 @@
   },
   "filename": "types/localization.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/localization.ts#L24",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/localization/"
+  ]
 }

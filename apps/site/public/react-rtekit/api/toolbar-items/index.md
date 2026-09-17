@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/toolbar-items/
 title: Toolbar items
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: All 42 built-in toolbar items, by name.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,7 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Toolbar](/react-rtekit/toolbar/)
 
 ## Import
 

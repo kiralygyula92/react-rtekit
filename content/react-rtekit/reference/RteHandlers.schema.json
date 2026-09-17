@@ -116,5 +116,10 @@
   },
   "filename": "types/handlers.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/handlers.ts#L157",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/links/",
+    "/react-rtekit/paste-cleanup/",
+    "/react-rtekit/mentions/",
+    "/react-rtekit/handler-middleware/"
+  ]
 }

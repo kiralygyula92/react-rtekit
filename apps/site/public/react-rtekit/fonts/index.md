@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/fonts/
 title: Fonts
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Font family and size as inline styles, from lists you supply, for editors whose output has to carry its own typography.
 archetype: B
 section: features
 capabilityId: fonts
 group: 'Display & layout'
-symbols: []
+symbols: [CommandId, RichTextEditorProps]
 ---
 
 # Fonts
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+content-styles
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Both write inline styles, which is what e-mail needs and what a design system usually does not want. Prefer theme tokens unless the output has to survive outside your CSS.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

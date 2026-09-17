@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/handlers/
 title: Handler catalogue
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: All 18 middleware points, and the context each one receives.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,7 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Handler middleware](/react-rtekit/handler-middleware/)
 
 ## Import
 

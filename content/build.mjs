@@ -87,7 +87,14 @@ renderer.code = ({ text, lang }) => {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
-  return `<pre class="code-block"><code class="language-${lang ?? 'text'}">${escaped}</code></pre>`;
+  /*
+   * `tabindex` and a label, because the block scrolls horizontally.
+   *
+   * A scrollable region that nothing can focus is unreachable by keyboard — axe reports
+   * it as `scrollable-region-focusable`, and PPDS §7.8 asks for code blocks to be
+   * keyboard-reachable in as many words.
+   */
+  return `<pre class="code-block" tabindex="0" role="region" aria-label="${lang ?? 'code'} example"><code class="language-${lang ?? 'text'}">${escaped}</code></pre>`;
 };
 
 renderer.heading = ({ text, depth, tokens }) => {

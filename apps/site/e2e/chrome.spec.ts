@@ -24,7 +24,7 @@ async function selectFirstWord(page: Page): Promise<void> {
 
 test.describe('inline marks', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/examples/formatting');
+    await page.goto('/react-rtekit/text-formatting/');
     await expect(editor(page)).toBeVisible();
   });
 
@@ -73,14 +73,14 @@ test.describe('inline marks', () => {
 
 test.describe('the toolbar that follows a selection', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/examples/floating-toolbar');
+    await page.goto('/react-rtekit/selection-toolbar/');
     await expect(editor(page)).toBeVisible();
   });
 
   test('stays away when a docked toolbar is already there', async ({ page }) => {
     // The `full` preset asked for both, so selecting anything in an editor that already
     // had every command on a toolbar above it raised a second toolbar over the text.
-    await page.goto('/examples/formatting');
+    await page.goto('/react-rtekit/text-formatting/');
     await expect(editor(page)).toBeVisible();
     await selectFirstWord(page);
 
@@ -153,7 +153,7 @@ test.describe('the overflow menu', () => {
     // It had no icon and no label: the only route to the hidden half of the toolbar
     // was an empty box.
     await page.setViewportSize({ width: 640, height: 720 });
-    await page.goto('/examples/floating-toolbar');
+    await page.goto('/react-rtekit/selection-toolbar/');
     await expect(editor(page)).toBeVisible();
 
     const more = page.locator('[data-item="overflow"]').first();
@@ -168,7 +168,7 @@ test.describe('the overflow menu', () => {
     // in here they are rendered with their labels — so a group of five ran out through
     // the side of the popover instead of the card growing to hold it.
     await page.setViewportSize({ width: 620, height: 720 });
-    await page.goto('/examples/floating-toolbar');
+    await page.goto('/react-rtekit/selection-toolbar/');
     await expect(editor(page)).toBeVisible();
 
     await page.locator('[data-item="overflow"]').first().click();
@@ -192,7 +192,7 @@ test.describe('the overflow menu', () => {
     // that fewer fit but never that more did: narrowing the window once collapsed the
     // toolbar permanently.
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/examples/floating-toolbar');
+    await page.goto('/react-rtekit/selection-toolbar/');
     await expect(editor(page)).toBeVisible();
 
     const toolbar = page.locator('.rte-toolbar').first();
@@ -215,8 +215,8 @@ test.describe('every button in the full preset does something', () => {
    * and after; these two are the ones that had no effect.
    */
   test.beforeEach(async ({ page }) => {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
   });
 
@@ -259,8 +259,8 @@ test.describe('every button in the full preset does something', () => {
 
 test.describe('fullscreen', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
   });
 
@@ -286,7 +286,9 @@ test.describe('fullscreen', () => {
     await page.locator('.playground__editor [data-item="fullscreen"]').click();
     await expect(page.locator('.rte-root[data-fullscreen="true"]')).toBeVisible();
 
-    await page.locator('.rte-root [data-item="color"]').click();
+    // The playground page has the demo's editor as well as the playground's own, so the
+    // fullscreen root is the one to scope to.
+    await page.locator('.rte-root[data-fullscreen="true"] [data-item="color"]').click();
     const picker = page.locator('.rte-color-picker').first();
     await expect(picker).toBeVisible();
 
@@ -312,8 +314,8 @@ test.describe('popovers open under the button that opened them', () => {
    * to the content element — which put them under the whole text area.
    */
   test.beforeEach(async ({ page }) => {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
     await page.locator('.playground__editor [contenteditable="true"]').first().click();
     await page.keyboard.type('anchor me');
@@ -362,8 +364,8 @@ test.describe('popovers open under the button that opened them', () => {
 
 test.describe('the find and replace panel', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -428,8 +430,8 @@ test.describe('inserting an image from the device', () => {
   }) => {
     // The picker used to appear only when the host supplied `onUpload`, so an editor
     // with no backend had a URL box and no way to use a picture from this machine.
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -455,8 +457,8 @@ test.describe('inserting an image from the device', () => {
 test.describe('tables', () => {
   /** Inserts a small table and puts the caret in its first cell. */
   async function insertTable(page: Page) {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -559,8 +561,8 @@ test.describe('check lists', () => {
     // renders `<li role="checkbox" class="rte-list-item--unchecked">` and the serializer
     // writes `<li data-checked>`, neither with a child element — so a check list was a
     // bulleted list with nothing to tick.
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
     const surface = page.locator('.playground__editor [contenteditable="true"]').first();
     await expect(surface).toBeVisible();
     await surface.click();
@@ -592,7 +594,7 @@ test.describe('check lists', () => {
 
 test.describe('the playground', () => {
   test('puts the options above the editor and the output below it', async ({ page }) => {
-    await page.goto('/playground');
+    await page.goto('/react-rtekit/demos/playground/');
     const controls = await page.locator('.playground__controls').boundingBox();
     const surface = await page.locator('.playground__editor').boundingBox();
     const output = await page.locator('.playground__output').boundingBox();
@@ -606,7 +608,7 @@ test.describe('the playground', () => {
   test('gives the editor the full width of the page', async ({ page }) => {
     // Squeezed into the middle of a three-column grid, the page whose purpose is to
     // show every option had room for the fewest.
-    await page.goto('/playground');
+    await page.goto('/react-rtekit/demos/playground/');
     const surface = await page.locator('.playground__editor').boundingBox();
     const controls = await page.locator('.playground__controls').boundingBox();
     expect(surface && controls).toBeTruthy();
@@ -616,15 +618,15 @@ test.describe('the playground', () => {
   });
 
   test('shows every control in a labelled group', async ({ page }) => {
-    await page.goto('/playground');
+    await page.goto('/react-rtekit/demos/playground/');
     // `toBeVisible` waits for hydration; a bare `count()` does not, and reads zero.
     await expect(page.getByRole('group', { name: 'Features' })).toBeVisible();
     expect(await page.locator('.playground__group').count()).toBeGreaterThan(3);
   });
 
   test('the full preset shows its whole toolbar', async ({ page }) => {
-    await page.goto('/playground');
-    await page.getByLabel('Preset').selectOption('full');
+    await page.goto('/react-rtekit/demos/playground/');
+    await page.locator('.playground__controls').getByLabel('Preset').selectOption('full');
 
     const toolbar = page.locator('.playground__editor .rte-toolbar');
     await expect(toolbar).toBeVisible();

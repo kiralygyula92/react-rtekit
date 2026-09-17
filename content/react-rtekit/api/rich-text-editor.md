@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/rich-text-editor/
 title: RichTextEditor
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: The all-in-one component and every prop it takes.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,29 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Composable parts](/react-rtekit/composable-parts/)
+- [Headings](/react-rtekit/headings/)
+- [HTML interop](/react-rtekit/html-interop/)
+- [Paste clean-up](/react-rtekit/paste-cleanup/)
+- [Merge tags](/react-rtekit/merge-tags/)
+- [Markdown shortcuts](/react-rtekit/markdown-shortcuts/)
+- [Counters & limits](/react-rtekit/counters-and-limits/)
+- [Colours](/react-rtekit/colours/)
+- [Fonts](/react-rtekit/fonts/)
+- [Selection toolbar](/react-rtekit/selection-toolbar/)
+- [Slash menu](/react-rtekit/slash-menu/)
+- [Emoji](/react-rtekit/emoji/)
+- [Mentions](/react-rtekit/mentions/)
+- [Fullscreen](/react-rtekit/fullscreen/)
+- [Keyboard shortcuts](/react-rtekit/keyboard-shortcuts/)
+- [Autosave & drafts](/react-rtekit/autosave/)
+- [Read-only & disabled](/react-rtekit/read-only-and-disabled/)
+- [Mobile](/react-rtekit/mobile/)
+- [Engine adapter](/react-rtekit/engine-adapter/)
+- [Accessibility](/react-rtekit/accessibility/)
+- [Server rendering](/react-rtekit/server-rendering/)
+- [Performance](/react-rtekit/performance/)
+- [Forms](/react-rtekit/forms/)
 
 ## Import
 

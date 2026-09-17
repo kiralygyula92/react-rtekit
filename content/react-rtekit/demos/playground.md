@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/demos/playground/
 title: Playground
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'Every prop, live: change the configuration and read the code that produces it.'
 archetype: B
 section: demos
 ---
@@ -11,16 +11,23 @@ section: demos
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+Every option, live. The configuration lives in the URL, so a link carries the whole setup — which makes it the fastest way to report a bug.
+
+```demo
+presets
+```
+
+The full playground — every prop, grouped, with the code it produces — is below.
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+The playground is built from the same public props you would use. Its generated Code tab is what you would paste into your own application.
 
 ## Limitations
 
-None known.
+It configures one editor with the shipped slots. Anything that needs your own components — a design-system skin, a custom slot — is shown in [Customization](/react-rtekit/customization/) instead, because a playground cannot import code that does not exist yet.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [Presets](/react-rtekit/api/plugin-api/)

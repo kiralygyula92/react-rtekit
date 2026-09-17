@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/editor-hooks/
 title: Editor hooks
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'The hooks that read editor state: focus, emptiness, counts, format and validation.'
 archetype: E
 section: reference
 ---
@@ -19,7 +19,19 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Counters & limits](/react-rtekit/counters-and-limits/)
+- [Commands](/react-rtekit/commands/)
+- [Headless](/react-rtekit/headless/)
+- [Read-only & disabled](/react-rtekit/read-only-and-disabled/)
+- [Performance](/react-rtekit/performance/)
+- [Empty state](/react-rtekit/empty-state/)
+- [Forms](/react-rtekit/forms/)
+- [Localization](/react-rtekit/localization/)
+- [Presets](/react-rtekit/presets/)
+- [Slots](/react-rtekit/slots/)
+- [Theming](/react-rtekit/theming/)
+- [Images & uploads](/react-rtekit/images/)
+- [Accessibility](/react-rtekit/accessibility/)
 
 ## Import
 

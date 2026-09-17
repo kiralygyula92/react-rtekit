@@ -14,13 +14,13 @@ function editor(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/basic');
+  await page.goto('/react-rtekit/getting-started/usage/');
   await expect(editor(page)).toBeVisible();
 });
 
-test('the example is listed in the gallery', async ({ page }) => {
-  await page.goto('/examples');
-  await expect(page.getByRole('link', { name: /Basic/ })).toBeVisible();
+test('the capability is listed in the features index', async ({ page }) => {
+  await page.goto('/react-rtekit/all-features/');
+  await expect(page.locator('a.card[href="/react-rtekit/value-formats/"]')).toBeVisible();
 });
 
 test('typing updates the value and the counter', async ({ page }) => {

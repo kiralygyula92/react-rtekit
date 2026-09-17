@@ -7,5 +7,7 @@
   "options": {},
   "filename": "react/providers.tsx",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L44",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/theming/"
+  ]
 }

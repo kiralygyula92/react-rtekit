@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/html-interop/
 title: HTML interop
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Reads legacy Quill markup and emits standards-compliant, Quill-compatible or e-mail-safe HTML, so stored content needs no migration.
 archetype: B
 section: features
 capabilityId: html-interop
 group: 'Content & data'
-symbols: []
+symbols: [htmlToDocument, documentToHtml, RichTextEditorProps]
 ---
 
 # HTML interop
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+html-interop
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Interop covers the constructs Quill and the office suites actually produce. Markup outside that set is normalized to the nearest thing the schema has, which may not be what its author meant.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [htmlToDocument](/react-rtekit/api/serialization/)
+- [documentToHtml](/react-rtekit/api/serialization/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

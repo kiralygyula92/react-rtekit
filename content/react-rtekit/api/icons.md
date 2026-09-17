@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/icons/
 title: Icon set
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: All 52 icons, and how to replace one.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,7 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Icons](/react-rtekit/icons/)
 
 ## Import
 

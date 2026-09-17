@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/alignment/
 title: Alignment
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Left, centre, right and justify, applied to blocks and serialized so legacy Quill alignment classes still read.
 archetype: B
 section: features
 capabilityId: alignment
 group: 'Display & layout'
-symbols: []
+symbols: [CommandId, FormatState]
 ---
 
 # Alignment
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+formatting
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Alignment is a block property. There is no way to align part of a paragraph, because there is nowhere in the document model to put it.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [FormatState](/react-rtekit/api/types/)

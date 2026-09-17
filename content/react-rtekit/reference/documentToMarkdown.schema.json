@@ -7,5 +7,8 @@
   "options": {},
   "filename": "core/serialize/markdown.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L151",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/code-blocks/",
+    "/react-rtekit/value-formats/"
+  ]
 }

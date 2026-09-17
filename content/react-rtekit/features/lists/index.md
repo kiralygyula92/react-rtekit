@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/lists/
 title: Lists
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Bulleted and numbered lists, nested to any depth, with Tab and Shift+Tab moving items between levels.
 archetype: B
 section: features
 capabilityId: lists
 group: Core features
-symbols: []
+symbols: [CommandId, FormatState]
 ---
 
 # Lists
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+lists
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+A list nested deeper than five levels stops gaining an indent class, because the shipped stylesheet defines five. Deeper nesting still serializes correctly; it just stops looking deeper.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [FormatState](/react-rtekit/api/types/)

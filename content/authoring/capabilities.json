@@ -1,0 +1,553 @@
+{
+  "text-formatting": {
+    "description": "Bold, italic, underline, strikethrough and inline code, as marks on the selection rather than tags in a string.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId",
+      "FormatState",
+      "commands"
+    ],
+    "limitations": "Underline and strikethrough render through a class of their own when both are applied, because the engine treats the pair as one format. An override that styles `.rte-underline` and `.rte-strike` separately must also style `.rte-underline-strike`, or text carrying both shows only one."
+  },
+  "headings": {
+    "description": "Six heading levels, restricted to the set your schema allows and reachable from the block-type dropdown or Markdown shortcuts.",
+    "demo": "markdown",
+    "symbols": [
+      "CommandId",
+      "RichTextEditorProps"
+    ],
+    "limitations": "The heading levels offered are fixed when the editor mounts. Changing `headingLevels` afterwards does not re-resolve the dropdown until the component remounts."
+  },
+  "lists": {
+    "description": "Bulleted and numbered lists, nested to any depth, with Tab and Shift+Tab moving items between levels.",
+    "demo": "lists",
+    "symbols": [
+      "CommandId",
+      "FormatState"
+    ],
+    "limitations": "A list nested deeper than five levels stops gaining an indent class, because the shipped stylesheet defines five. Deeper nesting still serializes correctly; it just stops looking deeper."
+  },
+  "check-lists": {
+    "description": "Task lists whose items can be ticked in place, serialized as data-checked so stored HTML keeps the state.",
+    "demo": "lists",
+    "symbols": [
+      "CommandId"
+    ],
+    "limitations": "The checkbox is drawn by the stylesheet in the first 20px of the item, which is the region the engine treats as a click on the box. A custom theme that indents check items past that point makes them unclickable."
+  },
+  "links": {
+    "description": "Adding, editing and removing links, with every URL checked against the protocol allowlist before it reaches the document.",
+    "demo": "links",
+    "symbols": [
+      "LinkAttrs",
+      "checkUrl",
+      "normalizeUrl",
+      "RteHandlers"
+    ],
+    "limitations": "`javascript:`, `vbscript:` and `data:text/html` URLs are refused whatever the configuration says. There is no option to allow them, and there will not be one."
+  },
+  "blockquotes": {
+    "description": "Block quotations, indentable and nestable, serialized as an ordinary blockquote element.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId"
+    ],
+    "limitations": "None known."
+  },
+  "code-blocks": {
+    "description": "Fenced code blocks that keep their language through every format, so a snippet survives a round trip to Markdown and back.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId",
+      "documentToMarkdown"
+    ],
+    "limitations": "The language is stored and serialized but not highlighted: the package ships no syntax highlighter. A `SourceView` or content-view override can add one."
+  },
+  "dividers": {
+    "description": "Horizontal rules, inserted from the toolbar or by typing three dashes.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId"
+    ],
+    "limitations": "None known."
+  },
+  "subscript-and-superscript": {
+    "description": "Subscript and superscript marks, for formulae and footnote references.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId",
+      "FormatState"
+    ],
+    "limitations": "Both are inline marks, so they cannot contain block content. A footnote that needs a paragraph is not this."
+  },
+  "clear-formatting": {
+    "description": "Strips every inline mark from the selection, leaving the text and the block structure.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId"
+    ],
+    "limitations": "Clears inline marks only. The block type, alignment and indentation are structure, not formatting, and are left alone."
+  },
+  "history": {
+    "description": "Undo and redo with coalesced typing, so a sentence is one entry rather than forty.",
+    "demo": "history",
+    "symbols": [
+      "CommandId",
+      "EditorInstance"
+    ],
+    "limitations": "History is per editor instance and is not persisted. A remount — including one caused by changing `preset` or `locale` — starts a new stack."
+  },
+  "empty-state": {
+    "description": "What counts as empty, and why an empty paragraph does not: isEmpty() reads content, so required means required.",
+    "demo": "counter-and-limits",
+    "symbols": [
+      "EditorInstance",
+      "isEmptyHtml",
+      "useIsEmpty",
+      "RteErrorText",
+      "RteHelperText"
+    ],
+    "limitations": "An editor containing only an image, a table or a horizontal rule is not empty, even though it has no text. That is deliberate: emptiness is about content, not about characters."
+  },
+  "value-formats": {
+    "description": "HTML, JSON, Markdown or plain text — one valueFormat prop decides what value takes and what onChange hands back.",
+    "demo": "value-formats",
+    "symbols": [
+      "EditorValue",
+      "ChangeMeta",
+      "htmlToDocument",
+      "documentToHtml",
+      "documentToMarkdown",
+      "documentToText",
+      "markdownToHtml",
+      "markdownToDocument",
+      "EditorDocument"
+    ],
+    "limitations": "Markdown is a lossy target. Tables, merge tags and inline colour survive the round trip; arbitrary inline styles do not, because Markdown has nowhere to put them.",
+    "variations": [
+      {
+        "title": "Controlled and uncontrolled",
+        "demo": "controlled"
+      }
+    ]
+  },
+  "sanitization": {
+    "description": "An allowlist sanitizer on every content boundary — the initial value, every paste, every drop, every programmatic insert and the output.",
+    "demo": "sanitization",
+    "symbols": [
+      "SanitizeConfig",
+      "SanitizeProfileName",
+      "sanitizeHtml",
+      "getProfile",
+      "checkUrl",
+      "resolveSanitizeConfig",
+      "mergeSanitizeConfig"
+    ],
+    "limitations": "`sanitize={false}` exists and is almost always the wrong answer. It disables the input sanitizer only; the hard rules — no `<script>`, no `on*` attribute, no `javascript:` URL — are not configurable and still apply."
+  },
+  "html-interop": {
+    "description": "Reads legacy Quill markup and emits standards-compliant, Quill-compatible or e-mail-safe HTML, so stored content needs no migration.",
+    "demo": "html-interop",
+    "symbols": [
+      "htmlToDocument",
+      "documentToHtml",
+      "RichTextEditorProps"
+    ],
+    "limitations": "Interop covers the constructs Quill and the office suites actually produce. Markup outside that set is normalized to the nearest thing the schema has, which may not be what its author meant."
+  },
+  "email-output": {
+    "description": "An output profile that inlines styles and drops what e-mail clients strip, so the HTML you store is the HTML that sends.",
+    "demo": "email-output",
+    "symbols": [
+      "documentToHtml",
+      "SanitizeProfileName",
+      "getProfile"
+    ],
+    "limitations": "The profile makes HTML that e-mail clients can render. It does not test it against them — there is no Litmus in this package, and a complicated layout still needs a real preview."
+  },
+  "paste-cleanup": {
+    "description": "Three paste modes — rich, clean and text — each running the same sanitizer, so a paste from Word cannot smuggle anything in.",
+    "demo": "paste-cleanup",
+    "symbols": [
+      "RteHandlers",
+      "RichTextEditorProps"
+    ],
+    "limitations": "`clean` keeps structure and drops the source's own formatting. Deciding which of the two a given span is remains a heuristic, and a document that encodes meaning purely in inline style loses it."
+  },
+  "merge-tags": {
+    "description": "Template variables as atomic chips: one delete removes the whole tag, and formatting the message never splits it.",
+    "demo": "merge-tags",
+    "symbols": [
+      "EditorInstance",
+      "RichTextEditorProps"
+    ],
+    "limitations": "A tag is atomic in the editor, not in stored HTML. Code that rewrites the saved markup with a regular expression can still cut one in half."
+  },
+  "markdown-shortcuts": {
+    "description": "Typing ##  or -  or >  turns the block into the thing it looks like, as you type.",
+    "demo": "markdown",
+    "symbols": [
+      "RichTextEditorProps",
+      "plugins"
+    ],
+    "limitations": "Shortcuts fire on the block you are typing in. Pasting Markdown does not convert it — use `valueFormat=\"markdown\"` or `markdownToDocument` for that."
+  },
+  "counters-and-limits": {
+    "description": "Character or word counts that measure text rather than markup, with a hard or soft limit and a live counter.",
+    "demo": "counter-and-limits",
+    "symbols": [
+      "useCharacterCount",
+      "RichTextEditorProps",
+      "EditorInstance"
+    ],
+    "limitations": "The count is of text content, so a bold word costs what a plain one costs. It is not a byte count, and it is not what a database `VARCHAR` will measure."
+  },
+  "theming": {
+    "description": "114 CSS custom properties in a cascade layer — every colour, size and radius, with no CSS-in-JS and no UI kit.",
+    "demo": "theming",
+    "symbols": [
+      "RteTheme",
+      "createTheme",
+      "theme-tokens",
+      "RteThemeProvider",
+      "useRteTheme"
+    ],
+    "limitations": "Tokens cover what the editor draws. Content styling — how a heading or a table looks inside the text — lives in `content.css` and is a separate stylesheet on purpose, so stored HTML renders the same outside the editor."
+  },
+  "theme-presets": {
+    "description": "Five ready themes — light, dark, classic, compact and bordered — each a token set you can extend rather than fight.",
+    "demo": "presets",
+    "symbols": [
+      "lightTheme",
+      "darkTheme",
+      "classicTheme",
+      "compactTheme",
+      "borderedTheme",
+      "themes"
+    ],
+    "limitations": "Every shipped preset meets WCAG AA, and a test enforces it. A theme you derive from one does not inherit that guarantee — `meetsContrastAA` is exported so you can check your own."
+  },
+  "colours": {
+    "description": "Text and background colour from a configurable palette, with a recent-colours row and a reset that removes the declaration.",
+    "demo": "toolbar-config",
+    "symbols": [
+      "CommandId",
+      "FormatState",
+      "RichTextEditorProps"
+    ],
+    "limitations": "Reset removes the colour rather than writing black, so text returns to whatever the theme says. A document that relied on an explicit black will look different after a reset."
+  },
+  "fonts": {
+    "description": "Font family and size as inline styles, from lists you supply, for editors whose output has to carry its own typography.",
+    "demo": "content-styles",
+    "symbols": [
+      "CommandId",
+      "RichTextEditorProps"
+    ],
+    "limitations": "Both write inline styles, which is what e-mail needs and what a design system usually does not want. Prefer theme tokens unless the output has to survive outside your CSS."
+  },
+  "alignment": {
+    "description": "Left, centre, right and justify, applied to blocks and serialized so legacy Quill alignment classes still read.",
+    "demo": "formatting",
+    "symbols": [
+      "CommandId",
+      "FormatState"
+    ],
+    "limitations": "Alignment is a block property. There is no way to align part of a paragraph, because there is nowhere in the document model to put it."
+  },
+  "indentation": {
+    "description": "Block indentation in steps, for quotes and nested structure, with the legacy ql-indent-* classes read on the way in.",
+    "demo": "lists",
+    "symbols": [
+      "CommandId",
+      "FormatState"
+    ],
+    "limitations": "Indenting a list item changes its nesting level rather than its margin, which is what makes the output valid HTML rather than a flat list with padding."
+  },
+  "tables": {
+    "description": "Tables with a size picker, per-cell editing, and controls for adding and removing rows, columns and the table itself.",
+    "demo": "tables",
+    "symbols": [
+      "TableOptions",
+      "CommandId"
+    ],
+    "limitations": "No merged cells. `colspan` and `rowspan` survive a round trip through stored HTML, but nothing in the editor creates them."
+  },
+  "images": {
+    "description": "Images by URL, by file picker or by drag-and-drop, resizable in place, with captions and an upload handler of your own.",
+    "demo": "images",
+    "symbols": [
+      "ImageAttrs",
+      "UploadHandler",
+      "useUpload"
+    ],
+    "limitations": "Without an `onUpload` the file is embedded as a `data:` URL, which is what makes the picker work with no backend and what makes a large image a large document. Give it a handler for anything but small pictures."
+  },
+  "content-view": {
+    "description": "A read-only renderer for stored HTML that applies the same content stylesheet, so a list page looks like the editor.",
+    "demo": "content-styles",
+    "symbols": [
+      "RteContentView",
+      "RteContentViewProps"
+    ],
+    "limitations": "It renders; it does not edit. It also sanitizes on every render, so passing a new string on every keystroke is measurably slower than passing a stable one."
+  },
+  "toolbar": {
+    "description": "A real ARIA toolbar: one tab stop, arrows between controls, configurable groups, and three overflow behaviours.",
+    "demo": "toolbar-config",
+    "symbols": [
+      "ToolbarItemSpec",
+      "toolbar-items",
+      "createToolbarItem",
+      "RteToolbar"
+    ],
+    "limitations": "`overflow=\"menu\"` measures the row to decide what fits, so it needs a laid-out container. In a hidden tab or a zero-width parent every group stays visible until the container has a width."
+  },
+  "selection-toolbar": {
+    "description": "A bubble toolbar over the selection, carrying the marks and the link rather than the whole row.",
+    "demo": "floating-toolbar",
+    "symbols": [
+      "RichTextEditorProps",
+      "ToolbarItemSpec"
+    ],
+    "limitations": "Off by default wherever a toolbar is already docked: two toolbars offering the same commands is noise. Set `floatingToolbar` to ask for both."
+  },
+  "slash-menu": {
+    "description": "A command palette on /, listing the blocks and inserts the current configuration actually has.",
+    "demo": "emoji-and-slash",
+    "symbols": [
+      "RichTextEditorProps",
+      "ToolbarItemSpec"
+    ],
+    "limitations": "The menu lists items whose plugins are loaded. An item you add to the toolbar without a plugin behind it appears in neither."
+  },
+  "emoji": {
+    "description": "A searchable picker in the toolbar and a : trigger in the text, inserting characters rather than images.",
+    "demo": "emoji-and-slash",
+    "symbols": [
+      "CommandId",
+      "RichTextEditorProps"
+    ],
+    "limitations": "A curated set of about sixty, not the full Unicode table — the whole set is several hundred kilobytes that no editor should pay for by default."
+  },
+  "mentions": {
+    "description": "An @ trigger backed by your own async search, inserting an atomic chip that carries an id.",
+    "demo": "mentions",
+    "symbols": [
+      "RichTextEditorProps",
+      "RteHandlers"
+    ],
+    "limitations": "The provider is yours, and so is its debounce. The editor does not cache results between triggers."
+  },
+  "find-and-replace": {
+    "description": "Find and replace over the document, with match case, whole word and regular expressions, highlighted by overlay.",
+    "demo": "find-replace",
+    "symbols": [
+      "EditorInstance",
+      "FindOptions"
+    ],
+    "limitations": "Matches are highlighted with an overlay rather than by marking up the document, so a search never changes what you would save and never pushes an entry onto the undo stack. The overlay is positioned from the rendered text, so it needs the editor to be visible."
+  },
+  "fullscreen": {
+    "description": "Fills the window without remounting the editor, so the selection, the undo stack and every listener survive.",
+    "demo": "fullscreen",
+    "symbols": [
+      "EditorInstance",
+      "RichTextEditorProps"
+    ],
+    "limitations": "This is a CSS fullscreen, not the Fullscreen API: it covers the viewport, not the screen, and it does not need a user gesture."
+  },
+  "source-view": {
+    "description": "Edit the HTML directly, with everything you type going through the same sanitizer as a paste.",
+    "demo": "source-view",
+    "symbols": [
+      "EditorInstance",
+      "sanitizeHtml"
+    ],
+    "limitations": "The source view is not a way around the sanitizer — markup that sanitizes away to nothing is refused rather than silently emptying the field."
+  },
+  "keyboard-shortcuts": {
+    "description": "A complete keyboard model, and a shortcut reference built from the keymap that is actually in force.",
+    "demo": "accessibility",
+    "symbols": [
+      "RichTextEditorProps",
+      "RtePlugin"
+    ],
+    "limitations": "Shortcuts are matched on physical keys, so a layout that puts `B` somewhere else moves Mod+B with it. That is the platform's behaviour, not something this package overrides."
+  },
+  "autosave": {
+    "description": "Drafts written on a debounce to storage you choose, with a restore prompt on the way back and a TTL.",
+    "demo": "autosave",
+    "symbols": [
+      "EditorInstance",
+      "RichTextEditorProps"
+    ],
+    "limitations": "The default store is `localStorage`, which is per browser and per device, and which can be unavailable in private mode. Supply your own store for anything that has to follow a user."
+  },
+  "read-only-and-disabled": {
+    "description": "Two different states: read-only keeps the content selectable and copyable, disabled takes it out of the tab order.",
+    "demo": "readonly-and-disabled",
+    "symbols": [
+      "RichTextEditorProps",
+      "useEditorState"
+    ],
+    "limitations": "Neither is a security boundary. Both are UI states; a client can always change them, so the server has to check too."
+  },
+  "mobile": {
+    "description": "Touch targets at the platform minimum, a toolbar that docks above the on-screen keyboard, and no layout jumps on focus.",
+    "demo": "mobile",
+    "symbols": [
+      "RichTextEditorProps"
+    ],
+    "limitations": "The bottom-docked toolbar tracks the visual viewport, which iOS and Android report differently. It is tested on both, and a third mobile browser may need a check."
+  },
+  "slots": {
+    "description": "Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.",
+    "demo": "slots-custom",
+    "symbols": [
+      "RteSlots",
+      "slots",
+      "useRteSlots"
+    ],
+    "limitations": "A slot that drops the props it is given renders an empty shell — the behaviour lives in those props. Spread them back, or the part stops working rather than stops looking right."
+  },
+  "handler-middleware": {
+    "description": "Eighteen interception points, each (ctx, next) => void, so you can wrap, veto or replace a behaviour without forking it.",
+    "demo": "handlers-middleware",
+    "symbols": [
+      "RteHandlers",
+      "handlers"
+    ],
+    "limitations": "A handler that never calls `next()` cancels the default behaviour. That is the point, and it is also the most common cause of a feature that has silently stopped working."
+  },
+  "commands": {
+    "description": "Fifty-seven commands, each overridable, dispatched by the toolbar, the shortcuts and your own code alike.",
+    "demo": "command-overrides",
+    "symbols": [
+      "CommandId",
+      "commands",
+      "useCommand",
+      "EditorInstance"
+    ],
+    "limitations": "A command runs against the current selection. Calling one while the editor has no focus applies it to the saved selection, and if there is none, to nothing."
+  },
+  "composable-parts": {
+    "description": "The same editor as eleven separate components, for layouts the all-in-one shape cannot make.",
+    "demo": "composable",
+    "symbols": [
+      "Rte",
+      "RteRoot",
+      "RteToolbar",
+      "RteContent",
+      "RteLabel",
+      "RteCounter",
+      "RteFooter",
+      "RtePortals",
+      "RichTextEditor"
+    ],
+    "limitations": "`RtePortals` has to be rendered somewhere, or the popovers, dialogs and menus have nowhere to go and simply do not appear."
+  },
+  "headless": {
+    "description": "useEditor with no chrome at all: the document, the commands and the state, and you draw the rest.",
+    "demo": "headless",
+    "symbols": [
+      "useEditor",
+      "UseEditorOptions",
+      "EditorInstance",
+      "useEditorContext",
+      "useIsFocused",
+      "useFormatState"
+    ],
+    "limitations": "Headless still needs the engine and the stylesheet for the content area. It is about the chrome, not about the bytes."
+  },
+  "plugin-authoring": {
+    "description": "Add a mark, a block, a command or a toolbar item with definePlugin, in the same shape the built-ins use.",
+    "demo": "plugin-authoring",
+    "symbols": [
+      "RtePlugin",
+      "definePlugin",
+      "resolvePluginOrder",
+      "featuresOf"
+    ],
+    "limitations": "A plugin whose `dependsOn` names something absent still loads, with a warning — a missing dependency should not hand the reader an editor with a feature silently gone."
+  },
+  "presets": {
+    "description": "Six bundles — minimal, comment, standard, classic, email and full — each a plugin list plus prop defaults.",
+    "demo": "presets",
+    "symbols": [
+      "presets",
+      "resolvePlugins",
+      "plugins",
+      "useRteConfig",
+      "useRteDefaults",
+      "RteDefaultsProvider"
+    ],
+    "limitations": "A preset is resolved when the editor mounts, so changing `preset` remounts it and starts a new undo stack."
+  },
+  "engine-adapter": {
+    "description": "An EditorEngine interface owns the document layer, with Lexical as the default adapter behind it.",
+    "demo": "headless",
+    "symbols": [
+      "EditorInstance",
+      "RichTextEditorProps"
+    ],
+    "limitations": "One adapter ships. The interface exists so the engine is replaceable and so nothing outside `src/engines/` depends on it — not because a second adapter is coming."
+  },
+  "icons": {
+    "description": "Fifty-two inline SVGs drawn with currentColor, each replaceable, and no icon package in your bundle.",
+    "demo": "design-system-skin",
+    "symbols": [
+      "RteIcons",
+      "icons"
+    ],
+    "limitations": "Icons are sized from `--rte-icon-size` and coloured from `currentColor`. A replacement with baked-in dimensions or a hard-coded fill will not follow the theme."
+  },
+  "localization": {
+    "description": "Every string in one catalogue: five locales ship, 153 keys, and a pseudo-locale for finding the ones you missed.",
+    "demo": "localization",
+    "symbols": [
+      "RteLocalization",
+      "localization-keys",
+      "useLocalization",
+      "RteLocaleProvider"
+    ],
+    "limitations": "The catalogue covers the editor's own chrome. Content direction, date formats and your application's strings are yours."
+  },
+  "accessibility": {
+    "description": "A named textbox, a real ARIA toolbar with roving focus, linked errors, live announcements and AA contrast.",
+    "demo": "accessibility",
+    "symbols": [
+      "RichTextEditorProps",
+      "useValidationError"
+    ],
+    "limitations": "Every shipped theme meets WCAG AA and a test enforces it. A theme you write does not inherit that — and a slot you replace does not inherit the semantics either."
+  },
+  "server-rendering": {
+    "description": "Renders the content on the server and hydrates without a flash, so the field is not an empty box on first paint.",
+    "demo": "basic",
+    "symbols": [
+      "RichTextEditorProps",
+      "RteContentView"
+    ],
+    "limitations": "The server output is the content, not a working editor — the engine needs a DOM. Only an HTML value can be pre-rendered; JSON and Markdown need a converter the server entry deliberately does not carry."
+  },
+  "performance": {
+    "description": "What a large document costs, what is measured on every build, and which props are worth memoising.",
+    "demo": "large-document",
+    "symbols": [
+      "RichTextEditorProps",
+      "useEditorState"
+    ],
+    "limitations": "The budgets are measured on a quiet machine in CI. They are a regression signal, not a promise about a given device."
+  },
+  "forms": {
+    "description": "Validation, dirty state and submission, with an adapter for React Hook Form and a worked Formik example.",
+    "demo": "validation-rhf",
+    "symbols": [
+      "RichTextEditorProps",
+      "useValidationError",
+      "useIsEmpty"
+    ],
+    "limitations": "`required` uses `isEmpty()`, which ignores `<p><br></p>`. A form library checking the raw HTML string instead will think an empty editor has content."
+  }
+}

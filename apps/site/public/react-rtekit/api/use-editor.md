@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/use-editor/
 title: useEditor
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: The headless hook, and every option it accepts.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,7 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Headless](/react-rtekit/headless/)
 
 ## Import
 

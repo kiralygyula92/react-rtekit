@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/serialization/
 title: Serialization
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Converting between HTML, the document model, Markdown and plain text.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,11 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Value formats](/react-rtekit/value-formats/)
+- [HTML interop](/react-rtekit/html-interop/)
+- [E-mail output](/react-rtekit/email-output/)
+- [Code blocks](/react-rtekit/code-blocks/)
+- [Empty state](/react-rtekit/empty-state/)
 
 ## Import
 

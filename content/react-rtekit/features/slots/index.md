@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/slots/
 title: Slots
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.
 archetype: B
 section: features
 capabilityId: slots
 group: Developer tools
-symbols: []
+symbols: [RteSlots, slots, useRteSlots]
 ---
 
 # Slots
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+slots-custom
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+A slot that drops the props it is given renders an empty shell — the behaviour lives in those props. Spread them back, or the part stops working rather than stops looking right.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RteSlots](/react-rtekit/api/types/)
+- [slots](/react-rtekit/api/slots/)
+- [useRteSlots](/react-rtekit/api/editor-hooks/)

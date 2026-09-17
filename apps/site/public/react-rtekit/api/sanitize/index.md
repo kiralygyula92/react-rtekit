@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/sanitize/
 title: Sanitizer
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: The sanitizer, its four profiles, and the URL checker every href and src passes through.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,10 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Links](/react-rtekit/links/)
+- [Sanitization](/react-rtekit/sanitization/)
+- [E-mail output](/react-rtekit/email-output/)
+- [Source view](/react-rtekit/source-view/)
 
 ## Import
 

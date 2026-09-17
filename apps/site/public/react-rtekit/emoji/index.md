@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/emoji/
 title: Emoji
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'A searchable picker in the toolbar and a : trigger in the text, inserting characters rather than images.'
 archetype: B
 section: features
 capabilityId: emoji
 group: Interaction
-symbols: []
+symbols: [CommandId, RichTextEditorProps]
 ---
 
 # Emoji
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+emoji-and-slash
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+A curated set of about sixty, not the full Unicode table — the whole set is several hundred kilobytes that no editor should pay for by default.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

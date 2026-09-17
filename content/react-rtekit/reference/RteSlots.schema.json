@@ -284,5 +284,7 @@
   },
   "filename": "types/slots.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L294",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/slots/"
+  ]
 }

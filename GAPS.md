@@ -274,6 +274,29 @@ none of the machinery exists and `VERSIONING.md` is not surfaced on the site.
 
 ---
 
+## Opened in Phase 5
+
+### G-28 — 50 capability pages have no customised demo
+PPDS §6B asks every capability page's `## Customization` section for "a demo of one
+customised instance". Five capabilities have one — theming, design-system skin, Tailwind
+skin, slots and composable parts, each of which *is* a customisation — and the other 50
+carry prose and a link instead.
+
+Putting the same generic skinned editor under all 55 would satisfy the wording with
+something nobody learns anything from, and would put a second editor on every page. The
+brief's own instruction for this case is to use the fallback ladder and record the
+shortfall (§5.1), which is what this is.
+
+**What closing it needs:** one customised variant per capability — a table with your own
+cell chrome, a link popover with your own form, a counter rendered your way. That is 50
+demos, and it is the largest single piece of work left on the site.
+
+### G-29 — `/react-rtekit/discover-more/showcase/` has no entries
+The page exists and says so. Inventing applications would breach operating rule 4, so it
+stays empty until there is a real one whose owners agree to be named.
+
+---
+
 ## Not gaps — recorded so they are not re-litigated
 
 - **Analytics and search queries are unavailable.** Brief §1.6 asks for the top 50 pages

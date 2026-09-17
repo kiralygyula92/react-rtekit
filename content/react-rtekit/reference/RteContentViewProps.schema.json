@@ -80,5 +80,7 @@
   },
   "filename": "types/props.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L381",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/content-view/"
+  ]
 }

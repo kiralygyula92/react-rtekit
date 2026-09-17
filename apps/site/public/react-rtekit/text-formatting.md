@@ -2,28 +2,32 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/text-formatting/
 title: Text formatting
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Bold, italic, underline, strikethrough and inline code, as marks on the selection rather than tags in a string.
 archetype: B
 section: features
 capabilityId: text-formatting
 group: Core features
-symbols: []
+symbols: [CommandId, FormatState, commands]
 ---
 
 # Text formatting
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+formatting
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Underline and strikethrough render through a class of their own when both are applied, because the engine treats the pair as one format. An override that styles `.rte-underline` and `.rte-strike` separately must also style `.rte-underline-strike`, or text carrying both shows only one.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)
+- [FormatState](/react-rtekit/api/types/)
+- [commands](/react-rtekit/api/commands/)

@@ -215,8 +215,26 @@
   align-items: start;
 }
 
+/*
+ * The article fills its column; the prose inside it is what has a measure.
+ *
+ * Capping the article capped the demos too, and a demo of the `full` preset in a 46rem
+ * column puts most of its toolbar behind the overflow menu — the page whose job is to
+ * show a capability hiding the button for it. Text keeps its line length; editors,
+ * tables and code get the width.
+ */
 .docs-article {
   min-inline-size: 0;
+  max-inline-size: 66rem;
+}
+
+.docs-article__lead,
+.prose > div > p,
+.prose > div > ul,
+.prose > div > ol,
+.prose > div > blockquote,
+.prose > div > h2,
+.prose > div > h3 {
   max-inline-size: var(--docs-measure);
 }
 
@@ -432,8 +450,6 @@
   border: 1px solid var(--site-border);
   border-radius: var(--site-radius);
   overflow: hidden;
-  /* Demos are allowed out of the prose measure: an editor at 46rem is cramped. */
-  inline-size: min(100%, calc(var(--docs-measure) + 6rem));
 }
 
 .demo__surface {

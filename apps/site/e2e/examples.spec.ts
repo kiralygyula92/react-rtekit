@@ -49,21 +49,24 @@ for (const slug of SLUGS) {
   });
 }
 
-test('the gallery links to every example', async ({ page }) => {
-  await page.goto('/examples');
-  for (const slug of SLUGS) {
-    await expect(page.locator(`a[href="/examples/${slug}"]`)).toHaveCount(1);
-  }
+test('the features index links to every capability page', async ({ page }) => {
+  // It replaced the 44-H2 gallery, and it renders from the same nav data as the
+  // sidebar — so this is check 6 seen from the page rather than from the source.
+  await page.goto('/react-rtekit/all-features/');
+  const cards = page.locator('.card-grid a.card');
+  expect(await cards.count()).toBeGreaterThan(50);
+  await expect(page.locator('a.card[href="/react-rtekit/tables/"]')).toHaveCount(1);
+  await expect(page.locator('a.card[href="/react-rtekit/merge-tags/"]')).toHaveCount(1);
 });
 
-test('the Code tab shows the source that runs', async ({ page }) => {
-  await page.goto('/examples/controlled');
-  await page.getByRole('tab', { name: 'Code' }).click();
-  await expect(page.locator('.example-source')).toContainText('export default function ControlledExample');
+test('a demo can show the source that runs', async ({ page }) => {
+  await page.goto('/react-rtekit/value-formats/');
+  await page.getByRole('button', { name: 'Show source' }).first().click();
+  await expect(page.locator('.demo__source').first()).toContainText('export default function');
 });
 
 test('controlled: loading another report replaces the content (R1)', async ({ page }) => {
-  await page.goto('/examples/controlled');
+  await page.goto('/react-rtekit/value-formats/');
   const editor = page.getByRole('textbox', { name: 'Message' });
   await expect(editor).toContainText('April');
 
@@ -73,7 +76,7 @@ test('controlled: loading another report replaces the content (R1)', async ({ pa
 });
 
 test('controlled: typing reports source "user" and setContent reports "api" (R21)', async ({ page }) => {
-  await page.goto('/examples/controlled');
+  await page.goto('/react-rtekit/value-formats/');
   await page.getByRole('textbox', { name: 'Message' }).click();
   await page.keyboard.type('!');
   await expect(page.getByTestId('controlled-log')).toContainText('user');
@@ -83,7 +86,7 @@ test('controlled: typing reports source "user" and setContent reports "api" (R21
 });
 
 test('presets: switching preset changes the toolbar', async ({ page }) => {
-  await page.goto('/examples/presets');
+  await page.goto('/react-rtekit/presets/');
   await page.getByRole('radio', { name: 'classic' }).click();
   const classicButtons = await page.getByRole('toolbar').getByRole('button').count();
 
@@ -94,7 +97,7 @@ test('presets: switching preset changes the toolbar', async ({ page }) => {
 });
 
 test('toolbar-config: a custom item sits in the toolbar', async ({ page }) => {
-  await page.goto('/examples/toolbar-config');
+  await page.goto('/react-rtekit/toolbar/');
   await page.getByRole('radio', { name: 'Custom items' }).click();
 
   await expect(page.getByRole('button', { name: 'Insert signature' })).toBeVisible();
@@ -102,7 +105,7 @@ test('toolbar-config: a custom item sits in the toolbar', async ({ page }) => {
 });
 
 test('validation-rhf: an empty editor blocks submit, and the old check does not (R2)', async ({ page }) => {
-  await page.goto('/examples/validation-rhf');
+  await page.goto('/react-rtekit/integrations/react-hook-form/');
   await page.getByRole('button', { name: 'Send' }).click();
   await expect(page.getByRole('alert')).toContainText('A message is required');
   await expect(page.getByTestId('rhf-payload')).toHaveCount(0);
@@ -114,7 +117,7 @@ test('validation-rhf: an empty editor blocks submit, and the old check does not 
 });
 
 test('multiple-editors: three editors have three distinct id sets (R4)', async ({ page }) => {
-  await page.goto('/examples/multiple-editors');
+  await page.goto('/react-rtekit/demos/cms-body-field/');
   await expect(page.getByRole('toolbar')).toHaveCount(3);
 
   const ids = await page
@@ -125,7 +128,7 @@ test('multiple-editors: three editors have three distinct id sets (R4)', async (
 });
 
 test('multiple-editors: formatting one leaves the others alone', async ({ page }) => {
-  await page.goto('/examples/multiple-editors');
+  await page.goto('/react-rtekit/demos/cms-body-field/');
   const body = page.getByRole('textbox', { name: 'Message body' });
   await body.click();
   await page.keyboard.press('Control+a');

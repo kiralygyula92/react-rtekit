@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/plugins/
 title: Plugin catalogue
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Every built-in plugin and the presets it appears in.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,8 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Markdown shortcuts](/react-rtekit/markdown-shortcuts/)
+- [Presets](/react-rtekit/presets/)
 
 ## Import
 

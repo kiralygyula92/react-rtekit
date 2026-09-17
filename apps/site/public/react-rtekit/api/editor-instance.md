@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/editor-instance/
 title: EditorInstance
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'The imperative API on the editor ref: content, selection, commands, drafts and find.'
 archetype: E
 section: reference
 ---
@@ -19,7 +19,17 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Undo & redo](/react-rtekit/history/)
+- [Empty state](/react-rtekit/empty-state/)
+- [Merge tags](/react-rtekit/merge-tags/)
+- [Counters & limits](/react-rtekit/counters-and-limits/)
+- [Find & replace](/react-rtekit/find-and-replace/)
+- [Fullscreen](/react-rtekit/fullscreen/)
+- [Source view](/react-rtekit/source-view/)
+- [Autosave & drafts](/react-rtekit/autosave/)
+- [Commands](/react-rtekit/commands/)
+- [Headless](/react-rtekit/headless/)
+- [Engine adapter](/react-rtekit/engine-adapter/)
 
 ## Import
 

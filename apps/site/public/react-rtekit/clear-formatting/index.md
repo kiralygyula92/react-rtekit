@@ -2,28 +2,30 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/clear-formatting/
 title: Clear formatting
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Strips every inline mark from the selection, leaving the text and the block structure.
 archetype: B
 section: features
 capabilityId: clear-formatting
 group: Core features
-symbols: []
+symbols: [CommandId]
 ---
 
 # Clear formatting
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+formatting
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Clears inline marks only. The block type, alignment and indentation are structure, not formatting, and are left alone.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [CommandId](/react-rtekit/api/types/)

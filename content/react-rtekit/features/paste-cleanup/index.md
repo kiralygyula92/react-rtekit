@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/paste-cleanup/
 title: Paste clean-up
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Three paste modes — rich, clean and text — each running the same sanitizer, so a paste from Word cannot smuggle anything in.
 archetype: B
 section: features
 capabilityId: paste-cleanup
 group: 'Content & data'
-symbols: []
+symbols: [RteHandlers, RichTextEditorProps]
 ---
 
 # Paste clean-up
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+paste-cleanup
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+`clean` keeps structure and drops the source's own formatting. Deciding which of the two a given span is remains a heuristic, and a document that encodes meaning purely in inline style loses it.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RteHandlers](/react-rtekit/api/types/)
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)

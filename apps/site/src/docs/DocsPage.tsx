@@ -12,6 +12,8 @@ import { Toc } from './Toc';
 import { FeaturesIndex } from './FeaturesIndex';
 import { NotFound } from './NotFound';
 import { useMetadata } from './useMetadata';
+import { Playground } from '../routes/Playground';
+import { ThemeEditor } from '../routes/ThemeEditor';
 
 /**
  * One documentation page.
@@ -71,6 +73,19 @@ export function DocsPage() {
         {/* The features index is rendered from nav data rather than authored, so that
             it and the sidebar cannot disagree (check 6). */}
         {page.archetype === 'C' ? <FeaturesIndex /> : null}
+
+        {/*
+          * The two interactive tools.
+          *
+          * They are pages with prose like any other — Basics, Customization,
+          * Limitations, API — and the instrument itself is mounted underneath, because
+          * it is forty controls and a generated snippet rather than a demo. Rendering
+          * them here rather than at routes of their own keeps them inside the docs
+          * shell, with a sidebar, a breadcrumb and a table of contents (EXCEPTIONS
+          * E-03).
+          */}
+        {page.pathname === `/${config.id}/demos/playground/` ? <Playground /> : null}
+        {page.pathname === `/${config.id}/demos/theme-editor/` ? <ThemeEditor /> : null}
 
         <footer className="page-actions">
           <div className="page-actions__row">

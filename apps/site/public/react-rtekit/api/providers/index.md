@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/providers/
 title: Providers
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Theme, locale and defaults providers, for configuring several editors at once.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,9 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Presets](/react-rtekit/presets/)
+- [Localization](/react-rtekit/localization/)
+- [Theming](/react-rtekit/theming/)
 
 ## Import
 

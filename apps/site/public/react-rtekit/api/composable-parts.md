@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/composable-parts/
 title: Composable parts
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: The eleven parts the all-in-one component is assembled from.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,9 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Composable parts](/react-rtekit/composable-parts/)
+- [Empty state](/react-rtekit/empty-state/)
+- [Toolbar](/react-rtekit/toolbar/)
 
 ## Import
 

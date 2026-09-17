@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/types/
 title: Types
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'The exported types you annotate with: values, documents, themes, slots, handlers and configuration.'
 archetype: E
 section: reference
 ---
@@ -19,7 +19,41 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Value formats](/react-rtekit/value-formats/)
+- [Text formatting](/react-rtekit/text-formatting/)
+- [Headings](/react-rtekit/headings/)
+- [Lists](/react-rtekit/lists/)
+- [Check lists](/react-rtekit/check-lists/)
+- [Blockquotes](/react-rtekit/blockquotes/)
+- [Code blocks](/react-rtekit/code-blocks/)
+- [Dividers](/react-rtekit/dividers/)
+- [Subscript & superscript](/react-rtekit/subscript-and-superscript/)
+- [Clear formatting](/react-rtekit/clear-formatting/)
+- [Undo & redo](/react-rtekit/history/)
+- [Colours](/react-rtekit/colours/)
+- [Fonts](/react-rtekit/fonts/)
+- [Alignment](/react-rtekit/alignment/)
+- [Indentation](/react-rtekit/indentation/)
+- [Tables](/react-rtekit/tables/)
+- [Emoji](/react-rtekit/emoji/)
+- [Commands](/react-rtekit/commands/)
+- [Find & replace](/react-rtekit/find-and-replace/)
+- [Images & uploads](/react-rtekit/images/)
+- [Links](/react-rtekit/links/)
+- [Paste clean-up](/react-rtekit/paste-cleanup/)
+- [Mentions](/react-rtekit/mentions/)
+- [Handler middleware](/react-rtekit/handler-middleware/)
+- [Icons](/react-rtekit/icons/)
+- [Localization](/react-rtekit/localization/)
+- [Keyboard shortcuts](/react-rtekit/keyboard-shortcuts/)
+- [Plugin authoring](/react-rtekit/plugin-authoring/)
+- [Slots](/react-rtekit/slots/)
+- [Theming](/react-rtekit/theming/)
+- [Sanitization](/react-rtekit/sanitization/)
+- [E-mail output](/react-rtekit/email-output/)
+- [Toolbar](/react-rtekit/toolbar/)
+- [Selection toolbar](/react-rtekit/selection-toolbar/)
+- [Slash menu](/react-rtekit/slash-menu/)
 
 ## Import
 

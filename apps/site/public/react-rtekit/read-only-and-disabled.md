@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/read-only-and-disabled/
 title: 'Read-only & disabled'
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'Two different states: read-only keeps the content selectable and copyable, disabled takes it out of the tab order.'
 archetype: B
 section: features
 capabilityId: read-only-and-disabled
 group: Interaction
-symbols: []
+symbols: [RichTextEditorProps, useEditorState]
 ---
 
-# Read-only & disabled
+# 'Read-only & disabled'
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+readonly-and-disabled
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Neither is a security boundary. Both are UI states; a client can always change them, so the server has to check too.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [useEditorState](/react-rtekit/api/editor-hooks/)

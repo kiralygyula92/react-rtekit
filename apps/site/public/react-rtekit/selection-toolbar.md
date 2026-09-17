@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/selection-toolbar/
 title: Selection toolbar
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: A bubble toolbar over the selection, carrying the marks and the link rather than the whole row.
 archetype: B
 section: features
 capabilityId: selection-toolbar
 group: Interaction
-symbols: []
+symbols: [RichTextEditorProps, ToolbarItemSpec]
 ---
 
 # Selection toolbar
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+floating-toolbar
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Off by default wherever a toolbar is already docked: two toolbars offering the same commands is noise. Set `floatingToolbar` to ask for both.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [ToolbarItemSpec](/react-rtekit/api/types/)

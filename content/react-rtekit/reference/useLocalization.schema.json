@@ -7,5 +7,7 @@
   "options": {},
   "filename": "react/context.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L129",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/localization/"
+  ]
 }

@@ -28,7 +28,7 @@ function field(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/examples/legacy-parity');
+  await page.goto('/react-rtekit/demos/legacy-parity/');
   await expect(editor(page)).toBeVisible();
   // Web fonts change metrics; waiting keeps the snapshots stable.
   await page.evaluate(() => document.fonts.ready);
@@ -71,7 +71,7 @@ test('classic preset, formatted content', async ({ page }) => {
 });
 
 test('three editors keep independent chrome', async ({ page }) => {
-  await page.goto('/examples/multiple-editors');
+  await page.goto('/react-rtekit/demos/cms-body-field/');
   await expect(page.getByRole('textbox', { name: 'Message body' })).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
 

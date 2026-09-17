@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/demos/email-composer/
 title: E-mail composer
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Merge tags, an e-mail output profile and inline styles, producing HTML that survives an e-mail client.
 archetype: B
 section: demos
 ---
@@ -11,16 +11,21 @@ section: demos
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+Merge tags, an e-mail output profile, and inline styles — the HTML this produces is the HTML that sends.
+
+```demo
+email-output
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+The merge-tag syntax, the palette and the output profile are all props. The chips are a slot, so they can carry your own styling.
 
 ## Limitations
 
-None known.
+The e-mail profile makes HTML that e-mail clients can render. It does not test it against them: a complicated layout still needs a real preview service.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [documentToHtml](/react-rtekit/api/serialization/)
+- [Sanitizer](/react-rtekit/api/sanitize/)

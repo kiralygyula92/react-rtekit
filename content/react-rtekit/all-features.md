@@ -2,31 +2,13 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/all-features/
 title: All features
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Every capability in the package, grouped the way the sidebar groups them, with a line on each.
 archetype: C
 section: features
 ---
 
 # All features
 
-TODO: one or two paragraphs of scope: what is in, what is deliberately out
+Everything below ships in the package and is available to everyone — there is no paid tier. A capability is on when its plugin is loaded, which a [preset](/react-rtekit/presets/) usually decides for you.
 
-## Core features
-
-<!-- cards -->
-
-## Content & data
-
-<!-- cards -->
-
-## Display & layout
-
-<!-- cards -->
-
-## Interaction
-
-<!-- cards -->
-
-## Developer tools
-
-<!-- cards -->
+What is deliberately not here: real-time collaboration, document management, PDF export, and anything that stores content. This package edits text and hands it back.

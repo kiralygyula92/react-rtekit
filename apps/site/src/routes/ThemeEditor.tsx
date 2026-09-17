@@ -130,11 +130,6 @@ export function ThemeEditor() {
       </aside>
 
       <section className="theme-editor__preview" aria-label="Preview">
-        <h1>Theme editor</h1>
-        <p className="page__lead">
-          Every visual the library has is one of these tokens. The list is read off the theme,
-          so it cannot fall behind the implementation.
-        </p>
 
         <RichTextEditor
           preset="full"

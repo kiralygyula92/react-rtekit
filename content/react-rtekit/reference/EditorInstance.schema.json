@@ -314,5 +314,17 @@
   },
   "filename": "types/editor.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L164",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/history/",
+    "/react-rtekit/empty-state/",
+    "/react-rtekit/merge-tags/",
+    "/react-rtekit/counters-and-limits/",
+    "/react-rtekit/find-and-replace/",
+    "/react-rtekit/fullscreen/",
+    "/react-rtekit/source-view/",
+    "/react-rtekit/autosave/",
+    "/react-rtekit/commands/",
+    "/react-rtekit/headless/",
+    "/react-rtekit/engine-adapter/"
+  ]
 }

@@ -2,28 +2,35 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/headless/
 title: Headless
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'useEditor with no chrome at all: the document, the commands and the state, and you draw the rest.'
 archetype: B
 section: features
 capabilityId: headless
 group: Developer tools
-symbols: []
+symbols: [useEditor, UseEditorOptions, EditorInstance, useEditorContext, useIsFocused, useFormatState]
 ---
 
 # Headless
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+headless
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Headless still needs the engine and the stylesheet for the content area. It is about the chrome, not about the bytes.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [useEditor](/react-rtekit/api/use-editor/)
+- [UseEditorOptions](/react-rtekit/api/use-editor/)
+- [EditorInstance](/react-rtekit/api/editor-instance/)
+- [useEditorContext](/react-rtekit/api/editor-hooks/)
+- [useIsFocused](/react-rtekit/api/editor-hooks/)
+- [useFormatState](/react-rtekit/api/editor-hooks/)

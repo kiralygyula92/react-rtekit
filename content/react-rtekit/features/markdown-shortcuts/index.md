@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/markdown-shortcuts/
 title: Markdown shortcuts
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: 'Typing ##  or -  or >  turns the block into the thing it looks like, as you type.'
 archetype: B
 section: features
 capabilityId: markdown-shortcuts
 group: 'Content & data'
-symbols: []
+symbols: [RichTextEditorProps, plugins]
 ---
 
 # Markdown shortcuts
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+markdown
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Shortcuts fire on the block you are typing in. Pasting Markdown does not convert it — use `valueFormat="markdown"` or `markdownToDocument` for that.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [RichTextEditorProps](/react-rtekit/api/rich-text-editor/)
+- [plugins](/react-rtekit/api/plugins/)

@@ -2,13 +2,41 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/integrations/formik/
 title: Formik
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Wiring the editor to a Formik field, including validation and submission.
 archetype: I
 section: integrations
 ---
 
 # Formik
 
-## Formik
+```demo
+validation-formik
+```
 
-TODO: body
+There is no Formik adapter package — the editor wires to a field directly:
+
+```tsx
+import { useField } from 'formik';
+import { RichTextEditor, isEmptyHtml } from 'react-rtekit';
+
+function BodyField() {
+  const [field, meta, helpers] = useField('body');
+
+  return (
+    <RichTextEditor
+      label="Message"
+      value={field.value}
+      onChange={(next) => helpers.setValue(next)}
+      onBlur={() => helpers.setTouched(true)}
+      invalid={meta.touched && Boolean(meta.error)}
+      error={meta.touched ? meta.error : undefined}
+    />
+  );
+}
+```
+
+Validate with `isEmptyHtml` rather than a string check:
+
+```ts
+validate: (value) => (isEmptyHtml(value) ? 'A message is required' : undefined);
+```

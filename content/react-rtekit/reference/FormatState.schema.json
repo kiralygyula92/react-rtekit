@@ -56,5 +56,12 @@
   },
   "filename": "types/selection.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L72",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/text-formatting/",
+    "/react-rtekit/lists/",
+    "/react-rtekit/subscript-and-superscript/",
+    "/react-rtekit/colours/",
+    "/react-rtekit/alignment/",
+    "/react-rtekit/indentation/"
+  ]
 }

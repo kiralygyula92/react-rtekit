@@ -2,28 +2,31 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/find-and-replace/
 title: 'Find & replace'
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Find and replace over the document, with match case, whole word and regular expressions, highlighted by overlay.
 archetype: B
 section: features
 capabilityId: find-and-replace
 group: Interaction
-symbols: []
+symbols: [EditorInstance, FindOptions]
 ---
 
-# Find & replace
+# 'Find & replace'
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+```demo
+find-replace
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
-None known.
+Matches are highlighted with an overlay rather than by marking up the document, so a search never changes what you would save and never pushes an entry onto the undo stack. The overlay is positioned from the rendered text, so it needs the editor to be visible.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [EditorInstance](/react-rtekit/api/editor-instance/)
+- [FindOptions](/react-rtekit/api/types/)

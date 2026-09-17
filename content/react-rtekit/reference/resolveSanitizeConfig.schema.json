@@ -7,5 +7,7 @@
   "options": {},
   "filename": "core/sanitize/profiles.ts",
   "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L256",
-  "usedBy": []
+  "usedBy": [
+    "/react-rtekit/sanitization/"
+  ]
 }

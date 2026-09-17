@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/commands/
 title: Command catalogue
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: All 57 commands, their payloads and what each one does.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,8 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Text formatting](/react-rtekit/text-formatting/)
+- [Commands](/react-rtekit/commands/)
 
 ## Import
 

@@ -263,6 +263,7 @@ export const Toolbar = /* @__PURE__ */ memo(function Toolbar({
             }}
             label={resolveMessage(t.toolbar.more)}
             noPadding
+            keepFocus
           >
             <div className="rte-toolbar__overflow" role="group" aria-label={resolveMessage(t.toolbar.more)}>
               {hidden.map((group, groupIndex) => (

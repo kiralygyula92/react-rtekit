@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/plugin-api/
 title: Plugin API
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: Defining a plugin, resolving plugin order, and the preset bundles.
 archetype: E
 section: reference
 ---
@@ -19,7 +19,9 @@ section: reference
 
 ## Used by
 
-Nothing on this site declares these symbols in its frontmatter. They are part of the library’s own surface rather than of one capability.
+- [Toolbar](/react-rtekit/toolbar/)
+- [Plugin authoring](/react-rtekit/plugin-authoring/)
+- [Presets](/react-rtekit/presets/)
 
 ## Import
 

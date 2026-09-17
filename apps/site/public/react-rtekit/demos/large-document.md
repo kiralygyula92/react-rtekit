@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/demos/large-document/
 title: Large document
-description: 'TODO: one line, reused in nav, meta and llms.txt'
+description: A document large enough to make performance visible, with the numbers the budget is measured against.
 archetype: B
 section: demos
 ---
@@ -11,16 +11,21 @@ section: demos
 
 ## Basics
 
-TODO: a runnable demo, before any prose beyond one sentence
+A document long enough to make performance visible, with the measurements the build's budgets are checked against.
+
+```demo
+large-document
+```
 
 ## Customization
 
-TODO: one customised instance, and a link to the customization guide
+The props worth memoising, and the ones that cause a remount, are listed in the [performance guide](/react-rtekit/guides/performance/).
 
 ## Limitations
 
-None known.
+The budgets are measured on a quiet CI machine with a dedicated Playwright config. They are a regression signal, not a promise about a particular device.
 
 ## API
 
-TODO: generated from the symbols in this page’s frontmatter
+- [useEditor](/react-rtekit/api/use-editor/)
+- [useEditorState](/react-rtekit/api/editor-hooks/)

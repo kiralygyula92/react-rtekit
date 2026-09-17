@@ -38,6 +38,18 @@ export interface PopoverProps {
   offset?: number;
   /** Remove the panel's padding, for menus that manage their own. @default false */
   noPadding?: boolean;
+  /**
+   * Keep focus where it is when the panel opens.
+   *
+   * For a panel whose controls act on the editor's *selection* — the toolbar's overflow
+   * menu is the one that matters — taking focus loses the selection the command is meant
+   * to apply to, and the command then runs against nothing. That is R5 again, one level
+   * further out: the buttons prevent `mousedown` so clicking one keeps the caret, and
+   * then the panel that contains them moved focus anyway.
+   *
+   * @default false
+   */
+  keepFocus?: boolean;
   /** Appended to the panel’s own class name. */
   className?: string;
   /** The panel’s content. */
@@ -68,6 +80,7 @@ export function Popover({
   placement = 'bottom-start',
   offset = 4,
   noPadding = false,
+  keepFocus = false,
   className,
   children,
 }: PopoverProps) {
@@ -152,13 +165,13 @@ export function Popover({
   // Move focus into the panel, unless its content already placed it somewhere better:
   // the colour picker focuses the applied swatch, and child effects run first.
   useEffect(() => {
-    if (!open) return;
+    if (!open || keepFocus) return;
     const panel = panelRef.current;
     if (!panel) return;
     if (panel.contains(document.activeElement)) return;
     const [first] = focusable(panel);
     (first ?? panel).focus();
-  }, [open]);
+  }, [open, keepFocus]);
 
   // Keeping the editor's selection while the popover is open is a DOM concern, not a
   // user interaction, so the guard is attached imperatively rather than through JSX
