@@ -245,26 +245,15 @@
 }
 
 /*
- * The article fills its column; the prose inside it is what has a measure.
+ * The article fills the column it is given.
  *
- * Capping the article capped the demos too, and a demo of the `full` preset in a 46rem
- * column puts most of its toolbar behind the overflow menu — the page whose job is to
- * show a capability hiding the button for it. Text keeps its line length; editors,
- * tables and code get the width.
+ * It was capped at a reading measure, which made the content look like a panel floating
+ * in the page — and capped the demos with it, so a `full`-preset editor put most of its
+ * toolbar behind the overflow menu. The window decides the width; the sidebar and the
+ * rail take theirs and the article has the rest.
  */
 .docs-article {
   min-inline-size: 0;
-  max-inline-size: 66rem;
-}
-
-.docs-article__lead,
-.prose > div > p,
-.prose > div > ul,
-.prose > div > ol,
-.prose > div > blockquote,
-.prose > div > h2,
-.prose > div > h3 {
-  max-inline-size: var(--docs-measure);
 }
 
 .breadcrumb {
@@ -812,6 +801,12 @@
   font-weight: 400;
 }
 
+/* So a collapsed group still reports that something inside it was touched. */
+.panel__summary-changed {
+  color: var(--site-accent);
+  font-weight: 600;
+}
+
 /* ── the filter row ────────────────────────────────────────────────────────── */
 .panel__filter {
   display: flex;
@@ -869,12 +864,14 @@
   color: var(--site-text-muted);
 }
 
+/* The gutters are mostly the controls' own padding, so a changed control can paint a
+   card without the row it sits in shifting. */
 .panel__grid,
 .panel__setup-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 14px 20px;
-  padding: 6px 14px 18px;
+  gap: 2px 4px;
+  padding: 4px 4px 14px;
 }
 
 .panel__setup {
@@ -882,9 +879,23 @@
 }
 
 /* ── one control ───────────────────────────────────────────────────────────── */
+.control {
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+/* Changed props are the answer to "what did I actually touch?", so they are a tinted
+   card rather than a one-pixel border difference you have to hunt for. */
+.control[data-changed='true'] {
+  border-color: color-mix(in srgb, var(--site-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--site-accent) 8%, transparent);
+}
+
 .control__head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
   margin-block-end: 5px;
 }
@@ -899,23 +910,22 @@
   cursor: pointer;
 }
 
-/* Only on a changed control, so the panel is not 61 reset buttons. */
+/* Only on a changed control, so the panel is not 61 reset buttons. Worded rather than
+   drawn: an icon this small next to a prop name reads as decoration. */
 .control__reset {
-  display: grid;
-  place-items: center;
-  inline-size: 20px;
-  block-size: 20px;
-  padding: 0;
+  flex: none;
+  padding: 1px 5px;
   border: 0;
   border-radius: 5px;
   background: none;
-  color: var(--site-text-muted);
+  color: var(--site-accent);
+  font: inherit;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .control__reset:hover {
-  background: var(--site-bg-muted);
-  color: var(--site-accent);
+  background: color-mix(in srgb, var(--site-accent) 14%, transparent);
 }
 
 .control__input {
@@ -929,9 +939,10 @@
   font-size: 13px;
 }
 
-/* A changed control is marked on the input, not only by the reset button appearing. */
-.control[data-changed='true'] .control__input {
-  border-color: var(--site-accent);
+/* The card carries the "changed" signal; the field keeps its ordinary border so it still
+   reads as a field against the tint. */
+.control[data-changed='true'] .control__name {
+  background: color-mix(in srgb, var(--site-accent) 16%, transparent);
 }
 
 .control__meta {

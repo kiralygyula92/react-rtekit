@@ -143,6 +143,11 @@ export function ControlPanel({ value, onChange, setup }: ControlPanelProps) {
           const entries = visible.filter((prop) => prop.group === group);
           if (entries.length === 0) return null;
           const expanded = filtering || open.has(group);
+          // Counted on the group's own props, not on `entries`: a filtered-away change is
+          // still a change, and a collapsed group has to say so or it hides one.
+          const changed = PROPS.filter(
+            (prop) => prop.group === group && value[prop.name] !== undefined,
+          ).length;
 
           return (
             <section key={group} className="panel__section">
@@ -161,7 +166,15 @@ export function ControlPanel({ value, onChange, setup }: ControlPanelProps) {
               >
                 <Caret open={expanded} />
                 <span className="panel__summary-title">{group}</span>
-                <span className="panel__summary-count">({entries.length})</span>
+                <span className="panel__summary-count">
+                  ({entries.length}
+                  {changed > 0 ? (
+                    <>
+                      , <strong className="panel__summary-changed">{changed} changed</strong>
+                    </>
+                  ) : null}
+                  )
+                </span>
               </button>
 
               {expanded ? (
@@ -224,17 +237,11 @@ function Control({ prop, value, onChange }: ControlProps) {
             type="button"
             className="control__reset"
             aria-label={`Reset ${prop.name}`}
-            title={`Reset ${prop.name}`}
             onClick={() => {
               onChange(undefined);
             }}
           >
-            <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7"
-              />
-            </svg>
+            Reset
           </button>
         ) : null}
       </div>

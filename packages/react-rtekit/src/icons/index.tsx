@@ -46,8 +46,16 @@ function strokeIcon(path: ReactNode): ReactNode {
  */
 export const defaultIcons: RteIcons = {
   // ── marks ────────────────────────────────────────────────────────────────
+  /*
+   * The B is drawn as a stem and two bowls, with the counters as separate subpaths.
+   *
+   * The previous one closed its outer contour with an arc whose chord was nearly its
+   * own diameter, so both bowls came out almost flat on the right and the letter read
+   * as though it had been cut off. This one is centred in the box to within 0.03 units
+   * on each axis, which is what keeps it from drifting against the other icons.
+   */
   bold: /* @__PURE__ */ icon(
-    <path d="M15.6 10.79A4.5 4.5 0 0 0 13 3H7v14h6.8a4.5 4.5 0 0 0 1.8-6.21ZM10 5.5h2.5a2 2 0 0 1 0 4H10Zm3 9H10v-4h3a2 2 0 0 1 0 4Z" />,
+    <path d="M5.9 3.5h6.7a4.55 4.55 0 0 1 3.03 7.95A4.85 4.85 0 0 1 12.9 20.5H5.9ZM9.2 6.7v3.6h3.2a1.8 1.8 0 0 0 0-3.6ZM9.2 13.5v3.8h3.5a1.9 1.9 0 0 0 0-3.8Z" />,
   ),
   italic: /* @__PURE__ */ icon(<path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />),
   underline: /* @__PURE__ */ icon(
