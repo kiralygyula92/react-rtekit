@@ -24,25 +24,15 @@
 /**
  * Peer dependencies.
  *
- * The consumer already has these, so they are not part of what this package costs
- * them; 09 §4 documents the Lexical peer separately at ~30 kB for `standard`.
+ * The consumer already has these, so they are not part of what this package costs them.
+ *
+ * The list used to hold twelve Lexical packages as well, which is why these numbers
+ * went *up* when the engine was brought in-house: the engine now ships here instead of
+ * being installed alongside and excluded from the measurement. What a consumer actually
+ * downloads went down by far more than these budgets went up — the site's bundle lost a
+ * 323 kB chunk, 103 kB gzipped, and gained about 4 kB here.
  */
-const PEERS = [
-  'react',
-  'react-dom',
-  'lexical',
-  '@lexical/code',
-  '@lexical/history',
-  '@lexical/html',
-  '@lexical/link',
-  '@lexical/list',
-  '@lexical/markdown',
-  '@lexical/react',
-  '@lexical/rich-text',
-  '@lexical/selection',
-  '@lexical/table',
-  '@lexical/utils',
-];
+const PEERS = ['react', 'react-dom'];
 
 export default [
   {
@@ -51,20 +41,20 @@ export default [
     //
     //   ~12 kB gz  the core pipeline — the in-house HTML parser (ADR-003), the
     //              sanitizer, the schema, the interop dialects and the document model
-    //   ~11 kB gz  the Lexical adapter — its nodes, converters, commands, autolinking
-    //              and the markdown input rules
+    //   ~16 kB gz  the engine — the keyed tree, the renderer, the reconciler, selection
+    //              mapping, the model operations, history and the input handling
     //    ~5 kB gz  useEditor itself, the store and the keymap
     //    ~8 kB gz  the serializers, the English catalogue and the runtime
     //
-    // The adapter is the one piece that could leave: loading it on demand would take
-    // about 11 kB out of this number. It is not worth it — the engine is what makes
+    // The engine is the one piece that could leave: loading it on demand would take
+    // about 16 kB out of this number. It is not worth it — the engine is what makes
     // the editor an editor, and deferring it would put a visible delay between first
     // paint and a usable field, in exchange for bytes that arrive a moment later
     // anyway.
     name: 'core import (no plugins)',
     path: 'dist/index.js',
     import: '{ useEditor }',
-    limit: '37 kB',
+    limit: '41 kB',
     gzip: true,
     ignore: PEERS,
   },
@@ -74,7 +64,7 @@ export default [
     // than the component that can render any of them; 09 §4's `full` figure of 60 kB
     // is the honest comparison, and this is 3.6 kB over it.
     //
-    // What the 63.6 kB is: the 36 kB above, plus the toolbar and its item registry,
+    // What the 63.6 kB is: the 41 kB above, plus the toolbar and its item registry,
     // the 51-icon set, the slot table, the themes, and the feature chrome — the link
     // popover, the image dialog and resize frame, the table picker and toolbar, the
     // four trigger menus, find and replace, the source view, fullscreen, autosave,
@@ -100,7 +90,7 @@ export default [
     name: 'RichTextEditor (all chrome, all plugins)',
     path: 'dist/index.js',
     import: '{ RichTextEditor }',
-    limit: '67 kB',
+    limit: '71 kB',
     gzip: true,
     ignore: PEERS,
   },

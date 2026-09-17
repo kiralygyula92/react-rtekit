@@ -15,13 +15,15 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 
 | Entry point | Budget |
 |---|---|
-| `useEditor` — headless | 37 kB |
-| `RichTextEditor` — everything | 67 kB |
+| `useEditor` — headless | 41 kB |
+| `RichTextEditor` — everything | 71 kB |
 | `react-rtekit/core` — no React | 19 kB |
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |
 
 All min+gzip. There are no peers to exclude: React and React DOM are the only ones, and the consumer already has them.
+
+These numbers include the editing engine, which is this package's own code. That is worth saying because it makes them look worse than they are: an editor that leaves the engine to a peer dependency reports a smaller figure and costs the reader more. Bringing the engine in-house added about 4 kB here and removed 103 kB gzipped from what a consumer downloads.
 
 ## Why the component is larger than the hook
 
