@@ -39,7 +39,7 @@
     print stylesheet that drops the chrome and writes link destinations out.
   - **Floating toolbar**, sticky docking, and a measured overflow menu — the same
     `Toolbar` in all three placements, so the roving focus and slots are the same too.
-  - **Keyboard model complete** (05 §13): `Alt+F10` moves focus to the toolbar, `Mod+/`
+  - **Keyboard model complete**: `Alt+F10` moves focus to the toolbar, `Mod+/`
     opens the shortcut reference, Tab indents inside a list and moves focus outside one,
     `Mod+Enter` submits, and Escape exits when `escapeExitsEditor` is on. The reference
     is built from the keymap in force, so a rebound or disabled shortcut is shown as it
@@ -96,12 +96,12 @@
     and mobile emulation of both — rather than on Chromium alone. Getting there meant
     separating what is a browser difference from what is a bug: a phone's 44px touch
     targets are not a parity regression, and Shift+Enter is a desktop gesture.
-  - **IME composition is covered** (05 §15). No change event fires between
+  - **IME composition is covered**. No change event fires between
     `compositionstart` and `compositionend`, exactly one fires when the composition
     commits, and a half-composed reading never reaches an autosaved draft — a Japanese or
     Korean user was previously able to save `にほn` as their message.
   - **Server rendering is covered**, including the one case that was broken: see below.
-  - **The performance budgets from 09 §4 are measured** in a real browser, in their own CI
+  - **The performance budgets are measured** in a real browser, in their own CI
     job, because a timing budget that shares a machine with eight parallel browsers
     measures the machine. All four pass with room: mounting a `standard` editor takes 3 ms
     against a budget of 50, typing in a 50 KB document is 8 ms at the 95th percentile
@@ -120,15 +120,35 @@
     all shared a chunk with something reachable, so none of them could be dropped. Giving
     the large UI modules their own chunk boundaries took that import from 41.1 kB to
     36.0 kB with no change in behaviour.
-  - **Safari left merge tags behind when a selection was deleted.** A
-    `contenteditable="false"` node inside a deleted range survives WebKit's own handling,
-    so "select all, delete, write a new message" kept every placeholder — and
-    `{first_name}` went out to a recipient whose name had never been substituted in.
-    Deleting a range now goes through the document model on every browser.
+  - **Safari left merge tags and mentions behind.** Selecting the whole message and then
+    deleting it, or typing over it, kept the last chip — and an unsubstituted
+    `{company_address}` went out in the e-mail. The cause was `contenteditable="false"` on
+    the chip: WebKit's select-all stops at the edge of a non-editable node, so the model
+    range excluded it and everything downstream was correct about the wrong range. The
+    attribute added nothing the node's token mode did not already provide, and removing it
+    fixes both chip types on every engine. Deleting a range also goes through the document
+    model now rather than being left to the browser.
+  - **The test that should have caught that** asserted `toContainText('5')` against a
+    counter reading "N / 2048", which a leftover count of 25 satisfies. Counter assertions
+    read the counter exactly now.
+  - **`floatingToolbar` did nothing.** The component behind it was written, styled,
+    documented and demonstrated, and nothing ever rendered it. It is mounted now, shows
+    `bubbleMenuItems` when they are given and the docked toolbar's items otherwise, and
+    has tests.
+  - **`editor.replace()` over-reported.** It counted matches it had found and then
+    deliberately skipped: a match inside a merge tag is not replaced, because replacing
+    half a chip leaves a label that no longer matches its key — but it was still added to
+    the total shown to the user.
   - **`<RichTextEditor>` server-rendered an empty box** and logged a hydration warning in
     every application that rendered it. It now sends the same sanitized static markup the
-    composable parts do, which is what 02 §8 asked for, and suppresses the warning the
+    composable parts do, and suppresses the warning the
     engine's own normalization causes.
+  - **The package is standalone.** It was built from a specification describing one
+    application, and it read like it: comments cited section numbers, the `classic` preset
+    reproduced a named product, and every example was about that product's domain. The
+    specification is gone, its one durable part is `docs/regressions.md`, and the
+    vocabulary is now the general case — a legacy Quill wrapper, which is what most
+    applications are actually replacing.
   - **The documentation site could not have been deployed.** It had no base path, so every
     asset URL on a GitHub Pages project site would have been wrong by exactly the
     repository prefix, and every deep link would have 404ed. Both are fixed, and the
@@ -160,7 +180,7 @@
 
   - Theme tokens reached the DOM under names no stylesheet read (`--rte-editor-border-width`
     rather than `--rte-border-width`), so most of a theme silently did nothing. The
-    mapping in 07 §3 is now explicit and a test asserts both directions of it.
+    mapping is an explicit table now, and a test asserts both directions of it.
   - `Mod+B`, `Mod+I` and `Mod+U` were handled by both the keymap and the engine, so the
     format toggled twice and the shortcut appeared to do nothing. `disableShortcuts` now
     also stops the engine's own handling, rather than only unbinding our command.
@@ -212,7 +232,7 @@
 
 - Customization depth, the documentation site, and a readable default theme.
 
-  - **The composable parts are complete** (06 §6). `<Rte.Root>` now provides the slot
+  - **The composable parts are complete**. `<Rte.Root>` now provides the slot
     table and the resolved configuration that the other parts read, and `<Rte.Label>`,
     `<Rte.Toolbar>` and `<Rte.Portals>` join it. A field assembled by hand gets the same
     toolbar, the same colour picture and the same popovers as `<RichTextEditor>`, because
@@ -225,7 +245,7 @@
     is built from the same sources the pages render: guide headings are parsed out of the
     guide modules, and slots, commands, handlers and tokens come from the runtime
     metadata, so a result can never point at something that no longer exists.
-  - **Thirteen more examples**, finishing 08 §3: plugin authoring, command overrides,
+  - **Thirteen more examples**, finishing the set: plugin authoring, command overrides,
     handler middleware, custom slots, a Tailwind skin, a design-system skin, theming,
     content styles, localization, Formik validation, a 100 KB document with a latency
     meter, headless, and the composable card layout.
@@ -244,7 +264,7 @@
     now above 4.5:1 against both surfaces, and a contrast test covers every shipped theme
     so a nicer-looking shade cannot quietly undo it. The `classic` theme keeps its pinned
     parity values for the accent, the focus ring and the 1px invalid border; only its
-    error _text_ changes, which is recorded as a deliberate deviation from 07 §4.
+    error _text_ changes, which is recorded as a deliberate deviation from the reference palette.
   - **`useEditorReady` never became true outside `<RichTextEditor>`.** Mounting sets a ref,
     which re-renders nothing; the hook worked only because the surrounding chrome happened
     to re-render around it. Under `<Rte.Root>`, where the children are elements the root
@@ -255,7 +275,7 @@
     in order, so the content element ended up with no accessible name at all. It now writes
     only the attributes it was actually given.
   - **A plugin's toolbar item could not be referenced by name.** `toolbar={[['bold',
-'highlight']]}` — the form 06 §5 documents — did not typecheck, because the entry type
+'highlight']]}` — the documented form — did not typecheck, because the entry type
     only admitted built-in names. `ToolbarEntry` now accepts any string while keeping
     autocomplete on the built-ins.
   - The `Checkbox` slot did not expose `disabled`, though the primitive behind it always

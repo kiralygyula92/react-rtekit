@@ -50,7 +50,7 @@
 
   - Theme tokens reached the DOM under names no stylesheet read (`--rte-editor-border-width`
     rather than `--rte-border-width`), so most of a theme silently did nothing. The
-    mapping in 07 §3 is now explicit and a test asserts both directions of it.
+    mapping is an explicit table now, and a test asserts both directions of it.
   - `Mod+B`, `Mod+I` and `Mod+U` were handled by both the keymap and the engine, so the
     format toggled twice and the shortcut appeared to do nothing. `disableShortcuts` now
     also stops the engine's own handling, rather than only unbinding our command.
