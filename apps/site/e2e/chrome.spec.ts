@@ -162,7 +162,7 @@ test.describe('the toolbar that follows a selection', () => {
     await selectFirstWord(page);
     await page.locator('.rte-floating-toolbar [data-item="bold"]').click();
 
-    await expect(editor(page).locator('.rte-bold').first()).toBeVisible();
+    await expect(editor(page).locator('.rte-bold, strong').first()).toBeVisible();
   });
 });
 

@@ -957,11 +957,20 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
       );
       /** Set by the structural handler when the browser's default must survive. */
       let claimed = false;
+      /**
+       * Whether the middleware reached the default at all.
+       *
+       * An `onKeyDown` handler vetoes by not calling `next`, and a veto has to stop the
+       * *engine's* own bindings too — it binds Mod+B and friends itself, so a key that
+       * merely went unhandled here would still format the selection.
+       */
+      let reached = false;
 
       runHandler<KeyDownContext>(
         config.handlers?.onKeyDown,
         { editor: instance, event, keymapMatch: match?.handler ?? null },
         (ctx) => {
+          reached = true;
           if (disabled) {
             ctx.event.preventDefault();
             return;
@@ -975,7 +984,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
         },
       );
 
-      return claimed;
+      return claimed || !reached;
     };
 
     /**

@@ -203,6 +203,8 @@ class NativeEngineHandle implements EngineHandle {
    * validating against noise. No change event escapes while this is set.
    */
   #composing = false;
+  /** Whether the host's keymap claimed the keydown that produced the current input. */
+  #claimedByKeymap = false;
   readonly #cleanup: (() => void)[] = [];
 
   constructor(container: HTMLElement, options: EngineMountOptions) {
@@ -1037,7 +1039,8 @@ class NativeEngineHandle implements EngineHandle {
     });
     on(this.contentElement, 'keydown', (event) => {
       const claimed = this.#events.emitClaimable('keydown', event);
-      if (claimed || event.defaultPrevented) return;
+      this.#claimedByKeymap = claimed || event.defaultPrevented;
+      if (this.#claimedByKeymap) return;
       if (this.#handleKeyDown(event)) event.preventDefault();
     });
 
@@ -1049,6 +1052,31 @@ class NativeEngineHandle implements EngineHandle {
         model === null ? null : toEditorSelection(this.#tree, model),
       );
       this.#emitFormat();
+    });
+
+    // The check box is drawn with `::before`, which cannot receive a click of its own,
+    // so the item reports the click and the engine decides whether it landed on the box.
+    on(this.contentElement, 'pointerdown', (event) => {
+      if (!this.#editable) return;
+      const target = (event).target;
+      if (!(target instanceof Element)) return;
+      const item = target.closest('li[data-checked]');
+      if (item === null) return;
+      const box = item.getBoundingClientRect();
+      const inset = Number.parseFloat(getComputedStyle(item).paddingInlineStart) || 0;
+      // The box sits in the item's leading padding; a click past it is a click in the
+      // text, where it belongs.
+      const offsetX = (event).clientX - box.left;
+      if (offsetX > inset) return;
+      const key = this.#index.byNode.get(item);
+      if (key === undefined) return;
+      event.preventDefault();
+      const value = this.#tree.get(key)?.value;
+      if (value?.type !== 'listItem') return;
+      this.#edit('structure', 'user', (context, selection) => {
+        context.write.setValue(key, { ...value, checked: value.checked !== true, content: [] });
+        return selection;
+      });
     });
 
     on(this.contentElement, 'compositionstart', () => {
@@ -1093,6 +1121,49 @@ class NativeEngineHandle implements EngineHandle {
    */
   #handleKeyDown(event: KeyboardEvent): boolean {
     if (!this.#editable) return false;
+
+    /*
+     * Undo and redo are the engine's, not the keymap's.
+     *
+     * `buildKeymap` binds no shortcut for them — the Lexical adapter took them from
+     * Lexical's own history plugin, so the host never needed to — which meant Ctrl+Z
+     * reached this engine and fell straight through to the browser.
+     */
+    if ((event.ctrlKey || event.metaKey) && !event.altKey) {
+      const key = event.key.toLowerCase();
+      if (key === 'z' && !event.shiftKey) {
+        if (!this.#history.canUndo()) return false;
+        this.undo();
+        return true;
+      }
+      if ((key === 'z' && event.shiftKey) || key === 'y') {
+        if (!this.#history.canRedo()) return false;
+        this.redo();
+        return true;
+      }
+
+      /*
+       * The format shortcuts, for the browsers where nothing else delivers them.
+       *
+       * Only reached when the host's keymap did not claim the key, so this is a fallback
+       * rather than a second opinion. Chromium routes Ctrl+B through the keymap and
+       * Firefox through neither the keymap nor `beforeinput`, which left the shortcut
+       * doing nothing there at all.
+       */
+      const shortcut = event.shiftKey
+        ? key === 'x'
+          ? 'toggleStrike'
+          : null
+        : key === 'b'
+          ? 'toggleBold'
+          : key === 'i'
+            ? 'toggleItalic'
+            : key === 'u'
+              ? 'toggleUnderline'
+              : null;
+      if (shortcut !== null) return this.exec(shortcut);
+    }
+
     if (event.ctrlKey || event.metaKey || event.altKey) return false;
 
     if (event.key === 'Backspace') {
@@ -1153,11 +1224,29 @@ class NativeEngineHandle implements EngineHandle {
           deleteRange(context, selection),
         );
       case 'formatBold':
-        return this.exec('toggleBold');
       case 'formatItalic':
-        return this.exec('toggleItalic');
-      case 'formatUnderline':
-        return this.exec('toggleUnderline');
+      case 'formatUnderline': {
+        /*
+         * The browser's own reading of Ctrl+B and friends.
+         *
+         * The host's keymap runs the same command on `keydown`, and browsers disagree
+         * about whether both reach us: Chromium sends the keydown the host matches,
+         * Firefox sends this as well. Running it unconditionally toggled the mark
+         * straight back off there; ignoring it broke the shortcut where the keydown is
+         * the one that does not arrive. So it runs only if nothing already has, and is
+         * claimed either way — the default has to be prevented, or the browser formats
+         * the DOM behind the model's back.
+         */
+        if (this.#claimedByKeymap) return true;
+        const command =
+          event.inputType === 'formatBold'
+            ? 'toggleBold'
+            : event.inputType === 'formatItalic'
+              ? 'toggleItalic'
+              : 'toggleUnderline';
+        this.exec(command);
+        return true;
+      }
       case 'historyUndo':
         this.undo();
         return true;

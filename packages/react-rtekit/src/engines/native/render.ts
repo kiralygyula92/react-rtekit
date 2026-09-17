@@ -265,6 +265,11 @@ export function renderNode(
         list.setAttribute('start', String(value.start));
       }
       if (value.style !== undefined) list.setAttribute('type', value.style);
+      // A check list is a group of checkboxes rather than a list of items, and saying so
+      // is what lets each item carry `role="checkbox"`. Leaving the implicit `list` role
+      // in place made every item a non-listitem child of a list, which is an accessibility
+      // violation in its own right.
+      if (value.listType === 'check') list.setAttribute('role', 'group');
       appendChildren(list);
       return list;
     }
@@ -275,6 +280,11 @@ export function renderNode(
       if (parent?.type === 'list' && parent.listType === 'check') {
         item.setAttribute('data-checked', String(value.checked === true));
         item.setAttribute('style', 'list-style-type: none');
+        // The box is drawn with `::before`, so the item *is* the checkbox as far as a
+        // screen reader is concerned and has to say so. `data-checked` is what the
+        // stylesheet and the serializer read; `aria-checked` is what a person hears.
+        item.setAttribute('role', 'checkbox');
+        item.setAttribute('aria-checked', String(value.checked === true));
       }
       const className = alignClass(value.align);
       if (className !== null) item.className = className;

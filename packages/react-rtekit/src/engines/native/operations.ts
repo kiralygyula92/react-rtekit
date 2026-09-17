@@ -306,21 +306,79 @@ function stripAlign(node: AnyNode): AnyNode {
   return stripUndefined(copy as unknown as AnyNode);
 }
 
-/** Moves every touched block one indent step, never below zero. */
+/**
+ * Moves every touched block one indent step.
+ *
+ * A list item indents by *nesting*, not by an attribute: a list inside a list is what the
+ * markup means and what every reader of that HTML expects. Everything else carries an
+ * `indent` count, never below zero.
+ */
 export function shiftIndent(
   context: EditContext,
   selection: ModelSelection,
   by: number,
 ): ModelSelection {
-  for (const key of blocksInRange(context.tree, selection)) {
-    const value = context.tree.get(key)?.value;
+  const { tree, write } = context;
+  for (const key of blocksInRange(tree, selection)) {
+    const value = tree.get(key)?.value;
     if (value === undefined) continue;
+
+    if (value.type === 'listItem') {
+      if (by > 0) nestItem(context, key);
+      else unnestItem(context, key);
+      continue;
+    }
+
     const current = 'indent' in value && value.indent !== undefined ? value.indent : 0;
     const next = Math.max(0, current + by);
     const updated = { ...value, indent: next === 0 ? undefined : next } as AnyNode;
-    context.write.setValue(key, stripUndefined(updated));
+    write.setValue(key, stripUndefined(updated));
   }
   return selection;
+}
+
+/**
+ * Moves a list item into a list nested under the item before it.
+ *
+ * The first item of a list has nothing to nest under, so Tab there does nothing — which
+ * is what every editor does, because an item with no parent is not a sub-item.
+ */
+function nestItem(context: EditContext, item: NodeKey): void {
+  const { tree, write } = context;
+  const list = tree.parent(item);
+  if (list === null || list === undefined) return;
+  const siblings = tree.children(list);
+  const at = siblings.indexOf(item);
+  if (at <= 0) return;
+  const previous = siblings[at - 1]!;
+
+  const listValue = tree.get(list)?.value;
+  const listType = listValue?.type === 'list' ? listValue.listType : 'bullet';
+
+  // Join the sub-list the previous item already has, rather than starting a second one
+  // beside it — two adjacent nested lists render as two lists.
+  const existing = tree
+    .children(previous)
+    .find((child) => tree.get(child)?.value.type === 'list');
+  const target = existing ?? write.insert(previous, { type: 'list', listType, items: [] }, undefined, 'children');
+  write.move(item, target);
+}
+
+/** Moves a nested list item back out to its grandparent list. */
+function unnestItem(context: EditContext, item: NodeKey): void {
+  const { tree, write } = context;
+  const list = tree.parent(item);
+  if (list === null || list === undefined) return;
+  const parentItem = tree.parent(list);
+  if (parentItem === null || parentItem === undefined) return;
+  if (tree.get(parentItem)?.value.type !== 'listItem') return;
+  const outer = tree.parent(parentItem);
+  if (outer === null || outer === undefined) return;
+
+  const at = tree.children(outer).indexOf(parentItem);
+  write.move(item, outer, at + 1);
+  // A nested list with nothing left in it is markup nobody asked for.
+  if (tree.children(list).length === 0) write.remove(list);
 }
 
 /** Which list a block is in, if it is in one. */
@@ -406,6 +464,16 @@ export function insertText(
     const next = before.slice(0, caret.offset) + text + before.slice(caret.offset);
     write.setValue(caret.key, { ...entry.value, text: next });
     const point = { key: caret.key, offset: caret.offset + text.length };
+    return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
+  }
+
+  // The caret is beside something that is not text — a line break, a chip — so the run
+  // to type into does not exist yet and goes next to it.
+  const parent = tree.parent(caret.key);
+  if (entry !== undefined && parent !== null && parent !== undefined && isInline(tree, caret.key)) {
+    const at_ = tree.children(parent).indexOf(caret.key) + (caret.offset > 0 ? 1 : 0);
+    const key = write.insert(parent, { type: 'text', text }, at_);
+    const point = { key, offset: text.length };
     return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
   }
 
@@ -670,7 +738,9 @@ export function insertInline(
   const point =
     after !== undefined && tree.get(after)?.value.type === 'text'
       ? { key: after, offset: 0 }
-      : { key: inserted, offset: 0 };
+      : // Offset 1 means *after* the node. Offset 0 put the caret in front of the line
+        // break just inserted, so Shift+Enter then typing produced "secondthird<br>".
+        { key: inserted, offset: 1 };
   return { anchor: point, focus: { ...point }, isCollapsed: true, isBackward: false };
 }
 

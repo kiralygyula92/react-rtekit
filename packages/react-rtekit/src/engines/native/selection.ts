@@ -108,12 +108,66 @@ export function toModelPoint(
   const empty = emptyBlockPoint(tree, ownKey);
   if (empty !== null) return empty;
 
+  /*
+   * "After the last child" is a real position and a common one: it is where the caret
+   * sits after Shift+Enter, and it is where Firefox and WebKit put the end of a
+   * select-all — against the container, not against a text node.
+   *
+   * Descending into that child finds the node *before* it, so Shift+Enter then typing
+   * landed in front of the line break, and select-all then typing left most of the
+   * document behind. The answer is the far edge of the subtree.
+   */
+  if (offset >= element.childNodes.length && element.lastChild !== null) {
+    const edge = edgePoint(tree, index, element, true);
+    if (edge !== null) return edge;
+  }
+  if (offset === 0 && ownKey !== undefined && tree.get(ownKey) !== undefined) {
+    const edge = edgePoint(tree, index, element, false);
+    if (edge !== null) return edge;
+  }
+
   if (child !== undefined && child !== null) {
     const inner = deepestRun(tree, index, child, offset >= element.childNodes.length);
     if (inner !== null) return inner;
   }
   if (ownKey !== undefined) return nearestRun(tree, ownKey, offset > 0);
   return null;
+}
+
+/**
+ * The first or last *inline* position inside an element's subtree.
+ *
+ * Unambiguous where descending child-by-child is not: a point against a container is a
+ * point at one end of everything it holds, whatever shape that happens to have.
+ */
+function edgePoint(
+  tree: DocumentTree,
+  index: RenderIndex,
+  element: HTMLElement,
+  atEnd: boolean,
+): ModelPoint | null {
+  const key = index.byNode.get(element);
+  if (key === undefined) return null;
+  const inside = documentOrder(tree).filter(
+    (candidate) => tree.ancestors(candidate).includes(key) && isInlineLeaf(tree, candidate),
+  );
+  const chosen = atEnd ? inside[inside.length - 1] : inside[0];
+  if (chosen === undefined) return null;
+  const value = tree.get(chosen)?.value;
+  const length = value?.type === 'text' ? value.text.length : 1;
+  return { key: chosen, offset: atEnd ? length : 0 };
+}
+
+/** True for a leaf that holds content: text, and the atomic inline nodes. */
+function isInlineLeaf(tree: DocumentTree, key: NodeKey): boolean {
+  const type = tree.get(key)?.value.type;
+  return (
+    type === 'text' ||
+    type === 'mergeTag' ||
+    type === 'mention' ||
+    type === 'emoji' ||
+    type === 'lineBreak'
+  );
 }
 
 /**
@@ -128,8 +182,14 @@ function emptyBlockPoint(tree: DocumentTree, key: NodeKey | undefined): ModelPoi
   if (type !== 'paragraph' && type !== 'heading' && type !== 'listItem' && type !== 'blockquote') {
     return null;
   }
-  const hasRun = textRuns(tree).some((run) => run === key || tree.ancestors(run).includes(key));
-  return hasRun ? null : { key, offset: 0 };
+  // Any inline leaf, not just a text run: a paragraph holding nothing but a merge tag is
+  // not empty, and treating it as such collapsed WebKit's select-all — whose end point is
+  // the paragraph, not a text node — to the start of that paragraph, so most of the
+  // document fell outside the range.
+  const hasContent = documentOrder(tree).some(
+    (candidate) => tree.ancestors(candidate).includes(key) && isInlineLeaf(tree, candidate),
+  );
+  return hasContent ? null : { key, offset: 0 };
 }
 
 /** The first or last text run inside `node`'s subtree. */
@@ -195,6 +255,15 @@ function nearestRun(tree: DocumentTree, key: NodeKey, after: boolean): ModelPoin
       }
     }
   }
+  if (best === null) {
+    // Nothing on the side asked for: take the nearest on the other side rather than
+    // jumping to the far end of the document, which is where a caret after the last
+    // line break used to go.
+    for (let at = position - 1; at >= 0 && best === null; at -= 1) {
+      if (runs.includes(order[at]!)) best = order[at]!;
+    }
+    if (best !== null) return { key: best, offset: runText(tree, best).length };
+  }
   best ??= after ? runs[runs.length - 1]! : runs[0]!;
   return { key: best, offset: after ? runText(tree, best).length : 0 };
 }
@@ -223,6 +292,17 @@ export function toDomPoint(
   }
   const node = index.byKey.get(point.key);
   if (node === undefined) return null;
+
+  // A node with no text of its own — a `<br>`, an image, a chip — cannot hold a caret.
+  // The position is *beside* it, expressed against its parent. Returning `{ node, 0 }`
+  // put the caret inside an empty element, and reading it back found the nearest run,
+  // which after a line break is in a different paragraph: Shift+Enter then typing put
+  // the new text at the top of the document.
+  const parent = node.parentNode;
+  if (parent !== null) {
+    const index_ = [...parent.childNodes].indexOf(node as ChildNode);
+    if (index_ !== -1) return { node: parent, offset: index_ + (point.offset > 0 ? 1 : 0) };
+  }
   return { node, offset: 0 };
 }
 

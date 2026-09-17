@@ -14,13 +14,24 @@ import { DocumentTree, ROOT_KEY } from './tree.js';
  * a styling difference somebody notices later.
  */
 
-/** The rendered DOM as HTML, with the bookkeeping attribute taken back off. */
+/**
+ * What the editor renders, minus the attributes that exist only while it is being edited.
+ *
+ * `data-rte-key` is the reconciler's bookkeeping. `role` and `aria-checked` on a check
+ * item are an affordance: the box is drawn with `::before`, so the item *is* the checkbox
+ * to a screen reader — which stored HTML has no reason to say, because nobody is ticking
+ * anything there. Everything else must match the serializer byte for byte.
+ */
+const EDITOR_ONLY = [KEY_ATTRIBUTE, 'role', 'aria-checked'];
+
 function renderToHtml(doc: EditorDocument): string {
   const tree = DocumentTree.fromDocument(doc);
   const container = document.createElement('div');
   renderTree(tree, container);
-  for (const element of container.querySelectorAll(`[${KEY_ATTRIBUTE}]`)) {
-    element.removeAttribute(KEY_ATTRIBUTE);
+  for (const attribute of EDITOR_ONLY) {
+    for (const element of container.querySelectorAll(`[${attribute}]`)) {
+      element.removeAttribute(attribute);
+    }
   }
   return container.innerHTML;
 }
@@ -231,6 +242,27 @@ const CASES: [name: string, doc: EditorDocument][] = [
     }),
   ],
 ];
+
+describe('a check item announces itself as a checkbox', () => {
+  it('carries the role and state the box implies', () => {
+    const tree = DocumentTree.fromDocument(
+      doc({
+        type: 'list',
+        listType: 'check',
+        items: [
+          { type: 'listItem', checked: true, content: [{ type: 'text', text: 'done' }] },
+          { type: 'listItem', content: [{ type: 'text', text: 'todo' }] },
+        ],
+      }),
+    );
+    const container = document.createElement('div');
+    renderTree(tree, container);
+    const [first, second] = [...container.querySelectorAll('li')];
+    expect(first!.getAttribute('role')).toBe('checkbox');
+    expect(first!.getAttribute('aria-checked')).toBe('true');
+    expect(second!.getAttribute('aria-checked')).toBe('false');
+  });
+});
 
 describe('a merge tag is the one deliberate difference', () => {
   // The backend substitutes `{key}`, so that is what gets stored. The author has to see
