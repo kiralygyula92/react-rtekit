@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The popovers, menus and dialogs the features own.\n\nA composed layout renders this once, anywhere inside `<Rte.Root>`. Without it the\nlink popover, the image dialog and the suggestion menus have nowhere to mount, and\nthe features look broken rather than absent.",
+  "optionDescriptions": {}
+}

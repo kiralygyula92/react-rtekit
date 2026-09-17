@@ -1,0 +1,11 @@
+{
+  "name": "RteLocaleProvider",
+  "kind": "function",
+  "imports": [
+    "import { RteLocaleProvider } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/providers.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L73",
+  "usedBy": []
+}

@@ -1,0 +1,354 @@
+{
+  "name": "Command catalogue",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "toggleBold": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleItalic": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleUnderline": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleStrike": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleCode": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleSubscript": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleSuperscript": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setColor": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setBackgroundColor": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setFontFamily": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setFontSize": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "clearFormatting": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setBlockType": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "setAlign": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "indent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "outdent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleBulletList": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleOrderedList": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleCheckList": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertLink": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "updateLink": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "removeLink": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openLinkEditor": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertImage": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "updateImage": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "removeImage": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openImageDialog": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertTable": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "addRowBefore": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "addRowAfter": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "addColumnBefore": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "addColumnAfter": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "deleteRow": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "deleteColumn": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "deleteTable": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleHeaderRow": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertHorizontalRule": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertLineBreak": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertEmoji": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertMergeTag": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertMention": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertText": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertHTML": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "insertContent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "undo": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "redo": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "selectAll": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "focusStart": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "focusEnd": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleSourceView": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "toggleFullscreen": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openFindReplace": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "print": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "pastePlainText": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openShortcutHelp": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openColorPicker": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "openMergeTagMenu": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

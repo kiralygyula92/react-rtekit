@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The live character or word count.\n\nCounts text, never markup (fixes R3).",
+  "optionDescriptions": {}
+}

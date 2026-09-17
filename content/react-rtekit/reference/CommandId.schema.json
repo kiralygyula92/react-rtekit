@@ -1,0 +1,11 @@
+{
+  "name": "CommandId",
+  "kind": "type",
+  "imports": [
+    "import { CommandId } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "types/commands.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L172",
+  "usedBy": []
+}

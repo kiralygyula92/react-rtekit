@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Turns the `sanitize` prop into a resolved configuration.\n\nA config object is merged onto `standard`; `false` is handled by the caller, which\nalso emits the development warning.",
+  "optionDescriptions": {}
+}

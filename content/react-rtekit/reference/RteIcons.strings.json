@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Replaceable icons.\n\nDefaults are in-house 24px inline SVGs drawn with `currentColor`, sized from\n`--rte-icon-size`, so no icon package is ever pulled into a consumer's bundle.",
+  "optionDescriptions": {}
+}

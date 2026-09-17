@@ -1,0 +1,72 @@
+{
+  "name": "SanitizeConfig",
+  "kind": "interface",
+  "imports": [
+    "import { SanitizeConfig } from 'react-rtekit';"
+  ],
+  "options": {
+    "allowTags": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "allowAttributes": {
+      "type": {
+        "name": "Record<string, string[]>"
+      },
+      "required": false
+    },
+    "allowStyles": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "allowClasses": {
+      "type": {
+        "name": "string | RegExp[]"
+      },
+      "required": false
+    },
+    "allowProtocols": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "allowDataUrls": {
+      "type": {
+        "name": "boolean | object"
+      },
+      "required": false
+    },
+    "allowRelative": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "linkRel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "transform": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onViolation": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/sanitize.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L53",
+  "usedBy": []
+}

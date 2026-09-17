@@ -1,0 +1,930 @@
+{
+  "name": "Localization keys",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "announce.draftRestored": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.findResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.formatApplied": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.formatRemoved": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.imageInserted": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.linkInserted": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.linkRemoved": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.listLevel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "announce.overLimit": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.apply": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.automatic": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.custom": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.recent": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.reset": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.swatch": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "counter.characters": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "counter.limit": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "counter.overLimit": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "counter.words": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "dir": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "draft.discard": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "draft.restore": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "draft.restoreBody": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "draft.restoreTitle": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "editor.empty": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "editor.label": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "editor.placeholder": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "emoji.noResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "emoji.search": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "emoji.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.close": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.find": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.matchCase": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.next": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.noResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.previous": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.regex": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.replace": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.replaceAll": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.results": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "find.wholeWord": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.alignCenter": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.alignLeft": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.alignRight": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.alt": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.cancel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.caption": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.decorative": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.insert": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.invalidUrl": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.remove": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.replace": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.resize": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.retry": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.tooLarge": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.upload": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.uploadFailed": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.uploading": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.url": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.width": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image.wrongType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.apply": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.invalidUrl": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.newTab": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.open": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.remove": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.text": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link.url": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "locale": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mention.loading": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mention.noResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mention.search": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag.noResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag.preview": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag.search": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag.unknown": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "paste.keepFormatting": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "paste.removeFormatting": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "shortcuts.close": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "shortcuts.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "slash.noResults": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "slash.search": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "slash.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "sourceView.apply": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "sourceView.cancel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "sourceView.invalid": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "sourceView.title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.addColumnAfter": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.addColumnBefore": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.addRowAfter": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.addRowBefore": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.columns": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.deleteColumn": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.deleteRow": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.deleteTable": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.headerRow": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.insert": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.rows": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table.size": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.align": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.alignCenter": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.alignJustify": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.alignLeft": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.alignRight": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.backgroundColor": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.blockType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.blockquote": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.bold": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.bulletList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.checkList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.clearFormatting": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.code": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.codeBlock": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.color": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.emoji": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.exitFullscreen": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.findReplace": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.fontFamily": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.fontSize": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.fullscreen": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.heading": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.headingLevel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.horizontalRule": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.image": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.indent": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.italic": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.label": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.link": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.mention": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.mergeTag": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.more": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.orderedList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.outdent": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.paragraph": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.print": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.redo": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.sourceView": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.strike": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.subscript": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.superscript": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.table": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.underline": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.undo": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.unlink": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "toolbar.wordCount": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "validation.invalidHtml": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "validation.maxLength": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "validation.required": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

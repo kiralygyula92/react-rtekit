@@ -1,0 +1,11 @@
+{
+  "name": "markdownToHtml",
+  "kind": "function",
+  "imports": [
+    "import { markdownToHtml } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/serialize/markdown.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L263",
+  "usedBy": []
+}

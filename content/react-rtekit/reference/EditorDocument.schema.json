@@ -1,0 +1,30 @@
+{
+  "name": "EditorDocument",
+  "kind": "interface",
+  "imports": [
+    "import { EditorDocument } from 'react-rtekit';"
+  ],
+  "options": {
+    "type": {
+      "type": {
+        "name": "\"doc\""
+      },
+      "required": true
+    },
+    "version": {
+      "type": {
+        "name": "1"
+      },
+      "required": true
+    },
+    "content": {
+      "type": {
+        "name": "BlockNode[]"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/document.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/document.ts#L289",
+  "usedBy": []
+}

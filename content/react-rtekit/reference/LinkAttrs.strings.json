@@ -1,0 +1,10 @@
+{
+  "symbolDescription": "Link attributes as stored on a link node and edited in the link popover.",
+  "optionDescriptions": {
+    "href": "The destination. Sanitized before it reaches the document.",
+    "text": "The link text, used when creating a link at a collapsed caret.",
+    "target": "Where the link opens.",
+    "rel": "The relationship, which gains `noopener noreferrer` for `_blank`.",
+    "title": "The anchor's advisory title."
+  }
+}

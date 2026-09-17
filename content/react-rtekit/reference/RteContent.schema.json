@@ -1,0 +1,11 @@
+{
+  "name": "RteContent",
+  "kind": "variable",
+  "imports": [
+    "import { RteContent } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/parts.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L287",
+  "usedBy": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "RteCounter",
+  "kind": "variable",
+  "imports": [
+    "import { RteCounter } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/parts.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L359",
+  "usedBy": []
+}

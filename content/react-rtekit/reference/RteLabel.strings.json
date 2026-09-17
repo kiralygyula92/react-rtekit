@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The field label, bound to the content element.\n\n`<label for>` names a form control, and the content element is a `div` with\n`role=\"textbox\"` — so the label also has to be attached with `aria-labelledby`, or\nthe editor has an accessible name in the markup and none in the accessibility tree.",
+  "optionDescriptions": {}
+}

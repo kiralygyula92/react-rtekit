@@ -1,0 +1,11 @@
+{
+  "name": "createToolbarItem",
+  "kind": "function",
+  "imports": [
+    "import { createToolbarItem } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/plugins/define.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L44",
+  "usedBy": []
+}

@@ -1,0 +1,26 @@
+{
+  "symbolDescription": "The full message catalogue.",
+  "optionDescriptions": {
+    "locale": "BCP-47 tag of this catalogue, e.g. `'en'`.",
+    "dir": "Writing direction of this locale.",
+    "editor": "The field itself: its default name, its placeholder and its empty announcement.",
+    "toolbar": "Every toolbar control, used as both the tooltip and the accessible name.",
+    "color": "The colour picker.",
+    "link": "The link popover.",
+    "image": "The image dialog, the upload placeholder and the image controls.",
+    "table": "The table picker and the table controls.",
+    "mergeTag": "The merge-tag menu and its validation messages.",
+    "mention": "The mention menu, including its loading and empty states.",
+    "slash": "The slash-command palette.",
+    "emoji": "The emoji picker.",
+    "find": "The find-and-replace panel.",
+    "counter": "The character and word counter.",
+    "validation": "The built-in validation messages.",
+    "draft": "The prompt offering to restore an autosaved draft.",
+    "shortcuts": "The keyboard reference dialog.",
+    "paste": "The prompt shown after a rich office paste.",
+    "sourceView": "The HTML source view.",
+    "announce": "Everything sent to the editor's polite live region.",
+    "custom": "Keys contributed by plugins live here, flat and dot-separated."
+  }
+}

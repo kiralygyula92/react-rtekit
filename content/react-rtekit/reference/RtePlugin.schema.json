@@ -1,0 +1,114 @@
+{
+  "name": "RtePlugin",
+  "kind": "interface",
+  "imports": [
+    "import { RtePlugin } from 'react-rtekit';"
+  ],
+  "options": {
+    "name": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "dependsOn": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "provides": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "setup": {
+      "type": {
+        "name": "object"
+      },
+      "required": false
+    },
+    "commands": {
+      "type": {
+        "name": "Partial<Record<CommandId, CommandHandler>>"
+      },
+      "required": false
+    },
+    "nodes": {
+      "type": {
+        "name": "NodeSpec[]"
+      },
+      "required": false
+    },
+    "marks": {
+      "type": {
+        "name": "MarkSpec[]"
+      },
+      "required": false
+    },
+    "keymap": {
+      "type": {
+        "name": "Record<string, CommandId | function>"
+      },
+      "required": false
+    },
+    "toolbar": {
+      "type": {
+        "name": "ToolbarItemSpec[]"
+      },
+      "required": false
+    },
+    "slashItems": {
+      "type": {
+        "name": "SlashItemSpec[]"
+      },
+      "required": false
+    },
+    "serialize": {
+      "type": {
+        "name": "PluginSerializers"
+      },
+      "required": false
+    },
+    "sanitize": {
+      "type": {
+        "name": "PluginSanitizeRules"
+      },
+      "required": false
+    },
+    "ui": {
+      "type": {
+        "name": "ComponentType"
+      },
+      "required": false
+    },
+    "localization": {
+      "type": {
+        "name": "Record<string, string>"
+      },
+      "required": false
+    },
+    "theme": {
+      "type": {
+        "name": "object"
+      },
+      "required": false
+    },
+    "options": {
+      "type": {
+        "name": "Options"
+      },
+      "required": false
+    },
+    "priority": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/plugin.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/plugin.ts#L90",
+  "usedBy": []
+}

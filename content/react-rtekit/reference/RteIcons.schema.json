@@ -1,0 +1,11 @@
+{
+  "name": "RteIcons",
+  "kind": "type",
+  "imports": [
+    "import { RteIcons } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "types/icons.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/icons.ts#L12",
+  "usedBy": []
+}

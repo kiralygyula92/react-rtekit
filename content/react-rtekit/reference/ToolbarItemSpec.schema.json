@@ -1,0 +1,120 @@
+{
+  "name": "ToolbarItemSpec",
+  "kind": "interface",
+  "imports": [
+    "import { ToolbarItemSpec } from 'react-rtekit';"
+  ],
+  "options": {
+    "name": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "kind": {
+      "type": {
+        "name": "\"custom\" | \"button\" | \"toggle\" | \"dropdown\" | \"colorPicker\" | \"separator\""
+      },
+      "required": false
+    },
+    "icon": {
+      "type": {
+        "name": "ReactNode | function"
+      },
+      "required": false
+    },
+    "label": {
+      "type": {
+        "name": "ReactNode | function"
+      },
+      "required": true
+    },
+    "shortcut": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "command": {
+      "type": {
+        "name": "CommandId"
+      },
+      "required": false
+    },
+    "payload": {
+      "type": {
+        "name": "CommandPayload<CommandId>"
+      },
+      "required": false
+    },
+    "isActive": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "isDisabled": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onClick": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "options": {
+      "type": {
+        "name": "ToolbarOption[] | function"
+      },
+      "required": false
+    },
+    "value": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onSelect": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "render": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "group": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "showIn": {
+      "type": {
+        "name": "ToolbarItemSurface[]"
+      },
+      "required": false
+    },
+    "order": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "keywords": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/toolbar.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/toolbar.ts#L90",
+  "usedBy": []
+}

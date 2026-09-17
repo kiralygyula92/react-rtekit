@@ -1,0 +1,120 @@
+{
+  "name": "RteHandlers",
+  "kind": "interface",
+  "imports": [
+    "import { RteHandlers } from 'react-rtekit';"
+  ],
+  "options": {
+    "onBeforeChange": {
+      "type": {
+        "name": "Middleware<BeforeChangeContext>"
+      },
+      "required": true
+    },
+    "onPaste": {
+      "type": {
+        "name": "Middleware<PasteHandlerContext>"
+      },
+      "required": true
+    },
+    "onDrop": {
+      "type": {
+        "name": "Middleware<DropHandlerContext>"
+      },
+      "required": true
+    },
+    "onUploadStart": {
+      "type": {
+        "name": "Middleware<UploadStartContext>"
+      },
+      "required": true
+    },
+    "onUploadError": {
+      "type": {
+        "name": "Middleware<UploadErrorContext>"
+      },
+      "required": true
+    },
+    "onKeyDown": {
+      "type": {
+        "name": "Middleware<KeyDownContext>"
+      },
+      "required": true
+    },
+    "onLinkClick": {
+      "type": {
+        "name": "Middleware<LinkClickContext>"
+      },
+      "required": true
+    },
+    "onLinkOpen": {
+      "type": {
+        "name": "Middleware<LinkOpenContext>"
+      },
+      "required": true
+    },
+    "onToolbarCommand": {
+      "type": {
+        "name": "Middleware<ToolbarCommandContext>"
+      },
+      "required": true
+    },
+    "onFocus": {
+      "type": {
+        "name": "Middleware<FocusHandlerContext>"
+      },
+      "required": true
+    },
+    "onBlur": {
+      "type": {
+        "name": "Middleware<FocusHandlerContext>"
+      },
+      "required": true
+    },
+    "onSelectionChange": {
+      "type": {
+        "name": "Middleware<SelectionChangeContext>"
+      },
+      "required": true
+    },
+    "onMaxLengthExceeded": {
+      "type": {
+        "name": "Middleware<MaxLengthContext>"
+      },
+      "required": true
+    },
+    "onSanitizeViolation": {
+      "type": {
+        "name": "Middleware<SanitizeViolationContext>"
+      },
+      "required": true
+    },
+    "onFullscreenChange": {
+      "type": {
+        "name": "Middleware<OpenStateContext>"
+      },
+      "required": true
+    },
+    "onSourceViewToggle": {
+      "type": {
+        "name": "Middleware<OpenStateContext>"
+      },
+      "required": true
+    },
+    "onDraftRestore": {
+      "type": {
+        "name": "Middleware<DraftContext>"
+      },
+      "required": true
+    },
+    "onDraftSave": {
+      "type": {
+        "name": "Middleware<DraftContext>"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/handlers.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/handlers.ts#L157",
+  "usedBy": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "useRteConfig",
+  "kind": "function",
+  "imports": [
+    "import { useRteConfig } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/context.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L191",
+  "usedBy": []
+}

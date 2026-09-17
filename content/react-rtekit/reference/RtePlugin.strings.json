@@ -1,0 +1,22 @@
+{
+  "symbolDescription": "A plugin.\n\nEvery built-in feature is one of these, which is what makes `enableX` props,\npresets and third-party extensions the same mechanism.",
+  "optionDescriptions": {
+    "name": "Unique id. Duplicate names are de-duplicated, last registration winning.",
+    "dependsOn": "Names of plugins that must be set up first.",
+    "provides": "Feature ids this plugin adds to the active schema. Defaults to `[name]`.",
+    "setup": "Runs once on mount; anything it returns is called on teardown.",
+    "commands": "Command handlers, added to the chains of the ids they name.",
+    "nodes": "Custom node types this plugin introduces.",
+    "marks": "Custom inline marks this plugin introduces.",
+    "keymap": "`'Mod+B'` style bindings. A string value is a command id.",
+    "toolbar": "Controls this plugin contributes to the toolbar.",
+    "slashItems": "Entries this plugin contributes to the slash palette.",
+    "serialize": "Serializer rules, in both directions, so the markup round-trips.",
+    "sanitize": "Sanitizer additions, so the markup survives input.",
+    "ui": "Rendered inside the editor root; the home of popovers and menus.",
+    "localization": "Extra localization keys, merged under `custom`.",
+    "theme": "Extra theme tokens.",
+    "options": "Default options for this plugin.",
+    "priority": "Higher runs its command handlers later, so it wins."
+  }
+}

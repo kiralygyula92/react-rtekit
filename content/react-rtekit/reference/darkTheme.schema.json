@@ -1,0 +1,11 @@
+{
+  "name": "darkTheme",
+  "kind": "variable",
+  "imports": [
+    "import { darkTheme } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "themes/index.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L301",
+  "usedBy": []
+}

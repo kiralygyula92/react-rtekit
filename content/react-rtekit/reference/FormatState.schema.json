@@ -1,0 +1,60 @@
+{
+  "name": "FormatState",
+  "kind": "interface",
+  "imports": [
+    "import { FormatState } from 'react-rtekit';"
+  ],
+  "options": {
+    "marks": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "block": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "list": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "link": {
+      "type": {
+        "name": "LinkAttrs | null"
+      },
+      "required": true
+    },
+    "canUndo": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": true
+    },
+    "canRedo": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": true
+    },
+    "isEmpty": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": true
+    },
+    "isCollapsed": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/selection.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L72",
+  "usedBy": []
+}

@@ -1,0 +1,36 @@
+{
+  "name": "FindOptions",
+  "kind": "interface",
+  "imports": [
+    "import { FindOptions } from 'react-rtekit';"
+  ],
+  "options": {
+    "matchCase": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "wholeWord": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "regex": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "backwards": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/editor.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L54",
+  "usedBy": []
+}

@@ -1,0 +1,324 @@
+{
+  "name": "Icon set",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "alert": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "align": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "alignCenter": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "alignJustify": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "alignLeft": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "alignRight": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "backgroundColor": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "blockType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "blockquote": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "bold": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "bulletList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "check": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "checkList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "chevronDown": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "chevronRight": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "clearFormatting": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "close": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "code": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "codeBlock": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "color": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "dragHandle": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "emoji": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "exitFullscreen": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "external": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "findReplace": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "fontFamily": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "fontSize": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "fullscreen": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "heading": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "horizontalRule": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "image": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "indent": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "italic": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "link": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mention": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "mergeTag": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "more": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "orderedList": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "outdent": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "print": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "redo": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "search": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "sourceView": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "spinner": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "strike": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "subscript": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "superscript": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "table": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "underline": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "undo": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "unlink": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "wordCount": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

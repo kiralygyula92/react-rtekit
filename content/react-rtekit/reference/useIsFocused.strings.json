@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "True while the editor has focus. Drives `:focus-within` styling (fixes R9).",
+  "optionDescriptions": {}
+}

@@ -1,0 +1,25 @@
+{
+  "symbolDescription": "The token tree. Every field is optional in overrides via `DeepPartial`.",
+  "optionDescriptions": {
+    "name": "Identifies the theme in `data-theme` and in the docs site.",
+    "font": "The chrome’s typography, which is separate from the content’s.",
+    "color": "The palette every other group draws from.",
+    "editor": "The content box: its size, its border and its focus ring.",
+    "toolbar": "The toolbar strip.",
+    "button": "Toolbar controls, in each of their states.",
+    "popover": "Every floating surface.",
+    "menu": "Menu rows.",
+    "colorPicker": "The swatch grid.",
+    "footer": "The row below the content holding the helper text and the counter.",
+    "helper": "The helper text.",
+    "counter": "The counter, in each of its three states.",
+    "mergeTag": "Merge-tag chips inside the content.",
+    "mention": "Mention chips inside the content.",
+    "selection": "The selection highlight.",
+    "findMatch": "Search-match highlights, current and otherwise.",
+    "content": "Prose styles, shipped separately so stored content renders identically anywhere.",
+    "motion": "Transition timing, which `prefers-reduced-motion` overrides to none.",
+    "z": "Stacking, so the editor can sit inside an application’s own layers.",
+    "density": "A multiplier over sizes and paddings, so it composes with any theme."
+  }
+}

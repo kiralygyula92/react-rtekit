@@ -1,0 +1,8 @@
+{
+  "symbolDescription": "Options for `insertTable`.",
+  "optionDescriptions": {
+    "headerRow": "Make the first row a header row.",
+    "headerColumn": "Make the first column a header column.",
+    "columnWidths": "Column widths as percentages, summing to 100."
+  }
+}

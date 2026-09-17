@@ -1,0 +1,54 @@
+{
+  "name": "ImageAttrs",
+  "kind": "interface",
+  "imports": [
+    "import { ImageAttrs } from 'react-rtekit';"
+  ],
+  "options": {
+    "src": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "alt": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "align": {
+      "type": {
+        "name": "Align"
+      },
+      "required": false
+    },
+    "caption": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/commands.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L9",
+  "usedBy": []
+}

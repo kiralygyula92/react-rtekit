@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The active message catalogue. Falls back to the shipped English one.",
+  "optionDescriptions": {}
+}

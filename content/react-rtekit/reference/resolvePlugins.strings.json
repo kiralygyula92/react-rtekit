@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Resolves the plugin list for a set of props.\n\nOrder of precedence: `plugins` replaces the preset entirely, then `removePlugins`\ndrops names, then `addPlugins` appends, then the `enableX` flags turn individual\nfeatures off.",
+  "optionDescriptions": {}
+}

@@ -1,0 +1,132 @@
+{
+  "name": "RteTheme",
+  "kind": "interface",
+  "imports": [
+    "import { RteTheme } from 'react-rtekit';"
+  ],
+  "options": {
+    "name": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "font": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "color": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "editor": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "toolbar": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "button": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "popover": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "menu": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "colorPicker": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "footer": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "helper": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "counter": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "mergeTag": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "mention": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "selection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "findMatch": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "content": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "motion": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "z": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "density": {
+      "type": {
+        "name": "Density"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/theme.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/theme.ts#L18",
+  "usedBy": []
+}

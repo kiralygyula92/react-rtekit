@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Returns a profile by name. The returned object is a fresh copy.",
+  "optionDescriptions": {}
+}

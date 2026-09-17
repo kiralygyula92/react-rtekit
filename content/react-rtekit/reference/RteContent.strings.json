@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The editable surface.\n\nThe engine creates the contenteditable element itself and React never touches its\nchildren, which is what keeps React's reconciler and the browser's editing engine out\nof each other's way.",
+  "optionDescriptions": {}
+}

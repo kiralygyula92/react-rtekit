@@ -1,0 +1,11 @@
+{
+  "name": "SanitizeProfileName",
+  "kind": "type",
+  "imports": [
+    "import { SanitizeProfileName } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "types/sanitize.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L16",
+  "usedBy": []
+}

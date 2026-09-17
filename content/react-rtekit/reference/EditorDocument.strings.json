@@ -1,0 +1,8 @@
+{
+  "symbolDescription": "A whole document.",
+  "optionDescriptions": {
+    "type": "Discriminator.",
+    "version": "Schema version, so stored documents can be migrated rather than guessed at.",
+    "content": "The document's top-level blocks."
+  }
+}

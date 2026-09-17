@@ -1,0 +1,10 @@
+{
+  "symbolDescription": "Metadata passed alongside every `onChange`.",
+  "optionDescriptions": {
+    "source": "What caused the change, which is what keeps a controlled parent from looping.",
+    "isEmpty": "True for content that only looks non-empty, such as `<p><br></p>` (fixes R2).",
+    "length": "Length in the configured `countUnit`.",
+    "wordCount": "Words in the document, whatever `countUnit` is set to.",
+    "document": "Lazily built — the getter only runs if the consumer reads it."
+  }
+}

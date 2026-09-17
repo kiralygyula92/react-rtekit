@@ -1,0 +1,11 @@
+{
+  "name": "resolveSanitizeConfig",
+  "kind": "function",
+  "imports": [
+    "import { resolveSanitizeConfig } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/sanitize/profiles.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L256",
+  "usedBy": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "normalizeUrl",
+  "kind": "function",
+  "imports": [
+    "import { normalizeUrl } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/sanitize/url.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134",
+  "usedBy": []
+}

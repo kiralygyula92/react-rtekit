@@ -1,0 +1,11 @@
+{
+  "name": "RteRoot",
+  "kind": "function",
+  "imports": [
+    "import { RteRoot } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/parts.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L102",
+  "usedBy": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "documentToHtml",
+  "kind": "function",
+  "imports": [
+    "import { documentToHtml } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/serialize/to-html.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L412",
+  "usedBy": []
+}

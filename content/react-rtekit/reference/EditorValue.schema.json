@@ -1,0 +1,11 @@
+{
+  "name": "EditorValue",
+  "kind": "type",
+  "imports": [
+    "import { EditorValue } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "types/common.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/common.ts#L30",
+  "usedBy": []
+}

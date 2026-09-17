@@ -1,0 +1,120 @@
+{
+  "name": "Handler catalogue",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "onBeforeChange": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onPaste": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onDrop": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onUploadStart": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onUploadError": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onKeyDown": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onLinkClick": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onLinkOpen": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onToolbarCommand": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onFocus": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onBlur": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onSelectionChange": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onMaxLengthExceeded": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onSanitizeViolation": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onFullscreenChange": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onSourceViewToggle": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onDraftRestore": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "onDraftSave": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

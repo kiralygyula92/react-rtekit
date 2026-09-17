@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Sets app-wide prop defaults.\n\nThe one place a team configures sanitization, the HTML profile, merge tags and the\nupload handler, so no individual field can get it wrong.",
+  "optionDescriptions": {}
+}

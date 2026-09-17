@@ -1,0 +1,696 @@
+{
+  "name": "Theme tokens",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "--rte-bold-weight": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-border-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-border-width": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-active-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-active-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-disabled-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-focus-ring": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-hover-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-button-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-cell-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-code-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-code-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-code-font": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-accent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-accent-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-accent-contrast": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-accent-soft": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-border-subtle": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-danger": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-placeholder": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-success": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-surface": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-surface-muted": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-surface-raised": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-text": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-text-disabled": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-text-muted": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-color-warning": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-content-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-content-font-family": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-content-font-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-content-line-height": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-content-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-counter-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-counter-over-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-counter-warn-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-density-scale": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-disabled-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-editor-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-find-active-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-find-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-focus-ring": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-font-family": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-font-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-font-size-sm": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-footer-gap": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-footer-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h1-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h2-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h3-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h4-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h5-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-h6-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-heading-weight": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-helper-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-hr-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-icon-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-indent-step": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-invalid-border-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-line-height": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-link-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-link-decoration": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-list-indent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-list-item-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-max-height": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mention-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mention-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mention-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mention-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-menu-item-active-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-menu-item-height": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-menu-item-hover-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-menu-item-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-mergetag-selected-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-min-height": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-motion-duration": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-motion-easing": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-paragraph-spacing": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-popover-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-popover-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-popover-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-popover-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-popover-shadow": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-quote-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-quote-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-selection-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-swatch-border-color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-swatch-gap": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-swatch-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-swatch-selected-ring": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-swatch-size": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-table-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-table-header-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-bg": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-border": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-gap": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-margin-bottom": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-padding": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-radius": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-separator": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-toolbar-separator-margin": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-z-floating": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-z-fullscreen": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "--rte-z-popover": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

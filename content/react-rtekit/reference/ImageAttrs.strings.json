@@ -1,0 +1,12 @@
+{
+  "symbolDescription": "Image attributes as stored on an image node.",
+  "optionDescriptions": {
+    "src": "The source, sanitized before it reaches the document.",
+    "alt": "Alternative text; an empty string marks the image as decorative and is kept.",
+    "title": "The image's advisory title.",
+    "width": "Intrinsic width in pixels.",
+    "height": "Intrinsic height in pixels.",
+    "align": "How the image sits in the flow.",
+    "caption": "The caption, which serializes as a `<figure>` with a `<figcaption>`."
+  }
+}

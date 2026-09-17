@@ -154,19 +154,19 @@ function bodyFor(archetype, page, title) {
   }
 
   if (archetype === 'E') {
+    // Nothing but the markers. Everything between them is written by
+    // `reference/render.mjs` from the generated schema and strings files, including the
+    // four required H2s — a hand-typed heading here would be a hand-written reference
+    // page, which P5 forbids.
     return [
       '<!--',
-      '  Generated in Phase 4 from the TypeScript declarations.',
-      '  Do not author prose here: it belongs in reference/{symbol}.strings.json.',
+      '  Generated from the TypeScript declarations. Do not author anything here:',
+      '  structure comes from reference/{symbol}.schema.json and prose from',
+      '  reference/{symbol}.strings.json, and this region is replaced wholesale.',
       '-->',
       '',
-      '## Used by',
-      '',
-      '## Import',
-      '',
-      '## Options',
-      '',
-      '## Source',
+      '<!-- generated:reference:start -->',
+      '<!-- generated:reference:end -->',
     ].join('\n');
   }
 

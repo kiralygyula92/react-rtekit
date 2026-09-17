@@ -1,0 +1,23 @@
+{
+  "symbolDescription": "A toolbar item, whether built-in or contributed by a plugin.",
+  "optionDescriptions": {
+    "name": "Unique within the toolbar.",
+    "kind": "`button` (default), `toggle`, `dropdown`, `colorPicker`, `separator` or `custom`.",
+    "icon": "The control's icon, statically or derived from the current state.",
+    "label": "The accessible name, and the visible one when labels are shown.",
+    "shortcut": "Shown in the tooltip next to the label, e.g. `'Mod+B'`.",
+    "command": "Command run by default when the item is activated.",
+    "payload": "Payload for `command`.",
+    "isActive": "Whether the control renders as pressed; the default reads `command`.",
+    "isDisabled": "Whether the control renders as disabled; the default reads `canExec`.",
+    "onClick": "Runs instead of `command` when the control is activated.",
+    "options": "Dropdown options; required for `kind: 'dropdown'`.",
+    "value": "Current dropdown value.",
+    "onSelect": "Runs when a dropdown option is chosen.",
+    "render": "Fully custom rendering, bypassing the button slots.",
+    "group": "Logical grouping used by the slash menu and the overflow menu.",
+    "showIn": "Surfaces this item may appear on.",
+    "order": "Ordering hint inside a group; lower comes first.",
+    "keywords": "Keywords used by slash-menu search."
+  }
+}

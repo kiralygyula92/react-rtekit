@@ -1,0 +1,234 @@
+{
+  "name": "Plugin catalogue",
+  "kind": "catalogue",
+  "imports": [
+    "import { meta } from 'react-rtekit/meta';"
+  ],
+  "options": {
+    "align": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "backgroundColor": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "blockquote": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "bold": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "checkList": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "clearFormatting": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "code": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "codeBlock": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "color": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "counter": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "emoji": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "findReplace": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "floatingToolbar": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "fontFamily": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "fontSize": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "fullscreen": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "heading": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "history": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "horizontalRule": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "image": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "indent": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "italic": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "link": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "list": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "markdownShortcuts": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "mention": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "mergeTag": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "paragraph": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "paste": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "placeholder": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "slashMenu": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "sourceView": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "strike": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "subSup": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "table": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "trailingParagraph": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    },
+    "underline": {
+      "type": {
+        "name": "entry"
+      },
+      "required": false
+    }
+  },
+  "filename": "src/meta.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/meta.ts",
+  "usedBy": []
+}

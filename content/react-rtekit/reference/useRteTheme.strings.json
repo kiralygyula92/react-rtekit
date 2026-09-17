@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The active theme, or `null` when no provider is above.",
+  "optionDescriptions": {}
+}

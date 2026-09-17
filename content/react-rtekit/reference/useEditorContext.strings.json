@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "The editor instance for the nearest `<Rte.Root>` or `<RichTextEditor>`.",
+  "optionDescriptions": {}
+}

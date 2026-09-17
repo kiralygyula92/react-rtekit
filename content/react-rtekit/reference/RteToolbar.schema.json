@@ -1,0 +1,11 @@
+{
+  "name": "RteToolbar",
+  "kind": "function",
+  "imports": [
+    "import { RteToolbar } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/parts.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L534",
+  "usedBy": []
+}

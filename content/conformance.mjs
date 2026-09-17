@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -23,7 +24,6 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const PLUGIN = 'react-rtekit';
 const dir = path.join(here, PLUGIN);
-const dist = path.join(root, 'apps/site/dist');
 const BASE = process.env.CONFORMANCE_BASE ?? 'http://localhost:4189';
 const served = process.argv.includes('--served');
 
@@ -173,7 +173,6 @@ const referenceDir = path.join(dir, 'reference');
 check(10, 'no reference schema file hand-edited since generation', () => {
   const lock = path.join(referenceDir, 'checksums.json');
   if (!existsSync(lock)) return fail('reference/checksums.json is missing (Phase 4)');
-  const { createHash } = require('node:crypto');
   const checksums = readJson(lock);
   const bad = [];
   for (const [file, expected] of Object.entries(checksums)) {
@@ -383,7 +382,6 @@ if (served) {
   const isHtmlShell = (body) => body.includes('<div id="root">') && !body.includes('---');
 
   for (const url of ['/react-rtekit/llms.txt', '/llms.txt']) {
-    // eslint-disable-next-line no-await-in-loop -- sequential probes, deliberately
     const ok = await probe(url, (body) => body.startsWith('# React RTE Kit'));
     if (!ok) failures.push(`${url} served the app shell, not llms.txt`);
   }

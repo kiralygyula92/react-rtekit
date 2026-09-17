@@ -1,0 +1,11 @@
+{
+  "name": "RteContentView",
+  "kind": "function",
+  "imports": [
+    "import { RteContentView } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "view/RteContentView.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/view/RteContentView.tsx#L33",
+  "usedBy": []
+}

@@ -1,0 +1,13 @@
+{
+  "symbolDescription": "The formatting that applies to the current selection.\n\nA value-carrying mark is `null` when the selection is mixed, so a toolbar can render\nan indeterminate state rather than lying about one of the values.",
+  "optionDescriptions": {
+    "marks": "Inline formatting; a value mark is `null` when the selection is mixed.",
+    "block": "The block the caret is in, and how it is laid out.",
+    "list": "The list the caret is in, if any, and how deeply nested it is.",
+    "link": "The link the caret is inside, or `null`.",
+    "canUndo": "Whether there is anything to undo, which disables the control.",
+    "canRedo": "Whether there is anything to redo.",
+    "isEmpty": "Whether the document is empty in the `isEmpty` sense (fixes R2).",
+    "isCollapsed": "Whether the selection is a caret rather than a range."
+  }
+}

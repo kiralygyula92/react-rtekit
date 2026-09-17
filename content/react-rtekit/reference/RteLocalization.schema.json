@@ -1,0 +1,138 @@
+{
+  "name": "RteLocalization",
+  "kind": "interface",
+  "imports": [
+    "import { RteLocalization } from 'react-rtekit';"
+  ],
+  "options": {
+    "locale": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "dir": {
+      "type": {
+        "name": "\"ltr\" | \"rtl\""
+      },
+      "required": true
+    },
+    "editor": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "toolbar": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "color": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "link": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "image": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "table": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "mergeTag": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "mention": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "slash": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "emoji": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "find": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "counter": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "validation": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "draft": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "shortcuts": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "paste": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "sourceView": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "announce": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "custom": {
+      "type": {
+        "name": "Record<string, LocalizedString>"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/localization.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/localization.ts#L24",
+  "usedBy": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "useRteSlots",
+  "kind": "function",
+  "imports": [
+    "import { useRteSlots } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/context.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L110",
+  "usedBy": []
+}

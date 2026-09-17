@@ -1,0 +1,11 @@
+{
+  "name": "useFormatState",
+  "kind": "function",
+  "imports": [
+    "import { useFormatState } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/hooks.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L76",
+  "usedBy": []
+}

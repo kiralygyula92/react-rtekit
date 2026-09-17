@@ -1,0 +1,15 @@
+{
+  "symbolDescription": "Fine-grained sanitizer configuration.\n\nAnything omitted falls back to the profile the config is merged onto (`standard` by\ndefault). The hard rules cannot be re-enabled from here.",
+  "optionDescriptions": {
+    "allowTags": "Tag allowlist. Replaces the profile's list when given.",
+    "allowAttributes": "Attribute allowlist per tag. The `'*'` key applies to every tag.",
+    "allowStyles": "CSS property allowlist for inline `style`.",
+    "allowClasses": "Class-name allowlist. Strings match exactly; regexes are tested against the name.",
+    "allowProtocols": "URL scheme allowlist.",
+    "allowDataUrls": "Allow `data:` URLs, optionally restricted to specific MIME types.",
+    "allowRelative": "Allow protocol-relative and path-relative URLs.",
+    "linkRel": "`rel` forced onto links that open in a new tab.",
+    "transform": "Per-element hook. Return the element, `null` to drop it, or `'unwrap'` to keep its children.",
+    "onViolation": "Called for every removal."
+  }
+}

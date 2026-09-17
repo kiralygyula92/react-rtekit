@@ -1,0 +1,318 @@
+{
+  "name": "EditorInstance",
+  "kind": "interface",
+  "imports": [
+    "import { EditorInstance } from 'react-rtekit';"
+  ],
+  "options": {
+    "getHTML": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getJSON": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getMarkdown": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getText": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getPlainTextAlternative": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "setContent": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "insertContent": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "clear": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "isEmpty": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getLength": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getSelection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "setSelection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "saveSelection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "restoreSelection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getFormatState": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "focus": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "blur": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "hasFocus": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "exec": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "canExec": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "isActive": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "registerCommand": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "undo": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "redo": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "canUndo": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "canRedo": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "clearHistory": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "insertLink": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "removeLink": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getLinkAtSelection": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "insertImage": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "uploadFiles": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "insertMergeTag": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getMergeTags": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "insertTable": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "setEditable": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "isEditable": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "setFullscreen": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "isFullscreen": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "toggleSourceView": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "isSourceView": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "find": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "replace": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "clearDraft": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "saveDraft": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "validate": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "announce": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "on": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "getSnapshot": {
+      "type": {
+        "name": "object"
+      },
+      "required": true
+    },
+    "engine": {
+      "type": {
+        "name": "EngineHandle"
+      },
+      "required": true
+    },
+    "id": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/editor.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L164",
+  "usedBy": []
+}

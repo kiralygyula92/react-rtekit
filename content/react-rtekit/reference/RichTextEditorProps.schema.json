@@ -1,0 +1,852 @@
+{
+  "name": "RichTextEditorProps",
+  "kind": "interface",
+  "imports": [
+    "import { RichTextEditorProps } from 'react-rtekit';"
+  ],
+  "options": {
+    "enableBold": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableItalic": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableUnderline": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableStrike": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableCode": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableSubSup": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableColor": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableBackgroundColor": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableFontFamily": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableFontSize": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableHeadings": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableAlign": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableIndent": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableLists": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableCheckList": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableBlockquote": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableCodeBlock": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableLinks": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableImages": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableTables": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableHorizontalRule": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableEmoji": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableMentions": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableMergeTags": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableHistory": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableMarkdownShortcuts": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableFindReplace": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableSourceView": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableFullscreen": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableClearFormatting": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "enableWordCount": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "value": {
+      "type": {
+        "name": "EditorValue"
+      },
+      "required": false
+    },
+    "defaultValue": {
+      "type": {
+        "name": "EditorValue"
+      },
+      "required": false
+    },
+    "valueFormat": {
+      "type": {
+        "name": "ValueFormat"
+      },
+      "required": false
+    },
+    "onChange": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onChangeDebounced": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "changeDebounceMs": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "onBlur": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onFocus": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onSelectionChange": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onReady": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onContentWarning": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onError": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "disabled": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "readOnly": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "autoFocus": {
+      "type": {
+        "name": "boolean | \"start\" | \"end\""
+      },
+      "required": false
+    },
+    "placeholder": {
+      "type": {
+        "name": "ReactNode"
+      },
+      "required": false
+    },
+    "spellCheck": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "dir": {
+      "type": {
+        "name": "\"ltr\" | \"rtl\" | \"auto\""
+      },
+      "required": false
+    },
+    "lang": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "tabIndex": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "editorRef": {
+      "type": {
+        "name": "Ref<EditorInstance>"
+      },
+      "required": false
+    },
+    "engine": {
+      "type": {
+        "name": "EditorEngine"
+      },
+      "required": false
+    },
+    "preset": {
+      "type": {
+        "name": "PresetName"
+      },
+      "required": false
+    },
+    "plugins": {
+      "type": {
+        "name": "RtePlugin<unknown>[]"
+      },
+      "required": false
+    },
+    "addPlugins": {
+      "type": {
+        "name": "RtePlugin<unknown>[]"
+      },
+      "required": false
+    },
+    "removePlugins": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "pluginOptions": {
+      "type": {
+        "name": "Record<string, unknown>"
+      },
+      "required": false
+    },
+    "headingLevels": {
+      "type": {
+        "name": "HeadingLevel[]"
+      },
+      "required": false
+    },
+    "fontFamilies": {
+      "type": {
+        "name": "object[]"
+      },
+      "required": false
+    },
+    "fontSizes": {
+      "type": {
+        "name": "object[]"
+      },
+      "required": false
+    },
+    "colors": {
+      "type": {
+        "name": "ColorPaletteConfig"
+      },
+      "required": false
+    },
+    "mergeTags": {
+      "type": {
+        "name": "MergeTagsConfig"
+      },
+      "required": false
+    },
+    "mentions": {
+      "type": {
+        "name": "MentionsConfig"
+      },
+      "required": false
+    },
+    "slashMenu": {
+      "type": {
+        "name": "boolean | SlashMenuConfig"
+      },
+      "required": false
+    },
+    "markdownShortcuts": {
+      "type": {
+        "name": "boolean | MarkdownShortcutConfig[]"
+      },
+      "required": false
+    },
+    "maxLength": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "countUnit": {
+      "type": {
+        "name": "CountUnit"
+      },
+      "required": false
+    },
+    "maxLengthBehaviour": {
+      "type": {
+        "name": "\"warn\" | \"block\""
+      },
+      "required": false
+    },
+    "showCounter": {
+      "type": {
+        "name": "boolean | \"always\" | \"nearLimit\""
+      },
+      "required": false
+    },
+    "required": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "error": {
+      "type": {
+        "name": "string | boolean"
+      },
+      "required": false
+    },
+    "helperText": {
+      "type": {
+        "name": "ReactNode"
+      },
+      "required": false
+    },
+    "label": {
+      "type": {
+        "name": "ReactNode"
+      },
+      "required": false
+    },
+    "hideLabel": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "validate": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "sanitize": {
+      "type": {
+        "name": "SanitizeOption"
+      },
+      "required": false
+    },
+    "sanitizeOutput": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "htmlProfile": {
+      "type": {
+        "name": "HtmlProfile"
+      },
+      "required": false
+    },
+    "emailOptions": {
+      "type": {
+        "name": "EmailOutputOptions"
+      },
+      "required": false
+    },
+    "interop": {
+      "type": {
+        "name": "InteropOptions"
+      },
+      "required": false
+    },
+    "pasteMode": {
+      "type": {
+        "name": "PasteMode | function"
+      },
+      "required": false
+    },
+    "pastePrompt": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "autoLinkOnPaste": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "autoLink": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "autoLinkProtocols": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "defaultProtocol": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "linkValidator": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "allowDataUrlImages": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "autosave": {
+      "type": {
+        "name": "AutosaveConfig"
+      },
+      "required": false
+    },
+    "toolbar": {
+      "type": {
+        "name": "false | ToolbarConfig"
+      },
+      "required": false
+    },
+    "toolbarPosition": {
+      "type": {
+        "name": "\"bottom\" | \"top\" | \"none\""
+      },
+      "required": false
+    },
+    "stickyToolbar": {
+      "type": {
+        "name": "boolean | object"
+      },
+      "required": false
+    },
+    "toolbarOverflow": {
+      "type": {
+        "name": "\"menu\" | \"wrap\" | \"scroll\""
+      },
+      "required": false
+    },
+    "floatingToolbar": {
+      "type": {
+        "name": "boolean | FloatingToolbarConfig"
+      },
+      "required": false
+    },
+    "bubbleMenuItems": {
+      "type": {
+        "name": "ToolbarItemSpec[]"
+      },
+      "required": false
+    },
+    "minHeight": {
+      "type": {
+        "name": "string | number"
+      },
+      "required": false
+    },
+    "maxHeight": {
+      "type": {
+        "name": "string | number"
+      },
+      "required": false
+    },
+    "autoGrow": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "resizable": {
+      "type": {
+        "name": "boolean | \"vertical\""
+      },
+      "required": false
+    },
+    "fullscreen": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "defaultFullscreen": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "footer": {
+      "type": {
+        "name": "ReactNode | function"
+      },
+      "required": false
+    },
+    "readOnlyToolbar": {
+      "type": {
+        "name": "\"hide\" | \"disable\""
+      },
+      "required": false
+    },
+    "renderToolbar": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderFooter": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderPlaceholder": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderLinkPopover": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderImagePopover": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderSlashMenu": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderMergeTagMenu": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderColorPicker": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderSourceView": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "renderRestoreDraftPrompt": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "onUpload": {
+      "type": {
+        "name": "UploadHandler"
+      },
+      "required": false
+    },
+    "uploadAccept": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "maxUploadSize": {
+      "type": {
+        "name": "number"
+      },
+      "required": false
+    },
+    "onUploadError": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "imageOptions": {
+      "type": {
+        "name": "ImageOptions"
+      },
+      "required": false
+    },
+    "slots": {
+      "type": {
+        "name": "Partial<RteSlots>"
+      },
+      "required": false
+    },
+    "slotProps": {
+      "type": {
+        "name": "RteSlotProps"
+      },
+      "required": false
+    },
+    "classNames": {
+      "type": {
+        "name": "RteClassNames"
+      },
+      "required": false
+    },
+    "styles": {
+      "type": {
+        "name": "RteStyles"
+      },
+      "required": false
+    },
+    "handlers": {
+      "type": {
+        "name": "Partial<RteHandlers>"
+      },
+      "required": false
+    },
+    "commandOverrides": {
+      "type": {
+        "name": "CommandOverrides"
+      },
+      "required": false
+    },
+    "icons": {
+      "type": {
+        "name": "RteIcons"
+      },
+      "required": false
+    },
+    "localization": {
+      "type": {
+        "name": "object"
+      },
+      "required": false
+    },
+    "theme": {
+      "type": {
+        "name": "RteTheme | object"
+      },
+      "required": false
+    },
+    "colorScheme": {
+      "type": {
+        "name": "ColorScheme"
+      },
+      "required": false
+    },
+    "contentClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "unstyled": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "className": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "style": {
+      "type": {
+        "name": "CSSProperties"
+      },
+      "required": false
+    },
+    "id": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "keymap": {
+      "type": {
+        "name": "Record<string, CommandId | function>"
+      },
+      "required": false
+    },
+    "disableShortcuts": {
+      "type": {
+        "name": "string[]"
+      },
+      "required": false
+    },
+    "tabBehaviour": {
+      "type": {
+        "name": "TabBehaviour"
+      },
+      "required": false
+    },
+    "submitOnEnter": {
+      "type": {
+        "name": "boolean | \"mod\""
+      },
+      "required": false
+    },
+    "onSubmit": {
+      "type": {
+        "name": "function"
+      },
+      "required": false
+    },
+    "escapeExitsEditor": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/props.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L118",
+  "usedBy": []
+}

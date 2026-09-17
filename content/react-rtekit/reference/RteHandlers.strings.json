@@ -1,0 +1,23 @@
+{
+  "symbolDescription": "The overridable interaction surface.\n\nEach handler is `(ctx, next) => void`. Call `next()` (optionally with a partial\ncontext override) to run the built-in behaviour; skip it to cancel.",
+  "optionDescriptions": {
+    "onBeforeChange": "Wraps every content change; skipping `next()` vetoes it.",
+    "onPaste": "Wraps every paste, including the sanitization that follows it.",
+    "onDrop": "Wraps every drop onto the content element.",
+    "onUploadStart": "Wraps each upload before the file leaves the browser.",
+    "onUploadError": "Wraps the reporting of a rejected or failed upload.",
+    "onKeyDown": "Wraps every keydown, before the keymap acts on it.",
+    "onLinkClick": "Wraps a click on a link inside the content.",
+    "onLinkOpen": "Wraps following a link, which is where a confirmation belongs.",
+    "onToolbarCommand": "Wraps every toolbar activation, which is where analytics belongs.",
+    "onFocus": "Wraps focus entering the editor.",
+    "onBlur": "Wraps focus leaving the editor (fixes R9).",
+    "onSelectionChange": "Wraps every selection change.",
+    "onMaxLengthExceeded": "Wraps what happens when input would pass `maxLength`.",
+    "onSanitizeViolation": "Wraps the reporting of something the sanitizer refused.",
+    "onFullscreenChange": "Wraps entering and leaving fullscreen.",
+    "onSourceViewToggle": "Wraps opening and closing the HTML source view.",
+    "onDraftRestore": "Wraps restoring an autosaved draft.",
+    "onDraftSave": "Wraps writing an autosave draft."
+  }
+}

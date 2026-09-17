@@ -1,0 +1,84 @@
+{
+  "name": "RteContentViewProps",
+  "kind": "interface",
+  "imports": [
+    "import { RteContentViewProps } from 'react-rtekit';"
+  ],
+  "options": {
+    "value": {
+      "type": {
+        "name": "EditorValue"
+      },
+      "required": true
+    },
+    "valueFormat": {
+      "type": {
+        "name": "ValueFormat"
+      },
+      "required": false
+    },
+    "sanitize": {
+      "type": {
+        "name": "SanitizeOption"
+      },
+      "required": false
+    },
+    "htmlProfile": {
+      "type": {
+        "name": "HtmlProfile"
+      },
+      "required": false
+    },
+    "theme": {
+      "type": {
+        "name": "RteTheme | object"
+      },
+      "required": false
+    },
+    "colorScheme": {
+      "type": {
+        "name": "ColorScheme"
+      },
+      "required": false
+    },
+    "className": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "style": {
+      "type": {
+        "name": "CSSProperties"
+      },
+      "required": false
+    },
+    "mergeTagPreview": {
+      "type": {
+        "name": "Record<string, string>"
+      },
+      "required": false
+    },
+    "as": {
+      "type": {
+        "name": "\"div\" | \"article\" | \"section\""
+      },
+      "required": false
+    },
+    "unstyled": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "id": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/props.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L381",
+  "usedBy": []
+}

@@ -1,0 +1,17 @@
+{
+  "symbolDescription": "",
+  "optionDescriptions": {
+    "value": "The stored content to render.",
+    "valueFormat": "What `value` is.",
+    "sanitize": "The profile applied before rendering; never render unsanitized HTML.",
+    "htmlProfile": "Output dialect used when re-serializing non-HTML input.",
+    "theme": "Theme tokens, so stored content matches the editor that produced it.",
+    "colorScheme": "Light, dark, or follow the operating system.",
+    "className": "Applied to the container.",
+    "style": "Applied to the container.",
+    "mergeTagPreview": "Render merge tags with these sample values instead of `{key}`.",
+    "as": "Element rendered as the container.",
+    "unstyled": "Prose styles only, no chrome visuals.",
+    "id": "The container's element id."
+  }
+}

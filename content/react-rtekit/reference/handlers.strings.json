@@ -1,0 +1,23 @@
+{
+  "symbolDescription": "",
+  "optionDescriptions": {
+    "onBeforeChange": "Runs before a change is committed; can veto it.",
+    "onPaste": "Wraps the paste pipeline.",
+    "onDrop": "Wraps drop handling.",
+    "onUploadStart": "Runs before an upload begins.",
+    "onUploadError": "Runs when an upload fails.",
+    "onKeyDown": "Wraps key handling before the keymap.",
+    "onLinkClick": "Runs when a link in the content is clicked.",
+    "onLinkOpen": "Runs before a link is opened.",
+    "onToolbarCommand": "Wraps every toolbar activation.",
+    "onFocus": "Wraps focus handling.",
+    "onBlur": "Wraps blur handling.",
+    "onSelectionChange": "Wraps selection updates.",
+    "onMaxLengthExceeded": "Runs when input would exceed `maxLength`.",
+    "onSanitizeViolation": "Runs for each thing the sanitizer removed.",
+    "onFullscreenChange": "Wraps entering and leaving fullscreen.",
+    "onSourceViewToggle": "Wraps the source-view toggle.",
+    "onDraftRestore": "Wraps restoring a saved draft.",
+    "onDraftSave": "Wraps saving a draft."
+  }
+}

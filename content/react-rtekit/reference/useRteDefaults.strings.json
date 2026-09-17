@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "App-wide prop defaults from `<RteDefaultsProvider>`. Props still win.",
+  "optionDescriptions": {}
+}

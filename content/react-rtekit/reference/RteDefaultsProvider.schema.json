@@ -1,0 +1,11 @@
+{
+  "name": "RteDefaultsProvider",
+  "kind": "function",
+  "imports": [
+    "import { RteDefaultsProvider } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "react/providers.tsx",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L102",
+  "usedBy": []
+}

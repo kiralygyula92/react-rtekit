@@ -1,0 +1,11 @@
+{
+  "name": "documentToText",
+  "kind": "function",
+  "imports": [
+    "import { documentToText } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "core/document.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307",
+  "usedBy": []
+}

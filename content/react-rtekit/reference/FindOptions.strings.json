@@ -1,0 +1,9 @@
+{
+  "symbolDescription": "Find & replace options.",
+  "optionDescriptions": {
+    "matchCase": "Match the query's case.",
+    "wholeWord": "Only match whole words.",
+    "regex": "Treat the query as a regular expression.",
+    "backwards": "Search backwards from the current match."
+  }
+}

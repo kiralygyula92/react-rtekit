@@ -1,0 +1,42 @@
+{
+  "name": "LinkAttrs",
+  "kind": "interface",
+  "imports": [
+    "import { LinkAttrs } from 'react-rtekit';"
+  ],
+  "options": {
+    "href": {
+      "type": {
+        "name": "string"
+      },
+      "required": true
+    },
+    "text": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "target": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "rel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    },
+    "title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/selection.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L51",
+  "usedBy": []
+}

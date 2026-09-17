@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "1:1 parity with the legacy editor.\n\n**These values are frozen.** The parity guarantee is part of the versioning contract:\nchanging one is a major release. Other presets may move in a minor.\n\nDeliberate deviations, documented on the parity page:\nthe focus ring replaces the 1px→2px border swap so focusing shifts nothing (R10),\ncolour Reset clears the format instead of writing `#000000` (R14), swatches are\nfocusable buttons (R15), the toolbar is a real ARIA toolbar (R16), the icons are\nin-house at the same size and colour, and there is now a placeholder (R24).",
+  "optionDescriptions": {}
+}

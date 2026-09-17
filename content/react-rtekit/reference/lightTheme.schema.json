@@ -1,0 +1,11 @@
+{
+  "name": "lightTheme",
+  "kind": "variable",
+  "imports": [
+    "import { lightTheme } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "themes/index.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L60",
+  "usedBy": []
+}

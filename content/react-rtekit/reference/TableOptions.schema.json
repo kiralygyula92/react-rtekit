@@ -1,0 +1,30 @@
+{
+  "name": "TableOptions",
+  "kind": "interface",
+  "imports": [
+    "import { TableOptions } from 'react-rtekit';"
+  ],
+  "options": {
+    "headerRow": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "headerColumn": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": false
+    },
+    "columnWidths": {
+      "type": {
+        "name": "number[]"
+      },
+      "required": false
+    }
+  },
+  "filename": "types/commands.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L27",
+  "usedBy": []
+}

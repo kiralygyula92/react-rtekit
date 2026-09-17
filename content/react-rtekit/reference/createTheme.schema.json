@@ -1,0 +1,11 @@
+{
+  "name": "createTheme",
+  "kind": "function",
+  "imports": [
+    "import { createTheme } from 'react-rtekit';"
+  ],
+  "options": {},
+  "filename": "themes/index.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L198",
+  "usedBy": []
+}

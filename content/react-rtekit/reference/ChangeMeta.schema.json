@@ -1,0 +1,42 @@
+{
+  "name": "ChangeMeta",
+  "kind": "interface",
+  "imports": [
+    "import { ChangeMeta } from 'react-rtekit';"
+  ],
+  "options": {
+    "source": {
+      "type": {
+        "name": "ChangeSource"
+      },
+      "required": true
+    },
+    "isEmpty": {
+      "type": {
+        "name": "boolean"
+      },
+      "required": true
+    },
+    "length": {
+      "type": {
+        "name": "number"
+      },
+      "required": true
+    },
+    "wordCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": true
+    },
+    "document": {
+      "type": {
+        "name": "EditorDocument"
+      },
+      "required": true
+    }
+  },
+  "filename": "types/editor.ts",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L18",
+  "usedBy": []
+}

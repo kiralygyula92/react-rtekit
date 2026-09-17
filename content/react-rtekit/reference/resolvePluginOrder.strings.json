@@ -1,0 +1,4 @@
+{
+  "symbolDescription": "Resolves a plugin list: dependencies first, duplicates removed.\n\nA plugin registered twice keeps its last definition, which is what makes\n`addPlugins` able to replace a built-in by name.",
+  "optionDescriptions": {}
+}
