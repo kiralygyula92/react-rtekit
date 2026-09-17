@@ -84,9 +84,9 @@ test.describe('the eight-button toolbar', () => {
       'Bold',
       'Italic',
       'Underline',
-      'Text color',
+      'Text colour',
       'Align left',
-      'Align center',
+      'Align centre',
       'Align right',
       'Bulleted list',
     ]);
@@ -153,16 +153,16 @@ test.describe('the bugs that only show in a browser', () => {
     await editor(page).click();
     expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual(['Align left']);
 
-    await page.getByRole('button', { name: 'Align center' }).click();
-    expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual(['Align center']);
+    await page.getByRole('button', { name: 'Align centre' }).click();
+    expect((await pressed()).filter((label) => label.startsWith('Align'))).toEqual(['Align centre']);
   });
 
   test('the colour picker is a keyboard-navigable radiogroup of 21 swatches (R15)', async ({ page }) => {
     await editor(page).click();
     await page.keyboard.press('ControlOrMeta+a');
-    await page.getByRole('button', { name: 'Text color' }).click();
+    await page.getByRole('button', { name: 'Text colour' }).click();
 
-    const dialog = page.getByRole('dialog', { name: 'Text color' });
+    const dialog = page.getByRole('dialog', { name: 'Text colour' });
     await expect(dialog.getByRole('radio')).toHaveCount(21);
 
     await dialog.getByRole('radio').first().focus();
@@ -176,11 +176,11 @@ test.describe('the bugs that only show in a browser', () => {
   test('colour Reset removes the colour instead of writing black (R14)', async ({ page }) => {
     await editor(page).click();
     await page.keyboard.press('ControlOrMeta+a');
-    await page.getByRole('button', { name: 'Text color' }).click();
-    await page.getByRole('radio', { name: 'Color #FF0000' }).click();
+    await page.getByRole('button', { name: 'Text colour' }).click();
+    await page.getByRole('radio', { name: 'Colour #FF0000' }).click();
     await expect(page.getByTestId('parity-output-classic')).toContainText(/#ff0000/i);
 
-    await page.getByRole('button', { name: 'Text color' }).click();
+    await page.getByRole('button', { name: 'Text colour' }).click();
     await page.getByRole('dialog').getByRole('button', { name: 'Reset' }).click();
 
     const html = await page.getByTestId('parity-output-classic').innerText();

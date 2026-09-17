@@ -80,16 +80,55 @@ const PAGES = {
 };
 
 /** The catalogues, each one page, read from the runtime metadata. */
+/**
+ * `derived: true` marks a catalogue whose row descriptions are *facts read from the
+ * library*, not prose somebody wrote. Those are recomputed on every run and overwrite
+ * what is in the strings file, because the alternative is documentation that was true
+ * once: change a default and the page keeps quoting the old one forever.
+ *
+ * Everything without the flag keeps the normal contract — seeded once, then owned by the
+ * strings file (E-07).
+ */
 const CATALOGUES = {
   slots: { title: 'Slot catalogue', field: 'slots' },
   'toolbar-items': { title: 'Toolbar items', field: 'toolbarItems' },
-  'theme-tokens': { title: 'Theme tokens', field: 'tokens' },
+  'theme-tokens': { title: 'Theme tokens', field: 'tokens', derived: true, describe: describeToken },
   icons: { title: 'Icon set', field: 'icons' },
-  'localization-keys': { title: 'Localization keys', field: 'localizationKeys' },
+  'localization-keys': {
+    title: 'Localization keys',
+    field: 'localizationKeys',
+    derived: true,
+    describe: describeLocaleKey,
+  },
   plugins: { title: 'Plugin catalogue', field: 'plugins' },
   commands: { title: 'Command catalogue', field: 'commands' },
   handlers: { title: 'Handler catalogue', field: 'handlers' },
 };
+
+/** A token's default, as code — `--rte-color-border` is an identifier, not a misspelling. */
+function describeToken(entry) {
+  const match = /^Default: (.+)$/.exec(entry.description ?? '');
+  return match ? `Default: \`${match[1]}\`` : (entry.description ?? '');
+}
+
+/**
+ * A locale key's default English string, which is the one thing a translator needs.
+ *
+ * Fifteen of them are functions. Their source cannot go in the cell — a template
+ * literal's own backticks end the Markdown code span and spill JavaScript into the
+ * prose — so each is called with a proxy that names its placeholders, and the cell shows
+ * the sentence rather than the code.
+ */
+function describeLocaleKey(key, en) {
+  const value = key.split('.').reduce((node, part) => node?.[part], en);
+  if (value === undefined) return '';
+  if (typeof value !== 'function') return `Default: \`${String(value)}\``;
+  const named = new Proxy(
+    {},
+    { get: (_target, prop) => (typeof prop === 'symbol' ? undefined : `{${String(prop)}}`) },
+  );
+  return `Default: a function returning \`${String(value(named))}\`.`;
+}
 
 // ── TypeDoc ──────────────────────────────────────────────────────────────────
 const apiJsonPath = path.join(root, 'packages/react-rtekit/api.json');
@@ -196,6 +235,8 @@ function defaultTagOf(comment) {
 
 // ── build the symbol records ─────────────────────────────────────────────────
 const { meta } = require(path.join(root, 'packages/react-rtekit/dist/meta.cjs'));
+// The default catalogue, so the localization reference can quote what it actually says.
+const { en } = require(path.join(root, 'packages/react-rtekit/dist/index.cjs'));
 
 /** name -> { page, schema, seedProse } */
 const symbols = new Map();
@@ -240,6 +281,7 @@ for (const [page, spec] of Object.entries(CATALOGUES)) {
   symbols.set(name, {
     page,
     catalogue: true,
+    derived: spec.derived === true,
     schema: {
       name: spec.title,
       kind: 'catalogue',
@@ -257,10 +299,11 @@ for (const [page, spec] of Object.entries(CATALOGUES)) {
     prose: {
       symbolDescription: '',
       optionDescriptions: Object.fromEntries(
-        entries.map((entry) => [
-          typeof entry === 'string' ? entry : entry.name,
-          typeof entry === 'string' ? '' : (entry.description ?? ''),
-        ]),
+        entries.map((entry) => {
+          const key = typeof entry === 'string' ? entry : entry.name;
+          if (spec.describe) return [key, spec.describe(entry, en)];
+          return [key, typeof entry === 'string' ? '' : (entry.description ?? '')];
+        }),
       ),
     },
   });
@@ -311,7 +354,11 @@ for (const [name, record] of symbols) {
   const current = existingStrings.get(stringsFile) ?? {};
   const merged = {
     symbolDescription: current.symbolDescription || record.prose.symbolDescription,
-    optionDescriptions: { ...record.prose.optionDescriptions, ...(current.optionDescriptions ?? {}) },
+    // A derived catalogue's rows are read from the library on every run, so the freshly
+    // computed value wins; everywhere else the strings file does.
+    optionDescriptions: record.derived
+      ? { ...current.optionDescriptions, ...record.prose.optionDescriptions }
+      : { ...record.prose.optionDescriptions, ...(current.optionDescriptions ?? {}) },
   };
   for (const key of Object.keys(record.prose.optionDescriptions)) {
     if (current.optionDescriptions?.[key] !== undefined) preserved += 1;

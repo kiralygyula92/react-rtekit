@@ -44,11 +44,11 @@ Every string the editor can show, including the `aria-label`s and the live-regio
 | `announce.overLimit` | `string` | no | Default: `You have reached the character limit` |
 | `color.apply` | `string` | no | Default: `Apply` |
 | `color.automatic` | `string` | no | Default: `Automatic` |
-| `color.custom` | `string` | no | Default: `Custom color` |
+| `color.custom` | `string` | no | Default: `Custom colour` |
 | `color.recent` | `string` | no | Default: `Recent` |
 | `color.reset` | `string` | no | Default: `Reset` |
-| `color.swatch` | `string` | no | Default: a function returning `Color {color}`. |
-| `color.title` | `string` | no | Default: `Text color` |
+| `color.swatch` | `string` | no | Default: a function returning `Colour {color}`. |
+| `color.title` | `string` | no | Default: `Text colour` |
 | `counter.characters` | `string` | no | Default: a function returning `{count} characters`. |
 | `counter.limit` | `string` | no | Default: a function returning `{count} / {max}`. |
 | `counter.overLimit` | `string` | no | Default: `Over the limit` |
@@ -76,7 +76,7 @@ Every string the editor can show, including the `aria-label`s and the live-regio
 | `find.results` | `string` | no | Default: a function returning `{index} of {total}`. |
 | `find.title` | `string` | no | Default: `Find and replace` |
 | `find.wholeWord` | `string` | no | Default: `Whole word` |
-| `image.alignCenter` | `string` | no | Default: `Align center` |
+| `image.alignCenter` | `string` | no | Default: `Align centre` |
 | `image.alignLeft` | `string` | no | Default: `Align left` |
 | `image.alignRight` | `string` | no | Default: `Align right` |
 | `image.alt` | `string` | no | Default: `Alt text` |
@@ -138,11 +138,11 @@ Every string the editor can show, including the `aria-label`s and the live-regio
 | `table.rows` | `string` | no | Default: `Rows` |
 | `table.size` | `string` | no | Default: a function returning `{rows} × {columns}`. |
 | `toolbar.align` | `string` | no | Default: `Alignment` |
-| `toolbar.alignCenter` | `string` | no | Default: `Align center` |
+| `toolbar.alignCenter` | `string` | no | Default: `Align centre` |
 | `toolbar.alignJustify` | `string` | no | Default: `Justify` |
 | `toolbar.alignLeft` | `string` | no | Default: `Align left` |
 | `toolbar.alignRight` | `string` | no | Default: `Align right` |
-| `toolbar.backgroundColor` | `string` | no | Default: `Highlight color` |
+| `toolbar.backgroundColor` | `string` | no | Default: `Highlight colour` |
 | `toolbar.blockType` | `string` | no | Default: `Block type` |
 | `toolbar.blockquote` | `string` | no | Default: `Quote` |
 | `toolbar.bold` | `string` | no | Default: `Bold` |
@@ -151,7 +151,7 @@ Every string the editor can show, including the `aria-label`s and the live-regio
 | `toolbar.clearFormatting` | `string` | no | Default: `Clear formatting` |
 | `toolbar.code` | `string` | no | Default: `Inline code` |
 | `toolbar.codeBlock` | `string` | no | Default: `Code block` |
-| `toolbar.color` | `string` | no | Default: `Text color` |
+| `toolbar.color` | `string` | no | Default: `Text colour` |
 | `toolbar.emoji` | `string` | no | Default: `Emoji` |
 | `toolbar.exitFullscreen` | `string` | no | Default: `Exit fullscreen` |
 | `toolbar.findReplace` | `string` | no | Default: `Find and replace` |

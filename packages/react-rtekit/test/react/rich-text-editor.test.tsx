@@ -42,9 +42,9 @@ describe(`the classic preset reproduces the legacy editor's toolbar`, () => {
       'Bold',
       'Italic',
       'Underline',
-      'Text color',
+      'Text colour',
       'Align left',
-      'Align center',
+      'Align centre',
       'Align right',
       'Bulleted list',
     ]);
@@ -75,7 +75,7 @@ describe(`the classic preset reproduces the legacy editor's toolbar`, () => {
     const { editor } = await mount({ preset: 'classic', defaultValue: '<p>text</p>' });
 
     const left = await screen.findByRole('button', { name: 'Align left' });
-    const center = screen.getByRole('button', { name: 'Align center' });
+    const center = screen.getByRole('button', { name: 'Align centre' });
 
     // Nothing is aligned yet, so "left" is the active one.
     await waitFor(() => {
@@ -139,8 +139,8 @@ describe('the colour picker (R14, R15)', () => {
     const user = userEvent.setup();
     await mount({ preset: 'classic' });
 
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
     const swatches = within(dialog).getAllByRole('radio');
     expect(swatches).toHaveLength(RTE_PREDEFINED_COLORS.length);
   });
@@ -149,16 +149,16 @@ describe('the colour picker (R14, R15)', () => {
     const user = userEvent.setup();
     await mount({ preset: 'classic' });
 
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
-    const first = within(dialog).getByRole('radio', { name: 'Color #000000' });
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
+    const first = within(dialog).getByRole('radio', { name: 'Colour #000000' });
     expect(first).toBeInTheDocument();
     await waitFor(() => {
       expect(document.activeElement).toBe(first);
     });
 
     await user.keyboard('{ArrowRight}');
-    expect(document.activeElement).toBe(within(dialog).getByRole('radio', { name: 'Color #FF0000' }));
+    expect(document.activeElement).toBe(within(dialog).getByRole('radio', { name: 'Colour #FF0000' }));
   });
 
   it('applies a swatch to the selection', async () => {
@@ -166,9 +166,9 @@ describe('the colour picker (R14, R15)', () => {
     const { editor } = await mount({ preset: 'classic', defaultValue: '<p>colour me</p>' });
     editor.setSelection('all');
 
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
-    await user.click(within(dialog).getByRole('radio', { name: 'Color #FF0000' }));
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
+    await user.click(within(dialog).getByRole('radio', { name: 'Colour #FF0000' }));
 
     await waitFor(() => {
       expect(editor.getHTML()).toContain('color: #ff0000');
@@ -183,8 +183,8 @@ describe('the colour picker (R14, R15)', () => {
     });
     editor.setSelection('all');
 
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
     await user.click(within(dialog).getByRole('button', { name: 'Reset' }));
 
     await waitFor(() => {
@@ -196,14 +196,14 @@ describe('the colour picker (R14, R15)', () => {
   it('closes on Escape and returns focus to the trigger', async () => {
     const user = userEvent.setup();
     await mount({ preset: 'classic' });
-    const trigger = await screen.findByRole('button', { name: 'Text color' });
+    const trigger = await screen.findByRole('button', { name: 'Text colour' });
 
     await user.click(trigger);
-    expect(await screen.findByRole('dialog', { name: 'Text color' })).toBeInTheDocument();
+    expect(await screen.findByRole('dialog', { name: 'Text colour' })).toBeInTheDocument();
 
     await user.keyboard('{Escape}');
     await waitFor(() => {
-      expect(screen.queryByRole('dialog', { name: 'Text color' })).toBeNull();
+      expect(screen.queryByRole('dialog', { name: 'Text colour' })).toBeNull();
     });
     expect(document.activeElement).toBe(trigger);
   });
@@ -342,9 +342,9 @@ describe('several editors on one page (R4, R10)', () => {
       expect(screen.getAllByRole('toolbar')).toHaveLength(2);
     });
 
-    const [firstColor] = screen.getAllByRole('button', { name: 'Text color' });
+    const [firstColor] = screen.getAllByRole('button', { name: 'Text colour' });
     await user.click(firstColor!);
-    expect(await screen.findAllByRole('dialog', { name: 'Text color' })).toHaveLength(1);
+    expect(await screen.findAllByRole('dialog', { name: 'Text colour' })).toHaveLength(1);
   });
 });
 

@@ -173,9 +173,9 @@ describe('R5: toolbar buttons stole focus, so commands hit a stale selection', (
     editor.focus('end');
     editor.setSelection('all');
 
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
-    await user.click(within(dialog).getByRole('radio', { name: 'Color #008000' }));
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
+    await user.click(within(dialog).getByRole('radio', { name: 'Colour #008000' }));
 
     await waitFor(() => {
       expect(editor.getHTML()).toContain('#008000');
@@ -320,14 +320,14 @@ describe('R15: swatches were divs — no focus, no keyboard, no names', () => {
   it('every swatch is a named radio', async () => {
     const user = userEvent.setup();
     await mount({ preset: 'classic' });
-    await user.click(await screen.findByRole('button', { name: 'Text color' }));
+    await user.click(await screen.findByRole('button', { name: 'Text colour' }));
 
-    const dialog = await screen.findByRole('dialog', { name: 'Text color' });
+    const dialog = await screen.findByRole('dialog', { name: 'Text colour' });
     const swatches = within(dialog).getAllByRole('radio');
     expect(swatches).toHaveLength(21);
     for (const swatch of swatches) {
       expect(swatch.tagName).toBe('BUTTON');
-      expect(swatch).toHaveAccessibleName(/^Color #/);
+      expect(swatch).toHaveAccessibleName(/^Colour #/);
     }
   });
 });

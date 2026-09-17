@@ -46,8 +46,8 @@ test('classic preset, focused', async ({ page }) => {
 
 test('classic preset, colour popover open', async ({ page }) => {
   await editor(page).click();
-  await page.getByRole('button', { name: 'Text color' }).click();
-  await expect(page.getByRole('dialog', { name: 'Text color' })).toBeVisible();
+  await page.getByRole('button', { name: 'Text colour' }).click();
+  await expect(page.getByRole('dialog', { name: 'Text colour' })).toBeVisible();
   await expect(page.locator('.rte-popover')).toHaveScreenshot('classic-color-popover.png');
 });
 
@@ -65,7 +65,7 @@ test('classic preset, formatted content', async ({ page }) => {
   await page.keyboard.type('Formatted sample');
   await page.keyboard.press('Control+a');
   await page.getByRole('button', { name: 'Bold' }).click();
-  await page.getByRole('button', { name: 'Align center' }).click();
+  await page.getByRole('button', { name: 'Align centre' }).click();
   await page.getByRole('button', { name: 'Bulleted list' }).click();
   await expect(field(page)).toHaveScreenshot('classic-formatted.png');
 });

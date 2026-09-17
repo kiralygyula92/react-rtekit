@@ -7,6 +7,12 @@ import type { RteLocalization } from '../types/localization.js';
  * `aria-label`s and live-region announcements — nothing is hard-coded in a component
  * (fixes R17).
  *
+ * British English, to agree with the documentation: a reader on the Colours page should
+ * not find a button labelled "Text color". This was settled before 1.0.0 was published,
+ * because afterwards it is a breaking change to anyone matching on a label. American
+ * spellings are one object away — `localization` takes a partial catalogue, so
+ * `{ toolbar: { color: 'Text color' } }` is the whole override.
+ *
  * @group Localization
  */
 export const en: RteLocalization = {
@@ -27,8 +33,8 @@ export const en: RteLocalization = {
     code: 'Inline code',
     subscript: 'Subscript',
     superscript: 'Superscript',
-    color: 'Text color',
-    backgroundColor: 'Highlight color',
+    color: 'Text colour',
+    backgroundColor: 'Highlight colour',
     clearFormatting: 'Clear formatting',
     fontFamily: 'Font',
     fontSize: 'Font size',
@@ -37,7 +43,7 @@ export const en: RteLocalization = {
     paragraph: 'Paragraph',
     blockType: 'Block type',
     alignLeft: 'Align left',
-    alignCenter: 'Align center',
+    alignCenter: 'Align centre',
     alignRight: 'Align right',
     alignJustify: 'Justify',
     align: 'Alignment',
@@ -66,13 +72,13 @@ export const en: RteLocalization = {
     wordCount: 'Word count',
   },
   color: {
-    title: 'Text color',
-    custom: 'Custom color',
+    title: 'Text colour',
+    custom: 'Custom colour',
     apply: 'Apply',
     reset: 'Reset',
     automatic: 'Automatic',
     recent: 'Recent',
-    swatch: ({ color }) => `Color ${color}`,
+    swatch: ({ color }) => `Colour ${color}`,
   },
   link: {
     title: 'Link',
@@ -104,7 +110,7 @@ export const en: RteLocalization = {
     tooLarge: ({ size }) => `File is too large. Max ${size}`,
     wrongType: 'That file type is not allowed',
     alignLeft: 'Align left',
-    alignCenter: 'Align center',
+    alignCenter: 'Align centre',
     alignRight: 'Align right',
   },
   table: {
