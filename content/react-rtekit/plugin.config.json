@@ -1,0 +1,64 @@
+{
+  "$schema": "../../docs/ppds/plugin-site.schema.json",
+  "id": "react-rtekit",
+  "name": "React RTE Kit",
+  "tagline": "A production-grade React rich-text editor you can actually own.",
+  "description": "React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.",
+  "categoryId": "content-editing",
+  "urlPrefix": "",
+  "repo": "https://github.com/kiralygyula92/react-rtekit",
+  "currentVersion": "1.0.0",
+  "versions": [
+    {
+      "label": "v1.0",
+      "href": "/react-rtekit/",
+      "current": true,
+      "supported": true
+    }
+  ],
+  "tiers": [
+    {
+      "id": "free",
+      "name": "Free",
+      "badge": null
+    }
+  ],
+  "links": {
+    "issues": "https://github.com/kiralygyula92/react-rtekit/issues",
+    "discussions": "https://github.com/kiralygyula92/react-rtekit/discussions",
+    "support": "/react-rtekit/getting-started/support/",
+    "changelog": "/react-rtekit/discover-more/changelog/",
+    "roadmap": "/react-rtekit/discover-more/roadmap/",
+    "source": "https://github.com/kiralygyula92/react-rtekit/tree/main/packages/react-rtekit/src",
+    "npm": "https://www.npmjs.com/package/react-rtekit"
+  },
+  "taxonomy": [
+    "Core features",
+    "Content & data",
+    "Display & layout",
+    "Interaction",
+    "Developer tools"
+  ],
+  "sections": [
+    { "id": "getting-started" },
+    { "id": "features" },
+    { "id": "demos" },
+    { "id": "reference" },
+    { "id": "customization" },
+    { "id": "guides" },
+    { "id": "integrations" },
+    { "id": "migration" },
+    { "id": "discover-more" }
+  ],
+  "referenceSource": {
+    "kind": "typescript-declarations",
+    "entry": "packages/react-rtekit/src/index.tsx",
+    "command": "pnpm --filter react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs"
+  },
+  "branding": {
+    "accentColor": "#3B6FF5",
+    "logoLight": "/brand/react-rtekit-light.svg",
+    "logoDark": "/brand/react-rtekit-dark.svg",
+    "ogImageTemplate": "/og/{slug}.png"
+  }
+}

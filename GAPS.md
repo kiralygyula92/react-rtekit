@@ -20,6 +20,36 @@ at all — decides whether three PPDS sections get built or excepted.
 
 ---
 
+## Resolved in Phase 2
+
+The original findings below are left as written — the audit record is not edited after
+the fact. This table says what was decided and where the decision lives.
+
+| Gap | Resolution | Recorded in |
+|---|---|---|
+| **G-04** `trailingParagraph` undocumented | Implementation detail, not a capability. Folded into `/react-rtekit/empty-state/`. 56 capabilities → 55 pages | `EXCEPTIONS.md` **E-08** |
+| **G-09** no marketing surface | Not building one. One surface: the docs. Owner's decision | **E-01** |
+| **G-10** no pricing, no tiers | Confirmed free and MIT. One `free` tier; §6D, §6H, flow F6 and checks 13–15 not applicable | **E-02** |
+| **G-11** URLs outside the PPDS taxonomy | Adopting `/react-rtekit/…`. Every legacy URL 301s; the map is complete and gate-checked | `content/react-rtekit/migration/url-map.csv` |
+| **G-16** reference not split into schema + strings | Adopting the split, with `strings.json` seeded from TSDoc on first generation and never overwritten after | **E-07** |
+| **G-17** 5 reference pages for 507 symbols | 21 pages: one per symbol, except the six enumerable catalogues, which §5.4 permits as settings groups | **E-06** |
+| **G-08** `/internal/performance` in the production build | Keeps its URL, stays out of the nav, gets `noindex` | **E-05** |
+| **G-12** nav derived from registries | `nav.json` now exists: 132 nodes, explicit order, `capabilityId` on all 55 capability nodes | `content/react-rtekit/nav.json` |
+| **G-06** eight canonical sections missing | Nine sections declared and ordered; `resources` and `design-resources` omitted as conditional and genuinely inapplicable | `plugin.config.json#/sections` |
+
+**G-01 stays open.** The package is still unpublished, so the third reconciliation source
+does not exist. It does not block Phase 3.
+
+**G-13 (no badges) is deferred, not resolved.** With one tier the `Pro`/`Premium` badges
+are moot (E-02), and at an initial 1.0.0 nothing is `New`, `Preview`, `Beta`, `Planned`
+or `Deprecated` — every capability shipped in the same release, so marking them all "New"
+would say nothing. The mechanism is in the nav schema and unused. It becomes live at the
+first 1.1.0.
+
+Everything else remains open and is Phase 3's or Phase 5's to close.
+
+---
+
 ## Phase 1 findings that block Phase 2
 
 ### G-01 — No marketplace listing exists, so the third reconciliation source is missing
