@@ -15,9 +15,9 @@ export default function EmojiAndSlashExample() {
   return (
     <div className="stack">
       <p className="page__lead">
-        Type a slash at the start of an empty line for the command palette, or a colon followed
-        by a name for an emoji. Emoji insert as characters, never images, so they survive
-        plain-text export and every e-mail client.
+        Type a slash at the start of an empty line for the command palette, or a colon followed by a
+        name for an emoji. Emoji insert as characters, never images, so they survive plain-text
+        export and every e-mail client.
       </p>
 
       <RichTextEditor
@@ -32,8 +32,8 @@ export default function EmojiAndSlashExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Emoji and slash output" testId="emoji-and-slash-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

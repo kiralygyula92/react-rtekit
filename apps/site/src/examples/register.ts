@@ -143,49 +143,133 @@ import ValueFormatsExample from './value-formats';
 import { meta as ValueFormatsMeta } from './value-formats/meta';
 import ValueFormatsSource from './value-formats/index.tsx?raw';
 
-registerExample({ ...AccessibilityMeta, Component: AccessibilityExample, source: AccessibilitySource });
+registerExample({
+  ...AccessibilityMeta,
+  Component: AccessibilityExample,
+  source: AccessibilitySource,
+});
 registerExample({ ...AutosaveMeta, Component: AutosaveExample, source: AutosaveSource });
 registerExample({ ...BasicMeta, Component: BasicExample, source: BasicSource });
-registerExample({ ...CommandOverridesMeta, Component: CommandOverridesExample, source: CommandOverridesSource });
+registerExample({
+  ...CommandOverridesMeta,
+  Component: CommandOverridesExample,
+  source: CommandOverridesSource,
+});
 registerExample({ ...ComposableMeta, Component: ComposableExample, source: ComposableSource });
-registerExample({ ...ContentStylesMeta, Component: ContentStylesExample, source: ContentStylesSource });
+registerExample({
+  ...ContentStylesMeta,
+  Component: ContentStylesExample,
+  source: ContentStylesSource,
+});
 registerExample({ ...ControlledMeta, Component: ControlledExample, source: ControlledSource });
-registerExample({ ...CounterAndLimitsMeta, Component: CounterAndLimitsExample, source: CounterAndLimitsSource });
-registerExample({ ...DesignSystemSkinMeta, Component: DesignSystemSkinExample, source: DesignSystemSkinSource });
+registerExample({
+  ...CounterAndLimitsMeta,
+  Component: CounterAndLimitsExample,
+  source: CounterAndLimitsSource,
+});
+registerExample({
+  ...DesignSystemSkinMeta,
+  Component: DesignSystemSkinExample,
+  source: DesignSystemSkinSource,
+});
 registerExample({ ...EmailOutputMeta, Component: EmailOutputExample, source: EmailOutputSource });
-registerExample({ ...EmojiAndSlashMeta, Component: EmojiAndSlashExample, source: EmojiAndSlashSource });
+registerExample({
+  ...EmojiAndSlashMeta,
+  Component: EmojiAndSlashExample,
+  source: EmojiAndSlashSource,
+});
 registerExample({ ...FindReplaceMeta, Component: FindReplaceExample, source: FindReplaceSource });
-registerExample({ ...FloatingToolbarMeta, Component: FloatingToolbarExample, source: FloatingToolbarSource });
+registerExample({
+  ...FloatingToolbarMeta,
+  Component: FloatingToolbarExample,
+  source: FloatingToolbarSource,
+});
 registerExample({ ...FormattingMeta, Component: FormattingExample, source: FormattingSource });
 registerExample({ ...FullscreenMeta, Component: FullscreenExample, source: FullscreenSource });
-registerExample({ ...HandlersMiddlewareMeta, Component: HandlersMiddlewareExample, source: HandlersMiddlewareSource });
+registerExample({
+  ...HandlersMiddlewareMeta,
+  Component: HandlersMiddlewareExample,
+  source: HandlersMiddlewareSource,
+});
 registerExample({ ...HeadlessMeta, Component: HeadlessExample, source: HeadlessSource });
 registerExample({ ...HistoryMeta, Component: HistoryExample, source: HistorySource });
 registerExample({ ...HtmlInteropMeta, Component: HtmlInteropExample, source: HtmlInteropSource });
 registerExample({ ...ImagesMeta, Component: ImagesExample, source: ImagesSource });
-registerExample({ ...LargeDocumentMeta, Component: LargeDocumentExample, source: LargeDocumentSource });
-registerExample({ ...LegacyParityMeta, Component: LegacyParityExample, source: LegacyParitySource });
+registerExample({
+  ...LargeDocumentMeta,
+  Component: LargeDocumentExample,
+  source: LargeDocumentSource,
+});
+registerExample({
+  ...LegacyParityMeta,
+  Component: LegacyParityExample,
+  source: LegacyParitySource,
+});
 registerExample({ ...LinksMeta, Component: LinksExample, source: LinksSource });
 registerExample({ ...ListsMeta, Component: ListsExample, source: ListsSource });
-registerExample({ ...LocalizationMeta, Component: LocalizationExample, source: LocalizationSource });
+registerExample({
+  ...LocalizationMeta,
+  Component: LocalizationExample,
+  source: LocalizationSource,
+});
 registerExample({ ...MarkdownMeta, Component: MarkdownExample, source: MarkdownSource });
 registerExample({ ...MentionsMeta, Component: MentionsExample, source: MentionsSource });
 registerExample({ ...MergeTagsMeta, Component: MergeTagsExample, source: MergeTagsSource });
 registerExample({ ...MobileMeta, Component: MobileExample, source: MobileSource });
-registerExample({ ...MultipleEditorsMeta, Component: MultipleEditorsExample, source: MultipleEditorsSource });
-registerExample({ ...PasteCleanupMeta, Component: PasteCleanupExample, source: PasteCleanupSource });
-registerExample({ ...PluginAuthoringMeta, Component: PluginAuthoringExample, source: PluginAuthoringSource });
+registerExample({
+  ...MultipleEditorsMeta,
+  Component: MultipleEditorsExample,
+  source: MultipleEditorsSource,
+});
+registerExample({
+  ...PasteCleanupMeta,
+  Component: PasteCleanupExample,
+  source: PasteCleanupSource,
+});
+registerExample({
+  ...PluginAuthoringMeta,
+  Component: PluginAuthoringExample,
+  source: PluginAuthoringSource,
+});
 registerExample({ ...PresetsMeta, Component: PresetsExample, source: PresetsSource });
-registerExample({ ...ReadonlyAndDisabledMeta, Component: ReadonlyAndDisabledExample, source: ReadonlyAndDisabledSource });
-registerExample({ ...SanitizationMeta, Component: SanitizationExample, source: SanitizationSource });
+registerExample({
+  ...ReadonlyAndDisabledMeta,
+  Component: ReadonlyAndDisabledExample,
+  source: ReadonlyAndDisabledSource,
+});
+registerExample({
+  ...SanitizationMeta,
+  Component: SanitizationExample,
+  source: SanitizationSource,
+});
 registerExample({ ...SlotsCustomMeta, Component: SlotsCustomExample, source: SlotsCustomSource });
 registerExample({ ...SourceViewMeta, Component: SourceViewExample, source: SourceViewSource });
 registerExample({ ...TablesMeta, Component: TablesExample, source: TablesSource });
-registerExample({ ...TailwindSkinMeta, Component: TailwindSkinExample, source: TailwindSkinSource });
+registerExample({
+  ...TailwindSkinMeta,
+  Component: TailwindSkinExample,
+  source: TailwindSkinSource,
+});
 registerExample({ ...ThemingMeta, Component: ThemingExample, source: ThemingSource });
-registerExample({ ...ToolbarConfigMeta, Component: ToolbarConfigExample, source: ToolbarConfigSource });
-registerExample({ ...ValidationFormikMeta, Component: ValidationFormikExample, source: ValidationFormikSource });
-registerExample({ ...ValidationRhfMeta, Component: ValidationRhfExample, source: ValidationRhfSource });
-registerExample({ ...ValueFormatsMeta, Component: ValueFormatsExample, source: ValueFormatsSource });
+registerExample({
+  ...ToolbarConfigMeta,
+  Component: ToolbarConfigExample,
+  source: ToolbarConfigSource,
+});
+registerExample({
+  ...ValidationFormikMeta,
+  Component: ValidationFormikExample,
+  source: ValidationFormikSource,
+});
+registerExample({
+  ...ValidationRhfMeta,
+  Component: ValidationRhfExample,
+  source: ValidationRhfSource,
+});
+registerExample({
+  ...ValueFormatsMeta,
+  Component: ValueFormatsExample,
+  source: ValueFormatsSource,
+});
 
 export {};

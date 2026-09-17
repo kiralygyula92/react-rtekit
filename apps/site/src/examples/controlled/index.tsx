@@ -77,8 +77,8 @@ export default function ControlledExample() {
 
       <h2>Value held by the parent</h2>
       <CodeBlock label="Controlled value" testId="controlled-value">
-            {value || '(empty)'}
-          </CodeBlock>
+        {value || '(empty)'}
+      </CodeBlock>
 
       <h2>Change log</h2>
       <table className="data-table" data-testid="controlled-log">

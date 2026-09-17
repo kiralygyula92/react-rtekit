@@ -10,39 +10,105 @@
  * you.
  */
 
-.tw-flex { display: flex; }
-.tw-flex-wrap { flex-wrap: wrap; }
-.tw-items-center { align-items: center; }
-.tw-justify-between { justify-content: space-between; }
-.tw-gap-1 { gap: 0.25rem; }
-.tw-gap-2 { gap: 0.5rem; }
-.tw-p-2 { padding: 0.5rem; }
-.tw-p-3 { padding: 0.75rem; }
-.tw-px-2 { padding-inline: 0.5rem; }
-.tw-py-1 { padding-block: 0.25rem; }
-.tw-mt-1 { margin-block-start: 0.25rem; }
-.tw-min-h-40 { min-block-size: 10rem; }
-.tw-w-full { inline-size: 100%; }
-.tw-rounded-md { border-radius: 0.375rem; }
-.tw-rounded-lg { border-radius: 0.5rem; }
-.tw-border { border: 1px solid #e5e7eb; }
-.tw-border-b { border-block-end: 1px solid #e5e7eb; }
-.tw-border-slate-200 { border-color: #e2e8f0; }
-.tw-bg-white { background-color: #ffffff; }
-.tw-bg-slate-50 { background-color: #f8fafc; }
-.tw-bg-slate-100 { background-color: #f1f5f9; }
-.tw-bg-indigo-600 { background-color: #4f46e5; }
-.tw-text-white { color: #ffffff; }
-.tw-text-slate-500 { color: #64748b; }
-.tw-text-slate-700 { color: #334155; }
-.tw-text-rose-600 { color: #e11d48; }
-.tw-text-sm { font-size: 0.875rem; line-height: 1.25rem; }
-.tw-text-xs { font-size: 0.75rem; line-height: 1rem; }
-.tw-font-medium { font-weight: 500; }
-.tw-shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%); }
-.tw-cursor-pointer { cursor: pointer; }
+.tw-flex {
+  display: flex;
+}
+.tw-flex-wrap {
+  flex-wrap: wrap;
+}
+.tw-items-center {
+  align-items: center;
+}
+.tw-justify-between {
+  justify-content: space-between;
+}
+.tw-gap-1 {
+  gap: 0.25rem;
+}
+.tw-gap-2 {
+  gap: 0.5rem;
+}
+.tw-p-2 {
+  padding: 0.5rem;
+}
+.tw-p-3 {
+  padding: 0.75rem;
+}
+.tw-px-2 {
+  padding-inline: 0.5rem;
+}
+.tw-py-1 {
+  padding-block: 0.25rem;
+}
+.tw-mt-1 {
+  margin-block-start: 0.25rem;
+}
+.tw-min-h-40 {
+  min-block-size: 10rem;
+}
+.tw-w-full {
+  inline-size: 100%;
+}
+.tw-rounded-md {
+  border-radius: 0.375rem;
+}
+.tw-rounded-lg {
+  border-radius: 0.5rem;
+}
+.tw-border {
+  border: 1px solid #e5e7eb;
+}
+.tw-border-b {
+  border-block-end: 1px solid #e5e7eb;
+}
+.tw-border-slate-200 {
+  border-color: #e2e8f0;
+}
+.tw-bg-white {
+  background-color: #ffffff;
+}
+.tw-bg-slate-50 {
+  background-color: #f8fafc;
+}
+.tw-bg-slate-100 {
+  background-color: #f1f5f9;
+}
+.tw-bg-indigo-600 {
+  background-color: #4f46e5;
+}
+.tw-text-white {
+  color: #ffffff;
+}
+.tw-text-slate-500 {
+  color: #64748b;
+}
+.tw-text-slate-700 {
+  color: #334155;
+}
+.tw-text-rose-600 {
+  color: #e11d48;
+}
+.tw-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.tw-text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.tw-font-medium {
+  font-weight: 500;
+}
+.tw-shadow-sm {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+}
+.tw-cursor-pointer {
+  cursor: pointer;
+}
 
-.tw-hover\:bg-slate-100:hover { background-color: #f1f5f9; }
+.tw-hover\:bg-slate-100:hover {
+  background-color: #f1f5f9;
+}
 
 .tw-focus\:outline-indigo-600:focus-visible {
   outline: 2px solid #4f46e5;
@@ -51,12 +117,26 @@
 
 /* The editor's own dark-mode support is off in unstyled mode, so the skin owns it. */
 @media (prefers-color-scheme: dark) {
-  .tw-bg-white { background-color: #0f172a; }
-  .tw-bg-slate-50 { background-color: #1e293b; }
-  .tw-bg-slate-100 { background-color: #334155; }
+  .tw-bg-white {
+    background-color: #0f172a;
+  }
+  .tw-bg-slate-50 {
+    background-color: #1e293b;
+  }
+  .tw-bg-slate-100 {
+    background-color: #334155;
+  }
   .tw-border,
-  .tw-border-b { border-color: #334155; }
-  .tw-text-slate-700 { color: #e2e8f0; }
-  .tw-text-slate-500 { color: #94a3b8; }
-  .tw-hover\:bg-slate-100:hover { background-color: #334155; }
+  .tw-border-b {
+    border-color: #334155;
+  }
+  .tw-text-slate-700 {
+    color: #e2e8f0;
+  }
+  .tw-text-slate-500 {
+    color: #94a3b8;
+  }
+  .tw-hover\:bg-slate-100:hover {
+    background-color: #334155;
+  }
 }

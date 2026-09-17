@@ -44,8 +44,8 @@ export default function FloatingToolbarExample() {
       </div>
 
       <p className="page__lead">
-        Narrow the window: the groups that no longer fit move into a “more” menu at the end of
-        the row.
+        Narrow the window: the groups that no longer fit move into a “more” menu at the end of the
+        row.
       </p>
 
       <RichTextEditor

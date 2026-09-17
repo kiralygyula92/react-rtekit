@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { RteContentView } from 'react-rtekit/view';
 import { sanitizeHtml, type SanitizeProfileName } from 'react-rtekit';
 import { XSS_PAYLOADS } from '../../fixtures';
+import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -16,7 +17,10 @@ const PROFILES: { name: SanitizeProfileName; summary: string }[] = [
   { name: 'strict', summary: 'Marks and paragraphs only. No links, no images, no styles.' },
   { name: 'standard', summary: 'The default: everything the editor can edit, nothing it cannot.' },
   { name: 'email', summary: 'Inline styles allowed, because e-mail clients have no stylesheet.' },
-  { name: 'permissive', summary: 'Widest allowlist — and still no scripts, no event handlers, no javascript: URLs.' },
+  {
+    name: 'permissive',
+    summary: 'Widest allowlist — and still no scripts, no event handlers, no javascript: URLs.',
+  },
 ];
 
 /** Things that must never appear in output, whatever the profile. */
@@ -39,23 +43,13 @@ export default function SanitizationExample() {
         text, and only the sanitized result is rendered as HTML.
       </p>
 
-      <div className="button-row" role="radiogroup" aria-label="Profile">
-        {PROFILES.map((entry) => (
-          <button
-            key={entry.name}
-            type="button"
-            role="radio"
-            aria-checked={entry.name === profile}
-            className="chip"
-            data-active={entry.name === profile}
-            onClick={() => {
-              setProfile(entry.name);
-            }}
-          >
-            {entry.name}
-          </button>
-        ))}
-      </div>
+      <ChoiceGroup
+        label="Profile"
+        hint="How much of the incoming markup survives. Every profile blocks scripts and event handlers."
+        options={PROFILES.map((entry) => entry.name)}
+        value={profile}
+        onChange={setProfile}
+      />
       <p className="page__lead" data-testid="profile-summary">
         {PROFILES.find((entry) => entry.name === profile)!.summary}
       </p>
@@ -92,9 +86,7 @@ export default function SanitizationExample() {
       <div className="parity__outputs">
         <figure>
           <figcaption>Input, as text</figcaption>
-          <CodeBlock label="Code">
-            {input}
-          </CodeBlock>
+          <CodeBlock label="Code">{input}</CodeBlock>
         </figure>
         <figure>
           <figcaption>

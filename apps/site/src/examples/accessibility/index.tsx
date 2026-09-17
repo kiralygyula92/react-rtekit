@@ -39,7 +39,9 @@ export default function AccessibilityExample() {
         helperText="Everything announced below is what a screen reader would hear."
         onChange={(next: EditorValue, meta) => {
           setValue(next as string);
-          setLog((entries) => [`change · ${meta.source} · ${meta.length} characters`, ...entries].slice(0, 10));
+          setLog((entries) =>
+            [`change · ${meta.source} · ${meta.length} characters`, ...entries].slice(0, 10),
+          );
         }}
       />
 

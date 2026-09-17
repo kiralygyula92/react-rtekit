@@ -124,10 +124,9 @@ export default function HeadlessExample() {
       </div>
 
       <p className="callout">
-        The one component that could not be replaced is <code>{'<Rte.Content>'}</code>. The
-        engine owns that element — it is where the selection, the IME and the undo stack
-        live — so the library attaches it rather than rendering it, and everything else
-        is yours.
+        The one component that could not be replaced is <code>{'<Rte.Content>'}</code>. The engine
+        owns that element — it is where the selection, the IME and the undo stack live — so the
+        library attaches it rather than rendering it, and everything else is yours.
       </p>
     </div>
   );

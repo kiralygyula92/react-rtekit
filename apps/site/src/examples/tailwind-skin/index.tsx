@@ -29,7 +29,8 @@ const SKIN = {
     'tw-rounded-md tw-px-2 tw-py-1 tw-text-sm tw-text-slate-700 tw-cursor-pointer ' +
     'tw-hover:bg-slate-100 tw-focus:outline-indigo-600',
   content: 'tw-min-h-40 tw-w-full tw-p-3',
-  footer: 'tw-flex tw-items-center tw-justify-between tw-border-b tw-p-2 tw-text-xs tw-text-slate-500',
+  footer:
+    'tw-flex tw-items-center tw-justify-between tw-border-b tw-p-2 tw-text-xs tw-text-slate-500',
   label: 'tw-text-sm tw-font-medium tw-text-slate-700',
   errorText: 'tw-mt-1 tw-text-sm tw-text-rose-600',
   placeholder: 'tw-p-3 tw-text-sm tw-text-slate-500',
@@ -54,17 +55,16 @@ export default function TailwindSkinExample() {
       />
 
       <p className="callout">
-        In your application these classes come from Tailwind. This site does not build
-        with Tailwind — adding it for one page would change every other page — so the
-        classes used here are written out in <code>utilities.css</code> next to this
-        file, with Tailwind&rsquo;s own values.
+        In your application these classes come from Tailwind. This site does not build with Tailwind
+        — adding it for one page would change every other page — so the classes used here are
+        written out in <code>utilities.css</code> next to this file, with Tailwind&rsquo;s own
+        values.
       </p>
 
       <p className="callout">
-        Note what <code>unstyled</code> keeps: the layout still works and the content
-        still reads as prose. Dropping <code>content.css</code> as well would make this
-        editor and a list page render the same stored HTML differently, which is the
-        one difference users notice.
+        Note what <code>unstyled</code> keeps: the layout still works and the content still reads as
+        prose. Dropping <code>content.css</code> as well would make this editor and a list page
+        render the same stored HTML differently, which is the one difference users notice.
       </p>
     </div>
   );

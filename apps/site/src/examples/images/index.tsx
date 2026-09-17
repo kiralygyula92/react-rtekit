@@ -73,8 +73,8 @@ export default function ImagesExample() {
       />
 
       <p className="page__lead">
-        Click an image to resize it, set its alt text or add a caption. Files over 2 MB and
-        anything that is not an image are refused before the upload starts.
+        Click an image to resize it, set its alt text or add a caption. Files over 2 MB and anything
+        that is not an image are refused before the upload starts.
       </p>
 
       <h2>Upload log</h2>
@@ -88,8 +88,8 @@ export default function ImagesExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Images output" testId="images-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

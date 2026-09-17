@@ -52,8 +52,8 @@ export default function HistoryExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="History output" testId="history-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

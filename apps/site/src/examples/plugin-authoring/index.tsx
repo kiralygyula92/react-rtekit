@@ -42,10 +42,10 @@ export default function PluginAuthoringExample() {
       <CodeBlock label="Highlight plugin source">{source}</CodeBlock>
 
       <p className="callout">
-        Nothing above reaches into the engine. <code>definePlugin</code> is an identity
-        function — it exists so the object is inferred rather than annotated — and{' '}
-        <code>{'createToolbarItem'}</code> does the same for one control. Both are re-exported
-        here only so this file shows the imports a plugin author needs.
+        Nothing above reaches into the engine. <code>definePlugin</code> is an identity function —
+        it exists so the object is inferred rather than annotated — and{' '}
+        <code>{'createToolbarItem'}</code> does the same for one control. Both are re-exported here
+        only so this file shows the imports a plugin author needs.
       </p>
 
       <p className="example-basic__state">

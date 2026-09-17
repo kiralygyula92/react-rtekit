@@ -27,7 +27,9 @@ export default function BasicExample() {
         <Rte.Content aria-label="Message" placeholder="Write your message…" />
         <Rte.Footer>
           <span className="example-basic__state">
-            {meta ? `${meta.length} characters · ${meta.wordCount} words · source: ${meta.source}` : 'No changes yet'}
+            {meta
+              ? `${meta.length} characters · ${meta.wordCount} words · source: ${meta.source}`
+              : 'No changes yet'}
           </span>
           <Rte.Counter />
         </Rte.Footer>
@@ -35,8 +37,8 @@ export default function BasicExample() {
 
       <h2>Serialized value</h2>
       <CodeBlock label="Basic html" testId="basic-html">
-            {html}
-          </CodeBlock>
+        {html}
+      </CodeBlock>
 
       <h2>The same value in RteContentView</h2>
       <div data-testid="basic-view" className="example-basic__preview">

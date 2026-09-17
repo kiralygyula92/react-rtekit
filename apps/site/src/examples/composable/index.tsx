@@ -94,10 +94,9 @@ export default function ComposableExample() {
       ) : null}
 
       <p className="callout">
-        The footer here is a <code>div</code> of this page&rsquo;s own, not the
-        editor&rsquo;s. <code>{'<Rte.Counter>'}</code> and <code>{'<Rte.ErrorText>'}</code> work
-        inside it because they read the editor from context rather than from a parent
-        component.
+        The footer here is a <code>div</code> of this page&rsquo;s own, not the editor&rsquo;s.{' '}
+        <code>{'<Rte.Counter>'}</code> and <code>{'<Rte.ErrorText>'}</code> work inside it because
+        they read the editor from context rather than from a parent component.
       </p>
     </div>
   );

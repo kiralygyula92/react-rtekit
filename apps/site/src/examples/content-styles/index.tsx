@@ -141,8 +141,8 @@ export default function ContentStylesExample() {
 
       <p className="callout">
         This is why <code>content.css</code> is a separate file rather than part of the
-        editor&rsquo;s stylesheet: a server-rendered list page can load the prose styles
-        without loading an editor at all.
+        editor&rsquo;s stylesheet: a server-rendered list page can load the prose styles without
+        loading an editor at all.
       </p>
     </div>
   );

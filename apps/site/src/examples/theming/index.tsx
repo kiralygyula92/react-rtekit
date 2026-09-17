@@ -7,6 +7,7 @@ import {
   type Density,
   type ResolvedRteTheme,
 } from 'react-rtekit';
+import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -55,61 +56,29 @@ export default function ThemingExample() {
 
   return (
     <div className="stack">
-      <div className="button-row" role="radiogroup" aria-label="Theme">
-        {[...PRESETS, 'brand' as const].map((entry) => (
-          <button
-            key={entry}
-            type="button"
-            role="radio"
-            aria-checked={entry === name}
-            className="chip"
-            data-active={entry === name}
-            onClick={() => {
-              setName(entry);
-            }}
-          >
-            {entry}
-          </button>
-        ))}
-      </div>
+      <ChoiceGroup
+        label="Theme"
+        hint="A whole set of tokens — colours, radii, spacing — as one object."
+        options={[...PRESETS, 'brand' as const]}
+        value={name}
+        onChange={setName}
+      />
 
-      <div className="button-row">
-        <div role="radiogroup" aria-label="Colour scheme" className="button-row">
-          {(['light', 'dark', 'auto'] as ColorScheme[]).map((entry) => (
-            <button
-              key={entry}
-              type="button"
-              role="radio"
-              aria-checked={entry === colorScheme}
-              className="chip"
-              data-active={entry === colorScheme}
-              onClick={() => {
-                setColorScheme(entry);
-              }}
-            >
-              {entry}
-            </button>
-          ))}
-        </div>
+      <ChoiceGroup
+        label="Colour scheme"
+        hint="Which palette the theme resolves to. Auto follows the operating system."
+        options={['light', 'dark', 'auto'] as ColorScheme[]}
+        value={colorScheme}
+        onChange={setColorScheme}
+      />
 
-        <div role="radiogroup" aria-label="Density" className="button-row">
-          {DENSITIES.map((entry) => (
-            <button
-              key={entry}
-              type="button"
-              role="radio"
-              aria-checked={entry === density}
-              className="chip"
-              data-active={entry === density}
-              onClick={() => {
-                setDensity(entry);
-              }}
-            >
-              {entry}
-            </button>
-          ))}
-        </div>
-      </div>
+      <ChoiceGroup
+        label="Density"
+        hint="Scales every spacing token at once, so it composes with any theme rather than replacing it."
+        options={DENSITIES}
+        value={density}
+        onChange={setDensity}
+      />
 
       <RichTextEditor
         preset="standard"

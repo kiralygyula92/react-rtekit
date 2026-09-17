@@ -75,8 +75,8 @@ export default function CounterAndLimitsExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Counter and limits output" testId="counter-and-limits-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

@@ -34,7 +34,8 @@ export default function PasteCleanupExample() {
   const source = SOURCES.find((entry) => entry.id === sourceId)!;
 
   const cleaned = useMemo(() => {
-    const html = mode === 'clean' ? source.html.replace(/\s(?:style|class)="[^"]*"/gi, '') : source.html;
+    const html =
+      mode === 'clean' ? source.html.replace(/\s(?:style|class)="[^"]*"/gi, '') : source.html;
     const doc = htmlToDocument(html);
     return mode === 'text' ? documentToText(doc) : documentToHtml(doc);
   }, [mode, source.html]);

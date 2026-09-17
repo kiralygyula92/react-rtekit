@@ -37,7 +37,13 @@ body {
   background: var(--site-bg);
   color: var(--site-text);
   font-family:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
     sans-serif;
   font-size: 15px;
   line-height: 1.6;
@@ -432,6 +438,37 @@ pre code {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+}
+
+/* ── a labelled row of choices ─────────────────────────────────────────────── */
+
+/*
+ * Groups are separated by space rather than by a border: two rows of pills read as one
+ * group of twelve when nothing sits between them, and a rule for every group turns an
+ * example into a form.
+ */
+.choice-group + .choice-group {
+  margin-block-start: 14px;
+}
+
+.choice-group__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  margin-block-end: 6px;
+}
+
+.choice-group__label {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--site-text);
+}
+
+/* What the group *does*. The label alone says only what it is called. */
+.choice-group__hint {
+  font-size: 12.5px;
+  color: var(--site-text-muted);
 }
 
 .field-inline {
@@ -1057,8 +1094,12 @@ pre code {
   color: var(--site-text-muted);
 }
 
-.skin-counter[data-state='near'] { color: #B45309; }
-.skin-counter[data-state='over'] { color: #C81E1E; }
+.skin-counter[data-state='near'] {
+  color: #b45309;
+}
+.skin-counter[data-state='over'] {
+  color: #c81e1e;
+}
 
 .skin-counter__ring {
   inline-size: 12px;
@@ -1173,11 +1214,15 @@ pre code {
 }
 
 @keyframes ds-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ds-spinner { animation: none; }
+  .ds-spinner {
+    animation: none;
+  }
 }
 
 .ds-tooltip {

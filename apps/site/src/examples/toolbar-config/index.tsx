@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from 'react-rtekit';
+import { ChoiceGroup } from '../../components/ChoiceGroup';
 
 /**
  * Every shape the `toolbar` prop takes.
@@ -66,7 +67,11 @@ const LAYOUTS: { id: string; title: string; note: string; toolbar: ToolbarConfig
     title: 'Compact size',
     note: "size: 'sm' scales the buttons down without changing the touch target model.",
     toolbar: {
-      items: [['bold', 'italic', 'underline', 'strike'], ['color', 'backgroundColor'], ['bulletList', 'orderedList']],
+      items: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['color', 'backgroundColor'],
+        ['bulletList', 'orderedList'],
+      ],
       size: 'sm',
     },
   },
@@ -87,23 +92,16 @@ export default function ToolbarConfigExample() {
 
   return (
     <div className="stack">
-      <div className="button-row" role="radiogroup" aria-label="Layout">
-        {LAYOUTS.map((entry) => (
-          <button
-            key={entry.id}
-            type="button"
-            role="radio"
-            aria-checked={entry.id === layout.id}
-            className="chip"
-            data-active={entry.id === layout.id}
-            onClick={() => {
-              setLayout(entry);
-            }}
-          >
-            {entry.title}
-          </button>
-        ))}
-      </div>
+      <ChoiceGroup
+        label="Layout"
+        hint="Which items the toolbar shows and in what order. A name nothing provides is dropped rather than disabled."
+        options={LAYOUTS.map((entry) => ({ value: entry.id, label: entry.title }))}
+        value={layout.id}
+        onChange={(id) => {
+          const found = LAYOUTS.find((entry) => entry.id === id);
+          if (found) setLayout(found);
+        }}
+      />
 
       <label className="field-inline">
         Overflow

@@ -113,15 +113,15 @@ export default function EmailOutputExample() {
         <code>text/html</code> part
       </h2>
       <CodeBlock label="Email html" testId="email-html">
-            {html}
-          </CodeBlock>
+        {html}
+      </CodeBlock>
 
       <h2>
         <code>text/plain</code> alternative
       </h2>
       <CodeBlock label="Email text" testId="email-text">
-            {text}
-          </CodeBlock>
+        {text}
+      </CodeBlock>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RichTextEditor, documentToHtml, htmlToDocument, type PresetName } from 'react-rtekit';
+import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -13,8 +14,14 @@ import { CodeBlock } from '../../components/CodeBlock';
 /** What each preset is for. */
 const PRESETS: { name: PresetName; summary: string }[] = [
   { name: 'minimal', summary: 'Bold, italic, links. For a comment box that should stay small.' },
-  { name: 'classic', summary: 'The legacy parity bundle: eight buttons, 287px, quill-compatible output.' },
-  { name: 'standard', summary: 'The general-purpose bundle: marks, headings, lists, links, history.' },
+  {
+    name: 'classic',
+    summary: 'The legacy parity bundle: eight buttons, 287px, quill-compatible output.',
+  },
+  {
+    name: 'standard',
+    summary: 'The general-purpose bundle: marks, headings, lists, links, history.',
+  },
   { name: 'email', summary: 'Everything an e-mail client renders, and nothing it does not.' },
   { name: 'comment', summary: 'Compact chrome, no block formatting, counter always visible.' },
   { name: 'full', summary: 'Every plugin the library ships, including tables and images.' },
@@ -34,23 +41,13 @@ export default function PresetsExample() {
 
   return (
     <div className="stack">
-      <div className="button-row" role="radiogroup" aria-label="Preset">
-        {PRESETS.map((entry) => (
-          <button
-            key={entry.name}
-            type="button"
-            role="radio"
-            aria-checked={entry.name === preset}
-            className="chip"
-            data-active={entry.name === preset}
-            onClick={() => {
-              setPreset(entry.name);
-            }}
-          >
-            {entry.name}
-          </button>
-        ))}
-      </div>
+      <ChoiceGroup
+        label="Preset"
+        hint="Which plugins load, and so which toolbar items exist. Everything below changes with it."
+        options={PRESETS.map((entry) => entry.name)}
+        value={preset}
+        onChange={setPreset}
+      />
 
       <p className="page__lead" data-testid="preset-summary">
         {current.summary}
@@ -70,8 +67,10 @@ export default function PresetsExample() {
 
       <h2>Output for this preset</h2>
       <CodeBlock label="Preset output" testId="preset-output">
-            {documentToHtml(htmlToDocument(value), { profile: preset === 'email' ? 'email' : 'standard' })}
-          </CodeBlock>
+        {documentToHtml(htmlToDocument(value), {
+          profile: preset === 'email' ? 'email' : 'standard',
+        })}
+      </CodeBlock>
     </div>
   );
 }

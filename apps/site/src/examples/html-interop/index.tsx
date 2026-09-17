@@ -6,6 +6,7 @@ import {
   type HtmlProfile,
   type EditorValue,
 } from 'react-rtekit';
+import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -71,31 +72,21 @@ export default function HtmlInteropExample() {
         }}
       />
 
-      <div className="button-row" role="radiogroup" aria-label="Profile">
-        {PROFILES.map((entry) => (
-          <button
-            key={entry.name}
-            type="button"
-            role="radio"
-            aria-checked={entry.name === profile}
-            className="chip"
-            data-active={entry.name === profile}
-            onClick={() => {
-              setProfile(entry.name);
-            }}
-          >
-            {entry.name}
-          </button>
-        ))}
-      </div>
+      <ChoiceGroup
+        label="Output profile"
+        hint="Which dialect of HTML the editor writes out. What it reads is unaffected."
+        options={PROFILES.map((entry) => entry.name)}
+        value={profile}
+        onChange={setProfile}
+      />
 
       <p className="page__lead" data-testid="interop-summary">
         {current.summary}
       </p>
 
       <CodeBlock label="Interop output" testId="interop-output">
-            {outputs[profile]}
-          </CodeBlock>
+        {outputs[profile]}
+      </CodeBlock>
 
       <h2>Side by side</h2>
       <table className="data-table" data-testid="interop-table">

@@ -62,7 +62,9 @@ export default function LargeDocumentExample() {
 
     setTimings([
       time('getText()', 'What a counter needs. No markup is built.', () => editor.getText()),
-      time('getJSON()', 'The portable document. What onChange builds lazily.', () => editor.getJSON()),
+      time('getJSON()', 'The portable document. What onChange builds lazily.', () =>
+        editor.getJSON(),
+      ),
       time('getHTML()', 'Serialize, then sanitize the output.', () => editor.getHTML()),
       time('getHTML({ sanitize: false })', 'The same, without the output sanitizer.', () =>
         editor.getHTML({ sanitize: false }),
@@ -77,8 +79,8 @@ export default function LargeDocumentExample() {
   return (
     <div className="stack">
       <p className="page__lead">
-        {Math.round(initial.length / 1024)} KB of HTML. Type into it and watch the meter;
-        the number that matters is the average, not the first keystroke.
+        {Math.round(initial.length / 1024)} KB of HTML. Type into it and watch the meter; the number
+        that matters is the average, not the first keystroke.
       </p>
 
       <RichTextEditor
@@ -144,10 +146,9 @@ export default function LargeDocumentExample() {
       ) : null}
 
       <p className="callout">
-        This is why <code>ChangeMeta.document</code> is a getter. A handler that reads
-        only <code>meta.length</code> never pays for the document; one that reads{' '}
-        <code>meta.document</code> pays the row above, on every keystroke, unless it is
-        debounced.
+        This is why <code>ChangeMeta.document</code> is a getter. A handler that reads only{' '}
+        <code>meta.length</code> never pays for the document; one that reads{' '}
+        <code>meta.document</code> pays the row above, on every keystroke, unless it is debounced.
       </p>
     </div>
   );

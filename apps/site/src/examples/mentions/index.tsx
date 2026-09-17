@@ -41,8 +41,8 @@ export default function MentionsExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Mentions output" testId="mentions-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

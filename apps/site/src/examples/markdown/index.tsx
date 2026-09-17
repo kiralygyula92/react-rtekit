@@ -32,8 +32,8 @@ export default function MarkdownExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Markdown output" testId="markdown-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

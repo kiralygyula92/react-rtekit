@@ -23,8 +23,8 @@ export default function TablesExample() {
   return (
     <div className="stack">
       <p className="page__lead">
-        Put the caret in a cell to get the row and column controls. Tab moves to the next cell;
-        Tab in the last cell adds a row.
+        Put the caret in a cell to get the row and column controls. Tab moves to the next cell; Tab
+        in the last cell adds a row.
       </p>
 
       <RichTextEditor

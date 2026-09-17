@@ -73,8 +73,8 @@ export default function FormattingExample() {
 
       <h2>Serialized</h2>
       <CodeBlock label="Formatting html" testId="formatting-html">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

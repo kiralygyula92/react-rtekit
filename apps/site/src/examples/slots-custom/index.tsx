@@ -73,7 +73,11 @@ const slots: Partial<RteSlots> = {
   Counter: ({ id, count, max, overLimit, nearLimit, text }) => {
     const fraction = max ? Math.min(count / max, 1) : 0;
     return (
-      <span id={id} className="skin-counter" data-state={overLimit ? 'over' : nearLimit ? 'near' : 'ok'}>
+      <span
+        id={id}
+        className="skin-counter"
+        data-state={overLimit ? 'over' : nearLimit ? 'near' : 'ok'}
+      >
         <span
           className="skin-counter__ring"
           style={{ ['--fill' as string]: `${String(Math.round(fraction * 100))}%` }}
@@ -111,9 +115,9 @@ export default function SlotsCustomExample() {
       />
 
       <p className="callout">
-        Nothing here changes what the editor <em>does</em>. The four replacements are
-        presentation only, which is why the keyboard model, the announcements and the
-        selection handling are all still the shipped ones.
+        Nothing here changes what the editor <em>does</em>. The four replacements are presentation
+        only, which is why the keyboard model, the announcements and the selection handling are all
+        still the shipped ones.
       </p>
     </div>
   );

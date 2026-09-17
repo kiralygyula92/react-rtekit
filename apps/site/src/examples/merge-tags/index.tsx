@@ -22,7 +22,12 @@ const TAGS = [
   { key: 'due_date', label: 'Due date', group: 'Dates', sample: '14 October 2026' },
   { key: 'report_date', label: 'Report date', group: 'Dates', sample: '16 September 2026' },
   { key: 'company_name', label: 'Company name', group: 'Organization', sample: 'Northwind Ltd' },
-  { key: 'company_address', label: 'Company address', group: 'Organization', sample: '1 Marina Way' },
+  {
+    key: 'company_address',
+    label: 'Company address',
+    group: 'Organization',
+    sample: '1 Marina Way',
+  },
 ];
 
 export default function MergeTagsExample() {
@@ -76,8 +81,8 @@ export default function MergeTagsExample() {
 
       <h2>{preview ? 'With sample values' : 'Stored value'}</h2>
       <CodeBlock label="Merge tags output" testId="merge-tags-output">
-            {preview ? previewed : value}
-          </CodeBlock>
+        {preview ? previewed : value}
+      </CodeBlock>
     </div>
   );
 }

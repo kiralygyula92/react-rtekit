@@ -13,9 +13,24 @@ import { CodeBlock } from '../../components/CodeBlock';
 
 /** The three fields, each with its own preset, so the isolation is visible. */
 const FIELDS = [
-  { id: 'subject', label: 'Subject line', preset: 'minimal' as const, value: '<p>Your April report</p>' },
-  { id: 'body', label: 'Message body', preset: 'classic' as const, value: '<p>Hi Dana,</p><p>Your results are ready.</p>' },
-  { id: 'footer', label: 'Footer', preset: 'comment' as const, value: '<p>Northwind Ltd · Tampa FL</p>' },
+  {
+    id: 'subject',
+    label: 'Subject line',
+    preset: 'minimal' as const,
+    value: '<p>Your April report</p>',
+  },
+  {
+    id: 'body',
+    label: 'Message body',
+    preset: 'classic' as const,
+    value: '<p>Hi Dana,</p><p>Your results are ready.</p>',
+  },
+  {
+    id: 'footer',
+    label: 'Footer',
+    preset: 'comment' as const,
+    value: '<p>Northwind Ltd · Tampa FL</p>',
+  },
 ];
 
 export default function MultipleEditorsExample() {
@@ -55,8 +70,8 @@ export default function MultipleEditorsExample() {
 
       <h2>Values</h2>
       <CodeBlock label="Multiple values" testId="multiple-values">
-            {JSON.stringify(values, null, 2)}
-          </CodeBlock>
+        {JSON.stringify(values, null, 2)}
+      </CodeBlock>
     </div>
   );
 }

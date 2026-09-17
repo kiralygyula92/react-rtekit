@@ -42,7 +42,9 @@ export default function LegacyParityExample() {
 
   // The same document, serialized for storage and for an e-mail client.
   const outputs = useMemo(() => {
-    const doc = htmlToDocument(message, { mergeTags: { knownKeys: MERGE_TAGS.map((tag) => tag.key) } });
+    const doc = htmlToDocument(message, {
+      mergeTags: { knownKeys: MERGE_TAGS.map((tag) => tag.key) },
+    });
     return {
       classic: documentToHtml(doc, { profile: 'quill-compatible' }),
       email: documentToHtml(doc, {
@@ -123,16 +125,16 @@ export default function LegacyParityExample() {
                 <code>quill-compatible</code> — what the old API stored
               </figcaption>
               <CodeBlock label="Parity output classic" testId="parity-output-classic">
-            {outputs.classic}
-          </CodeBlock>
+                {outputs.classic}
+              </CodeBlock>
             </figure>
             <figure>
               <figcaption>
                 <code>email</code> — inline styles, merge tags previewed
               </figcaption>
               <CodeBlock label="Parity output email" testId="parity-output-email">
-            {outputs.email}
-          </CodeBlock>
+                {outputs.email}
+              </CodeBlock>
             </figure>
           </div>
         ) : null}

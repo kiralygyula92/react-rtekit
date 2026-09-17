@@ -51,7 +51,10 @@ export default function LinksExample() {
         label="Content"
         value={value}
         autoLink={autoLink}
-        toolbar={[['bold', 'italic'], ['link', 'unlink']]}
+        toolbar={[
+          ['bold', 'italic'],
+          ['link', 'unlink'],
+        ]}
         {...(internalOnly
           ? {
               linkValidator: (url: string) =>
@@ -64,14 +67,14 @@ export default function LinksExample() {
       />
 
       <p className="page__lead">
-        Select some text and press <kbd>Ctrl</kbd>+<kbd>K</kbd>, or click an existing link. A
-        plain click opens the popover; <kbd>Ctrl</kbd>+click follows the link.
+        Select some text and press <kbd>Ctrl</kbd>+<kbd>K</kbd>, or click an existing link. A plain
+        click opens the popover; <kbd>Ctrl</kbd>+click follows the link.
       </p>
 
       <h2>Serialized</h2>
       <CodeBlock label="Links output" testId="links-output">
-            {value}
-          </CodeBlock>
+        {value}
+      </CodeBlock>
     </div>
   );
 }

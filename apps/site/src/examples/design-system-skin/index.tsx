@@ -22,7 +22,11 @@ function DsButton({
   children?: ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button {...rest} className={['ds-button', className].filter(Boolean).join(' ')} data-variant={variant}>
+    <button
+      {...rest}
+      className={['ds-button', className].filter(Boolean).join(' ')}
+      data-variant={variant}
+    >
       {children}
     </button>
   );
@@ -121,7 +125,11 @@ const slots: Partial<RteSlots> = {
   ),
 
   Spinner: ({ label, className }) => (
-    <span className={['ds-spinner', className].filter(Boolean).join(' ')} role="status" aria-label={label} />
+    <span
+      className={['ds-spinner', className].filter(Boolean).join(' ')}
+      role="status"
+      aria-label={label}
+    />
   ),
 
   Tooltip: ({ title, children, className }) => (
@@ -151,9 +159,9 @@ export default function DesignSystemSkinExample() {
       />
 
       <p className="callout">
-        Eight replacements, and every dialog, popover, field and busy indicator in the
-        editor changed with them. The features themselves were not touched — they ask
-        for a <code>Dialog</code>, not for this one.
+        Eight replacements, and every dialog, popover, field and busy indicator in the editor
+        changed with them. The features themselves were not touched — they ask for a{' '}
+        <code>Dialog</code>, not for this one.
       </p>
     </div>
   );
