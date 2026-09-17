@@ -300,16 +300,15 @@ for (const [name, record] of symbols) {
 await writeFile(path.join(here, 'index.json'), `${JSON.stringify(index, null, 2)}\n`, 'utf8');
 await writeFile(path.join(here, 'checksums.json'), `${JSON.stringify(checksums, null, 2)}\n`, 'utf8');
 
-const missingProse = Object.entries(index).filter(([name]) => {
-  const slug = name.replace(/[^\w-]/g, '');
-  const strings = JSON.parse(readFileSyncSafe(path.join(here, `${slug}.strings.json`)));
-  return (strings.symbolDescription ?? '') === '';
-});
-
-function readFileSyncSafe(file) {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports -- node builtin, sync read
-  return require('node:fs').readFileSync(file, 'utf8');
-}
+/*
+ * Missing prose is a warning, not a failure (PPDS §8.5).
+ *
+ * A symbol whose TSDoc says nothing worth seeding still gets a strings file with an
+ * empty key, ready for someone to fill in; the build does not stop for it.
+ */
+const missingProse = [...symbols].filter(
+  ([, record]) => (record.prose.symbolDescription ?? '') === '',
+);
 
 process.stdout.write(
   `${symbols.size} symbols across ${new Set([...symbols.values()].map((r) => r.page)).size} pages\n` +
