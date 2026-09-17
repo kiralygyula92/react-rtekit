@@ -43,71 +43,49 @@ export const KIND_LABEL: Record<SearchKind, string> = {
 };
 
 async function build(): Promise<SearchEntry[]> {
-  const [{ GUIDES, guideHeadings }, { listExamples }, { API_PAGES }, apiPages, { meta }] =
-    await Promise.all([
-      import('../guides'),
-      import('../examples'),
-      import('../routes/ApiIndex'),
-      import('../api/pages.json'),
-      import('react-rtekit/meta'),
-    ]);
+  // The manifest is the site's content; the runtime metadata is the library's enumerable
+  // surface. Between them they cover every page and every symbol, and neither is a list
+  // anyone maintains by hand, so a result can never point at a page that is not there.
+  const [{ pages }, { meta }] = await Promise.all([
+    import('../docs/manifest'),
+    import('react-rtekit/meta'),
+  ]);
 
-  const generated = apiPages.default as Record<string, { name: string; description: string }[]>;
   const entries: SearchEntry[] = [];
 
-  for (const guide of GUIDES) {
+  for (const page of pages) {
+    const reference = page.pathname.includes('/api/');
     entries.push({
-      id: `guide:${guide.slug}`,
-      kind: 'guide',
-      title: guide.title,
-      context: 'Guide',
-      to: `/docs/guides/${guide.slug}`,
-      keywords: guide.slug.replace(/-/g, ' '),
+      id: `page:${page.pathname}`,
+      kind: reference ? 'api' : page.capabilityId ? 'example' : 'guide',
+      title: page.title,
+      context: reference ? 'API reference' : (page.group ?? page.section ?? 'Documentation'),
+      to: page.pathname,
+      keywords: page.description,
     });
 
-    for (const heading of guideHeadings(guide.slug)) {
+    for (const heading of page.headings) {
       entries.push({
-        id: `section:${guide.slug}#${heading.id}`,
+        id: `section:${page.pathname}#${heading.id}`,
         kind: 'section',
-        title: heading.title,
-        context: guide.title,
-        to: `/docs/guides/${guide.slug}#${heading.id}`,
-        keywords: guide.title,
+        title: heading.text,
+        context: page.title,
+        to: `${page.pathname}#${heading.id}`,
+        keywords: page.title,
       });
     }
   }
 
-  for (const page of API_PAGES) {
-    entries.push({
-      id: `api:${page.slug}`,
-      kind: 'api',
-      title: page.title,
-      context: 'API reference',
-      to: `/api/${page.slug}`,
-      keywords: page.description,
-    });
-  }
-
-  // Symbols: TypeDoc for the typed surface, runtime metadata for the lists that must
-  // never drift (slots, commands, handlers, tokens).
-  const symbols: { name: string; page: string; description: string }[] = [];
-  for (const [slug, rows] of Object.entries(generated)) {
-    for (const row of rows) {
-      symbols.push({ name: row.name, page: slug, description: row.description });
-    }
-  }
-  for (const slot of meta.slots) {
-    symbols.push({ name: slot.name, page: 'slots', description: slot.description });
-  }
-  for (const command of meta.commands) {
-    symbols.push({ name: command.name, page: 'commands', description: command.description });
-  }
-  for (const handler of meta.handlers) {
-    symbols.push({ name: handler.name, page: 'handlers', description: handler.description });
-  }
-  for (const token of meta.tokens) {
-    symbols.push({ name: token.name, page: 'theme-tokens', description: token.description });
-  }
+  // Symbols come from the runtime metadata, which a unit test holds to the modules it
+  // enumerates — so the slot, command, handler and token lists cannot drift from the code.
+  const symbols: { name: string; page: string; description: string }[] = [
+    ...meta.slots.map((entry) => ({ ...entry, page: 'slots' })),
+    ...meta.commands.map((entry) => ({ ...entry, page: 'commands' })),
+    ...meta.handlers.map((entry) => ({ ...entry, page: 'handlers' })),
+    ...meta.tokens.map((entry) => ({ ...entry, page: 'theme-tokens' })),
+    ...meta.toolbarItems.map((entry) => ({ ...entry, page: 'toolbar-items' })),
+    ...meta.icons.map((name) => ({ name, description: 'Icon', page: 'icons' })),
+  ];
 
   const seen = new Set<string>();
   for (const symbol of symbols) {
@@ -118,20 +96,9 @@ async function build(): Promise<SearchEntry[]> {
       id,
       kind: 'symbol',
       title: symbol.name,
-      context: API_PAGES.find((page) => page.slug === symbol.page)?.title ?? symbol.page,
-      to: `/api/${symbol.page}?q=${encodeURIComponent(symbol.name)}#${symbol.name}`,
+      context: symbol.page.replace(/-/g, ' '),
+      to: `/react-rtekit/api/${symbol.page}/#${symbol.name}`,
       keywords: symbol.description,
-    });
-  }
-
-  for (const example of listExamples()) {
-    entries.push({
-      id: `example:${example.slug}`,
-      kind: 'example',
-      title: example.title,
-      context: 'Example',
-      to: `/examples/${example.slug}`,
-      keywords: `${example.description} ${example.tags.join(' ')} ${example.features.join(' ')}`,
     });
   }
 

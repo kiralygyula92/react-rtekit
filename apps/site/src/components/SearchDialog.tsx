@@ -26,8 +26,29 @@ function isTypingTarget(target: EventTarget | null): boolean {
   );
 }
 
-export function SearchDialog() {
-  const [open, setOpen] = useState(false);
+/** Props for {@link SearchDialog}. */
+export interface SearchDialogProps {
+  /** Opens the palette from outside, e.g. the header button or the `/` shortcut. */
+  open?: boolean;
+  /** Called when the palette closes, so the caller can clear its own flag. */
+  onClose?: () => void;
+}
+
+export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}) {
+  // Two ways in: Ctrl+K, which this component owns, and the header, which the layout
+  // owns. Either can open it; closing has to clear both or the palette reopens.
+  const [selfOpen, setSelfOpen] = useState(false);
+  const open = selfOpen || openProp === true;
+  // Stable, so the callbacks and effects below can depend on it without being rebuilt
+  // on every render.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+  const setOpen = useCallback((next: boolean): void => {
+    setSelfOpen(next);
+    if (!next) onCloseRef.current?.();
+  }, []);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const [entries, setEntries] = useState<SearchEntry[] | null>(null);
@@ -55,7 +76,7 @@ export function SearchDialog() {
     // Focus goes back where it came from, so a keyboard user is not dropped at the
     // top of the document.
     openerRef.current?.focus();
-  }, []);
+  }, [setOpen]);
 
   const go = useCallback(
     (entry: SearchEntry) => {
@@ -84,7 +105,7 @@ export function SearchDialog() {
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [close, open]);
+  }, [close, open, setOpen]);
 
   useEffect(() => {
     if (!open) return;

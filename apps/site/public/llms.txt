@@ -1,0 +1,154 @@
+# React RTE Kit
+
+A production-grade React rich-text editor you can actually own.
+React RTE Kit is an accessible, themeable React rich-text editor built on Lexical: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+
+## Getting started
+
+- [Overview](/react-rtekit/index.md): TODO: one line, reused in nav, meta and llms.txt
+- [Installation](/react-rtekit/getting-started/installation.md): TODO: one line, reused in nav, meta and llms.txt
+- [Usage](/react-rtekit/getting-started/usage.md): TODO: one line, reused in nav, meta and llms.txt
+- [Requirements](/react-rtekit/getting-started/requirements.md): TODO: one line, reused in nav, meta and llms.txt
+- [FAQ](/react-rtekit/getting-started/faq.md): TODO: one line, reused in nav, meta and llms.txt
+- [Support](/react-rtekit/getting-started/support.md): TODO: one line, reused in nav, meta and llms.txt
+- [Versions](/react-rtekit/getting-started/versions.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Features
+
+- [All features](/react-rtekit/all-features.md): TODO: one line, reused in nav, meta and llms.txt
+- [Text formatting](/react-rtekit/text-formatting.md): TODO: one line, reused in nav, meta and llms.txt
+- [Headings](/react-rtekit/headings.md): TODO: one line, reused in nav, meta and llms.txt
+- [Lists](/react-rtekit/lists.md): TODO: one line, reused in nav, meta and llms.txt
+- [Check lists](/react-rtekit/check-lists.md): TODO: one line, reused in nav, meta and llms.txt
+- [Links](/react-rtekit/links.md): TODO: one line, reused in nav, meta and llms.txt
+- [Blockquotes](/react-rtekit/blockquotes.md): TODO: one line, reused in nav, meta and llms.txt
+- [Code blocks](/react-rtekit/code-blocks.md): TODO: one line, reused in nav, meta and llms.txt
+- [Dividers](/react-rtekit/dividers.md): TODO: one line, reused in nav, meta and llms.txt
+- [Subscript & superscript](/react-rtekit/subscript-and-superscript.md): TODO: one line, reused in nav, meta and llms.txt
+- [Clear formatting](/react-rtekit/clear-formatting.md): TODO: one line, reused in nav, meta and llms.txt
+- [Undo & redo](/react-rtekit/history.md): TODO: one line, reused in nav, meta and llms.txt
+- [Empty state](/react-rtekit/empty-state.md): TODO: one line, reused in nav, meta and llms.txt
+- [Value formats](/react-rtekit/value-formats.md): TODO: one line, reused in nav, meta and llms.txt
+- [Sanitization](/react-rtekit/sanitization.md): TODO: one line, reused in nav, meta and llms.txt
+- [HTML interop](/react-rtekit/html-interop.md): TODO: one line, reused in nav, meta and llms.txt
+- [E-mail output](/react-rtekit/email-output.md): TODO: one line, reused in nav, meta and llms.txt
+- [Paste clean-up](/react-rtekit/paste-cleanup.md): TODO: one line, reused in nav, meta and llms.txt
+- [Merge tags](/react-rtekit/merge-tags.md): TODO: one line, reused in nav, meta and llms.txt
+- [Markdown shortcuts](/react-rtekit/markdown-shortcuts.md): TODO: one line, reused in nav, meta and llms.txt
+- [Counters & limits](/react-rtekit/counters-and-limits.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theming](/react-rtekit/theming.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theme presets](/react-rtekit/theme-presets.md): TODO: one line, reused in nav, meta and llms.txt
+- [Colours](/react-rtekit/colours.md): TODO: one line, reused in nav, meta and llms.txt
+- [Fonts](/react-rtekit/fonts.md): TODO: one line, reused in nav, meta and llms.txt
+- [Alignment](/react-rtekit/alignment.md): TODO: one line, reused in nav, meta and llms.txt
+- [Indentation](/react-rtekit/indentation.md): TODO: one line, reused in nav, meta and llms.txt
+- [Tables](/react-rtekit/tables.md): TODO: one line, reused in nav, meta and llms.txt
+- [Images & uploads](/react-rtekit/images.md): TODO: one line, reused in nav, meta and llms.txt
+- [Content view](/react-rtekit/content-view.md): TODO: one line, reused in nav, meta and llms.txt
+- [Toolbar](/react-rtekit/toolbar.md): TODO: one line, reused in nav, meta and llms.txt
+- [Selection toolbar](/react-rtekit/selection-toolbar.md): TODO: one line, reused in nav, meta and llms.txt
+- [Slash menu](/react-rtekit/slash-menu.md): TODO: one line, reused in nav, meta and llms.txt
+- [Emoji](/react-rtekit/emoji.md): TODO: one line, reused in nav, meta and llms.txt
+- [Mentions](/react-rtekit/mentions.md): TODO: one line, reused in nav, meta and llms.txt
+- [Find & replace](/react-rtekit/find-and-replace.md): TODO: one line, reused in nav, meta and llms.txt
+- [Fullscreen](/react-rtekit/fullscreen.md): TODO: one line, reused in nav, meta and llms.txt
+- [Source view](/react-rtekit/source-view.md): TODO: one line, reused in nav, meta and llms.txt
+- [Keyboard shortcuts](/react-rtekit/keyboard-shortcuts.md): TODO: one line, reused in nav, meta and llms.txt
+- [Autosave & drafts](/react-rtekit/autosave.md): TODO: one line, reused in nav, meta and llms.txt
+- [Read-only & disabled](/react-rtekit/read-only-and-disabled.md): TODO: one line, reused in nav, meta and llms.txt
+- [Mobile](/react-rtekit/mobile.md): TODO: one line, reused in nav, meta and llms.txt
+- [Slots](/react-rtekit/slots.md): TODO: one line, reused in nav, meta and llms.txt
+- [Handler middleware](/react-rtekit/handler-middleware.md): TODO: one line, reused in nav, meta and llms.txt
+- [Commands](/react-rtekit/commands.md): TODO: one line, reused in nav, meta and llms.txt
+- [Composable parts](/react-rtekit/composable-parts.md): TODO: one line, reused in nav, meta and llms.txt
+- [Headless](/react-rtekit/headless.md): TODO: one line, reused in nav, meta and llms.txt
+- [Plugin authoring](/react-rtekit/plugin-authoring.md): TODO: one line, reused in nav, meta and llms.txt
+- [Presets](/react-rtekit/presets.md): TODO: one line, reused in nav, meta and llms.txt
+- [Engine adapter](/react-rtekit/engine-adapter.md): TODO: one line, reused in nav, meta and llms.txt
+- [Icons](/react-rtekit/icons.md): TODO: one line, reused in nav, meta and llms.txt
+- [Localization](/react-rtekit/localization.md): TODO: one line, reused in nav, meta and llms.txt
+- [Accessibility](/react-rtekit/accessibility.md): TODO: one line, reused in nav, meta and llms.txt
+- [Server rendering](/react-rtekit/server-rendering.md): TODO: one line, reused in nav, meta and llms.txt
+- [Performance](/react-rtekit/performance.md): TODO: one line, reused in nav, meta and llms.txt
+- [Forms](/react-rtekit/forms.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Demos
+
+- [All demos](/react-rtekit/demos.md): TODO: one line, reused in nav, meta and llms.txt
+- [Playground](/react-rtekit/demos/playground.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theme editor](/react-rtekit/demos/theme-editor.md): TODO: one line, reused in nav, meta and llms.txt
+- [Comment box](/react-rtekit/demos/comment-box.md): TODO: one line, reused in nav, meta and llms.txt
+- [E-mail composer](/react-rtekit/demos/email-composer.md): TODO: one line, reused in nav, meta and llms.txt
+- [CMS body field](/react-rtekit/demos/cms-body-field.md): TODO: one line, reused in nav, meta and llms.txt
+- [Legacy parity](/react-rtekit/demos/legacy-parity.md): TODO: one line, reused in nav, meta and llms.txt
+- [Large document](/react-rtekit/demos/large-document.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Reference
+
+- [API reference](/react-rtekit/api.md): TODO: one line, reused in nav, meta and llms.txt
+- [RichTextEditor](/react-rtekit/api/rich-text-editor.md): TODO: one line, reused in nav, meta and llms.txt
+- [RteContentView](/react-rtekit/api/rte-content-view.md): TODO: one line, reused in nav, meta and llms.txt
+- [Composable parts](/react-rtekit/api/composable-parts.md): TODO: one line, reused in nav, meta and llms.txt
+- [Providers](/react-rtekit/api/providers.md): TODO: one line, reused in nav, meta and llms.txt
+- [useEditor](/react-rtekit/api/use-editor.md): TODO: one line, reused in nav, meta and llms.txt
+- [Editor hooks](/react-rtekit/api/editor-hooks.md): TODO: one line, reused in nav, meta and llms.txt
+- [EditorInstance](/react-rtekit/api/editor-instance.md): TODO: one line, reused in nav, meta and llms.txt
+- [Command catalogue](/react-rtekit/api/commands.md): TODO: one line, reused in nav, meta and llms.txt
+- [Handler catalogue](/react-rtekit/api/handlers.md): TODO: one line, reused in nav, meta and llms.txt
+- [Serialization](/react-rtekit/api/serialization.md): TODO: one line, reused in nav, meta and llms.txt
+- [Sanitizer](/react-rtekit/api/sanitize.md): TODO: one line, reused in nav, meta and llms.txt
+- [Plugin API](/react-rtekit/api/plugin-api.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theme API](/react-rtekit/api/theme-api.md): TODO: one line, reused in nav, meta and llms.txt
+- [Slot catalogue](/react-rtekit/api/slots.md): TODO: one line, reused in nav, meta and llms.txt
+- [Toolbar items](/react-rtekit/api/toolbar-items.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theme tokens](/react-rtekit/api/theme-tokens.md): TODO: one line, reused in nav, meta and llms.txt
+- [Icon set](/react-rtekit/api/icons.md): TODO: one line, reused in nav, meta and llms.txt
+- [Localization keys](/react-rtekit/api/localization-keys.md): TODO: one line, reused in nav, meta and llms.txt
+- [Plugin catalogue](/react-rtekit/api/plugins.md): TODO: one line, reused in nav, meta and llms.txt
+- [Types](/react-rtekit/api/types.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Customization
+
+- [How to customize](/react-rtekit/customization.md): TODO: one line, reused in nav, meta and llms.txt
+- [Theming & tokens](/react-rtekit/customization/theme-tokens.md): TODO: one line, reused in nav, meta and llms.txt
+- [Overriding structure](/react-rtekit/customization/overriding-slots.md): TODO: one line, reused in nav, meta and llms.txt
+- [Toolbar layout](/react-rtekit/customization/toolbar-layout.md): TODO: one line, reused in nav, meta and llms.txt
+- [Design-system skin](/react-rtekit/customization/design-system-skin.md): TODO: one line, reused in nav, meta and llms.txt
+- [Content styles](/react-rtekit/customization/content-styles.md): TODO: one line, reused in nav, meta and llms.txt
+- [Recipes](/react-rtekit/customization/recipes.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Guides
+
+- [All guides](/react-rtekit/guides.md): TODO: one line, reused in nav, meta and llms.txt
+- [Best practices](/react-rtekit/guides/best-practices.md): TODO: one line, reused in nav, meta and llms.txt
+- [Security](/react-rtekit/guides/security.md): TODO: one line, reused in nav, meta and llms.txt
+- [Performance](/react-rtekit/guides/performance.md): TODO: one line, reused in nav, meta and llms.txt
+- [Testing](/react-rtekit/guides/testing.md): TODO: one line, reused in nav, meta and llms.txt
+- [Accessibility](/react-rtekit/guides/accessibility.md): TODO: one line, reused in nav, meta and llms.txt
+- [Localization](/react-rtekit/guides/localization.md): TODO: one line, reused in nav, meta and llms.txt
+- [Server rendering](/react-rtekit/guides/server-rendering.md): TODO: one line, reused in nav, meta and llms.txt
+- [Writing a plugin](/react-rtekit/guides/writing-a-plugin.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Integrations
+
+- [All integrations](/react-rtekit/integrations.md): TODO: one line, reused in nav, meta and llms.txt
+- [React Hook Form](/react-rtekit/integrations/react-hook-form.md): TODO: one line, reused in nav, meta and llms.txt
+- [Formik](/react-rtekit/integrations/formik.md): TODO: one line, reused in nav, meta and llms.txt
+- [Next.js](/react-rtekit/integrations/next-js.md): TODO: one line, reused in nav, meta and llms.txt
+- [Remix](/react-rtekit/integrations/remix.md): TODO: one line, reused in nav, meta and llms.txt
+- [Tailwind CSS](/react-rtekit/integrations/tailwind.md): TODO: one line, reused in nav, meta and llms.txt
+- [TypeScript](/react-rtekit/integrations/typescript.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Migration
+
+- [Migration](/react-rtekit/migration.md): TODO: one line, reused in nav, meta and llms.txt
+- [From Quill](/react-rtekit/migration/from-quill.md): TODO: one line, reused in nav, meta and llms.txt
+
+## Discover more
+
+- [Discover more](/react-rtekit/discover-more.md): TODO: one line, reused in nav, meta and llms.txt
+- [Changelog](/react-rtekit/discover-more/changelog.md): TODO: one line, reused in nav, meta and llms.txt
+- [Roadmap](/react-rtekit/discover-more/roadmap.md): TODO: one line, reused in nav, meta and llms.txt
+- [Showcase](/react-rtekit/discover-more/showcase.md): TODO: one line, reused in nav, meta and llms.txt
+- [Architecture](/react-rtekit/discover-more/architecture.md): TODO: one line, reused in nav, meta and llms.txt
+- [llms.txt](/react-rtekit/discover-more/llms-txt.md): TODO: one line, reused in nav, meta and llms.txt

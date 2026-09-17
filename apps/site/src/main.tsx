@@ -10,6 +10,7 @@ import 'react-rtekit/styles.css';
 import 'react-rtekit/presets/classic.css';
 import 'react-rtekit/presets/dark.css';
 import './styles/site.css';
+import './styles/docs.css';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('#root is missing from index.html');
