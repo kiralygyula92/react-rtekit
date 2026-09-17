@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import { canonicalPath, nav, titleOf, type NavNode } from './manifest';
 import { Badge } from './Badge';
@@ -10,14 +10,15 @@ import { Badge } from './Badge';
  * code (N1), the titles come from the title map (N2), and every badge traces back to a
  * `plan` or `lifecycle` on the node (N4/P7). No component here decides what to show.
  *
- * Sections expand in place rather than collapsing the rest, because a reader moving
- * between Features and Reference should not have to re-open what they were reading.
+ * A section opens two ways — because the route is inside it, or because the reader
+ * clicked it. It used to open only the first way, which made every section heading look
+ * like a control and behave like a label.
  *
  * @module
  */
 
-/** The section containing a pathname, so it opens on a deep link. */
-function openSectionFor(pathname: string): string | null {
+/** The section containing a pathname, so a deep link opens the right one. */
+function sectionFor(pathname: string): string | null {
   const target = canonicalPath(pathname);
   for (const section of nav) {
     if (section.children?.some((child) => child.pathname === target)) return section.pathname;
@@ -44,20 +45,54 @@ function Item({ node, onNavigate }: { node: NavNode; onNavigate?: () => void }) 
 
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const { pathname } = useLocation();
-  const openSection = openSectionFor(pathname);
+  const [open, setOpen] = useState<string | null>(() => sectionFor(pathname));
+
+  /*
+   * Navigating into another section opens it.
+   *
+   * Held in state rather than derived, so a reader can also open a section to look
+   * through it without leaving the page they are on. Adjusted during render rather than
+   * in an effect: an effect would render once with the old section open and once with
+   * the new one, and the first of those frames is visible.
+   */
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
+    const section = sectionFor(pathname);
+    if (section) setOpen(section);
+  }
 
   return (
     <nav className="docs-nav" aria-label="Documentation">
       {nav.map((section) => {
-        const open = section.pathname === openSection;
+        const expanded = section.pathname === open;
+        const listId = `${section.pathname.replace(/\W+/g, '-')}-list`;
         return (
           <div key={section.pathname} className="docs-nav__section">
-            <p className="docs-nav__section-title" data-open={open}>
-              {section.title}
-            </p>
+            <button
+              type="button"
+              className="docs-nav__section-title"
+              data-open={expanded}
+              aria-expanded={expanded}
+              aria-controls={listId}
+              onClick={() => {
+                setOpen(expanded ? null : section.pathname);
+              }}
+            >
+              <span>{section.title}</span>
+              <svg
+                className="docs-nav__chevron"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <path fill="currentColor" d="M8.6 16.6 13.2 12 8.6 7.4 10 6l6 6-6 6z" />
+              </svg>
+            </button>
 
-            {open ? (
-              <ul className="docs-nav__list">
+            {expanded ? (
+              <ul className="docs-nav__list" id={listId}>
                 {section.children?.map((child) => (
                   // A `subheader` opens a group and the rows after it belong to it, so
                   // the label is rendered before its first member rather than as a

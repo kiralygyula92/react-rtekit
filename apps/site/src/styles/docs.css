@@ -10,11 +10,18 @@
  */
 
 :root {
-  --docs-header-height: 56px;
-  --docs-sidebar-width: 292px;
-  --docs-rail-width: 232px;
-  --docs-gutter: 32px;
-  --docs-measure: 46rem;
+  --docs-header-height: 52px;
+  --docs-sidebar-width: 268px;
+  --docs-rail-width: 220px;
+  --docs-gutter: 28px;
+  --docs-measure: 44rem;
+  /* One step down from the browser default: documentation reads denser than prose. */
+  --docs-font-size: 15px;
+  --docs-line-height: 1.6;
+}
+
+.docs-shell {
+  font-size: var(--docs-font-size);
 }
 
 /* ── shell ─────────────────────────────────────────────────────────────────── */
@@ -115,13 +122,19 @@
   font-size: 12px;
 }
 
+/* `border: 0` because a <button> has one by default and an <a> does not — the theme
+   toggle is a button, so without this it was the only boxed control in the bar. */
 .docs-header__icon {
   display: grid;
   place-items: center;
-  inline-size: 34px;
-  block-size: 34px;
-  border-radius: 8px;
+  inline-size: 30px;
+  block-size: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
   color: var(--site-text);
+  cursor: pointer;
 }
 
 .docs-header__icon:hover {
@@ -146,7 +159,7 @@
   inset-block-start: var(--docs-header-height);
   block-size: calc(100vh - var(--docs-header-height));
   overflow-y: auto;
-  padding: 24px 12px 48px 24px;
+  padding: 16px 10px 40px 18px;
   border-right: 1px solid var(--site-border);
 }
 
@@ -154,29 +167,57 @@
   margin-block-start: 4px;
 }
 
+/* A real button: it toggles its section, so it has to be operable and say so. */
 .docs-nav__section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  inline-size: 100%;
   margin: 0;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 15px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
   color: var(--site-text);
+  font: inherit;
+  font-weight: 650;
+  font-size: 14px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.docs-nav__section-title:hover {
+  background: var(--site-bg-muted);
 }
 
 .docs-nav__section-title[data-open='true'] {
   background: var(--site-bg-muted);
 }
 
+.docs-nav__chevron {
+  flex: none;
+  color: var(--site-text-muted);
+  transition: transform 120ms ease;
+}
+
+.docs-nav__section-title[data-open='true'] .docs-nav__chevron {
+  transform: rotate(90deg);
+}
+
+/* Indented, and ruled, so a child row reads as belonging to the section above it. */
 .docs-nav__list {
-  margin: 2px 0 12px;
-  padding: 0;
+  margin: 2px 0 8px;
+  padding: 0 0 0 10px;
+  margin-inline-start: 10px;
+  border-inline-start: 1px solid var(--site-border);
   list-style: none;
 }
 
 /* The capability group label: a quiet upper-case rule, not a clickable row. */
 .docs-nav__group {
-  padding: 14px 12px 4px;
-  font-size: 11px;
+  padding: 12px 10px 3px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -187,10 +228,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
   color: var(--site-text-muted);
-  font-size: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
   text-decoration: none;
 }
 
@@ -211,7 +253,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--docs-rail-width);
   gap: var(--docs-gutter);
-  padding: 40px var(--docs-gutter) 80px;
+  padding: 28px var(--docs-gutter) 64px;
   align-items: start;
 }
 
@@ -241,49 +283,65 @@
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-block-end: 12px;
-  font-size: 14px;
+  gap: 7px;
+  margin-block-end: 10px;
+  font-size: 13px;
   color: var(--site-text-muted);
 }
 
+/* Not underlined: a breadcrumb is a location, and the underline made the product name
+   look like the page's first piece of prose. */
 .breadcrumb a {
   color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--site-text);
+  text-decoration: underline;
 }
 
 .docs-article h1 {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 0 0 12px;
-  font-size: clamp(2rem, 1.4rem + 2vw, 2.9rem);
-  line-height: 1.15;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.2rem);
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .docs-article__lead {
-  margin: 0 0 40px;
-  font-size: 1.125rem;
-  line-height: 1.6;
+  margin: 0 0 28px;
+  font-size: 1rem;
+  line-height: 1.55;
   color: var(--site-text-muted);
 }
 
 .prose h2 {
-  margin: 48px 0 16px;
-  font-size: 1.6rem;
+  margin: 32px 0 12px;
+  font-size: 1.3rem;
   letter-spacing: -0.01em;
   scroll-margin-top: calc(var(--docs-header-height) + 16px);
 }
 
 .prose h3 {
-  margin: 32px 0 12px;
-  font-size: 1.2rem;
+  margin: 24px 0 8px;
+  font-size: 1.05rem;
   scroll-margin-top: calc(var(--docs-header-height) + 16px);
 }
 
 .prose p,
 .prose li {
-  line-height: 1.7;
+  line-height: var(--docs-line-height);
+}
+
+.prose p {
+  margin: 0 0 12px;
+}
+
+.prose li + li {
+  margin-block-start: 4px;
 }
 
 .prose ul,
@@ -300,23 +358,24 @@
 
 .prose .code-block {
   overflow-x: auto;
-  padding: 16px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
   border: 1px solid var(--site-border);
   border-radius: var(--site-radius);
   background: var(--site-bg-muted);
-  font-size: 13.5px;
-  line-height: 1.6;
+  font-size: 12.5px;
+  line-height: 1.55;
 }
 
 .prose table {
   inline-size: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .prose th,
 .prose td {
-  padding: 10px 12px;
+  padding: 7px 10px;
   border-bottom: 1px solid var(--site-border);
   text-align: start;
   vertical-align: top;
@@ -357,13 +416,19 @@
   padding-inline-start: 12px;
 }
 
+/* Square. The sidebar marks its current page with a filled rounded block; copying that
+   here made two different things look like the same control. This is a rule in the
+   margin, which is what a table of contents wants. */
 .toc__link {
   display: block;
-  padding: 5px 12px;
+  padding: 4px 10px;
   margin-inline-start: -1px;
+  border-radius: 0;
   border-inline-start: 2px solid transparent;
+  background: none;
   color: var(--site-text-muted);
-  font-size: 13.5px;
+  font-size: 12.5px;
+  line-height: 1.45;
   text-decoration: none;
 }
 
@@ -373,7 +438,10 @@
 
 .toc__link--active {
   border-inline-start-color: var(--site-accent);
+  border-radius: 0;
+  background: none;
   color: var(--site-accent);
+  font-weight: 600;
 }
 
 /* ── badges ────────────────────────────────────────────────────────────────── */

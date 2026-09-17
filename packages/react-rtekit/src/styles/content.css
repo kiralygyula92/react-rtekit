@@ -79,6 +79,26 @@
   }
 
   /*
+   * An item that only holds a nested list has no marker of its own.
+   *
+   * A nested list is a `<ul>` inside an `<li>`, and that outer item draws a bullet for
+   * itself as well as the list drawing one for each child — so one indented item showed
+   * two bullets, the second slightly above and to the left of the first. The engine
+   * marks such an item `--nested`; for stored HTML there is no class, so the selector
+   * asks the question directly: an item whose only child is a list.
+   */
+  .rte-content .rte-list-item--nested,
+  .rte-view li:has(> :is(ul, ol):only-child) {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .rte-content .rte-list-item--nested::marker,
+  .rte-view li:has(> :is(ul, ol):only-child)::marker {
+    content: '';
+  }
+
+  /*
    * Check lists.
    *
    * The box is drawn with `::before` on the item, because that is the only thing there
@@ -108,7 +128,15 @@
     content: '';
     position: absolute;
     inset-inline-start: 0;
-    inset-block-start: 0.2em;
+    /*
+     * Centred on the first line, not pinned to the top of the item.
+     *
+     * The box is 1em and the line box is `line-height` tall, so half the difference
+     * puts it on the text's centre line. Calculated rather than nudged, so it stays
+     * centred when a theme changes the line height — and on the *first* line, so a
+     * wrapped item keeps its box beside the text it starts with.
+     */
+    inset-block-start: calc((1em * var(--rte-content-line-height, 1.5) - 1em) / 2);
     inline-size: 1em;
     block-size: 1em;
     border: 1px solid var(--rte-color-border);
@@ -131,7 +159,7 @@
     content: '';
     position: absolute;
     inset-inline-start: 0.34em;
-    inset-block-start: 0.34em;
+    inset-block-start: calc((1em * var(--rte-content-line-height, 1.5) - 1em) / 2 + 0.14em);
     inline-size: 0.28em;
     block-size: 0.55em;
     border: solid #ffffff;

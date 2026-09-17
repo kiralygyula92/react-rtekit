@@ -22,7 +22,15 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const require = createRequire(path.join(root, 'package.json'));
-const { marked } = require('marked');
+/*
+ * The package renders its own documentation.
+ *
+ * `markdownToHtml` is React RTE Kit's own Markdown reader and HTML serializer — the same
+ * code path `valueFormat="markdown"` uses — so the docs site carries no third-party
+ * Markdown library, and every page on it exercises the library's own parser. A heading,
+ * table or fenced block that renders wrongly here renders wrongly for a consumer too.
+ */
+const { markdownToHtml } = require('./packages/react-rtekit/dist/core/index.cjs');
 
 const PLUGIN = 'react-rtekit';
 const dir = path.join(here, PLUGIN);
@@ -71,39 +79,81 @@ function slugify(text) {
     .replace(/\s+/g, '-');
 }
 
-const renderer = new marked.Renderer();
+/** A heading's text with its inline markup removed, for the slug. */
+function stripTags(html) {
+  return html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
 
-/*
- * A fenced ```demo block names a live component rather than showing code. Rendering it
- * as a mount point keeps the demo registry in React — where the 44 existing examples
- * already live — while the prose around it stays ordinary Markdown that the twin can
- * serve verbatim.
+/**
+ * Turns one Markdown document into the HTML the site renders.
+ *
+ * Three things the library's serializer does not do, because they are the site's concern
+ * rather than the document model's:
+ *
+ *   - heading ids, so the table of contents has somewhere to link;
+ *   - the `demo` fence, which names a live component instead of showing code;
+ *   - `tabindex` on code blocks, which scroll horizontally and are otherwise unreachable
+ *     by keyboard (axe calls it `scrollable-region-focusable`; PPDS §7.8 asks for it).
+ *
+ * All three are applied to the serialized output rather than by forking the serializer,
+ * so the Markdown path this site exercises is exactly the one a consumer gets.
  */
-renderer.code = ({ text, lang }) => {
-  if (lang === 'demo') {
-    return `<div data-demo="${text.trim()}"></div>`;
+function render(markdown) {
+  let html = markdownToHtml(markdown);
+
+  // A ```demo fence becomes a mount point. The registry stays in React, where the 44
+  // examples already live, and the prose around it stays ordinary Markdown that the
+  // twin can serve verbatim.
+  html = html.replace(
+    /<pre><code class="language-demo">([\s\S]*?)<\/code><\/pre>/g,
+    (_match, slug) => `<div data-demo="${slug.trim()}"></div>`,
+  );
+
+  html = html.replace(
+    /<pre><code class="language-([\w+-]*)">/g,
+    (_match, lang) =>
+      `<pre class="code-block" tabindex="0" role="region" aria-label="${lang || 'code'} example"><code class="language-${lang || 'text'}">`,
+  );
+  // A fence with no language still needs the class and the focusability.
+  html = html.replace(
+    /<pre><code>/g,
+    '<pre class="code-block" tabindex="0" role="region" aria-label="code example"><code>',
+  );
+
+  const heading = /<(h[23])>([\s\S]*?)<\/h[23]>/g;
+  html = html.replace(heading, (_match, tag, inner) => {
+    return `<${tag} id="${slugify(stripTags(inner))}">${inner}</${tag}>`;
+  });
+
+  return html;
+}
+
+/**
+ * The H2s and H3s of a document, for the "on this page" rail.
+ *
+ * Read from the Markdown rather than from the rendered HTML: a `##` inside a fenced code
+ * block is code, not a heading, and only the source knows the difference.
+ */
+function headingsOf(markdown) {
+  const headings = [];
+  let inFence = false;
+  for (const line of markdown.split('\n')) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const match = line.match(/^(#{2,3})\s+(.*)$/);
+    if (!match) continue;
+    const text = match[2].replace(/[*`_]/g, '').trim();
+    headings.push({ depth: match[1].length, text, id: slugify(text) });
   }
-  const escaped = text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-  /*
-   * `tabindex` and a label, because the block scrolls horizontally.
-   *
-   * A scrollable region that nothing can focus is unreachable by keyboard — axe reports
-   * it as `scrollable-region-focusable`, and PPDS §7.8 asks for code blocks to be
-   * keyboard-reachable in as many words.
-   */
-  return `<pre class="code-block" tabindex="0" role="region" aria-label="${lang ?? 'code'} example"><code class="language-${lang ?? 'text'}">${escaped}</code></pre>`;
-};
-
-renderer.heading = ({ text, depth, tokens }) => {
-  const inline = this?.parser?.parseInline?.(tokens) ?? text;
-  const id = slugify(text);
-  return `<h${depth} id="${id}">${inline}</h${depth}>`;
-};
-
-marked.setOptions({ renderer, gfm: true });
+  return headings;
+}
 
 // ── walk the content tree ────────────────────────────────────────────────────
 async function* markdownFiles(base) {
@@ -144,14 +194,8 @@ for await (const file of markdownFiles(dir)) {
    */
   const withoutTitle = body.replace(/^\s*#\s+[^\n]*\n+/, '');
 
-  const headings = [];
-  for (const token of marked.lexer(withoutTitle)) {
-    if (token.type === 'heading' && token.depth >= 2 && token.depth <= 3) {
-      headings.push({ depth: token.depth, text: token.text, id: slugify(token.text) });
-    }
-  }
-
-  const html = marked.parse(withoutTitle);
+  const headings = headingsOf(withoutTitle);
+  const html = render(withoutTitle);
   const text = withoutTitle.replace(/[#*`_>[\]()-]/g, ' ').replace(/\s+/g, ' ').trim();
 
   pages.push({
