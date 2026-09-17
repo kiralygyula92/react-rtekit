@@ -29,7 +29,7 @@ import { meta } from 'react-rtekit/meta';
 
 ## Options
 
-Every icon the editor draws, keyed by name. Pass a component for a name to `icons` to replace one; it receives the same props as the built-in, which renders a 24×24 SVG that inherits `currentColor`.
+Every icon the editor draws, keyed by name. Supply a replacement by passing a component for that name to `icons`; it receives the same props as the built-in, which renders a 24×24 SVG that inherits `currentColor`.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
