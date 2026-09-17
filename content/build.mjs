@@ -196,7 +196,10 @@ for await (const file of markdownFiles(dir)) {
 
   const headings = headingsOf(withoutTitle);
   const html = render(withoutTitle);
-  const text = withoutTitle.replace(/[#*`_>[\]()-]/g, ' ').replace(/\s+/g, ' ').trim();
+  const text = withoutTitle
+    .replace(/[#*`_>[\]()-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
   pages.push({
     pathname: data.pathname,
@@ -240,24 +243,30 @@ await writeFile(
  * The Markdown twins.
  *
  * PPDS §7.7 says appending `.md` to a docs URL returns the Markdown. With a trailing
- * slash canonical (R4) that reads literally as `/react-rtekit/tables/.md`, a dotfile
- * most static hosts hide. Both forms are emitted — `tables.md` beside the directory and
- * `tables/index.md` inside it — so the URL works however a reader spells it, and
- * `llms.txt` links the form that is certain to be served. Recorded as EXCEPTIONS E-10.
+ * slash canonical (R4) that reads literally as `/react-rtekit/tables/.md`, a dotfile most
+ * static hosts hide, so the twin is the URL with its slash stripped: `tables.md` beside
+ * the `tables/` directory, and `react-rtekit.md` beside the namespace itself.
+ *
+ * One form, and never `index.md` inside the directory.
+ *
+ * That second form used to be emitted as well, on the theory that it worked "however a
+ * reader spells it". What it actually did was put a file called `index` in every
+ * directory that is also a route — and a host that resolves a directory to its index file
+ * does not check the extension first. Vercel served `/react-rtekit/` as
+ * `react-rtekit/index.md`: the site's front page was a screenful of raw frontmatter, and
+ * no rewrite could help, because a rewrite is only consulted once the filesystem has
+ * declined. Removing the directory index leaves those directories empty and the SPA
+ * fallback reachable, which is the only reason any route renders at all.
  */
 let twins = 0;
 for (const page of pages) {
   const slug = page.pathname.replace(`/${PLUGIN}/`, '').replace(/\/$/, '');
   const base = path.join(sitePublic, PLUGIN);
-  const targets =
-    slug === ''
-      ? [path.join(base, 'index.md')]
-      : [path.join(base, `${slug}.md`), path.join(base, slug, 'index.md')];
-  for (const target of targets) {
-    await mkdir(path.dirname(target), { recursive: true });
-    await writeFile(target, page.markdown, 'utf8');
-    twins += 1;
-  }
+  const target =
+    slug === '' ? path.join(sitePublic, `${PLUGIN}.md`) : path.join(base, `${slug}.md`);
+  await mkdir(path.dirname(target), { recursive: true });
+  await writeFile(target, page.markdown, 'utf8');
+  twins += 1;
 }
 
 /* llms.txt — grouped by section, in nav order, one line per page (PPDS §7.7). */
@@ -271,27 +280,22 @@ for (const page of pages) {
   bySection.get(key).push(page);
 }
 
-const llms = [
-  `# ${config.name}`,
-  '',
-  config.tagline,
-  config.description,
-  '',
-];
+const llms = [`# ${config.name}`, '', config.tagline, config.description, ''];
 for (const [section, entries] of bySection) {
   llms.push(`## ${sectionTitles[section] ?? section}`, '');
   for (const page of entries) {
-    // The docs root's twin is `/{plugin}/index.md`: stripping its trailing slash would
-    // name `/react-rtekit.md`, a file one level up that does not exist.
-    const href =
-      page.pathname === `/${PLUGIN}/`
-        ? `/${PLUGIN}/index.md`
-        : `${page.pathname.replace(/\/$/, '')}.md`;
+    // Every twin is the URL with its trailing slash stripped, the root included: it is
+    // `/react-rtekit.md`, one level up from the namespace, and it is written there.
+    const href = `${page.pathname.replace(/\/$/, '')}.md`;
     llms.push(`- [${page.title}](${href}): ${page.description}`);
   }
   llms.push('');
 }
-await writeFile(path.join(sitePublic, PLUGIN, 'llms.txt'), `${llms.join('\n').trimEnd()}\n`, 'utf8');
+await writeFile(
+  path.join(sitePublic, PLUGIN, 'llms.txt'),
+  `${llms.join('\n').trimEnd()}\n`,
+  'utf8',
+);
 await writeFile(path.join(sitePublic, 'llms.txt'), `${llms.join('\n').trimEnd()}\n`, 'utf8');
 
 /* sitemap.xml */

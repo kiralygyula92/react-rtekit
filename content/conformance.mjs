@@ -91,7 +91,8 @@ check(2, 'exactly one H1 per page; heading levels never skip', () => {
     if (/<h1/i.test(page.html)) bad.push(`${page.pathname}: H1 in body`);
     let previous = 1;
     for (const heading of page.headings) {
-      if (heading.depth > previous + 1) bad.push(`${page.pathname}: h${previous} -> h${heading.depth}`);
+      if (heading.depth > previous + 1)
+        bad.push(`${page.pathname}: h${previous} -> h${heading.depth}`);
       previous = heading.depth;
     }
   }
@@ -109,7 +110,9 @@ check(3, 'capability pages carry Basics, Customization, Limitations, API in orde
     const expected = ORDER.filter((name) => seen.includes(name));
     if (seen.join(',') !== expected.join(',')) bad.push(`${page.pathname}: ${seen.join(' > ')}`);
   }
-  return bad.length === 0 ? pass(`${pages.filter((p) => p.capabilityId).length} capabilities`) : fail(bad.slice(0, 5).join('; '));
+  return bad.length === 0
+    ? pass(`${pages.filter((p) => p.capabilityId).length} capabilities`)
+    : fail(bad.slice(0, 5).join('; '));
 });
 
 check(4, 'no capability page exceeds 8 H2s or ~2,000 words', () => {
@@ -122,8 +125,17 @@ check(4, 'no capability page exceeds 8 H2s or ~2,000 words', () => {
 
 check(5, 'sidebar section order matches PPDS §5', () => {
   const CANONICAL = [
-    'getting-started', 'features', 'demos', 'reference', 'customization',
-    'guides', 'integrations', 'resources', 'migration', 'discover-more', 'design-resources',
+    'getting-started',
+    'features',
+    'demos',
+    'reference',
+    'customization',
+    'guides',
+    'integrations',
+    'resources',
+    'migration',
+    'discover-more',
+    'design-resources',
   ];
   const actual = nav.map((node) => node.pathname.replace(`/${PLUGIN}/`, '').replace('-group', ''));
   const indices = actual.map((id) => CANONICAL.indexOf(id));
@@ -155,7 +167,9 @@ check(7, 'nav depth <= 3', () => {
 
 check(8, 'every nav pathname resolves to a real page', () => {
   const missing = navPages.filter((node) => !byPath.has(node.pathname)).map((n) => n.pathname);
-  return missing.length === 0 ? pass(`${navPages.length} nodes`) : fail(missing.slice(0, 6).join(', '));
+  return missing.length === 0
+    ? pass(`${navPages.length} nodes`)
+    : fail(missing.slice(0, 6).join(', '));
 });
 
 check(9, 'every rendered badge traces to a nav plan/lifecycle', () => {
@@ -184,7 +198,9 @@ check(10, 'no reference schema file hand-edited since generation', () => {
     const actual = createHash('sha256').update(readFileSync(full)).digest('hex');
     if (actual !== expected) bad.push(`${file} edited`);
   }
-  return bad.length === 0 ? pass(`${Object.keys(checksums).length} files`) : fail(bad.slice(0, 5).join('; '));
+  return bad.length === 0
+    ? pass(`${Object.keys(checksums).length} files`)
+    : fail(bad.slice(0, 5).join('; '));
 });
 
 check(11, 'every symbol in capability frontmatter has a reference page', () => {
@@ -201,7 +217,8 @@ check(11, 'every symbol in capability frontmatter has a reference page', () => {
 });
 
 check(12, 'every reference page has a non-empty usedBy or is marked internal', () => {
-  if (!existsSync(path.join(referenceDir, 'index.json'))) return fail('reference/index.json missing');
+  if (!existsSync(path.join(referenceDir, 'index.json')))
+    return fail('reference/index.json missing');
   const index = readJson(path.join(referenceDir, 'index.json'));
   const orphans = Object.entries(index)
     .filter(([, entry]) => (entry.usedBy ?? []).length === 0 && entry.internal !== true)
@@ -215,15 +232,21 @@ check(12, 'every reference page has a non-empty usedBy or is marked internal', (
 const tiered = config.tiers.length > 1;
 const TIER_REASON = 'EXCEPTIONS E-02: single free tier, MIT licensed';
 
-check(13, 'every pricing-matrix row href resolves', () => (tiered ? fail('not implemented') : na(TIER_REASON)));
+check(13, 'every pricing-matrix row href resolves', () =>
+  tiered ? fail('not implemented') : na(TIER_REASON),
+);
 check(14, 'every gated capability appears in the matrix', () => {
   if (!tiered) {
     const gated = navPages.filter((node) => node.plan !== undefined);
-    return gated.length === 0 ? na(TIER_REASON) : fail(`${gated.length} gated nodes without a matrix`);
+    return gated.length === 0
+      ? na(TIER_REASON)
+      : fail(`${gated.length} gated nodes without a matrix`);
   }
   return fail('not implemented');
 });
-check(15, 'every plan card has a distinct CTA verb', () => (tiered ? fail('not implemented') : na(TIER_REASON)));
+check(15, 'every plan card has a distinct CTA verb', () =>
+  tiered ? fail('not implemented') : na(TIER_REASON),
+);
 
 // ── machine surface ──────────────────────────────────────────────────────────
 check(16, 'llms.txt exists, lists every page, and every entry resolves', () => {
@@ -235,9 +258,7 @@ check(16, 'llms.txt exists, lists every page, and every entry resolves', () => {
   // own page with the extension swapped for a trailing slash.
   const asPage = new Set(
     listed.map((href) =>
-      href.endsWith('/index.md')
-        ? href.replace(/index\.md$/, '')
-        : `${href.replace(/\.md$/, '')}/`,
+      href.endsWith('/index.md') ? href.replace(/index\.md$/, '') : `${href.replace(/\.md$/, '')}/`,
     ),
   );
   const missing = pages.filter((page) => !asPage.has(page.pathname)).map((p) => p.pathname);
@@ -253,14 +274,20 @@ check(17, 'every docs URL + .md returns Markdown', () => {
   const missing = [];
   for (const page of pages) {
     const slug = page.pathname.replace(`/${PLUGIN}/`, '').replace(/\/$/, '');
+    // The twin is always the URL minus its trailing slash, so the root's sits beside the
+    // namespace rather than inside it — a file named `index` in a route directory is what
+    // a static host serves instead of the application.
     const file =
       slug === ''
-        ? path.join(root, 'apps/site/public', PLUGIN, 'index.md')
+        ? path.join(root, 'apps/site/public', `${PLUGIN}.md`)
         : path.join(root, 'apps/site/public', PLUGIN, `${slug}.md`);
     if (!existsSync(file)) missing.push(page.pathname);
-    else if (!readFileSync(file, 'utf8').startsWith('---')) missing.push(`${page.pathname} (not md)`);
+    else if (!readFileSync(file, 'utf8').startsWith('---'))
+      missing.push(`${page.pathname} (not md)`);
   }
-  return missing.length === 0 ? pass(`${pages.length} twins`) : fail(missing.slice(0, 6).join(', '));
+  return missing.length === 0
+    ? pass(`${pages.length} twins`)
+    : fail(missing.slice(0, 6).join(', '));
 });
 
 check(18, 'sitemap.xml covers the surface', () => {
@@ -275,9 +302,22 @@ check(18, 'sitemap.xml covers the surface', () => {
 check(19, 'every page emits the full §7.6 meta set', () => {
   const source = readFileSync(path.join(root, 'apps/site/src/docs/useMetadata.ts'), 'utf8');
   const required = [
-    'canonical', 'description', 'og:title', 'og:description', 'og:type', 'og:url',
-    'og:image', 'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image',
-    'theme-color', 'search:language', 'search:version', 'plugin:id', 'plugin:categoryId',
+    'canonical',
+    'description',
+    'og:title',
+    'og:description',
+    'og:type',
+    'og:url',
+    'og:image',
+    'twitter:card',
+    'twitter:title',
+    'twitter:description',
+    'twitter:image',
+    'theme-color',
+    'search:language',
+    'search:version',
+    'plugin:id',
+    'plugin:categoryId',
   ];
   const missing = required.filter((name) => !source.includes(name));
   return missing.length === 0 ? pass(`${required.length} tags`) : fail(missing.join(', '));
@@ -292,10 +332,7 @@ check(20, 'llms.txt description == meta description == H1 subtitle, per page', (
       blank.push(page.pathname);
       continue;
     }
-    const href =
-      page.pathname === `/${PLUGIN}/`
-        ? `/${PLUGIN}/index.md`
-        : `${page.pathname.replace(/\/$/, '')}.md`;
+    const href = `${page.pathname.replace(/\/$/, '')}.md`;
     if (!llms.includes(`](${href}): ${page.description}`)) bad.push(page.pathname);
   }
   if (blank.length > 0) return fail(`${blank.length} pages have no description yet`);
@@ -316,12 +353,16 @@ check(22, 'every legacy URL redirects', () => {
   const redirects = readJson(path.join(root, 'apps/site/src/content/redirects.json'));
   const bad = [];
   for (const row of rows) {
-    const cells = row.match(/(".*?"|[^,]*)(,|$)/g).map((c) => c.replace(/,$/, '').replace(/^"|"$/g, ''));
+    const cells = row
+      .match(/(".*?"|[^,]*)(,|$)/g)
+      .map((c) => c.replace(/,$/, '').replace(/^"|"$/g, ''));
     const [from, , , to, , note] = cells;
     if (!from || note === '(same URL)') continue;
     if (redirects[from] !== to) bad.push(from);
   }
-  return bad.length === 0 ? pass(`${Object.keys(redirects).length} redirects`) : fail(bad.slice(0, 6).join(', '));
+  return bad.length === 0
+    ? pass(`${Object.keys(redirects).length} redirects`)
+    : fail(bad.slice(0, 6).join(', '));
 });
 
 check(23, 'no internal link 404s', () => {
@@ -353,8 +394,15 @@ check(25, 'section names, badges, footer columns and taxonomy are the portfolio 
   const footer = readFileSync(path.join(root, 'apps/site/src/docs/Footer.tsx'), 'utf8');
   const missingColumn = FOOTER.filter((name) => !footer.includes(`'${name}'`));
   const VOCABULARY = [
-    'Core features', 'Advanced features', 'Content & data', 'Display & layout',
-    'Interaction', 'Automation', 'Integrations', 'Administration', 'Developer tools',
+    'Core features',
+    'Advanced features',
+    'Content & data',
+    'Display & layout',
+    'Interaction',
+    'Automation',
+    'Integrations',
+    'Administration',
+    'Developer tools',
   ];
   const invented = config.taxonomy.filter((term) => !VOCABULARY.includes(term));
   if (missingColumn.length > 0) return fail(`footer columns: ${missingColumn.join(', ')}`);
@@ -367,7 +415,9 @@ check(26, 'shared components are imported, not forked', () => {
   // is what §12 forbids, because the next plugin inherits the fork.
   const shared = ['Badge.tsx', 'Toc.tsx', 'Footer.tsx', 'Demo.tsx', 'FeaturesIndex.tsx'];
   const missing = shared.filter((file) => !existsSync(path.join(root, 'apps/site/src/docs', file)));
-  return missing.length === 0 ? pass(`${shared.length} shared components`) : fail(missing.join(', '));
+  return missing.length === 0
+    ? pass(`${shared.length} shared components`)
+    : fail(missing.join(', '));
 });
 
 // ── optional: probe a running server ─────────────────────────────────────────
@@ -385,7 +435,10 @@ if (served) {
     const ok = await probe(url, (body) => body.startsWith('# React RTE Kit'));
     if (!ok) failures.push(`${url} served the app shell, not llms.txt`);
   }
-  const mdOk = await probe('/react-rtekit/tables.md', (body) => !isHtmlShell(body) && body.startsWith('---'));
+  const mdOk = await probe(
+    '/react-rtekit/tables.md',
+    (body) => !isHtmlShell(body) && body.startsWith('---'),
+  );
   if (!mdOk) failures.push('/react-rtekit/tables.md served the app shell, not Markdown');
   const mapOk = await probe('/sitemap.xml', (body) => body.startsWith('<?xml'));
   if (!mapOk) failures.push('/sitemap.xml served the app shell, not XML');
@@ -393,7 +446,9 @@ if (served) {
   results.push({
     id: 'S',
     title: 'served: machine surface returns its own content type, not the SPA shell',
-    ...(failures.length === 0 ? pass('llms.txt, .md twin, sitemap.xml') : fail(failures.join('; '))),
+    ...(failures.length === 0
+      ? pass('llms.txt, .md twin, sitemap.xml')
+      : fail(failures.join('; '))),
   });
 }
 
