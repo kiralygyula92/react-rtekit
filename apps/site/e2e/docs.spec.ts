@@ -121,3 +121,42 @@ test.describe('the search palette', () => {
     await expect(page.getByRole('button', { name: /Search/ })).toBeFocused();
   });
 });
+
+test.describe('the changelog', () => {
+  test('renders the generated notes through the library itself', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+
+    await page.goto('/changelog');
+
+    // The page's own heading, and the release below it — nested under it rather than
+    // competing with it, because a generated changelog brings its own level-1 title.
+    await expect(page.getByRole('heading', { level: 1, name: 'Changelog' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: '1.0.0' })).toBeVisible();
+
+    // Rendered through `<RteContentView valueFormat="markdown">`, so this is also a
+    // standing test of the Markdown reader against text nobody wrote for a test.
+    await expect(page.locator('.rte-view li').first()).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test('switches between the two packages', async ({ page }) => {
+    await page.goto('/changelog');
+
+    await page.getByRole('radio', { name: 'react-rtekit-rhf' }).click();
+    await expect(page.getByRole('heading', { level: 2, name: '1.0.0' })).toBeVisible();
+  });
+
+  test('has no serious accessibility violations', async ({ page }) => {
+    await page.goto('/changelog');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    const blocking = results.violations.filter(
+      (violation) => violation.impact === 'serious' || violation.impact === 'critical',
+    );
+    expect(blocking.map((violation) => violation.id)).toEqual([]);
+  });
+});

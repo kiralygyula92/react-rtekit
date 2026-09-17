@@ -7,7 +7,7 @@
 - 1.0.0.
 
   The public API is now covered by semantic versioning, as written down in
-  [VERSIONING.md](../VERSIONING.md): props, instance methods, command ids and payloads,
+  [VERSIONING.md](https://github.com/kiralygyula92/react-rtekit/blob/main/VERSIONING.md): props, instance methods, command ids and payloads,
   slot names and their context props, handler names and contexts, the plugin API, theme
   tokens, localization keys, CSS class names, CSS variables, data attributes and the
   portable document shape. The lists those live in are generated from the library's own
