@@ -24,6 +24,7 @@ export default function PluginAuthoringExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         addPlugins={[highlight]}
         toolbar={[['bold', 'italic'], ['highlight'], ['undo', 'redo']]}
         localization={{ custom: { highlight: 'Highlight' } }}

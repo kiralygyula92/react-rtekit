@@ -23,6 +23,7 @@ export default function MarkdownExample() {
       <RichTextEditor
         preset="standard"
         label="Notes"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);

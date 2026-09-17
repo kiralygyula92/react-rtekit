@@ -102,6 +102,7 @@ export default function HandlersMiddlewareExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         value={html}
         handlers={handlers}
         helperText={`Changes past ${HARD_LIMIT} characters are refused by onBeforeChange.`}

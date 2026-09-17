@@ -48,6 +48,7 @@ export default function MobileExample() {
         <RichTextEditor
           preset="full"
           label="Message"
+          hideLabel
           value={value}
           toolbarPosition={position}
           toolbarOverflow={overflow}

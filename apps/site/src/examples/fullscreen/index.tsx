@@ -29,6 +29,7 @@ export default function FullscreenExample() {
       <RichTextEditor
         preset="full"
         label="Content"
+        hideLabel
         editorRef={editorRef}
         defaultValue="<p>Type something, go fullscreen, and watch the caret stay where it was.</p>"
       />

@@ -105,6 +105,7 @@ export default function SlotsCustomExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         maxLength={240}
         showCounter
         slots={slots}

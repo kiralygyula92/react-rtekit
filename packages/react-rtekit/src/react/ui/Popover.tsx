@@ -180,7 +180,8 @@ export function Popover({
     const panel = panelRef.current;
     if (!open || !panel) return undefined;
     const keepSelection = (event: MouseEvent): void => {
-      if ((event.target as HTMLElement).closest('input, textarea, select, [contenteditable]')) return;
+      if ((event.target as HTMLElement).closest('input, textarea, select, [contenteditable]'))
+        return;
       event.preventDefault();
     };
     panel.addEventListener('mousedown', keepSelection);
@@ -233,11 +234,35 @@ export function Popover({
 
   if (!open || typeof document === 'undefined') return null;
 
+  /*
+   * A popover renders into `document.body`, so it leaves the editor's subtree and stops
+   * inheriting anything the editor declared about how it should look — which is why the
+   * toolbar's overflow menu and the colour picker stayed white while the editor around
+   * them went dark.
+   *
+   * The scheme and preset are read back off the root the anchor belongs to, rather than
+   * threaded through a context: every caller already hands us an anchor inside the
+   * editor, and the root is the element that carries the attributes whichever way they
+   * were set — the `colorScheme` prop, the provider, or the preset's implied theme.
+   *
+   * A scheme inherited from the host page needs no attribute here: the portal is still a
+   * descendant of whatever declared it, and the preset stylesheet matches `.rte-portal`
+   * on that basis.
+   */
+  const root = anchor?.closest('.rte-root');
+  const inherited = {
+    ...(root?.getAttribute('data-theme') ? { 'data-theme': root.getAttribute('data-theme') } : {}),
+    ...(root?.getAttribute('data-color-scheme')
+      ? { 'data-color-scheme': root.getAttribute('data-color-scheme') }
+      : {}),
+  };
+
   return createPortal(
     <div
       className="rte-popover rte-portal"
       style={position ?? { visibility: 'hidden' }}
       data-placement={placement}
+      {...inherited}
     >
       <div
         ref={panelRef}

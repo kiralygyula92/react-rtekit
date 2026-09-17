@@ -134,9 +134,9 @@ export function Performance() {
     <div className="page">
       <h1>Performance harness</h1>
       <p className="page__lead">
-        A fixed page for the performance budget measurements. Not part of the documentation
-        — it is here so the e2e suite can measure typing latency, mount time and paste
-        cost against the same build everyone else gets.
+        A fixed page for the performance budget measurements. Not part of the documentation — it is
+        here so the e2e suite can measure typing latency, mount time and paste cost against the same
+        build everyone else gets.
       </p>
 
       <p className="example-basic__state" data-testid="perf-status">
@@ -147,6 +147,7 @@ export function Performance() {
         key={generation}
         preset="standard"
         label="Document"
+        hideLabel
         defaultValue="<p>Ready.</p>"
         maxHeight={320}
         onReady={onReady}

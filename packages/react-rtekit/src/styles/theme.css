@@ -13,6 +13,21 @@
     font-size: var(--rte-font-size);
     line-height: var(--rte-line-height);
     color: var(--rte-color-text);
+    /*
+     * The root paints its own surface, rather than letting the host's show through.
+     *
+     * It already sets `color` from the theme, and the label, footer, counter and helper
+     * text sit on the root rather than on `.rte-content` — so without this they were the
+     * theme's text colour on whatever the host happened to have behind them. On a white
+     * page that looked fine by luck; on a dark one it was #212121 on #0b1120, which
+     * measured 1.08:1. It also made the preset files' "AA-verified against color.text and
+     * color.surface" claim vacuous for exactly those four, since the surface they were
+     * verified against was not the one they were drawn on.
+     *
+     * A host that wants the page to show through sets `--rte-color-surface: transparent`,
+     * and then owns the contrast of the text it has chosen to put on its own background.
+     */
+    background: var(--rte-color-surface);
   }
 
   /* ── toolbar ────────────────────────────────────────────────────────────── */

@@ -42,6 +42,7 @@ export default function HistoryExample() {
       <RichTextEditor
         preset="standard"
         label="Content"
+        hideLabel
         value={value}
         editorRef={editorRef}
         onChange={(next: EditorValue) => {

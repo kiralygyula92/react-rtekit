@@ -165,9 +165,11 @@ export function RichTextEditor(props: RichTextEditorProps) {
     // Configuring merge tags or mentions turns the feature on, whatever the preset
     // says: the legacy field is `classic` *plus* merge tags.
     enableMergeTags:
-      resolved.enableMergeTags ?? (enabledFeatures.has('mergeTag') || resolved.mergeTags !== undefined),
+      resolved.enableMergeTags ??
+      (enabledFeatures.has('mergeTag') || resolved.mergeTags !== undefined),
     enableMentions:
-      resolved.enableMentions ?? (enabledFeatures.has('mention') || resolved.mentions !== undefined),
+      resolved.enableMentions ??
+      (enabledFeatures.has('mention') || resolved.mentions !== undefined),
     enableEmoji: resolved.enableEmoji ?? enabledFeatures.has('emoji'),
     enableIndent: resolved.enableIndent ?? enabledFeatures.has('indent'),
   });
@@ -204,9 +206,7 @@ export function RichTextEditor(props: RichTextEditorProps) {
       .map((group) =>
         group
           .map((entry) =>
-            typeof entry === 'string'
-              ? (pluginItems.get(entry) ?? builtIns.get(entry))
-              : entry,
+            typeof entry === 'string' ? (pluginItems.get(entry) ?? builtIns.get(entry)) : entry,
           )
           .filter((item): item is ToolbarItemSpec => item !== undefined),
       )
@@ -268,9 +268,29 @@ export function RichTextEditor(props: RichTextEditorProps) {
   // An explicit `theme` wins, then an app-wide provider, then whatever the preset
   // implies. Only `classic` implies one: its whole purpose is a visual reproduction,
   // so `preset="classic"` has to look classic without a second prop.
-  const theme = resolved.theme ?? themeContext?.theme ?? PRESET_THEMES[presetName];
+  const explicitTheme = resolved.theme ?? themeContext?.theme;
+  const theme = explicitTheme ?? PRESET_THEMES[presetName];
 
-  const themeVars = useMemo(() => (theme ? themeToCssVars(theme) : undefined), [theme]);
+  /*
+   * Only a theme the caller actually passed is written out as inline custom properties.
+   *
+   * An inline custom property beats every stylesheet, layered or not, so inlining the
+   * *implied* theme put a complete light palette on the element and left the colour
+   * scheme with nothing it could override: `preset="classic"` stayed white on a dark
+   * page, and so did its toolbar, its menus and its popovers.
+   *
+   * It was also redundant. `classicTheme` flattens to exactly the 114 variables that
+   * `tokens.css` plus `presets/classic.css` already produce — same names, same values —
+   * so `data-theme="classic"` below reaches the same result through the cascade, where a
+   * colour scheme can still get at it.
+   *
+   * An explicit `theme` is a different matter and still wins outright: the caller named a
+   * palette, and a palette they named is not something a media query should override.
+   */
+  const themeVars = useMemo(
+    () => (explicitTheme ? themeToCssVars(explicitTheme) : undefined),
+    [explicitTheme],
+  );
 
   const colorScheme = resolved.colorScheme ?? themeContext?.colorScheme;
   const themeName = theme && 'name' in theme ? theme.name : undefined;
@@ -315,7 +335,15 @@ interface EditorChromeProps {
  * Split from `RichTextEditor` so it can subscribe to editor state without re-rendering
  * the providers above it on every keystroke.
  */
-function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme, themeName }: EditorChromeProps) {
+function EditorChrome({
+  props,
+  groups,
+  features,
+  keymap,
+  themeVars,
+  colorScheme,
+  themeName,
+}: EditorChromeProps) {
   const editorContext = useEditorContextValue();
   const { editor } = editorContext;
   const runtime = getRuntime(editor);
@@ -389,7 +417,7 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
   // `dangerouslySetInnerHTML`, and re-rendering that with a new string would have React
   // replace the children — which by then are the engine's contenteditable element.
   const [serverValue] = useState(() =>
-    (props.valueFormat ?? 'html') === 'html' ? props.value ?? props.defaultValue : undefined,
+    (props.valueFormat ?? 'html') === 'html' ? (props.value ?? props.defaultValue) : undefined,
   );
 
   // A bottom-docked toolbar has to sit above the on-screen keyboard, which does not
@@ -406,12 +434,16 @@ function EditorChrome({ props, groups, features, keymap, themeVars, colorScheme,
   const toolbarNode: ReactNode = toolbarVisible ? (
     <Toolbar
       groups={groups}
-      {...(typeof props.toolbar === 'object' && !Array.isArray(props.toolbar) && props.toolbar.ariaLabel
+      {...(typeof props.toolbar === 'object' &&
+      !Array.isArray(props.toolbar) &&
+      props.toolbar.ariaLabel
         ? { ariaLabel: props.toolbar.ariaLabel }
         : {})}
       {...(props.toolbarOverflow ? { overflow: props.toolbarOverflow } : {})}
       {...(props.stickyToolbar ? { sticky: props.stickyToolbar } : {})}
-      {...(typeof props.toolbar === 'object' && !Array.isArray(props.toolbar) && props.toolbar.showLabels
+      {...(typeof props.toolbar === 'object' &&
+      !Array.isArray(props.toolbar) &&
+      props.toolbar.showLabels
         ? { showLabels: true }
         : {})}
       {...(typeof props.toolbar === 'object' && !Array.isArray(props.toolbar) && props.toolbar.size

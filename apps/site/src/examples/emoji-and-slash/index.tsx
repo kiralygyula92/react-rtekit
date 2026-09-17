@@ -23,6 +23,7 @@ export default function EmojiAndSlashExample() {
       <RichTextEditor
         preset="full"
         label="Message"
+        hideLabel
         value={value}
         slashMenu
         onChange={(next: EditorValue) => {

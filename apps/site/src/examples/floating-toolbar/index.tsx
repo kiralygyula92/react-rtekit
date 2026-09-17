@@ -51,6 +51,7 @@ export default function FloatingToolbarExample() {
       <RichTextEditor
         preset="full"
         label="Content"
+        hideLabel
         value={value}
         stickyToolbar={sticky}
         floatingToolbar={floating}

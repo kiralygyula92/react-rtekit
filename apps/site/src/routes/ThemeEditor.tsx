@@ -29,7 +29,11 @@ const BASES: Record<string, ResolvedRteTheme> = {
 /** Pairs whose contrast has to hold, whatever the author does to them. */
 const CONTRAST_PAIRS: { label: string; foreground: string; background: string }[] = [
   { label: 'Body text on the editor', foreground: 'color.text', background: 'color.surface' },
-  { label: 'Placeholder on the editor', foreground: 'color.placeholder', background: 'color.surface' },
+  {
+    label: 'Placeholder on the editor',
+    foreground: 'color.placeholder',
+    background: 'color.surface',
+  },
   { label: 'Helper text on the page', foreground: 'color.textMuted', background: 'color.surface' },
   { label: 'Error text on the page', foreground: 'color.danger', background: 'color.surface' },
 ];
@@ -38,7 +42,10 @@ const CONTRAST_PAIRS: { label: string; foreground: string; background: string }[
 function read(theme: ResolvedRteTheme, path: string): string {
   const value = path
     .split('.')
-    .reduce<unknown>((current, part) => (current as Record<string, unknown> | undefined)?.[part], theme);
+    .reduce<unknown>(
+      (current, part) => (current as Record<string, unknown> | undefined)?.[part],
+      theme,
+    );
   // Only leaf tokens are readable; a group would stringify as "[object Object]".
   return typeof value === 'string' ? value : '';
 }
@@ -130,10 +137,10 @@ export function ThemeEditor() {
       </aside>
 
       <section className="theme-editor__preview" aria-label="Preview">
-
         <RichTextEditor
           preset="full"
           label="Preview"
+          hideLabel
           theme={theme}
           helperText="Helper text, in the muted colour."
           maxLength={80}

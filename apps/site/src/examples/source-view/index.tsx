@@ -33,6 +33,7 @@ export default function SourceViewExample() {
       <RichTextEditor
         preset="full"
         label="Content"
+        hideLabel
         value={value}
         editorRef={editorRef}
         onChange={(next: EditorValue) => {

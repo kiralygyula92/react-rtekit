@@ -15,6 +15,8 @@ import {
 import { quillFixture } from '../fixtures/quill.js';
 import { XSS_PAYLOADS } from '../fixtures/xss.js';
 import { officeFixture } from '../fixtures/office.js';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 /**
  * One named regression test per entry in `docs/regressions.md`.
@@ -42,6 +44,34 @@ async function mount(
   return { editor: instance! };
 }
 
+/**
+ * The declarations in a preset stylesheet.
+ *
+ * The classic preset's tokens live in CSS rather than in an inline style, so a test that
+ * wants to pin one reads it from there. jsdom does not load the library's stylesheets, so
+ * `getComputedStyle` cannot answer this.
+ */
+function presetPath(name: string): string {
+  // Not `import.meta.url`: under jsdom that resolves against the document, so it is an
+  // http: URL rather than a file one. The suite runs from the repo root or from the
+  // package, so both are tried.
+  const relative = `src/styles/presets/${name}.css`;
+  for (const base of ['packages/react-rtekit/', '']) {
+    const candidate = join(process.cwd(), base, relative);
+    if (existsSync(candidate)) return candidate;
+  }
+  throw new Error(`preset stylesheet not found: ${relative}`);
+}
+
+function presetDeclarations(name: string): Map<string, string> {
+  const css = readFileSync(presetPath(name), 'utf8');
+  const found = new Map<string, string>();
+  for (const [, token, value] of css.matchAll(/(--rte-[a-z0-9-]+):\s*([^;]+);/g)) {
+    found.set(token, value.trim());
+  }
+  return found;
+}
+
 describe('R1: defaultValue was read once, so a reset never reached the editor', () => {
   it('a controlled value from the parent replaces the content', async () => {
     const user = userEvent.setup();
@@ -49,9 +79,13 @@ describe('R1: defaultValue was read once, so a reset never reached the editor', 
       const [value, setValue] = useState('<p>first report</p>');
       return (
         <>
-          <RichTextEditor preset="classic" value={value} onChange={(next) => {
+          <RichTextEditor
+            preset="classic"
+            value={value}
+            onChange={(next) => {
               setValue(next as string);
-            }} />
+            }}
+          />
           <button
             type="button"
             onClick={() => {
@@ -263,11 +297,13 @@ describe('R10: focus swapped a 1px border for 2px and shifted the content', () =
     expect(classicTheme.editor.focusRing).toContain('inset');
     expect(classicTheme.editor.borderWidth).toBe('1px');
 
-    // And the tokens reach the element, under the name the stylesheet reads.
+    // And the element selects the preset whose stylesheet carries them.
     await mount({ preset: 'classic' });
     const root = document.querySelector<HTMLElement>('.rte-root');
-    expect(root?.style.getPropertyValue('--rte-focus-ring')).toContain('inset');
-    expect(root?.style.getPropertyValue('--rte-border-width')).toBe('1px');
+    expect(root).toHaveAttribute('data-theme', 'classic');
+    const classic = presetDeclarations('classic');
+    expect(classic.get('--rte-focus-ring')).toContain('inset');
+    expect(classic.get('--rte-border-width')).toBe('1px');
     // Nothing in the theme makes the border change on focus.
     expect(classicTheme.toCssVars()['--rte-border-width']).toBe('1px');
   });
@@ -491,9 +527,16 @@ describe('R22: 287px was a magic number repeated three times', () => {
     // own tokens and the 287px lives in exactly one place.
     await mount({ preset: 'classic' });
     const root = document.querySelector<HTMLElement>('.rte-root');
-    expect(root?.style.getPropertyValue('--rte-min-height')).toBe('287px');
-    expect(root?.style.getPropertyValue('--rte-content-padding')).toBe('12px');
-    expect(root?.style.getPropertyValue('--rte-radius')).toBe('4px');
+    expect(root).toHaveAttribute('data-theme', 'classic');
+
+    const classic = presetDeclarations('classic');
+    expect(classic.get('--rte-min-height')).toBe('287px');
+    expect(classic.get('--rte-content-padding')).toBe('12px');
+    expect(classic.get('--rte-radius')).toBe('4px');
+
+    // "Exactly one place" is the whole of R22, so it is worth asserting literally.
+    const css = readFileSync(presetPath('classic'), 'utf8');
+    expect(css.match(/287px/g)).toHaveLength(1);
   });
 
   it('minHeight overrides it', async () => {

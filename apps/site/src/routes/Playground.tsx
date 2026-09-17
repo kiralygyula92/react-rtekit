@@ -15,7 +15,11 @@ import {
   type FormatState,
 } from 'react-rtekit';
 import { CodeBlock } from '../components/CodeBlock';
-import { PLAYGROUND_CONTROLS, type ControlSpec, type PlaygroundState } from '../playground/controls';
+import {
+  PLAYGROUND_CONTROLS,
+  type ControlSpec,
+  type PlaygroundState,
+} from '../playground/controls';
 import { generateCode, toProps } from '../playground/code';
 import { ControlPanel, type PropState } from '../playground/ControlPanel';
 
@@ -34,7 +38,9 @@ const LOCALES = { en, hu, de, es, pseudo };
 function readHash(): Partial<PlaygroundState> {
   if (typeof window === 'undefined' || window.location.hash.length < 2) return {};
   try {
-    return JSON.parse(decodeURIComponent(window.location.hash.slice(1))) as Partial<PlaygroundState>;
+    return JSON.parse(
+      decodeURIComponent(window.location.hash.slice(1)),
+    ) as Partial<PlaygroundState>;
   } catch {
     // A hand-edited or truncated hash is not worth failing over.
     return {};
@@ -118,7 +124,10 @@ export function Playground() {
           onChange={(next: EditorValue, meta: ChangeMeta) => {
             setValue(next as string);
             setEvents((log) =>
-              [`change · ${meta.source} · ${meta.length} chars · ${meta.wordCount} words`, ...log].slice(0, 30),
+              [
+                `change · ${meta.source} · ${meta.length} chars · ${meta.wordCount} words`,
+                ...log,
+              ].slice(0, 30),
             );
             setFormat(editorRef.current?.getFormatState() ?? null);
           }}

@@ -86,6 +86,7 @@ export default function LargeDocumentExample() {
       <RichTextEditor
         preset="standard"
         label="Large document"
+        hideLabel
         editorRef={editorRef}
         defaultValue={initial}
         maxHeight={360}

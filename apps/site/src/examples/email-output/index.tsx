@@ -59,6 +59,7 @@ export default function EmailOutputExample() {
       <RichTextEditor
         preset="email"
         label="Message"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);

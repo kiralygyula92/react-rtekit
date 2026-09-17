@@ -66,6 +66,7 @@ export default function ControlledExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         value={value}
         editorRef={editorRef}
         placeholder="Type here — the caret stays where you put it."

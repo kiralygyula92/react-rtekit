@@ -83,6 +83,7 @@ export default function ThemingExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         theme={theme}
         colorScheme={colorScheme}
         value={html}

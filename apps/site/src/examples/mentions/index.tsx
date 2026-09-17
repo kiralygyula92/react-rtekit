@@ -32,6 +32,7 @@ export default function MentionsExample() {
       <RichTextEditor
         preset="standard"
         label="Note"
+        hideLabel
         value={value}
         mentions={{ search }}
         onChange={(next: EditorValue) => {

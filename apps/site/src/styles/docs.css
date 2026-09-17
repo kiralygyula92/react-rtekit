@@ -98,9 +98,12 @@
   font-size: 13px;
   cursor: pointer;
   /* The chevron, drawn rather than shipped as an icon. */
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
-  background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 9px) 50%;
   background-size: 5px 5px;
   background-repeat: no-repeat;
 }
@@ -236,7 +239,7 @@
 
 /* Active is a filled block, not a colour change: colour alone is not a state. */
 .docs-nav__link--active {
-  background: color-mix(in srgb, var(--site-accent) 14%, transparent);
+  background: color-mix(in srgb, var(--site-accent) 12%, transparent);
   color: var(--site-accent);
   font-weight: 600;
 }
@@ -445,14 +448,14 @@
 
 .badge[data-lifecycle='new'] {
   border-color: transparent;
-  background: color-mix(in srgb, #12b76a 18%, transparent);
-  color: #067647;
+  background: color-mix(in srgb, var(--site-ok-surface) 18%, transparent);
+  color: var(--site-ok);
 }
 
 .badge[data-lifecycle='deprecated'] {
   border-color: transparent;
-  background: color-mix(in srgb, #f04438 18%, transparent);
-  color: #b42318;
+  background: color-mix(in srgb, var(--site-danger-surface) 18%, transparent);
+  color: var(--site-danger);
 }
 
 /* ── cards ─────────────────────────────────────────────────────────────────── */
@@ -561,7 +564,7 @@
 
 .demo--missing {
   padding: 16px;
-  border-color: #f04438;
+  border-color: var(--site-danger-surface);
 }
 
 /* ── page footer ───────────────────────────────────────────────────────────── */
@@ -931,7 +934,7 @@
 }
 
 .control__reset:hover {
-  background: color-mix(in srgb, var(--site-accent) 14%, transparent);
+  background: color-mix(in srgb, var(--site-accent) 12%, transparent);
 }
 
 .control__input {

@@ -26,6 +26,7 @@ export default function ListsExample() {
       <RichTextEditor
         preset="full"
         label="Lists"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);

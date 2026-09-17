@@ -1,12 +1,45 @@
 /**
  * The `dark` preset. Contrast pairs are AA-verified against `color.text`
  * and `color.surface`; the check runs in the theme editor and in CI.
+ *
+ * Applied three ways. The palette is written out for each, because CSS has no way to name
+ * a declaration block and reuse it, and the same duplication is in the site's own tokens
+ * for the same reason. Keep the three copies in step.
+ *
+ *   1. The editor was told directly: `colorScheme="dark"`, or the preset by name.
+ *   2. An ancestor declares the scheme and the editor is on `auto`. A host that sets
+ *      `data-color-scheme="dark"` on `<html>` — the usual place — gets dark editors
+ *      without threading a prop through every call site.
+ *   3. `auto` with nothing declared above it, which is what the `ColorScheme` type means
+ *      by "`'auto'` follows `prefers-color-scheme`".
+ *
+ * Cases 2 and 3 are what `auto` — the default — actually does; before them it did
+ * nothing at all, and an editor embedded in a dark page kept its light palette. Because
+ * `.rte-view` paints no background of its own, that put near-black text straight onto the
+ * host's dark background: 1.17:1, which is not readable by anyone.
+ *
+ * Cases 2 and 3 apply to an editor that has not been given a scheme of its own, and to
+ * either no preset or `classic` — ours, and one whose dark form is simply its geometry
+ * with this palette. A `data-theme` naming anybody else's is left alone: that is a
+ * palette the consumer wrote, and repainting it is not the scheme's business.
+ *
+ * `.rte-portal` is in the list because popovers render into `document.body`. They leave
+ * the editor's subtree, so nothing about the editor reaches them by inheritance; Popover
+ * copies the two attributes across for the cases where the editor was told directly.
  */
 @layer rtekit.theme {
+  /* 1 + 2: asked for directly, or inherited from a host that declared the scheme. */
   .rte-root[data-color-scheme='dark'],
   .rte-view[data-color-scheme='dark'],
+  .rte-portal[data-color-scheme='dark'],
   .rte-root[data-theme='dark'],
-  .rte-view[data-theme='dark'] {
+  .rte-view[data-theme='dark'],
+  .rte-portal[data-theme='dark'],
+  [data-color-scheme='dark']
+    :is(.rte-root, .rte-view, .rte-portal):not([data-color-scheme]):is(
+      :not([data-theme]),
+      [data-theme='classic']
+    ) {
     --rte-color-surface: #0f1115;
     --rte-color-surface-muted: #12151b;
     --rte-color-surface-raised: #161a20;
@@ -30,6 +63,10 @@
 
     --rte-disabled-bg: #12151b;
     --rte-button-color: #9aa1ac;
+    --rte-button-active-color: var(--rte-color-text);
+    --rte-popover-bg: var(--rte-color-surface-raised);
+    --rte-popover-border: 1px solid var(--rte-color-border);
+    --rte-swatch-border-color: var(--rte-color-border);
     --rte-button-hover-bg: rgb(255 255 255 / 6%);
     --rte-menu-item-hover-bg: rgb(255 255 255 / 6%);
     --rte-popover-shadow: 0 4px 16px rgb(0 0 0 / 48%);
@@ -49,9 +86,76 @@
     --rte-selection-bg: #1e4066;
     --rte-find-bg: #4d4318;
     --rte-find-active-bg: #6b3a44;
+
+    color-scheme: dark;
   }
 
-  .rte-dialog[data-color-scheme='dark'] {
+  .rte-dialog[data-color-scheme='dark'],
+  [data-color-scheme='dark'] .rte-dialog:not([data-color-scheme]) {
     background: rgb(0 0 0 / 56%);
+  }
+}
+
+/*
+ * 3: `auto`, following the system.
+ *
+ * Guarded on the document element so that a host which has explicitly chosen light still
+ * wins over a dark system — the same guard, in the same shape, as case 2's.
+ */
+@media (prefers-color-scheme: dark) {
+  @layer rtekit.theme {
+    :root:not([data-color-scheme='light'])
+      :is(.rte-root, .rte-view, .rte-portal):not([data-color-scheme]):is(
+        :not([data-theme]),
+        [data-theme='classic']
+      ) {
+      --rte-color-surface: #0f1115;
+      --rte-color-surface-muted: #12151b;
+      --rte-color-surface-raised: #161a20;
+
+      --rte-color-text: #e6e8eb;
+      --rte-color-text-muted: #9aa1ac;
+      --rte-color-text-disabled: #5b626c;
+      --rte-color-placeholder: #858c99;
+
+      --rte-color-border: #262b33;
+      --rte-color-border-subtle: #1d222a;
+
+      --rte-color-accent: #4da3ff;
+      --rte-color-accent-soft: #4da3ff26;
+      --rte-color-accent-border: #4da3ff80;
+      --rte-color-accent-contrast: #06121f;
+      --rte-color-danger: #ff6b5e;
+      --rte-color-success: #3ccb8b;
+      --rte-color-warning: #ffb547;
+
+      --rte-disabled-bg: #12151b;
+      --rte-button-color: #9aa1ac;
+      --rte-button-active-color: var(--rte-color-text);
+      --rte-popover-bg: var(--rte-color-surface-raised);
+      --rte-popover-border: 1px solid var(--rte-color-border);
+      --rte-swatch-border-color: var(--rte-color-border);
+      --rte-button-hover-bg: rgb(255 255 255 / 6%);
+      --rte-menu-item-hover-bg: rgb(255 255 255 / 6%);
+      --rte-popover-shadow: 0 4px 16px rgb(0 0 0 / 48%);
+
+      --rte-code-bg: #161a20;
+      --rte-code-color: #ff9d8a;
+      --rte-table-header-bg: #161a20;
+
+      --rte-mergetag-bg: #13263b;
+      --rte-mergetag-color: #8fc6ff;
+      --rte-mergetag-border: 1px solid #1e4066;
+      --rte-mergetag-selected-bg: #1e4066;
+
+      --rte-mention-bg: #241b38;
+      --rte-mention-color: #c4a8ff;
+
+      --rte-selection-bg: #1e4066;
+      --rte-find-bg: #4d4318;
+      --rte-find-active-bg: #6b3a44;
+
+      color-scheme: dark;
+    }
   }
 }

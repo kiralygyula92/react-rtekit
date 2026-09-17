@@ -59,6 +59,7 @@ export default function ImagesExample() {
       <RichTextEditor
         preset="full"
         label="Content"
+        hideLabel
         value={value}
         onUpload={upload}
         uploadAccept="image/*"

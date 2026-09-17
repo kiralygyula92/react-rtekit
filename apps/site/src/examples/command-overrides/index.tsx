@@ -80,6 +80,7 @@ export default function CommandOverridesExample() {
       <RichTextEditor
         preset="full"
         label="Message"
+        hideLabel
         value={html}
         onChange={(value) => {
           setHtml(value as string);

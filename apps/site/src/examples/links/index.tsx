@@ -49,6 +49,7 @@ export default function LinksExample() {
         key={`${String(internalOnly)}-${String(autoLink)}`}
         preset="standard"
         label="Content"
+        hideLabel
         value={value}
         autoLink={autoLink}
         toolbar={[

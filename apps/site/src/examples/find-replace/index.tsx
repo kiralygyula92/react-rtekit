@@ -39,6 +39,7 @@ export default function FindReplaceExample() {
       <RichTextEditor
         preset="full"
         label="Report"
+        hideLabel
         value={value}
         editorRef={editorRef}
         onChange={(next: EditorValue) => {

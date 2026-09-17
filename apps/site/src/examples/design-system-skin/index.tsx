@@ -151,6 +151,7 @@ export default function DesignSystemSkinExample() {
       <RichTextEditor
         preset="full"
         label="Message"
+        hideLabel
         slots={slots}
         value={html}
         onChange={(value) => {

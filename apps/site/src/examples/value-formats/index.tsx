@@ -30,6 +30,7 @@ export default function ValueFormatsExample() {
       <RichTextEditor
         preset="standard"
         label="Content"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);

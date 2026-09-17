@@ -125,6 +125,7 @@ export default function ToolbarConfigExample() {
         key={layout.id}
         preset="standard"
         label="Message"
+        hideLabel
         toolbar={layout.toolbar}
         toolbarOverflow={overflow}
         defaultValue="<p>Resize the window to watch the overflow behaviour change.</p>"

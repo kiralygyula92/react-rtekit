@@ -8,6 +8,13 @@
   --site-border: #e3e6ea;
   /* AA-compliant against both --site-bg values; the editor keeps its own accent token. */
   --site-accent: #0c63ce;
+  /* Status hues for the lifecycle badges: text, and the hue its tint is mixed from. */
+  --site-ok: #067647;
+  --site-ok-surface: #12b76a;
+  --site-danger: #b42318;
+  --site-danger-surface: #f04438;
+  /* The label on a solid accent control: white is only legible on the darker accent. */
+  --site-accent-contrast: #ffffff;
   --site-radius: 10px;
   --site-max: 1180px;
   color-scheme: light;
@@ -26,23 +33,33 @@
  */
 @media (prefers-color-scheme: dark) {
   :root:not([data-color-scheme='light']) {
-    --site-bg: #0d1117;
-    --site-bg-muted: #161b22;
-    --site-text: #e6edf3;
-    --site-text-muted: #8b949e;
-    --site-border: #232a33;
-    --site-accent: #58a6ff;
+    --site-bg: #0b1120;
+    --site-bg-muted: #111a2e;
+    --site-text: #e2e8f0;
+    --site-text-muted: #94a3b8;
+    --site-border: #1e293b;
+    --site-accent: #60a5fa;
+    --site-ok: #6ee7b7;
+    --site-ok-surface: #12b76a;
+    --site-danger: #fca5a5;
+    --site-danger-surface: #f04438;
+    --site-accent-contrast: #0b1120;
     color-scheme: dark;
   }
 }
 
 :root[data-color-scheme='dark'] {
-  --site-bg: #0d1117;
-  --site-bg-muted: #161b22;
-  --site-text: #e6edf3;
-  --site-text-muted: #8b949e;
-  --site-border: #232a33;
-  --site-accent: #58a6ff;
+  --site-bg: #0b1120;
+  --site-bg-muted: #111a2e;
+  --site-text: #e2e8f0;
+  --site-text-muted: #94a3b8;
+  --site-border: #1e293b;
+  --site-accent: #60a5fa;
+  --site-ok: #6ee7b7;
+  --site-ok-surface: #12b76a;
+  --site-danger: #fca5a5;
+  --site-danger-surface: #f04438;
+  --site-accent-contrast: #0b1120;
   color-scheme: dark;
 }
 
@@ -75,6 +92,19 @@ body {
 
 a {
   color: var(--site-accent);
+}
+
+/*
+ * ...but not inside an editor, which brings its own accent.
+ *
+ * The library's `.rte-content a` is inside `@layer rtekit.content`, and the site's styles
+ * are unlayered — and an unlayered declaration beats a layered one whatever the
+ * specificity, so the bare `a` above was recolouring editor content. That showed up as
+ * the site's dark-mode link blue on the editor's white surface, at 2.54:1.
+ */
+.rte-root a,
+.rte-view a {
+  color: var(--rte-color-accent);
 }
 
 code {
@@ -306,7 +336,7 @@ pre code {
 .button--solid {
   background: var(--site-accent);
   border-color: var(--site-accent);
-  color: #fff;
+  color: var(--site-accent-contrast);
 }
 
 .feature-grid {
@@ -397,7 +427,7 @@ pre code {
 .chip[data-active='true'] {
   background: var(--site-accent);
   border-color: var(--site-accent);
-  color: #fff;
+  color: var(--site-accent-contrast);
 }
 
 .empty-state {
@@ -423,9 +453,10 @@ pre code {
 }
 
 /* ── example surfaces ─────────────────────────────────────────────────────── */
+/* Inside `Rte.Footer`, so it takes the editor's muted text, not the site's. */
 .example-basic__state {
   font-size: 13px;
-  color: var(--site-text-muted);
+  color: var(--rte-color-text-muted);
 }
 
 .example-basic__preview {
@@ -1308,11 +1339,15 @@ pre code {
 }
 
 /* ── composable example ───────────────────────────────────────────────────── */
+/*
+ * The composable example's chrome sits inside `.rte-root`, so it is themed by the
+ * editor rather than by the site: the card follows whatever theme the demo is showing.
+ */
 .compose-card {
-  border: 1px solid var(--site-border);
+  border: 1px solid var(--rte-color-border);
   border-radius: 10px;
   overflow: hidden;
-  background: var(--site-bg);
+  background: var(--rte-color-surface);
 }
 
 .compose-card__header {
@@ -1320,8 +1355,8 @@ pre code {
   flex-direction: column;
   gap: 8px;
   padding: 12px;
-  background: var(--site-bg-muted);
-  border-block-end: 1px solid var(--site-border);
+  background: var(--rte-color-surface-muted);
+  border-block-end: 1px solid var(--rte-color-border);
 }
 
 .compose-card__footer {
@@ -1330,7 +1365,7 @@ pre code {
   justify-content: flex-end;
   gap: 12px;
   padding: 10px 12px;
-  border-block-start: 1px solid var(--site-border);
+  border-block-start: 1px solid var(--rte-color-border);
 }
 
 /* ── playground and theme editor ──────────────────────────────────────────── */

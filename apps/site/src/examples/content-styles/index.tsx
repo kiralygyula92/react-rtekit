@@ -86,6 +86,7 @@ export default function ContentStylesExample() {
           <RichTextEditor
             preset="standard"
             label="Notes"
+            hideLabel
             value={html}
             onChange={(value) => {
               setHtml(value as string);

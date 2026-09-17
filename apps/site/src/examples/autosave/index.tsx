@@ -64,6 +64,7 @@ export default function AutosaveExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         value={value}
         editorRef={editorRef}
         autosave={{ key: 'demo', storage, debounceMs: 500, ttlMs: 60_000 }}

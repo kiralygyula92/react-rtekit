@@ -69,6 +69,7 @@ export default function MergeTagsExample() {
       <RichTextEditor
         preset="email"
         label="Message"
+        hideLabel
         value={value}
         editorRef={editorRef}
         mergeTags={{ tags: TAGS, unknownTagBehaviour: 'warn' }}

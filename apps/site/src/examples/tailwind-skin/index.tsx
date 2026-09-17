@@ -45,6 +45,7 @@ export default function TailwindSkinExample() {
         unstyled
         preset="standard"
         label="Release notes"
+        hideLabel
         maxLength={400}
         showCounter
         classNames={SKIN}

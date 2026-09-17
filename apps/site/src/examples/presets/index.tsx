@@ -59,6 +59,7 @@ export default function PresetsExample() {
         key={preset}
         preset={preset}
         label="Message"
+        hideLabel
         defaultValue={value}
         onChange={(next) => {
           setValue(next as string);

@@ -30,6 +30,7 @@ export default function TablesExample() {
       <RichTextEditor
         preset="full"
         label="Results"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);

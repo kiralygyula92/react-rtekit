@@ -63,6 +63,7 @@ export default function CounterAndLimitsExample() {
       <RichTextEditor
         preset="standard"
         label="Message"
+        hideLabel
         value={value}
         onChange={(next: EditorValue) => {
           setValue(next as string);
