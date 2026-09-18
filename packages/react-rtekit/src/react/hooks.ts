@@ -35,18 +35,25 @@ export function useEditorState<T>(
   // The selected value is cached so `useSyncExternalStore` sees a stable reference
   // whenever `isEqual` says nothing changed; otherwise React would loop on any
   // selector that builds an object.
-  const cache = useRef<{ snapshot: EditorSnapshot; value: T } | null>(null);
+  const cache = useRef<{
+    snapshot: EditorSnapshot;
+    selector: typeof selector;
+    isEqual: typeof isEqual;
+    value: T;
+  } | null>(null);
 
   const getSelection = useCallback(() => {
     const snapshot = store.getSnapshot();
     const cached = cache.current;
-    if (cached?.snapshot === snapshot) return cached.value;
-    const next = selector(snapshot);
-    if (cached && isEqual(cached.value, next)) {
-      cache.current = { snapshot, value: cached.value };
+    if (cached?.snapshot === snapshot && cached.selector === selector && cached.isEqual === isEqual) {
       return cached.value;
     }
-    cache.current = { snapshot, value: next };
+    const next = selector(snapshot);
+    if (cached && isEqual(cached.value, next)) {
+      cache.current = { snapshot, selector, isEqual, value: cached.value };
+      return cached.value;
+    }
+    cache.current = { snapshot, selector, isEqual, value: next };
     return next;
   }, [isEqual, selector, store]);
 

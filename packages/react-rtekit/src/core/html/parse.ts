@@ -243,7 +243,7 @@ export function parseHtmlFragment(html: string): HtmlNode[] {
     const { attrs, selfClosing } = readAttributes(state);
 
     if (CLOSES_PARAGRAPH.has(tag)) closeIfOpen(new Set(['p']));
-    const implied = IMPLIED_END_TAGS[tag];
+    const implied = Object.hasOwn(IMPLIED_END_TAGS, tag) ? IMPLIED_END_TAGS[tag] : undefined;
     if (implied) closeIfOpen(implied);
 
     const el: HtmlElement = { type: 'element', tag, attrs, children: [] };

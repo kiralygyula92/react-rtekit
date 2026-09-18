@@ -26,6 +26,20 @@ function canReuse(existing: Node, value: AnyNode): boolean {
   return existing.nodeType === 1;
 }
 
+/** Forget this node's wrappers and text, leaving independently indexed children alone. */
+function forgetNode(key: NodeKey, index: RenderIndex): void {
+  const forget = (node: Node): void => {
+    const owner = index.byNode.get(node);
+    if (owner !== undefined && owner !== key) return;
+    index.byNode.delete(node);
+    for (const child of node.childNodes) forget(child);
+  };
+  const node = index.byKey.get(key);
+  if (node !== undefined) forget(node);
+  index.byKey.delete(key);
+  index.textByKey.delete(key);
+}
+
 /**
  * Updates one node's own DOM, reusing the element where that is safe.
  *
@@ -71,12 +85,16 @@ function updateNode(
   // Rebuild this node alone, then move the existing children across rather than
   // re-rendering them — they are untouched by this change, and re-rendering would take
   // the caret with them.
-  const replacement = renderNode(tree, key, index, document_);
+  forgetNode(key, index);
+  const replacement = renderNode(tree, key, index, document_, (child) => {
+    // Check-list item attributes depend on their parent's list type.
+    if (entry.value.type === 'list') signatures.delete(child);
+    return updateNode(tree, child, index, document_, signatures);
+  });
   if (existing !== undefined && replacement !== null && existing.parentNode !== null) {
     existing.parentNode.replaceChild(replacement, existing);
   } else if (existing !== undefined && replacement === null && existing.parentNode !== null) {
     existing.parentNode.removeChild(existing);
-    index.byKey.delete(key);
   }
   if (replacement === null) signatures.delete(key);
   else signatures.set(key, signature);
@@ -181,19 +199,24 @@ export function reconcile(
     const node = index.byKey.get(key);
     if (node !== undefined) {
       node.parentNode?.removeChild(node);
-      index.byNode.delete(node);
     }
-    index.byKey.delete(key);
-    index.textByKey.delete(key);
+    forgetNode(key, index);
     signatures.delete(key);
   }
 
-  for (const key of change.updated) updateNode(tree, key, index, document_, signatures);
+  const emptyParents = new Set<NodeKey>();
+  for (const key of change.updated) {
+    if (updateNode(tree, key, index, document_, signatures) === null) {
+      const parent = tree.parent(key);
+      if (parent !== null && parent !== undefined) emptyParents.add(parent);
+    }
+  }
 
   // Rearrangements last, so every child they place has already been brought up to date.
   // Shallowest first: a parent that was itself rebuilt has to exist before its children
   // are hung off it.
-  const parents = [...change.rearranged].filter((key) => tree.get(key) !== undefined);
+  const parents = [...new Set([...change.rearranged, ...emptyParents])]
+    .filter((key) => tree.get(key) !== undefined);
   parents.sort((a, b) => tree.ancestors(a).length - tree.ancestors(b).length);
   for (const key of parents) syncChildren(tree, key, index, document_, signatures);
 

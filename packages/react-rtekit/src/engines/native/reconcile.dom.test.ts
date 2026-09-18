@@ -227,6 +227,45 @@ describe('reconciling lands on the same DOM a fresh render would', () => {
 });
 
 describe('reconciling touches as little as it can', () => {
+  it('preserves inline DOM when only the block alignment changes', () => {
+    const editor = mount(doc({ type: 'paragraph', content: [{ type: 'text', text: 'text' }] }));
+    const paragraph = editor.tree.children(ROOT_KEY)[0]!;
+    const run = editor.tree.children(paragraph)[0]!;
+    const text = editor.index.textByKey.get(run);
+    editor.apply((w) => {
+      w.setValue(paragraph, { type: 'paragraph', align: 'center', content: [] });
+    });
+    expect(editor.index.textByKey.get(run)).toBe(text);
+    expect(editor.container.querySelector('p')?.firstChild).toBe(text);
+    expect(editor.html()).toBe('<p class="rte-align-center">text</p>');
+  });
+
+  it('releases every old DOM mapping after repeated formatting and removal', () => {
+    const editor = mount(doc({ type: 'paragraph', content: [{ type: 'text', text: 'text' }] }));
+    const paragraph = editor.tree.children(ROOT_KEY)[0]!;
+    const run = editor.tree.children(paragraph)[0]!;
+    for (let step = 0; step < 20; step += 1) {
+      editor.apply((w) => {
+        w.setValue(run, {
+          type: 'text', text: 'text',
+          marks: step % 2 === 0 ? [{ type: 'bold' }, { type: 'italic' }] : [],
+        });
+      });
+    }
+    expect([...editor.index.byNode.keys()].every((node) => editor.container.contains(node))).toBe(true);
+    editor.apply((w) => { w.remove(paragraph); });
+    expect([...editor.index.byNode.keys()]).toEqual([editor.container]);
+    expect(editor.index.textByKey.size).toBe(0);
+  });
+
+  it('drops the old text mapping when a run becomes empty', () => {
+    const editor = mount(doc({ type: 'paragraph', content: [{ type: 'text', text: 'text' }] }));
+    const run = editor.tree.children(editor.tree.children(ROOT_KEY)[0]!)[0]!;
+    editor.apply((w) => { w.setValue(run, { type: 'text', text: '' }); });
+    expect(editor.index.textByKey.has(run)).toBe(false);
+    expect(editor.html()).toBe('<p><br></p>');
+  });
+
   it('keeps the text node when only its characters change', () => {
     // The whole point. A replaced text node takes the caret with it, so typing would
     // send the caret back to the start of the line on every keystroke.

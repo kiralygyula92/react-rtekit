@@ -13,6 +13,45 @@ import { decodeEntitiesDeep } from '../html/entities.js';
 /** CSS values containing any of these are removed, whatever the property is. */
 const DANGEROUS_VALUE = /expression\s*\(|javascript\s*:|vbscript\s*:|@import|behavio(u)?r\s*:|-moz-binding|url\s*\(\s*['"]?\s*(javascript|vbscript|data:text\/html)/i;
 
+/** Decode CSS syntax for policy checks only; keep the author's safe value intact. */
+function valueForPolicy(value: string): string {
+  let uncommented = '';
+  let quote: string | null = null;
+  for (let index = 0; index < value.length; index += 1) {
+    const char = value[index]!;
+    if (char === '\\') {
+      uncommented += value.slice(index, index + 2);
+      index += 1;
+      continue;
+    }
+    if (quote !== null) {
+      uncommented += char;
+      if (char === quote) quote = null;
+    } else if (char === '"' || char === "'") {
+      quote = char;
+      uncommented += char;
+    } else if (char === '/' && value[index + 1] === '*') {
+      const end = value.indexOf('*/', index + 2);
+      index = end === -1 ? value.length : end + 1;
+    } else {
+      uncommented += char;
+    }
+  }
+  return uncommented
+    .replace(/\\(?:([0-9a-f]{1,6})(?:\r\n|[\t\n\f\r ])?|(\r\n|[\n\r\f])|([\s\S]))/gi,
+      (_match, hex: string | undefined, newline: string | undefined, escaped: string | undefined) => {
+        if (hex !== undefined) {
+          const code = Number.parseInt(hex, 16);
+          return code === 0 || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)
+            ? '\uFFFD'
+            : String.fromCodePoint(code);
+        }
+        return newline !== undefined ? '' : (escaped ?? '');
+      })
+    // URL parsers ignore these characters even inside a quoted CSS URL.
+    .replace(/[\t\n\r]/g, '');
+}
+
 /**
  * A well-formed CSS property name.
  *
@@ -168,7 +207,7 @@ export function sanitizeStyle(
       onViolation?.(property, 'style-property-not-allowed');
       continue;
     }
-    if (DANGEROUS_VALUE.test(value)) {
+    if (DANGEROUS_VALUE.test(valueForPolicy(value))) {
       onViolation?.(property, 'style-value-not-allowed');
       continue;
     }

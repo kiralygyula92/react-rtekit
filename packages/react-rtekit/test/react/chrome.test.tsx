@@ -214,6 +214,19 @@ describe('fullscreen', () => {
 });
 
 describe('drafts', () => {
+  it('keeps editing available when the browser denies access to localStorage', async () => {
+    const storage = vi.spyOn(window, 'localStorage', 'get').mockImplementation(() => {
+      throw new DOMException('Storage is blocked', 'SecurityError');
+    });
+    try {
+      const editor = await mount({ autosave: { key: 'blocked-storage' } });
+      expect(editor.getText()).toBe('The water test result is water clear.');
+      expect(() => { editor.saveDraft(); }).not.toThrow();
+    } finally {
+      storage.mockRestore();
+    }
+  });
+
   /** An isolated storage, so one test never sees another's draft. */
   function makeStorage(seed?: Record<string, string>): Storage {
     const data = new Map(Object.entries(seed ?? {}));

@@ -116,6 +116,10 @@ const DEFAULT_MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
  */
 function readAsDataUrl(file: File, signal: AbortSignal): Promise<string> {
   return new Promise((resolve, reject) => {
+    if (signal.aborted) {
+      reject(new Error(`Reading "${file.name}" was cancelled`));
+      return;
+    }
     const reader = new FileReader();
     const onAbort = (): void => {
       reader.abort();
@@ -215,6 +219,8 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
   const containerRef = useRef<HTMLElement | null>(null);
   const announcerRef = useRef<HTMLElement | null>(null);
   const uploadsRef = useRef<UploadState[]>([]);
+  const uploadControllersRef = useRef(new Set<AbortController>());
+  const uploadIdRef = useRef(0);
   const cleanupsRef = useRef<Unregister[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   /** The value most recently handed to `onChange`, for controlled-mode diffing. */
@@ -493,8 +499,11 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
         requireEngine().exec('insertImage', attrs);
       },
       uploadFiles: async (files: File[]) => {
+        const engine = engineRef.current;
+        if (!engine) return;
         const upload = optionsRef.current.onUpload;
         for (const file of files) {
+          if (engineRef.current !== engine) return;
           // The constraints are checked before the upload starts, not after it
           // returns: a 30 MB file should never leave the browser.
           const rejection = checkUploadable(file, optionsRef.current);
@@ -503,8 +512,12 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
             continue;
           }
           const controller = new AbortController();
+          uploadControllersRef.current.add(controller);
+          let finished = false;
+          const active = (): boolean =>
+            !finished && !controller.signal.aborted && engineRef.current === engine;
           const entry: UploadState = {
-            id: `${instanceId}-upload-${uploadsRef.current.length + 1}`,
+            id: `${instanceId}-upload-${++uploadIdRef.current}`,
             file,
             progress: 0,
             status: 'uploading',
@@ -512,70 +525,42 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
           uploadsRef.current = [...uploadsRef.current, entry];
           store.update({ uploads: uploadsRef.current });
 
-          // A veto here is how a consumer refuses a file for a reason of its own —
-          // a quota, a filename policy, a virus scan that has not come back yet.
-          let proceed = false;
-          runHandler<UploadStartContext>(
-            optionsRef.current.handlers?.onUploadStart,
-            { editor: api, file },
-            () => {
-              proceed = true;
-            },
-          );
-          if (!proceed) {
-            uploadsRef.current = uploadsRef.current.filter((current) => current.id !== entry.id);
-            store.update({ uploads: uploadsRef.current });
-            continue;
-          }
-
-          // No `onUpload`, so there is nowhere to put the file but the document. The
-          // picture the author chose is embedded as a data URL, which is what makes
-          // "insert an image from this device" work without a backend behind it. The
-          // size and type checks above have already run, and the sanitizer keeps only
-          // the raster types — `data:image/svg+xml` stays blocked in every profile,
-          // because an SVG is a document that can carry script.
-          if (!upload) {
-            try {
-              const src = await readAsDataUrl(file, controller.signal);
-              uploadsRef.current = uploadsRef.current.map((current) =>
-                current.id === entry.id
-                  ? { ...current, status: 'done', progress: 100, url: src }
-                  : current,
-              );
-              store.update({ uploads: uploadsRef.current });
-              api.insertImage({ src, alt: file.name });
-            } catch (error) {
-              uploadsRef.current = uploadsRef.current.map((current) =>
-                current.id === entry.id ? { ...current, status: 'error', error } : current,
-              );
-              store.update({ uploads: uploadsRef.current });
-              runHandler<UploadErrorContext>(
-                optionsRef.current.handlers?.onUploadError,
-                { editor: api, file, error },
-                (ctx) => {
-                  optionsRef.current.onUploadError?.(ctx.error, ctx.file);
-                },
-              );
-            }
-            continue;
-          }
-
           try {
-            const result = await upload(file, {
-              signal: controller.signal,
-              onProgress: (progress) => {
-                uploadsRef.current = uploadsRef.current.map((current) =>
-                  current.id === entry.id ? { ...current, progress } : current,
-                );
+            // Middleware may await a quota or file check before calling next.
+            const onStart = optionsRef.current.handlers?.onUploadStart;
+            if (onStart) {
+              let proceed = false;
+              const context: UploadStartContext = { editor: api, file };
+              await onStart(context, () => { proceed = true; });
+              if (!active()) return;
+              if (!proceed) {
+                uploadsRef.current = uploadsRef.current.filter((current) => current.id !== entry.id);
                 store.update({ uploads: uploadsRef.current });
-              },
-            });
+                continue;
+              }
+            }
+            if (!active()) return;
+            // Without a backend, embed the file. The same sanitizer still rejects SVG.
+            const result = upload
+              ? await upload(file, {
+                  signal: controller.signal,
+                  onProgress: (progress) => {
+                    if (!active()) return;
+                    uploadsRef.current = uploadsRef.current.map((current) =>
+                      current.id === entry.id ? { ...current, progress } : current,
+                    );
+                    store.update({ uploads: uploadsRef.current });
+                  },
+                })
+              : { url: await readAsDataUrl(file, controller.signal), alt: file.name };
+            if (!active()) return;
             uploadsRef.current = uploadsRef.current.map((current) =>
               current.id === entry.id
                 ? { ...current, status: 'done', progress: 100, url: result.url }
                 : current,
             );
             store.update({ uploads: uploadsRef.current });
+            if (!active()) return;
             api.insertImage({
               src: result.url,
               ...(result.alt ? { alt: result.alt } : {}),
@@ -583,6 +568,7 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
               ...(result.height ? { height: result.height } : {}),
             });
           } catch (error) {
+            if (!active()) return;
             uploadsRef.current = uploadsRef.current.map((current) =>
               current.id === entry.id ? { ...current, status: 'error', error } : current,
             );
@@ -594,6 +580,9 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
                 optionsRef.current.onUploadError?.(ctx.error, ctx.file);
               },
             );
+          } finally {
+            finished = true;
+            uploadControllersRef.current.delete(controller);
           }
         }
       },
@@ -1085,8 +1074,12 @@ export function useEditor(options: UseEditorOptions): EditorInstance {
     return () => {
       for (const cleanup of cleanupsRef.current.splice(0)) cleanup();
       if (debounceRef.current) clearTimeout(debounceRef.current);
-      engine.destroy();
       engineRef.current = null;
+      for (const controller of uploadControllersRef.current) controller.abort();
+      uploadControllersRef.current.clear();
+      uploadsRef.current = [];
+      store.update({ uploads: uploadsRef.current });
+      engine.destroy();
       emit('destroy');
     };
   }, [

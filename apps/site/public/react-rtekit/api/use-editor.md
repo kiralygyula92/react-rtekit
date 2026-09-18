@@ -180,6 +180,6 @@ This symbol takes no options.
 ## Source
 
 - [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L371)
-- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L209)
+- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L213)
 
 <!-- generated:reference:end -->

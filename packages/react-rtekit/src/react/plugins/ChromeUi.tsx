@@ -176,7 +176,14 @@ export function AutosaveUi({ config, handlers }: AutosaveUiProps) {
   const decided = useRef(false);
 
   const storageKey = `rte-draft:${config.key}`;
-  const storage = config.storage ?? (typeof localStorage === 'undefined' ? null : localStorage);
+  let storage = config.storage ?? null;
+  if (storage === null) {
+    try {
+      storage = typeof localStorage === 'undefined' ? null : localStorage;
+    } catch {
+      // Accessing the storage object itself can throw in sandboxed/blocked contexts.
+    }
+  }
 
   /**
    * The stored draft, read once during the first render.

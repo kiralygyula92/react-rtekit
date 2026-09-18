@@ -62,7 +62,7 @@ export function Header({ onSearch, onToggleNav, navOpen }: HeaderProps) {
 
       <div className="docs-header__spacer" />
 
-      <button type="button" className="docs-header__search" onClick={onSearch}>
+      <button type="button" className="docs-header__search" aria-label="Search" onClick={onSearch}>
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path
             fill="currentColor"

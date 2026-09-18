@@ -142,19 +142,19 @@ This symbol takes no options.
 
 ## Source
 
-- [useCharacterCount](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L131)
-- [useCommand](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L99)
+- [useCharacterCount](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L138)
+- [useCommand](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L106)
 - [useEditorContext](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L52)
 - [useEditorState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L30)
-- [useFormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L76)
-- [useIsEmpty](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L122)
-- [useIsFocused](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L161)
+- [useFormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L83)
+- [useIsEmpty](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L129)
+- [useIsFocused](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L168)
 - [useLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L129)
 - [useRteConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L191)
 - [useRteDefaults](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L206)
 - [useRteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L110)
 - [useRteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L149)
-- [useUpload](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L151)
-- [useValidationError](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L168)
+- [useUpload](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L158)
+- [useValidationError](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L175)
 
 <!-- generated:reference:end -->

@@ -131,6 +131,7 @@ export function renderNode(
   key: NodeKey,
   index: RenderIndex,
   document_: Document = globalThis.document,
+  renderChild?: (child: NodeKey) => Node | null,
 ): Node | null {
   const entry = tree.get(key);
   if (entry === undefined) return null;
@@ -141,7 +142,7 @@ export function renderNode(
   const appendChildren = (parent: Element, only?: (child: NodeKey) => boolean): void => {
     for (const child of children) {
       if (only !== undefined && !only(child)) continue;
-      const rendered = renderNode(tree, child, index, document_);
+      const rendered = renderChild ? renderChild(child) : renderNode(tree, child, index, document_);
       if (rendered !== null) parent.append(rendered);
     }
   };

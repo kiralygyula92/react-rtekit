@@ -252,11 +252,16 @@ function ImageFrame({
   const [alt, setAlt] = useState(image.getAttribute('alt') ?? '');
   const [caption, setCaption] = useState('');
   const [width, setWidth] = useState(image.width || null);
+  const resizeCleanup = useRef<(() => void) | null>(null);
+
+  useEffect(() => () => { resizeCleanup.current?.(); }, [image]);
 
   /** A pointer drag on a handle, previewed live and committed once at the end. */
   const startResize = (event: React.PointerEvent, direction: 1 | -1): void => {
     if (!resizable) return;
     event.preventDefault();
+    resizeCleanup.current?.();
+    const originalWidth = image.style.width;
     const startX = event.clientX;
     const startWidth = image.getBoundingClientRect().width;
     const ratio = image.naturalHeight / (image.naturalWidth || 1);
@@ -271,14 +276,25 @@ function ImageFrame({
       setWidth(next);
     };
     const onUp = (): void => {
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onUp);
       const finalWidth = Math.round(image.getBoundingClientRect().width);
-      image.style.width = '';
+      cleanup();
       onCommit({ width: finalWidth, height: Math.round(finalWidth * ratio) });
     };
+    const onCancel = (): void => {
+      cleanup();
+      setWidth(image.width || null);
+    };
+    const cleanup = (): void => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onCancel);
+      image.style.width = originalWidth;
+      resizeCleanup.current = null;
+    };
+    resizeCleanup.current = cleanup;
     window.addEventListener('pointermove', onMove);
     window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onCancel);
   };
 
   const ImagePopover = slots.ImagePopover;

@@ -90,7 +90,7 @@ export function decodeEntities(input: string): string {
       const code = Number.parseInt(digits, hex ? 16 : 10);
       return Number.isNaN(code) ? match : safeFromCodePoint(code);
     }
-    return NAMED[body] ?? match;
+    return Object.hasOwn(NAMED, body) ? NAMED[body]! : match;
   });
 }
 

@@ -352,6 +352,10 @@
   line-height: 1.55;
 }
 
+.prose .table-scroll {
+  overflow-x: auto;
+}
+
 .prose table {
   inline-size: 100%;
   border-collapse: collapse;
@@ -726,6 +730,26 @@
     block-size: auto;
     background: var(--site-bg);
     border-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .docs-header {
+    gap: 8px;
+    padding-inline: 12px;
+  }
+
+  .docs-header__version select {
+    inline-size: 5.5em;
+  }
+
+  .docs-header__search {
+    flex-shrink: 0;
+    padding-inline: 6px;
+  }
+
+  .docs-header__search kbd {
+    display: none;
   }
 }
 

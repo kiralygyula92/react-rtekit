@@ -112,15 +112,16 @@ function stripTags(html) {
 /**
  * Turns one Markdown document into the HTML the site renders.
  *
- * Three things the library's serializer does not do, because they are the site's concern
+ * Things the library's serializer does not do, because they are the site's concern
  * rather than the document model's:
  *
  *   - heading ids, so the table of contents has somewhere to link;
  *   - the `demo` fence, which names a live component instead of showing code;
  *   - `tabindex` on code blocks, which scroll horizontally and are otherwise unreachable
- *     by keyboard (axe calls it `scrollable-region-focusable`).
+ *     by keyboard (axe calls it `scrollable-region-focusable`);
+ *   - scroll containers for wide tables, keeping the page within a mobile viewport.
  *
- * All three are applied to the serialized output rather than by forking the serializer,
+ * These are applied to the serialized output rather than by forking the serializer,
  * so the Markdown path this site exercises is exactly the one a consumer gets.
  */
 function render(markdown) {
@@ -144,6 +145,13 @@ function render(markdown) {
     /<pre><code>/g,
     '<pre class="code-block" tabindex="0" role="region" aria-label="code example"><code>',
   );
+
+  html = html
+    .replace(
+      /<table>/g,
+      '<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>',
+    )
+    .replace(/<\/table>/g, '</table></div>');
 
   const heading = /<(h[23])>([\s\S]*?)<\/h[23]>/g;
   html = html.replace(heading, (_match, tag, inner) => {

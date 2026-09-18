@@ -145,6 +145,24 @@ test('every page has both footer actions', async ({ page }) => {
   await expect(page.getByText('Was this page helpful?')).toBeVisible();
 });
 
+test('wide reference tables keep mobile navigation within the viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/react-rtekit/api/types/');
+  await expect(page.getByRole('heading', { name: 'Used by' })).toBeVisible();
+
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+
+  await page.locator('.docs-header').getByRole('button', { name: 'Search', exact: true }).click();
+  await expect(page.locator('.search-dialog').getByRole('combobox')).toBeVisible();
+  await page.keyboard.press('Escape');
+
+  await page.locator('#main').getByRole('link', { name: 'Tables', exact: true }).click();
+  await expect(page).toHaveURL(/\/react-rtekit\/tables\/$/);
+});
+
 test('the on-this-page rail lists the page’s own headings', async ({ page }) => {
   await page.goto('/react-rtekit/tables/');
   await expect(page.locator('.toc__link')).toHaveText([
