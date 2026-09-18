@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router';
+import { Outlet, ScrollRestoration } from 'react-router';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
@@ -16,7 +16,6 @@ import { SearchDialog } from '../components/SearchDialog';
  */
 
 export function DocsLayout() {
-  const { pathname, hash } = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
@@ -24,8 +23,7 @@ export function DocsLayout() {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent): void => {
       const target = event.target as HTMLElement | null;
-      const typing =
-        target?.closest('input, textarea, select, [contenteditable="true"]') !== null;
+      const typing = target?.closest('input, textarea, select, [contenteditable="true"]') !== null;
       if (event.key === '/' && !typing) {
         event.preventDefault();
         setSearchOpen(true);
@@ -37,19 +35,25 @@ export function DocsLayout() {
     };
   }, []);
 
-  // A new page starts at the top; a fragment link goes to its heading. Without this the
-  // router keeps the previous scroll position and a long reference page opens halfway
-  // down.
-  useEffect(() => {
-    if (hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView();
-      return;
-    }
-    window.scrollTo(0, 0);
-  }, [pathname, hash]);
-
   return (
     <div className="docs-shell" data-nav-open={navOpen}>
+      {/*
+       * The router's own scroll handling, in place of a hand-rolled effect.
+       *
+       * The effect this replaces called `scrollTo(0, 0)` on every pathname change — which
+       * includes Back and Forward — and again on mount, which includes a reload. So Back
+       * dropped the reader at the top of the page they had been reading, and a refresh did
+       * the same; measured on production, Back from 900px landed at 91 and a refresh from
+       * 700 landed at 0. It also left `history.scrollRestoration` on `auto`, so the browser
+       * was restoring at the same time the effect was resetting, which is where the 91
+       * came from.
+       *
+       * `ScrollRestoration` does what a reader expects of a link: a new page opens at the
+       * top, or at its `#fragment`; Back, Forward and reload return to the position saved
+       * for that history entry. It takes `scrollRestoration` over from the browser, so
+       * there is one thing deciding.
+       */}
+      <ScrollRestoration />
       <a className="skip-link" href="#main">
         Skip to content
       </a>

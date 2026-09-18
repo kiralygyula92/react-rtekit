@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page as BrowserPage } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
 /**
@@ -193,4 +193,51 @@ test('a link in page content navigates without reloading the page', async ({ pag
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Value formats');
   await expect(page).toHaveURL(/\/react-rtekit\/value-formats\/$/);
   expect(loads - before).toBe(0);
+});
+
+/*
+ * Where the reader was is where they come back to.
+ *
+ * The layout used to call `scrollTo(0, 0)` on every pathname change and on mount, so a
+ * reload always landed at the top — measured on production, 700px became 0. Back
+ * happened to survive only because the browser's own restoration was racing that effect
+ * and winning. `ScrollRestoration` makes it one mechanism, and these pin both behaviours.
+ */
+test.describe('scroll position', () => {
+  const PAGE = '/react-rtekit/api/serialization/';
+  const scrollY = async (page: BrowserPage) => page.evaluate(() => Math.round(window.scrollY));
+
+  test('a reload keeps the reader where they were', async ({ page }) => {
+    await page.goto(PAGE);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
+    await page.evaluate(() => {
+      window.scrollTo(0, 700);
+    });
+    await expect.poll(() => scrollY(page)).toBe(700);
+
+    await page.reload();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
+    await expect.poll(() => scrollY(page)).toBe(700);
+  });
+
+  test('a new page opens at the top, and Back returns to the old position', async ({ page }) => {
+    await page.goto(PAGE);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
+    await page.evaluate(() => {
+      window.scrollTo(0, 900);
+    });
+    await expect.poll(() => scrollY(page)).toBe(900);
+
+    // The sidebar is sticky, so clicking it does not move the window first.
+    await page
+      .locator('.docs-sidebar a[href^="/react-rtekit/api/"]:not([href="' + PAGE + '"])')
+      .first()
+      .click();
+    await expect(page).not.toHaveURL(new RegExp(`${PAGE}$`));
+    await expect.poll(() => scrollY(page)).toBe(0);
+
+    await page.goBack();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
+    await expect.poll(() => scrollY(page)).toBe(900);
+  });
 });
