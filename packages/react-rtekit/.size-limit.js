@@ -1,11 +1,11 @@
 /**
- * Bundle budgets (09 §4), measured min+gzip.
+ * Bundle budgets, measured min+gzip.
  *
- * Where a figure differs from the target in 09 §4, the target is kept in the comment
+ * Where a figure differs from its original target, the target is kept in the comment
  * and the limit is set just above what the code actually costs, so a regression still
  * fails the build. Each gap below names what is in the graph and why it cannot leave.
  *
- * The milestone 6 audit found and fixed one real defect behind these numbers. The
+ * These numbers once hid a real defect, since fixed. The
  * published files are pre-bundled, and a pre-bundled file tree-shakes at *chunk*
  * granularity: a module that shares a chunk with something the consumer does use
  * cannot be dropped, however pure it is. `tsup.config.ts` now names the large UI
@@ -36,10 +36,10 @@ const PEERS = ['react', 'react-dom'];
 
 export default [
   {
-    // 09 §4 target: 22 kB. Actual 36.0 kB, in four parts, none of which a mounted
+    // Target: 22 kB. Actual 36.0 kB, in four parts, none of which a mounted
     // editor can do without:
     //
-    //   ~12 kB gz  the core pipeline — the in-house HTML parser (ADR-003), the
+    //   ~12 kB gz  the core pipeline — the in-house HTML parser, the
     //              sanitizer, the schema, the interop dialects and the document model
     //   ~16 kB gz  the engine — the keyed tree, the renderer, the reconciler, selection
     //              mapping, the model operations, history and the input handling
@@ -59,9 +59,9 @@ export default [
     ignore: PEERS,
   },
   {
-    // 09 §4 target: 34 kB for the `classic` preset and its chrome. Actual: the whole
+    // Target: 34 kB for the `classic` preset and its chrome. Actual: the whole
     // component. The preset selects plugins at runtime, so no preset measures smaller
-    // than the component that can render any of them; 09 §4's `full` figure of 60 kB
+    // than the component that can render any of them; the original `full` figure of 60 kB
     // is the honest comparison, and this is 3.6 kB over it.
     //
     // What the 63.6 kB is: the 41 kB above, plus the toolbar and its item registry,
@@ -95,15 +95,15 @@ export default [
     ignore: PEERS,
   },
   {
-    // 09 §4 target: 22 kB for the headless core. Met.
+    // Target: 22 kB for the headless core. Met.
     name: 'headless core (no React, no engine)',
     path: 'dist/core/index.js',
     limit: '19 kB',
     gzip: true,
   },
   {
-    // 09 §4 target: 4 kB. Actual figure includes the in-house HTML parser, which the
-    // sanitizer cannot work without (ADR-003) and which the target did not account for.
+    // Target: 4 kB. Actual figure includes the in-house HTML parser, which the
+    // sanitizer cannot work without and which the target did not account for.
     name: 'sanitizer alone',
     path: 'dist/core/index.js',
     import: '{ sanitizeHtml }',
@@ -111,7 +111,7 @@ export default [
     gzip: true,
   },
   {
-    // 09 §4 target: 6 kB. Actual: the parser and sanitizer alone are 6.1 kB, and the
+    // Target: 6 kB. Actual: the parser and sanitizer alone are 6.1 kB, and the
     // view needs more than those. It parses, normalizes the interop dialects and
     // re-serializes rather than sanitizing the string in place, because that is what
     // makes a stored Quill document render in a list page exactly as it does in the
@@ -124,7 +124,7 @@ export default [
     ignore: PEERS,
   },
   {
-    // Not in 09 §4, but quoted in the README, so it is measured rather than estimated.
+    // No original target, but quoted in the README, so it is measured rather than estimated.
     // The metadata is the whole enumerated API surface — every slot, command, handler,
     // token and locale key — which is what the API pages and the site search read. It
     // is not 4 kB of descriptions: enumerating the slots needs the slot table, the
@@ -136,7 +136,7 @@ export default [
     ignore: PEERS,
   },
   {
-    // 09 §4 target: 9 kB. Met.
+    // Target: 9 kB. Met.
     name: 'styles.css',
     path: 'dist/styles.css',
     limit: '9 kB',

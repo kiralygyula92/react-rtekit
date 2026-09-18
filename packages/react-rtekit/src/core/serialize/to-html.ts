@@ -17,7 +17,7 @@ import { serializeStyle, type CssDeclaration } from '../sanitize/css.js';
 import { sortMarks } from '../document.js';
 
 /**
- * The portable document model to HTML, in four dialects (ADR-004).
+ * The portable document model to HTML, in four dialects.
  *
  * | Profile | Alignment | Lists | Styles |
  * |---|---|---|---|
@@ -126,7 +126,9 @@ function inlineToHtml(nodes: InlineNode[], ctx: Ctx): HtmlNode[] {
         break;
       case 'mention':
         out.push(
-          element('span', { 'data-mention-id': node.id, class: 'rte-mention' }, [textNode(node.label)]),
+          element('span', { 'data-mention-id': node.id, class: 'rte-mention' }, [
+            textNode(node.label),
+          ]),
         );
         break;
       case 'emoji':
@@ -226,11 +228,7 @@ function listToHtml(list: ListNode, ctx: Ctx, topLevel = true): HtmlElement {
     const children: HtmlNode[] = inlineToHtml(item.content, ctx);
     for (const child of item.children ?? []) children.push(listToHtml(child, ctx, false));
 
-    return element(
-      'li',
-      mergeAttrs(itemAttrs, alignAttrs(item.align, ctx)),
-      children,
-    );
+    return element('li', mergeAttrs(itemAttrs, alignAttrs(item.align, ctx)), children);
   });
 
   // Quill's flat form: nested lists are siblings carrying `ql-indent-N`. Flattening
@@ -251,7 +249,8 @@ function flattenForQuill(items: HtmlNode[], depth: number): HtmlNode[] {
       continue;
     }
     const nestedLists = item.children.filter(
-      (child): child is HtmlElement => child.type === 'element' && (child.tag === 'ul' || child.tag === 'ol'),
+      (child): child is HtmlElement =>
+        child.type === 'element' && (child.tag === 'ul' || child.tag === 'ol'),
     );
     const own = item.children.filter(
       (child) => !(child.type === 'element' && (child.tag === 'ul' || child.tag === 'ol')),
@@ -317,11 +316,9 @@ function blockToHtml(block: BlockNode, ctx: Ctx): HtmlNode | null {
         blocksToHtml(block.content, ctx),
       );
     case 'codeBlock': {
-      const code = element(
-        'code',
-        block.language ? { class: `language-${block.language}` } : {},
-        [textNode(block.text)],
-      );
+      const code = element('code', block.language ? { class: `language-${block.language}` } : {}, [
+        textNode(block.text),
+      ]);
       return element('pre', {}, [code]);
     }
     case 'horizontalRule':
@@ -345,12 +342,20 @@ function blockToHtml(block: BlockNode, ctx: Ctx): HtmlNode | null {
     case 'table':
       return element(
         'table',
-        ctx.profile === 'email' ? { style: EMAIL_TABLE_STYLE, cellpadding: '0', cellspacing: '0' } : {},
+        ctx.profile === 'email'
+          ? { style: EMAIL_TABLE_STYLE, cellpadding: '0', cellspacing: '0' }
+          : {},
         [
           element(
             'tbody',
             {},
-            block.rows.map((row) => element('tr', {}, row.cells.map((cell) => cellToHtml(cell, ctx)))),
+            block.rows.map((row) =>
+              element(
+                'tr',
+                {},
+                row.cells.map((cell) => cellToHtml(cell, ctx)),
+              ),
+            ),
           ),
         ],
       );
@@ -425,16 +430,20 @@ export function documentToHtml(doc: EditorDocument, options: DocumentToHtmlOptio
     const width = ctx.email.containerWidth ?? 600;
     const font = ctx.email.fontFallback ?? 'Arial, Helvetica, sans-serif';
     nodes = [
-      element('table', { style: 'width: 100%; border-collapse: collapse', cellpadding: '0', cellspacing: '0' }, [
-        element('tbody', {}, [
-          element('tr', {}, [
-            element(
-              'td',
-              { align: 'center', style: 'padding: 0' },
-              [
+      element(
+        'table',
+        { style: 'width: 100%; border-collapse: collapse', cellpadding: '0', cellspacing: '0' },
+        [
+          element('tbody', {}, [
+            element('tr', {}, [
+              element('td', { align: 'center', style: 'padding: 0' }, [
                 element(
                   'table',
-                  { style: `width: ${width}px; max-width: 100%; border-collapse: collapse`, cellpadding: '0', cellspacing: '0' },
+                  {
+                    style: `width: ${width}px; max-width: 100%; border-collapse: collapse`,
+                    cellpadding: '0',
+                    cellspacing: '0',
+                  },
                   [
                     element('tbody', {}, [
                       element('tr', {}, [
@@ -443,16 +452,17 @@ export function documentToHtml(doc: EditorDocument, options: DocumentToHtmlOptio
                     ]),
                   ],
                 ),
-              ],
-            ),
+              ]),
+            ]),
           ]),
-        ]),
-      ]),
+        ],
+      ),
     ];
   }
 
   const sanitizeWith =
-    options.sanitizeWith ?? (options.sanitize === false ? false : profile === 'email' ? 'email' : 'standard');
+    options.sanitizeWith ??
+    (options.sanitize === false ? false : profile === 'email' ? 'email' : 'standard');
   if (sanitizeWith !== false) {
     nodes = sanitizeNodes(nodes, { sanitize: sanitizeWith });
   }

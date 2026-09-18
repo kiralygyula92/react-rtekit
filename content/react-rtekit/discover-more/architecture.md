@@ -9,7 +9,7 @@ section: discover-more
 
 # Architecture
 
-The decisions that shaped the package, each recorded as an ADR in the repository.
+The decisions that shaped the package, and the reasoning behind each.
 
 ## An engine adapter, not a wrapper
 
@@ -32,5 +32,3 @@ Reading legacy Quill markup as it is means adoption does not require a data migr
 ## Slots and middleware rather than configuration flags
 
 A flag anticipates a need; a slot does not have to. Forty-six replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.
-
-The ADRs are in [docs/adr](https://github.com/kiralygyula92/react-rtekit/tree/main/docs/adr).

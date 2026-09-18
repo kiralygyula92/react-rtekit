@@ -1,4 +1,5 @@
 import { createRequire } from 'node:module';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,12 +10,11 @@ import { fileURLToPath } from 'node:url';
  * Three outputs, one pass, so they cannot disagree:
  *
  *   apps/site/src/content/manifest.json   every page: frontmatter, headings, HTML
- *   apps/site/public/**.md                the Markdown twins (PPDS §7.7)
+ *   apps/site/public/**.md                the Markdown twins, one per page
  *   apps/site/public/llms.txt             the agent index
  *
  * `description` is read once per page and written into the manifest, the twin and
- * `llms.txt` from that one field — which is the whole of P10, and the thing the Phase 1
- * audit found most broken (one description shared by 81 pages).
+ * `llms.txt` from that one field, so the three cannot disagree.
  *
  * Run: node content/build.mjs
  */
@@ -53,8 +53,8 @@ const titles = await readJson(path.join(dir, 'titles.json'));
  * separate default that was spelled correctly. There is now one, so the two cannot
  * disagree again.
  *
- * Vercel's production domain, because that is the deployment that can issue the 301s in
- * `url-map.csv` and the one the analytics run on. The Pages copy of the site still
+ * Vercel's production domain, because that is the deployment that can issue the legacy
+ * redirects as real 301s and the one the analytics run on. The Pages copy of the site still
  * builds, and its pages declare this as their canonical, which is what a search engine
  * needs to treat two copies of a site as one.
  */
@@ -118,7 +118,7 @@ function stripTags(html) {
  *   - heading ids, so the table of contents has somewhere to link;
  *   - the `demo` fence, which names a live component instead of showing code;
  *   - `tabindex` on code blocks, which scroll horizontally and are otherwise unreachable
- *     by keyboard (axe calls it `scrollable-region-focusable`; PPDS §7.8 asks for it).
+ *     by keyboard (axe calls it `scrollable-region-focusable`).
  *
  * All three are applied to the serialized output rather than by forking the serializer,
  * so the Markdown path this site exercises is exactly the one a consumer gets.
@@ -217,7 +217,7 @@ for await (const file of markdownFiles(dir)) {
    *
    * It stays in the file so the Markdown twin is a valid standalone document with a
    * title, and it is removed here because the page component renders the H1 from
-   * frontmatter. Leaving both gives every page two H1s, which fails conformance check 2.
+   * frontmatter. Leaving both would give every page two H1s.
    */
   const withoutTitle = body.replace(/^\s*#\s+[^\n]*\n+/, '');
 
@@ -249,7 +249,6 @@ for await (const file of markdownFiles(dir)) {
 
 pages.sort((a, b) => order.indexOf(a.pathname) - order.indexOf(b.pathname));
 
-
 // ── outputs ──────────────────────────────────────────────────────────────────
 await mkdir(siteSrc, { recursive: true });
 await writeFile(
@@ -271,8 +270,8 @@ await writeFile(
 /*
  * The Markdown twins.
  *
- * PPDS §7.7 says appending `.md` to a docs URL returns the Markdown. With a trailing
- * slash canonical (R4) that reads literally as `/react-rtekit/tables/.md`, a dotfile most
+ * Appending `.md` to a docs URL returns the page's Markdown. With a trailing slash
+ * canonical that reads literally as `/react-rtekit/tables/.md`, a dotfile most
  * static hosts hide, so the twin is the URL with its slash stripped: `tables.md` beside
  * the `tables/` directory, and `react-rtekit.md` beside the namespace itself.
  *
@@ -298,7 +297,7 @@ for (const page of pages) {
   twins += 1;
 }
 
-/* llms.txt — grouped by section, in nav order, one line per page (PPDS §7.7). */
+/* llms.txt — grouped by section, in nav order, one line per page. */
 const sectionTitles = Object.fromEntries(
   nav.map((node) => [node.pathname.replace(`/${PLUGIN}/`, '').replace('-group', ''), node.title]),
 );
@@ -318,8 +317,8 @@ const llms = [
   /*
    * Ahead of the lists, so an agent that wants everything does not have to crawl — and in
    * prose rather than as a `- [..](..)` entry, because every list line in this file is one
-   * page's twin (PPDS: "each line `- [Title](url.md): description`"), and conformance
-   * check 16 and the F8 flow both read it that way.
+   * page's twin (`- [Title](url.md): description`), and the F8 agent flow reads it
+   * that way.
    */
   `The whole documentation in one file, with the source of every example: [llms-full.md](/${PLUGIN}/llms-full.md).`,
   '',
@@ -478,8 +477,65 @@ const sitemap = [
 ].join('\n');
 await writeFile(path.join(sitePublic, 'sitemap.xml'), `${sitemap}\n`, 'utf8');
 
+/*
+ * The invariants a broken site would otherwise ship with.
+ *
+ * Checked here, where the pages are built, rather than by a separate tool: each is a
+ * fact about what this script just produced, and a build that produced a broken site
+ * should say so and stop.
+ */
+const known = new Set(pages.map((page) => page.pathname));
+const redirectTable = await readJson(path.join(siteSrc, 'redirects.json'));
+
+// Every sidebar entry leads to a page, and has a name to show.
+(function walk(nodes) {
+  for (const node of nodes) {
+    if (!node.pathname.endsWith('-group')) {
+      if (!known.has(node.pathname)) problems.push(`nav: ${node.pathname} is not a page`);
+      if (!node.title && !titles[node.pathname]) {
+        problems.push(`nav: ${node.pathname} has no title, in nav.json or titles.json`);
+      }
+    }
+    if (node.children) walk(node.children);
+  }
+})(nav);
+
+for (const page of pages) {
+  // The description is the subtitle, the meta description and the llms.txt line at once.
+  if (page.description.trim() === '') problems.push(`${page.pathname}: no description`);
+
+  // The H1 comes from frontmatter; the body starts at H2 and never skips a level.
+  if (/<h1[\s>]/i.test(page.html)) problems.push(`${page.pathname}: a second H1 in the body`);
+  // Read from the HTML, not from `headings`: that list is the table of contents, which
+  // holds only H2 and H3, so a jump to H4 would never appear in it.
+  let previous = 1;
+  for (const [, level] of page.html.matchAll(/<h([2-6])[\s>]/g)) {
+    const depth = Number(level);
+    if (depth > previous + 1)
+      problems.push(`${page.pathname}: jumps from h${previous} to h${depth}`);
+    previous = depth;
+  }
+
+  // Every internal link goes somewhere: a page, a legacy URL that redirects, or a file.
+  for (const match of page.html.matchAll(/href="(\/[^"#?]*)/g)) {
+    const href = match[1];
+    if (/\.[a-z0-9]+$/i.test(href)) {
+      if (!existsSync(path.join(sitePublic, href)))
+        problems.push(`${page.pathname}: ${href} is not a file`);
+      continue;
+    }
+    const asPage = href.endsWith('/') ? href : `${href}/`;
+    if (known.has(asPage) || redirectTable[href.replace(/\/$/, '') || '/'] !== undefined) continue;
+    problems.push(`${page.pathname}: links to ${href}, which is not a page`);
+  }
+}
+
 if (problems.length > 0) {
-  for (const problem of problems) process.stdout.write(`  ! ${problem}\n`);
+  for (const problem of problems) process.stderr.write(`  ! ${problem}\n`);
+  process.stderr.write(
+    `${problems.length} problem(s) in the content; nothing above is fit to publish.\n`,
+  );
+  process.exit(1);
 }
 process.stdout.write(
   `${pages.length} pages -> manifest · ${twins} markdown twins · llms.txt · sitemap.xml\n`,

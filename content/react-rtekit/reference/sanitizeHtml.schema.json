@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "core/sanitize/sanitize.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L268",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L275",
   "usedBy": [
     "/react-rtekit/sanitization/",
     "/react-rtekit/source-view/"

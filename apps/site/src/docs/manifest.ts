@@ -4,14 +4,13 @@ import data from '../content/manifest.json';
  * The compiled content, typed.
  *
  * One import for the whole site: the sidebar, the features index, the search index, the
- * table of contents and every page body are read from this single object. PPDS check 6
- * makes divergence between the sidebar and the feature lists a defect, so there is one
- * source rather than three that could drift.
+ * table of contents and every page body are read from this single object, so there is
+ * one source rather than three that could drift apart.
  *
  * @module
  */
 
-/** A node in the ordered navigation tree (PPDS §4). */
+/** A node in the ordered navigation tree. */
 export interface NavNode {
   pathname: string;
   title?: string;
@@ -82,7 +81,7 @@ export const pages = manifest.pages;
 
 const byPathname = new Map(pages.map((page) => [page.pathname, page]));
 
-/** Normalizes a URL to the trailing-slash form the nav uses (PPDS R4). */
+/** Normalizes a URL to the trailing-slash form the nav uses. */
 export function canonicalPath(pathname: string): string {
   const trimmed = pathname.replace(/\/+$/, '');
   return trimmed === '' ? '/' : `${trimmed}/`;
@@ -93,7 +92,7 @@ export function findPage(pathname: string): DocPage | undefined {
   return byPathname.get(canonicalPath(pathname));
 }
 
-/** The title for a nav node: inline first, then the title map (N2). */
+/** The title for a nav node: inline first, then the title map. */
 export function titleOf(node: NavNode): string {
   return node.title ?? titles[node.pathname] ?? node.pathname;
 }

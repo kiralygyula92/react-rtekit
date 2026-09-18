@@ -124,8 +124,8 @@ export const presets: Record<PresetName, PresetDefinition> = {
     defaults: {
       toolbar: CLASSIC_TOOLBAR,
       minHeight: 287,
-      // Keeps what this editor saves readable by the old one during a phased rollout
-      // (ADR-004). Switch to 'email' or 'standard' once the old editor is gone.
+      // Keeps what this editor saves readable by the old one during a phased rollout.
+      // Switch to 'email' or 'standard' once the old editor is gone.
       htmlProfile: 'quill-compatible',
       sanitize: 'standard',
       showCounter: false,
@@ -165,7 +165,12 @@ export const presets: Record<PresetName, PresetDefinition> = {
   comment: {
     plugins: COMMENT,
     defaults: {
-      toolbar: [['bold', 'italic', 'strike', 'code'], ['link'], ['bulletList', 'orderedList'], ['emoji']],
+      toolbar: [
+        ['bold', 'italic', 'strike', 'code'],
+        ['link'],
+        ['bulletList', 'orderedList'],
+        ['emoji'],
+      ],
       submitOnEnter: 'mod',
       minHeight: 80,
     },

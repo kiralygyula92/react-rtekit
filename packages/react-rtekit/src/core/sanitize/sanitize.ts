@@ -12,11 +12,17 @@ import {
   type HtmlParserChoice,
 } from '../html/index.js';
 import { sanitizeStyle } from './css.js';
-import { HARD_BLOCKED_TAGS, URL_ATTRIBUTES, UNWRAP_TAGS, getProfile, resolveSanitizeConfig } from './profiles.js';
+import {
+  HARD_BLOCKED_TAGS,
+  URL_ATTRIBUTES,
+  UNWRAP_TAGS,
+  getProfile,
+  resolveSanitizeConfig,
+} from './profiles.js';
 import { checkUrl, isExternalUrl } from './url.js';
 
 /**
- * The sanitizer (ADR-003).
+ * The sanitizer.
  *
  * Runs at every content boundary in both directions. The hard rules below cannot be
  * turned off by configuration, and `sanitize: false` is handled by the caller so that
@@ -54,11 +60,7 @@ function classAllowed(name: string, patterns: readonly (string | RegExp)[]): boo
   return false;
 }
 
-function attributeAllowed(
-  tag: string,
-  name: string,
-  allow: Record<string, string[]>,
-): boolean {
+function attributeAllowed(tag: string, name: string, allow: Record<string, string[]>): boolean {
   const global = allow['*'] ?? [];
   const perTag = allow[tag] ?? [];
   for (const candidate of [...global, ...perTag]) {
@@ -87,7 +89,12 @@ function sanitizeAttributes(el: HtmlElement, run: SanitizeRun): Record<string, s
     }
     // Hard rule: `srcdoc` carries a whole document, and namespaced xlink href is the
     // SVG smuggling route.
-    if (name === 'srcdoc' || name === 'xlink:href' || name === 'xmlns' || name.startsWith('xmlns:')) {
+    if (
+      name === 'srcdoc' ||
+      name === 'xlink:href' ||
+      name === 'xmlns' ||
+      name.startsWith('xmlns:')
+    ) {
       report({ tag: el.tag, attribute: name, reason: 'attribute-not-allowed' });
       continue;
     }

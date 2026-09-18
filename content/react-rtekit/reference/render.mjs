@@ -7,12 +7,12 @@ import { fileURLToPath } from 'node:url';
  *
  * The prose between the markers is authored nowhere: it is assembled from
  * `{symbol}.schema.json` (structure) and `{symbol}.strings.json` (descriptions) every
- * time this runs. A hand-written options table is what P5 forbids, so the region is
- * fenced with markers and anything inside them is replaced wholesale.
+ * time this runs. A hand-written options table would drift from the declarations, so
+ * the region is fenced with markers and anything inside them is replaced wholesale.
  *
  * `## Used by` is the inversion of every capability page's `symbols` frontmatter, so the
  * link between a capability and its symbols is declared once, on the capability, and the
- * reverse direction is derived (PPDS §8.3).
+ * reverse direction is derived.
  *
  * Run: node content/react-rtekit/reference/render.mjs
  */
@@ -31,7 +31,11 @@ const manifest = await readJson(path.join(root, 'apps/site/src/content/manifest.
 const titleOf = new Map(manifest.pages.map((page) => [page.pathname, page.title]));
 
 /** Escapes a cell so a type containing a pipe cannot break the table. */
-const cell = (text) => String(text ?? '').replace(/\|/g, '\\|').replace(/\n+/g, ' ').trim();
+const cell = (text) =>
+  String(text ?? '')
+    .replace(/\|/g, '\\|')
+    .replace(/\n+/g, ' ')
+    .trim();
 
 /** Which symbols each API page carries. */
 const byPage = new Map();
@@ -51,7 +55,7 @@ for (const [pagePath, names] of byPage) {
   /*
    * One set of the four required H2s per page, with an H3 per symbol inside Options.
    * Repeating the H2s per symbol would give a page four "## Options" headings, which
-   * reads as four sections and breaks the archetype's block contract (check 1).
+   * reads as four sections.
    */
   const records = [];
   for (const name of [...names].sort()) {
@@ -118,4 +122,6 @@ for (const [pagePath, names] of byPage) {
   }
 }
 
-process.stdout.write(`${written} reference pages rendered from ${Object.keys(index).length} symbols\n`);
+process.stdout.write(
+  `${written} reference pages rendered from ${Object.keys(index).length} symbols\n`,
+);

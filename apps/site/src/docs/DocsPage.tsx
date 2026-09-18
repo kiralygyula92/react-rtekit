@@ -1,11 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import {
-  canonicalPath,
-  config,
-  findPage,
-  neighbours,
-  sectionOf,
-} from './manifest';
+import { canonicalPath, config, findPage, neighbours, sectionOf } from './manifest';
 import { Badge } from './Badge';
 import { PageBody } from './PageBody';
 import { Toc } from './Toc';
@@ -20,7 +14,7 @@ import { ThemeEditor } from '../routes/ThemeEditor';
  *
  * Everything on it comes from the manifest: the breadcrumb from the section the nav puts
  * it in, the badges from its nav node, the "on this page" rail from its own headings,
- * and the metadata from the one title/description pair the Markdown declares (P10).
+ * and the metadata from the one title/description pair the Markdown declares.
  *
  * @module
  */
@@ -64,26 +58,24 @@ export function DocsPage() {
         </h1>
 
         {/* The subtitle is the same string as the meta description and the llms.txt
-            line, read from one field — which is what P10 asks for and what the audit
-            found missing everywhere. */}
+            line, read from one field so the three cannot disagree. */}
         <p className="docs-article__lead">{page.description}</p>
 
         <PageBody html={page.html} />
 
         {/* The features index is rendered from nav data rather than authored, so that
-            it and the sidebar cannot disagree (check 6). */}
+            it and the sidebar cannot disagree. */}
         {page.archetype === 'C' ? <FeaturesIndex /> : null}
 
         {/*
-          * The two interactive tools.
-          *
-          * They are pages with prose like any other — Basics, Customization,
-          * Limitations, API — and the instrument itself is mounted underneath, because
-          * it is forty controls and a generated snippet rather than a demo. Rendering
-          * them here rather than at routes of their own keeps them inside the docs
-          * shell, with a sidebar, a breadcrumb and a table of contents (EXCEPTIONS
-          * E-03).
-          */}
+         * The two interactive tools.
+         *
+         * They are pages with prose like any other — Basics, Customization,
+         * Limitations, API — and the instrument itself is mounted underneath, because
+         * it is forty controls and a generated snippet rather than a demo. Rendering
+         * them here rather than at routes of their own keeps them inside the docs
+         * shell, with a sidebar, a breadcrumb and a table of contents.
+         */}
         {page.pathname === `/${config.id}/demos/playground/` ? <Playground /> : null}
         {page.pathname === `/${config.id}/demos/theme-editor/` ? <ThemeEditor /> : null}
 
@@ -122,7 +114,7 @@ export function DocsPage() {
 }
 
 /**
- * Per-page feedback (PPDS §7.3).
+ * Per-page feedback.
  *
  * Records the answer locally and says thank you. There is no analytics endpoint to send
  * it to, and inventing one would be worse than being honest about where it goes.
@@ -141,10 +133,20 @@ function Feedback({ pathname }: { pathname: string }) {
   return (
     <div className="feedback">
       <span>Was this page helpful?</span>
-      <button type="button" onClick={() => { answer(true); }}>
+      <button
+        type="button"
+        onClick={() => {
+          answer(true);
+        }}
+      >
         Yes
       </button>
-      <button type="button" onClick={() => { answer(false); }}>
+      <button
+        type="button"
+        onClick={() => {
+          answer(false);
+        }}
+      >
         No
       </button>
       <span id="feedback-status" role="status" aria-live="polite" />

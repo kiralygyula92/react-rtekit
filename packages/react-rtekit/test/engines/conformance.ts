@@ -5,7 +5,7 @@ import type { EditorEngine, EngineHandle, EngineMountOptions } from '../../src/t
 /**
  * The `EngineHandle` contract, as executable tests.
  *
- * Written because ADR-006 asks for it: replacing the engine is only a contained piece of
+ * Replacing the engine is only a contained piece of
  * work if "contained" has a definition. Without this, a second adapter is finished when
  * somebody decides it looks finished, and every disagreement about behaviour is settled
  * by reading whichever engine happens to ship — which makes that engine the

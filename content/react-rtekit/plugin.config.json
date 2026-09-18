@@ -1,5 +1,4 @@
 {
-  "$schema": "../../docs/ppds/plugin-site.schema.json",
   "id": "react-rtekit",
   "name": "React RTE Kit",
   "tagline": "A production-grade React rich-text editor you can actually own.",
@@ -40,15 +39,33 @@
     "Developer tools"
   ],
   "sections": [
-    { "id": "getting-started" },
-    { "id": "features" },
-    { "id": "demos" },
-    { "id": "reference" },
-    { "id": "customization" },
-    { "id": "guides" },
-    { "id": "integrations" },
-    { "id": "migration" },
-    { "id": "discover-more" }
+    {
+      "id": "getting-started"
+    },
+    {
+      "id": "features"
+    },
+    {
+      "id": "demos"
+    },
+    {
+      "id": "reference"
+    },
+    {
+      "id": "customization"
+    },
+    {
+      "id": "guides"
+    },
+    {
+      "id": "integrations"
+    },
+    {
+      "id": "migration"
+    },
+    {
+      "id": "discover-more"
+    }
   ],
   "referenceSource": {
     "kind": "typescript-declarations",

@@ -3,7 +3,7 @@
  *
  * Both frontends — the browser's `DOMParser` and the in-house tokenizer used on the
  * server — produce this shape, so the sanitizer and the interop parsers have exactly
- * one code path and cannot diverge between environments (ADR-003).
+ * one code path and cannot diverge between environments.
  *
  * @module
  */

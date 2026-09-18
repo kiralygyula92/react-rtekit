@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
@@ -6,20 +5,19 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 /**
- * Phase 4 — generates the reference from the package's own source of truth.
+ * Generates the API reference from the package's own source of truth.
  *
  * Inputs, in order of authority:
  *   packages/react-rtekit/api.json   TypeDoc's output, from the TypeScript declarations
  *   react-rtekit/meta                the runtime metadata, for the enumerable catalogues
  *
- * Outputs, per PPDS §8.4/§8.5:
+ * Outputs:
  *   {symbol}.schema.json   structure — always overwritten
  *   {symbol}.strings.json  prose — only ever gains keys, never overwritten
  *   index.json             every symbol, its page, and its usedBy back-links
- *   checksums.json         so conformance check 10 can detect a hand-edited schema
  *
- * The split is P6: structure and prose in separate files so regeneration and translation
- * never fight. The addition is EXCEPTIONS E-07 — on first write, each prose key is
+ * Structure and prose live in separate files so regeneration and translation never
+ * fight. On first write, each prose key is
  * *seeded* from the TSDoc comment that already exists and that `docs:check` already
  * enforces in strict mode. Retyping 507 descriptions by hand would lose the guarantee
  * that the docs and the signatures were written together. After seeding, the strings
@@ -39,28 +37,87 @@ const NS = '/react-rtekit';
  * Which reference page a symbol belongs on.
  *
  * Components, hooks and functions get a page each; the six enumerable catalogues get one
- * page each rather than 444 (EXCEPTIONS E-06 — PPDS §5.4 allows "one page per public
- * symbol *or settings group*", and a flat list of named options generated from one source
- * is a settings group in the strict sense).
+ * page each rather than 444 — a flat list of named options generated from one source is
+ * a settings group, and one page per group is what a reader can actually scan.
  */
 const PAGES = {
-  'rich-text-editor': { title: 'RichTextEditor', symbols: ['RichTextEditor', 'RichTextEditorProps'] },
-  'rte-content-view': { title: 'RteContentView', symbols: ['RteContentView', 'RteContentViewProps'] },
+  'rich-text-editor': {
+    title: 'RichTextEditor',
+    symbols: ['RichTextEditor', 'RichTextEditorProps'],
+  },
+  'rte-content-view': {
+    title: 'RteContentView',
+    symbols: ['RteContentView', 'RteContentViewProps'],
+  },
   'composable-parts': {
     title: 'Composable parts',
-    symbols: ['Rte', 'RteRoot', 'RteToolbar', 'RteContent', 'RteLabel', 'RteCounter', 'RteFooter', 'RteHelperText', 'RteErrorText', 'RtePortals'],
+    symbols: [
+      'Rte',
+      'RteRoot',
+      'RteToolbar',
+      'RteContent',
+      'RteLabel',
+      'RteCounter',
+      'RteFooter',
+      'RteHelperText',
+      'RteErrorText',
+      'RtePortals',
+    ],
   },
-  providers: { title: 'Providers', symbols: ['RteThemeProvider', 'RteLocaleProvider', 'RteDefaultsProvider'] },
+  providers: {
+    title: 'Providers',
+    symbols: ['RteThemeProvider', 'RteLocaleProvider', 'RteDefaultsProvider'],
+  },
   'use-editor': { title: 'useEditor', symbols: ['useEditor', 'UseEditorOptions'] },
   'editor-hooks': { title: 'Editor hooks', prefix: 'use' },
   'editor-instance': { title: 'EditorInstance', symbols: ['EditorInstance'] },
   serialization: {
     title: 'Serialization',
-    symbols: ['htmlToDocument', 'documentToHtml', 'documentToMarkdown', 'markdownToDocument', 'markdownToHtml', 'documentToText', 'isEmptyHtml'],
+    symbols: [
+      'htmlToDocument',
+      'documentToHtml',
+      'documentToMarkdown',
+      'markdownToDocument',
+      'markdownToHtml',
+      'documentToText',
+      'isEmptyHtml',
+    ],
   },
-  sanitize: { title: 'Sanitizer', symbols: ['sanitizeHtml', 'getProfile', 'resolveSanitizeConfig', 'mergeSanitizeConfig', 'checkUrl', 'normalizeUrl'] },
-  'plugin-api': { title: 'Plugin API', symbols: ['definePlugin', 'createToolbarItem', 'resolvePlugins', 'resolvePluginOrder', 'featuresOf', 'presets', 'plugins'] },
-  'theme-api': { title: 'Theme API', symbols: ['createTheme', 'lightTheme', 'darkTheme', 'classicTheme', 'compactTheme', 'borderedTheme', 'themes'] },
+  sanitize: {
+    title: 'Sanitizer',
+    symbols: [
+      'sanitizeHtml',
+      'getProfile',
+      'resolveSanitizeConfig',
+      'mergeSanitizeConfig',
+      'checkUrl',
+      'normalizeUrl',
+    ],
+  },
+  'plugin-api': {
+    title: 'Plugin API',
+    symbols: [
+      'definePlugin',
+      'createToolbarItem',
+      'resolvePlugins',
+      'resolvePluginOrder',
+      'featuresOf',
+      'presets',
+      'plugins',
+    ],
+  },
+  'theme-api': {
+    title: 'Theme API',
+    symbols: [
+      'createTheme',
+      'lightTheme',
+      'darkTheme',
+      'classicTheme',
+      'compactTheme',
+      'borderedTheme',
+      'themes',
+    ],
+  },
   /*
    * The exported types a consumer annotates with, as one page.
    *
@@ -71,10 +128,26 @@ const PAGES = {
   types: {
     title: 'Types',
     symbols: [
-      'EditorValue', 'EditorDocument', 'ChangeMeta', 'FormatState', 'SelectionInfo',
-      'RteTheme', 'RteSlots', 'RteHandlers', 'RteLocalization', 'RteIcons',
-      'RtePlugin', 'CommandId', 'ToolbarItemSpec', 'SanitizeConfig', 'SanitizeProfileName',
-      'UploadHandler', 'ImageAttrs', 'LinkAttrs', 'TableOptions', 'FindOptions',
+      'EditorValue',
+      'EditorDocument',
+      'ChangeMeta',
+      'FormatState',
+      'SelectionInfo',
+      'RteTheme',
+      'RteSlots',
+      'RteHandlers',
+      'RteLocalization',
+      'RteIcons',
+      'RtePlugin',
+      'CommandId',
+      'ToolbarItemSpec',
+      'SanitizeConfig',
+      'SanitizeProfileName',
+      'UploadHandler',
+      'ImageAttrs',
+      'LinkAttrs',
+      'TableOptions',
+      'FindOptions',
     ],
   },
 };
@@ -87,12 +160,17 @@ const PAGES = {
  * once: change a default and the page keeps quoting the old one forever.
  *
  * Everything without the flag keeps the normal contract — seeded once, then owned by the
- * strings file (E-07).
+ * strings file.
  */
 const CATALOGUES = {
   slots: { title: 'Slot catalogue', field: 'slots' },
   'toolbar-items': { title: 'Toolbar items', field: 'toolbarItems' },
-  'theme-tokens': { title: 'Theme tokens', field: 'tokens', derived: true, describe: describeToken },
+  'theme-tokens': {
+    title: 'Theme tokens',
+    field: 'tokens',
+    derived: true,
+    describe: describeToken,
+  },
   icons: { title: 'Icon set', field: 'icons' },
   'localization-keys': {
     title: 'Localization keys',
@@ -147,7 +225,10 @@ function commentText(comment) {
   for (const tag of comment.blockTags ?? []) {
     if (tag.tag === '@remarks') parts.push(...tag.content);
   }
-  return parts.map((part) => part.text ?? '').join('').trim();
+  return parts
+    .map((part) => part.text ?? '')
+    .join('')
+    .trim();
 }
 
 /** A type, printed the way a reader would write it. */
@@ -233,7 +314,6 @@ function defaultTagOf(comment) {
   return text === '' ? undefined : text;
 }
 
-
 /**
  * Which entry point actually exports a symbol.
  *
@@ -281,7 +361,9 @@ const symbols = new Map();
 for (const [page, spec] of Object.entries(PAGES)) {
   const wanted = spec.symbols
     ? all.filter(({ node }) => spec.symbols.includes(node.name))
-    : all.filter(({ node }) => spec.prefix && node.name.startsWith(spec.prefix) && node.kind === 64);
+    : all.filter(
+        ({ node }) => spec.prefix && node.name.startsWith(spec.prefix) && node.kind === 64,
+      );
 
   for (const { node } of wanted) {
     if (symbols.has(node.name)) continue;
@@ -291,7 +373,13 @@ for (const [page, spec] of Object.entries(PAGES)) {
       schema: {
         name: node.name,
         kind:
-          node.kind === 256 ? 'interface' : node.kind === 64 ? 'function' : node.kind === 2097152 ? 'type' : 'variable',
+          node.kind === 256
+            ? 'interface'
+            : node.kind === 64
+              ? 'function'
+              : node.kind === 2097152
+                ? 'type'
+                : 'variable',
         imports: [importFor(node.name)],
         options: optionsOf(node),
         filename: node.sources?.[0]?.fileName ?? '',
@@ -305,7 +393,10 @@ for (const [page, spec] of Object.entries(PAGES)) {
         optionDescriptions: Object.fromEntries(
           (node.children ?? [])
             .filter((child) => child.kind === 1024 || child.kind === 2048)
-            .map((child) => [child.name, commentText(child.signatures?.[0]?.comment ?? child.comment)]),
+            .map((child) => [
+              child.name,
+              commentText(child.signatures?.[0]?.comment ?? child.comment),
+            ]),
         ),
       },
     });
@@ -326,7 +417,13 @@ for (const [page, spec] of Object.entries(CATALOGUES)) {
       options: Object.fromEntries(
         entries.map((entry) => {
           const key = typeof entry === 'string' ? entry : entry.name;
-          return [key, { type: { name: typeof entry === 'string' ? 'string' : (entry.type ?? 'entry') }, required: false }];
+          return [
+            key,
+            {
+              type: { name: typeof entry === 'string' ? 'string' : (entry.type ?? 'entry') },
+              required: false,
+            },
+          ];
         }),
       ),
       filename: `src/meta.ts`,
@@ -366,7 +463,6 @@ for (const file of existsSync(here) ? await readdir(here) : []) {
   existingStrings.set(file, JSON.parse(await readFile(path.join(here, file), 'utf8')));
 }
 
-const checksums = {};
 const index = {};
 let seeded = 0;
 let preserved = 0;
@@ -376,15 +472,15 @@ for (const [name, record] of symbols) {
   const schemaFile = `${slug}.schema.json`;
   const stringsFile = `${slug}.strings.json`;
 
-  // Structure: always overwritten, and checksummed so a hand-edit fails CI.
+  // Structure: always overwritten. A hand-edit fails CI, whose regenerate-and-diff
+  // rewrites this file from the declarations and finds the difference.
   const schemaBody = `${JSON.stringify(record.schema, null, 2)}\n`;
   await writeFile(path.join(here, schemaFile), schemaBody, 'utf8');
-  checksums[schemaFile] = createHash('sha256').update(schemaBody).digest('hex');
 
   // Prose: only ever gains keys. An existing value is never replaced, whatever the
-  // TSDoc now says — that is the whole point of the split (P6).
+  // TSDoc now says — that is the whole point of the split.
   //
-  // `||`, not `??`: E-07 writes an empty key on first sight of a symbol, and an empty
+  // `||`, not `??`: seeding writes an empty key on first sight of a symbol, and an empty
   // string is not nullish, so `??` kept the placeholder forever and no TSDoc summary
   // written afterwards ever reached the page. An empty description is a placeholder,
   // not an editorial decision; anything non-empty is still untouchable.
@@ -417,7 +513,6 @@ for (const [name, record] of symbols) {
 }
 
 await writeFile(path.join(here, 'index.json'), `${JSON.stringify(index, null, 2)}\n`, 'utf8');
-await writeFile(path.join(here, 'checksums.json'), `${JSON.stringify(checksums, null, 2)}\n`, 'utf8');
 
 // ── the playground's controls, from the same schema ──────────────────────────
 /*
@@ -428,17 +523,33 @@ await writeFile(path.join(here, 'checksums.json'), `${JSON.stringify(checksums, 
  * new prop appear in it without anyone remembering to add it.
  */
 const GROUPS = [
-  ['Marks', (name) => /^enable(Bold|Italic|Underline|Strike|Code|SubSup|ClearFormatting)$/.test(name)],
-  ['Blocks', (name) => /^enable(Headings|Lists|CheckList|Blockquote|CodeBlock|HorizontalRule)$/.test(name)],
+  [
+    'Marks',
+    (name) => /^enable(Bold|Italic|Underline|Strike|Code|SubSup|ClearFormatting)$/.test(name),
+  ],
+  [
+    'Blocks',
+    (name) => /^enable(Headings|Lists|CheckList|Blockquote|CodeBlock|HorizontalRule)$/.test(name),
+  ],
   ['Insert', (name) => /^enable(Links|Images|Tables|Emoji|Mentions|MergeTags)$/.test(name)],
-  ['Typography', (name) => /^enable(Color|BackgroundColor|FontFamily|FontSize|Align|Indent)$/.test(name)],
-  ['Tools', (name) => /^enable(History|MarkdownShortcuts|FindReplace|SourceView|Fullscreen|WordCount)$/.test(name)],
+  [
+    'Typography',
+    (name) => /^enable(Color|BackgroundColor|FontFamily|FontSize|Align|Indent)$/.test(name),
+  ],
+  [
+    'Tools',
+    (name) =>
+      /^enable(History|MarkdownShortcuts|FindReplace|SourceView|Fullscreen|WordCount)$/.test(name),
+  ],
   ['Toolbar', (name) => /^toolbar/i.test(name) || name === 'readOnlyToolbar'],
   ['Value & sanitization', (name) => /sanitize|paste|autoLink|Protocol|DataUrl/i.test(name)],
   ['Limits & validation', (name) => /maxLength|required|pastePrompt/i.test(name)],
   ['State', (name) => /^(disabled|readOnly|fullscreen|defaultFullscreen|autoGrow)$/.test(name)],
   ['Uploads', (name) => /upload/i.test(name)],
-  ['Accessibility & i18n', (name) => /^(dir|lang|tabIndex|spellCheck|hideLabel|escapeExitsEditor)$/.test(name)],
+  [
+    'Accessibility & i18n',
+    (name) => /^(dir|lang|tabIndex|spellCheck|hideLabel|escapeExitsEditor)$/.test(name),
+  ],
   ['Appearance', (name) => /^(unstyled|className|contentClassName|id)$/.test(name)],
 ];
 
@@ -498,7 +609,7 @@ await writeFile(
 );
 
 /*
- * Missing prose is a warning, not a failure (PPDS §8.5).
+ * Missing prose is a warning, not a failure.
  *
  * A symbol whose TSDoc says nothing worth seeding still gets a strings file with an
  * empty key, ready for someone to fill in; the build does not stop for it.

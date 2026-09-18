@@ -9,7 +9,7 @@ import {
 } from './nodes.js';
 
 /**
- * The in-house HTML parser (ADR-003).
+ * The in-house HTML parser.
  *
  * Small, dependency-free and environment-independent. It is deliberately *stricter*
  * than a browser: raw-text elements swallow their content as text, unbalanced tags are
@@ -59,14 +59,17 @@ function skipBogus(state: ParserState): void {
  * Duplicate names keep the *first* value, matching the HTML spec — taking the last
  * would let `<a href="safe" href="javascript:…">` slip past a first-match check.
  */
-function readAttributes(state: ParserState): { attrs: Record<string, string>; selfClosing: boolean } {
+function readAttributes(state: ParserState): {
+  attrs: Record<string, string>;
+  selfClosing: boolean;
+} {
   const attrs: Record<string, string> = {};
   let selfClosing = false;
 
   for (;;) {
     while (/\s/.test(peek(state))) state.pos += 1;
     const ch = peek(state);
-    if (ch === '' ) break;
+    if (ch === '') break;
     if (ch === '>') {
       state.pos += 1;
       break;

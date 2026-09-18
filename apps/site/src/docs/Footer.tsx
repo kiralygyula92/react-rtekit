@@ -2,12 +2,10 @@ import { Link } from 'react-router';
 import { config } from './manifest';
 
 /**
- * The shared footer (PPDS §2.3).
+ * The shared footer.
  *
- * Four columns, and the column names are forbidden variation under §12 — they are the
- * same on every plugin site in the portfolio. "Products" holds one entry here because
- * there is one product; the column stays so the next plugin inherits the same footer
- * rather than a fork of it.
+ * Four columns. "Products" holds one entry here because there is one product; the
+ * column stays so the next plugin inherits the same footer rather than a fork of it.
  *
  * @module
  */

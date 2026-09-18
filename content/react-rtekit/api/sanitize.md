@@ -88,6 +88,6 @@ This symbol takes no options.
 - [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L284)
 - [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134)
 - [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L278)
-- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L268)
+- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L275)
 
 <!-- generated:reference:end -->

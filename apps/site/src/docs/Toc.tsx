@@ -5,7 +5,7 @@ import type { PageHeading } from './manifest';
  * The "on this page" rail.
  *
  * Generated from the page's own H2s and H3s, with the section nearest the top of the
- * viewport marked active (PPDS §7.4). An `IntersectionObserver` rather than a scroll
+ * viewport marked active. An `IntersectionObserver` rather than a scroll
  * handler: the browser does the work off the main thread, and a long reference page has
  * two hundred headings to track.
  *

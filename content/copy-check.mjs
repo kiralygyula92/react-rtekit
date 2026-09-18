@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url';
 /**
  * Proofreads the prose, which no other check in this repo looks at.
  *
- * `validate.mjs` checks that the nav, the URLs and the config agree; `conformance.mjs`
- * checks the pages against PPDS. Both are happy with a page whose description is
- * missing, whose headings are Title Case on one page and sentence case on the next, or
- * that says "color" in a body of text that says "colour" everywhere else. 123 pages
- * written over many sessions drift that way by default.
+ * `build.mjs` checks that the pages are well formed: links resolve, headings nest, every
+ * page has a description. It is happy with headings that are Title Case on one page and
+ * sentence case on the next, or a page that says "color" in a body of text that says
+ * "colour" everywhere else — and pages written over many sessions drift that way by
+ * default.
  *
  * Every check runs on *prose*: front matter, fenced code, indented code, inline code and
  * link targets are removed first, so an identifier named `color` never votes on how the
@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
  *   - Sentence case for titles and headings.
  *   - A description that is one sentence and ends in a full stop.
  *
- * Usage: node content/copy-check.mjs [--report qa/copy-report.md]
+ * Usage: node content/copy-check.mjs [--report <file.md>]
  */
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -224,9 +224,8 @@ for (const file of files) {
     if (front.description && !/[.?!]$/.test(front.description)) {
       add(file, 1, 'description', 'description does not end in a full stop');
     }
-    // 200 is the schema's own limit for a nav description (plugin-site.schema.json
-    // $defs/navNode), and the same string is reused in meta and llms.txt (P10), so it
-    // is an error rather than a preference. The floor is this project's own.
+    // 200 at most: the same string is the nav tooltip, the meta description and the
+    // llms.txt line, so an overlong one is an error rather than a preference.
     if (front.description && front.description.length > 200) {
       add(
         file,

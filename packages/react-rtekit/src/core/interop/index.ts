@@ -2,15 +2,11 @@ import { detectOfficeSource } from './office.js';
 import { looksLikeQuill } from './quill.js';
 
 /**
- * HTML interop (ADR-004).
+ * HTML interop.
  *
  * @module
  */
-export {
-  parseQuillMarkup,
-  looksLikeQuill,
-  DEFAULT_SIZE_MAP,
-} from './quill.js';
+export { parseQuillMarkup, looksLikeQuill, DEFAULT_SIZE_MAP } from './quill.js';
 export { cleanOfficeMarkup, detectOfficeSource } from './office.js';
 
 /** Where a clipboard payload came from. */

@@ -2,14 +2,11 @@ import { useEffect } from 'react';
 import { config, origin } from './manifest';
 
 /**
- * The metadata contract (PPDS §7.6).
+ * The metadata every page emits.
  *
- * Every tag below is derived from exactly one title and one description, which is the
- * whole of P10 — the same pair feeds the H1 subtitle, `<title>`, the meta description,
- * the OG card, the nav tooltip and the `llms.txt` line.
- *
- * The Phase 1 audit found none of this: no canonical on any page, no OG tag on any page,
- * and one description shared by all 81 pages, so check 20 could not pass anywhere.
+ * Every tag below is derived from exactly one title and one description — the same pair
+ * feeds the H1 subtitle, `<title>`, the meta description, the OG card, the nav tooltip
+ * and the `llms.txt` line, so they cannot disagree.
  *
  * @module
  */
@@ -62,7 +59,7 @@ export interface PageMetadata {
 export function useMetadata({ title, description, pathname, archetype }: PageMetadata): void {
   useEffect(() => {
     const full = pathname === `/${config.id}/` ? config.name : `${title} — ${config.name}`;
-    // Trailing slash is canonical (R4), and the canonical URL is absolute.
+    // Trailing slash is canonical, and the canonical URL is absolute.
     const url = `${ORIGIN}${pathname}`;
     const image = `${ORIGIN}/og/${pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'index'}.png`;
 
@@ -83,7 +80,7 @@ export function useMetadata({ title, description, pathname, archetype }: PageMet
     meta('name', 'twitter:description', description);
     meta('name', 'twitter:image', image);
 
-    // Version-scoped search, and the portfolio keys the standard asks every page to emit.
+    // Version-scoped search, and the plugin keys the site search indexes on.
     meta('name', 'search:language', 'en');
     meta('name', 'search:version', config.currentVersion);
     meta('name', 'plugin:id', config.id);

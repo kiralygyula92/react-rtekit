@@ -37,9 +37,8 @@ Rich-text editors fail in ways unit tests miss, so the weighting is deliberate
   cannot drive contenteditable, so a jsdom test that claims to is lying.
 - **Security** has its own CI job. Every change to `src/core/sanitize` or
   `src/core/interop` needs a corresponding fixture.
-- Every entry in [`docs/regressions.md`](docs/regressions.md) has a named regression
-  test (`R1`-`R26`). Do not remove one: each records a behaviour this library exists to
-  fix, and the name is the contract.
+- The regression tests `R1`-`R26` each record a behaviour this library exists to fix,
+  relative to a typical Quill wrapper. Do not remove one: the name is the contract.
 
 ## Definition of done
 
@@ -62,6 +61,7 @@ parity guarantee.
 
 ## Architecture
 
-Read the ADRs in [`docs/adr/`](docs/adr/) — they carry the reasoning behind the engine
-boundary, the sanitizer and the interop profiles. The one rule worth repeating here:
-nothing outside `src/engines/` may import Lexical.
+The editing engine is this project's own, behind the `EditorEngine` interface in
+`src/engines/`. The one rule worth repeating here: nothing outside `src/engines/` may
+depend on how the engine edits the document — only on that interface. It is what let the
+engine be replaced without the public API moving.

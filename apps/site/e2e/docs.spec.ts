@@ -47,13 +47,13 @@ test.describe('every page', () => {
 
       await browser.goto(page.pathname);
 
-      // Exactly one H1, carrying the page's own title (check 2).
+      // Exactly one H1, carrying the page's own title.
       const headings = browser.getByRole('heading', { level: 1 });
       await expect(headings).toHaveCount(1);
       await expect(headings).toBeVisible();
 
       // The description is on the page, in the metadata and in llms.txt, from one
-      // field (P10). This is the visible third of that.
+      // field. This is the visible third of that.
       await expect(browser.locator('.docs-article__lead')).toHaveText(page.description);
 
       expect(errors).toEqual([]);
@@ -63,7 +63,7 @@ test.describe('every page', () => {
 
 test.describe('the metadata contract', () => {
   for (const page of SAMPLE) {
-    test(`${page.pathname} emits the §7.6 tag set`, async ({ page: browser }) => {
+    test(`${page.pathname} emits the full metadata tag set`, async ({ page: browser }) => {
       await browser.goto(page.pathname);
       await expect(browser.getByRole('heading', { level: 1 })).toBeVisible();
 

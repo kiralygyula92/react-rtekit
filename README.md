@@ -32,26 +32,25 @@ export function MessageField() {
 }
 ```
 
-[Documentation](https://kiralygyula92.github.io/react-rtekit) ·
-[Examples](https://kiralygyula92.github.io/react-rtekit/examples) ·
-[Playground](https://kiralygyula92.github.io/react-rtekit/playground) ·
-[API reference](https://kiralygyula92.github.io/react-rtekit/api)
+[Documentation](https://react-rtekit.vercel.app/react-rtekit/) ·
+[Examples](https://react-rtekit.vercel.app/react-rtekit/all-features/) ·
+[Playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) ·
+[API reference](https://react-rtekit.vercel.app/react-rtekit/api/)
 
 ## Why
 
 - **Sanitized at every boundary.** The initial value, every paste, every drop, every
   programmatic insert and the output all pass an allowlist sanitizer with four profiles
   and hard rules no configuration can switch off. There is no code path that renders
-  HTML the sanitizer has not seen ([ADR-003](docs/adr/003-sanitizer.md)).
+  HTML the sanitizer has not seen.
 - **Your stored HTML keeps working.** Interop profiles read legacy Quill markup —
   `ql-align-*`, `data-list`, indent classes — and emit standards-compliant,
   Quill-compatible or e-mail-safe HTML, so existing content needs no migration in
-  either direction ([ADR-004](docs/adr/004-interop-profiles.md)).
+  either direction.
 - **An engine adapter, not a wrapper.** An `EditorEngine` interface owns the document
   layer, and the engine behind it is this project's own. Nothing above
   `src/engines/` knows how the document is edited, which is what let the
-  engine be replaced without the public API moving
-  ([ADR-006](docs/adr/006-an-in-house-engine.md)).
+  engine be replaced without the public API moving.
 - **Emptiness is a first-class concept.** `isEmpty()` ignores `<p><br></p>`, and length
   limits count text rather than markup — so `required` actually means required, and a
   bold word does not eat your character budget.
@@ -97,17 +96,14 @@ carries no engine at all.
 
 ## Documentation
 
-- [Guides](https://kiralygyula92.github.io/react-rtekit/docs) — getting started, value
-  and formats, forms, sanitization, HTML interop, merge tags, the toolbar, plugins,
-  slots and handlers, theming, uploads, accessibility, localization, performance, SSR,
-  and migrating off a Quill wrapper.
-- [API reference](https://kiralygyula92.github.io/react-rtekit/api) — generated from
-  TypeDoc and the library's runtime metadata, so the lists cannot drift.
-- [`docs/adr/`](docs/adr/) — why the engine sits behind an adapter, why the sanitizer
-  is in-house, and why legacy markup is handled with interop profiles rather than a
-  second engine.
-- [`docs/regressions.md`](docs/regressions.md) — the twenty-six behaviours this library
-  fixes relative to a typical Quill wrapper, each one a named regression test.
+- [Guides](https://react-rtekit.vercel.app/react-rtekit/guides/) — getting started, value and formats, forms,
+  sanitization, HTML interop, merge tags, the toolbar, plugins, slots and handlers,
+  theming, uploads, accessibility, localization, performance, SSR, and migrating off a
+  Quill wrapper.
+- [API reference](https://react-rtekit.vercel.app/react-rtekit/api/) — generated from TypeDoc and the library's runtime
+  metadata, so the lists cannot drift.
+- [AI context](https://react-rtekit.vercel.app/react-rtekit/getting-started/ai-context/) — the whole documentation and the
+  source of every example in one Markdown file, for AI coding agents.
 
 ## Packages
 

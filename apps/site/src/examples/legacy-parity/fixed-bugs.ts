@@ -1,5 +1,5 @@
 /**
- * The 26 defects of the legacy wrapper, as listed in `docs/regressions.md`.
+ * The 26 defects of the legacy wrapper, each one a named regression test (`R1`-`R26`).
  *
  * The parity page shows this list behind the "show differences" toggle: the visuals
  * match the old editor, and every entry here is a way the behaviour deliberately

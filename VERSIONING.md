@@ -14,17 +14,17 @@ A change to any of the following is a **major** release.
 
 | Surface | Where it is enumerated |
 |---|---|
-| `<RichTextEditor>` props, and their defaults | [`/api/rich-text-editor`](https://kiralygyula92.github.io/react-rtekit/api/rich-text-editor) |
-| `EditorInstance` methods and their signatures | [`/api/editor-instance`](https://kiralygyula92.github.io/react-rtekit/api/editor-instance) |
-| Command ids and their payloads | [`/api/commands`](https://kiralygyula92.github.io/react-rtekit/api/commands) |
-| Slot names and the props each slot receives | [`/api/slots`](https://kiralygyula92.github.io/react-rtekit/api/slots) |
-| Handler names and their context objects | [`/api/handlers`](https://kiralygyula92.github.io/react-rtekit/api/handlers) |
-| The plugin API: `definePlugin`, node and mark specs, serializer and sanitizer rules | [`/api/plugins`](https://kiralygyula92.github.io/react-rtekit/api/plugins) |
-| Theme tokens and the CSS variables they produce | [`/api/theme-tokens`](https://kiralygyula92.github.io/react-rtekit/api/theme-tokens) |
-| Localization keys | [`/api/localization`](https://kiralygyula92.github.io/react-rtekit/api/localization) |
+| `<RichTextEditor>` props, and their defaults | [`/api/rich-text-editor`](https://react-rtekit.vercel.app/react-rtekit/api/rich-text-editor/) |
+| `EditorInstance` methods and their signatures | [`/api/editor-instance`](https://react-rtekit.vercel.app/react-rtekit/api/editor-instance/) |
+| Command ids and their payloads | [`/api/commands`](https://react-rtekit.vercel.app/react-rtekit/api/commands/) |
+| Slot names and the props each slot receives | [`/api/slots`](https://react-rtekit.vercel.app/react-rtekit/api/slots/) |
+| Handler names and their context objects | [`/api/handlers`](https://react-rtekit.vercel.app/react-rtekit/api/handlers/) |
+| The plugin API: `definePlugin`, node and mark specs, serializer and sanitizer rules | [`/api/plugins`](https://react-rtekit.vercel.app/react-rtekit/api/plugins/) |
+| Theme tokens and the CSS variables they produce | [`/api/theme-tokens`](https://react-rtekit.vercel.app/react-rtekit/api/theme-tokens/) |
+| Localization keys | [`/api/localization`](https://react-rtekit.vercel.app/react-rtekit/api/localization-keys/) |
 | CSS class names (`rte-*`) and data attributes (`data-*`) on the rendered elements | `styles.css` |
 | The exported entry points and what each one exports | `package.json#exports` |
-| The portable document shape (`EditorDocument`) and its `version` field | [`/api/types`](https://kiralygyula92.github.io/react-rtekit/api/types) |
+| The portable document shape (`EditorDocument`) and its `version` field | [`/api/types`](https://react-rtekit.vercel.app/react-rtekit/api/types/) |
 
 Those pages are generated from the library's own runtime metadata rather than written
 by hand, so the list cannot fall behind the implementation.
@@ -40,7 +40,7 @@ recorded in the theme source and in the parity example's "show differences" list
 
 - **Rendered HTML structure inside the content**, beyond the class names above. The
   engine decides how a paragraph is nested; that is what the engine adapter is for.
-- **The Lexical adapter's internals**, including anything reached through
+- **The engine's internals**, including anything reached through
   `editor.engine.native`. It is a documented escape hatch, and an escape hatch is not
   a contract.
 - **Anything marked `@internal`** in the TSDoc, which is excluded from the published

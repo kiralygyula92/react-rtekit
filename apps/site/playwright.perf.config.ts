@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * The performance budgets (09 §4), on their own.
+ * The performance budgets, on their own.
  *
  * A budget measured while seven other browsers compete for the same cores measures the
  * machine rather than the editor — the same typing run reports 7 ms alone and 20 ms

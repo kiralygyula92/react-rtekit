@@ -1600,7 +1600,7 @@ import { CodeBlock } from '../../components/CodeBlock';
  *
  * Load legacy Quill markup, edit it, and see what each profile writes. The point of
  * `quill-compatible` is a phased rollout: what this editor saves stays readable by
- * the old one, so both can run against the same column (ADR-004).
+ * the old one, so both can run against the same column.
  */
 
 const PROFILES: { name: HtmlProfile; summary: string }[] = [
@@ -7152,7 +7152,7 @@ This symbol takes no options.
 
 ## Source
 
-- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L412)
+- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L417)
 - [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L198)
 - [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307)
 - [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706)
@@ -7239,7 +7239,7 @@ This symbol takes no options.
 - [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L284)
 - [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134)
 - [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L278)
-- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L268)
+- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L275)
 
 ---
 
@@ -7318,7 +7318,7 @@ This symbol takes no options.
 - [featuresOf](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L91)
 - [presets](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L117)
 - [resolvePluginOrder](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L57)
-- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L202)
+- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L207)
 
 ---
 
@@ -9654,7 +9654,7 @@ If you have shipped something with it, [say so](https://github.com/kiralygyula92
 
 Discover more · https://react-rtekit.vercel.app/react-rtekit/discover-more/architecture/
 
-The decisions that shaped the package, each recorded as an ADR in the repository.
+The decisions that shaped the package, and the reasoning behind each.
 
 ## An engine adapter, not a wrapper
 
@@ -9677,8 +9677,6 @@ Reading legacy Quill markup as it is means adoption does not require a data migr
 ## Slots and middleware rather than configuration flags
 
 A flag anticipates a need; a slot does not have to. Forty-six replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.
-
-The ADRs are in [docs/adr](https://github.com/kiralygyula92/react-rtekit/tree/main/docs/adr).
 
 ---
 

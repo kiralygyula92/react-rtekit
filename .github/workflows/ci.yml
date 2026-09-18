@@ -72,33 +72,24 @@ jobs:
       - name: Fail on any undocumented public symbol
         run: pnpm docs:check
 
-  conformance:
-    name: Docs standard conformance
+  content:
+    name: Docs content
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: The nav, title and URL-map invariants
-        run: pnpm content:validate
       - name: The prose
         run: pnpm copy:check
-      - name: Recompile the content and the generated reference
+      - name: Recompile the content and the generated reference, and check it
         run: pnpm docs:json && pnpm content:reference && pnpm content
       - name: Fail if the generated reference or the content drifted
         run: git diff --exit-code -- content apps/site/src/content apps/site/public apps/site/vercel.json
-      - name: The 26 PPDS conformance checks
-        run: pnpm conformance
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: conformance-report
-          path: qa/conformance-report.md
 
   e2e:
     name: E2E and accessibility
@@ -116,8 +107,6 @@ jobs:
         run: pnpm exec playwright install --with-deps
       - name: Verify every redirect in a browser
         run: pnpm --filter @react-rtekit/site preview & sleep 6 && pnpm redirects:check
-      - name: The machine surface returns its own content type
-        run: pnpm conformance:served
       - name: Run Playwright
         # PRs run Chromium only; main runs all three engines plus mobile emulation.
         run: pnpm e2e
@@ -131,7 +120,7 @@ jobs:
           retention-days: 7
 
   # A job of its own: a timing budget measured on a machine that is also running eight
-  # browsers measures the machine (09 §4).
+  # browsers measures the machine.
   performance:
     name: Performance budgets
     runs-on: ubuntu-latest

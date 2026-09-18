@@ -7,7 +7,7 @@ import { defineConfig } from 'tsup';
 /**
  * Entry points that render React and therefore need the `"use client"` directive so
  * they work inside React Server Component graphs. `core` and `view` stay server-safe
- * (02 §8, 09 §6), so the directive is added per entry rather than as a global banner.
+ *, so the directive is added per entry rather than as a global banner.
  */
 const CLIENT_ENTRIES = ['index'];
 
@@ -39,7 +39,7 @@ export default defineConfig({
     // A pre-bundled file tree-shakes at chunk granularity, so a module that shares a
     // chunk with something the consumer does use cannot be dropped. Naming the large
     // UI modules here puts each in its own chunk, which is what lets a headless
-    // `useEditor` import leave the whole React chrome behind (09 §4).
+    // `useEditor` import leave the whole React chrome behind.
     'src/react/parts.tsx',
     'src/react/RichTextEditor.tsx',
     'src/react/plugins/FeatureUi.tsx',

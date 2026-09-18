@@ -7,8 +7,8 @@ import { Badge } from './Badge';
  * The documentation sidebar.
  *
  * Rendered from `nav.json` and nothing else: the order is editorial and reviewed like
- * code (N1), the titles come from the title map (N2), and every badge traces back to a
- * `plan` or `lifecycle` on the node (N4/P7). No component here decides what to show.
+ * code, the titles come from the title map, and every badge traces back to a `plan` or
+ * `lifecycle` on the node. No component here decides what to show.
  *
  * A section opens two ways — because the route is inside it, or because the reader
  * clicked it. It used to open only the first way, which made every section heading look

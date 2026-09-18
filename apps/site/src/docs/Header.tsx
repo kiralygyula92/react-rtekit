@@ -5,8 +5,8 @@ import { ThemeSwitch } from '../components/ThemeSwitch';
 /**
  * The docs header.
  *
- * Product name, version selector, search, repository, theme (PPDS §2.2). No mega-menus:
- * this site has one surface, so there is nothing to navigate between (EXCEPTIONS E-01).
+ * Product name, version selector, search, repository, theme. No mega-menus: this site
+ * has one surface, so there is nothing to navigate between.
  * The name links to the docs root rather than to a marketing home, for the same reason.
  *
  * @module

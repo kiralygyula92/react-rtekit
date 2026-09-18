@@ -10,7 +10,7 @@ import { SearchDialog } from '../components/SearchDialog';
  *
  * Full-bleed rather than a centred column: the sidebar and the rail are fixed, the
  * article takes what is left, and the page fills the window at any width. One surface,
- * so there is no marketing chrome to switch between (EXCEPTIONS E-01).
+ * so there is no marketing chrome to switch between.
  *
  * @module
  */

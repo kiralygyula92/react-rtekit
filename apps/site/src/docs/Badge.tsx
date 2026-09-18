@@ -1,11 +1,11 @@
 import { config } from './manifest';
 
 /**
- * The badge vocabulary (PPDS §7.1), and the only component that renders one.
+ * The badge vocabulary, and the only component that renders one.
  *
  * Exactly six labels, no synonyms. A badge's state comes from a nav node's `plan` or
  * `lifecycle` and from nowhere else, so the sidebar, the page heading and any feature
- * list cannot disagree about it (P7). A page that wants a badge declares it in nav data.
+ * list cannot disagree about it. A page that wants a badge declares it in nav data.
  *
  * At 1.0.0 nothing carries one: every capability shipped in the same release, so nothing
  * is `New` relative to anything, and a single free tier means no tier gate. The

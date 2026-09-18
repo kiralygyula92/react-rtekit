@@ -1,14 +1,12 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * The eight required user flows (PPDS §9).
+ * The user flows through the docs, end to end.
  *
  * Each one is walked as a clickable path rather than asserted on by URL, because the
  * requirement is that the flow is *completable without a dead end* — a page that exists
  * but that nothing links to satisfies a URL check and fails a reader. Two of the eight
  * are not applicable and say why.
- *
- * The click path each test takes is what `qa/flow-walkthroughs.md` records.
  */
 
 /** Clicks a link by its visible text, inside the article rather than the chrome. */
@@ -17,7 +15,7 @@ async function follow(page: Page, name: string | RegExp): Promise<void> {
 }
 
 test('F1 evaluate: docs overview → features index → a capability', async ({ page }) => {
-  // No marketing surface and no pricing (EXCEPTIONS E-01, E-02), so the flow starts at
+  // No marketing surface and no pricing, so the flow starts at
   // the docs root and ends where a reader decides to install rather than to buy.
   await page.goto('/react-rtekit/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Overview');
@@ -94,12 +92,11 @@ test('F5 upgrade: version selector → versions → migration → changelog', as
 
 test('F6 convert is not applicable', () => {
   /*
-   * PPDS §9 F6 is the paywall flow: a tier badge on a capability leads to the tier
-   * explanation, then to pricing, then to a purchase. This package is MIT licensed and
-   * has one free tier, so there is no badge, no pricing page and nothing to convert to.
-   * Recorded in EXCEPTIONS.md as E-02 rather than left as an unexplained gap.
+   * F6 is the paywall flow: a tier badge on a capability leads to the tier explanation,
+   * then to pricing, then to a purchase. This package is MIT licensed and has one free
+   * tier, so there is no badge, no pricing page and nothing to convert to.
    */
-  test.skip(true, 'EXCEPTIONS E-02: single free tier, MIT licensed — no paywall exists');
+  test.skip(true, 'single free tier, MIT licensed — no paywall exists');
 });
 
 test('F7 support: any docs page → support → a channel', async ({ page }) => {
@@ -132,7 +129,7 @@ test('F8 agent: llms.txt → a .md twin → the whole corpus', async ({ page }) 
   // And the whole corpus in one read: the AI-context file llms.txt points to before its
   // lists. Every page is in it, and every live demo has become the source behind it — a
   // leftover ```demo fence would be a demo an agent can see the name of and not the code.
-  const full = text.match(/\]\((\/[^)\s]*llms-full\.md)\)/)?.[1];
+  const full = /\]\((\/[^)\s]*llms-full\.md)\)/.exec(text)?.[1];
   expect(full, 'llms.txt links the full file').toBeTruthy();
   const corpus = await page.goto(full!);
   const all = (await corpus?.text()) ?? '';

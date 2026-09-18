@@ -158,7 +158,9 @@ describe('the colour picker (R14, R15)', () => {
     });
 
     await user.keyboard('{ArrowRight}');
-    expect(document.activeElement).toBe(within(dialog).getByRole('radio', { name: 'Colour #FF0000' }));
+    expect(document.activeElement).toBe(
+      within(dialog).getByRole('radio', { name: 'Colour #FF0000' }),
+    );
   });
 
   it('applies a swatch to the selection', async () => {
@@ -271,7 +273,7 @@ describe('field chrome', () => {
 });
 
 describe('presets', () => {
-  it('classic keeps quill-compatible output by default (ADR-004)', async () => {
+  it('classic keeps quill-compatible output by default', async () => {
     const { editor } = await mount({
       preset: 'classic',
       defaultValue: '<ul><li>one</li></ul>',

@@ -93,7 +93,7 @@ This symbol takes no options.
 
 ## Source
 
-- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L412)
+- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L417)
 - [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L198)
 - [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307)
 - [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706)

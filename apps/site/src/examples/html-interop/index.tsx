@@ -14,7 +14,7 @@ import { CodeBlock } from '../../components/CodeBlock';
  *
  * Load legacy Quill markup, edit it, and see what each profile writes. The point of
  * `quill-compatible` is a phased rollout: what this editor saves stays readable by
- * the old one, so both can run against the same column (ADR-004).
+ * the old one, so both can run against the same column.
  */
 
 const PROFILES: { name: HtmlProfile; summary: string }[] = [

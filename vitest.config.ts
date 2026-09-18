@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 const fixtures = fileURLToPath(new URL('./packages/react-rtekit/test/fixtures', import.meta.url));
 
 /**
- * Test projects (09 §1).
+ * Test projects.
  *
  * `core` runs in node against the headless core; `react` runs in jsdom for component
  * behaviour. jsdom cannot do real contenteditable editing, so anything involving a
@@ -22,7 +22,7 @@ export default defineConfig({
           include: [
             'src/core/**/*.test.ts',
             'src/themes/**/*.test.ts',
-            // The native engine's model layer is deliberately DOM-free (ADR-006 stage 2),
+            // The native engine's model layer is deliberately DOM-free,
             // and running it in the node project is what proves that rather than asserts
             // it. Its DOM-bound parts are named `*.dom.test.ts` and run under `react`.
             'src/engines/native/**/*.test.ts',
@@ -91,8 +91,18 @@ export default defineConfig({
        * They still sit close enough underneath to catch a regression.
        */
       thresholds: {
-        'packages/react-rtekit/src/core/**': { lines: 90, branches: 85, functions: 85, statements: 90 },
-        'packages/react-rtekit/src/react/**': { lines: 81, branches: 75, functions: 68, statements: 81 },
+        'packages/react-rtekit/src/core/**': {
+          lines: 90,
+          branches: 85,
+          functions: 85,
+          statements: 90,
+        },
+        'packages/react-rtekit/src/react/**': {
+          lines: 81,
+          branches: 75,
+          functions: 68,
+          statements: 81,
+        },
       },
     },
   },

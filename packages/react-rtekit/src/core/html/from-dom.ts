@@ -6,7 +6,7 @@ import type { HtmlElement, HtmlNode } from './nodes.js';
  * Parsing with the browser means we sanitize *the browser's own interpretation* of the
  * input rather than our approximation of it, which is the safest model for untrusted
  * markup. The server falls back to the in-house tokenizer, and both feed the same
- * sanitizer (ADR-003).
+ * sanitizer.
  *
  * @module
  */

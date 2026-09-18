@@ -3,7 +3,7 @@ import { ROOT_KEY } from './tree.js';
 import { type RenderIndex, renderNode, signatureOf } from './render.js';
 
 /**
- * Model diff to DOM — stage 3b of ADR-006.
+ * Model diff to DOM.
  *
  * The whole reason an editor needs a reconciler rather than re-rendering: replacing a
  * DOM node destroys any selection inside it. Typing a character would move the caret back

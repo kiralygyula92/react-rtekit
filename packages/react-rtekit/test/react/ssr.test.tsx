@@ -79,7 +79,12 @@ describe('server rendering the editor', () => {
     // A Markdown or JSON value needs a converter the server entry does not carry, so
     // the field renders empty rather than wrong.
     const html = renderToString(
-      <RichTextEditor preset="standard" label="Message" valueFormat="markdown" defaultValue="# Title" />,
+      <RichTextEditor
+        preset="standard"
+        label="Message"
+        valueFormat="markdown"
+        defaultValue="# Title"
+      />,
     );
 
     expect(html).not.toContain('# Title');
@@ -87,7 +92,9 @@ describe('server rendering the editor', () => {
   });
 
   it('renders the content through the serializer when given an ssrValue', () => {
-    const html = renderToString(<ComposedField value="<p>Quarterly <strong>summary</strong></p>" />);
+    const html = renderToString(
+      <ComposedField value="<p>Quarterly <strong>summary</strong></p>" />,
+    );
 
     expect(html).toContain('Quarterly');
     expect(html).toContain('<strong>summary</strong>');
@@ -155,7 +162,7 @@ describe('module scope is server-safe', () => {
   });
 
   it('parses and serializes on the server with no DOMParser', () => {
-    // ADR-003: the in-house tokenizer is what makes this work where `DOMParser` is not
+    // The in-house tokenizer is what makes this work where `DOMParser` is not
     // defined, which is every Node runtime older than the DOM shims.
     const original = globalThis.DOMParser;
     // @ts-expect-error -- deleting a global is the point of the test

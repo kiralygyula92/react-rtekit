@@ -8,7 +8,7 @@ import type {
 } from '../../types/document.js';
 
 /**
- * The live document tree — stage 2 of ADR-006.
+ * The live document tree.
  *
  * `EditorDocument` is the shape everything outside the engine speaks: a plain nested
  * tree, ideal for storing, diffing in a test and handing to a serializer. It is the wrong

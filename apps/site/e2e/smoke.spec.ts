@@ -16,7 +16,7 @@ const ROUTES = [
   { path: '/react-rtekit/discover-more/changelog/', heading: /changelog/i },
 ];
 
-/** Legacy URLs, which must land somewhere rather than 404 (PPDS R6, P12). */
+/** Legacy URLs, which must land somewhere rather than 404. */
 const REDIRECTS: [string, string][] = [
   ['/', '/react-rtekit/'],
   ['/docs/guides/getting-started', '/react-rtekit/getting-started/usage/'],

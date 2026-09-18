@@ -37,7 +37,7 @@ function EmailForm() {
 implementation this library replaces took a required `setValue` prop from
 react-hook-form and could not be used anywhere else. Binding the editor to a form is
 about twenty lines — the
-[forms guide](https://kiralygyula92.github.io/react-rtekit/docs/guides/forms) shows the
+[forms guide](https://react-rtekit.vercel.app/react-rtekit/forms/) shows the
 same thing done with Formik — so the adapter is a convenience, not a dependency.
 
 ## What it does that a hand-rolled binding forgets

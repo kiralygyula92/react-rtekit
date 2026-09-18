@@ -20,9 +20,9 @@ const LEGACY = redirects as Record<string, string>;
 /**
  * Sends a legacy URL to its mapped target.
  *
- * PPDS R6 and operating rule 2: no URL is ever deleted, and the mapping is the one in
- * `migration/url-map.csv` — this reads the generated table rather than repeating it, so
- * the redirect the site performs and the redirect the map promises cannot diverge.
+ * No URL is ever deleted, only redirected. This reads `redirects.json` rather than
+ * repeating it, and `vercel.json` is generated from the same file, so the redirect the
+ * site performs and the one the host performs cannot diverge.
  *
  * A browser cannot issue a 301 from script; the static host does that, from the same
  * table. This is the client-side equivalent so a deep link works in development and in
@@ -46,7 +46,7 @@ export const router = createBrowserRouter(
       ],
     },
     {
-      // The e2e performance harness. Not in the nav, not indexed (EXCEPTIONS E-05).
+      // The e2e performance harness. Not in the nav, not indexed.
       path: '/internal/performance',
       lazy: async () => ({ Component: (await import('./routes/Performance')).Performance }),
     },

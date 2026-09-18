@@ -12,7 +12,7 @@ import {
 import { QUILL_FIXTURES, quillFixture } from '../fixtures/quill.js';
 
 /**
- * The interop contract (ADR-004).
+ * The interop contract.
  *
  * Every fixture is real markup the old editor produced. The assertion is not that the
  * bytes match, but that nothing an author can see is lost on the way in or out.
@@ -63,12 +63,7 @@ describe('alignment', () => {
     const aligns = doc.content.map((block) =>
       block.type === 'paragraph' ? (block.align ?? 'left') : 'n/a',
     );
-    expect(aligns).toEqual([
-      'left',
-      'center',
-      'right',
-      'justify',
-    ]);
+    expect(aligns).toEqual(['left', 'center', 'right', 'justify']);
   });
 
   it('reads inline text-align styles', () => {
@@ -80,7 +75,9 @@ describe('alignment', () => {
   it('writes the dialect each profile calls for', () => {
     const doc = htmlToDocument('<p class="ql-align-center">x</p>');
     expect(documentToHtml(doc, { profile: 'standard' })).toContain('class="rte-align-center"');
-    expect(documentToHtml(doc, { profile: 'quill-compatible' })).toContain('class="ql-align-center"');
+    expect(documentToHtml(doc, { profile: 'quill-compatible' })).toContain(
+      'class="ql-align-center"',
+    );
     expect(documentToHtml(doc, { profile: 'email', sanitizeWith: 'email' })).toContain(
       'style="text-align: center"',
     );
@@ -262,9 +259,9 @@ describe('merge tags (R23)', () => {
     });
     const first = back.content[0];
     if (first?.type !== 'paragraph') throw new Error('expected a paragraph');
-    expect(first.content.some((node) => node.type === 'mergeTag' && node.key === 'first_name')).toBe(
-      true,
-    );
+    expect(
+      first.content.some((node) => node.type === 'mergeTag' && node.key === 'first_name'),
+    ).toBe(true);
   });
 
   it('reports unknown keys', () => {

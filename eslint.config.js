@@ -17,7 +17,6 @@ export default tseslint.config(
       '**/test-results/**',
       '**/.vite/**',
       '**/*.d.ts',
-      'docs/**',
     ],
   },
   js.configs.recommended,

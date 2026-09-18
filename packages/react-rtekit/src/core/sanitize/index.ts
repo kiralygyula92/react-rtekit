@@ -1,5 +1,5 @@
 /**
- * Sanitization (ADR-003).
+ * Sanitization.
  *
  * @module
  */

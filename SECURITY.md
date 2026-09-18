@@ -17,7 +17,7 @@ Include, where you can:
 - the input (HTML, clipboard payload, or `value`) that triggers the problem;
 - the configuration in use, especially `sanitize`, `htmlProfile` and `interop`;
 - the observed output and what an attacker could do with it;
-- the version of `react-rtekit` and of the Lexical peers.
+- the versions of `react-rtekit` and React.
 
 ## What we consider a vulnerability
 

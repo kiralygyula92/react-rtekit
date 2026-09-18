@@ -29,10 +29,10 @@ export function MessageField() {
 }
 ```
 
-[Documentation](https://kiralygyula92.github.io/react-rtekit) ·
-[Examples](https://kiralygyula92.github.io/react-rtekit/examples) ·
-[Playground](https://kiralygyula92.github.io/react-rtekit/playground) ·
-[API reference](https://kiralygyula92.github.io/react-rtekit/api)
+[Documentation](https://react-rtekit.vercel.app/react-rtekit/) ·
+[Examples](https://react-rtekit.vercel.app/react-rtekit/all-features/) ·
+[Playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) ·
+[API reference](https://react-rtekit.vercel.app/react-rtekit/api/)
 
 ## Why
 
@@ -97,7 +97,7 @@ pnpm add react-rtekit-rhf
 
 Formik, TanStack Form and anything else bind in about twenty lines — the editor is a
 controlled input with a `value` and an `onChange`. The
-[forms guide](https://kiralygyula92.github.io/react-rtekit/docs/guides/forms) has both.
+[forms guide](https://react-rtekit.vercel.app/react-rtekit/forms/) has both.
 
 ## Server rendering
 

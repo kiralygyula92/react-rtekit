@@ -3,7 +3,7 @@ import { parseHtmlFragment } from './parse.js';
 import type { HtmlNode } from './nodes.js';
 
 /**
- * The HTML layer: one tree, two frontends (ADR-003).
+ * The HTML layer: one tree, two frontends.
  *
  * @module
  */

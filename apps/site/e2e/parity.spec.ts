@@ -4,8 +4,8 @@ import { expect, test, type Page } from '@playwright/test';
 /**
  * Parity with the legacy editor.
  *
- * The reproduction has to match the reference measurements exactly, and every defect in
- * `docs/regressions.md` that only shows in a real browser has to be fixed here rather
+ * The reproduction has to match the reference measurements exactly, and every legacy
+ * defect (`R1`-`R26`) that only shows in a real browser has to be fixed here rather
  * than reproduced.
  */
 

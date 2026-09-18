@@ -4,9 +4,8 @@ import type { ExampleEntry } from '../examples';
 /**
  * A live demo and its toolbar.
  *
- * PPDS §7.2 requires four affordances on every demo: copy, show/hide source, open in a
- * live sandbox, and reset. The Phase 1 audit found the first two and neither of the last
- * two, on all 44 demos.
+ * Four affordances on every demo: copy, show/hide source, open in a live sandbox, and
+ * reset.
  *
  * Reset is a remount, keyed on a counter — the editors hold their own state, so there is
  * nothing to reach into and clear. That is also why reset matters here more than on a

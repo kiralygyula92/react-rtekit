@@ -3,7 +3,7 @@ import { capabilities, config } from './manifest';
 import { Badge } from './Badge';
 
 /**
- * The features index (PPDS §6C).
+ * The features index.
  *
  * Rendered from the same nav data as the sidebar, grouped by the same `subheader`
  * values, in the same order. Check 6 makes any divergence between the two a defect, so

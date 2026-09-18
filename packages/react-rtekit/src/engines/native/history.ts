@@ -2,7 +2,7 @@ import type { EditorDocument } from '../../types/document.js';
 import type { EditorSelection } from '../../types/selection.js';
 
 /**
- * Undo — stage 6 of ADR-006.
+ * Undo.
  *
  * The thing that makes an undo stack feel right is not the stack, it is the coalescing:
  * a typed sentence has to come back as one entry, not as forty. So entries record *why*

@@ -3,13 +3,13 @@ import { defineConfig, devices } from '@playwright/test';
 const CI = !!process.env.CI;
 
 /**
- * Editing behaviour is the primary gate (09 §1), so the matrix is real browsers.
+ * Editing behaviour is the primary gate, so the matrix is real browsers.
  * PRs run Chromium; `main` runs all three engines plus mobile emulation.
  */
 export default defineConfig({
   testDir: './e2e',
   // The performance budgets need a quiet machine, so they have their own config and
-  // their own CI job rather than running alongside eight parallel browsers (09 §4).
+  // their own CI job rather than running alongside eight parallel browsers.
   testIgnore: ['**/performance.spec.ts'],
   fullyParallel: true,
   forbidOnly: CI,

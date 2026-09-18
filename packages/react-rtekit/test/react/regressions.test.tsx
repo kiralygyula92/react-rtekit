@@ -19,7 +19,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
- * One named regression test per entry in `docs/regressions.md`.
+ * One named regression test per behaviour this library fixes relative to a typical Quill
+ * wrapper, `R1` to `R26`.
  *
  * These are the reason the library exists. Do not delete one: each records a way the
  * previous implementation was wrong, and the name is the contract.
@@ -67,7 +68,7 @@ function presetDeclarations(name: string): Map<string, string> {
   const css = readFileSync(presetPath(name), 'utf8');
   const found = new Map<string, string>();
   for (const [, token, value] of css.matchAll(/(--rte-[a-z0-9-]+):\s*([^;]+);/g)) {
-    found.set(token, value.trim());
+    if (token !== undefined && value !== undefined) found.set(token, value.trim());
   }
   return found;
 }

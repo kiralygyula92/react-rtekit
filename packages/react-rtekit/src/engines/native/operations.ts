@@ -15,7 +15,7 @@ import type { AnyNode, DocumentTree, NodeKey, TreeWriter } from './tree.js';
 import { ROOT_KEY } from './tree.js';
 
 /**
- * Model edits — stages 5 to 7 of ADR-006.
+ * Model edits.
  *
  * Every content change the editor can make, expressed as a function from a tree and a
  * selection to a new selection. Nothing here touches the DOM: the caller applies these
@@ -357,10 +357,10 @@ function nestItem(context: EditContext, item: NodeKey): void {
 
   // Join the sub-list the previous item already has, rather than starting a second one
   // beside it — two adjacent nested lists render as two lists.
-  const existing = tree
-    .children(previous)
-    .find((child) => tree.get(child)?.value.type === 'list');
-  const target = existing ?? write.insert(previous, { type: 'list', listType, items: [] }, undefined, 'children');
+  const existing = tree.children(previous).find((child) => tree.get(child)?.value.type === 'list');
+  const target =
+    existing ??
+    write.insert(previous, { type: 'list', listType, items: [] }, undefined, 'children');
   write.move(item, target);
 }
 

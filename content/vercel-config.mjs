@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
  * so the client-side `LegacyRedirect` was all there was. Vercel can do it properly, and
  * this generates those rules from `redirects.json` — the same file the router compiles in
  * — so the redirect the host performs and the one the client would perform cannot
- * diverge. `url-map.csv` records them as 301s, and that is what they become.
+ * diverge. They are permanent, so they are 301s.
  *
  * `LegacyRedirect` stays as the fallback: it is what makes a deep link work in
  * development, and on Pages it remains the only thing that works at all.
@@ -37,9 +37,9 @@ const config = {
   buildCommand: 'pnpm -w run build && pnpm run build',
   outputDirectory: 'dist',
   /*
-   * Canonical URLs carry a trailing slash (PPDS R4), which is how every `pathname` in the
-   * manifest and every `<loc>` in the sitemap is spelled. Declaring it keeps the host from
-   * inventing a second spelling of each page, and — because PPDS §7.7 also publishes a
+   * Canonical URLs carry a trailing slash, which is how every `pathname` in the manifest
+   * and every `<loc>` in the sitemap is spelled. Declaring it keeps the host from
+   * inventing a second spelling of each page, and — because every page also has a
    * Markdown twin at `installation.md`, directly beside the `installation/` route — it
    * keeps a page URL from resolving to raw Markdown. `cleanUrls` is off for the same
    * reason: nothing should be guessing at extensions next to those twins.

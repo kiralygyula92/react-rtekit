@@ -4,7 +4,7 @@ import type { DocumentTree, NodeKey } from './tree.js';
 import { ROOT_KEY } from './tree.js';
 
 /**
- * Selection mapping — stage 4 of ADR-006.
+ * Selection mapping.
  *
  * Two representations have to agree. The DOM's is a node and a character offset inside
  * whatever the browser happens to have built. The model's is a `NodeKey` and an offset

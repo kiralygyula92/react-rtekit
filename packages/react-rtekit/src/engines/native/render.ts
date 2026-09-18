@@ -4,7 +4,7 @@ import type { AnyNode, DocumentTree, NodeKey } from './tree.js';
 import { ROOT_KEY } from './tree.js';
 
 /**
- * Model to DOM — stage 3a of ADR-006.
+ * Model to DOM.
  *
  * The editor's DOM is the *same* DOM `documentToHtml` writes. That is a decision, not a
  * coincidence: `<RteContentView>` renders stored HTML, the editor renders the live model,

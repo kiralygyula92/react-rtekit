@@ -79,7 +79,7 @@ import {
 import { DocumentTree, ROOT_KEY, type NodeKey } from './tree.js';
 
 /**
- * The in-house engine — stage 8 of ADR-006.
+ * The in-house engine.
  *
  * Implements `EngineHandle`, so it is graded by the conformance suite in
  * `test/engines/`, and imports nothing outside this project.
@@ -1031,7 +1031,6 @@ class NativeEngineHandle implements EngineHandle {
     this.#events.emit('formatChange', this.#formatState());
   }
 
-
   /**
    * Runs `write`, telling the guard that whatever it does to the DOM was our idea.
    *
@@ -1096,8 +1095,8 @@ class NativeEngineHandle implements EngineHandle {
     this.#tree = DocumentTree.fromDocument(document_);
     this.#applyToDom(() => {
       this.#applyToDom(() => {
-      this.#index = renderTree(this.#tree, this.contentElement, this.#document);
-    });
+        this.#index = renderTree(this.#tree, this.contentElement, this.#document);
+      });
     });
     this.#signatures = signaturesOf(this.#tree);
     const restored = caret === null ? null : this.#pointAtTextOffset(caret);
@@ -1201,7 +1200,7 @@ class NativeEngineHandle implements EngineHandle {
     // so the item reports the click and the engine decides whether it landed on the box.
     on(this.contentElement, 'pointerdown', (event) => {
       if (!this.#editable) return;
-      const target = (event).target;
+      const target = event.target;
       if (!(target instanceof Element)) return;
       const item = target.closest('li[data-checked]');
       if (item === null) return;
@@ -1209,7 +1208,7 @@ class NativeEngineHandle implements EngineHandle {
       const inset = Number.parseFloat(getComputedStyle(item).paddingInlineStart) || 0;
       // The box sits in the item's leading padding; a click past it is a click in the
       // text, where it belongs.
-      const offsetX = (event).clientX - box.left;
+      const offsetX = event.clientX - box.left;
       if (offsetX > inset) return;
       const key = this.#index.byNode.get(item);
       if (key === undefined) return;
