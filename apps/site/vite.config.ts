@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { copyFileSync, existsSync } from 'node:fs';
+import { copyFileSync, existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
@@ -48,11 +49,61 @@ function spaFallback() {
   };
 }
 
+/**
+ * Fails the build if any file would be served in place of a page.
+ *
+ * Every page is a route of the application: the host has no file for it, declines, and
+ * the SPA fallback hands the request to `index.html`. That only works while the host has
+ * nothing to serve. A file named `index.anything` inside a route's directory is served
+ * first — a host resolving a directory to its index does not check the extension, and a
+ * rewrite is consulted only after the filesystem has declined — so the page arrives as
+ * that file instead of as the application.
+ *
+ * That is not hypothetical. The Markdown twins were once emitted as `<page>/index.md`, and
+ * every refresh on the deployed site came back as raw frontmatter while every in-app click
+ * looked fine, because a click never asked the server. It went through every test,
+ * because the test server resolves directories differently from the host. So the check is
+ * on the output, against the page list, and it stops the build rather than the reader.
+ */
+function routeShadowGuard() {
+  return {
+    name: 'route-shadow-guard',
+    closeBundle() {
+      const dist = fileURLToPath(new URL('./dist', import.meta.url));
+      if (!existsSync(`${dist}/index.html`)) return; // a failed build: let its own error stand
+      const manifest = JSON.parse(
+        readFileSync(
+          fileURLToPath(new URL('./src/content/manifest.json', import.meta.url)),
+          'utf8',
+        ),
+      ) as { pages: { pathname: string }[] };
+
+      const shadowed: string[] = [];
+      for (const { pathname } of manifest.pages) {
+        const directory = path.join(dist, pathname);
+        const asFile = path.join(dist, pathname.replace(/\/$/, ''));
+        if (existsSync(asFile) && statSync(asFile).isFile()) shadowed.push(pathname);
+        if (!existsSync(directory) || !statSync(directory).isDirectory()) continue;
+        for (const entry of readdirSync(directory)) {
+          if (/^index\./i.test(entry)) shadowed.push(`${pathname}${entry}`);
+        }
+      }
+      if (shadowed.length > 0) {
+        throw new Error(
+          `${shadowed.length} file(s) would be served instead of a page, e.g. ${shadowed
+            .slice(0, 3)
+            .join(', ')}. A route's URL must have no file behind it.`,
+        );
+      }
+    },
+  };
+}
+
 export default defineConfig({
   base,
   // Read by `main.tsx` to decide whether the analytics components are worth mounting.
   define: { __ON_VERCEL__: JSON.stringify(onVercel) },
-  plugins: [react(), spaFallback()],
+  plugins: [react(), spaFallback(), routeShadowGuard()],
   resolve: {
     alias: {
       // The fixture corpus is shared with the library's tests so the two cannot drift.
