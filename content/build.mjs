@@ -222,6 +222,27 @@ for await (const file of markdownFiles(dir)) {
 
 pages.sort((a, b) => order.indexOf(a.pathname) - order.indexOf(b.pathname));
 
+/*
+ * The one origin every absolute URL is built on — the sitemap here, the canonical and
+ * `og:url` tags in the site through the manifest.
+ *
+ * Scheme and host only. Every `pathname` already begins with the docs namespace, so an
+ * origin that carries `/react-rtekit` as well names every page twice. The sitemap's own
+ * default did exactly that, and each of its 123 `<loc>`s pointed at
+ * `…/react-rtekit/react-rtekit/…`, which does not exist; the canonical tags had a
+ * separate default that was spelled correctly. There is now one, so the two cannot
+ * disagree again.
+ *
+ * Vercel's production domain, because that is the deployment that can issue the 301s in
+ * `url-map.csv` and the one the analytics run on. The Pages copy of the site still
+ * builds, and its pages declare this as their canonical, which is what a search engine
+ * needs to treat two copies of a site as one.
+ */
+const origin = (process.env.SITE_ORIGIN ?? 'https://react-rtekit.vercel.app').replace(/\/+$/, '');
+if (new URL(origin).pathname !== '/') {
+  throw new Error(`SITE_ORIGIN must be scheme and host only, not ${origin}`);
+}
+
 // ── outputs ──────────────────────────────────────────────────────────────────
 await mkdir(siteSrc, { recursive: true });
 await writeFile(
@@ -229,6 +250,7 @@ await writeFile(
   `${JSON.stringify(
     {
       config,
+      origin,
       nav,
       titles,
       pages: pages.map(({ markdown: _markdown, ...rest }) => rest),
@@ -299,7 +321,6 @@ await writeFile(
 await writeFile(path.join(sitePublic, 'llms.txt'), `${llms.join('\n').trimEnd()}\n`, 'utf8');
 
 /* sitemap.xml */
-const origin = process.env.SITE_ORIGIN ?? 'https://kiralygyula92.github.io/react-rtekit';
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',

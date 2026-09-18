@@ -67,12 +67,15 @@ export interface PluginConfig {
 
 const manifest = data as unknown as {
   config: PluginConfig;
+  /** Scheme and host of the canonical deployment. Pathnames already carry the namespace. */
+  origin: string;
   nav: NavNode[];
   titles: Record<string, string>;
   pages: DocPage[];
 };
 
 export const config = manifest.config;
+export const origin = manifest.origin;
 export const nav = manifest.nav;
 export const titles = manifest.titles;
 export const pages = manifest.pages;

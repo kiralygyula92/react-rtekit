@@ -294,8 +294,22 @@ check(18, 'sitemap.xml covers the surface', () => {
   const file = path.join(root, 'apps/site/public/sitemap.xml');
   if (!existsSync(file)) return fail('sitemap.xml missing');
   const xml = readFileSync(file, 'utf8');
-  const missing = pages.filter((page) => !xml.includes(`${page.pathname}<`)).map((p) => p.pathname);
-  return missing.length === 0 ? pass(`${pages.length} URLs`) : fail(`${missing.length} missing`);
+  /*
+   * Each `<loc>` must be exactly origin + pathname, not merely end with the pathname.
+   *
+   * The suffix test this replaced passed a sitemap whose every entry was
+   * `…/react-rtekit/react-rtekit/tables/` — a URL that ends in the right pathname and
+   * does not exist — because the origin it was built on carried the namespace as well.
+   */
+  const locs = new Set([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
+  const origin = manifest.origin;
+  if (typeof origin !== 'string' || new URL(origin).pathname !== '/') {
+    return fail(`manifest origin must be scheme and host only, got ${origin}`);
+  }
+  const missing = pages.filter((page) => !locs.has(`${origin}${page.pathname}`));
+  return missing.length === 0
+    ? pass(`${pages.length} URLs on ${origin}`)
+    : fail(`${missing.length} missing, e.g. ${origin}${missing[0].pathname}`);
 });
 
 // ── metadata ─────────────────────────────────────────────────────────────────

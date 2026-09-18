@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { config } from './manifest';
+import { config, origin } from './manifest';
 
 /**
  * The metadata contract (PPDS §7.6).
@@ -21,9 +21,12 @@ import { config } from './manifest';
  * `/react-rtekit/` and the docs namespace is `/react-rtekit/` too — they are the same
  * path, not two. Vite's `base` points the assets at it and the router runs at `/`, so a
  * pathname already carries the namespace and the origin must not repeat it.
+ *
+ * Read from the manifest, where `content/build.mjs` writes the same value it uses for the
+ * sitemap. This used to be a second default of its own; the two disagreed, and the
+ * sitemap's was the one that was wrong.
  */
-const ORIGIN =
-  (import.meta.env.VITE_SITE_ORIGIN as string | undefined) ?? 'https://kiralygyula92.github.io';
+const ORIGIN = origin;
 
 /** Sets or creates one `<meta>`, keyed by the attribute that identifies it. */
 function meta(key: 'name' | 'property', value: string, content: string): void {
