@@ -3,11 +3,14 @@
 A production-grade React rich-text editor you can actually own.
 React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
+The whole documentation in one file, with the source of every example: [llms-full.md](/react-rtekit/llms-full.md).
+
 ## Getting started
 
 - [Overview](/react-rtekit.md): An accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
 - [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
 - [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
+- [AI context](/react-rtekit/getting-started/ai-context.md): The whole documentation and the source of every example in one Markdown file, for AI coding agents.
 - [Requirements](/react-rtekit/getting-started/requirements.md): The React, TypeScript and browser versions this package supports, and what it expects of your bundler.
 - [FAQ](/react-rtekit/getting-started/faq.md): The questions that come up while adopting it: bundle size, engine choice, server rendering, and what it deliberately does not do.
 - [Support](/react-rtekit/getting-started/support.md): Where to ask a question, where to file a bug, and what to include so it can be answered.

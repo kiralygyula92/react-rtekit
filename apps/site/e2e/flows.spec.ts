@@ -129,6 +129,19 @@ test('F8 agent: llms.txt → a .md twin → the whole corpus', async ({ page }) 
   expect(body).toContain('pluginId: react-rtekit');
   expect(body).not.toContain('<div id="root">');
 
+  // And the whole corpus in one read: the AI-context file llms.txt points to before its
+  // lists. Every page is in it, and every live demo has become the source behind it — a
+  // leftover ```demo fence would be a demo an agent can see the name of and not the code.
+  const full = text.match(/\]\((\/[^)\s]*llms-full\.md)\)/)?.[1];
+  expect(full, 'llms.txt links the full file').toBeTruthy();
+  const corpus = await page.goto(full!);
+  const all = (await corpus?.text()) ?? '';
+  expect(all.startsWith('# React RTE Kit')).toBe(true);
+  expect(all).not.toContain('<div id="root">');
+  expect(all.match(/^# /gm)?.length ?? 0).toBeGreaterThan(entries.length);
+  expect(all).not.toMatch(/^```demo$/m);
+  expect(all).toContain("from 'react-rtekit'");
+
   const sitemap = await page.goto('/sitemap.xml');
   expect((await sitemap?.text())?.startsWith('<?xml')).toBe(true);
 });

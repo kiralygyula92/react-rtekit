@@ -42,6 +42,27 @@ const config = await readJson(path.join(dir, 'plugin.config.json'));
 const nav = await readJson(path.join(dir, 'nav.json'));
 const titles = await readJson(path.join(dir, 'titles.json'));
 
+/*
+ * The one origin every absolute URL is built on — the sitemap here, the canonical and
+ * `og:url` tags in the site through the manifest.
+ *
+ * Scheme and host only. Every `pathname` already begins with the docs namespace, so an
+ * origin that carries `/react-rtekit` as well names every page twice. The sitemap's own
+ * default did exactly that, and each of its 123 `<loc>`s pointed at
+ * `…/react-rtekit/react-rtekit/…`, which does not exist; the canonical tags had a
+ * separate default that was spelled correctly. There is now one, so the two cannot
+ * disagree again.
+ *
+ * Vercel's production domain, because that is the deployment that can issue the 301s in
+ * `url-map.csv` and the one the analytics run on. The Pages copy of the site still
+ * builds, and its pages declare this as their canonical, which is what a search engine
+ * needs to treat two copies of a site as one.
+ */
+const origin = (process.env.SITE_ORIGIN ?? 'https://react-rtekit.vercel.app').replace(/\/+$/, '');
+if (new URL(origin).pathname !== '/') {
+  throw new Error(`SITE_ORIGIN must be scheme and host only, not ${origin}`);
+}
+
 // ── frontmatter ──────────────────────────────────────────────────────────────
 /** A deliberately small YAML subset: scalars, and `[a, b]` lists. */
 function parseFrontmatter(source) {
@@ -178,7 +199,13 @@ const pages = [];
 const problems = [];
 
 for await (const file of markdownFiles(dir)) {
-  const source = await readFile(file, 'utf8');
+  /*
+   * `%SITE_ORIGIN%` in a page becomes the origin above. For the few places prose needs an
+   * absolute URL — a `curl` command, say — so that they follow the one definition instead
+   * of becoming a second copy of it. Deliberately not `{origin}`: braces are JSX in every
+   * code sample on the site.
+   */
+  const source = (await readFile(file, 'utf8')).replaceAll('%SITE_ORIGIN%', origin);
   const { data, body } = parseFrontmatter(source);
   if (!data.pathname) {
     problems.push(`${path.relative(root, file)}: no pathname in frontmatter`);
@@ -222,26 +249,6 @@ for await (const file of markdownFiles(dir)) {
 
 pages.sort((a, b) => order.indexOf(a.pathname) - order.indexOf(b.pathname));
 
-/*
- * The one origin every absolute URL is built on — the sitemap here, the canonical and
- * `og:url` tags in the site through the manifest.
- *
- * Scheme and host only. Every `pathname` already begins with the docs namespace, so an
- * origin that carries `/react-rtekit` as well names every page twice. The sitemap's own
- * default did exactly that, and each of its 123 `<loc>`s pointed at
- * `…/react-rtekit/react-rtekit/…`, which does not exist; the canonical tags had a
- * separate default that was spelled correctly. There is now one, so the two cannot
- * disagree again.
- *
- * Vercel's production domain, because that is the deployment that can issue the 301s in
- * `url-map.csv` and the one the analytics run on. The Pages copy of the site still
- * builds, and its pages declare this as their canonical, which is what a search engine
- * needs to treat two copies of a site as one.
- */
-const origin = (process.env.SITE_ORIGIN ?? 'https://react-rtekit.vercel.app').replace(/\/+$/, '');
-if (new URL(origin).pathname !== '/') {
-  throw new Error(`SITE_ORIGIN must be scheme and host only, not ${origin}`);
-}
 
 // ── outputs ──────────────────────────────────────────────────────────────────
 await mkdir(siteSrc, { recursive: true });
@@ -302,7 +309,21 @@ for (const page of pages) {
   bySection.get(key).push(page);
 }
 
-const llms = [`# ${config.name}`, '', config.tagline, config.description, ''];
+const llms = [
+  `# ${config.name}`,
+  '',
+  config.tagline,
+  config.description,
+  '',
+  /*
+   * Ahead of the lists, so an agent that wants everything does not have to crawl — and in
+   * prose rather than as a `- [..](..)` entry, because every list line in this file is one
+   * page's twin (PPDS: "each line `- [Title](url.md): description`"), and conformance
+   * check 16 and the F8 flow both read it that way.
+   */
+  `The whole documentation in one file, with the source of every example: [llms-full.md](/${PLUGIN}/llms-full.md).`,
+  '',
+];
 for (const [section, entries] of bySection) {
   llms.push(`## ${sectionTitles[section] ?? section}`, '');
   for (const page of entries) {
@@ -319,6 +340,134 @@ await writeFile(
   'utf8',
 );
 await writeFile(path.join(sitePublic, 'llms.txt'), `${llms.join('\n').trimEnd()}\n`, 'utf8');
+
+/*
+ * The AI context: the whole documentation, and every example's source, in one file.
+ *
+ * `llms.txt` is an index an agent has to crawl; this is the thing an agent can be handed
+ * whole — dropped into a repository next to a CLAUDE.md, or given as one URL. It is built
+ * from the same pages, in the same order, in the same pass as the twins, so it cannot say
+ * anything the site does not.
+ *
+ * Each ```demo fence becomes the source of that example, which is the file the site's
+ * "Show source" displays. On the site those fences are live editors; in a text file the
+ * only useful thing a demo can be is its code.
+ *
+ * Written twice. `llms-full.txt` is the name tools look for by convention, and
+ * `llms-full.md` is what a person downloads and keeps; the bytes are the same.
+ */
+const examplesDir = path.join(root, 'apps/site/src/examples');
+const exampleSlugs = (await readdir(examplesDir, { withFileTypes: true }))
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+  .sort();
+
+/** One example: its title from `meta.ts`, and the source the site shows. */
+async function readExample(slug) {
+  const source = (await readFile(path.join(examplesDir, slug, 'index.tsx'), 'utf8')).trimEnd();
+  const meta = await readFile(path.join(examplesDir, slug, 'meta.ts'), 'utf8').catch(() => '');
+  const title = meta.match(/title:\s*'([^']+)'/)?.[1] ?? slug;
+  return { slug, title, source };
+}
+
+/** A fence one backtick longer than any run inside the code, so the code cannot close it. */
+function fence(language, code) {
+  const longest = Math.max(0, ...[...code.matchAll(/`+/g)].map((match) => match[0].length));
+  const ticks = '`'.repeat(Math.max(3, longest + 1));
+  return `${ticks}${language}\n${code}\n${ticks}`;
+}
+
+const packageJson = JSON.parse(
+  await readFile(path.join(root, 'packages/react-rtekit/package.json'), 'utf8'),
+);
+const peers = Object.entries(packageJson.peerDependencies ?? {})
+  .map(([name, range]) => `\`${name}\` ${range}`)
+  .join(', ');
+
+const shown = new Map(); // slug -> the title of the page that first showed it
+const sections = [];
+for (const page of pages) {
+  const body = page.markdown
+    .replace(/^---\n[\s\S]*?\n---\n?/, '') // frontmatter: the fields are restated below
+    .replace(/^\s*#\s+[^\n]*\n+/, '') // the H1, which is re-emitted with the description
+    .replace(/<!--[\s\S]*?-->\n*/g, ''); // generator markers, which mean nothing out here
+
+  const parts = [];
+  let cursor = 0;
+  for (const match of body.matchAll(/```demo\r?\n([^\r\n]+)\r?\n```/g)) {
+    parts.push(body.slice(cursor, match.index));
+    cursor = match.index + match[0].length;
+    const slug = match[1].trim();
+    if (!exampleSlugs.includes(slug)) {
+      problems.push(`${page.pathname}: demo fence names ${slug}, which is not an example`);
+      continue;
+    }
+    const example = await readExample(slug);
+    if (shown.has(slug)) {
+      parts.push(`*Example: ${example.title}* — the same source as under "${shown.get(slug)}".`);
+    } else {
+      shown.set(slug, page.title);
+      parts.push(
+        `*Example: ${example.title}* — the source of the live demo on this page.\n\n${fence('tsx', example.source)}`,
+      );
+    }
+  }
+  parts.push(body.slice(cursor));
+
+  // Site-relative links become absolute, so they still work in a file on someone's disk.
+  const text = parts.join('').replace(/\]\((\/[^)\s]*)\)/g, `](${origin}$1)`);
+  const section = sectionTitles[page.section] ?? page.section ?? '';
+  sections.push(
+    [
+      `# ${page.title}`,
+      '',
+      `> ${page.description}`,
+      '',
+      `${section ? `${section} · ` : ''}${origin}${page.pathname}`,
+      '',
+      text.trim(),
+    ].join('\n'),
+  );
+}
+
+// Every example is on a page today; one added without a page still belongs in here.
+const unplaced = exampleSlugs.filter((slug) => !shown.has(slug));
+if (unplaced.length > 0) {
+  const blocks = [];
+  for (const slug of unplaced) {
+    const example = await readExample(slug);
+    blocks.push(`## ${example.title}\n\n${fence('tsx', example.source)}`);
+  }
+  sections.push(['# Examples not shown on any page', '', ...blocks].join('\n\n'));
+}
+
+const aiContext = [
+  `# ${config.name} — the complete documentation`,
+  '',
+  `> ${config.tagline}`,
+  '',
+  config.description,
+  '',
+  `Every page of the documentation at ${origin}/${PLUGIN}/, in reading order, with the source ` +
+    'of every live example inlined where its page shows it. It is generated from the same ' +
+    'Markdown as the site, so it says exactly what the site says.',
+  '',
+  `- Package: \`${packageJson.name}\` ${packageJson.version} on npm. Peer dependencies: ${peers}, and nothing else.`,
+  `- Page index: ${origin}/${PLUGIN}/llms.txt — and any single page as Markdown, at its URL with \`.md\`.`,
+  `- ${pages.length} pages, ${exampleSlugs.length} examples.`,
+  '',
+  'The examples import a few components that belong to the documentation site rather than to ' +
+    'the package — `CodeBlock`, `ChoiceGroup` and the shared test fixtures. They display ' +
+    'output; the editor code around them is the part to copy.',
+  '',
+  ...sections.flatMap((section) => ['---', '', section, '']),
+]
+  .join('\n')
+  .trimEnd();
+
+for (const name of ['llms-full.md', 'llms-full.txt']) {
+  await writeFile(path.join(sitePublic, PLUGIN, name), `${aiContext}\n`, 'utf8');
+}
 
 /* sitemap.xml */
 const sitemap = [

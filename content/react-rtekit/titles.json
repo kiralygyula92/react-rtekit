@@ -1,15 +1,13 @@
 {
   "/react-rtekit/": "Overview",
-
   "/react-rtekit/getting-started/installation/": "Installation",
   "/react-rtekit/getting-started/usage/": "Usage",
+  "/react-rtekit/getting-started/ai-context/": "AI context",
   "/react-rtekit/getting-started/requirements/": "Requirements",
   "/react-rtekit/getting-started/faq/": "FAQ",
   "/react-rtekit/getting-started/support/": "Support",
   "/react-rtekit/getting-started/versions/": "Versions",
-
   "/react-rtekit/all-features/": "All features",
-
   "/react-rtekit/text-formatting/": "Text formatting",
   "/react-rtekit/headings/": "Headings",
   "/react-rtekit/lists/": "Lists",
@@ -22,7 +20,6 @@
   "/react-rtekit/clear-formatting/": "Clear formatting",
   "/react-rtekit/history/": "Undo & redo",
   "/react-rtekit/empty-state/": "Empty state",
-
   "/react-rtekit/value-formats/": "Value formats",
   "/react-rtekit/sanitization/": "Sanitization",
   "/react-rtekit/html-interop/": "HTML interop",
@@ -31,7 +28,6 @@
   "/react-rtekit/merge-tags/": "Merge tags",
   "/react-rtekit/markdown-shortcuts/": "Markdown shortcuts",
   "/react-rtekit/counters-and-limits/": "Counters & limits",
-
   "/react-rtekit/theming/": "Theming",
   "/react-rtekit/theme-presets/": "Theme presets",
   "/react-rtekit/colours/": "Colours",
@@ -41,7 +37,6 @@
   "/react-rtekit/tables/": "Tables",
   "/react-rtekit/images/": "Images & uploads",
   "/react-rtekit/content-view/": "Content view",
-
   "/react-rtekit/toolbar/": "Toolbar",
   "/react-rtekit/selection-toolbar/": "Selection toolbar",
   "/react-rtekit/slash-menu/": "Slash menu",
@@ -54,7 +49,6 @@
   "/react-rtekit/autosave/": "Autosave & drafts",
   "/react-rtekit/read-only-and-disabled/": "Read-only & disabled",
   "/react-rtekit/mobile/": "Mobile",
-
   "/react-rtekit/slots/": "Slots",
   "/react-rtekit/handler-middleware/": "Handler middleware",
   "/react-rtekit/commands/": "Commands",
@@ -69,7 +63,6 @@
   "/react-rtekit/server-rendering/": "Server rendering",
   "/react-rtekit/performance/": "Performance",
   "/react-rtekit/forms/": "Forms",
-
   "/react-rtekit/demos/": "All demos",
   "/react-rtekit/demos/playground/": "Playground",
   "/react-rtekit/demos/theme-editor/": "Theme editor",
@@ -78,7 +71,6 @@
   "/react-rtekit/demos/cms-body-field/": "CMS body field",
   "/react-rtekit/demos/legacy-parity/": "Legacy parity",
   "/react-rtekit/demos/large-document/": "Large document",
-
   "/react-rtekit/api/": "API reference",
   "/react-rtekit/api/rich-text-editor/": "RichTextEditor",
   "/react-rtekit/api/rte-content-view/": "RteContentView",
@@ -100,7 +92,6 @@
   "/react-rtekit/api/localization-keys/": "Localization keys",
   "/react-rtekit/api/plugins/": "Plugin catalogue",
   "/react-rtekit/api/types/": "Types",
-
   "/react-rtekit/customization/": "How to customize",
   "/react-rtekit/customization/theme-tokens/": "Theming & tokens",
   "/react-rtekit/customization/overriding-slots/": "Overriding structure",
@@ -108,7 +99,6 @@
   "/react-rtekit/customization/design-system-skin/": "Design-system skin",
   "/react-rtekit/customization/content-styles/": "Content styles",
   "/react-rtekit/customization/recipes/": "Recipes",
-
   "/react-rtekit/guides/": "All guides",
   "/react-rtekit/guides/best-practices/": "Best practices",
   "/react-rtekit/guides/security/": "Security",
@@ -118,7 +108,6 @@
   "/react-rtekit/guides/localization/": "Localization",
   "/react-rtekit/guides/server-rendering/": "Server rendering",
   "/react-rtekit/guides/writing-a-plugin/": "Writing a plugin",
-
   "/react-rtekit/integrations/": "All integrations",
   "/react-rtekit/integrations/react-hook-form/": "React Hook Form",
   "/react-rtekit/integrations/formik/": "Formik",
@@ -126,10 +115,8 @@
   "/react-rtekit/integrations/remix/": "Remix",
   "/react-rtekit/integrations/tailwind/": "Tailwind CSS",
   "/react-rtekit/integrations/typescript/": "TypeScript",
-
   "/react-rtekit/migration/": "Migration",
   "/react-rtekit/migration/from-quill/": "From Quill",
-
   "/react-rtekit/discover-more/": "Discover more",
   "/react-rtekit/discover-more/changelog/": "Changelog",
   "/react-rtekit/discover-more/roadmap/": "Roadmap",
