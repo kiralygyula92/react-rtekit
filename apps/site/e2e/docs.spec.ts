@@ -169,3 +169,28 @@ test('search finds a capability and goes to it', async ({ page }) => {
 
   await expect(page).toHaveURL(/merge-tags/);
 });
+
+/*
+ * A link in a page's own content goes through the router.
+ *
+ * Page bodies are compiled HTML set with `dangerouslySetInnerHTML`, so their anchors are
+ * invisible to React Router, and every one of them used to be a full page load. That was
+ * slow, and it made each click a fresh request to the server — which is how a deployment
+ * still carrying the old `index.md` twins answered an ordinary link with raw Markdown.
+ * Counting navigation requests is what distinguishes the two: a routed click makes none.
+ */
+test('a link in page content navigates without reloading the page', async ({ page }) => {
+  let loads = 0;
+  page.on('request', (request) => {
+    if (request.isNavigationRequest() && request.frame() === page.mainFrame()) loads += 1;
+  });
+
+  await page.goto('/react-rtekit/api/serialization/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
+  const before = loads;
+
+  await page.locator('.prose a[href="/react-rtekit/value-formats/"]').first().click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Value formats');
+  await expect(page).toHaveURL(/\/react-rtekit\/value-formats\/$/);
+  expect(loads - before).toBe(0);
+});
