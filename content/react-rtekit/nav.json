@@ -13,8 +13,7 @@
         "pathname": "/react-rtekit/getting-started/usage/"
       },
       {
-        "pathname": "/react-rtekit/getting-started/ai-context/",
-        "lifecycle": "new"
+        "pathname": "/react-rtekit/getting-started/ai-context/"
       },
       {
         "pathname": "/react-rtekit/getting-started/requirements/"
