@@ -105,7 +105,14 @@ export function createBuiltInItems(
   // ── marks ────────────────────────────────────────────────────────────────
   add(toggle('bold', icons.bold, 'bold', 'toggleBold', ({ format }) => format.marks.bold, 'Mod+B'));
   add(
-    toggle('italic', icons.italic, 'italic', 'toggleItalic', ({ format }) => format.marks.italic, 'Mod+I'),
+    toggle(
+      'italic',
+      icons.italic,
+      'italic',
+      'toggleItalic',
+      ({ format }) => format.marks.italic,
+      'Mod+I',
+    ),
   );
   add(
     toggle(
@@ -118,7 +125,14 @@ export function createBuiltInItems(
     ),
   );
   add(
-    toggle('strike', icons.strike, 'strike', 'toggleStrike', ({ format }) => format.marks.strike, 'Mod+Shift+X'),
+    toggle(
+      'strike',
+      icons.strike,
+      'strike',
+      'toggleStrike',
+      ({ format }) => format.marks.strike,
+      'Mod+Shift+X',
+    ),
   );
   add(toggle('code', icons.code, 'code', 'toggleCode', ({ format }) => format.marks.code, 'Mod+E'));
   add(
@@ -144,8 +158,8 @@ export function createBuiltInItems(
   add({
     name: 'color',
     kind: 'colorPicker',
-    // The glyph is tinted with the active colour, exactly as the old editor did
-    //; `--rte-current-color` is set by the button and read by the preset CSS.
+    // The glyph is tinted with the active colour, exactly as the old editor did:
+    // `--rte-current-color` is set by the button and read by the preset CSS.
     icon: icons.color,
     label: (t) => resolveMessage(t.toolbar.color),
     command: 'setColor',
@@ -384,8 +398,14 @@ export function createBuiltInItems(
   });
 
   // ── tools ────────────────────────────────────────────────────────────────
-  add({ ...button('findReplace', icons.findReplace, 'findReplace', 'openFindReplace'), group: 'tools' });
-  add({ ...button('sourceView', icons.sourceView, 'sourceView', 'toggleSourceView'), group: 'tools' });
+  add({
+    ...button('findReplace', icons.findReplace, 'findReplace', 'openFindReplace'),
+    group: 'tools',
+  });
+  add({
+    ...button('sourceView', icons.sourceView, 'sourceView', 'toggleSourceView'),
+    group: 'tools',
+  });
   add({
     ...button('fullscreen', icons.fullscreen, 'fullscreen', 'toggleFullscreen'),
     group: 'tools',

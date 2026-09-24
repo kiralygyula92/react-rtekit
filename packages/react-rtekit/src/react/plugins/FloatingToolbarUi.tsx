@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useIsomorphicLayoutEffect } from '../hooks/useIsomorphicLayoutEffect.js';
 import type { FloatingToolbarConfig } from '../../types/config.js';
 import type { ToolbarItemSpec } from '../../types/toolbar.js';
 import { useEditorContext, useRteSlots } from '../context.js';
@@ -108,7 +109,7 @@ export function FloatingToolbarUi({ config, items }: FloatingToolbarUiProps) {
 
   // Measured before paint: `useLayoutEffect` is what keeps the first frame from showing
   // the toolbar at an unclamped position.
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const element = elementRef.current;
     if (!anchor || !element) {
       setPlacement(null);

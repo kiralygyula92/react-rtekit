@@ -6,8 +6,8 @@ import { defineConfig } from 'tsup';
 
 /**
  * Entry points that render React and therefore need the `"use client"` directive so
- * they work inside React Server Component graphs. `core` and `view` stay server-safe
- *, so the directive is added per entry rather than as a global banner.
+ * they work inside React Server Component graphs. `core` and `view` stay server-safe,
+ * so the directive is added per entry rather than as a global banner.
  */
 const CLIENT_ENTRIES = ['index'];
 
@@ -22,6 +22,13 @@ async function addUseClientBanners(): Promise<void> {
       const source = await readFile(file, 'utf8');
       if (source.startsWith("'use client'") || source.startsWith('"use client"')) continue;
       await writeFile(file, `'use client';\n${source}`, 'utf8');
+      // One line was added above everything, so the map gains one empty generated line —
+      // otherwise every frame in a stack trace points at the line below the real one.
+      if (existsSync(`${file}.map`)) {
+        const map = JSON.parse(await readFile(`${file}.map`, 'utf8')) as { mappings: string };
+        map.mappings = `;${map.mappings}`;
+        await writeFile(`${file}.map`, JSON.stringify(map), 'utf8');
+      }
     }
   }
 }
@@ -65,13 +72,7 @@ export default defineConfig({
   splitting: true,
   treeshake: true,
   minify: false,
-  external: [
-    'react',
-    'react-dom',
-    'react/jsx-runtime',
-    'react/jsx-dev-runtime',
-    'isomorphic-dompurify',
-  ],
+  external: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   esbuildOptions(options) {
     options.jsx = 'automatic';
   },

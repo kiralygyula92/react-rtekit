@@ -1,13 +1,13 @@
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
   type CSSProperties,
   type ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useIsomorphicLayoutEffect } from '../hooks/useIsomorphicLayoutEffect.js';
 
 /**
  * The popover primitive.
@@ -151,7 +151,7 @@ export function Popover({
     setPosition({ top, left });
   }, [anchor, offset, placement]);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!open) return undefined;
     reposition();
     window.addEventListener('scroll', reposition, true);
