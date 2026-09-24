@@ -559,11 +559,38 @@ class NativeEngineHandle implements EngineHandle {
 
   /** Parses any accepted value shape into the portable document. */
   #parse(value: EditorValue, format: ValueFormat): EditorDocument {
-    if (typeof value !== 'string') return value;
-    if (format === 'json') return JSON.parse(value) as EditorDocument;
+    if (typeof value !== 'string') return this.#fromDocument(value);
+    if (format === 'json') return this.#fromDocument(JSON.parse(value) as EditorDocument);
     if (format === 'markdown') return markdownToDocument(value);
     if (format === 'text') return textToDocument(value);
     return this.#options.parseHtml(value);
+  }
+
+  /**
+   * A document from outside the editor, put through the same sanitizer as HTML.
+   *
+   * A document is a boundary like any other: `valueFormat="json"` reads one from wherever
+   * it was stored, and `value` accepts one directly. Both went into the tree untouched,
+   * and the tree trusts what it holds — an `html` node is written with `innerHTML`, a
+   * link's `href` and a colour mark's CSS are written as given. So a stored document
+   * carrying `{ type: 'html', html: '<img onerror=…>' }` or a `javascript:` link ran in
+   * the editor, where the same content as HTML would have been cleaned on the way in.
+   *
+   * Serializing and re-reading it applies the editor's own `sanitize` profile, schema
+   * and merge-tag rules, and reports what is removed through `onSanitizeViolation`,
+   * exactly as for HTML. `standard` is the dialect the parser reads back without loss,
+   * which the controlled HTML value already depends on.
+   *
+   * Serialized *without* output sanitization, on purpose: the string never reaches the
+   * DOM, only `parseHtml`, which is the input sanitizer. Cleaning it on the way out as
+   * well removed the hostile parts where nothing reports a removal, and the parser then
+   * saw clean HTML and had nothing to say — so a stored document with a script in it was
+   * fixed silently, where the same content pasted as HTML is reported.
+   */
+  #fromDocument(document_: EditorDocument): EditorDocument {
+    return this.#options.parseHtml(
+      this.#options.serializeHtml(document_, { profile: 'standard', sanitize: false }),
+    );
   }
 
   /** The selection to edit at: the live one, or the last one seen (fixes R5). */

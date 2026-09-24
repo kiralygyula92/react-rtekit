@@ -7,6 +7,7 @@ import type {
 } from '../../types/document.js';
 import { createDocument, normalizeDocument } from '../document.js';
 import { htmlToDocument, type HtmlToDocumentOptions } from './from-html.js';
+import { checkUrl, DEFAULT_PROTOCOLS, type UrlPolicy } from '../sanitize/url.js';
 
 /**
  * Markdown.
@@ -70,15 +71,21 @@ function escapeMarkdown(value: string): string {
  * literal text `\1.`, which is escaped again on the next write.
  */
 function escapeLeadingMarker(line: string): string {
-  const thematic = line.replace(THEMATIC_BREAK_RE, (_match, indent: string, char: string) =>
-    `${indent}\\${char}${line.trimStart().slice(1)}`,
+  const thematic = line.replace(
+    THEMATIC_BREAK_RE,
+    (_match, indent: string, char: string) => `${indent}\\${char}${line.trimStart().slice(1)}`,
   );
   if (thematic !== line) return thematic;
 
   return line.replace(
     LEADING_MARKER_RE,
-    (_match, indent: string, simple: string | undefined, digits: string | undefined, punctuation: string | undefined) =>
-      simple === undefined ? `${indent}${digits!}\\${punctuation!}` : `${indent}\\${simple}`,
+    (
+      _match,
+      indent: string,
+      simple: string | undefined,
+      digits: string | undefined,
+      punctuation: string | undefined,
+    ) => (simple === undefined ? `${indent}${digits!}\\${punctuation!}` : `${indent}\\${simple}`),
   );
 }
 
@@ -128,7 +135,11 @@ function inlineToMarkdown(nodes: InlineNode[], options: Required<MarkdownOptions
   return out;
 }
 
-function listToMarkdown(list: ListNode, options: Required<MarkdownOptions>, depth: number): string[] {
+function listToMarkdown(
+  list: ListNode,
+  options: Required<MarkdownOptions>,
+  depth: number,
+): string[] {
   const lines: string[] = [];
   const indent = '  '.repeat(depth);
   list.items.forEach((item, index) => {
@@ -139,7 +150,8 @@ function listToMarkdown(list: ListNode, options: Required<MarkdownOptions>, dept
           ? `${options.bullet} [${item.checked ? 'x' : ' '}]`
           : options.bullet;
     lines.push(`${indent}${marker} ${inlineToMarkdown(item.content, options)}`);
-    for (const child of item.children ?? []) lines.push(...listToMarkdown(child, options, depth + 1));
+    for (const child of item.children ?? [])
+      lines.push(...listToMarkdown(child, options, depth + 1));
   });
   return lines;
 }
@@ -168,7 +180,10 @@ function blockToMarkdown(block: BlockNode, options: Required<MarkdownOptions>): 
     case 'table': {
       const rows = block.rows.map((row) =>
         row.cells.map((cell) =>
-          cell.content.map((child) => blockToMarkdown(child, options)).join(' ').replace(/\|/g, '\\|'),
+          cell.content
+            .map((child) => blockToMarkdown(child, options))
+            .join(' ')
+            .replace(/\|/g, '\\|'),
         ),
       );
       if (rows.length === 0) return '';
@@ -217,22 +232,79 @@ export function documentToMarkdown(doc: EditorDocument, options: MarkdownOptions
  * `_` emphasis requires a non-word boundary on both sides, as CommonMark does, so a
  * merge tag like `{{first_name}}` is not shredded into italics.
  */
+/**
+ * What a Markdown link or image may point at: the `standard` profile's rules, so
+ * `markdownToHtml` and the HTML sanitizer agree about what a URL may be.
+ *
+ * `markdownToHtml` is a public export and its output is HTML. Before this it wrote any
+ * destination straight into `href` and `src`, so `[x](javascript:alert(1))` produced a
+ * working script link — safe inside the editor only because `markdownToDocument` sends
+ * the result through the sanitizer afterwards, and not at all for anyone who rendered
+ * the HTML themselves.
+ */
+const LINK_POLICY: UrlPolicy = {
+  allowProtocols: DEFAULT_PROTOCOLS,
+  allowDataUrls: false,
+  allowRelative: true,
+};
+const IMAGE_POLICY: UrlPolicy = {
+  allowProtocols: DEFAULT_PROTOCOLS,
+  allowDataUrls: { mimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'] },
+  allowRelative: true,
+};
+
+/**
+ * A link destination: anything but whitespace and parentheses, plus balanced pairs of
+ * them, so `https://en.wikipedia.org/wiki/Foo_(bar)` is one URL rather than being cut
+ * at the first `)`.
+ */
+const DESTINATION = String.raw`((?:[^()\s]|\([^()\s]*\))+)`;
+
 const INLINE_RULES: { pattern: RegExp; render: (groups: string[]) => string }[] = [
   {
-    pattern: /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g,
-    render: ([alt, src, title]) => `<img src="${src}" alt="${alt}"${title ? ` title="${title}"` : ''}>`,
+    pattern: new RegExp(String.raw`!\[([^[\]]*)\]\(${DESTINATION}(?:\s+"([^"]*)")?\)`, 'g'),
+    // `alt` and `title` are quote-escaped as well as the URL: an unescaped `"` in the alt
+    // text closed the attribute, and `![a" onerror="…](x.png)` became an event handler.
+    render: ([alt, src, title]) => {
+      const url = safeUrl(src ?? '', IMAGE_POLICY);
+      if (url === null) return alt ?? '';
+      return `<img src="${escapeAttr(url)}" alt="${quoteAttr(alt ?? '')}"${title ? ` title="${quoteAttr(title)}"` : ''}>`;
+    },
   },
   {
-    pattern: /\[([^\]]+)\]\(([^)\s]+)\)/g,
-    // The URL is attribute-escaped: a quote in it would otherwise end the attribute
-    // early and turn the rest of the link into stray attributes.
-    render: ([label, href]) => `<a href="${escapeAttr(href ?? '')}">${label ?? ''}</a>`,
+    pattern: new RegExp(String.raw`\[([^[\]]+)\]\(${DESTINATION}\)`, 'g'),
+    // A refused destination keeps the label as plain text, which is what the document
+    // path already did.
+    render: ([label, href]) => {
+      const url = safeUrl(href ?? '', LINK_POLICY);
+      return url === null ? (label ?? '') : `<a href="${escapeAttr(url)}">${label ?? ''}</a>`;
+    },
   },
-  { pattern: /\*\*(?=\S)([\s\S]*?\S)\*\*/g, render: ([body]) => `<strong>${body}</strong>` },
-  { pattern: /(^|[^\w_])__(?=\S)([\s\S]*?\S)__(?!\w)/g, render: ([before, body]) => `${before}<strong>${body}</strong>` },
-  { pattern: /~~(?=\S)([\s\S]*?\S)~~/g, render: ([body]) => `<s>${body}</s>` },
+  /*
+   * No body may run past its own delimiter, and no label past a `[`.
+   *
+   * The bodies were `[\s\S]*?`: from every opener, a lazy scan to the end of the text
+   * whenever no valid closer followed — and in `**a **a **a …` every `**` is preceded by
+   * a space, so none is. That is quadratic, and since the same text reaches
+   * `markdownToDocument` it was a way to hold a server rendering Markdown for minutes
+   * with a megabyte of asterisks. Stopping each scan at the next delimiter makes every
+   * rule linear, and matches CommonMark where the two differ: `**a **b**` is
+   * `**a <strong>b</strong>`, the nearest opener closing, not `<strong>a **b</strong>`.
+   */
+  {
+    pattern: /\*\*(?=\S)((?:[^*]|\*(?!\*))*?\S)\*\*/g,
+    render: ([body]) => `<strong>${body}</strong>`,
+  },
+  {
+    pattern: /(^|[^\w_])__(?=\S)((?:[^_]|_(?!_))*?\S)__(?!\w)/g,
+    render: ([before, body]) => `${before}<strong>${body}</strong>`,
+  },
+  { pattern: /~~(?=\S)((?:[^~]|~(?!~))*?\S)~~/g, render: ([body]) => `<s>${body}</s>` },
   { pattern: /\*(?=\S)([^*\n]*?\S)\*/g, render: ([body]) => `<em>${body}</em>` },
-  { pattern: /(^|[^\w_])_(?=\S)([^_\n]*?\S)_(?!\w)/g, render: ([before, body]) => `${before}<em>${body}</em>` },
+  {
+    pattern: /(^|[^\w_])_(?=\S)([^_\n]*?\S)_(?!\w)/g,
+    render: ([before, body]) => `${before}<em>${body}</em>`,
+  },
 ];
 
 /** Escapes text for HTML output. */
@@ -243,6 +315,29 @@ function escapeHtml(value: string): string {
 /** Escapes a value for a double-quoted HTML attribute. */
 function escapeAttr(value: string): string {
   return escapeHtml(value).replace(/"/g, '&quot;');
+}
+
+/**
+ * Quotes text the inline pass has already HTML-escaped, for use inside an attribute.
+ *
+ * The rules run on escaped text, so `&`, `<` and `>` are done and only `"` is left.
+ * Running `escapeAttr` on it again turned every `&amp;` into `&amp;amp;`.
+ */
+function quoteAttr(escaped: string): string {
+  return escaped.replace(/"/g, '&quot;');
+}
+
+/**
+ * The raw URL behind an escaped destination, checked against `policy`.
+ *
+ * The inline pass has already escaped the text, so the captured URL reads
+ * `?a=1&amp;b=2`. It is unescaped before the check and escaped exactly once on the way
+ * out: escaping it a second time is what made every Markdown link with a query string
+ * point at `?a=1&amp;b=2`.
+ */
+function safeUrl(escaped: string, policy: UrlPolicy): string | null {
+  const raw = escaped.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  return checkUrl(raw, policy).value;
 }
 
 /**
@@ -362,8 +457,14 @@ export function markdownToHtml(markdown: string, options: MarkdownOptions = {}):
         body.push(lines[index]!);
         index += 1;
       }
-      const escaped = body.join('\n').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      out.push(`<pre><code${language ? ` class="language-${language}"` : ''}>${escaped}</code></pre>`);
+      const escaped = body
+        .join('\n')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      out.push(
+        `<pre><code${language ? ` class="language-${language}"` : ''}>${escaped}</code></pre>`,
+      );
       continue;
     }
 
@@ -423,7 +524,11 @@ export function markdownToHtml(markdown: string, options: MarkdownOptions = {}):
     if (tableRow && index + 1 < lines.length && /^\s*\|[\s:|-]+\|\s*$/.test(lines[index + 1]!)) {
       closeParagraph();
       closeLists();
-      const cells = (row: string): string[] => row.split('|').slice(1, -1).map((cell) => cell.trim());
+      const cells = (row: string): string[] =>
+        row
+          .split('|')
+          .slice(1, -1)
+          .map((cell) => cell.trim());
       const header = cells(line);
       index += 2;
       const bodyRows: string[][] = [];
@@ -434,7 +539,10 @@ export function markdownToHtml(markdown: string, options: MarkdownOptions = {}):
       index -= 1;
       const th = header.map((cell) => `<th>${inlineMarkdownToHtml(cell)}</th>`).join('');
       const tr = bodyRows
-        .map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdownToHtml(cell)}</td>`).join('')}</tr>`)
+        .map(
+          (row) =>
+            `<tr>${row.map((cell) => `<td>${inlineMarkdownToHtml(cell)}</td>`).join('')}</tr>`,
+        )
         .join('');
       out.push(`<table><tbody><tr>${th}</tr>${tr}</tbody></table>`);
       continue;

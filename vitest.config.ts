@@ -48,6 +48,8 @@ export default defineConfig({
             'src/view/**/*.test.{ts,tsx}',
             'test/react/**/*.test.{ts,tsx}',
             'test/engines/**/*.test.{ts,tsx}',
+            // Security tests that need a real editor mounted; the rest run under `core`.
+            'test/security/**/*.dom.test.tsx',
           ],
           globals: true,
         },

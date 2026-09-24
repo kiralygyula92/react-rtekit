@@ -10,6 +10,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Nothing here writes to the repository, so the token cannot either. Without this every
+# job ran with the repository's default token, which is read-write on older repositories
+# — including the PR jobs that build and run code from the branch.
+permissions:
+  contents: read
+
 env:
   NODE_VERSION: '22'
 
@@ -53,7 +59,9 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: XSS corpus and sanitizer fuzzing
-        run: pnpm vitest run --project core packages/react-rtekit/test/security
+        # `core` for the sanitizer and parser; `react` for the boundaries that need a
+        # mounted editor (the `*.dom.test.tsx` files).
+        run: pnpm vitest run --project core --project react packages/react-rtekit/test/security
       - name: Audit production dependencies
         run: pnpm audit --prod
 
