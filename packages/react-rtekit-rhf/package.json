@@ -19,7 +19,7 @@
     "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
     "directory": "packages/react-rtekit-rhf"
   },
-  "homepage": "https://github.com/kiralygyula92/react-rtekit#readme",
+  "homepage": "https://react-rtekit.vercel.app/react-rtekit/integrations/react-hook-form/",
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -50,7 +50,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "size": "size-limit",
     "publint": "publint",
-    "attw": "attw --pack . --profile esm-only"
+    "attw": "attw --pack . --profile node16"
   },
   "peerDependencies": {
     "react": ">=18.2",

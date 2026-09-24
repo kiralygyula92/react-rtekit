@@ -175,13 +175,19 @@ test('the on-this-page rail lists the page’s own headings', async ({ page }) =
 
 test('search finds a capability and goes to it', async ({ page }) => {
   await page.goto('/react-rtekit/');
-  // The shortcut is bound on mount, so pressing it before hydration reaches nothing.
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await page.keyboard.press('/');
 
   // Scoped to the dialog: the version selector is a <select>, which is also a combobox.
   const input = page.locator('.search-dialog').getByRole('combobox');
-  await expect(input).toBeFocused();
+
+  // The shortcut is bound in an effect, and effects run after paint — so the heading can
+  // be on screen before the key has a listener, and a single press can reach nothing.
+  // Mobile WebKit lost that race every time. Pressing until the dialog answers tests the
+  // shortcut without betting on when the effect runs.
+  await expect(async () => {
+    if (!(await input.isVisible())) await page.keyboard.press('/');
+    await expect(input).toBeFocused({ timeout: 500 });
+  }).toPass();
   await input.fill('merge tags');
   await page.locator('.search-dialog').getByRole('option').first().click();
 
@@ -238,7 +244,14 @@ test.describe('scroll position', () => {
     await expect.poll(() => scrollY(page)).toBe(700);
   });
 
-  test('a new page opens at the top, and Back returns to the old position', async ({ page }) => {
+  test('a new page opens at the top, and Back returns to the old position', async ({
+    page,
+    isMobile,
+  }) => {
+    // The navigation has to happen without moving the window first, which is what a
+    // click in the sticky sidebar does on a desktop. On a phone the sidebar is a closed
+    // drawer, so there is no such click; the reload case above covers restoration there.
+    test.skip(isMobile, 'the sidebar is a drawer on phones');
     await page.goto(PAGE);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Serialization');
     await page.evaluate(() => {

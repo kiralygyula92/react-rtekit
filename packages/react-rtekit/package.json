@@ -24,7 +24,7 @@
     "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
     "directory": "packages/react-rtekit"
   },
-  "homepage": "https://github.com/kiralygyula92/react-rtekit#readme",
+  "homepage": "https://react-rtekit.vercel.app/react-rtekit/",
   "bugs": {
     "url": "https://github.com/kiralygyula92/react-rtekit/issues"
   },
@@ -121,14 +121,13 @@
     "docs:json": "typedoc --options typedoc.json",
     "docs:check": "node scripts/check-docs.mjs --strict",
     "publint": "publint",
-    "attw": "attw --pack . --profile esm-only --exclude-entrypoints styles.css base.css content.css presets/classic.css presets/dark.css presets/compact.css presets/bordered.css",
+    "attw": "attw --pack . --profile node16 --exclude-entrypoints styles.css base.css content.css presets/classic.css presets/dark.css presets/compact.css presets/bordered.css",
     "prebuild": "node scripts/sync-version.mjs"
   },
   "peerDependencies": {
     "react": ">=18.2",
     "react-dom": ">=18.2"
   },
-  "peerDependenciesMeta": {},
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@size-limit/preset-small-lib": "^11.2.0",

@@ -3,6 +3,8 @@ name: Release
 on:
   push:
     branches: [main]
+  # Run it by hand once the NPM_TOKEN secret is added, to publish without a new commit.
+  workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -10,6 +12,9 @@ jobs:
   release:
     name: Version or publish
     runs-on: ubuntu-latest
+    env:
+      # Read by the publish expression below; see the note there.
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: write
       pull-requests: write
@@ -29,11 +34,15 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+      # With no changesets pending, the action publishes whatever version is not yet on
+      # npm. Without a token that fails on every push to main, so publishing waits until
+      # the NPM_TOKEN secret exists; until then this step only opens version PRs.
+      # Secrets cannot be tested directly in an expression, hence the job-level env.
       - name: Create a version PR, or publish when one is merged
         uses: changesets/action@v1
         with:
           version: pnpm version-packages
-          publish: pnpm release
+          publish: ${{ env.NPM_TOKEN != '' && 'pnpm release' || '' }}
           commit: 'chore: version packages'
           title: 'chore: version packages'
         env:

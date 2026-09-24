@@ -51,10 +51,14 @@ export default [
     // the editor an editor, and deferring it would put a visible delay between first
     // paint and a usable field, in exchange for bytes that arrive a moment later
     // anyway.
+    //
+    // 41 → 43 kB for 1.0, all of it security work: CSS values checked with escapes and
+    // comments decoded, own-property lookups in the parser, uploads cancelled on
+    // unmount, and stored documents sanitized on the way into the editor.
     name: 'core import (no plugins)',
     path: 'dist/index.js',
     import: '{ useEditor }',
-    limit: '41 kB',
+    limit: '43 kB',
     gzip: true,
     ignore: PEERS,
   },
@@ -87,10 +91,13 @@ export default [
     // with no character to insert; the rows of the table menu, whose slot default
     // rendered an empty `<div>`; the grouping and stacking that made both readable. The
     // bytes are the joins, not new features.
+    //
+    // 71 → 72 kB for 1.0: the same security work as the core import. Removing the 26
+    // slot defaults nothing rendered took 0.6 kB back out.
     name: 'RichTextEditor (all chrome, all plugins)',
     path: 'dist/index.js',
     import: '{ RichTextEditor }',
-    limit: '71 kB',
+    limit: '72 kB',
     gzip: true,
     ignore: PEERS,
   },
@@ -117,9 +124,12 @@ export default [
     // makes a stored Quill document render in a list page exactly as it does in the
     // editor — `ql-align-center` becomes real alignment in both. Skipping the round
     // trip would save 8 kB and silently change how existing content looks.
+    //
+    // 17 → 18 kB for 1.0: Markdown link and image destinations are now checked
+    // against the same URL policy as HTML, and the CSS check decodes escapes.
     name: 'react-rtekit/view',
     path: 'dist/view/index.js',
-    limit: '17 kB',
+    limit: '18 kB',
     gzip: true,
     ignore: PEERS,
   },

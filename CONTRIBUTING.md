@@ -54,6 +54,28 @@ guide; wired into the playground; and accompanied by a changeset.
 Conventional Commits. Releases go through Changesets: add one with `pnpm changeset`,
 and the release workflow opens a version PR whose merge publishes with provenance.
 
+### Publishing 1.0.0 for the first time
+
+Both packages are at `1.0.0` with no changesets pending, so the release workflow
+publishes that version as soon as it can. Until an npm token exists it only opens
+version PRs, so pushing to `main` before then is safe.
+
+1. **Make the repository public.** npm provenance, which `publishConfig` turns on, is
+   refused for a private repository, and the package's `repository` and `bugs` links
+   and `SECURITY.md`'s reporting channel all point here.
+2. **Turn on private vulnerability reporting** (Settings → Code security), which
+   `SECURITY.md` tells people to use.
+3. **Create an npm access token** that can publish — a granular token scoped to
+   `react-rtekit` and `react-rtekit-rhf`, or an automation token — and add it as the
+   `NPM_TOKEN` repository secret.
+4. **Run the Release workflow** from the Actions tab (or push to `main`). It builds, runs
+   `changeset publish`, publishes both packages with provenance and tags the release.
+
+Publish through the workflow rather than from a local machine. Provenance can only be
+generated in CI, and `react-rtekit-rhf` has to be published with pnpm — which is what
+the workflow's `changeset publish` uses — so that its `workspace:^` peer on
+`react-rtekit` becomes `^1.0.0` in the published manifest.
+
 What semantic versioning covers here is written down in `VERSIONING.md` — it includes
 CSS class names, CSS variables, data attributes and localization keys, because those are
 things people build against. The `classic` theme's token values are frozen: they are the
