@@ -2,7 +2,7 @@
   "id": "react-rtekit",
   "name": "React RTE Kit",
   "tagline": "A production-grade React rich-text editor you can actually own.",
-  "description": "React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.",
+  "description": "React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.",
   "categoryId": "content-editing",
   "urlPrefix": "",
   "repo": "https://github.com/kiralygyula92/react-rtekit",

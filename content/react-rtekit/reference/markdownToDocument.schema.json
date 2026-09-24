@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "core/serialize/markdown.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L301",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L396",
   "usedBy": [
     "/react-rtekit/value-formats/"
   ]

@@ -1,36 +1,51 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { RichTextEditor, type RteSlots } from 'react-rtekit';
+import { forwardRef, useEffect, useRef, useState, type ReactNode } from 'react';
+import {
+  RichTextEditor,
+  type RteSlots,
+  type SlotBaseProps,
+  type ToolbarButtonSlotProps,
+} from 'react-rtekit';
 
 /**
- * Re-skinning through the twelve primitives.
+ * Re-skinning the editor's chrome with a design system's own components.
  *
- * This is the argument for having primitives at all. Replace `Button`, `Popover`,
- * `Dialog`, `TextInput` and the rest, and every feature that uses them follows — the
- * link popover, the image dialog, the colour picker, the table controls, the find
- * panel. No feature knows it has been re-skinned.
+ * The slots replaced here are the ones a design system usually has an opinion about: the
+ * toolbar's buttons and toggles, the field label, the helper text, the counter and the
+ * dialog. The features that use them are untouched — the toolbar asks for a
+ * `ToolbarButton`, not for this one — and keep their keyboard model, because the
+ * replacement forwards the ref and spreads the props it is given.
  */
 
-/** A stand-in for a design system's own components. */
-function DsButton({
-  variant = 'text',
-  className,
-  children,
-  ...rest
-}: {
-  variant?: 'text' | 'solid' | 'outline';
-  className?: string;
-  children?: ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      {...rest}
-      className={['ds-button', className].filter(Boolean).join(' ')}
-      data-variant={variant}
-    >
-      {children}
-    </button>
-  );
-}
+type ToolbarControlProps = ToolbarButtonSlotProps & SlotBaseProps;
+
+/**
+ * A toolbar control in the design system's style.
+ *
+ * The ref is forwarded and the remaining props are spread: the toolbar's roving focus
+ * moves between controls through that ref, and `tabIndex`, `aria-label`, `aria-pressed`
+ * and `onMouseDown` arrive in the props. Dropping either breaks the keyboard model.
+ */
+const DsToolbarControl = forwardRef<HTMLButtonElement, ToolbarControlProps>(
+  function DsToolbarControl(
+    { active, label, shortcut, icon, showLabel, className, command, type: _type, ...rest },
+    ref,
+  ) {
+    return (
+      <button
+        ref={ref}
+        type="button"
+        className={['ds-button', 'ds-button--icon', className].filter(Boolean).join(' ')}
+        data-active={active}
+        data-command={command}
+        title={shortcut ? `${label} (${shortcut})` : label}
+        {...rest}
+      >
+        {icon}
+        {showLabel ? <span className="ds-button__label">{label}</span> : null}
+      </button>
+    );
+  },
+);
 
 /** A dialog built on the platform's own, which gives focus trapping for free. */
 function DsDialog({
@@ -62,86 +77,47 @@ function DsDialog({
 }
 
 const slots: Partial<RteSlots> = {
-  Button: DsButton,
+  ToolbarButton: DsToolbarControl as RteSlots['ToolbarButton'],
+  ToolbarToggle: DsToolbarControl as RteSlots['ToolbarToggle'],
 
-  IconButton: ({ label, className, children, ...rest }) => (
-    <button
-      {...rest}
-      aria-label={label}
-      title={label}
-      className={['ds-button', 'ds-button--icon', className].filter(Boolean).join(' ')}
+  ToolbarSeparator: ({ className }) => (
+    <span className={['ds-divider', className].filter(Boolean).join(' ')} role="separator" />
+  ),
+
+  Label: ({ htmlFor, required, hidden, children, className }) => (
+    <label
+      htmlFor={htmlFor}
+      className={['ds-field__label', hidden ? 'rte-visually-hidden' : '', className]
+        .filter(Boolean)
+        .join(' ')}
     >
       {children}
-    </button>
+      {required ? <span aria-hidden="true"> *</span> : null}
+    </label>
+  ),
+
+  HelperText: ({ id, children, className }) => (
+    <p id={id} className={['ds-hint', className].filter(Boolean).join(' ')}>
+      {children}
+    </p>
+  ),
+
+  Counter: ({ id, text, overLimit, className }) => (
+    <span
+      id={id}
+      className={['ds-hint', className].filter(Boolean).join(' ')}
+      data-over={overLimit}
+    >
+      {text}
+    </span>
   ),
 
   Dialog: DsDialog,
-
-  TextInput: ({ label, value, onChange, invalid, className }) => (
-    <label className={['ds-field', className].filter(Boolean).join(' ')}>
-      {label ? <span className="ds-field__label">{label}</span> : null}
-      <input
-        className="ds-field__input"
-        value={value}
-        aria-invalid={invalid === true}
-        onChange={(event) => {
-          onChange(event.target.value);
-        }}
-      />
-    </label>
-  ),
-
-  Select: ({ label, value, options, onChange, className }) => (
-    <label className={['ds-field', className].filter(Boolean).join(' ')}>
-      {label ? <span className="ds-field__label">{label}</span> : null}
-      <select
-        className="ds-field__input"
-        value={value}
-        onChange={(event) => {
-          onChange(event.target.value);
-        }}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </label>
-  ),
-
-  Checkbox: ({ label, checked, onChange, disabled, className }) => (
-    <label className={['ds-check', className].filter(Boolean).join(' ')}>
-      <input
-        type="checkbox"
-        checked={checked}
-        disabled={disabled}
-        onChange={(event) => {
-          onChange(event.target.checked);
-        }}
-      />
-      {label}
-    </label>
-  ),
-
-  Spinner: ({ label, className }) => (
-    <span
-      className={['ds-spinner', className].filter(Boolean).join(' ')}
-      role="status"
-      aria-label={label}
-    />
-  ),
-
-  Tooltip: ({ title, children, className }) => (
-    <span className={['ds-tooltip', className].filter(Boolean).join(' ')} title={title}>
-      {children}
-    </span>
-  ),
 };
 
 const SAMPLE =
-  '<p>Open the <strong>link</strong> popover, the image dialog or the table picker: all three ' +
-  'are built from the primitives replaced in this file.</p>';
+  '<p>The toolbar, the label, the hint below the field and the counter are the design ' +
+  "system's components. Open the keyboard reference with <strong>Ctrl+/</strong> to see its dialog.</p>";
 
 export default function DesignSystemSkinExample() {
   const [html, setHtml] = useState(SAMPLE);
@@ -149,9 +125,11 @@ export default function DesignSystemSkinExample() {
   return (
     <div className="stack">
       <RichTextEditor
-        preset="full"
+        preset="standard"
         label="Message"
-        hideLabel
+        helperText="Seven slots replaced; every feature behind them unchanged."
+        maxLength={500}
+        showCounter
         slots={slots}
         value={html}
         onChange={(value) => {
@@ -160,9 +138,10 @@ export default function DesignSystemSkinExample() {
       />
 
       <p className="callout">
-        Eight replacements, and every dialog, popover, field and busy indicator in the editor
-        changed with them. The features themselves were not touched — they ask for a{' '}
-        <code>Dialog</code>, not for this one.
+        Seven replacements — the toolbar controls, the field chrome and the dialog. The features
+        themselves were not touched: they ask for a <code>ToolbarButton</code> or a{' '}
+        <code>Dialog</code>, not for this one, and keep their keyboard model because the replacement
+        forwards its ref.
       </p>
     </div>
   );

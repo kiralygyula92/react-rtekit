@@ -14,7 +14,14 @@ export type ControlSpec =
   | { name: string; label: string; type: 'boolean'; value: boolean; group: string }
   | { name: string; label: string; type: 'number'; value: number | undefined; group: string }
   | { name: string; label: string; type: 'text'; value: string; group: string }
-  | { name: string; label: string; type: 'select'; value: string; options: string[]; group: string };
+  | {
+      name: string;
+      label: string;
+      type: 'select';
+      value: string;
+      options: string[];
+      group: string;
+    };
 
 /** Shorthand builders, so the list below reads as data. */
 const select = (
@@ -50,10 +57,34 @@ const text = (name: string, label: string, value: string, group: string): Contro
 
 export const PLAYGROUND_CONTROLS: ControlSpec[] = [
   // ── composition ───────────────────────────────────────────────────────────
-  select('preset', 'Preset', ['minimal', 'classic', 'standard', 'email', 'comment', 'full'], 'standard', 'Composition'),
-  select('valueFormat', 'Value format', ['html', 'json', 'markdown', 'text'], 'html', 'Composition'),
-  select('htmlProfile', 'HTML profile', ['standard', 'quill-compatible', 'email', 'minimal'], 'standard', 'Composition'),
-  select('sanitize', 'Sanitize profile', ['strict', 'standard', 'email', 'permissive'], 'standard', 'Composition'),
+  select(
+    'preset',
+    'Preset',
+    ['minimal', 'classic', 'standard', 'email', 'comment', 'full'],
+    'standard',
+    'Composition',
+  ),
+  select(
+    'valueFormat',
+    'Value format',
+    ['html', 'json', 'markdown', 'text'],
+    'html',
+    'Composition',
+  ),
+  select(
+    'htmlProfile',
+    'HTML profile',
+    ['standard', 'quill-compatible', 'email', 'minimal'],
+    'standard',
+    'Composition',
+  ),
+  select(
+    'sanitize',
+    'Sanitize profile',
+    ['strict', 'standard', 'email', 'permissive'],
+    'standard',
+    'Composition',
+  ),
   select('pasteMode', 'Paste mode', ['rich', 'clean', 'text'], 'rich', 'Composition'),
 
   // ── features ──────────────────────────────────────────────────────────────
@@ -85,7 +116,6 @@ export const PLAYGROUND_CONTROLS: ControlSpec[] = [
   text('placeholder', 'Placeholder', 'Write something…', 'Chrome'),
   number('minHeight', 'Min height', 200, 'Chrome'),
   number('maxHeight', 'Max height', undefined, 'Chrome'),
-  toggle('autoGrow', 'Autogrow', true, 'Chrome'),
 
   // ── limits and validation ─────────────────────────────────────────────────
   number('maxLength', 'Max length', undefined, 'Limits'),
@@ -95,7 +125,13 @@ export const PLAYGROUND_CONTROLS: ControlSpec[] = [
   toggle('required', 'Required', false, 'Limits'),
 
   // ── appearance ────────────────────────────────────────────────────────────
-  select('theme', 'Theme', ['light', 'classic', 'dark', 'compact', 'bordered'], 'light', 'Appearance'),
+  select(
+    'theme',
+    'Theme',
+    ['light', 'classic', 'dark', 'compact', 'bordered'],
+    'light',
+    'Appearance',
+  ),
   select('colorScheme', 'Colour scheme', ['light', 'dark', 'auto'], 'light', 'Appearance'),
   select('density', 'Density', ['standard', 'compact', 'comfortable'], 'standard', 'Appearance'),
   toggle('unstyled', 'Unstyled', false, 'Appearance'),

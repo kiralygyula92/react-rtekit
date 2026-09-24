@@ -1,10 +1,4 @@
-import {
-  memo,
-  useEffect,
-  useMemo,
-  type CSSProperties,
-  type ReactNode,
-} from 'react';
+import { memo, useEffect, useMemo, type CSSProperties, type ReactNode } from 'react';
 import type { EditorInstance } from '../types/editor.js';
 import type { DeepPartial } from '../types/common.js';
 import type { RteLocalization } from '../types/localization.js';
@@ -129,9 +123,6 @@ export function RteRoot({
     () => ({
       slots: resolvedSlots,
       defaults: defaultSlots,
-      slotProps: undefined,
-      classNames: undefined,
-      styles: undefined,
       icons: resolvedIcons,
     }),
     [resolvedIcons, resolvedSlots],
@@ -179,17 +170,17 @@ export function RteRoot({
     <EditorContextProvider value={contextValue}>
       <LocaleContextProvider value={messages}>
         <SlotsContextProvider value={slotsValue}>
-        <ConfigContextProvider value={configValue}>
-        <RteRootElement
-          className={className}
-          style={style}
-          theme={theme}
-          colorScheme={colorScheme}
-          dataTheme={dataTheme}
-        >
-          {children}
-        </RteRootElement>
-        </ConfigContextProvider>
+          <ConfigContextProvider value={configValue}>
+            <RteRootElement
+              className={className}
+              style={style}
+              theme={theme}
+              colorScheme={colorScheme}
+              dataTheme={dataTheme}
+            >
+              {children}
+            </RteRootElement>
+          </ConfigContextProvider>
         </SlotsContextProvider>
       </LocaleContextProvider>
     </EditorContextProvider>
@@ -365,7 +356,9 @@ export const RteCounter = /* @__PURE__ */ memo(function RteCounter({
 }: RteCounterProps) {
   const editor = useEditorContext();
   const runtime = getRuntime(editor);
-  const count = useEditorState((snapshot) => (unit === 'words' ? snapshot.wordCount : snapshot.length));
+  const count = useEditorState((snapshot) =>
+    unit === 'words' ? snapshot.wordCount : snapshot.length,
+  );
   const t = useLocalization();
 
   const nearLimit = max !== undefined && count >= max * warnThreshold && count <= max;
@@ -391,7 +384,11 @@ export const RteCounter = /* @__PURE__ */ memo(function RteCounter({
 });
 
 /** The validation message, linked to the content element with `aria-describedby`. */
-export const RteErrorText = /* @__PURE__ */ memo(function RteErrorText({ children }: { children?: ReactNode }) {
+export const RteErrorText = /* @__PURE__ */ memo(function RteErrorText({
+  children,
+}: {
+  children?: ReactNode;
+}) {
   const editor = useEditorContext();
   const runtime = getRuntime(editor);
   const error = useValidationError();

@@ -5,24 +5,6 @@
     "import { RteSlots } from 'react-rtekit';"
   ],
   "options": {
-    "Root": {
-      "type": {
-        "name": "SlotComponent<RootSlotProps>"
-      },
-      "required": true
-    },
-    "Toolbar": {
-      "type": {
-        "name": "SlotComponent<ToolbarSlotProps>"
-      },
-      "required": true
-    },
-    "ToolbarGroup": {
-      "type": {
-        "name": "SlotComponent<Record<string, never>>"
-      },
-      "required": true
-    },
     "ToolbarSeparator": {
       "type": {
         "name": "SlotComponent<Record<string, never>>"
@@ -47,33 +29,9 @@
       },
       "required": true
     },
-    "ToolbarOverflow": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
     "ColorPicker": {
       "type": {
         "name": "SlotComponent<ColorPickerSlotProps>"
-      },
-      "required": true
-    },
-    "ContentWrapper": {
-      "type": {
-        "name": "SlotComponent<Record<string, never>>"
-      },
-      "required": true
-    },
-    "Content": {
-      "type": {
-        "name": "SlotComponent<ContentSlotProps>"
-      },
-      "required": true
-    },
-    "Placeholder": {
-      "type": {
-        "name": "SlotComponent<object>"
       },
       "required": true
     },
@@ -101,39 +59,15 @@
       },
       "required": true
     },
-    "Footer": {
-      "type": {
-        "name": "SlotComponent<Record<string, never>>"
-      },
-      "required": true
-    },
     "LinkPopover": {
       "type": {
         "name": "SlotComponent<LinkPopoverSlotProps>"
       },
       "required": true
     },
-    "ImageDialog": {
-      "type": {
-        "name": "SlotComponent<Record<string, unknown>>"
-      },
-      "required": true
-    },
     "ImagePopover": {
       "type": {
         "name": "SlotComponent<Record<string, unknown>>"
-      },
-      "required": true
-    },
-    "UploadPlaceholder": {
-      "type": {
-        "name": "SlotComponent<UploadPlaceholderSlotProps>"
-      },
-      "required": true
-    },
-    "TablePicker": {
-      "type": {
-        "name": "SlotComponent<object>"
       },
       "required": true
     },
@@ -149,37 +83,13 @@
       },
       "required": true
     },
-    "MergeTagChip": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "SlashMenu": {
-      "type": {
-        "name": "SlotComponent<InlineSuggestMenuSlotProps<unknown>>"
-      },
-      "required": true
-    },
     "EmojiPicker": {
       "type": {
         "name": "SlotComponent<InlineSuggestMenuSlotProps<unknown>>"
       },
       "required": true
     },
-    "MentionList": {
-      "type": {
-        "name": "SlotComponent<InlineSuggestMenuSlotProps<unknown>>"
-      },
-      "required": true
-    },
     "FloatingToolbar": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "BubbleMenu": {
       "type": {
         "name": "SlotComponent<object>"
       },
@@ -197,12 +107,6 @@
       },
       "required": true
     },
-    "FullscreenPortal": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
     "RestoreDraftPrompt": {
       "type": {
         "name": "SlotComponent<RestoreDraftPromptSlotProps>"
@@ -215,67 +119,7 @@
       },
       "required": true
     },
-    "Tooltip": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Menu": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "MenuItem": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Popover": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
     "Dialog": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Button": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "IconButton": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "TextInput": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Select": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Checkbox": {
-      "type": {
-        "name": "SlotComponent<object>"
-      },
-      "required": true
-    },
-    "Spinner": {
       "type": {
         "name": "SlotComponent<object>"
       },
@@ -283,7 +127,7 @@
     }
   },
   "filename": "types/slots.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L294",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L235",
   "usedBy": [
     "/react-rtekit/slots/"
   ]

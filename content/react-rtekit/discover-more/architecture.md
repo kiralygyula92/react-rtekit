@@ -31,4 +31,4 @@ Reading legacy Quill markup as it is means adoption does not require a data migr
 
 ## Slots and middleware rather than configuration flags
 
-A flag anticipates a need; a slot does not have to. Forty-six replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.
+A flag anticipates a need; a slot does not have to. Twenty replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.

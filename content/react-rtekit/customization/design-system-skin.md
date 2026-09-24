@@ -18,14 +18,14 @@ design-system-skin
 The combination that usually does it:
 
 - a **theme** for colour, radius and spacing;
-- **slots** for the controls, so they are literally your buttons and menus;
+- **slots** for the controls and the field chrome, so they are literally your components;
 - `unstyled` if you want none of the shipped chrome CSS at all.
 
 ```tsx
 <RichTextEditor
   unstyled
   theme={brand}
-  slots={{ ToolbarButton: MyButton, Popover: MyPopover, Dialog: MyDialog }}
+  slots={{ ToolbarButton: MyButton, ToolbarToggle: MyButton, Label: MyLabel, Dialog: MyDialog }}
 />
 ```
 

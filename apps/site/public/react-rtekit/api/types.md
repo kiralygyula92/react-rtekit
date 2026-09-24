@@ -264,59 +264,31 @@ presets and third-party extensions the same mechanism.
 
 ### RteSlots
 
-Every replaceable component.
-
-The last dozen entries are primitives; overriding just those re-skins the whole
-editor for a design system.
+Every replaceable component: the toolbar controls, the field chrome, and the panels and
+popovers the features open.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `Root` | `SlotComponent<RootSlotProps>` | yes | The outermost element, carrying every state attribute the CSS keys off. |
-| `Toolbar` | `SlotComponent<ToolbarSlotProps>` | yes | The toolbar container, including its roving-tabindex keyboard model. |
-| `ToolbarGroup` | `SlotComponent<Record<string, never>>` | yes | One group of toolbar items. |
 | `ToolbarSeparator` | `SlotComponent<Record<string, never>>` | yes | The divider drawn between toolbar groups. |
 | `ToolbarButton` | `SlotComponent<ToolbarButtonSlotProps>` | yes | A toolbar control that performs an action. |
 | `ToolbarToggle` | `SlotComponent<ToolbarButtonSlotProps>` | yes | A toolbar control that reflects a format, with `aria-pressed`. |
 | `ToolbarDropdown` | `SlotComponent<ToolbarDropdownSlotProps>` | yes | A toolbar control that opens a list of options. |
-| `ToolbarOverflow` | `SlotComponent<object>` | yes | The menu holding the items that did not fit at this width. |
 | `ColorPicker` | `SlotComponent<ColorPickerSlotProps>` | yes | The colour palette shown by the text- and background-colour controls. |
-| `ContentWrapper` | `SlotComponent<Record<string, never>>` | yes | The box around the content, which is what scrolls and grows. |
-| `Content` | `SlotComponent<ContentSlotProps>` | yes | The contenteditable surface itself. |
-| `Placeholder` | `SlotComponent<object>` | yes | The placeholder shown over an empty document. |
 | `Label` | `SlotComponent<object>` | yes | The field label. |
 | `HelperText` | `SlotComponent<object>` | yes | The description below the field. |
 | `ErrorText` | `SlotComponent<object>` | yes | The validation message, announced when it appears. |
 | `Counter` | `SlotComponent<CounterSlotProps>` | yes | The character or word counter. |
-| `Footer` | `SlotComponent<Record<string, never>>` | yes | The row below the content that holds the helper text and the counter. |
 | `LinkPopover` | `SlotComponent<LinkPopoverSlotProps>` | yes | The popover for creating and editing links. |
-| `ImageDialog` | `SlotComponent<Record<string, unknown>>` | yes | The dialog for inserting an image by URL or by file. |
 | `ImagePopover` | `SlotComponent<Record<string, unknown>>` | yes | The controls shown when an image is selected. |
-| `UploadPlaceholder` | `SlotComponent<UploadPlaceholderSlotProps>` | yes | The stand-in shown while a file uploads. |
-| `TablePicker` | `SlotComponent<object>` | yes | The grid for choosing the size of a new table. |
 | `TableToolbar` | `SlotComponent<Record<string, unknown>>` | yes | The controls shown when the caret is inside a table. |
 | `InlineSuggestMenu` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The shared popover behind the slash, mention, emoji and merge-tag menus. |
-| `MergeTagChip` | `SlotComponent<object>` | yes | One merge tag as it appears inside the document. |
-| `SlashMenu` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The command palette opened by `/`. |
 | `EmojiPicker` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The emoji picker. |
-| `MentionList` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The mention results, including their loading and empty states. |
 | `FloatingToolbar` | `SlotComponent<object>` | yes | The toolbar that follows the selection. |
-| `BubbleMenu` | `SlotComponent<object>` | yes | The bubble menu shown above a non-empty selection. |
 | `FindReplacePanel` | `SlotComponent<FindReplacePanelSlotProps>` | yes | The find-and-replace panel. |
 | `SourceView` | `SlotComponent<SourceViewSlotProps>` | yes | The HTML source editor. |
-| `FullscreenPortal` | `SlotComponent<object>` | yes | The container the editor moves into in fullscreen mode. |
 | `RestoreDraftPrompt` | `SlotComponent<RestoreDraftPromptSlotProps>` | yes | The prompt offering to restore an autosaved draft. |
 | `ShortcutHelpDialog` | `SlotComponent<object>` | yes | The keyboard reference, built from the keymap actually in force. |
-| `Tooltip` | `SlotComponent<object>` | yes | Wraps a control with its hover and focus description. |
-| `Menu` | `SlotComponent<object>` | yes | A menu surface with its own focus management. |
-| `MenuItem` | `SlotComponent<object>` | yes | One row of a RteSlots.Menu. |
-| `Popover` | `SlotComponent<object>` | yes | A positioned surface anchored to an element, closing on Escape and outside click. |
 | `Dialog` | `SlotComponent<object>` | yes | A modal surface that traps focus and returns it to the trigger. |
-| `Button` | `SlotComponent<object>` | yes | A labelled button. |
-| `IconButton` | `SlotComponent<object>` | yes | A button whose label is not visible and so must be given to assistive technology. |
-| `TextInput` | `SlotComponent<object>` | yes | A single-line text field. |
-| `Select` | `SlotComponent<object>` | yes | A single-choice control. |
-| `Checkbox` | `SlotComponent<object>` | yes | A two-state control with a visible label. |
-| `Spinner` | `SlotComponent<object>` | yes | The busy indicator, used while uploads and async providers are pending. |
 
 ### RteTheme
 
@@ -426,7 +398,7 @@ This symbol takes no options.
 - [RteIcons](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/icons.ts#L12)
 - [RteLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/localization.ts#L24)
 - [RtePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/plugin.ts#L90)
-- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L294)
+- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L235)
 - [RteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/theme.ts#L18)
 - [SanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L53)
 - [SanitizeProfileName](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L16)

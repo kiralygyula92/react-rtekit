@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/composable-parts/
 title: Composable parts
-description: The same editor as eleven separate components, for layouts the all-in-one shape cannot make.
+description: The same editor as nine separate components, for layouts the all-in-one shape cannot make.
 archetype: B
 section: features
 capabilityId: composable-parts
@@ -20,7 +20,7 @@ composable
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 

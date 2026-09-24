@@ -5,24 +5,6 @@
     "import { meta } from 'react-rtekit/meta';"
   ],
   "options": {
-    "Root": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Toolbar": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "ToolbarGroup": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "ToolbarSeparator": {
       "type": {
         "name": "entry"
@@ -47,31 +29,7 @@
       },
       "required": false
     },
-    "ToolbarOverflow": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "ColorPicker": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "ContentWrapper": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Content": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Placeholder": {
       "type": {
         "name": "entry"
       },
@@ -101,37 +59,13 @@
       },
       "required": false
     },
-    "Footer": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "LinkPopover": {
       "type": {
         "name": "entry"
       },
       "required": false
     },
-    "ImageDialog": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "ImagePopover": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "UploadPlaceholder": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "TablePicker": {
       "type": {
         "name": "entry"
       },
@@ -149,37 +83,13 @@
       },
       "required": false
     },
-    "MergeTagChip": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "SlashMenu": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "EmojiPicker": {
       "type": {
         "name": "entry"
       },
       "required": false
     },
-    "MentionList": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "FloatingToolbar": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "BubbleMenu": {
       "type": {
         "name": "entry"
       },
@@ -197,12 +107,6 @@
       },
       "required": false
     },
-    "FullscreenPortal": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "RestoreDraftPrompt": {
       "type": {
         "name": "entry"
@@ -215,67 +119,7 @@
       },
       "required": false
     },
-    "Tooltip": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Menu": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "MenuItem": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Popover": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
     "Dialog": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Button": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "IconButton": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "TextInput": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Select": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Checkbox": {
-      "type": {
-        "name": "entry"
-      },
-      "required": false
-    },
-    "Spinner": {
       "type": {
         "name": "entry"
       },

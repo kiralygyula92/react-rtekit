@@ -115,6 +115,39 @@
   outline-offset: 2px;
 }
 
+/*
+ * Arbitrary variants: a class on the root that styles one of its descendants.
+ *
+ * `[&_.rte-toolbar]:tw-bg-slate-50` is Tailwind for ".rte-toolbar inside this element
+ * gets bg-slate-50" — how the fixed structure the editor renders itself is reached, by
+ * the stable `rte-*` class names. Written out here the way Tailwind generates them.
+ */
+.\[\&_\.rte-toolbar\]\:tw-bg-slate-50 .rte-toolbar {
+  background-color: #f8fafc;
+}
+.\[\&_\.rte-toolbar\]\:tw-border-b .rte-toolbar {
+  border-block-end: 1px solid #e5e7eb;
+}
+.\[\&_\.rte-toolbar\]\:tw-p-2 .rte-toolbar {
+  padding: 0.5rem;
+}
+.\[\&_\.rte-content\]\:tw-p-3 .rte-content {
+  padding: 0.75rem;
+}
+.\[\&_\.rte-content\]\:tw-min-h-40 .rte-content {
+  min-block-size: 10rem;
+}
+.\[\&_\.rte-footer\]\:tw-p-2 .rte-footer {
+  padding: 0.5rem;
+}
+.\[\&_\.rte-footer\]\:tw-text-xs .rte-footer {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.\[\&_\.rte-footer\]\:tw-text-slate-500 .rte-footer {
+  color: #64748b;
+}
+
 /* The editor's own dark-mode support is off in unstyled mode, so the skin owns it. */
 @media (prefers-color-scheme: dark) {
   .tw-bg-white {
@@ -138,5 +171,14 @@
   }
   .tw-hover\:bg-slate-100:hover {
     background-color: #334155;
+  }
+  .\[\&_\.rte-toolbar\]\:tw-bg-slate-50 .rte-toolbar {
+    background-color: #1e293b;
+  }
+  .\[\&_\.rte-toolbar\]\:tw-border-b .rte-toolbar {
+    border-color: #334155;
+  }
+  .\[\&_\.rte-footer\]\:tw-text-slate-500 .rte-footer {
+    color: #94a3b8;
   }
 }

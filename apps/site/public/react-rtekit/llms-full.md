@@ -2,7 +2,7 @@
 
 > A production-grade React rich-text editor you can actually own.
 
-React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
 Every page of the documentation at https://react-rtekit.vercel.app/react-rtekit/, in reading order, with the source of every live example inlined where its page shows it. It is generated from the same Markdown as the site, so it says exactly what the site says.
 
@@ -16,7 +16,7 @@ The examples import a few components that belong to the documentation site rathe
 
 # Overview
 
-> An accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
+> An accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/
 
@@ -24,7 +24,7 @@ Getting started · https://react-rtekit.vercel.app/react-rtekit/
 
 React RTE Kit is a React component and a set of building blocks for editing rich text. The editing engine is its own — no third-party editor underneath — and it arrives as a complete field: a real ARIA toolbar, a sanitizer on every content boundary, HTML interop that reads legacy Quill markup, and 114 design tokens instead of a UI-kit dependency.
 
-Everything is controlled through props, CSS variables, slots and handler middleware, so the editor fits into your design system and your state management rather than the other way round. When the all-in-one component is the wrong shape, the same editor is available as eleven composable parts and as a headless hook.
+Everything is controlled through props, CSS variables, slots and handler middleware, so the editor fits into your design system and your state management rather than the other way round. When the all-in-one component is the wrong shape, the same editor is available as nine composable parts and as a headless hook.
 
 The package edits text. It does not manage documents, collaborate in real time, or store anything — the value goes in as a string and comes out as one.
 
@@ -35,7 +35,7 @@ The package edits text. It does not manage documents, collaborate in real time, 
 - **No dependencies at all:** React and React DOM are the only peers. The document model, the engine, the parser, the sanitizer and every serializer are this project's own code, behind an `EditorEngine` interface that keeps the engine swappable.
 - **Emptiness is a first-class concept:** `isEmpty()` ignores `<p><br></p>` and limits count text rather than markup, so `required` actually means required.
 - **Accessible by construction:** a real ARIA toolbar with roving focus, a named textbox, errors linked with `aria-describedby`, live announcements, and every shipped theme meeting WCAG AA with a test enforcing it.
-- **Replaceable at ten levels:** theme tokens, class names, slot props, toolbar config, custom items, slots, handler middleware, command overrides, composable parts and a headless hook. Use the lowest level that does the job.
+- **Replaceable at eight levels:** theme tokens, toolbar config, custom items, slots, handler middleware, command overrides, composable parts and a headless hook. Use the lowest level that does the job.
 
 ## Start now
 
@@ -44,7 +44,7 @@ The package edits text. It does not manage documents, collaborate in real time, 
 - [All features](https://react-rtekit.vercel.app/react-rtekit/all-features/) — every capability, grouped.
 - [Playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) — every prop, live.
 - [API reference](https://react-rtekit.vercel.app/react-rtekit/api/) — generated from the TypeScript declarations.
-- [Customization](https://react-rtekit.vercel.app/react-rtekit/customization/) — the ten levels, and how to pick one.
+- [Customization](https://react-rtekit.vercel.app/react-rtekit/customization/) — the eight levels, and how to pick one.
 
 Nothing in this documentation is behind a plan. The package is MIT licensed and every capability is available to everyone.
 
@@ -586,7 +586,7 @@ export default function FormattingExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -655,7 +655,7 @@ export default function MarkdownExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -726,7 +726,7 @@ export default function ListsExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -751,7 +751,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/check-lists/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -859,7 +859,7 @@ export default function LinksExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -886,7 +886,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/blockquotes/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -910,7 +910,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/code-blocks/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -935,7 +935,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/dividers/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -959,7 +959,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/subscript-and-superscri
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -984,7 +984,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/clear-formatting/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1071,7 +1071,7 @@ export default function HistoryExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1182,7 +1182,7 @@ export default function CounterAndLimitsExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1404,7 +1404,7 @@ export default function ControlledExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1555,7 +1555,7 @@ export default function SanitizationExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1708,7 +1708,7 @@ export default function HtmlInteropExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -1865,7 +1865,7 @@ export default function EmailOutputExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2006,7 +2006,7 @@ export default function PasteCleanupExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2123,7 +2123,7 @@ export default function MergeTagsExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2148,7 +2148,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/markdown-shortcuts/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2173,7 +2173,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/counters-and-limits/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2318,7 +2318,7 @@ export default function ThemingExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2426,7 +2426,7 @@ export default function PresetsExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2594,7 +2594,7 @@ export default function ToolbarConfigExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2773,7 +2773,7 @@ export default function ContentStylesExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2798,7 +2798,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/alignment/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2823,7 +2823,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/indentation/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -2907,7 +2907,7 @@ export default function TablesExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3031,7 +3031,7 @@ export default function ImagesExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3057,7 +3057,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/content-view/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3082,7 +3082,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/toolbar/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3177,7 +3177,7 @@ export default function FloatingToolbarExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3245,7 +3245,7 @@ export default function EmojiAndSlashExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3270,7 +3270,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/emoji/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3347,7 +3347,7 @@ export default function MentionsExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3431,7 +3431,7 @@ export default function FindReplaceExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3497,7 +3497,7 @@ export default function FullscreenExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3575,7 +3575,7 @@ export default function SourceViewExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3661,7 +3661,7 @@ export default function AccessibilityExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3771,7 +3771,7 @@ export default function AutosaveExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3840,7 +3840,7 @@ export default function ReadonlyAndDisabledExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3931,7 +3931,7 @@ export default function MobileExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -3945,7 +3945,7 @@ The bottom-docked toolbar tracks the visual viewport, which iOS and Android repo
 
 # Slots
 
-> Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.
+> Twenty replaceable parts, from the field label to a single toolbar button, each one an ordinary component.
 
 Features · https://react-rtekit.vercel.app/react-rtekit/slots/
 
@@ -3958,7 +3958,7 @@ import { useState } from 'react';
 import { RichTextEditor, type RteSlots } from 'react-rtekit';
 
 /**
- * Four replaced slots.
+ * Five replaced slots.
  *
  * The rule each replacement follows: spread the props you were given. They carry the
  * behaviour — the `mousedown` that keeps the selection alive (fixes R5), the ARIA the
@@ -4044,11 +4044,10 @@ const slots: Partial<RteSlots> = {
     );
   },
 
-  /** A placeholder with a hint under it. */
-  Placeholder: ({ text }) => (
-    <span className="skin-placeholder">
-      {text}
-      <small>Markdown shortcuts work here — try “# ” or “- ”.</small>
+  /** The helper text, set off as a hint. `id` ties it to the field for screen readers. */
+  HelperText: ({ id, children }) => (
+    <span id={id} className="skin-placeholder">
+      <small>{children}</small>
     </span>
   ),
 };
@@ -4062,6 +4061,7 @@ export default function SlotsCustomExample() {
         preset="standard"
         label="Message"
         hideLabel
+        helperText="Markdown shortcuts work here — try “# ” or “- ”."
         maxLength={240}
         showCounter
         slots={slots}
@@ -4072,7 +4072,7 @@ export default function SlotsCustomExample() {
       />
 
       <p className="callout">
-        Nothing here changes what the editor <em>does</em>. The four replacements are presentation
+        Nothing here changes what the editor <em>does</em>. The five replacements are presentation
         only, which is why the keyboard model, the announcements and the selection handling are all
         still the shipped ones.
       </p>
@@ -4083,7 +4083,7 @@ export default function SlotsCustomExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4244,7 +4244,7 @@ export default function HandlersMiddlewareExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4378,7 +4378,7 @@ export default function CommandOverridesExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4395,7 +4395,7 @@ A command runs against the current selection. Calling one while the editor has n
 
 # Composable parts
 
-> The same editor as eleven separate components, for layouts the all-in-one shape cannot make.
+> The same editor as nine separate components, for layouts the all-in-one shape cannot make.
 
 Features · https://react-rtekit.vercel.app/react-rtekit/composable-parts/
 
@@ -4511,7 +4511,7 @@ export default function ComposableExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4679,7 +4679,7 @@ export default function HeadlessExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4770,7 +4770,7 @@ export default function PluginAuthoringExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4797,7 +4797,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/presets/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4826,7 +4826,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/engine-adapter/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -4850,39 +4850,54 @@ Features · https://react-rtekit.vercel.app/react-rtekit/icons/
 *Example: Design-system skin* — the source of the live demo on this page.
 
 ```tsx
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { RichTextEditor, type RteSlots } from 'react-rtekit';
+import { forwardRef, useEffect, useRef, useState, type ReactNode } from 'react';
+import {
+  RichTextEditor,
+  type RteSlots,
+  type SlotBaseProps,
+  type ToolbarButtonSlotProps,
+} from 'react-rtekit';
 
 /**
- * Re-skinning through the twelve primitives.
+ * Re-skinning the editor's chrome with a design system's own components.
  *
- * This is the argument for having primitives at all. Replace `Button`, `Popover`,
- * `Dialog`, `TextInput` and the rest, and every feature that uses them follows — the
- * link popover, the image dialog, the colour picker, the table controls, the find
- * panel. No feature knows it has been re-skinned.
+ * The slots replaced here are the ones a design system usually has an opinion about: the
+ * toolbar's buttons and toggles, the field label, the helper text, the counter and the
+ * dialog. The features that use them are untouched — the toolbar asks for a
+ * `ToolbarButton`, not for this one — and keep their keyboard model, because the
+ * replacement forwards the ref and spreads the props it is given.
  */
 
-/** A stand-in for a design system's own components. */
-function DsButton({
-  variant = 'text',
-  className,
-  children,
-  ...rest
-}: {
-  variant?: 'text' | 'solid' | 'outline';
-  className?: string;
-  children?: ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      {...rest}
-      className={['ds-button', className].filter(Boolean).join(' ')}
-      data-variant={variant}
-    >
-      {children}
-    </button>
-  );
-}
+type ToolbarControlProps = ToolbarButtonSlotProps & SlotBaseProps;
+
+/**
+ * A toolbar control in the design system's style.
+ *
+ * The ref is forwarded and the remaining props are spread: the toolbar's roving focus
+ * moves between controls through that ref, and `tabIndex`, `aria-label`, `aria-pressed`
+ * and `onMouseDown` arrive in the props. Dropping either breaks the keyboard model.
+ */
+const DsToolbarControl = forwardRef<HTMLButtonElement, ToolbarControlProps>(
+  function DsToolbarControl(
+    { active, label, shortcut, icon, showLabel, className, command, type: _type, ...rest },
+    ref,
+  ) {
+    return (
+      <button
+        ref={ref}
+        type="button"
+        className={['ds-button', 'ds-button--icon', className].filter(Boolean).join(' ')}
+        data-active={active}
+        data-command={command}
+        title={shortcut ? `${label} (${shortcut})` : label}
+        {...rest}
+      >
+        {icon}
+        {showLabel ? <span className="ds-button__label">{label}</span> : null}
+      </button>
+    );
+  },
+);
 
 /** A dialog built on the platform's own, which gives focus trapping for free. */
 function DsDialog({
@@ -4914,86 +4929,47 @@ function DsDialog({
 }
 
 const slots: Partial<RteSlots> = {
-  Button: DsButton,
+  ToolbarButton: DsToolbarControl as RteSlots['ToolbarButton'],
+  ToolbarToggle: DsToolbarControl as RteSlots['ToolbarToggle'],
 
-  IconButton: ({ label, className, children, ...rest }) => (
-    <button
-      {...rest}
-      aria-label={label}
-      title={label}
-      className={['ds-button', 'ds-button--icon', className].filter(Boolean).join(' ')}
+  ToolbarSeparator: ({ className }) => (
+    <span className={['ds-divider', className].filter(Boolean).join(' ')} role="separator" />
+  ),
+
+  Label: ({ htmlFor, required, hidden, children, className }) => (
+    <label
+      htmlFor={htmlFor}
+      className={['ds-field__label', hidden ? 'rte-visually-hidden' : '', className]
+        .filter(Boolean)
+        .join(' ')}
     >
       {children}
-    </button>
+      {required ? <span aria-hidden="true"> *</span> : null}
+    </label>
+  ),
+
+  HelperText: ({ id, children, className }) => (
+    <p id={id} className={['ds-hint', className].filter(Boolean).join(' ')}>
+      {children}
+    </p>
+  ),
+
+  Counter: ({ id, text, overLimit, className }) => (
+    <span
+      id={id}
+      className={['ds-hint', className].filter(Boolean).join(' ')}
+      data-over={overLimit}
+    >
+      {text}
+    </span>
   ),
 
   Dialog: DsDialog,
-
-  TextInput: ({ label, value, onChange, invalid, className }) => (
-    <label className={['ds-field', className].filter(Boolean).join(' ')}>
-      {label ? <span className="ds-field__label">{label}</span> : null}
-      <input
-        className="ds-field__input"
-        value={value}
-        aria-invalid={invalid === true}
-        onChange={(event) => {
-          onChange(event.target.value);
-        }}
-      />
-    </label>
-  ),
-
-  Select: ({ label, value, options, onChange, className }) => (
-    <label className={['ds-field', className].filter(Boolean).join(' ')}>
-      {label ? <span className="ds-field__label">{label}</span> : null}
-      <select
-        className="ds-field__input"
-        value={value}
-        onChange={(event) => {
-          onChange(event.target.value);
-        }}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </label>
-  ),
-
-  Checkbox: ({ label, checked, onChange, disabled, className }) => (
-    <label className={['ds-check', className].filter(Boolean).join(' ')}>
-      <input
-        type="checkbox"
-        checked={checked}
-        disabled={disabled}
-        onChange={(event) => {
-          onChange(event.target.checked);
-        }}
-      />
-      {label}
-    </label>
-  ),
-
-  Spinner: ({ label, className }) => (
-    <span
-      className={['ds-spinner', className].filter(Boolean).join(' ')}
-      role="status"
-      aria-label={label}
-    />
-  ),
-
-  Tooltip: ({ title, children, className }) => (
-    <span className={['ds-tooltip', className].filter(Boolean).join(' ')} title={title}>
-      {children}
-    </span>
-  ),
 };
 
 const SAMPLE =
-  '<p>Open the <strong>link</strong> popover, the image dialog or the table picker: all three ' +
-  'are built from the primitives replaced in this file.</p>';
+  '<p>The toolbar, the label, the hint below the field and the counter are the design ' +
+  "system's components. Open the keyboard reference with <strong>Ctrl+/</strong> to see its dialog.</p>";
 
 export default function DesignSystemSkinExample() {
   const [html, setHtml] = useState(SAMPLE);
@@ -5001,9 +4977,11 @@ export default function DesignSystemSkinExample() {
   return (
     <div className="stack">
       <RichTextEditor
-        preset="full"
+        preset="standard"
         label="Message"
-        hideLabel
+        helperText="Seven slots replaced; every feature behind them unchanged."
+        maxLength={500}
+        showCounter
         slots={slots}
         value={html}
         onChange={(value) => {
@@ -5012,9 +4990,10 @@ export default function DesignSystemSkinExample() {
       />
 
       <p className="callout">
-        Eight replacements, and every dialog, popover, field and busy indicator in the editor
-        changed with them. The features themselves were not touched — they ask for a{' '}
-        <code>Dialog</code>, not for this one.
+        Seven replacements — the toolbar controls, the field chrome and the dialog. The features
+        themselves were not touched: they ask for a <code>ToolbarButton</code> or a{' '}
+        <code>Dialog</code>, not for this one, and keep their keyboard model because the replacement
+        forwards its ref.
       </p>
     </div>
   );
@@ -5023,7 +5002,7 @@ export default function DesignSystemSkinExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -5164,7 +5143,7 @@ export default function LocalizationExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -5191,7 +5170,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/accessibility/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -5216,7 +5195,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/server-rendering/
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -5400,7 +5379,7 @@ export default function LargeDocumentExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -5540,7 +5519,7 @@ export default function ValidationRhfExample() {
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](https://react-rtekit.vercel.app/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 
@@ -6182,13 +6161,10 @@ The full prop surface of `<RichTextEditor>`.
 | `enableEmoji` | `boolean` | no | The emoji picker and its `:` trigger. |
 | `enableMentions` | `boolean` | no | Mentions and their `@` trigger, configured through `mentions`. |
 | `enableMergeTags` | `boolean` | no | Merge tags as atomic nodes, configured through `mergeTags` (fixes R23). |
-| `enableHistory` | `boolean` | no | Undo and redo, with their bindings and toolbar controls. |
 | `enableMarkdownShortcuts` | `boolean` | no | Markdown input rules, such as `# ` for a heading. |
 | `enableFindReplace` | `boolean` | no | The find-and-replace panel. |
 | `enableSourceView` | `boolean` | no | The HTML source view, which sanitizes on apply. |
 | `enableFullscreen` | `boolean` | no | The fullscreen toggle. |
-| `enableClearFormatting` | `boolean` | no | The "clear formatting" command. |
-| `enableWordCount` | `boolean` | no | Word counting, which `countUnit: 'words'` needs. |
 | `value` | `EditorValue` | no | Controlled value, in `valueFormat`. |
 | `defaultValue` | `EditorValue` | no | Uncontrolled initial value. |
 | `valueFormat` | `ValueFormat` | no | What `value`, `defaultValue` and `onChange` speak. |
@@ -6215,7 +6191,6 @@ The full prop surface of `<RichTextEditor>`.
 | `plugins` | `RtePlugin<unknown>[]` | no | Replaces the preset's plugin list entirely. |
 | `addPlugins` | `RtePlugin<unknown>[]` | no | Plugins added on top of the preset's list. |
 | `removePlugins` | `string[]` | no | Names of plugins the preset included that this editor does not want. |
-| `pluginOptions` | `Record<string, unknown>` | no | Per-plugin options, keyed by plugin name. |
 | `headingLevels` | `HeadingLevel[]` | no | Which heading levels the dropdown and the schema allow. |
 | `fontFamilies` | `object[]` | no | The font-family dropdown's options. |
 | `fontSizes` | `object[]` | no | The font-size dropdown's options. |
@@ -6240,47 +6215,30 @@ The full prop surface of `<RichTextEditor>`.
 | `emailOptions` | `EmailOutputOptions` | no | Inlining, width and table-layout choices for the `email` profile. |
 | `interop` | `InteropOptions` | no | How legacy markup, such as Quill's, is read and written back. |
 | `pasteMode` | `PasteMode \| function` | no | Rich, plain or cleaned paste, statically or per paste. |
-| `pastePrompt` | `boolean` | no | Offer "Keep / Remove formatting" after a rich office paste. |
-| `autoLinkOnPaste` | `boolean` | no | Turn pasted URLs into links. |
 | `autoLink` | `boolean` | no | Turn typed URLs and e-mail addresses into links. |
 | `autoLinkProtocols` | `string[]` | no | Protocols a typed URL may be linked with. |
 | `defaultProtocol` | `string` | no | Protocol given to a bare host, in the popover and in autolinking. |
 | `linkValidator` | `function` | no | Rejects or rewrites a URL before it becomes a link. Return a message to reject, or `null` to accept. Sanitization runs regardless: a validator can tighten the rules but never loosens them. |
-| `allowDataUrlImages` | `boolean` | no | Allow `data:` image sources, which bloat stored content. |
 | `autosave` | `AutosaveConfig` | no | Draft saving, its key, its TTL and its restore prompt. |
 | `toolbar` | `false \| ToolbarConfig` | no | `false` hides the toolbar entirely. |
-| `toolbarPosition` | `"bottom" \| "top" \| "none"` | no | Which side of the content the toolbar sits on. |
+| `toolbarPosition` | `"top" \| "bottom" \| "none"` | no | Which side of the content the toolbar sits on. |
 | `stickyToolbar` | `boolean \| object` | no | Keep the toolbar visible while a long document scrolls. |
 | `toolbarOverflow` | `"menu" \| "wrap" \| "scroll"` | no | What happens to items that do not fit at this width. |
 | `floatingToolbar` | `boolean \| FloatingToolbarConfig` | no | A toolbar that follows the selection. |
 | `bubbleMenuItems` | `ToolbarItemSpec[]` | no | What the bubble menu offers, when it differs from the floating toolbar. |
 | `minHeight` | `string \| number` | no | Height of the content box before it grows. |
 | `maxHeight` | `string \| number` | no | Height at which the content starts scrolling instead of growing. |
-| `autoGrow` | `boolean` | no | Grow with the content rather than scrolling immediately. |
 | `resizable` | `boolean \| "vertical"` | no | Offer a drag handle for resizing the content box (fixes R22). |
 | `fullscreen` | `boolean` | no | Controlled fullscreen. |
-| `defaultFullscreen` | `boolean` | no | Start in fullscreen, for an uncontrolled editor. |
 | `footer` | `ReactNode \| function` | no | Extra footer content next to the counter. |
 | `readOnlyToolbar` | `"hide" \| "disable"` | no | Hide or disable the toolbar in `readOnly` mode. |
 | `renderToolbar` | `function` | no | Replaces the toolbar, with the resolved items and the default renderer to hand. |
-| `renderFooter` | `function` | no | Replaces the footer row. |
-| `renderPlaceholder` | `function` | no | Replaces the placeholder. |
-| `renderLinkPopover` | `function` | no | Replaces the link popover. |
-| `renderImagePopover` | `function` | no | Replaces the controls shown when an image is selected. |
-| `renderSlashMenu` | `function` | no | Replaces the `/` command palette. |
-| `renderMergeTagMenu` | `function` | no | Replaces the merge-tag menu. |
-| `renderColorPicker` | `function` | no | Replaces the colour palette. |
-| `renderSourceView` | `function` | no | Replaces the HTML source view. |
-| `renderRestoreDraftPrompt` | `function` | no | Replaces the prompt offering to restore an autosaved draft. |
 | `onUpload` | `UploadHandler` | no | Hands a file to your own service and returns the attributes to insert. |
 | `uploadAccept` | `string` | no | Accepted file types, enforced before the upload starts. |
 | `maxUploadSize` | `number` | no | Size ceiling, enforced before the file leaves the browser. |
 | `onUploadError` | `function` | no | A rejected or failed upload, with the file it concerned. |
 | `imageOptions` | `ImageOptions` | no | Resizing, alignment and caption behaviour for images. |
 | `slots` | `Partial<RteSlots>` | no | Replacement components, by slot name. |
-| `slotProps` | `RteSlotProps` | no | Extra props merged into each slot, statically or per render. |
-| `classNames` | `RteClassNames` | no | Per-slot class names. |
-| `styles` | `RteStyles` | no | Per-slot inline styles. |
 | `handlers` | `Partial<RteHandlers>` | no | Interaction middleware; each wraps one interaction. |
 | `commandOverrides` | `CommandOverrides` | no | Replacement command implementations, by command id. |
 | `icons` | `RteIcons` | no | Replacement icons, by icon name. |
@@ -6302,7 +6260,7 @@ The full prop surface of `<RichTextEditor>`.
 ## Source
 
 - [RichTextEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/RichTextEditor.tsx#L108)
-- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L118)
+- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L112)
 
 ---
 
@@ -6354,13 +6312,13 @@ This symbol takes no options.
 ## Source
 
 - [RteContentView](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/view/RteContentView.tsx#L33)
-- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L381)
+- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L338)
 
 ---
 
 # Composable parts
 
-> The eleven parts the all-in-one component is assembled from.
+> The nine parts the all-in-one component is assembled from.
 
 Reference · https://react-rtekit.vercel.app/react-rtekit/api/composable-parts/
 
@@ -6461,16 +6419,16 @@ This symbol takes no options.
 
 ## Source
 
-- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L433)
-- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L287)
-- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L359)
-- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L394)
-- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L420)
-- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L408)
-- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L464)
-- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L587)
-- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L102)
-- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L534)
+- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L430)
+- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L278)
+- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L350)
+- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L387)
+- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L417)
+- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L405)
+- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L461)
+- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L584)
+- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L96)
+- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L531)
 
 ---
 
@@ -6574,13 +6532,10 @@ Options accepted by the headless `useEditor` hook.
 | `enableEmoji` | `boolean` | no | The emoji picker and its `:` trigger. |
 | `enableMentions` | `boolean` | no | Mentions and their `@` trigger, configured through `mentions`. |
 | `enableMergeTags` | `boolean` | no | Merge tags as atomic nodes, configured through `mergeTags` (fixes R23). |
-| `enableHistory` | `boolean` | no | Undo and redo, with their bindings and toolbar controls. |
 | `enableMarkdownShortcuts` | `boolean` | no | Markdown input rules, such as `# ` for a heading. |
 | `enableFindReplace` | `boolean` | no | The find-and-replace panel. |
 | `enableSourceView` | `boolean` | no | The HTML source view, which sanitizes on apply. |
 | `enableFullscreen` | `boolean` | no | The fullscreen toggle. |
-| `enableClearFormatting` | `boolean` | no | The "clear formatting" command. |
-| `enableWordCount` | `boolean` | no | Word counting, which `countUnit: 'words'` needs. |
 | `value` | `EditorValue` | no | Controlled value, in `valueFormat`. |
 | `defaultValue` | `EditorValue` | no | Uncontrolled initial value. |
 | `valueFormat` | `ValueFormat` | no | What `value`, `defaultValue` and `onChange` speak. |
@@ -6607,7 +6562,6 @@ Options accepted by the headless `useEditor` hook.
 | `plugins` | `RtePlugin<unknown>[]` | no | Replaces the preset's plugin list entirely. |
 | `addPlugins` | `RtePlugin<unknown>[]` | no | Plugins added on top of the preset's list. |
 | `removePlugins` | `string[]` | no | Names of plugins the preset included that this editor does not want. |
-| `pluginOptions` | `Record<string, unknown>` | no | Per-plugin options, keyed by plugin name. |
 | `headingLevels` | `HeadingLevel[]` | no | Which heading levels the dropdown and the schema allow. |
 | `fontFamilies` | `object[]` | no | The font-family dropdown's options. |
 | `fontSizes` | `object[]` | no | The font-size dropdown's options. |
@@ -6632,37 +6586,23 @@ Options accepted by the headless `useEditor` hook.
 | `emailOptions` | `EmailOutputOptions` | no | Inlining, width and table-layout choices for the `email` profile. |
 | `interop` | `InteropOptions` | no | How legacy markup, such as Quill's, is read and written back. |
 | `pasteMode` | `PasteMode \| function` | no | Rich, plain or cleaned paste, statically or per paste. |
-| `pastePrompt` | `boolean` | no | Offer "Keep / Remove formatting" after a rich office paste. |
-| `autoLinkOnPaste` | `boolean` | no | Turn pasted URLs into links. |
 | `autoLink` | `boolean` | no | Turn typed URLs and e-mail addresses into links. |
 | `autoLinkProtocols` | `string[]` | no | Protocols a typed URL may be linked with. |
 | `defaultProtocol` | `string` | no | Protocol given to a bare host, in the popover and in autolinking. |
 | `linkValidator` | `function` | no | Rejects or rewrites a URL before it becomes a link. Return a message to reject, or `null` to accept. Sanitization runs regardless: a validator can tighten the rules but never loosens them. |
-| `allowDataUrlImages` | `boolean` | no | Allow `data:` image sources, which bloat stored content. |
 | `autosave` | `AutosaveConfig` | no | Draft saving, its key, its TTL and its restore prompt. |
 | `toolbar` | `false \| ToolbarConfig` | no | `false` hides the toolbar entirely. |
-| `toolbarPosition` | `"bottom" \| "top" \| "none"` | no | Which side of the content the toolbar sits on. |
+| `toolbarPosition` | `"top" \| "bottom" \| "none"` | no | Which side of the content the toolbar sits on. |
 | `stickyToolbar` | `boolean \| object` | no | Keep the toolbar visible while a long document scrolls. |
 | `toolbarOverflow` | `"menu" \| "wrap" \| "scroll"` | no | What happens to items that do not fit at this width. |
 | `floatingToolbar` | `boolean \| FloatingToolbarConfig` | no | A toolbar that follows the selection. |
 | `bubbleMenuItems` | `ToolbarItemSpec[]` | no | What the bubble menu offers, when it differs from the floating toolbar. |
 | `minHeight` | `string \| number` | no | Height of the content box before it grows. |
 | `maxHeight` | `string \| number` | no | Height at which the content starts scrolling instead of growing. |
-| `autoGrow` | `boolean` | no | Grow with the content rather than scrolling immediately. |
 | `resizable` | `boolean \| "vertical"` | no | Offer a drag handle for resizing the content box (fixes R22). |
 | `fullscreen` | `boolean` | no | Controlled fullscreen. |
-| `defaultFullscreen` | `boolean` | no | Start in fullscreen, for an uncontrolled editor. |
 | `footer` | `ReactNode \| function` | no | Extra footer content next to the counter. |
 | `readOnlyToolbar` | `"hide" \| "disable"` | no | Hide or disable the toolbar in `readOnly` mode. |
-| `renderFooter` | `function` | no | Replaces the footer row. |
-| `renderPlaceholder` | `function` | no | Replaces the placeholder. |
-| `renderLinkPopover` | `function` | no | Replaces the link popover. |
-| `renderImagePopover` | `function` | no | Replaces the controls shown when an image is selected. |
-| `renderSlashMenu` | `function` | no | Replaces the `/` command palette. |
-| `renderMergeTagMenu` | `function` | no | Replaces the merge-tag menu. |
-| `renderColorPicker` | `function` | no | Replaces the colour palette. |
-| `renderSourceView` | `function` | no | Replaces the HTML source view. |
-| `renderRestoreDraftPrompt` | `function` | no | Replaces the prompt offering to restore an autosaved draft. |
 | `onUpload` | `UploadHandler` | no | Hands a file to your own service and returns the attributes to insert. |
 | `uploadAccept` | `string` | no | Accepted file types, enforced before the upload starts. |
 | `maxUploadSize` | `number` | no | Size ceiling, enforced before the file leaves the browser. |
@@ -6693,7 +6633,7 @@ This symbol takes no options.
 
 ## Source
 
-- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L371)
+- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L329)
 - [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L213)
 
 ---
@@ -6831,16 +6771,16 @@ This symbol takes no options.
 
 - [useCharacterCount](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L138)
 - [useCommand](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L106)
-- [useEditorContext](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L52)
+- [useEditorContext](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L55)
 - [useEditorState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L30)
 - [useFormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L83)
 - [useIsEmpty](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L129)
 - [useIsFocused](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L168)
 - [useLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L129)
-- [useRteConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L191)
-- [useRteDefaults](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L206)
+- [useRteConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L194)
+- [useRteDefaults](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L211)
 - [useRteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L110)
-- [useRteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L149)
+- [useRteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L152)
 - [useUpload](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L158)
 - [useValidationError](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L175)
 
@@ -7153,12 +7093,12 @@ This symbol takes no options.
 ## Source
 
 - [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L417)
-- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L198)
+- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L213)
 - [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307)
 - [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706)
 - [isEmptyHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L773)
-- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L301)
-- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L333)
+- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L396)
+- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L428)
 
 ---
 
@@ -7415,7 +7355,7 @@ This symbol takes no options.
 
 # Slot catalogue
 
-> All 46 replaceable parts and the props each one receives.
+> All 20 replaceable parts and the props each one receives.
 
 Reference · https://react-rtekit.vercel.app/react-rtekit/api/slots/
 
@@ -7435,52 +7375,26 @@ Every part of the editor you can replace, keyed by name. Pass a component for a 
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `Root` | `entry` | no | The outermost element; owns the data attributes. |
-| `Toolbar` | `entry` | no | The toolbar container. |
-| `ToolbarGroup` | `entry` | no | One group of toolbar items. |
 | `ToolbarSeparator` | `entry` | no | The divider between groups. |
 | `ToolbarButton` | `entry` | no | A plain toolbar button. |
 | `ToolbarToggle` | `entry` | no | A toolbar button with a pressed state. |
 | `ToolbarDropdown` | `entry` | no | A toolbar control that opens a menu. |
-| `ToolbarOverflow` | `entry` | no | The "more" affordance for hidden items. |
 | `ColorPicker` | `entry` | no | The colour palette, recents and custom input. |
-| `ContentWrapper` | `entry` | no | The bordered box around the editable area. |
-| `Content` | `entry` | no | The host element the engine renders into. |
-| `Placeholder` | `entry` | no | Shown while the editor is empty. |
 | `Label` | `entry` | no | The field label. |
 | `HelperText` | `entry` | no | The helper text below the editor. |
 | `ErrorText` | `entry` | no | The validation message, with role="alert". |
 | `Counter` | `entry` | no | The character or word counter. |
-| `Footer` | `entry` | no | The row holding the counter and any extras. |
 | `LinkPopover` | `entry` | no | The link editor and preview. |
-| `ImageDialog` | `entry` | no | The insert-image dialog. |
 | `ImagePopover` | `entry` | no | The controls shown for a selected image. |
-| `UploadPlaceholder` | `entry` | no | The in-progress upload indicator. |
-| `TablePicker` | `entry` | no | The grid used to choose table dimensions. |
 | `TableToolbar` | `entry` | no | Row and column controls for a selected table. |
 | `InlineSuggestMenu` | `entry` | no | The shared list behind every trigger menu. |
-| `MergeTagChip` | `entry` | no | One merge tag as rendered in the content. |
-| `SlashMenu` | `entry` | no | The slash-command palette. |
 | `EmojiPicker` | `entry` | no | The emoji list. |
-| `MentionList` | `entry` | no | The mention candidate list. |
 | `FloatingToolbar` | `entry` | no | The toolbar that follows the selection. |
-| `BubbleMenu` | `entry` | no | The compact menu shown over a selection. |
 | `FindReplacePanel` | `entry` | no | The find-and-replace panel. |
 | `SourceView` | `entry` | no | The HTML source editor. |
-| `FullscreenPortal` | `entry` | no | The container used in fullscreen mode. |
 | `RestoreDraftPrompt` | `entry` | no | The prompt offering a saved draft. |
 | `ShortcutHelpDialog` | `entry` | no | The keyboard shortcut reference. |
-| `Tooltip` | `entry` | no | Tooltip primitive. |
-| `Menu` | `entry` | no | Menu primitive. |
-| `MenuItem` | `entry` | no | Menu item primitive. |
-| `Popover` | `entry` | no | Popover primitive. |
 | `Dialog` | `entry` | no | Dialog primitive. |
-| `Button` | `entry` | no | Button primitive. |
-| `IconButton` | `entry` | no | Icon-only button primitive. |
-| `TextInput` | `entry` | no | Text input primitive. |
-| `Select` | `entry` | no | Select primitive. |
-| `Checkbox` | `entry` | no | Checkbox primitive. |
-| `Spinner` | `entry` | no | Loading indicator primitive. |
 
 ## Source
 
@@ -8285,59 +8199,31 @@ presets and third-party extensions the same mechanism.
 
 ### RteSlots
 
-Every replaceable component.
-
-The last dozen entries are primitives; overriding just those re-skins the whole
-editor for a design system.
+Every replaceable component: the toolbar controls, the field chrome, and the panels and
+popovers the features open.
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `Root` | `SlotComponent<RootSlotProps>` | yes | The outermost element, carrying every state attribute the CSS keys off. |
-| `Toolbar` | `SlotComponent<ToolbarSlotProps>` | yes | The toolbar container, including its roving-tabindex keyboard model. |
-| `ToolbarGroup` | `SlotComponent<Record<string, never>>` | yes | One group of toolbar items. |
 | `ToolbarSeparator` | `SlotComponent<Record<string, never>>` | yes | The divider drawn between toolbar groups. |
 | `ToolbarButton` | `SlotComponent<ToolbarButtonSlotProps>` | yes | A toolbar control that performs an action. |
 | `ToolbarToggle` | `SlotComponent<ToolbarButtonSlotProps>` | yes | A toolbar control that reflects a format, with `aria-pressed`. |
 | `ToolbarDropdown` | `SlotComponent<ToolbarDropdownSlotProps>` | yes | A toolbar control that opens a list of options. |
-| `ToolbarOverflow` | `SlotComponent<object>` | yes | The menu holding the items that did not fit at this width. |
 | `ColorPicker` | `SlotComponent<ColorPickerSlotProps>` | yes | The colour palette shown by the text- and background-colour controls. |
-| `ContentWrapper` | `SlotComponent<Record<string, never>>` | yes | The box around the content, which is what scrolls and grows. |
-| `Content` | `SlotComponent<ContentSlotProps>` | yes | The contenteditable surface itself. |
-| `Placeholder` | `SlotComponent<object>` | yes | The placeholder shown over an empty document. |
 | `Label` | `SlotComponent<object>` | yes | The field label. |
 | `HelperText` | `SlotComponent<object>` | yes | The description below the field. |
 | `ErrorText` | `SlotComponent<object>` | yes | The validation message, announced when it appears. |
 | `Counter` | `SlotComponent<CounterSlotProps>` | yes | The character or word counter. |
-| `Footer` | `SlotComponent<Record<string, never>>` | yes | The row below the content that holds the helper text and the counter. |
 | `LinkPopover` | `SlotComponent<LinkPopoverSlotProps>` | yes | The popover for creating and editing links. |
-| `ImageDialog` | `SlotComponent<Record<string, unknown>>` | yes | The dialog for inserting an image by URL or by file. |
 | `ImagePopover` | `SlotComponent<Record<string, unknown>>` | yes | The controls shown when an image is selected. |
-| `UploadPlaceholder` | `SlotComponent<UploadPlaceholderSlotProps>` | yes | The stand-in shown while a file uploads. |
-| `TablePicker` | `SlotComponent<object>` | yes | The grid for choosing the size of a new table. |
 | `TableToolbar` | `SlotComponent<Record<string, unknown>>` | yes | The controls shown when the caret is inside a table. |
 | `InlineSuggestMenu` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The shared popover behind the slash, mention, emoji and merge-tag menus. |
-| `MergeTagChip` | `SlotComponent<object>` | yes | One merge tag as it appears inside the document. |
-| `SlashMenu` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The command palette opened by `/`. |
 | `EmojiPicker` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The emoji picker. |
-| `MentionList` | `SlotComponent<InlineSuggestMenuSlotProps<unknown>>` | yes | The mention results, including their loading and empty states. |
 | `FloatingToolbar` | `SlotComponent<object>` | yes | The toolbar that follows the selection. |
-| `BubbleMenu` | `SlotComponent<object>` | yes | The bubble menu shown above a non-empty selection. |
 | `FindReplacePanel` | `SlotComponent<FindReplacePanelSlotProps>` | yes | The find-and-replace panel. |
 | `SourceView` | `SlotComponent<SourceViewSlotProps>` | yes | The HTML source editor. |
-| `FullscreenPortal` | `SlotComponent<object>` | yes | The container the editor moves into in fullscreen mode. |
 | `RestoreDraftPrompt` | `SlotComponent<RestoreDraftPromptSlotProps>` | yes | The prompt offering to restore an autosaved draft. |
 | `ShortcutHelpDialog` | `SlotComponent<object>` | yes | The keyboard reference, built from the keymap actually in force. |
-| `Tooltip` | `SlotComponent<object>` | yes | Wraps a control with its hover and focus description. |
-| `Menu` | `SlotComponent<object>` | yes | A menu surface with its own focus management. |
-| `MenuItem` | `SlotComponent<object>` | yes | One row of a RteSlots.Menu. |
-| `Popover` | `SlotComponent<object>` | yes | A positioned surface anchored to an element, closing on Escape and outside click. |
 | `Dialog` | `SlotComponent<object>` | yes | A modal surface that traps focus and returns it to the trigger. |
-| `Button` | `SlotComponent<object>` | yes | A labelled button. |
-| `IconButton` | `SlotComponent<object>` | yes | A button whose label is not visible and so must be given to assistive technology. |
-| `TextInput` | `SlotComponent<object>` | yes | A single-line text field. |
-| `Select` | `SlotComponent<object>` | yes | A single-choice control. |
-| `Checkbox` | `SlotComponent<object>` | yes | A two-state control with a visible label. |
-| `Spinner` | `SlotComponent<object>` | yes | The busy indicator, used while uploads and async providers are pending. |
 
 ### RteTheme
 
@@ -8447,7 +8333,7 @@ This symbol takes no options.
 - [RteIcons](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/icons.ts#L12)
 - [RteLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/localization.ts#L24)
 - [RtePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/plugin.ts#L90)
-- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L294)
+- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L235)
 - [RteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/theme.ts#L18)
 - [SanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L53)
 - [SanitizeProfileName](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L16)
@@ -8459,24 +8345,22 @@ This symbol takes no options.
 
 # How to customize
 
-> The ten levels of customization, from a theme token to a fully headless editor, and how to pick the lowest one that does the job.
+> The eight levels of customization, from a theme token to a fully headless editor, and how to pick the lowest one that does the job.
 
 Customization · https://react-rtekit.vercel.app/react-rtekit/customization/
 
-There are ten ways to change what the editor looks like and how it behaves. They are ordered here from least invasive to most, and the rule is to use the lowest one that does the job — each level leaves everything above it working.
+There are eight ways to change what the editor looks like and how it behaves. They are ordered here from least invasive to most, and the rule is to use the lowest one that does the job — each level leaves everything above it working.
 
 1. **Theme tokens** — 114 CSS custom properties. Changes colour, size and spacing. [Theming & tokens](https://react-rtekit.vercel.app/react-rtekit/customization/theme-tokens/)
-2. **`classNames`** — add your own class to any part, keeping the shipped one.
-3. **`slotProps`** — pass props through to a part without replacing it.
-4. **Toolbar config** — choose items, group them, decide the overflow. [Toolbar layout](https://react-rtekit.vercel.app/react-rtekit/customization/toolbar-layout/)
-5. **Custom toolbar items** — add a control of your own, in the same shape as the built-ins.
-6. **Slots** — replace a part with your component. [Overriding structure](https://react-rtekit.vercel.app/react-rtekit/customization/overriding-slots/)
-7. **Handler middleware** — wrap, veto or replace a behaviour. [Handler middleware](https://react-rtekit.vercel.app/react-rtekit/handler-middleware/)
-8. **Command overrides** — change what a command does. [Commands](https://react-rtekit.vercel.app/react-rtekit/commands/)
-9. **Composable parts** — assemble the editor yourself. [Composable parts](https://react-rtekit.vercel.app/react-rtekit/composable-parts/)
-10. **Headless** — `useEditor`, and you draw everything. [Headless](https://react-rtekit.vercel.app/react-rtekit/headless/)
+2. **Toolbar config** — choose items, group them, decide the overflow. [Toolbar layout](https://react-rtekit.vercel.app/react-rtekit/customization/toolbar-layout/)
+3. **Custom toolbar items** — add a control of your own, in the same shape as the built-ins.
+4. **Slots** — replace a part with your component. [Overriding structure](https://react-rtekit.vercel.app/react-rtekit/customization/overriding-slots/)
+5. **Handler middleware** — wrap, veto or replace a behaviour. [Handler middleware](https://react-rtekit.vercel.app/react-rtekit/handler-middleware/)
+6. **Command overrides** — change what a command does. [Commands](https://react-rtekit.vercel.app/react-rtekit/commands/)
+7. **Composable parts** — assemble the editor yourself. [Composable parts](https://react-rtekit.vercel.app/react-rtekit/composable-parts/)
+8. **Headless** — `useEditor`, and you draw everything. [Headless](https://react-rtekit.vercel.app/react-rtekit/headless/)
 
-Content styling — how the prose itself looks — is separate from all ten, because stored HTML has to render the same outside the editor. See [Content styles](https://react-rtekit.vercel.app/react-rtekit/customization/content-styles/).
+Content styling — how the prose itself looks — is separate from all eight, because stored HTML has to render the same outside the editor. See [Content styles](https://react-rtekit.vercel.app/react-rtekit/customization/content-styles/).
 
 ---
 
@@ -8524,7 +8408,9 @@ The full token list is on the [theme tokens](https://react-rtekit.vercel.app/rea
 
 Customization · https://react-rtekit.vercel.app/react-rtekit/customization/overriding-slots/
 
-A slot is a component the editor renders instead of its own. There are 46 of them, from the root element down to a single toolbar button.
+A slot is a component the editor renders instead of its own. There are 20 of them, from the field label down to a single toolbar button.
+
+The frame around them — the root element, the toolbar row, the content box and the footer — is not a slot: the editor renders it itself. Style it through its `rte-*` class names, which are part of the versioned contract, from your own CSS or from `className` on the root.
 
 *Example: Custom slots* — the same source as under "Slots".
 
@@ -8605,14 +8491,14 @@ Making the editor look like the rest of your application means replacing its par
 The combination that usually does it:
 
 - a **theme** for colour, radius and spacing;
-- **slots** for the controls, so they are literally your buttons and menus;
+- **slots** for the controls and the field chrome, so they are literally your components;
 - `unstyled` if you want none of the shipped chrome CSS at all.
 
 ```tsx
 <RichTextEditor
   unstyled
   theme={brand}
-  slots={{ ToolbarButton: MyButton, Popover: MyPopover, Dialog: MyDialog }}
+  slots={{ ToolbarButton: MyButton, ToolbarToggle: MyButton, Label: MyLabel, Dialog: MyDialog }}
 />
 ```
 
@@ -9366,8 +9252,13 @@ Integrations · https://react-rtekit.vercel.app/react-rtekit/integrations/tailwi
 *Example: Tailwind skin* — the source of the live demo on this page.
 
 ```tsx
-import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
+import { forwardRef, useState } from 'react';
+import {
+  RichTextEditor,
+  type RteSlots,
+  type SlotBaseProps,
+  type ToolbarButtonSlotProps,
+} from 'react-rtekit';
 import './utilities.css';
 
 /**
@@ -9375,8 +9266,14 @@ import './utilities.css';
  *
  * `unstyled` drops the chrome visuals and keeps two things: the structural CSS, so the
  * layout still works, and the prose styles, so stored content renders the same here as
- * it does in `<RteContentView>` on a list page. Everything you can see is a class in
- * this file.
+ * it does in `<RteContentView>` on a list page. Everything visual is a utility class,
+ * reaching the editor two ways:
+ *
+ * - The parts that are components — the toolbar controls, the label, the counter, the
+ *   error — are slots, so a replacement takes classes like any component of yours.
+ * - The fixed structure — the toolbar row, the content box, the footer — is styled from
+ *   the root's `className` with arbitrary variants aimed at its stable `rte-*` class
+ *   names, which are part of the public contract.
  */
 
 const SAMPLE =
@@ -9385,23 +9282,64 @@ const SAMPLE =
   'those come from <code>content.css</code>, which is what keeps stored content consistent.</p>' +
   '<ul><li>Structure kept</li><li>Chrome replaced</li></ul>';
 
-/** Tailwind classes, prefixed here only because this page defines them locally. */
-const SKIN = {
-  root: 'tw-rounded-lg tw-border tw-border-slate-200 tw-bg-white tw-shadow-sm',
-  toolbar: 'tw-flex tw-flex-wrap tw-items-center tw-gap-1 tw-border-b tw-bg-slate-50 tw-p-2',
-  toolbarGroup: 'tw-flex tw-items-center tw-gap-1',
-  toolbarButton:
-    'tw-rounded-md tw-px-2 tw-py-1 tw-text-sm tw-text-slate-700 tw-cursor-pointer ' +
-    'tw-hover:bg-slate-100 tw-focus:outline-indigo-600',
-  toolbarToggle:
-    'tw-rounded-md tw-px-2 tw-py-1 tw-text-sm tw-text-slate-700 tw-cursor-pointer ' +
-    'tw-hover:bg-slate-100 tw-focus:outline-indigo-600',
-  content: 'tw-min-h-40 tw-w-full tw-p-3',
-  footer:
-    'tw-flex tw-items-center tw-justify-between tw-border-b tw-p-2 tw-text-xs tw-text-slate-500',
-  label: 'tw-text-sm tw-font-medium tw-text-slate-700',
-  errorText: 'tw-mt-1 tw-text-sm tw-text-rose-600',
-  placeholder: 'tw-p-3 tw-text-sm tw-text-slate-500',
+/** The root, and — through arbitrary variants — the structure inside it. */
+const ROOT = [
+  'tw-rounded-lg tw-border tw-border-slate-200 tw-bg-white tw-shadow-sm',
+  '[&_.rte-toolbar]:tw-bg-slate-50 [&_.rte-toolbar]:tw-border-b [&_.rte-toolbar]:tw-p-2',
+  '[&_.rte-content]:tw-p-3 [&_.rte-content]:tw-min-h-40',
+  '[&_.rte-footer]:tw-p-2 [&_.rte-footer]:tw-text-xs [&_.rte-footer]:tw-text-slate-500',
+].join(' ');
+
+const BUTTON =
+  'tw-rounded-md tw-px-2 tw-py-1 tw-text-sm tw-text-slate-700 tw-cursor-pointer ' +
+  'tw-hover:bg-slate-100 tw-focus:outline-indigo-600';
+
+/**
+ * A toolbar control in utility classes.
+ *
+ * The ref is forwarded and the remaining props are spread, because the toolbar's roving
+ * focus moves through that ref and `tabIndex`, `aria-label` and `aria-pressed` arrive in
+ * the props.
+ */
+const TwToolbarControl = forwardRef<HTMLButtonElement, ToolbarButtonSlotProps & SlotBaseProps>(
+  function TwToolbarControl(
+    { active, label, shortcut, icon, showLabel, className, command, type: _type, ...rest },
+    ref,
+  ) {
+    return (
+      <button
+        ref={ref}
+        type="button"
+        className={[BUTTON, active ? 'tw-bg-slate-100' : '', className].filter(Boolean).join(' ')}
+        data-command={command}
+        title={shortcut ? `${label} (${shortcut})` : label}
+        {...rest}
+      >
+        {icon}
+        {showLabel ? <span>{label}</span> : null}
+      </button>
+    );
+  },
+);
+
+const slots: Partial<RteSlots> = {
+  ToolbarButton: TwToolbarControl as RteSlots['ToolbarButton'],
+  ToolbarToggle: TwToolbarControl as RteSlots['ToolbarToggle'],
+  Label: ({ htmlFor, children }) => (
+    <label htmlFor={htmlFor} className="tw-text-sm tw-font-medium tw-text-slate-700">
+      {children}
+    </label>
+  ),
+  Counter: ({ id, text }) => (
+    <span id={id} className="tw-text-xs tw-text-slate-500">
+      {text}
+    </span>
+  ),
+  ErrorText: ({ id, role, children }) => (
+    <p id={id} role={role} className="tw-mt-1 tw-text-sm tw-text-rose-600">
+      {children}
+    </p>
+  ),
 };
 
 export default function TailwindSkinExample() {
@@ -9413,10 +9351,10 @@ export default function TailwindSkinExample() {
         unstyled
         preset="standard"
         label="Release notes"
-        hideLabel
         maxLength={400}
         showCounter
-        classNames={SKIN}
+        className={ROOT}
+        slots={slots}
         value={html}
         onChange={(value) => {
           setHtml(value as string);
@@ -9427,7 +9365,7 @@ export default function TailwindSkinExample() {
         In your application these classes come from Tailwind. This site does not build with Tailwind
         — adding it for one page would change every other page — so the classes used here are
         written out in <code>utilities.css</code> next to this file, with Tailwind&rsquo;s own
-        values.
+        values, arbitrary variants included.
       </p>
 
       <p className="callout">
@@ -9444,17 +9382,20 @@ The editor's CSS lives in a cascade layer called `rtekit`, so it does not fight 
 
 ## Skinning with utilities
 
+Two routes, and a skin usually uses both. The parts that are components — the toolbar controls, the label, the counter, the error — are slots, so a replacement carries your classes like any other component. The frame the editor renders itself is reached from the root's `className` with arbitrary variants on its `rte-*` class names:
+
 ```tsx
 <RichTextEditor
-  classNames={{
-    root: 'rounded-xl border border-slate-200 shadow-sm',
-    toolbar: 'bg-slate-50',
-    content: 'prose max-w-none p-4',
-  }}
+  className={[
+    'rounded-xl border border-slate-200 shadow-sm',
+    '[&_.rte-toolbar]:bg-slate-50',
+    '[&_.rte-content]:prose [&_.rte-content]:max-w-none [&_.rte-content]:p-4',
+  ].join(' ')}
+  slots={{ ToolbarButton: MyToolbarButton, ToolbarToggle: MyToolbarButton }}
 />
 ```
 
-`classNames` adds to the shipped class rather than replacing it, so the behaviour that depends on those classes keeps working.
+A slot component has to forward its ref and spread the props it is given: the toolbar's keyboard model moves focus through that ref, and the `mousedown` handling that keeps the selection arrives in the props.
 
 ## With `@tailwindcss/typography`
 
@@ -9676,7 +9617,7 @@ Reading legacy Quill markup as it is means adoption does not require a data migr
 
 ## Slots and middleware rather than configuration flags
 
-A flag anticipates a need; a slot does not have to. Forty-six replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.
+A flag anticipates a need; a slot does not have to. Twenty replaceable parts and eighteen interception points cover cases nobody thought of, which a growing list of booleans never does.
 
 ---
 

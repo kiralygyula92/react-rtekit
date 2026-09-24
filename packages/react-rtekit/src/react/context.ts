@@ -39,7 +39,10 @@ export interface EditorContextValue {
   store: EditorStore;
 }
 
-const EditorContext = /* @__PURE__ */ namedContext<EditorContextValue | null>('RteEditorContext', null);
+const EditorContext = /* @__PURE__ */ namedContext<EditorContextValue | null>(
+  'RteEditorContext',
+  null,
+);
 
 /** Provides the editor instance to slots, plugins and composable parts. */
 export const EditorContextProvider = EditorContext.Provider;
@@ -81,17 +84,14 @@ export interface SlotsContextValue {
   slots: RteSlots;
   /** The default implementations, so an override can wrap one rather than replace it. */
   defaults: RteSlots;
-  /** Extra props merged into each slot. */
-  slotProps: RichTextEditorProps['slotProps'];
-  /** Per-slot class names. */
-  classNames: RichTextEditorProps['classNames'];
-  /** Per-slot inline styles. */
-  styles: RichTextEditorProps['styles'];
   /** The icon set in effect, after merging overrides. */
   icons: RteIcons;
 }
 
-const SlotsContext = /* @__PURE__ */ namedContext<SlotsContextValue | null>('RteSlotsContext', null);
+const SlotsContext = /* @__PURE__ */ namedContext<SlotsContextValue | null>(
+  'RteSlotsContext',
+  null,
+);
 
 /** Provides the resolved slot table. */
 export const SlotsContextProvider = SlotsContext.Provider;
@@ -140,7 +140,10 @@ export interface ThemeContextValue {
   colorScheme: ColorScheme;
 }
 
-const ThemeContext = /* @__PURE__ */ namedContext<ThemeContextValue | null>('RteThemeContext', null);
+const ThemeContext = /* @__PURE__ */ namedContext<ThemeContextValue | null>(
+  'RteThemeContext',
+  null,
+);
 
 /** Provides the resolved theme. */
 export const ThemeContextProvider = ThemeContext.Provider;
@@ -194,10 +197,12 @@ export function useRteConfig(): RteConfigValue {
   return value;
 }
 
-
 // ─── app-wide defaults ───────────────────────────────────────────────────────
 
-const DefaultsContext = /* @__PURE__ */ namedContext<Partial<RichTextEditorProps>>('RteDefaultsContext', {});
+const DefaultsContext = /* @__PURE__ */ namedContext<Partial<RichTextEditorProps>>(
+  'RteDefaultsContext',
+  {},
+);
 
 /** Provides app-wide prop defaults. */
 export const DefaultsContextProvider = DefaultsContext.Provider;

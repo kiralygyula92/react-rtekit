@@ -15,7 +15,7 @@ import type { HeadingLevel } from './document.js';
 import type { CommandId, CommandOverrides } from './commands.js';
 import type { PresetName, RtePlugin } from './plugin.js';
 import type { RteHandlers } from './handlers.js';
-import type { RteClassNames, RteSlotProps, RteSlots, RteStyles } from './slots.js';
+import type { RteSlots } from './slots.js';
 import type { RteIcons } from './icons.js';
 import type { RteLocalization } from './localization.js';
 import type { ColorScheme, RteTheme } from './theme.js';
@@ -98,8 +98,6 @@ export interface FeatureFlagProps {
   enableMentions?: boolean;
   /** Merge tags as atomic nodes, configured through `mergeTags` (fixes R23). */
   enableMergeTags?: boolean;
-  /** Undo and redo, with their bindings and toolbar controls. */
-  enableHistory?: boolean;
   /** Markdown input rules, such as `# ` for a heading. */
   enableMarkdownShortcuts?: boolean;
   /** The find-and-replace panel. */
@@ -108,10 +106,6 @@ export interface FeatureFlagProps {
   enableSourceView?: boolean;
   /** The fullscreen toggle. */
   enableFullscreen?: boolean;
-  /** The "clear formatting" command. */
-  enableClearFormatting?: boolean;
-  /** Word counting, which `countUnit: 'words'` needs. */
-  enableWordCount?: boolean;
 }
 
 /** The full prop surface of `<RichTextEditor>`. */
@@ -173,8 +167,6 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   addPlugins?: RtePlugin[];
   /** Names of plugins the preset included that this editor does not want. */
   removePlugins?: string[];
-  /** Per-plugin options, keyed by plugin name. */
-  pluginOptions?: Record<string, unknown>;
   /** Which heading levels the dropdown and the schema allow. @default [1,2,3] */
   headingLevels?: HeadingLevel[];
   /** The font-family dropdown's options. */
@@ -225,10 +217,6 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   interop?: InteropOptions;
   /** Rich, plain or cleaned paste, statically or per paste. @default 'rich' */
   pasteMode?: PasteMode | ((ctx: PasteHandlerContext) => PasteMode);
-  /** Offer "Keep / Remove formatting" after a rich office paste. @default false */
-  pastePrompt?: boolean;
-  /** Turn pasted URLs into links. @default true */
-  autoLinkOnPaste?: boolean;
   /** Turn typed URLs and e-mail addresses into links. @default true */
   autoLink?: boolean;
   /** Protocols a typed URL may be linked with. @default ['https', 'http', 'mailto'] */
@@ -247,8 +235,6 @@ export interface RichTextEditorProps extends FeatureFlagProps {
    * ```
    */
   linkValidator?: (url: string) => string | null;
-  /** Allow `data:` image sources, which bloat stored content. @default false */
-  allowDataUrlImages?: boolean;
   /** Draft saving, its key, its TTL and its restore prompt. */
   autosave?: AutosaveConfig;
 
@@ -269,14 +255,10 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   minHeight?: number | string;
   /** Height at which the content starts scrolling instead of growing. */
   maxHeight?: number | string;
-  /** Grow with the content rather than scrolling immediately. @default true */
-  autoGrow?: boolean;
   /** Offer a drag handle for resizing the content box (fixes R22). @default false */
   resizable?: boolean | 'vertical';
   /** Controlled fullscreen. */
   fullscreen?: boolean;
-  /** Start in fullscreen, for an uncontrolled editor. @default false */
-  defaultFullscreen?: boolean;
   /** Extra footer content next to the counter. */
   footer?: ReactNode | ((ctx: RenderContext) => ReactNode);
   /** Hide or disable the toolbar in `readOnly` mode. @default 'hide' */
@@ -289,24 +271,6 @@ export interface RichTextEditorProps extends FeatureFlagProps {
       defaultRender: (override?: { items?: ToolbarItemSpec[][] }) => ReactNode;
     },
   ) => ReactNode;
-  /** Replaces the footer row. */
-  renderFooter?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the placeholder. */
-  renderPlaceholder?: (ctx: RenderContext & { text: string }) => ReactNode;
-  /** Replaces the link popover. */
-  renderLinkPopover?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the controls shown when an image is selected. */
-  renderImagePopover?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the `/` command palette. */
-  renderSlashMenu?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the merge-tag menu. */
-  renderMergeTagMenu?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the colour palette. */
-  renderColorPicker?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the HTML source view. */
-  renderSourceView?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
-  /** Replaces the prompt offering to restore an autosaved draft. */
-  renderRestoreDraftPrompt?: (ctx: RenderContext & { defaultRender: () => ReactNode }) => ReactNode;
 
   // ── 2.6 uploads and media ────────────────────────────────────────────────
   /** Hands a file to your own service and returns the attributes to insert. */
@@ -323,12 +287,6 @@ export interface RichTextEditorProps extends FeatureFlagProps {
   // ── 2.7 customization and theming ────────────────────────────────────────
   /** Replacement components, by slot name. */
   slots?: Partial<RteSlots>;
-  /** Extra props merged into each slot, statically or per render. */
-  slotProps?: RteSlotProps;
-  /** Per-slot class names. */
-  classNames?: RteClassNames;
-  /** Per-slot inline styles. */
-  styles?: RteStyles;
   /** Interaction middleware; each wraps one interaction. */
   handlers?: Partial<RteHandlers>;
   /** Replacement command implementations, by command id. */
@@ -368,11 +326,10 @@ export interface RichTextEditorProps extends FeatureFlagProps {
 }
 
 /** Options accepted by the headless `useEditor` hook. */
-export interface UseEditorOptions
-  extends Omit<
-    RichTextEditorProps,
-    'slots' | 'slotProps' | 'classNames' | 'styles' | 'className' | 'style' | 'renderToolbar'
-  > {
+export interface UseEditorOptions extends Omit<
+  RichTextEditorProps,
+  'slots' | 'className' | 'style' | 'renderToolbar'
+> {
   /** Source tag used by the initial `onChange`. @default 'init' */
   initialChangeSource?: ChangeSource;
 }

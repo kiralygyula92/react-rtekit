@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { defaultSlots } from '../../src/react/slots/defaults.js';
 import type { RteSlots } from '../../src/types/slots.js';
+import { meta } from '../../src/meta.js';
 
 /**
  * Every default slot, rendered once.
@@ -112,28 +113,19 @@ const names = (Object.keys(defaultSlots) as (keyof RteSlots)[]).filter(
  * placeholder from `text`, the chip from `label`, a text input from `value` — is right
  * to ignore `children`, and only the containers are wrong to.
  */
-const CONTAINERS: (keyof RteSlots)[] = [
-  'Root',
-  'Toolbar',
-  'ToolbarGroup',
-  'ContentWrapper',
-  'Footer',
-  'ImageDialog',
-  'ImagePopover',
-  'TablePicker',
-  'TableToolbar',
-  'FloatingToolbar',
-  'BubbleMenu',
-  'FullscreenPortal',
-  'Menu',
-  'MenuItem',
-  'Button',
-  'IconButton',
-];
+const CONTAINERS: (keyof RteSlots)[] = ['ImagePopover', 'TableToolbar', 'FloatingToolbar'];
 
 describe('the default slot table', () => {
-  it('has an entry for every slot', () => {
-    expect(names.length).toBeGreaterThan(40);
+  /*
+   * Exactly the documented slots, and every one of them rendered by the library.
+   *
+   * This asserted `> 40` and so could not notice the table drifting from what the
+   * editor renders: 26 of 46 slots were defined, defaulted, documented and never looked
+   * up, so replacing them did nothing. The metadata is what the API reference lists, so
+   * the defaults must match it one for one.
+   */
+  it('has an entry for every documented slot, and no other', () => {
+    expect(Object.keys(defaultSlots).sort()).toEqual(meta.slots.map((slot) => slot.name).sort());
   });
 
   it.each(names)('%s renders', (name) => {

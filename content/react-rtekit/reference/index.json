@@ -10,7 +10,7 @@
   "RichTextEditorProps": {
     "page": "/react-rtekit/api/rich-text-editor/",
     "kind": "interface",
-    "options": 140,
+    "options": 119,
     "usedBy": [
       "/react-rtekit/headings/",
       "/react-rtekit/html-interop/",
@@ -169,7 +169,7 @@
   "UseEditorOptions": {
     "page": "/react-rtekit/api/use-editor/",
     "kind": "interface",
-    "options": 134,
+    "options": 116,
     "usedBy": [
       "/react-rtekit/headless/"
     ]
@@ -689,7 +689,7 @@
   "RteSlots": {
     "page": "/react-rtekit/api/types/",
     "kind": "interface",
-    "options": 46,
+    "options": 20,
     "usedBy": [
       "/react-rtekit/slots/"
     ]
@@ -715,7 +715,7 @@
   "slots": {
     "page": "/react-rtekit/api/slots/",
     "kind": "catalogue",
-    "options": 46,
+    "options": 20,
     "usedBy": [
       "/react-rtekit/slots/"
     ],

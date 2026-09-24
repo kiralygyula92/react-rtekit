@@ -9,7 +9,9 @@ section: customization
 
 # Overriding structure
 
-A slot is a component the editor renders instead of its own. There are 46 of them, from the root element down to a single toolbar button.
+A slot is a component the editor renders instead of its own. There are 20 of them, from the field label down to a single toolbar button.
+
+The frame around them — the root element, the toolbar row, the content box and the footer — is not a slot: the editor renders it itself. Style it through its `rte-*` class names, which are part of the versioned contract, from your own CSS or from `className` on the root.
 
 ```demo
 slots-custom

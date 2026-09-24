@@ -149,12 +149,6 @@
       },
       "required": false
     },
-    "enableHistory": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false
-    },
     "enableMarkdownShortcuts": {
       "type": {
         "name": "boolean"
@@ -174,18 +168,6 @@
       "required": false
     },
     "enableFullscreen": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false
-    },
-    "enableClearFormatting": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false
-    },
-    "enableWordCount": {
       "type": {
         "name": "boolean"
       },
@@ -358,12 +340,6 @@
       },
       "required": false
     },
-    "pluginOptions": {
-      "type": {
-        "name": "Record<string, unknown>"
-      },
-      "required": false
-    },
     "headingLevels": {
       "type": {
         "name": "HeadingLevel[]"
@@ -522,20 +498,6 @@
       "required": false,
       "default": "'rich'"
     },
-    "pastePrompt": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false,
-      "default": "false"
-    },
-    "autoLinkOnPaste": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false,
-      "default": "true"
-    },
     "autoLink": {
       "type": {
         "name": "boolean"
@@ -563,13 +525,6 @@
       },
       "required": false
     },
-    "allowDataUrlImages": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false,
-      "default": "false"
-    },
     "autosave": {
       "type": {
         "name": "AutosaveConfig"
@@ -585,7 +540,7 @@
     },
     "toolbarPosition": {
       "type": {
-        "name": "\"bottom\" | \"top\" | \"none\""
+        "name": "\"top\" | \"bottom\" | \"none\""
       },
       "required": false,
       "default": "'top'"
@@ -630,13 +585,6 @@
       },
       "required": false
     },
-    "autoGrow": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false,
-      "default": "true"
-    },
     "resizable": {
       "type": {
         "name": "boolean | \"vertical\""
@@ -649,13 +597,6 @@
         "name": "boolean"
       },
       "required": false
-    },
-    "defaultFullscreen": {
-      "type": {
-        "name": "boolean"
-      },
-      "required": false,
-      "default": "false"
     },
     "footer": {
       "type": {
@@ -671,60 +612,6 @@
       "default": "'hide'"
     },
     "renderToolbar": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderFooter": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderPlaceholder": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderLinkPopover": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderImagePopover": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderSlashMenu": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderMergeTagMenu": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderColorPicker": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderSourceView": {
-      "type": {
-        "name": "function"
-      },
-      "required": false
-    },
-    "renderRestoreDraftPrompt": {
       "type": {
         "name": "function"
       },
@@ -765,24 +652,6 @@
     "slots": {
       "type": {
         "name": "Partial<RteSlots>"
-      },
-      "required": false
-    },
-    "slotProps": {
-      "type": {
-        "name": "RteSlotProps"
-      },
-      "required": false
-    },
-    "classNames": {
-      "type": {
-        "name": "RteClassNames"
-      },
-      "required": false
-    },
-    "styles": {
-      "type": {
-        "name": "RteStyles"
       },
       "required": false
     },
@@ -894,7 +763,7 @@
     }
   },
   "filename": "types/props.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L118",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L112",
   "usedBy": [
     "/react-rtekit/headings/",
     "/react-rtekit/html-interop/",

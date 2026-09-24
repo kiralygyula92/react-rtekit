@@ -661,7 +661,10 @@ test.describe('the playground control panel', () => {
   });
 
   test('is generated from the props, and says how many there are', async ({ page }) => {
-    await expect(page.locator('.panel__count')).toContainText('Props 61');
+    // A tripwire on the public surface: this number moves only when a prop is added or
+    // removed. It went from 61 to 53 when the eight inert props the panel listed —
+    // accepted, documented, read by nothing — were taken out of the 1.0 API.
+    await expect(page.locator('.panel__count')).toContainText('Props 53');
     await expect(page.locator('.panel__count')).toContainText('0 changed');
   });
 
@@ -680,8 +683,11 @@ test.describe('the playground control panel', () => {
   test('a control shows its type and its default', async ({ page }) => {
     await page.getByRole('button', { name: /^Toolbar/ }).click();
     const control = page.locator('.control').filter({ hasText: 'toolbarPosition' });
-    await expect(control.locator('.control__meta')).toContainText('"bottom" | "top" | "none"');
-    await expect(control.locator('.control__meta')).toContainText("default 'top'");
+    // Each member, not the union's spelling: TypeDoc orders union members by internal
+    // type ids, which move whenever an unrelated declaration is added or removed.
+    const meta = control.locator('.control__meta');
+    for (const member of ['"top"', '"bottom"', '"none"']) await expect(meta).toContainText(member);
+    await expect(meta).toContainText("default 'top'");
   });
 
   test('a changed value can be reset, and so can all of them', async ({ page }) => {

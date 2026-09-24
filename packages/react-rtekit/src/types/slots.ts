@@ -1,5 +1,4 @@
 import type { ComponentType, CSSProperties, MouseEvent, ReactNode, Ref } from 'react';
-import type { EditorInstance, UploadState } from './editor.js';
 import type { LinkAttrs } from './selection.js';
 import type { ToolbarItemSpec } from './toolbar.js';
 
@@ -19,34 +18,6 @@ export interface SlotBaseProps {
 
 /** A replaceable component. Spreading the props it receives keeps all behaviour. */
 export type SlotComponent<P> = ComponentType<P & SlotBaseProps>;
-
-/** Context for the `Root` slot: the editor plus every state flag CSS keys off. */
-export interface RootSlotProps {
-  /** The instance, so a custom root can read state or run commands. */
-  editor: EditorInstance;
-  /** True while the caret is inside the content element. */
-  focused: boolean;
-  /** True when the field is disabled, which also makes it unfocusable. */
-  disabled: boolean;
-  /** True when the content is selectable but not editable. */
-  readOnly: boolean;
-  /** True when the document has no text, images or other content (fixes R2). */
-  empty: boolean;
-  /** True when the field is showing an error. */
-  invalid: boolean;
-}
-
-/** Context for the `Toolbar` slot: the resolved item groups and the ARIA wiring. */
-export interface ToolbarSlotProps {
-  /** The instance the controls act on. */
-  editor: EditorInstance;
-  /** Items, already grouped; separators are the gaps between the inner arrays. */
-  items: ToolbarItemSpec[][];
-  /** The accessible name, from the localization catalogue. */
-  'aria-label': string;
-  /** Always `toolbar`; the roving-tabindex model depends on it. */
-  role: 'toolbar';
-}
 
 /** Context shared by the `ToolbarButton` and `ToolbarToggle` slots. */
 export interface ToolbarButtonSlotProps {
@@ -118,28 +89,6 @@ export interface ColorPickerSlotProps {
   onClose: () => void;
 }
 
-/** Context for the `Content` slot: the contenteditable surface and its textbox semantics. */
-export interface ContentSlotProps {
-  /** The element id other parts point at through `aria-describedby` and `htmlFor`. */
-  id: string;
-  /** False when the field is disabled or read-only. */
-  editable: boolean;
-  /** The placeholder text, already localized. */
-  placeholder: string;
-  /** The accessible name, when `label` did not already provide one. */
-  'aria-label'?: string;
-  /** The ids of the helper text, counter and error, space separated. */
-  'aria-describedby'?: string;
-  /** Always true; this is a multi-line textbox. */
-  'aria-multiline': true;
-  /** True when the field is required, so an empty editor is announced as such. */
-  'aria-required'?: boolean;
-  /** True when the field is showing an error. */
-  'aria-invalid'?: boolean;
-  /** Always `textbox`, which is what makes the editor reachable by screen readers. */
-  role: 'textbox';
-}
-
 /** Context for the `Counter` slot: the count, the limit and the two threshold flags. */
 export interface CounterSlotProps {
   /** Links the counter to the content element through `aria-describedby`. */
@@ -178,16 +127,6 @@ export interface LinkPopoverSlotProps {
   validate: (url: string) => string | null;
   /** True when editing an existing link rather than creating one. */
   editing: boolean;
-}
-
-/** Context for the `UploadPlaceholder` slot: one in-flight upload and its controls. */
-export interface UploadPlaceholderSlotProps {
-  /** The upload this placeholder stands for, including its progress and error. */
-  upload: UploadState;
-  /** Runs the upload handler again for the same file. */
-  retry: () => void;
-  /** Aborts the upload and removes the placeholder. */
-  cancel: () => void;
 }
 
 /** One row of an {@link InlineSuggestMenuSlotProps} list. */
@@ -286,18 +225,14 @@ export interface RestoreDraftPromptSlotProps {
 }
 
 /**
- * Every replaceable component.
+ * Every replaceable component: the toolbar controls, the field chrome, and the panels and
+ * popovers the features open.
  *
- * The last dozen entries are primitives; overriding just those re-skins the whole
- * editor for a design system.
+ * Each entry is looked up by the part that renders it, so replacing one always takes
+ * effect. The frame around them — root, toolbar row, content box, footer — is rendered
+ * by the editor itself and styled through its `rte-*` class names instead.
  */
 export interface RteSlots {
-  /** The outermost element, carrying every state attribute the CSS keys off. */
-  Root: SlotComponent<RootSlotProps>;
-  /** The toolbar container, including its roving-tabindex keyboard model. */
-  Toolbar: SlotComponent<ToolbarSlotProps>;
-  /** One group of toolbar items. */
-  ToolbarGroup: SlotComponent<Record<string, never>>;
   /** The divider drawn between toolbar groups. */
   ToolbarSeparator: SlotComponent<Record<string, never>>;
   /** A toolbar control that performs an action. */
@@ -306,16 +241,8 @@ export interface RteSlots {
   ToolbarToggle: SlotComponent<ToolbarButtonSlotProps>;
   /** A toolbar control that opens a list of options. */
   ToolbarDropdown: SlotComponent<ToolbarDropdownSlotProps>;
-  /** The menu holding the items that did not fit at this width. */
-  ToolbarOverflow: SlotComponent<{ hiddenItems: ToolbarItemSpec[]; label: string }>;
   /** The colour palette shown by the text- and background-colour controls. */
   ColorPicker: SlotComponent<ColorPickerSlotProps>;
-  /** The box around the content, which is what scrolls and grows. */
-  ContentWrapper: SlotComponent<Record<string, never>>;
-  /** The contenteditable surface itself. */
-  Content: SlotComponent<ContentSlotProps>;
-  /** The placeholder shown over an empty document. */
-  Placeholder: SlotComponent<{ text: string }>;
   /** The field label. */
   Label: SlotComponent<{ htmlFor: string; required: boolean; hidden: boolean }>;
   /** The description below the field. */
@@ -324,40 +251,22 @@ export interface RteSlots {
   ErrorText: SlotComponent<{ id: string; role: 'alert' }>;
   /** The character or word counter. */
   Counter: SlotComponent<CounterSlotProps>;
-  /** The row below the content that holds the helper text and the counter. */
-  Footer: SlotComponent<Record<string, never>>;
   /** The popover for creating and editing links. */
   LinkPopover: SlotComponent<LinkPopoverSlotProps>;
-  /** The dialog for inserting an image by URL or by file. */
-  ImageDialog: SlotComponent<Record<string, unknown>>;
   /** The controls shown when an image is selected. */
   ImagePopover: SlotComponent<Record<string, unknown>>;
-  /** The stand-in shown while a file uploads. */
-  UploadPlaceholder: SlotComponent<UploadPlaceholderSlotProps>;
-  /** The grid for choosing the size of a new table. */
-  TablePicker: SlotComponent<{ onSelect: (rows: number, cols: number) => void }>;
   /** The controls shown when the caret is inside a table. */
   TableToolbar: SlotComponent<Record<string, unknown>>;
   /** The shared popover behind the slash, mention, emoji and merge-tag menus. */
   InlineSuggestMenu: SlotComponent<InlineSuggestMenuSlotProps>;
-  /** One merge tag as it appears inside the document. */
-  MergeTagChip: SlotComponent<{ tagKey: string; label: string; selected: boolean }>;
-  /** The command palette opened by `/`. */
-  SlashMenu: SlotComponent<InlineSuggestMenuSlotProps>;
   /** The emoji picker. */
   EmojiPicker: SlotComponent<InlineSuggestMenuSlotProps>;
-  /** The mention results, including their loading and empty states. */
-  MentionList: SlotComponent<InlineSuggestMenuSlotProps>;
   /** The toolbar that follows the selection. */
   FloatingToolbar: SlotComponent<{ selectionRect: DOMRect | null; items: ToolbarItemSpec[] }>;
-  /** The bubble menu shown above a non-empty selection. */
-  BubbleMenu: SlotComponent<{ selectionRect: DOMRect | null; items: ToolbarItemSpec[] }>;
   /** The find-and-replace panel. */
   FindReplacePanel: SlotComponent<FindReplacePanelSlotProps>;
   /** The HTML source editor. */
   SourceView: SlotComponent<SourceViewSlotProps>;
-  /** The container the editor moves into in fullscreen mode. */
-  FullscreenPortal: SlotComponent<{ open: boolean }>;
   /** The prompt offering to restore an autosaved draft. */
   RestoreDraftPrompt: SlotComponent<RestoreDraftPromptSlotProps>;
   /** The keyboard reference, built from the keymap actually in force. */
@@ -365,76 +274,13 @@ export interface RteSlots {
     shortcuts: { keys: string; label: string }[];
     onClose: () => void;
   }>;
-  // ── primitives: the whole design-system integration surface ──────────────
-  /** Wraps a control with its hover and focus description. */
-  Tooltip: SlotComponent<{ title: string; children: ReactNode }>;
-  /** A menu surface with its own focus management. */
-  Menu: SlotComponent<{ open: boolean; onClose: () => void; label: string }>;
-  /** One row of a {@link RteSlots.Menu}. */
-  MenuItem: SlotComponent<{ selected?: boolean; disabled?: boolean; onSelect: () => void }>;
-  /** A positioned surface anchored to an element, closing on Escape and outside click. */
-  Popover: SlotComponent<{
-    open: boolean;
-    anchor: HTMLElement | null;
-    onClose: () => void;
-    label: string;
-    placement?: 'bottom-start' | 'bottom' | 'top' | 'top-start';
-  }>;
+  // ── primitives ────────────────────────────────────────────────────────────
+  // Only the dialog is looked up through this table today. The other primitives — the
+  // buttons, fields and popovers inside the plugin UIs — are rendered directly, so a
+  // slot for them would be accepted and ignored; each is added here once it is wired.
   /** A modal surface that traps focus and returns it to the trigger. */
   Dialog: SlotComponent<{ open: boolean; onClose: () => void; title: string }>;
-  /** A labelled button. */
-  Button: SlotComponent<{
-    variant?: 'text' | 'solid' | 'outline';
-    disabled?: boolean;
-    onClick?: () => void;
-  }>;
-  /** A button whose label is not visible and so must be given to assistive technology. */
-  IconButton: SlotComponent<{ label: string; disabled?: boolean; onClick?: () => void }>;
-  /** A single-line text field. */
-  TextInput: SlotComponent<{
-    label?: string;
-    value: string;
-    onChange: (v: string) => void;
-    invalid?: boolean;
-  }>;
-  /** A single-choice control. */
-  Select: SlotComponent<{
-    label?: string;
-    value: string;
-    options: { value: string; label: string }[];
-    onChange: (v: string) => void;
-  }>;
-  /** A two-state control with a visible label. */
-  Checkbox: SlotComponent<{
-    label: string;
-    checked: boolean;
-    onChange: (checked: boolean) => void;
-    disabled?: boolean;
-  }>;
-  /** The busy indicator, used while uploads and async providers are pending. */
-  Spinner: SlotComponent<{ label?: string }>;
 }
 
 /** Every slot name. */
 export type SlotName = keyof RteSlots;
-
-/** Per-slot extra props, either static or derived from the slot's own props. */
-export type RteSlotProps = {
-  [K in SlotName as Uncapitalize<K>]?:
-    | Record<string, unknown>
-    | ((ctx: Record<string, unknown>) => Record<string, unknown>);
-};
-
-/** Per-slot class names, either static or derived. */
-export type RteClassNames = {
-  [K in SlotName as Uncapitalize<K>]?:
-    | string
-    | ((ctx: Record<string, unknown>) => string | undefined);
-};
-
-/** Per-slot inline styles, either static or derived. */
-export type RteStyles = {
-  [K in SlotName as Uncapitalize<K>]?:
-    | CSSProperties
-    | ((ctx: Record<string, unknown>) => CSSProperties | undefined);
-};

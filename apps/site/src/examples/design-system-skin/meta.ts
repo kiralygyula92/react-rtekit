@@ -4,9 +4,9 @@ export const meta: ExampleMeta = {
   slug: 'design-system-skin',
   title: 'Design-system skin',
   description:
-    'Re-skinning the whole editor by replacing only the twelve primitives — button, popover, dialog, input and the rest — and nothing else.',
+    'Re-skinning the editor chrome with a design system: the toolbar controls, the field label, hint and counter, and the dialog — every feature behind them unchanged.',
   tags: ['customization', 'theming'],
-  features: ['slots', 'primitives'],
+  features: ['slots'],
   related: ['slots-custom', 'tailwind-skin'],
   priority: 7,
 };

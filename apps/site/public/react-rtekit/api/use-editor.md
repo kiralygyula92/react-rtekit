@@ -60,13 +60,10 @@ Options accepted by the headless `useEditor` hook.
 | `enableEmoji` | `boolean` | no | The emoji picker and its `:` trigger. |
 | `enableMentions` | `boolean` | no | Mentions and their `@` trigger, configured through `mentions`. |
 | `enableMergeTags` | `boolean` | no | Merge tags as atomic nodes, configured through `mergeTags` (fixes R23). |
-| `enableHistory` | `boolean` | no | Undo and redo, with their bindings and toolbar controls. |
 | `enableMarkdownShortcuts` | `boolean` | no | Markdown input rules, such as `# ` for a heading. |
 | `enableFindReplace` | `boolean` | no | The find-and-replace panel. |
 | `enableSourceView` | `boolean` | no | The HTML source view, which sanitizes on apply. |
 | `enableFullscreen` | `boolean` | no | The fullscreen toggle. |
-| `enableClearFormatting` | `boolean` | no | The "clear formatting" command. |
-| `enableWordCount` | `boolean` | no | Word counting, which `countUnit: 'words'` needs. |
 | `value` | `EditorValue` | no | Controlled value, in `valueFormat`. |
 | `defaultValue` | `EditorValue` | no | Uncontrolled initial value. |
 | `valueFormat` | `ValueFormat` | no | What `value`, `defaultValue` and `onChange` speak. |
@@ -93,7 +90,6 @@ Options accepted by the headless `useEditor` hook.
 | `plugins` | `RtePlugin<unknown>[]` | no | Replaces the preset's plugin list entirely. |
 | `addPlugins` | `RtePlugin<unknown>[]` | no | Plugins added on top of the preset's list. |
 | `removePlugins` | `string[]` | no | Names of plugins the preset included that this editor does not want. |
-| `pluginOptions` | `Record<string, unknown>` | no | Per-plugin options, keyed by plugin name. |
 | `headingLevels` | `HeadingLevel[]` | no | Which heading levels the dropdown and the schema allow. |
 | `fontFamilies` | `object[]` | no | The font-family dropdown's options. |
 | `fontSizes` | `object[]` | no | The font-size dropdown's options. |
@@ -118,37 +114,23 @@ Options accepted by the headless `useEditor` hook.
 | `emailOptions` | `EmailOutputOptions` | no | Inlining, width and table-layout choices for the `email` profile. |
 | `interop` | `InteropOptions` | no | How legacy markup, such as Quill's, is read and written back. |
 | `pasteMode` | `PasteMode \| function` | no | Rich, plain or cleaned paste, statically or per paste. |
-| `pastePrompt` | `boolean` | no | Offer "Keep / Remove formatting" after a rich office paste. |
-| `autoLinkOnPaste` | `boolean` | no | Turn pasted URLs into links. |
 | `autoLink` | `boolean` | no | Turn typed URLs and e-mail addresses into links. |
 | `autoLinkProtocols` | `string[]` | no | Protocols a typed URL may be linked with. |
 | `defaultProtocol` | `string` | no | Protocol given to a bare host, in the popover and in autolinking. |
 | `linkValidator` | `function` | no | Rejects or rewrites a URL before it becomes a link. Return a message to reject, or `null` to accept. Sanitization runs regardless: a validator can tighten the rules but never loosens them. |
-| `allowDataUrlImages` | `boolean` | no | Allow `data:` image sources, which bloat stored content. |
 | `autosave` | `AutosaveConfig` | no | Draft saving, its key, its TTL and its restore prompt. |
 | `toolbar` | `false \| ToolbarConfig` | no | `false` hides the toolbar entirely. |
-| `toolbarPosition` | `"bottom" \| "top" \| "none"` | no | Which side of the content the toolbar sits on. |
+| `toolbarPosition` | `"top" \| "bottom" \| "none"` | no | Which side of the content the toolbar sits on. |
 | `stickyToolbar` | `boolean \| object` | no | Keep the toolbar visible while a long document scrolls. |
 | `toolbarOverflow` | `"menu" \| "wrap" \| "scroll"` | no | What happens to items that do not fit at this width. |
 | `floatingToolbar` | `boolean \| FloatingToolbarConfig` | no | A toolbar that follows the selection. |
 | `bubbleMenuItems` | `ToolbarItemSpec[]` | no | What the bubble menu offers, when it differs from the floating toolbar. |
 | `minHeight` | `string \| number` | no | Height of the content box before it grows. |
 | `maxHeight` | `string \| number` | no | Height at which the content starts scrolling instead of growing. |
-| `autoGrow` | `boolean` | no | Grow with the content rather than scrolling immediately. |
 | `resizable` | `boolean \| "vertical"` | no | Offer a drag handle for resizing the content box (fixes R22). |
 | `fullscreen` | `boolean` | no | Controlled fullscreen. |
-| `defaultFullscreen` | `boolean` | no | Start in fullscreen, for an uncontrolled editor. |
 | `footer` | `ReactNode \| function` | no | Extra footer content next to the counter. |
 | `readOnlyToolbar` | `"hide" \| "disable"` | no | Hide or disable the toolbar in `readOnly` mode. |
-| `renderFooter` | `function` | no | Replaces the footer row. |
-| `renderPlaceholder` | `function` | no | Replaces the placeholder. |
-| `renderLinkPopover` | `function` | no | Replaces the link popover. |
-| `renderImagePopover` | `function` | no | Replaces the controls shown when an image is selected. |
-| `renderSlashMenu` | `function` | no | Replaces the `/` command palette. |
-| `renderMergeTagMenu` | `function` | no | Replaces the merge-tag menu. |
-| `renderColorPicker` | `function` | no | Replaces the colour palette. |
-| `renderSourceView` | `function` | no | Replaces the HTML source view. |
-| `renderRestoreDraftPrompt` | `function` | no | Replaces the prompt offering to restore an autosaved draft. |
 | `onUpload` | `UploadHandler` | no | Hands a file to your own service and returns the attributes to insert. |
 | `uploadAccept` | `string` | no | Accepted file types, enforced before the upload starts. |
 | `maxUploadSize` | `number` | no | Size ceiling, enforced before the file leaves the browser. |
@@ -179,7 +161,7 @@ This symbol takes no options.
 
 ## Source
 
-- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L371)
+- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L329)
 - [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L213)
 
 <!-- generated:reference:end -->

@@ -133,10 +133,6 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .rte-root[data-autogrow='false'] .rte-content {
-    block-size: var(--rte-min-height);
-  }
-
   .rte-root[data-resizable='vertical'] .rte-content {
     resize: vertical;
   }

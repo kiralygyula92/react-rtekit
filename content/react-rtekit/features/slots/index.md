@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/slots/
 title: Slots
-description: Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.
+description: Twenty replaceable parts, from the field label to a single toolbar button, each one an ordinary component.
 archetype: B
 section: features
 capabilityId: slots
@@ -20,7 +20,7 @@ slots-custom
 
 ## Customization
 
-Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the ten levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
+Every part of this is a slot, a token or a handler. See [How to customize](/react-rtekit/customization/) for the eight levels and how to pick one, and [Theming & tokens](/react-rtekit/customization/theme-tokens/) for the visual side.
 
 ## Limitations
 

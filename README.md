@@ -58,9 +58,9 @@ export function MessageField() {
   textbox, errors linked with `aria-describedby`, live-region announcements, a complete
   keyboard model and a shortcut reference built from the keymap that is actually in
   force. Every shipped theme meets WCAG AA, and a test enforces it.
-- **Replaceable at ten levels.** Theme tokens, `classNames`, `slotProps`, toolbar
-  config, custom toolbar items, slots, handler middleware, command overrides,
-  composable parts, and fully headless `useEditor`. Use the lowest level that does the
+- **Replaceable at eight levels.** Theme tokens, toolbar config, custom toolbar
+  items, slots, handler middleware, command overrides, composable parts, and fully
+  headless `useEditor`. Use the lowest level that does the
   job; each one leaves the rest working.
 
 ## Entry points

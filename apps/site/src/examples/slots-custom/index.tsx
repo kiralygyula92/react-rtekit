@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RichTextEditor, type RteSlots } from 'react-rtekit';
 
 /**
- * Four replaced slots.
+ * Five replaced slots.
  *
  * The rule each replacement follows: spread the props you were given. They carry the
  * behaviour — the `mousedown` that keeps the selection alive (fixes R5), the ARIA the
@@ -88,11 +88,10 @@ const slots: Partial<RteSlots> = {
     );
   },
 
-  /** A placeholder with a hint under it. */
-  Placeholder: ({ text }) => (
-    <span className="skin-placeholder">
-      {text}
-      <small>Markdown shortcuts work here — try “# ” or “- ”.</small>
+  /** The helper text, set off as a hint. `id` ties it to the field for screen readers. */
+  HelperText: ({ id, children }) => (
+    <span id={id} className="skin-placeholder">
+      <small>{children}</small>
     </span>
   ),
 };
@@ -106,6 +105,7 @@ export default function SlotsCustomExample() {
         preset="standard"
         label="Message"
         hideLabel
+        helperText="Markdown shortcuts work here — try “# ” or “- ”."
         maxLength={240}
         showCounter
         slots={slots}
@@ -116,7 +116,7 @@ export default function SlotsCustomExample() {
       />
 
       <p className="callout">
-        Nothing here changes what the editor <em>does</em>. The four replacements are presentation
+        Nothing here changes what the editor <em>does</em>. The five replacements are presentation
         only, which is why the keyboard model, the announcements and the selection handling are all
         still the shipped ones.
       </p>

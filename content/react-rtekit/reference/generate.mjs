@@ -543,8 +543,8 @@ const GROUPS = [
   ],
   ['Toolbar', (name) => /^toolbar/i.test(name) || name === 'readOnlyToolbar'],
   ['Value & sanitization', (name) => /sanitize|paste|autoLink|Protocol|DataUrl/i.test(name)],
-  ['Limits & validation', (name) => /maxLength|required|pastePrompt/i.test(name)],
-  ['State', (name) => /^(disabled|readOnly|fullscreen|defaultFullscreen|autoGrow)$/.test(name)],
+  ['Limits & validation', (name) => /maxLength|required/i.test(name)],
+  ['State', (name) => /^(disabled|readOnly|fullscreen)$/.test(name)],
   ['Uploads', (name) => /upload/i.test(name)],
   [
     'Accessibility & i18n',

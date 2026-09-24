@@ -251,12 +251,9 @@ export function RichTextEditor(props: RichTextEditorProps) {
     () => ({
       slots,
       defaults: defaultSlots,
-      slotProps: resolved.slotProps,
-      classNames: resolved.classNames,
-      styles: resolved.styles,
       icons,
     }),
-    [icons, resolved.classNames, resolved.slotProps, resolved.styles, slots],
+    [icons, slots],
   );
 
   const editorContextValue = useMemo(

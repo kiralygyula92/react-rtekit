@@ -1,13 +1,13 @@
 # React RTE Kit
 
 A production-grade React rich-text editor you can actually own.
-React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
+React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
 The whole documentation in one file, with the source of every example: [llms-full.md](/react-rtekit/llms-full.md).
 
 ## Getting started
 
-- [Overview](/react-rtekit.md): An accessible, themeable React rich-text editor with no dependencies: 46 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
+- [Overview](/react-rtekit.md): An accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
 - [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
 - [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
 - [AI context](/react-rtekit/getting-started/ai-context.md): The whole documentation and the source of every example in one Markdown file, for AI coding agents.
@@ -60,10 +60,10 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [Autosave & drafts](/react-rtekit/autosave.md): Drafts written on a debounce to storage you choose, with a restore prompt on the way back and a TTL.
 - [Read-only & disabled](/react-rtekit/read-only-and-disabled.md): Two different states: read-only keeps the content selectable and copyable, disabled takes it out of the tab order.
 - [Mobile](/react-rtekit/mobile.md): Touch targets at the platform minimum, a toolbar that docks above the on-screen keyboard, and no layout jumps on focus.
-- [Slots](/react-rtekit/slots.md): Forty-six replaceable parts, from the root element to a single toolbar button, each one an ordinary component.
+- [Slots](/react-rtekit/slots.md): Twenty replaceable parts, from the field label to a single toolbar button, each one an ordinary component.
 - [Handler middleware](/react-rtekit/handler-middleware.md): Eighteen interception points, each (ctx, next) => void, so you can wrap, veto or replace a behaviour without forking it.
 - [Commands](/react-rtekit/commands.md): Fifty-seven commands, each overridable, dispatched by the toolbar, the shortcuts and your own code alike.
-- [Composable parts](/react-rtekit/composable-parts.md): The same editor as eleven separate components, for layouts the all-in-one shape cannot make.
+- [Composable parts](/react-rtekit/composable-parts.md): The same editor as nine separate components, for layouts the all-in-one shape cannot make.
 - [Headless](/react-rtekit/headless.md): useEditor with no chrome at all: the document, the commands and the state, and you draw the rest.
 - [Plugin authoring](/react-rtekit/plugin-authoring.md): Add a mark, a block, a command or a toolbar item with definePlugin, in the same shape the built-ins use.
 - [Presets](/react-rtekit/presets.md): Six bundles — minimal, comment, standard, classic, email and full — each a plugin list plus prop defaults.
@@ -91,7 +91,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [API reference](/react-rtekit/api.md): Every public symbol, generated from the TypeScript declarations — components, hooks, the imperative API, the functions and the catalogues.
 - [RichTextEditor](/react-rtekit/api/rich-text-editor.md): The all-in-one component and every prop it takes.
 - [RteContentView](/react-rtekit/api/rte-content-view.md): The read-only renderer for stored HTML, with the same content styles as the editor.
-- [Composable parts](/react-rtekit/api/composable-parts.md): The eleven parts the all-in-one component is assembled from.
+- [Composable parts](/react-rtekit/api/composable-parts.md): The nine parts the all-in-one component is assembled from.
 - [Providers](/react-rtekit/api/providers.md): Theme, locale and defaults providers, for configuring several editors at once.
 - [useEditor](/react-rtekit/api/use-editor.md): The headless hook, and every option it accepts.
 - [Editor hooks](/react-rtekit/api/editor-hooks.md): The hooks that read editor state: focus, emptiness, counts, format and validation.
@@ -102,7 +102,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [Sanitizer](/react-rtekit/api/sanitize.md): The sanitizer, its four profiles, and the URL checker every href and src passes through.
 - [Plugin API](/react-rtekit/api/plugin-api.md): Defining a plugin, resolving plugin order, and the preset bundles.
 - [Theme API](/react-rtekit/api/theme-api.md): Building a theme, and the five that ship.
-- [Slot catalogue](/react-rtekit/api/slots.md): All 46 replaceable parts and the props each one receives.
+- [Slot catalogue](/react-rtekit/api/slots.md): All 20 replaceable parts and the props each one receives.
 - [Toolbar items](/react-rtekit/api/toolbar-items.md): All 42 built-in toolbar items by name, for building a layout of your own.
 - [Theme tokens](/react-rtekit/api/theme-tokens.md): All 114 design tokens and the CSS custom property each one writes.
 - [Icon set](/react-rtekit/api/icons.md): All 52 icons the toolbar and menus draw from, and how to replace one of them.
@@ -112,7 +112,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 
 ## Customization
 
-- [How to customize](/react-rtekit/customization.md): The ten levels of customization, from a theme token to a fully headless editor, and how to pick the lowest one that does the job.
+- [How to customize](/react-rtekit/customization.md): The eight levels of customization, from a theme token to a fully headless editor, and how to pick the lowest one that does the job.
 - [Theming & tokens](/react-rtekit/customization/theme-tokens.md): Changing colours, sizes and radii with tokens, and building a theme that keeps its contrast.
 - [Overriding structure](/react-rtekit/customization/overriding-slots.md): Replacing a part with your own component without losing the behaviour that came with it.
 - [Toolbar layout](/react-rtekit/customization/toolbar-layout.md): Choosing items, grouping them, adding your own, and deciding what happens when they do not fit.
