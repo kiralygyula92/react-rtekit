@@ -1,15 +1,14 @@
 /**
  * The site's search index.
  *
- * Built once, in memory, from the same sources the pages themselves render: guide
- * headings are parsed from the guide modules, example metadata comes from the example
- * registry, and API symbols come from TypeDoc plus the library's runtime metadata. No
+ * Built once, in memory, from the compiled manifest (every page and its headings) and
+ * the library's runtime metadata (every slot, command, handler, token and icon). No
  * entry is written by hand, so nothing can point at a page that no longer exists.
  *
- * Every source is imported dynamically. The palette lives in the site header, so a
- * static import would pull the guides, the examples and the API data into the entry
- * chunk and undo the route splitting.
+ * The manifest is already in the shell; the runtime metadata is imported when the
+ * palette first opens, so it is not in the entry chunk.
  */
+import { pages } from '../docs/manifest';
 
 /** What kind of thing a result is, which is also how results are grouped. */
 export type SearchKind = 'guide' | 'section' | 'example' | 'api' | 'symbol';
@@ -46,10 +45,7 @@ async function build(): Promise<SearchEntry[]> {
   // The manifest is the site's content; the runtime metadata is the library's enumerable
   // surface. Between them they cover every page and every symbol, and neither is a list
   // anyone maintains by hand, so a result can never point at a page that is not there.
-  const [{ pages }, { meta }] = await Promise.all([
-    import('../docs/manifest'),
-    import('react-rtekit/meta'),
-  ]);
+  const { meta } = await import('react-rtekit/meta');
 
   const entries: SearchEntry[] = [];
 

@@ -1,11 +1,14 @@
-import data from '../content/manifest.json';
+import data from 'virtual:docs/manifest';
 
 /**
  * The compiled content, typed.
  *
- * One import for the whole site: the sidebar, the features index, the search index, the
- * table of contents and every page body are read from this single object, so there is
- * one source rather than three that could drift apart.
+ * One import for the whole site: the sidebar, the features index, the search index and
+ * the table of contents are read from this single object, so there is one source rather
+ * than three that could drift apart.
+ *
+ * It is `content/manifest.json` without the page bodies, which are most of its weight
+ * and are loaded one page at a time instead (see `content.ts`).
  *
  * @module
  */
@@ -41,7 +44,6 @@ export interface DocPage {
   lifecycle: string | null;
   symbols: string[];
   headings: PageHeading[];
-  html: string;
   words: number;
   source: string;
 }
@@ -61,10 +63,9 @@ export interface PluginConfig {
   links: Record<string, string>;
   taxonomy: string[];
   sections: { id: string; title?: string; enabled?: boolean }[];
-  branding?: { accentColor?: string };
 }
 
-const manifest = data as unknown as {
+const manifest = data as {
   config: PluginConfig;
   /** Scheme and host of the canonical deployment. Pathnames already carry the namespace. */
   origin: string;

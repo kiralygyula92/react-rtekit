@@ -9,14 +9,6 @@ section: getting-started
 
 # Support
 
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](/react-rtekit/getting-started/installation/).
-
 ## Where to ask
 
 This is a free, MIT-licensed project maintained in the open. There is no paid support tier and no guaranteed response time.
@@ -24,7 +16,7 @@ This is a free, MIT-licensed project maintained in the open. There is no paid su
 | | |
 |---|---|
 | A bug | [GitHub issues](https://github.com/kiralygyula92/react-rtekit/issues) |
-| A question | [GitHub discussions](https://github.com/kiralygyula92/react-rtekit/discussions) |
+| A question | [An issue labelled "question"](https://github.com/kiralygyula92/react-rtekit/issues/new?labels=question) |
 | A security problem | Report privately through GitHub's security advisories rather than in a public issue |
 
 ## What to include in a bug report
@@ -36,11 +28,11 @@ A report that can be reproduced gets fixed; one that cannot, usually does not. I
 - the props you passed, or a link to a [playground](/react-rtekit/demos/playground/) URL, which carries the whole configuration in its hash;
 - what you did, what happened, and what you expected instead.
 
-## Minimal working example
+## Sharing a reproduction
 
 The playground's URL is the fastest reproduction case: configure it until it misbehaves and paste the link.
 
-## Verify
+## Before you file
 
 Before filing, check whether the behaviour is listed under the capability page's `## Limitations` — several things that look like bugs are documented constraints with a workaround.
 

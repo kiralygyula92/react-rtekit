@@ -1,13 +1,13 @@
 ---
 pluginId: react-rtekit
 pathname: /react-rtekit/api/composable-parts/
-title: Composable parts
+title: Composable parts API
 description: The nine parts the all-in-one component is assembled from.
 archetype: E
 section: reference
 ---
 
-# Composable parts
+# Composable parts API
 
 <!--
   Generated from the TypeScript declarations. Do not author anything here:

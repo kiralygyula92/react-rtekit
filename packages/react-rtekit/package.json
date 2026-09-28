@@ -1,7 +1,7 @@
 {
   "name": "react-rtekit",
   "version": "1.0.0",
-  "description": "Production-grade React rich-text editor: engine-adapter architecture, slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop profiles.",
+  "description": "Accessible, themeable rich-text editor for React with no dependencies: slots, handler middleware, theme tokens, built-in sanitization and HTML interop.",
   "keywords": [
     "react",
     "rich-text-editor",

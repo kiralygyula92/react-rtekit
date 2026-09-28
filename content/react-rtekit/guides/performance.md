@@ -1,13 +1,13 @@
 ---
 pluginId: react-rtekit
 pathname: /react-rtekit/guides/performance/
-title: Performance
+title: Performance tuning
 description: What costs what, what is measured on every build, and which props are worth memoising.
 archetype: I
 section: guides
 ---
 
-# Performance
+# Performance tuning
 
 ## What is measured
 
@@ -15,8 +15,8 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 
 | Entry point | Budget |
 |---|---|
-| `useEditor` — headless | 41 kB |
-| `RichTextEditor` — everything | 71 kB |
+| `useEditor` — headless | 43 kB |
+| `RichTextEditor` — everything | 72 kB |
 | `react-rtekit/core` — no React | 19 kB |
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |

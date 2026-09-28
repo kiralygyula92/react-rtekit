@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/theme-api/
 title: Theme API
-description: Building a theme, and the five that ship.
+description: 'Building a theme with createTheme, and the five that ship with the package: light, dark, classic, compact and bordered.'
 archetype: E
 section: reference
 ---

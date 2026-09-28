@@ -9,14 +9,6 @@ section: getting-started
 
 # FAQ
 
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](/react-rtekit/getting-started/installation/).
-
 ## What does it depend on?
 
 React and React DOM, and nothing else. The document model, the editing engine, the HTML parser, the sanitizer and every serializer are this project's own code. The `EditorEngine` interface keeps the engine replaceable, and the package ships one — its own.
@@ -40,14 +32,6 @@ Because `<RichTextEditor>` reads its feature set from props at runtime, so every
 ## Can I use it with a UI kit?
 
 Yes, and you do not have to. Every part is a slot, so you can render your own buttons, dialogs and menus while keeping the behaviour — see [Design-system skin](/react-rtekit/customization/design-system-skin/).
-
-## Minimal working example
-
-See [Usage](/react-rtekit/getting-started/usage/).
-
-## Verify
-
-Nothing to verify on this page.
 
 ## Next steps
 

@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -295,6 +295,7 @@ await writeFile(
  * fallback reachable, which is the only reason any route renders at all.
  */
 let twins = 0;
+const written = new Set();
 for (const page of pages) {
   const slug = page.pathname.replace(`/${PLUGIN}/`, '').replace(/\/$/, '');
   const base = path.join(sitePublic, PLUGIN);
@@ -302,7 +303,13 @@ for (const page of pages) {
     slug === '' ? path.join(sitePublic, `${PLUGIN}.md`) : path.join(base, `${slug}.md`);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, page.markdown, 'utf8');
+  written.add(target);
   twins += 1;
+}
+
+// A page that was deleted must not stay downloadable as Markdown.
+for await (const file of markdownFiles(path.join(sitePublic, PLUGIN))) {
+  if (!written.has(file) && path.basename(file) !== 'llms-full.md') await rm(file);
 }
 
 /* llms.txt — grouped by section, in nav order, one line per page. */
@@ -325,8 +332,7 @@ const llms = [
   /*
    * Ahead of the lists, so an agent that wants everything does not have to crawl — and in
    * prose rather than as a `- [..](..)` entry, because every list line in this file is one
-   * page's twin (`- [Title](url.md): description`), and the F8 agent flow reads it
-   * that way.
+   * page's twin (`- [Title](url.md): description`), and agents read it that way.
    */
   `The whole documentation in one file, with the source of every example: [llms-full.md](/${PLUGIN}/llms-full.md).`,
   '',
@@ -485,6 +491,13 @@ const sitemap = [
 ].join('\n');
 await writeFile(path.join(sitePublic, 'sitemap.xml'), `${sitemap}\n`, 'utf8');
 
+/* robots.txt: everything is public, so it exists to point crawlers at the sitemap. */
+await writeFile(
+  path.join(sitePublic, 'robots.txt'),
+  ['User-agent: *', 'Allow: /', '', `Sitemap: ${origin}/sitemap.xml`, ''].join('\n'),
+  'utf8',
+);
+
 /*
  * The invariants a broken site would otherwise ship with.
  *
@@ -508,9 +521,21 @@ const redirectTable = await readJson(path.join(siteSrc, 'redirects.json'));
   }
 })(nav);
 
+const seenTitles = new Map();
 for (const page of pages) {
-  // The description is the subtitle, the meta description and the llms.txt line at once.
-  if (page.description.trim() === '') problems.push(`${page.pathname}: no description`);
+  // The description is the subtitle, the meta description and the llms.txt line at once,
+  // so it has to fit a search result: long enough to say something, short enough not to
+  // be cut off.
+  const { length } = page.description.trim();
+  if (length === 0) problems.push(`${page.pathname}: no description`);
+  else if (length < 50 || length > 160)
+    problems.push(`${page.pathname}: description is ${length} characters, not 50 to 160`);
+
+  // The title becomes the <title>, and two pages sharing one cannot be told apart in a
+  // tab, a bookmark or a search result.
+  const clash = seenTitles.get(page.title);
+  if (clash) problems.push(`${page.pathname}: title "${page.title}" is also ${clash}'s`);
+  seenTitles.set(page.title, page.pathname);
 
   // The H1 comes from frontmatter; the body starts at H2 and never skips a level.
   if (/<h1[\s>]/i.test(page.html)) problems.push(`${page.pathname}: a second H1 in the body`);
@@ -546,5 +571,5 @@ if (problems.length > 0) {
   process.exit(1);
 }
 process.stdout.write(
-  `${pages.length} pages -> manifest · ${twins} markdown twins · llms.txt · sitemap.xml\n`,
+  `${pages.length} pages -> manifest · ${twins} markdown twins · llms.txt · sitemap.xml · robots.txt\n`,
 );

@@ -3,12 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="react-rtekit — a production-grade React rich-text editor: slots, handler middleware, theme tokens, sanitization and HTML interop profiles." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>react-rtekit</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!--head-->
+    <script>
+      // Applies a stored theme choice before the first paint, so a reader who picked the
+      // other theme from their system's does not see a flash of the wrong one on every load.
+      try {
+        var theme = localStorage.getItem('rtekit-site-theme');
+        if (theme === 'dark' || theme === 'light' || theme === 'classic') {
+          document.documentElement.dataset.siteTheme = theme;
+          document.documentElement.dataset.colorScheme = theme === 'dark' ? 'dark' : 'light';
+        }
+      } catch (error) {
+        // No storage: the system preference applies.
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="margin: 2rem; font-family: system-ui, sans-serif">
+        This documentation needs JavaScript. Every page is also available as Markdown, listed in
+        <a href="/llms.txt">llms.txt</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

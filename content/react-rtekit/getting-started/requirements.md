@@ -9,14 +9,6 @@ section: getting-started
 
 # Requirements
 
-## Prerequisites
-
-None beyond a React application.
-
-## Installation
-
-See [Installation](/react-rtekit/getting-started/installation/).
-
 ## Supported versions
 
 | | Supported |
@@ -35,10 +27,6 @@ The package targets modern evergreen browsers and uses `:has()`, `color-mix()` a
 ## Module formats
 
 ESM and CommonJS, with TypeScript declarations for both. `publint` and `are-the-types-wrong` run on every build, so the `exports` map is checked rather than assumed.
-
-## Minimal working example
-
-See [Usage](/react-rtekit/getting-started/usage/).
 
 ## Verify
 

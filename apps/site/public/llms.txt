@@ -1,13 +1,13 @@
 # React RTE Kit
 
-A production-grade React rich-text editor you can actually own.
+The rich-text editor for React that fits your design system.
 React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
 The whole documentation in one file, with the source of every example: [llms-full.md](/react-rtekit/llms-full.md).
 
 ## Getting started
 
-- [Overview](/react-rtekit.md): An accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
+- [Overview](/react-rtekit.md): An accessible, themeable React rich-text editor with no dependencies: replaceable slots, handler middleware, theme tokens and sanitization built in.
 - [Installation](/react-rtekit/getting-started/installation.md): Install the package, its peers and the stylesheet, and check that the editor renders.
 - [Usage](/react-rtekit/getting-started/usage.md): A working editor in about fifteen lines, controlled or uncontrolled, with the value in the format you want.
 - [AI context](/react-rtekit/getting-started/ai-context.md): The whole documentation and the source of every example in one Markdown file, for AI coding agents.
@@ -89,11 +89,11 @@ The whole documentation in one file, with the source of every example: [llms-ful
 ## Reference
 
 - [API reference](/react-rtekit/api.md): Every public symbol, generated from the TypeScript declarations — components, hooks, the imperative API, the functions and the catalogues.
-- [RichTextEditor](/react-rtekit/api/rich-text-editor.md): The all-in-one component and every prop it takes.
+- [RichTextEditor](/react-rtekit/api/rich-text-editor.md): The all-in-one editor component, and every prop it accepts with its type, whether it is required, and what it does.
 - [RteContentView](/react-rtekit/api/rte-content-view.md): The read-only renderer for stored HTML, with the same content styles as the editor.
-- [Composable parts](/react-rtekit/api/composable-parts.md): The nine parts the all-in-one component is assembled from.
+- [Composable parts API](/react-rtekit/api/composable-parts.md): The nine parts the all-in-one component is assembled from.
 - [Providers](/react-rtekit/api/providers.md): Theme, locale and defaults providers, for configuring several editors at once.
-- [useEditor](/react-rtekit/api/use-editor.md): The headless hook, and every option it accepts.
+- [useEditor](/react-rtekit/api/use-editor.md): The headless hook for building your own editor chrome, and every option it accepts with its type and what it does.
 - [Editor hooks](/react-rtekit/api/editor-hooks.md): The hooks that read editor state: focus, emptiness, counts, format and validation.
 - [EditorInstance](/react-rtekit/api/editor-instance.md): The imperative API on the editor ref: content, selection, commands, drafts and find.
 - [Command catalogue](/react-rtekit/api/commands.md): All 57 commands, their payloads and what each one does.
@@ -101,7 +101,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [Serialization](/react-rtekit/api/serialization.md): Converting between HTML, the document model, Markdown and plain text.
 - [Sanitizer](/react-rtekit/api/sanitize.md): The sanitizer, its four profiles, and the URL checker every href and src passes through.
 - [Plugin API](/react-rtekit/api/plugin-api.md): Defining a plugin, resolving plugin order, and the preset bundles.
-- [Theme API](/react-rtekit/api/theme-api.md): Building a theme, and the five that ship.
+- [Theme API](/react-rtekit/api/theme-api.md): Building a theme with createTheme, and the five that ship with the package: light, dark, classic, compact and bordered.
 - [Slot catalogue](/react-rtekit/api/slots.md): All 20 replaceable parts and the props each one receives.
 - [Toolbar items](/react-rtekit/api/toolbar-items.md): All 42 built-in toolbar items by name, for building a layout of your own.
 - [Theme tokens](/react-rtekit/api/theme-tokens.md): All 114 design tokens and the CSS custom property each one writes.
@@ -125,11 +125,11 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [All guides](/react-rtekit/guides.md): Longer pieces on doing a whole job well, rather than on one capability.
 - [Best practices](/react-rtekit/guides/best-practices.md): The habits that keep an editor fast, accessible and predictable as an application grows around it.
 - [Security](/react-rtekit/guides/security.md): Where untrusted HTML enters, what the sanitizer guarantees, and what remains your responsibility.
-- [Performance](/react-rtekit/guides/performance.md): What costs what, what is measured on every build, and which props are worth memoising.
+- [Performance tuning](/react-rtekit/guides/performance.md): What costs what, what is measured on every build, and which props are worth memoising.
 - [Testing](/react-rtekit/guides/testing.md): Testing an editor: what unit tests can reach, what needs a real browser, and why.
-- [Accessibility](/react-rtekit/guides/accessibility.md): The keyboard model, the ARIA semantics, and what an override has to keep.
-- [Localization](/react-rtekit/guides/localization.md): Translating the editor's strings, handling direction, and finding the keys you missed.
-- [Server rendering](/react-rtekit/guides/server-rendering.md): Rendering the content on the server and hydrating without a flash or a mismatch.
+- [Keyboard and ARIA](/react-rtekit/guides/accessibility.md): The keyboard model, the ARIA semantics, and what an override has to keep.
+- [Translating the editor](/react-rtekit/guides/localization.md): Translating the editor's strings, handling direction, and finding the keys you missed.
+- [SSR and hydration](/react-rtekit/guides/server-rendering.md): Rendering the content on the server and hydrating without a flash or a mismatch.
 - [Writing a plugin](/react-rtekit/guides/writing-a-plugin.md): Building a plugin end to end: a mark, a command, a keyboard shortcut and a toolbar item.
 
 ## Integrations
@@ -150,8 +150,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 ## Discover more
 
 - [Discover more](/react-rtekit/discover-more.md): Where the project is going, what it has already done, and how it is put together.
-- [Changelog](/react-rtekit/discover-more/changelog.md): Every released version and what changed in it.
+- [Changelog](/react-rtekit/discover-more/changelog.md): Every released version of React RTE Kit and what changed in it, from the changesets recorded with each change.
 - [Roadmap](/react-rtekit/discover-more/roadmap.md): What is being considered next, and what has been decided against.
-- [Showcase](/react-rtekit/discover-more/showcase.md): Applications built with this editor, added once their owners are happy to be named.
 - [Architecture](/react-rtekit/discover-more/architecture.md): The decisions behind the engine adapter, the sanitizer, the interop profiles and the slot system.
 - [llms.txt](/react-rtekit/discover-more/llms-txt.md): The machine-readable index of this documentation, and how to point an agent at it.

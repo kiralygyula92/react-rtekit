@@ -24,4 +24,4 @@ What has been **decided against**:
 - **Document management.** This edits text and hands it back.
 - **A CSS-in-JS build.** Tokens in a cascade layer do the same job without the runtime.
 
-If you need one of these, say so in [discussions](https://github.com/kiralygyula92/react-rtekit/discussions) — what people actually ask for is what moves.
+If you need one of these, say so in an [issue](https://github.com/kiralygyula92/react-rtekit/issues) — what people actually ask for is what moves.

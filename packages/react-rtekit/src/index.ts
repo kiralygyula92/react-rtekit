@@ -1,5 +1,5 @@
 /**
- * `react-rtekit` — a production-grade React rich-text editor.
+ * `react-rtekit`: an accessible, themeable rich-text editor for React.
  *
  * @module
  */

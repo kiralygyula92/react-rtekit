@@ -9,15 +9,7 @@ section: getting-started
 
 # Usage
 
-## Prerequisites
-
-A working [installation](/react-rtekit/getting-started/installation/).
-
-## Installation
-
-Already done — this page is about using what you installed.
-
-## Minimal working example
+## A basic editor
 
 ```demo
 basic

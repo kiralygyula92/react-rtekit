@@ -15,7 +15,15 @@
   --site-danger-surface: #f04438;
   /* The label on a solid accent control: white is only legible on the darker accent. */
   --site-accent-contrast: #ffffff;
-  --site-radius: 10px;
+  /*
+   * One radius scale for the site's own chrome. Examples that imitate another design
+   * system (the `ds-*` and `skin-*` classes) keep theirs on purpose.
+   */
+  --site-radius-xs: 4px; /* inline code, kbd, tags */
+  --site-radius-sm: 6px; /* rows in a list: nav links, search results */
+  --site-radius-control: 8px; /* buttons, inputs, selects */
+  --site-radius: 10px; /* cards, code blocks, demos, panels */
+  --site-radius-lg: 12px; /* dialogs */
   --site-max: 1180px;
   color-scheme: light;
 }
@@ -112,7 +120,9 @@ code {
   font-size: 0.9em;
   background: var(--site-bg-muted);
   padding: 0.1em 0.35em;
-  border-radius: 4px;
+  border-radius: var(--site-radius-xs);
+  /* A long identifier wraps rather than pushing a narrow page sideways. */
+  overflow-wrap: anywhere;
 }
 
 pre {
@@ -128,144 +138,15 @@ pre code {
   padding: 0;
 }
 
-.site {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.site-skip {
-  position: absolute;
-  inset-inline-start: -9999px;
-}
-
-.site-skip:focus {
-  inset-inline-start: 8px;
-  inset-block-start: 8px;
-  z-index: 10;
-  background: var(--site-bg);
-  padding: 8px 12px;
-  border: 1px solid var(--site-border);
-  border-radius: 6px;
-}
-
-.site-visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 12px 20px;
-  border-bottom: 1px solid var(--site-border);
-  background: color-mix(in srgb, var(--site-bg) 88%, transparent);
-  backdrop-filter: blur(8px);
-}
-
-.site-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 650;
-  text-decoration: none;
-  color: inherit;
-}
-
-.site-brand__mark {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  background: var(--site-accent);
-}
-
-.site-brand__version {
-  font-size: 12px;
-  color: var(--site-text-muted);
-  font-weight: 400;
-}
-
-.site-nav {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  margin-inline-end: auto;
-}
-
-.site-nav__link {
-  padding: 6px 10px;
-  border-radius: 7px;
-  text-decoration: none;
-  color: var(--site-text-muted);
-}
-
-.site-nav__link:hover,
-.site-nav__link.active {
-  background: var(--site-bg-muted);
-  color: var(--site-text);
-}
-
-.site-header__end {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.site-theme-switch select {
-  font: inherit;
-  padding: 5px 8px;
-  border-radius: 7px;
-  border: 1px solid var(--site-border);
-  background: var(--site-bg);
-  color: inherit;
-}
-
-.site-main {
-  flex: 1 1 auto;
-}
-
-.site-footer {
-  border-top: 1px solid var(--site-border);
-  padding: 24px 20px;
-  color: var(--site-text-muted);
-  font-size: 14px;
-}
-
 .page {
   max-width: var(--site-max);
   margin: 0 auto;
   padding: 32px 20px 64px;
 }
 
-.page--narrow {
-  max-width: 720px;
-}
-
-.page--with-sidebar {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 40px;
-}
-
 .page__lead {
   color: var(--site-text-muted);
   max-width: 68ch;
-}
-
-.sidebar__title {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--site-text-muted);
 }
 
 .sidebar ul {
@@ -277,54 +158,11 @@ pre code {
   gap: 2px;
 }
 
-.sidebar__link {
-  display: block;
-  padding: 5px 10px;
-  border-radius: 6px;
-  text-decoration: none;
-  color: var(--site-text-muted);
-  font-size: 14px;
-}
-
-.sidebar__link:hover,
-.sidebar__link.active {
-  background: var(--site-bg-muted);
-  color: var(--site-text);
-}
-
-.hero {
-  padding: 40px 0 24px;
-}
-
-.hero__title {
-  font-size: clamp(30px, 5vw, 46px);
-  line-height: 1.1;
-  margin: 0 0 16px;
-  letter-spacing: -0.02em;
-}
-
-.hero__lead {
-  font-size: 18px;
-  color: var(--site-text-muted);
-  max-width: 62ch;
-}
-
-.hero__actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 24px 0;
-}
-
-.hero__install {
-  display: inline-block;
-}
-
 .button {
   display: inline-flex;
   align-items: center;
-  padding: 9px 16px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: var(--site-radius-control);
   border: 1px solid var(--site-border);
   background: var(--site-bg);
   color: inherit;
@@ -337,80 +175,6 @@ pre code {
   background: var(--site-accent);
   border-color: var(--site-accent);
   color: var(--site-accent-contrast);
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.feature-card {
-  border: 1px solid var(--site-border);
-  border-radius: var(--site-radius);
-  padding: 18px;
-  background: var(--site-bg-muted);
-}
-
-.feature-card h2 {
-  font-size: 16px;
-  margin: 0 0 8px;
-}
-
-.feature-card p {
-  margin: 0;
-  color: var(--site-text-muted);
-  font-size: 14px;
-}
-
-.card-grid {
-  list-style: none;
-  margin: 24px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  display: block;
-  height: 100%;
-  border: 1px solid var(--site-border);
-  border-radius: var(--site-radius);
-  padding: 18px;
-  text-decoration: none;
-  color: inherit;
-  background: var(--site-bg);
-}
-
-.card:hover {
-  border-color: var(--site-accent);
-}
-
-.card h2 {
-  font-size: 16px;
-  margin: 0 0 8px;
-}
-
-.card p {
-  margin: 0;
-  color: var(--site-text-muted);
-  font-size: 14px;
-}
-
-.card__tags {
-  display: block;
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--site-text-muted);
-}
-
-.filter-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 20px 0;
 }
 
 .chip {
@@ -435,21 +199,6 @@ pre code {
   border-radius: var(--site-radius);
   padding: 20px;
   color: var(--site-text-muted);
-}
-
-.example-surface {
-  border: 1px solid var(--site-border);
-  border-radius: var(--site-radius);
-  padding: 20px;
-  background: var(--site-bg);
-  margin-top: 20px;
-}
-
-@media (max-width: 860px) {
-  .page--with-sidebar {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
 }
 
 /* ── example surfaces ─────────────────────────────────────────────────────── */
@@ -521,7 +270,7 @@ pre code {
 
 /* What the group *does*. The label alone says only what it is called. */
 .choice-group__hint {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--site-text-muted);
 }
 
@@ -537,7 +286,7 @@ pre code {
   font: inherit;
   padding: 6px 8px;
   border: 1px solid var(--site-border);
-  border-radius: 6px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
 }
@@ -570,7 +319,7 @@ pre code {
 .editor-grid {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   align-items: start;
 }
 
@@ -592,6 +341,7 @@ pre code {
   display: grid;
   gap: 16px;
   max-width: 720px;
+  min-width: 0;
 }
 
 .parity__title {
@@ -616,7 +366,7 @@ pre code {
   gap: 6px;
   align-items: center;
   border: 1px solid var(--site-border);
-  border-radius: 4px;
+  border-radius: var(--site-radius-control);
   padding: 6px 8px;
   background: var(--site-bg);
 }
@@ -649,7 +399,7 @@ pre code {
 
 .parity__chip-input {
   flex: 1 1 160px;
-  min-width: 120px;
+  min-width: 0;
   border: 0;
   outline: none;
   font: inherit;
@@ -698,12 +448,15 @@ pre code {
 .parity__outputs {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 }
 
+/* `start`, or the shorter figure's caption row soaks up the height of the taller one
+   and its code block sits lower than its neighbour's. */
 .parity__outputs figure {
   margin: 0;
   display: grid;
+  align-content: start;
   gap: 8px;
 }
 
@@ -740,16 +493,6 @@ pre code {
   color: var(--site-text);
 }
 
-/* ── example page chrome ──────────────────────────────────────────────────── */
-.example-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
 .example-tabs {
   display: inline-flex;
   gap: 4px;
@@ -774,22 +517,6 @@ pre code {
   color: var(--site-text);
 }
 
-.example-widths {
-  display: inline-flex;
-  gap: 6px;
-}
-
-.example-surface[data-width] {
-  transition: max-width 150ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.example-source {
-  margin-top: 20px;
-  max-height: 70vh;
-  overflow: auto;
-  font-size: 13px;
-}
-
 .example-related {
   padding-left: 20px;
 }
@@ -812,166 +539,9 @@ pre code {
   background: #ffffff;
 }
 
-/* ── guide pages ──────────────────────────────────────────────────────────── */
-.guide__section {
-  margin-block: 32px;
-  scroll-margin-block-start: 24px;
-}
-
-.guide__section h2 {
-  font-size: 20px;
-  margin-block-end: 12px;
-}
-
-.guide__anchor {
-  color: inherit;
-  text-decoration: none;
-}
-
-.guide__anchor:hover::after {
-  content: ' #';
-  color: var(--site-text-muted);
-  font-weight: 400;
-}
-
 .guide p,
 .guide li {
   max-width: 68ch;
-}
-
-.guide__see-also {
-  margin-block-start: 28px;
-  padding: 14px 16px;
-  border: 1px solid var(--site-border);
-  border-radius: var(--site-radius);
-  background: var(--site-bg-muted);
-}
-
-.guide__see-also h3 {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--site-text-muted);
-  margin: 0 0 8px;
-}
-
-.guide__see-also ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-.guide__pager {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-block-start: 48px;
-  padding-block-start: 20px;
-  border-top: 1px solid var(--site-border);
-}
-
-.guide__pager-link {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  text-decoration: none;
-  color: var(--site-text);
-  font-weight: 500;
-}
-
-.guide__pager-link--next {
-  text-align: right;
-}
-
-.guide__pager-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--site-text-muted);
-  font-weight: 400;
-}
-
-/* "On this page". A third column on wide screens; inline above the body below. */
-.page--with-sidebar:has(.toc) {
-  grid-template-columns: 220px minmax(0, 1fr) 200px;
-}
-
-.toc {
-  position: sticky;
-  top: 24px;
-  align-self: start;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
-}
-
-.toc__title {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--site-text-muted);
-  margin: 0 0 8px;
-}
-
-.toc ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.toc__link {
-  display: block;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--site-text-muted);
-  text-decoration: none;
-}
-
-.toc__link:hover {
-  background: var(--site-bg-muted);
-  color: var(--site-text);
-}
-
-@media (max-width: 1100px) {
-  .page--with-sidebar:has(.toc) {
-    grid-template-columns: 220px minmax(0, 1fr);
-  }
-
-  .toc {
-    position: static;
-    max-height: none;
-    grid-column: 1 / -1;
-    order: -1;
-  }
-}
-
-/* ── search palette ───────────────────────────────────────────────────────── */
-.site-search-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 10px;
-  border: 1px solid var(--site-border);
-  border-radius: 8px;
-  background: var(--site-bg);
-  color: var(--site-text-muted);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.site-search-trigger:hover {
-  color: var(--site-text);
-}
-
-.site-search-trigger__key {
-  font-size: 11px;
-  padding: 1px 5px;
-  border: 1px solid var(--site-border);
-  border-radius: 4px;
-  background: var(--site-bg-muted);
 }
 
 .search-overlay {
@@ -980,6 +550,7 @@ pre code {
   z-index: 100;
   background: rgb(0 0 0 / 40%);
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   padding: 10vh 16px 16px;
 }
@@ -992,7 +563,7 @@ pre code {
   flex-direction: column;
   background: var(--site-bg);
   border: 1px solid var(--site-border);
-  border-radius: 12px;
+  border-radius: var(--site-radius-lg);
   box-shadow: 0 24px 60px rgb(0 0 0 / 30%);
   overflow: hidden;
 }
@@ -1012,12 +583,25 @@ pre code {
   outline-offset: -2px;
 }
 
+/* Sized to its results: an empty or short list does not leave a tall blank panel. */
 .search-dialog__results {
   list-style: none;
   margin: 0;
   padding: 6px;
   overflow-y: auto;
-  flex: 1;
+  flex: 0 1 auto;
+}
+
+.search-dialog__empty {
+  margin: 0;
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--site-text-muted);
+  font-size: 14px;
+}
+
+.search-dialog__empty strong {
+  color: var(--site-text);
 }
 
 .search-result {
@@ -1026,7 +610,7 @@ pre code {
   align-items: baseline;
   gap: 10px;
   padding: 7px 10px;
-  border-radius: 8px;
+  border-radius: var(--site-radius-sm);
   cursor: pointer;
 }
 
@@ -1037,7 +621,7 @@ pre code {
 .search-result__kind {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--site-text-muted);
 }
 
@@ -1063,7 +647,7 @@ pre code {
 /* ── shared example layout ────────────────────────────────────────────────── */
 .split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 24px;
   align-items: start;
 }
@@ -1229,58 +813,15 @@ pre code {
   gap: 12px;
 }
 
-.ds-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
 .ds-field__label {
   font-size: 12px;
   color: var(--site-text-muted);
-}
-
-.ds-field__input {
-  padding: 6px 8px;
-  border: 1px solid var(--site-border);
-  border-radius: 4px;
-  background: var(--site-bg);
-  color: var(--site-text);
-  font: inherit;
-  font-size: 13px;
-}
-
-.ds-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.ds-spinner {
-  inline-size: 14px;
-  block-size: 14px;
-  border: 2px solid var(--site-border);
-  border-top-color: var(--site-accent);
-  border-radius: 50%;
-  display: inline-block;
-  animation: ds-spin 0.7s linear infinite;
 }
 
 @keyframes ds-spin {
   to {
     transform: rotate(360deg);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ds-spinner {
-    animation: none;
-  }
-}
-
-.ds-tooltip {
-  display: inline-flex;
 }
 
 /* ── headless example ─────────────────────────────────────────────────────── */
@@ -1302,7 +843,7 @@ pre code {
 .headless__control {
   padding: 4px 10px;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: var(--site-radius-control);
   background: transparent;
   color: var(--site-text);
   font: inherit;
@@ -1380,9 +921,7 @@ pre code {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: var(--site-max);
-  margin: 0 auto;
-  padding: 32px 20px 64px;
+  margin-block-start: 32px;
 }
 
 .theme-editor {
@@ -1390,43 +929,12 @@ pre code {
   grid-template-columns: 300px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
-  max-width: var(--site-max);
-  margin: 0 auto;
-  padding: 32px 20px 64px;
+  margin-block-start: 32px;
 }
 
-.playground__header h1 {
-  margin-block-end: 4px;
-}
-
-/* The options card. Its groups flow into as many columns as the page can hold. */
+/* The options. The control panel inside is the card, so this adds no frame of its own. */
 .playground__controls {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 8px 24px;
-  align-items: start;
-  padding: 16px;
-  border: 1px solid var(--site-border);
-  border-radius: var(--site-radius);
-  background: var(--site-bg-muted);
   font-size: 13px;
-}
-
-.playground__group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-
-.playground__group-title {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--site-text-muted);
-  padding-block-end: 4px;
-  border-bottom: 1px solid var(--site-border);
 }
 
 .theme-editor__tokens {
@@ -1487,7 +995,7 @@ pre code {
   inline-size: 110px;
   padding: 3px 6px;
   border: 1px solid var(--site-border);
-  border-radius: 4px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
   font: inherit;

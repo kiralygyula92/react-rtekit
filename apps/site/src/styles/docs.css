@@ -58,7 +58,7 @@
   padding: 8px 12px;
   background: var(--site-bg);
   border: 1px solid var(--site-accent);
-  border-radius: 6px;
+  border-radius: var(--site-radius-control);
 }
 
 /* ── header ────────────────────────────────────────────────────────────────── */
@@ -89,9 +89,10 @@
 
 .docs-header__version select {
   appearance: none;
-  padding: 5px 26px 5px 12px;
+  block-size: 32px;
+  padding: 0 26px 0 10px;
   border: 1px solid var(--site-border);
-  border-radius: 999px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg-muted);
   color: var(--site-text);
   font: inherit;
@@ -113,9 +114,10 @@
   align-items: center;
   gap: 8px;
   min-inline-size: 220px;
-  padding: 6px 10px;
+  block-size: 32px;
+  padding: 0 10px;
   border: 1px solid var(--site-border);
-  border-radius: 8px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg-muted);
   color: var(--site-text-muted);
   font: inherit;
@@ -127,7 +129,7 @@
   margin-inline-start: auto;
   padding: 1px 6px;
   border: 1px solid var(--site-border);
-  border-radius: 4px;
+  border-radius: var(--site-radius-xs);
   font-size: 12px;
 }
 
@@ -136,11 +138,11 @@
 .docs-header__icon {
   display: grid;
   place-items: center;
-  inline-size: 30px;
-  block-size: 30px;
+  inline-size: 32px;
+  block-size: 32px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--site-radius-control);
   background: none;
   color: var(--site-text);
   cursor: pointer;
@@ -153,10 +155,11 @@
 .docs-header__burger {
   display: none;
   place-items: center;
-  inline-size: 34px;
-  block-size: 34px;
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--site-radius-control);
   background: none;
   color: var(--site-text);
   cursor: pointer;
@@ -183,7 +186,7 @@
   margin: 0;
   padding: 6px 10px;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--site-radius-sm);
   background: none;
   color: var(--site-text);
   font: inherit;
@@ -213,9 +216,9 @@
 /* The capability group label: a quiet upper-case rule, not a clickable row. */
 .docs-nav__group {
   padding: 12px 10px 3px;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--site-text-muted);
 }
@@ -225,9 +228,9 @@
   align-items: center;
   gap: 8px;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: var(--site-radius-sm);
   color: var(--site-text-muted);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.5;
   text-decoration: none;
 }
@@ -245,9 +248,11 @@
 }
 
 /* ── article ───────────────────────────────────────────────────────────────── */
+/* The article stops growing at 72rem, which only a very wide window reaches, so the lines
+   stay readable and the rail stays beside the text rather than a screen's width away. */
 .docs-main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--docs-rail-width);
+  grid-template-columns: minmax(0, 72rem) var(--docs-rail-width);
   gap: var(--docs-gutter);
   padding: 28px var(--docs-gutter) 64px;
   align-items: start;
@@ -336,7 +341,7 @@
 
 .prose code:not(pre code) {
   padding: 0.15em 0.4em;
-  border-radius: 4px;
+  border-radius: var(--site-radius-xs);
   background: var(--site-bg-muted);
   font-size: 0.9em;
 }
@@ -348,7 +353,7 @@
   border: 1px solid var(--site-border);
   border-radius: var(--site-radius);
   background: var(--site-bg-muted);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -371,8 +376,8 @@
 }
 
 .prose th {
-  font-size: 12px;
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--site-text-muted);
 }
@@ -389,7 +394,7 @@
   margin: 0 0 10px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--site-text-muted);
 }
@@ -416,7 +421,7 @@
   border-inline-start: 2px solid transparent;
   background: none;
   color: var(--site-text-muted);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.45;
   text-decoration: none;
 }
@@ -541,7 +546,7 @@
 .demo__action {
   padding: 5px 11px;
   border: 1px solid var(--site-border);
-  border-radius: 7px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
   font: inherit;
@@ -555,12 +560,19 @@
   color: var(--site-accent);
 }
 
-.demo__source {
+.demo__actions {
+  flex-wrap: wrap;
+}
+
+/* The source sits flush under the demo bar, so the block loses its own frame. */
+.demo__source pre {
   max-block-size: 420px;
   overflow: auto;
   margin: 0;
   padding: 16px;
+  border: 0;
   border-block-start: 1px solid var(--site-border);
+  border-radius: 0;
   background: var(--site-bg-muted);
   font-size: 13px;
   line-height: 1.6;
@@ -571,42 +583,120 @@
   border-color: var(--site-danger-surface);
 }
 
+/* Holds the space an editor will take, so the page does not jump when it arrives. */
+.demo--loading {
+  min-block-size: 220px;
+  background: var(--site-bg-muted);
+}
+
+.demo__error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: var(--site-text-muted);
+}
+
+.demo__error p {
+  margin: 0;
+}
+
+/* ── loading and error states ──────────────────────────────────────────────── */
+
+/*
+ * The first page of a visit, while its content loads. Grey bars in the shape of a
+ * page, so nothing moves when the real one replaces them.
+ */
+.page-skeleton {
+  display: grid;
+  gap: 14px;
+  padding-block-start: 4px;
+}
+
+.page-skeleton__line {
+  display: block;
+  inline-size: 100%;
+  block-size: 14px;
+  border-radius: var(--site-radius-xs);
+  background: var(--site-border);
+}
+
+.page-skeleton__line--crumb {
+  inline-size: 30%;
+  block-size: 12px;
+}
+
+.page-skeleton__line--title {
+  inline-size: 55%;
+  block-size: 36px;
+  margin-block-end: 4px;
+}
+
+.page-skeleton__line--lead {
+  inline-size: 80%;
+  margin-block-end: 18px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-skeleton__line {
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/*
+ * Navigation feedback. Most pages arrive in a few milliseconds, and a bar that flashes
+ * for every one of them is noise, so it only appears once a page has taken a moment.
+ */
+.nav-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  block-size: 2px;
+  background: var(--site-accent);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.nav-progress[data-active='true'] {
+  opacity: 1;
+  transition:
+    opacity 0s linear 250ms,
+    transform 8s cubic-bezier(0.1, 0.8, 0.2, 1) 250ms;
+  transform: scaleX(0.9);
+}
+
+.route-error--standalone {
+  max-inline-size: 44rem;
+  margin: 12vh auto 0;
+  padding: 0 20px;
+}
+
+.docs-article pre.route-error__stack {
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
 /* ── page footer ───────────────────────────────────────────────────────────── */
 .page-actions {
   margin-block-start: 56px;
   padding-block-start: 20px;
   border-block-start: 1px solid var(--site-border);
-}
-
-.page-actions__row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: space-between;
-  align-items: center;
   font-size: 14px;
 }
 
-.feedback {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.page-actions__edit {
   color: var(--site-text-muted);
 }
 
-.feedback button {
-  padding: 4px 12px;
-  border: 1px solid var(--site-border);
-  border-radius: 999px;
-  background: none;
-  color: inherit;
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.feedback button:hover {
-  border-color: var(--site-accent);
+.page-actions__edit:hover {
   color: var(--site-accent);
 }
 
@@ -645,13 +735,14 @@
   border-block-start: 1px solid var(--site-border);
   padding: 40px var(--docs-gutter);
   background: var(--site-bg-muted);
+  color: var(--site-text-muted);
+  font-size: 14px;
 }
 
 .site-footer__columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 24px;
-  max-inline-size: 1100px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 220px));
+  gap: 24px 32px;
 }
 
 .site-footer__title {
@@ -715,7 +806,21 @@
   }
 
   .docs-header__search {
+    justify-content: center;
     min-inline-size: 0;
+    inline-size: 32px;
+    padding: 0;
+    border-color: transparent;
+    background: none;
+    color: var(--site-text);
+  }
+
+  .docs-header__search:hover {
+    background: var(--site-bg-muted);
+  }
+
+  .docs-header__search kbd {
+    display: none;
   }
 
   .docs-sidebar {
@@ -735,21 +840,30 @@
 
 @media (max-width: 480px) {
   .docs-header {
-    gap: 8px;
+    gap: 6px;
     padding-inline: 12px;
   }
 
-  .docs-header__version select {
-    inline-size: 5.5em;
+  .docs-header__version {
+    display: none;
+  }
+
+  .docs-header__brand {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-inline-size: 0;
   }
 
   .docs-header__search {
     flex-shrink: 0;
-    padding-inline: 6px;
   }
 
-  .docs-header__search kbd {
-    display: none;
+  .docs-main {
+    padding-inline: 16px;
+  }
+
+  .site-footer {
+    padding-inline: 16px;
   }
 }
 
@@ -775,7 +889,7 @@
 .panel__reset-all {
   padding: 5px 12px;
   border: 1px solid var(--site-border);
-  border-radius: 7px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
   font: inherit;
@@ -867,7 +981,7 @@
   min-inline-size: 180px;
   padding: 6px 10px;
   border: 1px solid var(--site-border);
-  border-radius: 7px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
   font: inherit;
@@ -915,7 +1029,7 @@
 .control {
   padding: 8px 10px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--site-radius-control);
 }
 
 /* Changed props are the answer to "what did I actually touch?", so they are a tinted
@@ -935,7 +1049,7 @@
 
 .control__name {
   padding: 1px 6px;
-  border-radius: 4px;
+  border-radius: var(--site-radius-xs);
   background: var(--site-bg-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 12px;
@@ -949,7 +1063,7 @@
   flex: none;
   padding: 1px 5px;
   border: 0;
-  border-radius: 5px;
+  border-radius: var(--site-radius-xs);
   background: none;
   color: var(--site-accent);
   font: inherit;
@@ -965,7 +1079,7 @@
   inline-size: 100%;
   padding: 5px 8px;
   border: 1px solid var(--site-border);
-  border-radius: 6px;
+  border-radius: var(--site-radius-control);
   background: var(--site-bg);
   color: var(--site-text);
   font: inherit;
@@ -980,14 +1094,14 @@
 
 .control__meta {
   margin: 4px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.4;
   color: var(--site-text-muted);
 }
 
 .control__meta code {
   padding: 0 4px;
-  border-radius: 3px;
+  border-radius: var(--site-radius-xs);
   background: var(--site-bg-muted);
   font-size: 11px;
 }

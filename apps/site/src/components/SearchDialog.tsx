@@ -52,6 +52,7 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const [entries, setEntries] = useState<SearchEntry[] | null>(null);
+  const [failed, setFailed] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
@@ -59,6 +60,7 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
   const listId = useId();
 
   const results = useMemo(() => (entries ? search(entries, query) : []), [entries, query]);
+  const noResults = entries !== null && query.trim() !== '' && results.length === 0;
 
   // A new query means a new first result, so the highlight goes back to the top.
   // Adjusting state during render rather than in an effect avoids a frame where the
@@ -76,6 +78,7 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
     // Focus goes back where it came from, so a keyboard user is not dropped at the
     // top of the document.
     openerRef.current?.focus();
+    openerRef.current = null;
   }, [setOpen]);
 
   const go = useCallback(
@@ -109,13 +112,21 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
 
   useEffect(() => {
     if (!open) return;
+    // Opened from the header or the `/` key rather than Ctrl+K: remember what had focus,
+    // so closing puts the keyboard back there.
+    openerRef.current ??= document.activeElement as HTMLElement | null;
     inputRef.current?.focus();
     // The index pulls in the guides, the examples and the API data, so it is fetched
     // when the palette first opens rather than on every page load.
     let cancelled = false;
-    void loadSearchIndex().then((loaded) => {
-      if (!cancelled) setEntries(loaded);
-    });
+    loadSearchIndex().then(
+      (loaded) => {
+        if (!cancelled) setEntries(loaded);
+      },
+      () => {
+        if (!cancelled) setFailed(true);
+      },
+    );
     return () => {
       cancelled = true;
     };
@@ -157,19 +168,6 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
 
   return (
     <>
-      <button
-        type="button"
-        className="site-search-trigger"
-        onClick={(event) => {
-          openerRef.current = event.currentTarget;
-          setOpen(true);
-        }}
-      >
-        <span aria-hidden="true">⌕</span>
-        Search
-        <kbd className="site-search-trigger__key">Ctrl K</kbd>
-      </button>
-
       {open ? (
         <div
           className="search-overlay"
@@ -197,7 +195,13 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
               onKeyDown={onInputKeyDown}
             />
 
-            <ul ref={listRef} id={listId} className="search-dialog__results" role="listbox">
+            <ul
+              ref={listRef}
+              id={listId}
+              className="search-dialog__results"
+              role="listbox"
+              hidden={results.length === 0}
+            >
               {results.map((entry, index) => (
                 <li
                   key={entry.id}
@@ -221,14 +225,27 @@ export function SearchDialog({ open: openProp, onClose }: SearchDialogProps = {}
               ))}
             </ul>
 
-            <p className="search-dialog__status" role="status">
-              {query.trim() === ''
-                ? 'Type to search the guides, the API reference and the examples.'
-                : entries === null
-                  ? 'Loading the index…'
-                  : results.length === 0
-                    ? `Nothing matches “${query}”.`
-                    : `${results.length} result${results.length === 1 ? '' : 's'}.`}
+            {noResults ? (
+              <p className="search-dialog__empty">
+                No results for <strong>“{query.trim()}”</strong>. Try a feature, such as “tables”,
+                or a prop, such as “maxLength”.
+              </p>
+            ) : null}
+
+            {/* Still announced when the message above says the same thing on screen. */}
+            <p
+              className={`search-dialog__status${noResults ? ' rte-visually-hidden' : ''}`}
+              role="status"
+            >
+              {failed
+                ? 'Search could not be loaded. Reload the page to try again.'
+                : query.trim() === ''
+                  ? 'Type to search the guides, the API reference and the examples.'
+                  : entries === null
+                    ? 'Loading the index…'
+                    : results.length === 0
+                      ? `Nothing matches “${query}”.`
+                      : `${results.length} result${results.length === 1 ? '' : 's'}.`}
             </p>
           </div>
         </div>

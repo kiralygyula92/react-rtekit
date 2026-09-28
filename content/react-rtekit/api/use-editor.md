@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/use-editor/
 title: useEditor
-description: The headless hook, and every option it accepts.
+description: The headless hook for building your own editor chrome, and every option it accepts with its type and what it does.
 archetype: E
 section: reference
 ---

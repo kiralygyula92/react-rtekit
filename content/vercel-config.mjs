@@ -5,15 +5,13 @@ import { fileURLToPath } from 'node:url';
 /**
  * Writes `apps/site/vercel.json`.
  *
- * The router says of the legacy URLs: *"A browser cannot issue a 301 from script; the
- * static host does that, from the same table."* On GitHub Pages there is no host config,
- * so the client-side `LegacyRedirect` was all there was. Vercel can do it properly, and
- * this generates those rules from `redirects.json` — the same file the router compiles in
- * — so the redirect the host performs and the one the client would perform cannot
- * diverge. They are permanent, so they are 301s.
+ * A browser cannot issue a 301 from script, so the legacy redirects are the host's job.
+ * This generates them from `redirects.json`, the same file the router compiles in, so
+ * the redirect the host performs and the one the client would perform cannot diverge.
+ * They are permanent, so they are 301s.
  *
- * `LegacyRedirect` stays as the fallback: it is what makes a deep link work in
- * development, and on Pages it remains the only thing that works at all.
+ * The router's `LegacyRedirect` stays as the fallback that makes a deep link work in
+ * development.
  *
  * Run: node content/vercel-config.mjs   (or `pnpm vercel:config`)
  */
@@ -50,12 +48,28 @@ const config = {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([source, destination]) => ({ source, destination, permanent: true })),
   /*
-   * The SPA fallback. Rewrites are applied after the filesystem check, so hashed assets
-   * and the Markdown twins still serve as files. `_vercel/` is excluded because that is
-   * where the analytics scripts live, and a catch-all would answer those requests with
-   * the application's HTML.
+   * No SPA rewrite. Every page is built to its own `<page>/index.html` (see the site's
+   * `vite.config.ts`), so a real page is a real file, and anything else falls through to
+   * `404.html` with a 404 status. A catch-all rewrite used to answer every URL with the
+   * application and a 200, including `/og/*.png` and `/robots.txt`, so crawlers indexed
+   * "not found" pages and link previews got HTML where they asked for an image.
    */
-  rewrites: [{ source: '/((?!_vercel/).*)', destination: '/index.html' }],
+  headers: [
+    {
+      // Content-hashed file names: a changed file is a new URL, so these never go stale.
+      source: '/assets/(.*)',
+      headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+    },
+    {
+      source: '/(.*)',
+      headers: [
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        { key: 'X-Frame-Options', value: 'DENY' },
+        { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+      ],
+    },
+  ],
 };
 
 const file = path.join(root, 'apps/site/vercel.json');

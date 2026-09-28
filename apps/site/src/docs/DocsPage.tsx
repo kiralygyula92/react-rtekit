@@ -1,20 +1,20 @@
-import { Link, useLocation } from 'react-router';
-import { canonicalPath, config, findPage, neighbours, sectionOf } from './manifest';
+import { Link, useLoaderData } from 'react-router';
+import { config, neighbours, sectionOf } from './manifest';
+import type { PageData } from './content';
 import { Badge } from './Badge';
 import { PageBody } from './PageBody';
 import { Toc } from './Toc';
 import { FeaturesIndex } from './FeaturesIndex';
 import { NotFound } from './NotFound';
 import { useMetadata } from './useMetadata';
-import { Playground } from '../routes/Playground';
-import { ThemeEditor } from '../routes/ThemeEditor';
 
 /**
  * One documentation page.
  *
  * Everything on it comes from the manifest: the breadcrumb from the section the nav puts
  * it in, the badges from its nav node, the "on this page" rail from its own headings,
- * and the metadata from the one title/description pair the Markdown declares.
+ * and the metadata from the one title/description pair the Markdown declares. The body,
+ * its demos and any interactive tool arrive through the route loader (`content.ts`).
  *
  * @module
  */
@@ -23,21 +23,17 @@ import { ThemeEditor } from '../routes/ThemeEditor';
 const EDIT_BASE = `${config.repo}/edit/main/`;
 
 export function DocsPage() {
-  const { pathname } = useLocation();
-  const page = findPage(pathname);
-  const section = sectionOf(pathname);
+  const data = useLoaderData<PageData | null>();
+  if (!data) return <NotFound />;
+  return <Page {...data} />;
+}
 
-  useMetadata({
-    title: page?.title ?? 'Not found',
-    description: page?.description ?? config.description,
-    pathname: canonicalPath(pathname),
-    ...(page?.archetype ? { archetype: page.archetype } : {}),
-  });
-
-  if (!page) return <NotFound />;
-
+function Page({ page, html, Tool }: PageData) {
+  const section = sectionOf(page.pathname);
   const { previous, next } = neighbours(page.pathname);
   const isOverview = page.pathname === `/${config.id}/`;
+
+  useMetadata(page);
 
   return (
     <>
@@ -53,7 +49,7 @@ export function DocsPage() {
         </nav>
 
         <h1>
-          {isOverview ? `${config.name} — Overview` : page.title}
+          {isOverview ? config.name : page.title}
           <Badge plan={page.plan} lifecycle={page.lifecycle} />
         </h1>
 
@@ -61,31 +57,24 @@ export function DocsPage() {
             line, read from one field so the three cannot disagree. */}
         <p className="docs-article__lead">{page.description}</p>
 
-        <PageBody html={page.html} />
+        <PageBody html={html} />
 
         {/* The features index is rendered from nav data rather than authored, so that
             it and the sidebar cannot disagree. */}
         {page.archetype === 'C' ? <FeaturesIndex /> : null}
 
-        {/*
-         * The two interactive tools.
-         *
-         * They are pages with prose like any other — Basics, Customization,
-         * Limitations, API — and the instrument itself is mounted underneath, because
-         * it is forty controls and a generated snippet rather than a demo. Rendering
-         * them here rather than at routes of their own keeps them inside the docs
-         * shell, with a sidebar, a breadcrumb and a table of contents.
-         */}
-        {page.pathname === `/${config.id}/demos/playground/` ? <Playground /> : null}
-        {page.pathname === `/${config.id}/demos/theme-editor/` ? <ThemeEditor /> : null}
+        {/* The playground and the theme editor: prose above, the instrument below. */}
+        {Tool ? <Tool /> : null}
 
         <footer className="page-actions">
-          <div className="page-actions__row">
-            <a href={`${EDIT_BASE}${page.source}`} target="_blank" rel="noreferrer">
-              Edit this page
-            </a>
-            <Feedback pathname={page.pathname} />
-          </div>
+          <a
+            className="page-actions__edit"
+            href={`${EDIT_BASE}${page.source}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Edit this page on GitHub
+          </a>
 
           <nav className="pager" aria-label="Previous and next page">
             {previous ? (
@@ -114,42 +103,21 @@ export function DocsPage() {
 }
 
 /**
- * Per-page feedback.
+ * What the article area shows while the first page of a visit loads.
  *
- * Records the answer locally and says thank you. There is no analytics endpoint to send
- * it to, and inventing one would be worse than being honest about where it goes.
+ * Only on that first load: later navigations keep the current page on screen until the
+ * next one is ready, which is the router's default and what a reader expects of a link.
+ * Shaped like a page (a title, a lead, paragraphs) so the layout does not jump.
  */
-function Feedback({ pathname }: { pathname: string }) {
-  const answer = (helpful: boolean): void => {
-    try {
-      localStorage.setItem(`feedback:${pathname}`, helpful ? 'yes' : 'no');
-    } catch {
-      // Private browsing, or storage disabled. The thank-you still shows.
-    }
-    const node = document.getElementById('feedback-status');
-    if (node) node.textContent = 'Thanks for the feedback.';
-  };
-
+export function PageSkeleton() {
   return (
-    <div className="feedback">
-      <span>Was this page helpful?</span>
-      <button
-        type="button"
-        onClick={() => {
-          answer(true);
-        }}
-      >
-        Yes
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          answer(false);
-        }}
-      >
-        No
-      </button>
-      <span id="feedback-status" role="status" aria-live="polite" />
-    </div>
+    <article className="docs-article page-skeleton" aria-busy="true" aria-label="Loading page">
+      <span className="page-skeleton__line page-skeleton__line--crumb" />
+      <span className="page-skeleton__line page-skeleton__line--title" />
+      <span className="page-skeleton__line page-skeleton__line--lead" />
+      {[92, 100, 84, 96, 60].map((width, index) => (
+        <span key={index} className="page-skeleton__line" style={{ width: `${width}%` }} />
+      ))}
+    </article>
   );
 }

@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useMemo, type MouseEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { examples } from '../examples';
-import { Demo } from './Demo';
+import { DemoSlot } from './Demo';
+import { DEMO_PLACEHOLDER } from './content';
 
 /**
  * Renders a compiled page, mounting live demos where the Markdown asked for them.
@@ -18,8 +18,6 @@ import { Demo } from './Demo';
  *
  * @module
  */
-
-const PLACEHOLDER = /<div data-demo="([^"]+)"><\/div>/g;
 
 /** Props for {@link PageBody}. */
 export interface PageBodyProps {
@@ -74,7 +72,7 @@ export function PageBody({ html }: PageBodyProps) {
   const parts = useMemo(() => {
     const segments: { html: string; demo?: string }[] = [];
     let cursor = 0;
-    for (const match of html.matchAll(PLACEHOLDER)) {
+    for (const match of html.matchAll(DEMO_PLACEHOLDER)) {
       segments.push({ html: html.slice(cursor, match.index), demo: match[1] });
       cursor = (match.index ?? 0) + match[0].length;
     }
@@ -101,7 +99,7 @@ export function PageBody({ html }: PageBodyProps) {
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div onClick={onClick} dangerouslySetInnerHTML={{ __html: part.html }} />
           ) : null}
-          {part.demo ? <Demo slug={part.demo} entry={examples.get(part.demo)} /> : null}
+          {part.demo ? <DemoSlot slug={part.demo} /> : null}
         </Fragment>
       ))}
     </div>

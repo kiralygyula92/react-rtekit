@@ -1,33 +1,25 @@
 import { useEffect } from 'react';
 import { config, origin } from './manifest';
+import { pageHead, type HeadPage } from './head';
 
 /**
- * The metadata every page emits.
+ * Keeps the document's `<head>` in step with the page being shown.
  *
- * Every tag below is derived from exactly one title and one description — the same pair
- * feeds the H1 subtitle, `<title>`, the meta description, the OG card, the nav tooltip
- * and the `llms.txt` line, so they cannot disagree.
+ * Each page's `index.html` is built with these tags already in it (see `head.ts`), which
+ * is what a crawler or a link preview reads. This hook covers what happens after that:
+ * navigating inside the application changes the page without a new document, so the
+ * title, the canonical URL and the social tags are updated here, from the same function.
  *
  * @module
  */
 
-/*
- * The site root, without the docs namespace.
- *
- * The repository and the plugin share a name, so GitHub Pages serves the site at
- * `/react-rtekit/` and the docs namespace is `/react-rtekit/` too — they are the same
- * path, not two. Vite's `base` points the assets at it and the router runs at `/`, so a
- * pathname already carries the namespace and the origin must not repeat it.
- *
- * Read from the manifest, where `content/build.mjs` writes the same value it uses for the
- * sitemap. This used to be a second default of its own; the two disagreed, and the
- * sitemap's was the one that was wrong.
- */
-const ORIGIN = origin;
-
-/** Sets or creates one `<meta>`, keyed by the attribute that identifies it. */
-function meta(key: 'name' | 'property', value: string, content: string): void {
+/** Sets, creates or (given `null`) removes one `<meta>`, keyed by its identifying attribute. */
+function meta(key: 'name' | 'property', value: string, content: string | null): void {
   let node = document.head.querySelector<HTMLMetaElement>(`meta[${key}="${value}"]`);
+  if (content === null) {
+    node?.remove();
+    return;
+  }
   if (!node) {
     node = document.createElement('meta');
     node.setAttribute(key, value);
@@ -36,54 +28,49 @@ function meta(key: 'name' | 'property', value: string, content: string): void {
   node.setAttribute('content', content);
 }
 
-/** Sets or creates one `<link rel>`. */
-function link(rel: string, href: string): void {
-  let node = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+/** Sets, creates or removes the canonical link. */
+function canonical(href: string | null): void {
+  let node = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (href === null) {
+    node?.remove();
+    return;
+  }
   if (!node) {
     node = document.createElement('link');
-    node.setAttribute('rel', rel);
+    node.setAttribute('rel', 'canonical');
     document.head.append(node);
   }
   node.setAttribute('href', href);
 }
 
 /** What a page contributes to its own metadata. */
-export interface PageMetadata {
-  title: string;
-  description: string;
-  pathname: string;
-  /** Used for `og:type`; a reference page is not an article. */
-  archetype?: string;
+export interface PageMetadata extends HeadPage {
+  /** A URL with no page behind it: titled as such, and kept out of search indexes. */
+  notFound?: boolean;
 }
 
-export function useMetadata({ title, description, pathname, archetype }: PageMetadata): void {
+export function useMetadata({
+  title,
+  description,
+  pathname,
+  archetype,
+  notFound = false,
+}: PageMetadata): void {
   useEffect(() => {
-    const full = pathname === `/${config.id}/` ? config.name : `${title} — ${config.name}`;
-    // Trailing slash is canonical, and the canonical URL is absolute.
-    const url = `${ORIGIN}${pathname}`;
-    const image = `${ORIGIN}/og/${pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'index'}.png`;
+    const head = pageHead({ title, description, pathname, archetype }, { ...config, origin });
 
-    document.title = full;
-    link('canonical', url);
+    document.title = head.title;
+    canonical(notFound ? null : head.url);
+    meta('name', 'description', head.description);
+    // Indexable is the default; only a page that is not there says otherwise.
+    meta('name', 'robots', notFound ? 'noindex' : null);
 
-    meta('name', 'description', description);
-    meta('name', 'theme-color', config.branding?.accentColor ?? '#3B6FF5');
+    meta('property', 'og:title', head.title);
+    meta('property', 'og:description', head.description);
+    meta('property', 'og:type', head.type);
+    meta('property', 'og:url', head.url);
 
-    meta('property', 'og:title', full);
-    meta('property', 'og:description', description);
-    meta('property', 'og:type', archetype === 'I' ? 'article' : 'website');
-    meta('property', 'og:url', url);
-    meta('property', 'og:image', image);
-
-    meta('name', 'twitter:card', 'summary_large_image');
-    meta('name', 'twitter:title', full);
-    meta('name', 'twitter:description', description);
-    meta('name', 'twitter:image', image);
-
-    // Version-scoped search, and the plugin keys the site search indexes on.
-    meta('name', 'search:language', 'en');
-    meta('name', 'search:version', config.currentVersion);
-    meta('name', 'plugin:id', config.id);
-    if (config.categoryId) meta('name', 'plugin:categoryId', config.categoryId);
-  }, [title, description, pathname, archetype]);
+    meta('name', 'twitter:title', head.title);
+    meta('name', 'twitter:description', head.description);
+  }, [title, description, pathname, archetype, notFound]);
 }

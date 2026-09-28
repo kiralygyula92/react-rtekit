@@ -14,28 +14,8 @@ export interface ExampleMeta {
   priority?: number;
 }
 
-/** One registered example: metadata plus its live component and raw source. */
+/** One loaded example: metadata plus its live component and raw source. */
 export interface ExampleEntry extends ExampleMeta {
   Component: ComponentType;
   source: string;
-}
-
-/**
- * Every example, keyed by slug.
- *
- * Populated by `src/examples/index.ts`, which is the single place a new example has
- * to be registered.
- */
-export const examples = new Map<string, ExampleEntry>();
-
-/** Registers one example. Called from `src/examples/index.ts`. */
-export function registerExample(entry: ExampleEntry): void {
-  examples.set(entry.slug, entry);
-}
-
-/** All examples, highest priority first, then alphabetical. */
-export function listExamples(): ExampleEntry[] {
-  return [...examples.values()].sort(
-    (a, b) => (b.priority ?? 0) - (a.priority ?? 0) || a.title.localeCompare(b.title),
-  );
 }

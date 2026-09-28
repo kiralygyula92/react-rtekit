@@ -1,13 +1,13 @@
 ---
 pluginId: react-rtekit
 pathname: /react-rtekit/guides/accessibility/
-title: Accessibility
+title: Keyboard and ARIA
 description: The keyboard model, the ARIA semantics, and what an override has to keep.
 archetype: I
 section: guides
 ---
 
-# Accessibility
+# Keyboard and ARIA
 
 ```demo
 accessibility

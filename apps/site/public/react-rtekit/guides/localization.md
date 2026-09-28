@@ -1,13 +1,13 @@
 ---
 pluginId: react-rtekit
 pathname: /react-rtekit/guides/localization/
-title: Localization
+title: Translating the editor
 description: 'Translating the editor''s strings, handling direction, and finding the keys you missed.'
 archetype: I
 section: guides
 ---
 
-# Localization
+# Translating the editor
 
 ```demo
 localization

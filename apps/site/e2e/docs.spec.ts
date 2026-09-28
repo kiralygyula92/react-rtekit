@@ -23,8 +23,14 @@ interface Page {
 // for JSON, and the manifest is a build artefact rather than a module either way.
 const manifest = JSON.parse(
   readFileSync(new URL('../src/content/manifest.json', import.meta.url), 'utf8'),
-) as { pages: Page[] };
-const pages = manifest.pages;
+) as { origin: string; pages: Page[] };
+const { origin, pages } = manifest;
+
+/** A page's `<title>`: the front page leads with the product, the rest with their own name. */
+const titleOf = (page: Page): string =>
+  page.pathname === '/react-rtekit/'
+    ? 'React RTE Kit | Rich-text editor for React'
+    : `${page.title} | React RTE Kit`;
 
 /** A representative page of each archetype, for the checks that are slow. */
 const SAMPLE = [
@@ -79,19 +85,45 @@ test.describe('the metadata contract', () => {
         await expect(browser.locator(selector)).toHaveAttribute('content', expected);
       }
 
+      await expect(browser).toHaveTitle(titleOf(page));
+
       for (const name of [
         'meta[property="og:title"]',
         'meta[property="og:type"]',
         'meta[property="og:url"]',
         'meta[property="og:image"]',
         'meta[name="twitter:card"]',
-        'meta[name="search:version"]',
-        'meta[name="plugin:id"]',
       ]) {
         await expect(browser.locator(name)).toHaveCount(1);
       }
+      await expect(browser.locator('meta[name="robots"]')).toHaveCount(0);
     });
   }
+
+  /*
+   * The head a crawler or a link preview reads is the one in the HTML the server sends,
+   * before any script runs. Each page is built with its own, and this reads it the way a
+   * bot does: as text, with no browser.
+   */
+  for (const page of SAMPLE) {
+    test(`${page.pathname} is served with its own head`, async ({ request }) => {
+      const html = await (await request.get(page.pathname)).text();
+      const escape = (value: string) =>
+        value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      expect(html).toContain(`<title>${escape(titleOf(page))}</title>`);
+      expect(html).toContain(`<meta name="description" content="${escape(page.description)}" />`);
+      expect(html).toContain(`href="${origin}${page.pathname}" />`);
+      expect(html).toContain(`<meta property="og:image" content="${origin}/og.png" />`);
+    });
+  }
+});
+
+test('a page that does not exist says so and stays out of search indexes', async ({ page }) => {
+  await page.goto('/react-rtekit/no-such-page/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+  await expect(page).toHaveTitle('Page not found | React RTE Kit');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
 });
 
 test.describe('accessibility', () => {
@@ -139,10 +171,12 @@ test('the features index and the sidebar list the same capabilities', async ({ p
   }
 });
 
-test('every page has both footer actions', async ({ page }) => {
+test('every page links to its own source on GitHub', async ({ page }) => {
   await page.goto('/react-rtekit/tables/');
-  await expect(page.getByRole('link', { name: 'Edit this page' })).toBeVisible();
-  await expect(page.getByText('Was this page helpful?')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Edit this page on GitHub' })).toHaveAttribute(
+    'href',
+    /\/edit\/main\/content\/react-rtekit\/features\/tables\/index\.md$/,
+  );
 });
 
 test('wide reference tables keep mobile navigation within the viewport', async ({ page }) => {

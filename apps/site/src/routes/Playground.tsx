@@ -71,7 +71,7 @@ export function Playground() {
   // The generated panel's state: only the props that differ from the library's
   // defaults, so the snippet lists what a reader would actually have to write.
   const [propState, setPropState] = useState<PropState>({});
-  const [value, setValue] = useState<string>('<p>Try the controls on the left.</p>');
+  const [value, setValue] = useState<string>('<p>Change any option above, and this editor follows it.</p>');
   const [events, setEvents] = useState<string[]>([]);
   const [format, setFormat] = useState<FormatState | null>(null);
   const [tab, setTab] = useState<'code' | 'value' | 'events' | 'state'>('code');

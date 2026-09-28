@@ -2,10 +2,7 @@ import { Link } from 'react-router';
 import { config } from './manifest';
 
 /**
- * The shared footer.
- *
- * Four columns. "Products" holds one entry here because there is one product; the
- * column stays so the next plugin inherits the same footer rather than a fork of it.
+ * The shared footer: where to go next in the docs, the tools, and the project itself.
  *
  * @module
  */
@@ -13,34 +10,29 @@ import { config } from './manifest';
 /** One column's links. External destinations come from `config.links`, never inline. */
 const COLUMNS: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
   {
-    title: 'Products',
-    links: [{ label: config.name, href: `/${config.id}/` }],
-  },
-  {
-    title: 'Resources',
+    title: 'Docs',
     links: [
+      { label: 'Installation', href: `/${config.id}/getting-started/installation/` },
+      { label: 'Usage', href: `/${config.id}/getting-started/usage/` },
       { label: 'All features', href: `/${config.id}/all-features/` },
-      { label: 'Demos', href: `/${config.id}/demos/` },
-      { label: 'Customization', href: `/${config.id}/customization/` },
-      { label: 'Integrations', href: `/${config.id}/integrations/` },
-    ],
-  },
-  {
-    title: 'Explore',
-    links: [
-      { label: 'Documentation', href: `/${config.id}/` },
-      { label: 'API reference', href: `/${config.id}/api/` },
       { label: 'Guides', href: `/${config.id}/guides/` },
-      { label: 'Showcase', href: `/${config.id}/discover-more/showcase/` },
-      { label: 'Roadmap', href: `/${config.id}/discover-more/roadmap/` },
+      { label: 'API reference', href: `/${config.id}/api/` },
     ],
   },
   {
-    title: 'Company',
+    title: 'Try it',
     links: [
-      { label: 'Support', href: `/${config.id}/getting-started/support/` },
+      { label: 'Playground', href: `/${config.id}/demos/playground/` },
+      { label: 'Theme editor', href: `/${config.id}/demos/theme-editor/` },
+      { label: 'All demos', href: `/${config.id}/demos/` },
+    ],
+  },
+  {
+    title: 'Project',
+    links: [
       { label: 'Changelog', href: `/${config.id}/discover-more/changelog/` },
-      { label: 'Versions', href: `/${config.id}/getting-started/versions/` },
+      { label: 'Roadmap', href: `/${config.id}/discover-more/roadmap/` },
+      { label: 'Support', href: `/${config.id}/getting-started/support/` },
       { label: 'GitHub', href: config.repo, external: true },
       { label: 'npm', href: config.links.npm ?? '', external: true },
     ],

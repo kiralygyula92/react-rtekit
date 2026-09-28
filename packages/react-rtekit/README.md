@@ -10,6 +10,7 @@ pnpm add react-rtekit
 ```
 
 ```tsx
+import { useState } from 'react';
 import { RichTextEditor } from 'react-rtekit';
 import 'react-rtekit/styles.css';
 
@@ -63,11 +64,11 @@ export function MessageField() {
 
 | Import | What it gives you | Size (min+gz) |
 |---|---|---|
-| `react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 64 kB for the full component, 36 kB headless |
+| `react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 71 kB for the full component, 42 kB headless |
 | `react-rtekit/core` | Parse, sanitize, serialize and count. No React, no engine. | 18 kB |
 | `react-rtekit/view` | `<RteContentView>`: stored content, rendered read-only and sanitized | 17 kB |
-| `react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 18 kB |
-| `react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 5 kB |
+| `react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 17 kB |
+| `react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 6 kB |
 
 `react-rtekit/core` has no browser dependency: the HTML parser is in-house precisely so
 that sanitizing and serializing work identically in a Node handler, in a worker and
@@ -79,8 +80,9 @@ React 18 or 19. Nothing else — there are no other dependencies, peer or otherw
 context props and theme tokens are all typed, and the command registry is open for
 augmentation.
 
-Browsers: the last two versions of Chrome, Firefox, Edge and Safari, plus iOS Safari
-and Chrome for Android. The end-to-end suite runs against all of them.
+Browsers: current Chrome, Edge, Firefox and Safari, on desktop and mobile. The
+end-to-end suite runs on Chromium, Firefox and WebKit, plus mobile Chrome and mobile
+Safari emulation.
 
 ## Forms
 

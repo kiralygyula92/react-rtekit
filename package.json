@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Monorepo for react-rtekit: a production-grade React rich-text editor library.",
+  "description": "Monorepo for react-rtekit, an accessible rich-text editor for React.",
   "packageManager": "pnpm@12.4.2",
   "engines": {
     "node": ">=18"

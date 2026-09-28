@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/discover-more/changelog/
 title: Changelog
-description: Every released version and what changed in it.
+description: Every released version of React RTE Kit and what changed in it, from the changesets recorded with each change.
 archetype: I
 section: discover-more
 ---

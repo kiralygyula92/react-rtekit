@@ -5,8 +5,7 @@ import { expect, test, type Page } from '@playwright/test';
  *
  * Each one is walked as a clickable path rather than asserted on by URL, because the
  * requirement is that the flow is *completable without a dead end* — a page that exists
- * but that nothing links to satisfies a URL check and fails a reader. Two of the eight
- * are not applicable and say why.
+ * but that nothing links to satisfies a URL check and fails a reader.
  */
 
 /** Clicks a link by its visible text, inside the article rather than the chrome. */
@@ -14,11 +13,11 @@ async function follow(page: Page, name: string | RegExp): Promise<void> {
   await page.locator('#main').getByRole('link', { name }).first().click();
 }
 
-test('F1 evaluate: docs overview → features index → a capability', async ({ page }) => {
+test('evaluate: docs overview → features index → a capability', async ({ page }) => {
   // No marketing surface and no pricing, so the flow starts at
   // the docs root and ends where a reader decides to install rather than to buy.
   await page.goto('/react-rtekit/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Overview');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('React RTE Kit');
 
   await follow(page, 'All features');
   await expect(page).toHaveURL(/all-features/);
@@ -28,7 +27,7 @@ test('F1 evaluate: docs overview → features index → a capability', async ({ 
   await expect(page.getByRole('heading', { name: 'Limitations' })).toBeVisible();
 });
 
-test('F2 adopt: overview → installation → usage → a working editor', async ({ page }) => {
+test('adopt: overview → installation → usage → a working editor', async ({ page }) => {
   await page.goto('/react-rtekit/');
   await follow(page, 'Installation');
   // The page has an H1 and an `## Installation` section; this is the page, not the section.
@@ -43,7 +42,7 @@ test('F2 adopt: overview → installation → usage → a working editor', async
   await expect(page.locator('[contenteditable="true"]').first()).toBeVisible();
 });
 
-test('F3 implement: search → capability → demo → reference → back', async ({ page }) => {
+test('implement: search → capability → demo → reference → back', async ({ page }) => {
   await page.goto('/react-rtekit/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
@@ -66,7 +65,7 @@ test('F3 implement: search → capability → demo → reference → back', asyn
   await expect(page).toHaveURL(/\/react-rtekit\/tables\/$/);
 });
 
-test('F4 customise: capability → customization guide → tokens', async ({ page }) => {
+test('customise: capability → customization guide → tokens', async ({ page }) => {
   await page.goto('/react-rtekit/tables/');
   await page.locator('#main').getByRole('link', { name: 'How to customize' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('How to customize');
@@ -76,9 +75,18 @@ test('F4 customise: capability → customization guide → tokens', async ({ pag
   await expect(page.locator('.demo [contenteditable="true"]').first()).toBeVisible();
 });
 
-test('F5 upgrade: version selector → versions → migration → changelog', async ({ page }) => {
+test('upgrade: version selector → versions → migration → changelog', async ({
+  page,
+  isMobile,
+}) => {
   await page.goto('/react-rtekit/');
-  await page.locator('.docs-header__version select').selectOption({ label: 'All versions…' });
+  if (isMobile) {
+    // The header has no room for the version picker on a phone; the page is in the menu.
+    await page.getByRole('button', { name: 'Documentation menu' }).click();
+    await page.locator('.docs-sidebar').getByRole('link', { name: 'Versions' }).click();
+  } else {
+    await page.locator('.docs-header__version select').selectOption({ label: 'All versions…' });
+  }
   await expect(page).toHaveURL(/versions/);
   await expect(page.getByRole('heading', { name: 'Versioning policy' })).toBeVisible();
 
@@ -90,16 +98,7 @@ test('F5 upgrade: version selector → versions → migration → changelog', as
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Changelog');
 });
 
-test('F6 convert is not applicable', () => {
-  /*
-   * F6 is the paywall flow: a tier badge on a capability leads to the tier explanation,
-   * then to pricing, then to a purchase. This package is MIT licensed and has one free
-   * tier, so there is no badge, no pricing page and nothing to convert to.
-   */
-  test.skip(true, 'single free tier, MIT licensed — no paywall exists');
-});
-
-test('F7 support: any docs page → support → a channel', async ({ page }) => {
+test('support: any docs page → support → a channel', async ({ page }) => {
   await page.goto('/react-rtekit/tables/');
   await page.locator('.site-footer').getByRole('link', { name: 'Support' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Support');
@@ -109,7 +108,7 @@ test('F7 support: any docs page → support → a channel', async ({ page }) => 
   await expect(issues).toHaveAttribute('href', /github\.com\/.+\/issues/);
 });
 
-test('F8 agent: llms.txt → a .md twin → the whole corpus', async ({ page }) => {
+test('agent: llms.txt → a .md twin → the whole corpus', async ({ page }) => {
   const index = await page.goto('/react-rtekit/llms.txt');
   expect(index?.headers()['content-type']).toContain('text');
   const text = (await index?.text()) ?? '';

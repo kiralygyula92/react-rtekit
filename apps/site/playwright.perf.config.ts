@@ -23,7 +23,8 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'pnpm build && pnpm preview',
+    // `--mode perf` is the only build that includes the `/internal/performance` harness.
+    command: 'pnpm build --mode perf && pnpm preview',
     url: 'http://localhost:4189',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

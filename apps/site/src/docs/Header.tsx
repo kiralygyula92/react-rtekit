@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { config } from './manifest';
 import { ThemeSwitch } from '../components/ThemeSwitch';
 
@@ -24,6 +24,7 @@ export interface HeaderProps {
 
 export function Header({ onSearch, onToggleNav, navOpen }: HeaderProps) {
   const current = config.versions.find((entry) => entry.current) ?? config.versions[0];
+  const navigate = useNavigate();
 
   return (
     <header className="docs-header">
@@ -48,7 +49,8 @@ export function Header({ onSearch, onToggleNav, navOpen }: HeaderProps) {
         <select
           value={current?.href}
           onChange={(event) => {
-            window.location.assign(event.target.value);
+            // Every entry is a page of this site, so it is a navigation, not a reload.
+            void navigate(event.target.value);
           }}
         >
           {config.versions.map((entry) => (

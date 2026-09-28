@@ -1,6 +1,6 @@
 # React RTE Kit — the complete documentation
 
-> A production-grade React rich-text editor you can actually own.
+> The rich-text editor for React that fits your design system.
 
 React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.
 
@@ -8,7 +8,7 @@ Every page of the documentation at https://react-rtekit.vercel.app/react-rtekit/
 
 - Package: `react-rtekit` 1.0.0 on npm. Peer dependencies: `react` >=18.2, `react-dom` >=18.2, and nothing else.
 - Page index: https://react-rtekit.vercel.app/react-rtekit/llms.txt — and any single page as Markdown, at its URL with `.md`.
-- 124 pages, 44 examples.
+- 123 pages, 44 examples.
 
 The examples import a few components that belong to the documentation site rather than to the package — `CodeBlock`, `ChoiceGroup` and the shared test fixtures. They display output; the editor code around them is the part to copy.
 
@@ -16,7 +16,7 @@ The examples import a few components that belong to the documentation site rathe
 
 # Overview
 
-> An accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.
+> An accessible, themeable React rich-text editor with no dependencies: replaceable slots, handler middleware, theme tokens and sanitization built in.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/
 
@@ -116,15 +116,7 @@ If the field appears but has no styling, the stylesheet import is missing.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/usage/
 
-## Prerequisites
-
-A working [installation](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/).
-
-## Installation
-
-Already done — this page is about using what you installed.
-
-## Minimal working example
+## A basic editor
 
 *Example: Basic* — the source of the live demo on this page.
 
@@ -284,14 +276,6 @@ Ask the agent something only the documentation answers — for example, whether 
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/requirements/
 
-## Prerequisites
-
-None beyond a React application.
-
-## Installation
-
-See [Installation](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/).
-
 ## Supported versions
 
 | | Supported |
@@ -311,10 +295,6 @@ The package targets modern evergreen browsers and uses `:has()`, `color-mix()` a
 
 ESM and CommonJS, with TypeScript declarations for both. `publint` and `are-the-types-wrong` run on every build, so the `exports` map is checked rather than assumed.
 
-## Minimal working example
-
-See [Usage](https://react-rtekit.vercel.app/react-rtekit/getting-started/usage/).
-
 ## Verify
 
 If your bundler resolves `react-rtekit/styles.css`, the `exports` map is being read correctly.
@@ -332,14 +312,6 @@ If your bundler resolves `react-rtekit/styles.css`, the `exports` map is being r
 > The questions that come up while adopting it: bundle size, engine choice, server rendering, and what it deliberately does not do.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/faq/
-
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/).
 
 ## What does it depend on?
 
@@ -365,14 +337,6 @@ Because `<RichTextEditor>` reads its feature set from props at runtime, so every
 
 Yes, and you do not have to. Every part is a slot, so you can render your own buttons, dialogs and menus while keeping the behaviour — see [Design-system skin](https://react-rtekit.vercel.app/react-rtekit/customization/design-system-skin/).
 
-## Minimal working example
-
-See [Usage](https://react-rtekit.vercel.app/react-rtekit/getting-started/usage/).
-
-## Verify
-
-Nothing to verify on this page.
-
 ## Next steps
 
 - [Support](https://react-rtekit.vercel.app/react-rtekit/getting-started/support/) — where to ask something this does not answer.
@@ -386,14 +350,6 @@ Nothing to verify on this page.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/support/
 
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/).
-
 ## Where to ask
 
 This is a free, MIT-licensed project maintained in the open. There is no paid support tier and no guaranteed response time.
@@ -401,7 +357,7 @@ This is a free, MIT-licensed project maintained in the open. There is no paid su
 | | |
 |---|---|
 | A bug | [GitHub issues](https://github.com/kiralygyula92/react-rtekit/issues) |
-| A question | [GitHub discussions](https://github.com/kiralygyula92/react-rtekit/discussions) |
+| A question | [An issue labelled "question"](https://github.com/kiralygyula92/react-rtekit/issues/new?labels=question) |
 | A security problem | Report privately through GitHub's security advisories rather than in a public issue |
 
 ## What to include in a bug report
@@ -413,11 +369,11 @@ A report that can be reproduced gets fixed; one that cannot, usually does not. I
 - the props you passed, or a link to a [playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) URL, which carries the whole configuration in its hash;
 - what you did, what happened, and what you expected instead.
 
-## Minimal working example
+## Sharing a reproduction
 
 The playground's URL is the fastest reproduction case: configure it until it misbehaves and paste the link.
 
-## Verify
+## Before you file
 
 Before filing, check whether the behaviour is listed under the capability page's `## Limitations` — several things that look like bugs are documented constraints with a workaround.
 
@@ -434,14 +390,6 @@ Before filing, check whether the behaviour is listed under the capability page's
 > Which versions are supported, how they are numbered, and where the documentation for older ones lives.
 
 Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/versions/
-
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/).
 
 ## Supported versions
 
@@ -461,13 +409,13 @@ The package follows [Semantic Versioning](https://semver.org). Every user-facing
 
 The public API is what the `exports` map exposes. Anything reachable only through a deep import is internal and can change in a patch.
 
-## Minimal working example
+## Installing a version
 
 ```bash
 npm install react-rtekit@^1.0.0
 ```
 
-## Verify
+## Checking the installed version
 
 `npm ls react-rtekit` should report the version you expect, and one copy of it.
 
@@ -5789,7 +5737,6 @@ import {
   documentToHtml,
   htmlToDocument,
   isEmptyHtml,
-  type ChangeMeta,
   type EditorValue,
 } from 'react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
@@ -5818,7 +5765,6 @@ const MESSAGE_MAX_LENGTH = 2048;
 
 export default function LegacyParityExample() {
   const [message, setMessage] = useState<string>(DEFAULT_EMAIL_BODY);
-  const [meta, setMeta] = useState<ChangeMeta | null>(null);
   const [to, setTo] = useState<string[]>(['dana@example.com']);
   const [cc, setCc] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<string | null>(null);
@@ -5862,9 +5808,8 @@ export default function LegacyParityExample() {
           preset="classic"
           label="Message"
           value={message}
-          onChange={(value: EditorValue, changeMeta: ChangeMeta) => {
+          onChange={(value: EditorValue) => {
             setMessage(value as string);
-            setMeta(changeMeta);
           }}
           required
           maxLength={MESSAGE_MAX_LENGTH}
@@ -5880,11 +5825,12 @@ export default function LegacyParityExample() {
             Send
           </button>
           <span className="parity__status" data-testid="parity-status">
+            {/* The length is the editor's own counter; this is only what Send will do. */}
             {submitted
               ? `Sent at ${submitted} to ${[...to, ...cc].join(', ')}`
               : empty
-                ? 'The message is empty — Send is disabled (R2)'
-                : `${meta?.length ?? 0} characters of text`}
+                ? 'The message is empty, so Send is disabled (R2)'
+                : null}
           </span>
         </div>
       </form>
@@ -6086,7 +6032,7 @@ Every public symbol, generated from the TypeScript declarations by TypeDoc and f
 
 # RichTextEditor
 
-> The all-in-one component and every prop it takes.
+> The all-in-one editor component, and every prop it accepts with its type, whether it is required, and what it does.
 
 Reference · https://react-rtekit.vercel.app/react-rtekit/api/rich-text-editor/
 
@@ -6316,7 +6262,7 @@ This symbol takes no options.
 
 ---
 
-# Composable parts
+# Composable parts API
 
 > The nine parts the all-in-one component is assembled from.
 
@@ -6485,7 +6431,7 @@ This symbol takes no options.
 
 # useEditor
 
-> The headless hook, and every option it accepts.
+> The headless hook for building your own editor chrome, and every option it accepts with its type and what it does.
 
 Reference · https://react-rtekit.vercel.app/react-rtekit/api/use-editor/
 
@@ -7264,7 +7210,7 @@ This symbol takes no options.
 
 # Theme API
 
-> Building a theme, and the five that ship.
+> Building a theme with createTheme, and the five that ship with the package: light, dark, classic, compact and bordered.
 
 Reference · https://react-rtekit.vercel.app/react-rtekit/api/theme-api/
 
@@ -8696,7 +8642,7 @@ const safe = sanitizeHtml(untrusted, { sanitize: 'standard' });
 
 ---
 
-# Performance
+# Performance tuning
 
 > What costs what, what is measured on every build, and which props are worth memoising.
 
@@ -8708,8 +8654,8 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 
 | Entry point | Budget |
 |---|---|
-| `useEditor` — headless | 41 kB |
-| `RichTextEditor` — everything | 71 kB |
+| `useEditor` — headless | 43 kB |
+| `RichTextEditor` — everything | 72 kB |
 | `react-rtekit/core` — no React | 19 kB |
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |
@@ -8773,7 +8719,7 @@ Pass `label`, and the textbox has a name you can query by. Without one, `getByRo
 
 ---
 
-# Accessibility
+# Keyboard and ARIA
 
 > The keyboard model, the ARIA semantics, and what an override has to keep.
 
@@ -8811,7 +8757,7 @@ A slot receives its semantics in its props. A replacement `ToolbarButton` that d
 
 ---
 
-# Localization
+# Translating the editor
 
 > Translating the editor's strings, handling direction, and finding the keys you missed.
 
@@ -8855,7 +8801,7 @@ The catalogue is the editor's own chrome. Date formats, number formats and your 
 
 ---
 
-# Server rendering
+# SSR and hydration
 
 > Rendering the content on the server and hydrating without a flash or a mismatch.
 
@@ -9527,7 +9473,6 @@ Where the project is going, what it has done, and how it is put together.
 
 - [Changelog](https://react-rtekit.vercel.app/react-rtekit/discover-more/changelog/) — every released version.
 - [Roadmap](https://react-rtekit.vercel.app/react-rtekit/discover-more/roadmap/) — what is being considered.
-- [Showcase](https://react-rtekit.vercel.app/react-rtekit/discover-more/showcase/) — applications using it.
 - [Architecture](https://react-rtekit.vercel.app/react-rtekit/discover-more/architecture/) — the decisions behind it.
 - [llms.txt](https://react-rtekit.vercel.app/react-rtekit/discover-more/llms-txt/) — the machine-readable index.
 
@@ -9535,7 +9480,7 @@ Where the project is going, what it has done, and how it is put together.
 
 # Changelog
 
-> Every released version and what changed in it.
+> Every released version of React RTE Kit and what changed in it, from the changesets recorded with each change.
 
 Discover more · https://react-rtekit.vercel.app/react-rtekit/discover-more/changelog/
 
@@ -9573,19 +9518,7 @@ What has been **decided against**:
 - **Document management.** This edits text and hands it back.
 - **A CSS-in-JS build.** Tokens in a cascade layer do the same job without the runtime.
 
-If you need one of these, say so in [discussions](https://github.com/kiralygyula92/react-rtekit/discussions) — what people actually ask for is what moves.
-
----
-
-# Showcase
-
-> Applications built with this editor, added once their owners are happy to be named.
-
-Discover more · https://react-rtekit.vercel.app/react-rtekit/discover-more/showcase/
-
-Nothing is listed here yet, and nothing invented will be. The package is newly released; when there is a real application using it whose owners are happy to be named, it will appear here.
-
-If you have shipped something with it, [say so](https://github.com/kiralygyula92/react-rtekit/discussions).
+If you need one of these, say so in an [issue](https://github.com/kiralygyula92/react-rtekit/issues) — what people actually ask for is what moves.
 
 ---
 

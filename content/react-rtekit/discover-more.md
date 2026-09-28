@@ -13,6 +13,5 @@ Where the project is going, what it has done, and how it is put together.
 
 - [Changelog](/react-rtekit/discover-more/changelog/) — every released version.
 - [Roadmap](/react-rtekit/discover-more/roadmap/) — what is being considered.
-- [Showcase](/react-rtekit/discover-more/showcase/) — applications using it.
 - [Architecture](/react-rtekit/discover-more/architecture/) — the decisions behind it.
 - [llms.txt](/react-rtekit/discover-more/llms-txt/) — the machine-readable index.

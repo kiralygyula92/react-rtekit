@@ -55,6 +55,11 @@ export function ThemeSwitch() {
     const { dataset } = document.documentElement;
     dataset.siteTheme = theme;
     dataset.colorScheme = theme === 'dark' ? 'dark' : 'light';
+    // The browser's own chrome (the mobile address bar) follows the chosen theme, not the
+    // system one that `index.html` starts from.
+    for (const node of document.querySelectorAll('meta[name="theme-color"]')) {
+      node.setAttribute('content', theme === 'dark' ? '#0b1120' : '#ffffff');
+    }
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {

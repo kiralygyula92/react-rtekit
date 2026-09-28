@@ -7,7 +7,7 @@ import { expect, test } from '@playwright/test';
  * shape-of-the-site check.
  */
 const ROUTES = [
-  { path: '/react-rtekit/', heading: /React RTE Kit . Overview/i },
+  { path: '/react-rtekit/', heading: /^React RTE Kit$/ },
   { path: '/react-rtekit/getting-started/installation/', heading: /installation/i },
   { path: '/react-rtekit/all-features/', heading: /all features/i },
   { path: '/react-rtekit/api/', heading: /api reference/i },

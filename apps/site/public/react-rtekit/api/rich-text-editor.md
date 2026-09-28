@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/api/rich-text-editor/
 title: RichTextEditor
-description: The all-in-one component and every prop it takes.
+description: The all-in-one editor component, and every prop it accepts with its type, whether it is required, and what it does.
 archetype: E
 section: reference
 ---

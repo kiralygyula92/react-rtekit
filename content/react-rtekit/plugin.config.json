@@ -1,7 +1,7 @@
 {
   "id": "react-rtekit",
   "name": "React RTE Kit",
-  "tagline": "A production-grade React rich-text editor you can actually own.",
+  "tagline": "The rich-text editor for React that fits your design system.",
   "description": "React RTE Kit is an accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every content boundary and HTML interop that reads legacy Quill markup.",
   "categoryId": "content-editing",
   "urlPrefix": "",
@@ -24,7 +24,6 @@
   ],
   "links": {
     "issues": "https://github.com/kiralygyula92/react-rtekit/issues",
-    "discussions": "https://github.com/kiralygyula92/react-rtekit/discussions",
     "support": "/react-rtekit/getting-started/support/",
     "changelog": "/react-rtekit/discover-more/changelog/",
     "roadmap": "/react-rtekit/discover-more/roadmap/",
@@ -71,11 +70,5 @@
     "kind": "typescript-declarations",
     "entry": "packages/react-rtekit/src/index.tsx",
     "command": "pnpm --filter react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs"
-  },
-  "branding": {
-    "accentColor": "#3B6FF5",
-    "logoLight": "/brand/react-rtekit-light.svg",
-    "logoDark": "/brand/react-rtekit-dark.svg",
-    "ogImageTemplate": "/og/{slug}.png"
   }
 }

@@ -4,7 +4,6 @@ import {
   documentToHtml,
   htmlToDocument,
   isEmptyHtml,
-  type ChangeMeta,
   type EditorValue,
 } from 'react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
@@ -33,7 +32,6 @@ const MESSAGE_MAX_LENGTH = 2048;
 
 export default function LegacyParityExample() {
   const [message, setMessage] = useState<string>(DEFAULT_EMAIL_BODY);
-  const [meta, setMeta] = useState<ChangeMeta | null>(null);
   const [to, setTo] = useState<string[]>(['dana@example.com']);
   const [cc, setCc] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState<string | null>(null);
@@ -77,9 +75,8 @@ export default function LegacyParityExample() {
           preset="classic"
           label="Message"
           value={message}
-          onChange={(value: EditorValue, changeMeta: ChangeMeta) => {
+          onChange={(value: EditorValue) => {
             setMessage(value as string);
-            setMeta(changeMeta);
           }}
           required
           maxLength={MESSAGE_MAX_LENGTH}
@@ -95,11 +92,12 @@ export default function LegacyParityExample() {
             Send
           </button>
           <span className="parity__status" data-testid="parity-status">
+            {/* The length is the editor's own counter; this is only what Send will do. */}
             {submitted
               ? `Sent at ${submitted} to ${[...to, ...cc].join(', ')}`
               : empty
-                ? 'The message is empty — Send is disabled (R2)'
-                : `${meta?.length ?? 0} characters of text`}
+                ? 'The message is empty, so Send is disabled (R2)'
+                : null}
           </span>
         </div>
       </form>

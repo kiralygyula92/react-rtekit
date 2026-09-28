@@ -9,14 +9,6 @@ section: getting-started
 
 # Versions
 
-## Prerequisites
-
-None.
-
-## Installation
-
-See [Installation](/react-rtekit/getting-started/installation/).
-
 ## Supported versions
 
 | Version | Status | Documentation |
@@ -35,13 +27,13 @@ The package follows [Semantic Versioning](https://semver.org). Every user-facing
 
 The public API is what the `exports` map exposes. Anything reachable only through a deep import is internal and can change in a patch.
 
-## Minimal working example
+## Installing a version
 
 ```bash
 npm install react-rtekit@^1.0.0
 ```
 
-## Verify
+## Checking the installed version
 
 `npm ls react-rtekit` should report the version you expect, and one copy of it.
 

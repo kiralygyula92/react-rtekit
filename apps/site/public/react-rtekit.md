@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/
 title: Overview
-description: 'An accessible, themeable React rich-text editor with no dependencies: 20 replaceable slots, handler middleware, theme tokens, sanitization at every boundary and HTML interop that reads Quill markup.'
+description: 'An accessible, themeable React rich-text editor with no dependencies: replaceable slots, handler middleware, theme tokens and sanitization built in.'
 archetype: A
 section: getting-started
 ---

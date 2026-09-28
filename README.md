@@ -1,7 +1,6 @@
 # react-rtekit
 
-[![npm](https://img.shields.io/npm/v/react-rtekit.svg)](https://www.npmjs.com/package/react-rtekit)
-[![license](https://img.shields.io/npm/l/react-rtekit.svg)](LICENSE)
+[![license](https://img.shields.io/github/license/kiralygyula92/react-rtekit)](LICENSE)
 
 A React rich-text editor for products that have to live with their own HTML: sanitized
 on every boundary, themeable down to the token, replaceable at every level from a CSS
@@ -13,6 +12,7 @@ pnpm add react-rtekit
 ```
 
 ```tsx
+import { useState } from 'react';
 import { RichTextEditor } from 'react-rtekit';
 import 'react-rtekit/styles.css';
 
@@ -33,7 +33,7 @@ export function MessageField() {
 ```
 
 [Documentation](https://react-rtekit.vercel.app/react-rtekit/) ·
-[Examples](https://react-rtekit.vercel.app/react-rtekit/all-features/) ·
+[Features](https://react-rtekit.vercel.app/react-rtekit/all-features/) ·
 [Playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) ·
 [API reference](https://react-rtekit.vercel.app/react-rtekit/api/)
 
@@ -67,11 +67,11 @@ export function MessageField() {
 
 | Import | What it gives you | Size (min+gz) |
 |---|---|---|
-| `react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 64 kB for the full component, 36 kB headless |
+| `react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 71 kB for the full component, 42 kB headless |
 | `react-rtekit/core` | Parse, sanitize, serialize and count. No React, no engine. | 18 kB |
 | `react-rtekit/view` | `<RteContentView>`: stored content, rendered read-only and sanitized | 17 kB |
-| `react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 18 kB |
-| `react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 5 kB |
+| `react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 17 kB |
+| `react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 6 kB |
 | `react-rtekit-rhf` | `<RteField>`, the react-hook-form adapter | under 1 kB |
 
 `react-rtekit/core` has no browser dependency: the HTML parser is in-house precisely so
@@ -84,8 +84,9 @@ React 18 or 19. Nothing else — there are no other dependencies, peer or otherw
 TypeScript is optional but the types are first-class: command payloads, slot context
 props and theme tokens are all typed, and the command registry is open for augmentation.
 
-Browsers: the last two versions of Chrome, Firefox, Edge and Safari, plus iOS Safari
-and Chrome for Android. The end-to-end suite runs against all of them.
+Browsers: current Chrome, Edge, Firefox and Safari, on desktop and mobile. The
+end-to-end suite runs on Chromium, Firefox and WebKit, plus mobile Chrome and mobile
+Safari emulation.
 
 ## Server rendering
 
@@ -96,10 +97,11 @@ carries no engine at all.
 
 ## Documentation
 
-- [Guides](https://react-rtekit.vercel.app/react-rtekit/guides/) — getting started, value and formats, forms,
-  sanitization, HTML interop, merge tags, the toolbar, plugins, slots and handlers,
-  theming, uploads, accessibility, localization, performance, SSR, and migrating off a
-  Quill wrapper.
+- [Getting started](https://react-rtekit.vercel.app/react-rtekit/getting-started/installation/)
+  and a page for every [feature](https://react-rtekit.vercel.app/react-rtekit/all-features/),
+  each with a live demo.
+- [Guides](https://react-rtekit.vercel.app/react-rtekit/guides/): security, performance,
+  testing, accessibility, localization, server rendering and writing a plugin.
 - [API reference](https://react-rtekit.vercel.app/react-rtekit/api/) — generated from TypeDoc and the library's runtime
   metadata, so the lists cannot drift.
 - [AI context](https://react-rtekit.vercel.app/react-rtekit/getting-started/ai-context/) — the whole documentation and the

@@ -1,13 +1,13 @@
 ---
 pluginId: react-rtekit
 pathname: /react-rtekit/guides/server-rendering/
-title: Server rendering
+title: SSR and hydration
 description: Rendering the content on the server and hydrating without a flash or a mismatch.
 archetype: I
 section: guides
 ---
 
-# Server rendering
+# SSR and hydration
 
 ## What runs where
 

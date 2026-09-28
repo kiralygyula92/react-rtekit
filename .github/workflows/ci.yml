@@ -20,22 +20,24 @@ env:
   NODE_VERSION: '22'
 
 jobs:
-  # lint -> typecheck -> test -> build -> size, in one job so later steps reuse the build.
+  # build -> lint -> typecheck -> test -> size, in one job so later steps reuse the build.
+  # The build comes first: the site imports `react-rtekit` through the package's built
+  # declarations, so linting it before they exist types every editor value as `any`.
   verify:
     name: Lint, typecheck, test, build, size
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm build
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test:coverage
-      - run: pnpm build
       - run: pnpm size
       - name: Package linting on the real tarball
         run: pnpm publint && pnpm attw
@@ -51,9 +53,9 @@ jobs:
     name: Security (XSS corpus)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -69,9 +71,9 @@ jobs:
     name: API docs validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -84,9 +86,9 @@ jobs:
     name: Docs content
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -103,16 +105,18 @@ jobs:
     name: E2E and accessibility
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+        # Playwright is a dependency of the site, not of the workspace root.
+        run: pnpm --filter @react-rtekit/site exec playwright install --with-deps
+      - run: pnpm build:site
       - name: Verify every redirect in a browser
         run: pnpm --filter @react-rtekit/site preview & sleep 6 && pnpm redirects:check
       - name: Run Playwright
@@ -133,16 +137,16 @@ jobs:
     name: Performance budgets
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm --filter @react-rtekit/site exec playwright install --with-deps chromium
       - name: Typing latency, mount time and paste cost
         run: pnpm --filter @react-rtekit/site e2e:perf
 
@@ -151,11 +155,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm

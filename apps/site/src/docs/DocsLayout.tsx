@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, ScrollRestoration } from 'react-router';
+import { Outlet, ScrollRestoration, useNavigation } from 'react-router';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
@@ -18,6 +18,7 @@ import { SearchDialog } from '../components/SearchDialog';
 export function DocsLayout() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const navigating = useNavigation().state !== 'idle';
 
   // `/` focuses search, the way every docs site does it, unless the reader is typing.
   useEffect(() => {
@@ -54,6 +55,8 @@ export function DocsLayout() {
        * there is one thing deciding.
        */}
       <ScrollRestoration />
+      {/* Shown only when a page is slow to arrive; see `.nav-progress`. */}
+      <div className="nav-progress" data-active={navigating} aria-hidden="true" />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -77,7 +80,7 @@ export function DocsLayout() {
           />
         </aside>
 
-        <main id="main" className="docs-main">
+        <main id="main" className="docs-main" aria-busy={navigating}>
           <Outlet />
         </main>
       </div>
