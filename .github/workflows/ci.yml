@@ -116,14 +116,16 @@ jobs:
       - name: Install Playwright browsers
         # Playwright is a dependency of the site, not of the workspace root.
         run: pnpm --filter @react-rtekit/site exec playwright install --with-deps
-      - run: pnpm build:site
-      - name: Verify every redirect in a browser
-        run: pnpm --filter @react-rtekit/site preview & sleep 6 && pnpm redirects:check
       - name: Run Playwright
         # PRs run Chromium only; main runs all three engines plus mobile emulation.
+        # Playwright builds the site and serves it on :4189 itself.
         run: pnpm e2e
         env:
           FULL_MATRIX: ${{ github.ref == 'refs/heads/main' && '1' || '' }}
+      # After Playwright, not before: the preview this starts is left running, and it
+      # would hold the port Playwright's own server needs.
+      - name: Verify every redirect in a browser
+        run: pnpm --filter @react-rtekit/site preview & sleep 6 && pnpm redirects:check
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
