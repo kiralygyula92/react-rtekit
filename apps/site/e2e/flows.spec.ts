@@ -75,10 +75,7 @@ test('customise: capability → customization guide → tokens', async ({ page }
   await expect(page.locator('.demo [contenteditable="true"]').first()).toBeVisible();
 });
 
-test('upgrade: version selector → versions → migration → changelog', async ({
-  page,
-  isMobile,
-}) => {
+test('upgrade: version selector → versions → migration → changelog', async ({ page, isMobile }) => {
   await page.goto('/react-rtekit/');
   if (isMobile) {
     // The header has no room for the version picker on a phone; the page is in the menu.
@@ -106,6 +103,25 @@ test('support: any docs page → support → a channel', async ({ page }) => {
   // A real destination, not a promise of one.
   const issues = page.locator('#main').getByRole('link', { name: 'GitHub issues' });
   await expect(issues).toHaveAttribute('href', /github\.com\/.+\/issues/);
+});
+
+/*
+ * The support page asks for a playground link as the reproduction, so the link has to
+ * bring back what its author changed: the panel's props as well as the setup.
+ */
+test('support: a playground link reproduces the options that were changed', async ({ page }) => {
+  await page.goto('/react-rtekit/demos/playground/');
+  await expect(page.locator('.playground__editor [contenteditable="true"]')).toBeVisible();
+  // Nothing changed yet, so nothing to share.
+  expect(new URL(page.url()).hash).toBe('');
+
+  await page.getByLabel('enableBold', { exact: true }).selectOption('false');
+  await expect
+    .poll(() => decodeURIComponent(new URL(page.url()).hash))
+    .toContain('"enableBold":false');
+
+  await page.reload();
+  await expect(page.getByLabel('enableBold', { exact: true })).toHaveValue('false');
 });
 
 test('agent: llms.txt → a .md twin → the whole corpus', async ({ page }) => {

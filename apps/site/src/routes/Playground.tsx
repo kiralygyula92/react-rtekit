@@ -58,29 +58,56 @@ const SETUP = new Set(['preset', 'locale', 'theme', 'colorScheme', 'density', 'v
 
 const setupControls = PLAYGROUND_CONTROLS.filter((control) => SETUP.has(control.name));
 
-/** The state every control starts in. */
+/** What every playground control starts as. */
+const DEFAULTS = Object.fromEntries(
+  PLAYGROUND_CONTROLS.map((control) => [control.name, control.value]),
+) as PlaygroundState;
+
+const CONTROL_NAMES = new Set(PLAYGROUND_CONTROLS.map((control) => control.name));
+
+/*
+ * The link holds the playground's controls and the panel's props side by side, so on the way
+ * back in each goes to the state it came from. Merged into one, the panel's props were
+ * dropped, and a shared link reproduced only half of what its author had set.
+ */
 function initialState(): PlaygroundState {
-  const defaults = Object.fromEntries(
-    PLAYGROUND_CONTROLS.map((control) => [control.name, control.value]),
-  ) as PlaygroundState;
-  return { ...defaults, ...readHash() };
+  const shared = Object.entries(readHash()).filter(([name]) => CONTROL_NAMES.has(name));
+  return { ...DEFAULTS, ...Object.fromEntries(shared) };
+}
+
+function initialProps(): PropState {
+  const shared = Object.entries(readHash()).filter(([name]) => !CONTROL_NAMES.has(name));
+  return Object.fromEntries(shared) as PropState;
 }
 
 export function Playground() {
   const [state, setState] = useState<PlaygroundState>(initialState);
   // The generated panel's state: only the props that differ from the library's
   // defaults, so the snippet lists what a reader would actually have to write.
-  const [propState, setPropState] = useState<PropState>({});
-  const [value, setValue] = useState<string>('<p>Change any option above, and this editor follows it.</p>');
+  const [propState, setPropState] = useState<PropState>(initialProps);
+  const [value, setValue] = useState<string>(
+    '<p>Change any option above, and this editor follows it.</p>',
+  );
   const [events, setEvents] = useState<string[]>([]);
   const [format, setFormat] = useState<FormatState | null>(null);
   const [tab, setTab] = useState<'code' | 'value' | 'events' | 'state'>('code');
   const editorRef = useRef<EditorInstance | null>(null);
 
-  // The configuration lives in the hash, so a playground link is the whole setup.
+  // The configuration lives in the hash, so a playground link is the whole setup. Only
+  // what differs from the defaults goes in it, and nothing at all until something does.
   useEffect(() => {
-    const encoded = encodeURIComponent(JSON.stringify({ ...state, ...propState }));
-    window.history.replaceState(null, '', `#${encoded}`);
+    const changed = Object.entries(state).filter(
+      ([name, value]) => JSON.stringify(value) !== JSON.stringify(DEFAULTS[name]),
+    );
+    const shared = { ...Object.fromEntries(changed), ...propState };
+    const { pathname, search } = window.location;
+    const url =
+      Object.keys(shared).length > 0
+        ? `${pathname}${search}#${encodeURIComponent(JSON.stringify(shared))}`
+        : `${pathname}${search}`;
+    // The router keeps its own entry in `history.state` (the key scroll restoration and
+    // Back rely on), so it is carried over rather than replaced with nothing.
+    window.history.replaceState(window.history.state, '', url);
   }, [state, propState]);
 
   const props = useMemo(() => ({ ...toProps(state), ...propState }), [state, propState]);
