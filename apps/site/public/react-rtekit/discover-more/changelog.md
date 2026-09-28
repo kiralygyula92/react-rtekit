@@ -11,10 +11,7 @@ section: discover-more
 
 Every user-facing change is recorded with a changeset and released under [Semantic Versioning](/react-rtekit/getting-started/versions/).
 
-The full changelog is maintained in the repository and published with each release:
-
-- [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md)
-- [Releases](https://github.com/kiralygyula92/react-rtekit/releases)
+The full changelog is kept in the repository as [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md).
 
 ## 1.0.0
 

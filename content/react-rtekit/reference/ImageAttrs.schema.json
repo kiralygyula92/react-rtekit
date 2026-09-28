@@ -49,7 +49,7 @@
     }
   },
   "filename": "types/commands.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L9",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/commands.ts#L9",
   "usedBy": [
     "/react-rtekit/images/"
   ]

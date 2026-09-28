@@ -25,7 +25,6 @@ import { resolveIcons } from '../icons/index.js';
 import { createBuiltInItems } from './toolbar/items.js';
 import { Toolbar } from './toolbar/Toolbar.js';
 import { mergeLocalization, resolveMessage } from './localization.js';
-import { en } from '../locales/en.js';
 import { classicTheme, themeToCssVars } from '../themes/index.js';
 import { presets, resolvePlugins } from '../core/plugins/presets.js';
 import { featuresOf } from '../core/plugins/define.js';
@@ -175,9 +174,12 @@ export function RichTextEditor(props: RichTextEditorProps) {
   });
 
   const runtime = getRuntime(editor);
+  // The nearest `RteLocaleProvider`'s catalogue (English when there is none), with the
+  // `localization` prop on top. Starting from English here ignored the provider.
+  const inheritedLocalization = useLocalizationValue();
   const localization = useMemo(
-    () => mergeLocalization(en, resolved.localization),
-    [resolved.localization],
+    () => mergeLocalization(inheritedLocalization, resolved.localization),
+    [inheritedLocalization, resolved.localization],
   );
   const icons = useMemo(() => resolveIcons(resolved.icons), [resolved.icons]);
   const slots = useMemo(() => resolveSlots(resolved.slots), [resolved.slots]);

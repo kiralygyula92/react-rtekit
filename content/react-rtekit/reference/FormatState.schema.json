@@ -55,7 +55,7 @@
     }
   },
   "filename": "types/selection.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L72",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/selection.ts#L72",
   "usedBy": [
     "/react-rtekit/text-formatting/",
     "/react-rtekit/lists/",

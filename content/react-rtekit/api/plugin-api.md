@@ -81,11 +81,11 @@ This symbol takes no options.
 
 ## Source
 
-- [createToolbarItem](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L44)
-- [definePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L26)
-- [featuresOf](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L91)
-- [presets](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L117)
-- [resolvePluginOrder](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L57)
-- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L207)
+- [createToolbarItem](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L44)
+- [definePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L26)
+- [featuresOf](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L91)
+- [presets](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/presets.ts#L117)
+- [resolvePluginOrder](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L57)
+- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/presets.ts#L207)
 
 <!-- generated:reference:end -->

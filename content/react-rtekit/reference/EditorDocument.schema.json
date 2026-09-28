@@ -25,7 +25,7 @@
     }
   },
   "filename": "types/document.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/document.ts#L289",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/document.ts#L289",
   "usedBy": [
     "/react-rtekit/value-formats/"
   ]

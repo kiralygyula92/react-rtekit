@@ -186,7 +186,7 @@ The full prop surface of `<RichTextEditor>`.
 
 ## Source
 
-- [RichTextEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/RichTextEditor.tsx#L108)
-- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L112)
+- [RichTextEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/RichTextEditor.tsx#L107)
+- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L112)
 
 <!-- generated:reference:end -->

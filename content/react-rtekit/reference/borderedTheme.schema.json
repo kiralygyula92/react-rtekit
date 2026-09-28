@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "themes/index.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L351",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L351",
   "usedBy": [
     "/react-rtekit/theme-presets/"
   ]

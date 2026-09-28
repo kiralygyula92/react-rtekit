@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "react/RichTextEditor.tsx",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/RichTextEditor.tsx#L108",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/RichTextEditor.tsx#L107",
   "usedBy": [
     "/react-rtekit/composable-parts/"
   ]

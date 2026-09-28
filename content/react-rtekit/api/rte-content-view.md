@@ -58,7 +58,7 @@ This symbol takes no options.
 
 ## Source
 
-- [RteContentView](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/view/RteContentView.tsx#L33)
-- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L338)
+- [RteContentView](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/view/RteContentView.tsx#L33)
+- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L338)
 
 <!-- generated:reference:end -->

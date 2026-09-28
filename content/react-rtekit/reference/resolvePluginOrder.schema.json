@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "core/plugins/define.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L57",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L57",
   "usedBy": [
     "/react-rtekit/plugin-authoring/"
   ]

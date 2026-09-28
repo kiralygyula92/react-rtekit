@@ -6205,8 +6205,8 @@ The full prop surface of `<RichTextEditor>`.
 
 ## Source
 
-- [RichTextEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/RichTextEditor.tsx#L108)
-- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L112)
+- [RichTextEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/RichTextEditor.tsx#L107)
+- [RichTextEditorProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L112)
 
 ---
 
@@ -6257,8 +6257,8 @@ This symbol takes no options.
 
 ## Source
 
-- [RteContentView](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/view/RteContentView.tsx#L33)
-- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L338)
+- [RteContentView](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/view/RteContentView.tsx#L33)
+- [RteContentViewProps](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L338)
 
 ---
 
@@ -6365,16 +6365,16 @@ This symbol takes no options.
 
 ## Source
 
-- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L430)
-- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L278)
-- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L350)
-- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L387)
-- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L417)
-- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L405)
-- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L461)
-- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L584)
-- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L96)
-- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L531)
+- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L430)
+- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L278)
+- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L350)
+- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L387)
+- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L417)
+- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L405)
+- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L461)
+- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L584)
+- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L96)
+- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L531)
 
 ---
 
@@ -6423,9 +6423,9 @@ This symbol takes no options.
 
 ## Source
 
-- [RteDefaultsProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L102)
-- [RteLocaleProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L73)
-- [RteThemeProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L44)
+- [RteDefaultsProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L100)
+- [RteLocaleProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L71)
+- [RteThemeProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L44)
 
 ---
 
@@ -6579,8 +6579,8 @@ This symbol takes no options.
 
 ## Source
 
-- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L329)
-- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/useEditor.ts#L213)
+- [UseEditorOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L329)
+- [useEditor](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/useEditor.ts#L213)
 
 ---
 
@@ -6715,20 +6715,20 @@ This symbol takes no options.
 
 ## Source
 
-- [useCharacterCount](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L138)
-- [useCommand](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L106)
-- [useEditorContext](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L55)
-- [useEditorState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L30)
-- [useFormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L83)
-- [useIsEmpty](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L129)
-- [useIsFocused](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L168)
-- [useLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L129)
-- [useRteConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L194)
-- [useRteDefaults](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L211)
-- [useRteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L110)
-- [useRteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/context.ts#L152)
-- [useUpload](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L158)
-- [useValidationError](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/hooks.ts#L175)
+- [useCharacterCount](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L138)
+- [useCommand](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L106)
+- [useEditorContext](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L55)
+- [useEditorState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L30)
+- [useFormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L83)
+- [useIsEmpty](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L129)
+- [useIsFocused](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L168)
+- [useLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L129)
+- [useRteConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L194)
+- [useRteDefaults](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L211)
+- [useRteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L110)
+- [useRteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/context.ts#L152)
+- [useUpload](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L158)
+- [useValidationError](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/hooks.ts#L175)
 
 ---
 
@@ -6818,7 +6818,7 @@ The handle returned by `useEditor` and exposed through `editorRef` / `onReady`.
 
 ## Source
 
-- [EditorInstance](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L164)
+- [EditorInstance](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/editor.ts#L164)
 
 ---
 
@@ -7038,13 +7038,13 @@ This symbol takes no options.
 
 ## Source
 
-- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/to-html.ts#L417)
-- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L213)
-- [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/document.ts#L307)
-- [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706)
-- [isEmptyHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L773)
-- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L396)
-- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/markdown.ts#L428)
+- [documentToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/to-html.ts#L417)
+- [documentToMarkdown](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/markdown.ts#L213)
+- [documentToText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/document.ts#L307)
+- [htmlToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/from-html.ts#L706)
+- [isEmptyHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/from-html.ts#L773)
+- [markdownToDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/markdown.ts#L396)
+- [markdownToHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/markdown.ts#L428)
 
 ---
 
@@ -7120,12 +7120,12 @@ This symbol takes no options.
 
 ## Source
 
-- [checkUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L80)
-- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L249)
-- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L284)
-- [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134)
-- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L278)
-- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L275)
+- [checkUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/url.ts#L80)
+- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L249)
+- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L284)
+- [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/url.ts#L134)
+- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L278)
+- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/sanitize.ts#L275)
 
 ---
 
@@ -7199,12 +7199,12 @@ This symbol takes no options.
 
 ## Source
 
-- [createToolbarItem](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L44)
-- [definePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L26)
-- [featuresOf](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L91)
-- [presets](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L117)
-- [resolvePluginOrder](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/define.ts#L57)
-- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/plugins/presets.ts#L207)
+- [createToolbarItem](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L44)
+- [definePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L26)
+- [featuresOf](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L91)
+- [presets](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/presets.ts#L117)
+- [resolvePluginOrder](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/define.ts#L57)
+- [resolvePlugins](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/plugins/presets.ts#L207)
 
 ---
 
@@ -7289,13 +7289,13 @@ This symbol takes no options.
 
 ## Source
 
-- [borderedTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L351)
-- [classicTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L225)
-- [compactTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L342)
-- [createTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L201)
-- [darkTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L304)
-- [lightTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L60)
-- [themes](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/themes/index.ts#L364)
+- [borderedTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L351)
+- [classicTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L225)
+- [compactTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L342)
+- [createTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L201)
+- [darkTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L304)
+- [lightTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L60)
+- [themes](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/themes/index.ts#L364)
 
 ---
 
@@ -8267,25 +8267,25 @@ This symbol takes no options.
 
 ## Source
 
-- [ChangeMeta](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L18)
-- [CommandId](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L172)
-- [EditorDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/document.ts#L289)
-- [EditorValue](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/common.ts#L30)
-- [FindOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L54)
-- [FormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L72)
-- [ImageAttrs](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L9)
-- [LinkAttrs](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/selection.ts#L51)
-- [RteHandlers](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/handlers.ts#L157)
-- [RteIcons](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/icons.ts#L12)
-- [RteLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/localization.ts#L24)
-- [RtePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/plugin.ts#L90)
-- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/slots.ts#L235)
-- [RteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/theme.ts#L18)
-- [SanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L53)
-- [SanitizeProfileName](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/sanitize.ts#L16)
-- [TableOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/commands.ts#L27)
-- [ToolbarItemSpec](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/toolbar.ts#L90)
-- [UploadHandler](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/config.ts#L164)
+- [ChangeMeta](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/editor.ts#L18)
+- [CommandId](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/commands.ts#L172)
+- [EditorDocument](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/document.ts#L289)
+- [EditorValue](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/common.ts#L30)
+- [FindOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/editor.ts#L54)
+- [FormatState](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/selection.ts#L72)
+- [ImageAttrs](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/commands.ts#L9)
+- [LinkAttrs](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/selection.ts#L51)
+- [RteHandlers](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/handlers.ts#L157)
+- [RteIcons](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/icons.ts#L12)
+- [RteLocalization](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/localization.ts#L14)
+- [RtePlugin](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/plugin.ts#L90)
+- [RteSlots](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/slots.ts#L235)
+- [RteTheme](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/theme.ts#L18)
+- [SanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/sanitize.ts#L53)
+- [SanitizeProfileName](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/sanitize.ts#L16)
+- [TableOptions](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/commands.ts#L27)
+- [ToolbarItemSpec](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/toolbar.ts#L90)
+- [UploadHandler](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/config.ts#L164)
 
 ---
 
@@ -9486,10 +9486,7 @@ Discover more · https://react-rtekit.vercel.app/react-rtekit/discover-more/chan
 
 Every user-facing change is recorded with a changeset and released under [Semantic Versioning](https://react-rtekit.vercel.app/react-rtekit/getting-started/versions/).
 
-The full changelog is maintained in the repository and published with each release:
-
-- [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md)
-- [Releases](https://github.com/kiralygyula92/react-rtekit/releases)
+The full changelog is kept in the repository as [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md).
 
 ## 1.0.0
 

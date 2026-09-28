@@ -83,11 +83,11 @@ This symbol takes no options.
 
 ## Source
 
-- [checkUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L80)
-- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L249)
-- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L284)
-- [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/url.ts#L134)
-- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/profiles.ts#L278)
-- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/sanitize/sanitize.ts#L275)
+- [checkUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/url.ts#L80)
+- [getProfile](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L249)
+- [mergeSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L284)
+- [normalizeUrl](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/url.ts#L134)
+- [resolveSanitizeConfig](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/profiles.ts#L278)
+- [sanitizeHtml](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/sanitize/sanitize.ts#L275)
 
 <!-- generated:reference:end -->

@@ -313,7 +313,7 @@
     }
   },
   "filename": "types/editor.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L164",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/editor.ts#L164",
   "usedBy": [
     "/react-rtekit/history/",
     "/react-rtekit/empty-state/",

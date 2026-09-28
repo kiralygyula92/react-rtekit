@@ -10,16 +10,6 @@
 /** A string, or a function of its interpolation values. */
 export type LocalizedString = string | ((values: Record<string, string | number>) => string);
 
-/** Number, date and file-size formatting hooks used by counters and the draft prompt. */
-export interface RteFormatters {
-  /** Formats a count for the counter and the search results. */
-  number(value: number): string;
-  /** e.g. "2 minutes ago". */
-  relativeTime(value: Date | number): string;
-  /** e.g. "5 MB". */
-  fileSize(bytes: number): string;
-}
-
 /** The full message catalogue. */
 export interface RteLocalization {
   /** BCP-47 tag of this catalogue, e.g. `'en'`. */

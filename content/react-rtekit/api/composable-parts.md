@@ -114,15 +114,15 @@ This symbol takes no options.
 
 ## Source
 
-- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L430)
-- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L278)
-- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L350)
-- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L387)
-- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L417)
-- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L405)
-- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L461)
-- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L584)
-- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L96)
-- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L531)
+- [Rte](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L430)
+- [RteContent](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L278)
+- [RteCounter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L350)
+- [RteErrorText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L387)
+- [RteFooter](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L417)
+- [RteHelperText](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L405)
+- [RteLabel](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L461)
+- [RtePortals](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L584)
+- [RteRoot](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L96)
+- [RteToolbar](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L531)
 
 <!-- generated:reference:end -->

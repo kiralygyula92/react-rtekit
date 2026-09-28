@@ -97,6 +97,6 @@ The handle returned by `useEditor` and exposed through `editorRef` / `onReady`.
 
 ## Source
 
-- [EditorInstance](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/editor.ts#L164)
+- [EditorInstance](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/editor.ts#L164)
 
 <!-- generated:reference:end -->

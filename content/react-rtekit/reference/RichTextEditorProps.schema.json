@@ -763,7 +763,7 @@
     }
   },
   "filename": "types/props.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/props.ts#L112",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/props.ts#L112",
   "usedBy": [
     "/react-rtekit/headings/",
     "/react-rtekit/html-interop/",

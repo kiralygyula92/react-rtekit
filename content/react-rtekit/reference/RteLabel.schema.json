@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "react/parts.tsx",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/parts.tsx#L461",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/parts.tsx#L461",
   "usedBy": [
     "/react-rtekit/composable-parts/"
   ]

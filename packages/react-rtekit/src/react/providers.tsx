@@ -1,6 +1,6 @@
 import { useMemo, type ReactNode } from 'react';
 import type { DeepPartial } from '../types/common.js';
-import type { RteLocalization, RteFormatters } from '../types/localization.js';
+import type { RteLocalization } from '../types/localization.js';
 import type { ColorScheme, ResolvedRteTheme, RteTheme } from '../types/theme.js';
 import type { RichTextEditorProps } from '../types/props.js';
 import {
@@ -53,8 +53,6 @@ export function RteThemeProvider({ theme, colorScheme = 'light', children }: Rte
 export interface RteLocaleProviderProps {
   /** The catalogue, or the keys to override on top of English. */
   localization: RteLocalization | DeepPartial<RteLocalization>;
-  /** Number, relative-time and file-size formatting. */
-  formatters?: Partial<RteFormatters>;
   /** The subtree the provider covers. */
   children?: ReactNode;
 }

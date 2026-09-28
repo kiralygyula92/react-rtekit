@@ -6,7 +6,7 @@
   ],
   "options": {},
   "filename": "core/serialize/from-html.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/core/serialize/from-html.ts#L706",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/core/serialize/from-html.ts#L706",
   "usedBy": [
     "/react-rtekit/value-formats/",
     "/react-rtekit/html-interop/"

@@ -56,8 +56,8 @@ This symbol takes no options.
 
 ## Source
 
-- [RteDefaultsProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L102)
-- [RteLocaleProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L73)
-- [RteThemeProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/react/providers.tsx#L44)
+- [RteDefaultsProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L100)
+- [RteLocaleProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L71)
+- [RteThemeProvider](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/react/providers.tsx#L44)
 
 <!-- generated:reference:end -->

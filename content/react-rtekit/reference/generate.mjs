@@ -383,8 +383,10 @@ for (const [page, spec] of Object.entries(PAGES)) {
         imports: [importFor(node.name)],
         options: optionsOf(node),
         filename: node.sources?.[0]?.fileName ?? '',
+        // TypeDoc reports paths relative to the package's `src/`, so the link has to put
+        // it back; without it every "Source" link on the reference pages was a 404.
         sourceUrl: node.sources?.[0]?.fileName
-          ? `${REPO}/blob/main/packages/react-rtekit/${node.sources[0].fileName}#L${node.sources[0].line ?? 1}`
+          ? `${REPO}/blob/main/packages/react-rtekit/src/${node.sources[0].fileName}#L${node.sources[0].line ?? 1}`
           : REPO,
         usedBy: [],
       },

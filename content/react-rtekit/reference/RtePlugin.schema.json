@@ -110,7 +110,7 @@
     }
   },
   "filename": "types/plugin.ts",
-  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/types/plugin.ts#L90",
+  "sourceUrl": "https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/src/types/plugin.ts#L90",
   "usedBy": [
     "/react-rtekit/keyboard-shortcuts/",
     "/react-rtekit/plugin-authoring/"
