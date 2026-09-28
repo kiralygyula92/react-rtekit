@@ -44,9 +44,19 @@ const config = {
    */
   trailingSlash: true,
   cleanUrls: false,
+  /*
+   * Sources carry the trailing slash. Vercel adds the slash (its own 308) before it looks
+   * at these rules, so a rule written as `/examples/tables` never matched anything: the
+   * request had already become `/examples/tables/`. A legacy URL is now two hops, slash
+   * then target, and both are permanent.
+   */
   redirects: Object.entries(table)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([source, destination]) => ({ source, destination, permanent: true })),
+    .map(([source, destination]) => ({
+      source: source.endsWith('/') ? source : `${source}/`,
+      destination,
+      permanent: true,
+    })),
   /*
    * No SPA rewrite. Every page is built to its own `<page>/index.html` (see the site's
    * `vite.config.ts`), so a real page is a real file, and anything else falls through to
