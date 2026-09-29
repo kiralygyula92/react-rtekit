@@ -26,6 +26,17 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: '@size-limit/*'
         update-types: ['version-update:semver-major']
+      # Vitest 5's V8 coverage counts statements and branches differently, which drops the measured
+      # coverage below the thresholds without losing a test. Vitest, Vite and the React plugin move
+      # together, so their majors wait until the thresholds are re-baselined.
+      - dependency-name: vitest
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@vitest/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: vite
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@vitejs/plugin-react'
+        update-types: ['version-update:semver-major']
       # Node type definitions track the Node version the repo runs, so that code cannot use APIs
       # the runtime does not have.
       - dependency-name: '@types/node'
