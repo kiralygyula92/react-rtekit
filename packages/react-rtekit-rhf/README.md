@@ -55,4 +55,4 @@ Every `<RichTextEditor>` prop is accepted and forwarded.
 
 ## License
 
-MIT
+[MIT](./LICENSE) © kiralygyula92.
