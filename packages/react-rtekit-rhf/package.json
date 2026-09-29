@@ -67,7 +67,7 @@
     "publint": "^0.3.14",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "^7.65.0",
+    "react-hook-form": "^7.89.0",
     "react-rtekit": "workspace:*",
     "size-limit": "^11.2.0",
     "tsup": "^8.5.0"
