@@ -39,7 +39,7 @@ jobs:
       # the NPM_TOKEN secret exists; until then this step only opens version PRs.
       # Secrets cannot be tested directly in an expression, hence the job-level env.
       - name: Create a version PR, or publish when one is merged
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           version: pnpm version-packages
           publish: ${{ env.NPM_TOKEN != '' && 'pnpm release' || '' }}
