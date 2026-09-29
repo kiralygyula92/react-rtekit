@@ -22,7 +22,7 @@
     "formik": "^2.4.9",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "^7.65.0",
+    "react-hook-form": "^7.89.0",
     "react-router": "^7.9.4",
     "react-rtekit": "workspace:*",
     "react-rtekit-rhf": "workspace:*"
