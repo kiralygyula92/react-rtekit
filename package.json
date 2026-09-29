@@ -2,6 +2,7 @@
   "name": "react-rtekit-monorepo",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Monorepo for react-rtekit, an accessible rich-text editor for React.",
   "packageManager": "pnpm@12.4.2",

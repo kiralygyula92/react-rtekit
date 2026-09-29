@@ -15,10 +15,7 @@
     "accessibility"
   ],
   "license": "MIT",
-  "author": {
-    "name": "kiralygyula92",
-    "url": "https://github.com/kiralygyula92"
-  },
+  "author": "kiralygyula92 (https://github.com/kiralygyula92)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
@@ -36,7 +33,8 @@
     "dist",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
