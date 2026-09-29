@@ -117,4 +117,5 @@ localization keys are all things people build against, so all of them are covere
 
 ## License
 
-MIT
+[MIT](./LICENSE) © kiralygyula92. Third-party attributions (Material Icons paths) are listed in
+[`NOTICE`](./NOTICE).

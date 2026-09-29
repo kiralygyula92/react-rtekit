@@ -123,4 +123,5 @@ is written down in [VERSIONING.md](VERSIONING.md).
 
 ## License
 
-MIT
+[MIT](LICENSE) © kiralygyula92. Third-party attributions are listed in
+[`packages/react-rtekit/NOTICE`](packages/react-rtekit/NOTICE).

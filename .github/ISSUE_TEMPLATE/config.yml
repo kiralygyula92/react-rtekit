@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://react-rtekit.vercel.app/react-rtekit/
+    about: Guides, live demos, the playground and the API reference.
+  - name: Report a security vulnerability
+    url: https://github.com/kiralygyula92/react-rtekit/security/advisories/new
+    about: Please report vulnerabilities privately.

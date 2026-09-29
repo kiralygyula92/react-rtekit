@@ -1,5 +1,3 @@
-Written for: people deciding whether to depend on this library, and what an upgrade will cost them.
-
 # Versioning policy
 
 `react-rtekit` follows [semantic versioning](https://semver.org/). This document says
