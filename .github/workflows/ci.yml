@@ -41,7 +41,7 @@ jobs:
       - run: pnpm size
       - name: Package linting on the real tarball
         run: pnpm publint && pnpm attw
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage
@@ -126,7 +126,7 @@ jobs:
       # would hold the port Playwright's own server needs.
       - name: Verify every redirect in a browser
         run: pnpm --filter @react-rtekit/site preview & sleep 6 && pnpm redirects:check
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
