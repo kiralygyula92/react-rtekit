@@ -86,20 +86,12 @@ Safari emulation.
 
 ## Forms
 
-`@kingtech/react-rtekit` has no form-library dependency. For react-hook-form there is a separate
-adapter:
-
-```bash
-npm install @kingtech/react-rtekit-rhf
-```
-
-```tsx
-<RteField control={control} name="message" preset="classic" label="Message" required />
-```
-
-Formik, TanStack Form and anything else bind in about twenty lines — the editor is a
-controlled input with a `value` and an `onChange`. The
-[forms guide](https://react-rtekit.vercel.app/react-rtekit/forms/) has both.
+`@kingtech/react-rtekit` has no form-library dependency. react-hook-form, Formik, TanStack Form
+and anything else bind in about twenty lines — the editor is a controlled input with a `value`
+and an `onChange`. Validate `required` with `isEmptyHtml` rather than string truthiness: an
+empty editor contains `<p><br></p>`. The
+[forms guide](https://react-rtekit.vercel.app/react-rtekit/forms/) has worked react-hook-form
+and Formik examples.
 
 ## Server rendering
 

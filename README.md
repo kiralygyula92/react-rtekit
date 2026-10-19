@@ -72,7 +72,6 @@ export function MessageField() {
 | `@kingtech/react-rtekit/view` | `<RteContentView>`: stored content, rendered read-only and sanitized | 17 kB |
 | `@kingtech/react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 17 kB |
 | `@kingtech/react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 6 kB |
-| `@kingtech/react-rtekit-rhf` | `<RteField>`, the react-hook-form adapter | under 1 kB |
 
 `@kingtech/react-rtekit/core` has no browser dependency: the HTML parser is in-house precisely so
 that sanitizing and serializing work identically in a Node handler, in a worker and
@@ -112,7 +111,6 @@ carries no engine at all.
 | Package | What it is |
 |---|---|
 | [`@kingtech/react-rtekit`](packages/react-rtekit) | The library |
-| [`@kingtech/react-rtekit-rhf`](packages/react-rtekit-rhf) | The react-hook-form adapter |
 | [`apps/site`](apps/site) | Demo gallery, playground, theme editor and API docs |
 
 ## Contributing

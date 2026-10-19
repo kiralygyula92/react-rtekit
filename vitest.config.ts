@@ -54,17 +54,6 @@ export default defineConfig({
           globals: true,
         },
       },
-      {
-        resolve: { alias: { '@fixtures': fixtures } },
-        test: {
-          name: 'rhf',
-          root: './packages/react-rtekit-rhf',
-          environment: 'jsdom',
-          setupFiles: ['./test/setup.ts'],
-          include: ['src/**/*.test.{ts,tsx}', 'test/**/*.test.{ts,tsx}'],
-          globals: true,
-        },
-      },
     ],
     coverage: {
       provider: 'v8',

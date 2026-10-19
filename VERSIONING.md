@@ -78,9 +78,8 @@ months after the new major is released. See [SECURITY.md](SECURITY.md).
 
 Every user-visible change carries a [changeset](https://github.com/changesets/changesets).
 A release pull request applies the pending changesets, and a `v*` tag on the merged commit
-stages both packages on npm with
-[provenance](https://docs.npmjs.com/generating-provenance-statements); they go live once a
-maintainer approves them, and the GitHub release carries the changelog section. The
-per-package `CHANGELOG.md` files are generated from the changesets, so the release notes
-are written when the change is made rather than reconstructed afterwards. See
-[RELEASING.md](RELEASING.md).
+stages the package on npm with
+[provenance](https://docs.npmjs.com/generating-provenance-statements); it goes live once a
+maintainer approves it, and the GitHub release carries the changelog section.
+`CHANGELOG.md` is generated from the changesets, so the release notes are written when the
+change is made rather than reconstructed afterwards. See [RELEASING.md](RELEASING.md).
