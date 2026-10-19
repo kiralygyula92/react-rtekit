@@ -1,5 +1,10 @@
 import { useMemo, useState } from 'react';
-import { documentToHtml, documentToText, htmlToDocument, type PasteMode } from 'react-rtekit';
+import {
+  documentToHtml,
+  documentToText,
+  htmlToDocument,
+  type PasteMode,
+} from '@kingtech/react-rtekit';
 import { OFFICE_FIXTURES, QUILL_FIXTURES } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 

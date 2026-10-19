@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { RteField } from 'react-rtekit-rhf';
+import { RteField } from '@kingtech/react-rtekit-rhf';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

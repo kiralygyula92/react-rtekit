@@ -37,7 +37,7 @@ toolbar-config
 `createToolbarItem` builds one in the same shape the built-ins use, so nothing about them is privileged:
 
 ```tsx
-import { createToolbarItem } from 'react-rtekit';
+import { createToolbarItem } from '@kingtech/react-rtekit';
 
 const highlight = createToolbarItem({
   name: 'highlight',

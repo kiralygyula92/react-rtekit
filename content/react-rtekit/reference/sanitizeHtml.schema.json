@@ -2,7 +2,7 @@
   "name": "sanitizeHtml",
   "kind": "function",
   "imports": [
-    "import { sanitizeHtml } from 'react-rtekit';"
+    "import { sanitizeHtml } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/sanitize/sanitize.ts",

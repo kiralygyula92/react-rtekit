@@ -17,7 +17,7 @@ The editor is a client component: the engine needs a DOM.
 'use client';
 
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 
 export function Body({ initial }: { initial: string }) {
   const [value, setValue] = useState(initial);
@@ -28,7 +28,7 @@ export function Body({ initial }: { initial: string }) {
 Import the stylesheet in the root layout:
 
 ```tsx
-import 'react-rtekit/styles.css';
+import '@kingtech/react-rtekit/styles.css';
 ```
 
 ## Displaying content in a server component
@@ -36,7 +36,7 @@ import 'react-rtekit/styles.css';
 A page that only renders stored HTML does not need an editor, or a client boundary:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 export default async function Page() {
   const post = await getPost();

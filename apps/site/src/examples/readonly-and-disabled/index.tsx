@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 /**
  * Read-only, disabled, and the view renderer (fixes R18).

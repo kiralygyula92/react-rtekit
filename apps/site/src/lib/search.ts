@@ -45,7 +45,7 @@ async function build(): Promise<SearchEntry[]> {
   // The manifest is the site's content; the runtime metadata is the library's enumerable
   // surface. Between them they cover every page and every symbol, and neither is a list
   // anyone maintains by hand, so a result can never point at a page that is not there.
-  const { meta } = await import('react-rtekit/meta');
+  const { meta } = await import('@kingtech/react-rtekit/meta');
 
   const entries: SearchEntry[] = [];
 

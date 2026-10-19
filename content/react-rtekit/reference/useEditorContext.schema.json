@@ -2,7 +2,7 @@
   "name": "useEditorContext",
   "kind": "function",
   "imports": [
-    "import { useEditorContext } from 'react-rtekit';"
+    "import { useEditorContext } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

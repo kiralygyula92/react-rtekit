@@ -8,9 +8,9 @@ import { router } from './router';
 // Self-hosted, so the classic preset renders in its real typeface offline and in CI.
 import '@fontsource-variable/open-sans';
 
-import 'react-rtekit/styles.css';
-import 'react-rtekit/presets/classic.css';
-import 'react-rtekit/presets/dark.css';
+import '@kingtech/react-rtekit/styles.css';
+import '@kingtech/react-rtekit/presets/classic.css';
+import '@kingtech/react-rtekit/presets/dark.css';
 import './styles/site.css';
 import './styles/docs.css';
 

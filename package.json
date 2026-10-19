@@ -30,13 +30,12 @@
     "e2e": "pnpm --filter @react-rtekit/site e2e",
     "e2e:install": "playwright install --with-deps",
     "size": "pnpm --filter \"./packages/**\" size",
-    "docs:json": "pnpm --filter react-rtekit docs:json",
-    "docs:check": "pnpm --filter react-rtekit docs:check",
+    "docs:json": "pnpm --filter @kingtech/react-rtekit docs:json",
+    "docs:check": "pnpm --filter @kingtech/react-rtekit docs:check",
     "publint": "pnpm --filter \"./packages/**\" publint",
     "attw": "pnpm --filter \"./packages/**\" attw",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish",
     "e2e:perf": "pnpm --filter @react-rtekit/site e2e:perf"
   },
   "devDependencies": {

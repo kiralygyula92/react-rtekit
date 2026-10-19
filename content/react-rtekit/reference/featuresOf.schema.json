@@ -2,7 +2,7 @@
   "name": "featuresOf",
   "kind": "function",
   "imports": [
-    "import { featuresOf } from 'react-rtekit';"
+    "import { featuresOf } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/define.ts",

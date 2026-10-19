@@ -2,7 +2,7 @@
   "name": "htmlToDocument",
   "kind": "function",
   "imports": [
-    "import { htmlToDocument } from 'react-rtekit';"
+    "import { htmlToDocument } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/serialize/from-html.ts",

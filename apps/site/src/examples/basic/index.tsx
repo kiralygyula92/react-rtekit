@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Rte, useEditor, type ChangeMeta, type EditorValue } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { Rte, useEditor, type ChangeMeta, type EditorValue } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

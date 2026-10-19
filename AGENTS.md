@@ -7,9 +7,9 @@ Instructions for AI coding agents working in this repository. Claude Code reads 
 
 A pnpm monorepo:
 
-- `packages/react-rtekit`: the published library `react-rtekit`, an accessible, themeable
+- `packages/react-rtekit`: the published library `@kingtech/react-rtekit`, an accessible, themeable
   rich-text editor for React with no dependencies.
-- `packages/react-rtekit-rhf`: the published react-hook-form adapter `react-rtekit-rhf`.
+- `packages/react-rtekit-rhf`: the published react-hook-form adapter `@kingtech/react-rtekit-rhf`.
 - `apps/site`: the demo gallery, playground, theme editor and API docs, which doubles as the
   Playwright test bed.
 - `content`: the documentation content (`content/react-rtekit`) and its build, reference and
@@ -21,8 +21,8 @@ A pnpm monorepo:
    breaking change.
 2. **Generic and app-agnostic.** No app-specific coupling in the packages: integration points are
    props, slots, handlers, plugins or CSS variables.
-3. **No dependencies.** `react` and `react-dom` are the only peers of `react-rtekit`;
-   `react-rtekit-rhf` adds `react-hook-form` and `react-rtekit`.
+3. **No dependencies.** `react` and `react-dom` are the only peers of `@kingtech/react-rtekit`;
+   `@kingtech/react-rtekit-rhf` adds `react-hook-form` and `@kingtech/react-rtekit`.
 4. **One engine interface.** Nothing outside `src/engines/` depends on how the engine edits the
    document, only on the `EditorEngine` interface.
 5. **Safe by default.** Untrusted HTML is sanitized. Every change to `src/core/sanitize` or
@@ -54,5 +54,6 @@ A pnpm monorepo:
   features, `major` for breaking changes.
 - Public API changes: TSDoc on the export, `pnpm docs:json && pnpm content`, and an example, a guide
   and the playground updated.
-- Never publish to npm, push tags or bump versions yourself; releases go through the Release
-  workflow (see [RELEASING.md](RELEASING.md)).
+- Never publish to npm or approve a staged version. Bump versions and push `v*` tags only when the
+  maintainer asks for a release; the Release workflow then stages it on npm (see
+  [RELEASING.md](RELEASING.md)).

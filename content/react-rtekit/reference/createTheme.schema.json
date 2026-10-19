@@ -2,7 +2,7 @@
   "name": "createTheme",
   "kind": "function",
   "imports": [
-    "import { createTheme } from 'react-rtekit';"
+    "import { createTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

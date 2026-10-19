@@ -20,7 +20,7 @@ theming
 `createTheme` merges your overrides onto a base, so you change what you care about and inherit the rest.
 
 ```tsx
-import { createTheme, lightTheme } from 'react-rtekit';
+import { createTheme, lightTheme } from '@kingtech/react-rtekit';
 
 const brand = createTheme(lightTheme, {
   color: { accent: '#6C4BF4' },
@@ -34,7 +34,7 @@ const brand = createTheme(lightTheme, {
 Every shipped theme meets WCAG AA and a test enforces it. A theme you derive does not inherit that, so `meetsContrastAA` is exported:
 
 ```tsx
-import { meetsContrastAA } from 'react-rtekit';
+import { meetsContrastAA } from '@kingtech/react-rtekit';
 
 meetsContrastAA(brand.color.text, brand.color.surface); // true
 ```

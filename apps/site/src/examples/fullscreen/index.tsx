@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { RichTextEditor, type EditorInstance } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance } from '@kingtech/react-rtekit';
 
 /**
  * Fullscreen.

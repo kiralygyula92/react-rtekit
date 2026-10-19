@@ -2,7 +2,7 @@
   "name": "RteLocaleProvider",
   "kind": "function",
   "imports": [
-    "import { RteLocaleProvider } from 'react-rtekit';"
+    "import { RteLocaleProvider } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/providers.tsx",

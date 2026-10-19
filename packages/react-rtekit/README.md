@@ -6,13 +6,13 @@ variable to the whole UI, and able to round-trip the markup your old editor alre
 stored.
 
 ```bash
-pnpm add react-rtekit
+npm install @kingtech/react-rtekit
 ```
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import 'react-rtekit/styles.css';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import '@kingtech/react-rtekit/styles.css';
 
 export function MessageField() {
   const [value, setValue] = useState('<p>Hello</p>');
@@ -64,13 +64,13 @@ export function MessageField() {
 
 | Import | What it gives you | Size (min+gz) |
 |---|---|---|
-| `react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 71 kB for the full component, 42 kB headless |
-| `react-rtekit/core` | Parse, sanitize, serialize and count. No React, no engine. | 18 kB |
-| `react-rtekit/view` | `<RteContentView>`: stored content, rendered read-only and sanitized | 17 kB |
-| `react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 17 kB |
-| `react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 6 kB |
+| `@kingtech/react-rtekit` | The editor, the parts, the hooks, the plugins, the themes | 71 kB for the full component, 42 kB headless |
+| `@kingtech/react-rtekit/core` | Parse, sanitize, serialize and count. No React, no engine. | 18 kB |
+| `@kingtech/react-rtekit/view` | `<RteContentView>`: stored content, rendered read-only and sanitized | 17 kB |
+| `@kingtech/react-rtekit/meta` | Runtime metadata: every slot, command, handler, token and locale key | 17 kB |
+| `@kingtech/react-rtekit/styles.css` | Structure, prose styles and the default theme, in a cascade layer | 6 kB |
 
-`react-rtekit/core` has no browser dependency: the HTML parser is in-house precisely so
+`@kingtech/react-rtekit/core` has no browser dependency: the HTML parser is in-house precisely so
 that sanitizing and serializing work identically in a Node handler, in a worker and
 during server rendering.
 
@@ -86,11 +86,11 @@ Safari emulation.
 
 ## Forms
 
-`react-rtekit` has no form-library dependency. For react-hook-form there is a separate
+`@kingtech/react-rtekit` has no form-library dependency. For react-hook-form there is a separate
 adapter:
 
 ```bash
-pnpm add react-rtekit-rhf
+npm install @kingtech/react-rtekit-rhf
 ```
 
 ```tsx

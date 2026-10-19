@@ -2,7 +2,7 @@
   "name": "useIsEmpty",
   "kind": "function",
   "imports": [
-    "import { useIsEmpty } from 'react-rtekit';"
+    "import { useIsEmpty } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

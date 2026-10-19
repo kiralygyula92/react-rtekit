@@ -13,15 +13,15 @@ section: integrations
 validation-rhf
 ```
 
-`react-rtekit-rhf` is a separate package so that a project not using React Hook Form does not pay for it:
+`@kingtech/react-rtekit-rhf` is a separate package so that a project not using React Hook Form does not pay for it:
 
 ```bash
-npm install react-rtekit-rhf
+npm install @kingtech/react-rtekit-rhf
 ```
 
 ```tsx
 import { useForm } from 'react-hook-form';
-import { RhfRichTextEditor } from 'react-rtekit-rhf';
+import { RhfRichTextEditor } from '@kingtech/react-rtekit-rhf';
 
 const { control, handleSubmit } = useForm({ defaultValues: { body: '' } });
 

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { RichTextEditor, countText, type RteHandlers } from 'react-rtekit';
+import { RichTextEditor, countText, type RteHandlers } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

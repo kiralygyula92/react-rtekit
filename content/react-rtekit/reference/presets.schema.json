@@ -2,7 +2,7 @@
   "name": "presets",
   "kind": "variable",
   "imports": [
-    "import { presets } from 'react-rtekit';"
+    "import { presets } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/presets.ts",

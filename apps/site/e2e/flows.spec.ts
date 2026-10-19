@@ -35,7 +35,7 @@ test('adopt: overview → installation → usage → a working editor', async ({
 
   // The minimal example is complete: no ellipses, and it imports what it uses.
   const example = page.locator('.code-block').filter({ hasText: 'RichTextEditor' }).first();
-  await expect(example).toContainText("import { RichTextEditor } from 'react-rtekit'");
+  await expect(example).toContainText("import { RichTextEditor } from '@kingtech/react-rtekit'");
   await expect(example).not.toContainText('…');
 
   await follow(page, 'Usage');
@@ -152,7 +152,7 @@ test('agent: llms.txt → a .md twin → the whole corpus', async ({ page }) => 
   expect(all).not.toContain('<div id="root">');
   expect(all.match(/^# /gm)?.length ?? 0).toBeGreaterThan(entries.length);
   expect(all).not.toMatch(/^```demo$/m);
-  expect(all).toContain("from 'react-rtekit'");
+  expect(all).toContain("from '@kingtech/react-rtekit'");
 
   const sitemap = await page.goto('/sitemap.xml');
   expect((await sitemap?.text())?.startsWith('<?xml')).toBe(true);

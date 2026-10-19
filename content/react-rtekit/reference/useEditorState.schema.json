@@ -2,7 +2,7 @@
   "name": "useEditorState",
   "kind": "function",
   "imports": [
-    "import { useEditorState } from 'react-rtekit';"
+    "import { useEditorState } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

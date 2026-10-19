@@ -1,5 +1,5 @@
 /**
- * `react-rtekit/core` — the headless core.
+ * `@kingtech/react-rtekit/core` — the headless core.
  *
  * No React, no engine, no DOM assumptions beyond an optional `DOMParser`: safe to
  * import from a server, a worker or a test. Everything the editor does to

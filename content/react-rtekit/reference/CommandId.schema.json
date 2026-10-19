@@ -2,7 +2,7 @@
   "name": "CommandId",
   "kind": "type",
   "imports": [
-    "import { CommandId } from 'react-rtekit';"
+    "import { CommandId } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "types/commands.ts",

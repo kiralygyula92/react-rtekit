@@ -16,10 +16,10 @@ import {
   type EditorInstance,
   type EditorValue,
   type RichTextEditorProps,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 
 /**
- * `react-rtekit-rhf` — the react-hook-form adapter.
+ * `@kingtech/react-rtekit-rhf` — the react-hook-form adapter.
  *
  * The core library has no form-library dependency (fixes R13); everything that knows
  * about react-hook-form lives here. The reason this package exists at all is the

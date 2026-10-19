@@ -2,7 +2,7 @@
   "name": "useValidationError",
   "kind": "function",
   "imports": [
-    "import { useValidationError } from 'react-rtekit';"
+    "import { useValidationError } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

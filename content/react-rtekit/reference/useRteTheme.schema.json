@@ -2,7 +2,7 @@
   "name": "useRteTheme",
   "kind": "function",
   "imports": [
-    "import { useRteTheme } from 'react-rtekit';"
+    "import { useRteTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

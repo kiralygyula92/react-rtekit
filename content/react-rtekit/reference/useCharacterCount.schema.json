@@ -2,7 +2,7 @@
   "name": "useCharacterCount",
   "kind": "function",
   "imports": [
-    "import { useCharacterCount } from 'react-rtekit';"
+    "import { useCharacterCount } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

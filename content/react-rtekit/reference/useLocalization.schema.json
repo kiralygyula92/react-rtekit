@@ -2,7 +2,7 @@
   "name": "useLocalization",
   "kind": "function",
   "imports": [
-    "import { useLocalization } from 'react-rtekit';"
+    "import { useLocalization } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

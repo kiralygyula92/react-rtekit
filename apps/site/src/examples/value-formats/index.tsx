@@ -6,7 +6,7 @@ import {
   documentToText,
   htmlToDocument,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

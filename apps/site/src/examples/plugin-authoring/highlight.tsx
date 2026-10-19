@@ -1,4 +1,4 @@
-import { createToolbarItem, definePlugin, resolveMessage } from 'react-rtekit';
+import { createToolbarItem, definePlugin, resolveMessage } from '@kingtech/react-rtekit';
 
 /**
  * A highlight plugin.

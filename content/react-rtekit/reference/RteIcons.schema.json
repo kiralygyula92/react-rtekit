@@ -2,7 +2,7 @@
   "name": "RteIcons",
   "kind": "type",
   "imports": [
-    "import { RteIcons } from 'react-rtekit';"
+    "import { RteIcons } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "types/icons.ts",

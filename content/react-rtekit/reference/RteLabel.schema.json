@@ -2,7 +2,7 @@
   "name": "RteLabel",
   "kind": "function",
   "imports": [
-    "import { RteLabel } from 'react-rtekit';"
+    "import { RteLabel } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

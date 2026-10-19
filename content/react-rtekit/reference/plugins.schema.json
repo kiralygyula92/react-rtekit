@@ -2,7 +2,7 @@
   "name": "Plugin catalogue",
   "kind": "catalogue",
   "imports": [
-    "import { meta } from 'react-rtekit/meta';"
+    "import { meta } from '@kingtech/react-rtekit/meta';"
   ],
   "options": {
     "align": {

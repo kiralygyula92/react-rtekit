@@ -2,7 +2,7 @@
   "name": "RteDefaultsProvider",
   "kind": "function",
   "imports": [
-    "import { RteDefaultsProvider } from 'react-rtekit';"
+    "import { RteDefaultsProvider } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/providers.tsx",

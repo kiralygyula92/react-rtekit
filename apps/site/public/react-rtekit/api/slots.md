@@ -24,7 +24,7 @@ section: reference
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options

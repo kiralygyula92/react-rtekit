@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 /**
  * One stylesheet, two places.

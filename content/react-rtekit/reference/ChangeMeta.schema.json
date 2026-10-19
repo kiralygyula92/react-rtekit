@@ -2,7 +2,7 @@
   "name": "ChangeMeta",
   "kind": "interface",
   "imports": [
-    "import { ChangeMeta } from 'react-rtekit';"
+    "import { ChangeMeta } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "source": {

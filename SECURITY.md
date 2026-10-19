@@ -14,7 +14,7 @@ Include, where you can:
 - the input (HTML, clipboard payload, or `value`) that triggers the problem;
 - the configuration in use, especially `sanitize`, `htmlProfile` and `interop`;
 - the observed output and what an attacker could do with it;
-- the versions of `react-rtekit` and React.
+- the versions of `@kingtech/react-rtekit` and React.
 
 You can expect an acknowledgement within three working days. We agree a disclosure timeline with
 the reporter, ship a patch release for every supported major, and credit the reporter in the
@@ -22,7 +22,7 @@ release notes unless they prefer otherwise.
 
 ## Scope and hardening
 
-`react-rtekit` parses, transforms and renders **untrusted HTML**, and its output is frequently
+`@kingtech/react-rtekit` parses, transforms and renders **untrusted HTML**, and its output is frequently
 emailed to third parties. Sanitization bypasses are therefore treated as the highest-severity class
 of bug in this project. We consider these vulnerabilities:
 

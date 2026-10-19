@@ -28,7 +28,7 @@ const config = {
   framework: 'vite',
   /*
    * Vercel's Root Directory is `apps/site`, so its own `build` runs — and that is
-   * `vite build` alone. `react-rtekit` and `react-rtekit-rhf` are `link:` dependencies
+   * `vite build` alone. `@kingtech/react-rtekit` and `@kingtech/react-rtekit-rhf` are `link:` dependencies
    * that have to be built first, which is what the root script does and what CI runs
    * before `build:site`.
    */

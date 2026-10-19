@@ -6,7 +6,7 @@ React RTE Kit is an accessible, themeable React rich-text editor with no depende
 
 Every page of the documentation at https://react-rtekit.vercel.app/react-rtekit/, in reading order, with the source of every live example inlined where its page shows it. It is generated from the same Markdown as the site, so it says exactly what the site says.
 
-- Package: `react-rtekit` 1.0.0 on npm. Peer dependencies: `react` >=18.2, `react-dom` >=18.2, and nothing else.
+- Package: `@kingtech/react-rtekit` 1.0.0 on npm. Peer dependencies: `react` >=18.2, `react-dom` >=18.2, and nothing else.
 - Page index: https://react-rtekit.vercel.app/react-rtekit/llms.txt — and any single page as Markdown, at its URL with `.md`.
 - 123 pages, 44 examples.
 
@@ -67,17 +67,17 @@ Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/
 One package. React and React DOM are the only peer dependencies, and there is nothing else to install:
 
 ```bash
-npm install react-rtekit
+npm install @kingtech/react-rtekit
 ```
 
 ```bash
-pnpm add react-rtekit
+pnpm add @kingtech/react-rtekit
 ```
 
 Then import the stylesheet once, wherever you import your application's other global CSS:
 
 ```ts
-import 'react-rtekit/styles.css';
+import '@kingtech/react-rtekit/styles.css';
 ```
 
 The stylesheet is plain CSS in a cascade layer. There is no CSS-in-JS runtime, no UI kit and no icon package.
@@ -86,8 +86,8 @@ The stylesheet is plain CSS in a cascade layer. There is no CSS-in-JS runtime, n
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import 'react-rtekit/styles.css';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import '@kingtech/react-rtekit/styles.css';
 
 export function Editor() {
   const [value, setValue] = useState('<p>Hello</p>');
@@ -122,8 +122,8 @@ Getting started · https://react-rtekit.vercel.app/react-rtekit/getting-started/
 
 ```tsx
 import { useState } from 'react';
-import { Rte, useEditor, type ChangeMeta, type EditorValue } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { Rte, useEditor, type ChangeMeta, type EditorValue } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -297,7 +297,7 @@ ESM and CommonJS, with TypeScript declarations for both. `publint` and `are-the-
 
 ## Verify
 
-If your bundler resolves `react-rtekit/styles.css`, the `exports` map is being read correctly.
+If your bundler resolves `@kingtech/react-rtekit/styles.css`, the `exports` map is being read correctly.
 
 ## Next steps
 
@@ -364,7 +364,7 @@ This is a free, MIT-licensed project maintained in the open. There is no paid su
 
 A report that can be reproduced gets fixed; one that cannot, usually does not. Include:
 
-- the version of `react-rtekit` and React;
+- the version of `@kingtech/react-rtekit` and React;
 - the browser, since most editor bugs are engine-specific;
 - the props you passed, or a link to a [playground](https://react-rtekit.vercel.app/react-rtekit/demos/playground/) URL, which carries the whole configuration in its hash;
 - what you did, what happened, and what you expected instead.
@@ -412,7 +412,7 @@ The public API is what the `exports` map exposes. Anything reachable only throug
 ## Installing a version
 
 ```bash
-npm install react-rtekit@^1.0.0
+npm install @kingtech/react-rtekit@^1.0.0
 ```
 
 ## Checking the installed version
@@ -450,7 +450,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/text-formatting/
 
 ```tsx
 import { useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -560,7 +560,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/headings/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -628,7 +628,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/lists/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -723,7 +723,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/links/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -956,7 +956,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/history/
 
 ```tsx
 import { useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -1044,7 +1044,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/empty-state/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -1165,7 +1165,7 @@ import {
   documentToText,
   htmlToDocument,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -1238,7 +1238,7 @@ import {
   type ChangeMeta,
   type EditorInstance,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -1384,8 +1384,8 @@ Features · https://react-rtekit.vercel.app/react-rtekit/sanitization/
 
 ```tsx
 import { useMemo, useState } from 'react';
-import { RteContentView } from 'react-rtekit/view';
-import { sanitizeHtml, type SanitizeProfileName } from 'react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
+import { sanitizeHtml, type SanitizeProfileName } from '@kingtech/react-rtekit';
 import { XSS_PAYLOADS } from '../../fixtures';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -1539,7 +1539,7 @@ import {
   htmlToDocument,
   type HtmlProfile,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -1688,7 +1688,7 @@ import {
   htmlToDocument,
   plainTextAlternative,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -1839,7 +1839,12 @@ Features · https://react-rtekit.vercel.app/react-rtekit/paste-cleanup/
 
 ```tsx
 import { useMemo, useState } from 'react';
-import { documentToHtml, documentToText, htmlToDocument, type PasteMode } from 'react-rtekit';
+import {
+  documentToHtml,
+  documentToText,
+  htmlToDocument,
+  type PasteMode,
+} from '@kingtech/react-rtekit';
 import { OFFICE_FIXTURES, QUILL_FIXTURES } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -1985,7 +1990,7 @@ import {
   htmlToDocument,
   type EditorInstance,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -2154,7 +2159,7 @@ import {
   type ColorScheme,
   type Density,
   type ResolvedRteTheme,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -2294,7 +2299,12 @@ Features · https://react-rtekit.vercel.app/react-rtekit/theme-presets/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, documentToHtml, htmlToDocument, type PresetName } from 'react-rtekit';
+import {
+  RichTextEditor,
+  documentToHtml,
+  htmlToDocument,
+  type PresetName,
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 
@@ -2403,7 +2413,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/colours/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from 'react-rtekit';
+import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 
 /**
@@ -2568,8 +2578,8 @@ Features · https://react-rtekit.vercel.app/react-rtekit/fonts/
 
 ```tsx
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 /**
  * One stylesheet, two places.
@@ -2796,7 +2806,12 @@ Features · https://react-rtekit.vercel.app/react-rtekit/tables/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, documentToHtml, htmlToDocument, type EditorValue } from 'react-rtekit';
+import {
+  RichTextEditor,
+  documentToHtml,
+  htmlToDocument,
+  type EditorValue,
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -2880,7 +2895,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/images/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue, type UploadResult } from 'react-rtekit';
+import { RichTextEditor, type EditorValue, type UploadResult } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3057,7 +3072,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/selection-toolbar/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 
 /**
  * Floating, sticky and overflowing toolbars.
@@ -3150,7 +3165,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/slash-menu/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3243,7 +3258,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/mentions/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue, type MentionCandidate } from 'react-rtekit';
+import { RichTextEditor, type EditorValue, type MentionCandidate } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3320,7 +3335,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/find-and-replace/
 
 ```tsx
 import { useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3404,7 +3419,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/fullscreen/
 
 ```tsx
 import { useRef } from 'react';
-import { RichTextEditor, type EditorInstance } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance } from '@kingtech/react-rtekit';
 
 /**
  * Fullscreen.
@@ -3470,7 +3485,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/source-view/
 
 ```tsx
 import { useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3548,7 +3563,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/keyboard-shortcuts/
 
 ```tsx
 import { useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 
 /**
  * The keyboard and screen-reader model.
@@ -3634,7 +3649,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/autosave/
 
 ```tsx
 import { useMemo, useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -3744,8 +3759,8 @@ Features · https://react-rtekit.vercel.app/react-rtekit/read-only-and-disabled/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import { RteContentView } from 'react-rtekit/view';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 /**
  * Read-only, disabled, and the view renderer (fixes R18).
@@ -3813,7 +3828,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/mobile/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 
 /**
  * The editor at phone width.
@@ -3903,7 +3918,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/slots/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type RteSlots } from 'react-rtekit';
+import { RichTextEditor, type RteSlots } from '@kingtech/react-rtekit';
 
 /**
  * Five replaced slots.
@@ -4057,7 +4072,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/handler-middleware/
 
 ```tsx
 import { useCallback, useMemo, useState } from 'react';
-import { RichTextEditor, countText, type RteHandlers } from 'react-rtekit';
+import { RichTextEditor, countText, type RteHandlers } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -4217,7 +4232,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/commands/
 
 ```tsx
 import { useCallback, useMemo, useState } from 'react';
-import { RichTextEditor, type CommandOverrides } from 'react-rtekit';
+import { RichTextEditor, type CommandOverrides } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -4353,7 +4368,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/composable-parts/
 
 ```tsx
 import { useState, type ReactNode } from 'react';
-import { Rte, classicTheme, presets, useEditor } from 'react-rtekit';
+import { Rte, classicTheme, presets, useEditor } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -4500,7 +4515,7 @@ import {
   useFormatState,
   useIsEmpty,
   type CommandId,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 
 /**
  * `useEditor` with a UI built from nothing.
@@ -4656,7 +4671,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/plugin-authoring/
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, createToolbarItem, definePlugin } from 'react-rtekit';
+import { RichTextEditor, createToolbarItem, definePlugin } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 import source from './highlight?raw';
 import { highlight } from './highlight';
@@ -4804,7 +4819,7 @@ import {
   type RteSlots,
   type SlotBaseProps,
   type ToolbarButtonSlotProps,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 
 /**
  * Re-skinning the editor's chrome with a design system's own components.
@@ -4975,7 +4990,15 @@ Features · https://react-rtekit.vercel.app/react-rtekit/localization/
 
 ```tsx
 import { useMemo, useState } from 'react';
-import { RichTextEditor, de, en, es, hu, pseudo, type RteLocalization } from 'react-rtekit';
+import {
+  RichTextEditor,
+  de,
+  en,
+  es,
+  hu,
+  pseudo,
+  type RteLocalization,
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 
 /**
@@ -5168,7 +5191,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/performance/
 
 ```tsx
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance } from '@kingtech/react-rtekit';
 import { buildLargeDocument } from '../../fixtures';
 
 /**
@@ -5353,7 +5376,7 @@ Features · https://react-rtekit.vercel.app/react-rtekit/forms/
 ```tsx
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { RteField } from 'react-rtekit-rhf';
+import { RteField } from '@kingtech/react-rtekit-rhf';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -5625,7 +5648,7 @@ The large case: headings, images, tables, autosave and a full-height field, with
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor, type ChangeMeta, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type ChangeMeta, type EditorValue } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -5738,7 +5761,7 @@ import {
   htmlToDocument,
   isEmptyHtml,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { FIXED_BUGS } from './fixed-bugs';
 import { CodeBlock } from '../../components/CodeBlock';
@@ -6065,8 +6088,8 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/rich-text-editor/
 ## Import
 
 ```ts
-import { RichTextEditor } from 'react-rtekit';
-import { RichTextEditorProps } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RichTextEditorProps } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6224,8 +6247,8 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/rte-content-view/
 ## Import
 
 ```ts
-import { RteContentView } from 'react-rtekit/view';
-import { RteContentViewProps } from 'react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
+import { RteContentViewProps } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6277,16 +6300,16 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/composable-parts/
 ## Import
 
 ```ts
-import { Rte } from 'react-rtekit';
-import { RteContent } from 'react-rtekit';
-import { RteCounter } from 'react-rtekit';
-import { RteErrorText } from 'react-rtekit';
-import { RteFooter } from 'react-rtekit';
-import { RteHelperText } from 'react-rtekit';
-import { RteLabel } from 'react-rtekit';
-import { RtePortals } from 'react-rtekit';
-import { RteRoot } from 'react-rtekit';
-import { RteToolbar } from 'react-rtekit';
+import { Rte } from '@kingtech/react-rtekit';
+import { RteContent } from '@kingtech/react-rtekit';
+import { RteCounter } from '@kingtech/react-rtekit';
+import { RteErrorText } from '@kingtech/react-rtekit';
+import { RteFooter } from '@kingtech/react-rtekit';
+import { RteHelperText } from '@kingtech/react-rtekit';
+import { RteLabel } from '@kingtech/react-rtekit';
+import { RtePortals } from '@kingtech/react-rtekit';
+import { RteRoot } from '@kingtech/react-rtekit';
+import { RteToolbar } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6393,9 +6416,9 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/providers/
 ## Import
 
 ```ts
-import { RteDefaultsProvider } from 'react-rtekit';
-import { RteLocaleProvider } from 'react-rtekit';
-import { RteThemeProvider } from 'react-rtekit';
+import { RteDefaultsProvider } from '@kingtech/react-rtekit';
+import { RteLocaleProvider } from '@kingtech/react-rtekit';
+import { RteThemeProvider } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6442,8 +6465,8 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/use-editor/
 ## Import
 
 ```ts
-import { UseEditorOptions } from 'react-rtekit';
-import { useEditor } from 'react-rtekit';
+import { UseEditorOptions } from '@kingtech/react-rtekit';
+import { useEditor } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6609,20 +6632,20 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/editor-hooks/
 ## Import
 
 ```ts
-import { useCharacterCount } from 'react-rtekit';
-import { useCommand } from 'react-rtekit';
-import { useEditorContext } from 'react-rtekit';
-import { useEditorState } from 'react-rtekit';
-import { useFormatState } from 'react-rtekit';
-import { useIsEmpty } from 'react-rtekit';
-import { useIsFocused } from 'react-rtekit';
-import { useLocalization } from 'react-rtekit';
-import { useRteConfig } from 'react-rtekit';
-import { useRteDefaults } from 'react-rtekit';
-import { useRteSlots } from 'react-rtekit';
-import { useRteTheme } from 'react-rtekit';
-import { useUpload } from 'react-rtekit';
-import { useValidationError } from 'react-rtekit';
+import { useCharacterCount } from '@kingtech/react-rtekit';
+import { useCommand } from '@kingtech/react-rtekit';
+import { useEditorContext } from '@kingtech/react-rtekit';
+import { useEditorState } from '@kingtech/react-rtekit';
+import { useFormatState } from '@kingtech/react-rtekit';
+import { useIsEmpty } from '@kingtech/react-rtekit';
+import { useIsFocused } from '@kingtech/react-rtekit';
+import { useLocalization } from '@kingtech/react-rtekit';
+import { useRteConfig } from '@kingtech/react-rtekit';
+import { useRteDefaults } from '@kingtech/react-rtekit';
+import { useRteSlots } from '@kingtech/react-rtekit';
+import { useRteTheme } from '@kingtech/react-rtekit';
+import { useUpload } from '@kingtech/react-rtekit';
+import { useValidationError } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6755,7 +6778,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/editor-instance/
 ## Import
 
 ```ts
-import { EditorInstance } from 'react-rtekit';
+import { EditorInstance } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -6836,7 +6859,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/commands/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -6922,7 +6945,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/handlers/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -6973,13 +6996,13 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/serialization/
 ## Import
 
 ```ts
-import { documentToHtml } from 'react-rtekit';
-import { documentToMarkdown } from 'react-rtekit';
-import { documentToText } from 'react-rtekit';
-import { htmlToDocument } from 'react-rtekit';
-import { isEmptyHtml } from 'react-rtekit';
-import { markdownToDocument } from 'react-rtekit';
-import { markdownToHtml } from 'react-rtekit/core';
+import { documentToHtml } from '@kingtech/react-rtekit';
+import { documentToMarkdown } from '@kingtech/react-rtekit';
+import { documentToText } from '@kingtech/react-rtekit';
+import { htmlToDocument } from '@kingtech/react-rtekit';
+import { isEmptyHtml } from '@kingtech/react-rtekit';
+import { markdownToDocument } from '@kingtech/react-rtekit';
+import { markdownToHtml } from '@kingtech/react-rtekit/core';
 ```
 
 ## Options
@@ -7064,12 +7087,12 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/sanitize/
 ## Import
 
 ```ts
-import { checkUrl } from 'react-rtekit/core';
-import { getProfile } from 'react-rtekit/core';
-import { mergeSanitizeConfig } from 'react-rtekit/core';
-import { normalizeUrl } from 'react-rtekit';
-import { resolveSanitizeConfig } from 'react-rtekit/core';
-import { sanitizeHtml } from 'react-rtekit';
+import { checkUrl } from '@kingtech/react-rtekit/core';
+import { getProfile } from '@kingtech/react-rtekit/core';
+import { mergeSanitizeConfig } from '@kingtech/react-rtekit/core';
+import { normalizeUrl } from '@kingtech/react-rtekit';
+import { resolveSanitizeConfig } from '@kingtech/react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -7144,12 +7167,12 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/plugin-api/
 ## Import
 
 ```ts
-import { createToolbarItem } from 'react-rtekit';
-import { definePlugin } from 'react-rtekit';
-import { featuresOf } from 'react-rtekit';
-import { presets } from 'react-rtekit';
-import { resolvePluginOrder } from 'react-rtekit';
-import { resolvePlugins } from 'react-rtekit';
+import { createToolbarItem } from '@kingtech/react-rtekit';
+import { definePlugin } from '@kingtech/react-rtekit';
+import { featuresOf } from '@kingtech/react-rtekit';
+import { presets } from '@kingtech/react-rtekit';
+import { resolvePluginOrder } from '@kingtech/react-rtekit';
+import { resolvePlugins } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -7222,13 +7245,13 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/theme-api/
 ## Import
 
 ```ts
-import { borderedTheme } from 'react-rtekit';
-import { classicTheme } from 'react-rtekit';
-import { compactTheme } from 'react-rtekit';
-import { createTheme } from 'react-rtekit';
-import { darkTheme } from 'react-rtekit';
-import { lightTheme } from 'react-rtekit';
-import { themes } from 'react-rtekit';
+import { borderedTheme } from '@kingtech/react-rtekit';
+import { classicTheme } from '@kingtech/react-rtekit';
+import { compactTheme } from '@kingtech/react-rtekit';
+import { createTheme } from '@kingtech/react-rtekit';
+import { darkTheme } from '@kingtech/react-rtekit';
+import { lightTheme } from '@kingtech/react-rtekit';
+import { themes } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -7312,7 +7335,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/slots/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7361,7 +7384,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/toolbar-items/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7432,7 +7455,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/theme-tokens/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7575,7 +7598,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/icons/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7656,7 +7679,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/localization-keys/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7839,7 +7862,7 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/plugins/
 ## Import
 
 ```ts
-import { meta } from 'react-rtekit/meta';
+import { meta } from '@kingtech/react-rtekit/meta';
 ```
 
 ## Options
@@ -7939,25 +7962,25 @@ Reference · https://react-rtekit.vercel.app/react-rtekit/api/types/
 ## Import
 
 ```ts
-import { ChangeMeta } from 'react-rtekit';
-import { CommandId } from 'react-rtekit';
-import { EditorDocument } from 'react-rtekit';
-import { EditorValue } from 'react-rtekit';
-import { FindOptions } from 'react-rtekit';
-import { FormatState } from 'react-rtekit';
-import { ImageAttrs } from 'react-rtekit';
-import { LinkAttrs } from 'react-rtekit';
-import { RteHandlers } from 'react-rtekit';
-import { RteIcons } from 'react-rtekit';
-import { RteLocalization } from 'react-rtekit';
-import { RtePlugin } from 'react-rtekit';
-import { RteSlots } from 'react-rtekit';
-import { RteTheme } from 'react-rtekit';
-import { SanitizeConfig } from 'react-rtekit';
-import { SanitizeProfileName } from 'react-rtekit';
-import { TableOptions } from 'react-rtekit';
-import { ToolbarItemSpec } from 'react-rtekit';
-import { UploadHandler } from 'react-rtekit';
+import { ChangeMeta } from '@kingtech/react-rtekit';
+import { CommandId } from '@kingtech/react-rtekit';
+import { EditorDocument } from '@kingtech/react-rtekit';
+import { EditorValue } from '@kingtech/react-rtekit';
+import { FindOptions } from '@kingtech/react-rtekit';
+import { FormatState } from '@kingtech/react-rtekit';
+import { ImageAttrs } from '@kingtech/react-rtekit';
+import { LinkAttrs } from '@kingtech/react-rtekit';
+import { RteHandlers } from '@kingtech/react-rtekit';
+import { RteIcons } from '@kingtech/react-rtekit';
+import { RteLocalization } from '@kingtech/react-rtekit';
+import { RtePlugin } from '@kingtech/react-rtekit';
+import { RteSlots } from '@kingtech/react-rtekit';
+import { RteTheme } from '@kingtech/react-rtekit';
+import { SanitizeConfig } from '@kingtech/react-rtekit';
+import { SanitizeProfileName } from '@kingtech/react-rtekit';
+import { TableOptions } from '@kingtech/react-rtekit';
+import { ToolbarItemSpec } from '@kingtech/react-rtekit';
+import { UploadHandler } from '@kingtech/react-rtekit';
 ```
 
 ## Options
@@ -8325,7 +8348,7 @@ A theme is a plain object of tokens that becomes CSS custom properties on the ed
 `createTheme` merges your overrides onto a base, so you change what you care about and inherit the rest.
 
 ```tsx
-import { createTheme, lightTheme } from 'react-rtekit';
+import { createTheme, lightTheme } from '@kingtech/react-rtekit';
 
 const brand = createTheme(lightTheme, {
   color: { accent: '#6C4BF4' },
@@ -8339,7 +8362,7 @@ const brand = createTheme(lightTheme, {
 Every shipped theme meets WCAG AA and a test enforces it. A theme you derive does not inherit that, so `meetsContrastAA` is exported:
 
 ```tsx
-import { meetsContrastAA } from 'react-rtekit';
+import { meetsContrastAA } from '@kingtech/react-rtekit';
 
 meetsContrastAA(brand.color.text, brand.color.surface); // true
 ```
@@ -8412,7 +8435,7 @@ The toolbar takes an array of arrays: each inner array is a group, and the gaps 
 `createToolbarItem` builds one in the same shape the built-ins use, so nothing about them is privileged:
 
 ```tsx
-import { createToolbarItem } from 'react-rtekit';
+import { createToolbarItem } from '@kingtech/react-rtekit';
 
 const highlight = createToolbarItem({
   name: 'highlight',
@@ -8465,14 +8488,14 @@ The prose inside the editor and the prose on a page that renders stored HTML hav
 That is why content styling is a separate stylesheet:
 
 ```ts
-import 'react-rtekit/content.css';   // the prose, on its own
-import 'react-rtekit/styles.css';    // everything, including the above
+import '@kingtech/react-rtekit/content.css';   // the prose, on its own
+import '@kingtech/react-rtekit/styles.css';    // everything, including the above
 ```
 
 Render stored HTML with the same styling using [RteContentView](https://react-rtekit.vercel.app/react-rtekit/content-view/), which sanitizes and applies the same classes:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 <RteContentView value={storedHtml} />
 ```
@@ -8635,7 +8658,7 @@ No profile and no configuration allows any of these:
 Sanitize again on the server. The client can be bypassed, and a determined caller can POST whatever it likes to your endpoint. `sanitizeHtml` is exported for exactly that:
 
 ```ts
-import { sanitizeHtml } from 'react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit/core';
 
 const safe = sanitizeHtml(untrusted, { sanitize: 'standard' });
 ```
@@ -8656,7 +8679,7 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 |---|---|
 | `useEditor` — headless | 43 kB |
 | `RichTextEditor` — everything | 72 kB |
-| `react-rtekit/core` — no React | 19 kB |
+| `@kingtech/react-rtekit/core` — no React | 19 kB |
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |
 
@@ -8770,7 +8793,7 @@ Guides · https://react-rtekit.vercel.app/react-rtekit/guides/localization/
 Five ship — `en`, `hu`, `de`, `es` and `pseudo` — each covering all 153 keys:
 
 ```tsx
-import { RichTextEditor, de } from 'react-rtekit';
+import { RichTextEditor, de } from '@kingtech/react-rtekit';
 
 <RichTextEditor localization={de} />
 ```
@@ -8813,7 +8836,7 @@ The engine needs a DOM, so the editor itself is a client component. What the ser
 
 ```tsx
 'use client';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 ```
 
 ## The rule that matters
@@ -8831,7 +8854,7 @@ An HTML value can be pre-rendered. JSON and Markdown need a converter the server
 If a page only displays content, do not mount an editor at all:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 <RteContentView value={storedHtml} />
 ```
@@ -8853,7 +8876,7 @@ Guides · https://react-rtekit.vercel.app/react-rtekit/guides/writing-a-plugin/
 A plugin is an object. `definePlugin` is an identity function that exists for the inference:
 
 ```tsx
-import { definePlugin } from 'react-rtekit';
+import { definePlugin } from '@kingtech/react-rtekit';
 
 export const highlight = definePlugin({
   name: 'highlight',
@@ -8884,7 +8907,7 @@ A `dependsOn` that names something absent produces a warning and still loads. A 
 Augment the catalogue so `editor.exec` knows about it:
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface CommandMap {
     toggleHighlight: void;
   }
@@ -8918,15 +8941,15 @@ Integrations · https://react-rtekit.vercel.app/react-rtekit/integrations/react-
 
 *Example: Validation with react-hook-form* — the same source as under "Forms".
 
-`react-rtekit-rhf` is a separate package so that a project not using React Hook Form does not pay for it:
+`@kingtech/react-rtekit-rhf` is a separate package so that a project not using React Hook Form does not pay for it:
 
 ```bash
-npm install react-rtekit-rhf
+npm install @kingtech/react-rtekit-rhf
 ```
 
 ```tsx
 import { useForm } from 'react-hook-form';
-import { RhfRichTextEditor } from 'react-rtekit-rhf';
+import { RhfRichTextEditor } from '@kingtech/react-rtekit-rhf';
 
 const { control, handleSubmit } = useForm({ defaultValues: { body: '' } });
 
@@ -8956,7 +8979,7 @@ Integrations · https://react-rtekit.vercel.app/react-rtekit/integrations/formik
 
 ```tsx
 import { useField, useFormikContext, Formik, Form } from 'formik';
-import { RichTextEditor, isEmptyHtml, countText } from 'react-rtekit';
+import { RichTextEditor, isEmptyHtml, countText } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**
@@ -9072,7 +9095,7 @@ There is no Formik adapter package — the editor wires to a field directly:
 
 ```tsx
 import { useField } from 'formik';
-import { RichTextEditor, isEmptyHtml } from 'react-rtekit';
+import { RichTextEditor, isEmptyHtml } from '@kingtech/react-rtekit';
 
 function BodyField() {
   const [field, meta, helpers] = useField('body');
@@ -9112,7 +9135,7 @@ The editor is a client component: the engine needs a DOM.
 'use client';
 
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 
 export function Body({ initial }: { initial: string }) {
   const [value, setValue] = useState(initial);
@@ -9123,7 +9146,7 @@ export function Body({ initial }: { initial: string }) {
 Import the stylesheet in the root layout:
 
 ```tsx
-import 'react-rtekit/styles.css';
+import '@kingtech/react-rtekit/styles.css';
 ```
 
 ## Displaying content in a server component
@@ -9131,7 +9154,7 @@ import 'react-rtekit/styles.css';
 A page that only renders stored HTML does not need an editor, or a client boundary:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 export default async function Page() {
   const post = await getPost();
@@ -9154,7 +9177,7 @@ Integrations · https://react-rtekit.vercel.app/react-rtekit/integrations/remix/
 ```tsx
 import { useLoaderData, Form } from '@remix-run/react';
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 
 export default function Edit() {
   const { body } = useLoaderData<typeof loader>();
@@ -9175,7 +9198,7 @@ The hidden input is what makes a progressive-enhancement submission carry the co
 ## Sanitize in the action
 
 ```ts
-import { sanitizeHtml } from 'react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit/core';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -9185,7 +9208,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 ```
 
-`react-rtekit/core` has no React and no engine, so importing it in a server action costs about 19 kB rather than the whole component.
+`@kingtech/react-rtekit/core` has no React and no engine, so importing it in a server action costs about 19 kB rather than the whole component.
 
 ---
 
@@ -9204,7 +9227,7 @@ import {
   type RteSlots,
   type SlotBaseProps,
   type ToolbarButtonSlotProps,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import './utilities.css';
 
 /**
@@ -9348,7 +9371,7 @@ A slot component has to forward its ref and spread the props it is given: the to
 Apply `prose` to the content area, and turn off the package's own content styling to avoid two opinions about a heading:
 
 ```ts
-import 'react-rtekit/base.css';   // chrome only, no content styles
+import '@kingtech/react-rtekit/base.css';   // chrome only, no content styles
 ```
 
 ## Dark mode
@@ -9378,7 +9401,7 @@ The package is written in TypeScript with `strict` on and ships declarations for
 Augment the catalogue, and `editor.exec` accepts it with the right payload:
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface CommandMap {
     toggleHighlight: void;
     insertCallout: { variant: 'info' | 'warning' };
@@ -9389,7 +9412,7 @@ declare module 'react-rtekit' {
 ## Adding a slot
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface RteSlots {
     CalloutChrome: SlotComponent<{ variant: string }>;
   }

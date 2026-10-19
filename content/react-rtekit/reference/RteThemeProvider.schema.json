@@ -2,7 +2,7 @@
   "name": "RteThemeProvider",
   "kind": "function",
   "imports": [
-    "import { RteThemeProvider } from 'react-rtekit';"
+    "import { RteThemeProvider } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/providers.tsx",

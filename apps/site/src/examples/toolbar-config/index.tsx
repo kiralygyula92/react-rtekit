@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from 'react-rtekit';
+import { RichTextEditor, type ToolbarConfig, type ToolbarItemSpec } from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 
 /**

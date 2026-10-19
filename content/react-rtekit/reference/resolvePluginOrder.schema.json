@@ -2,7 +2,7 @@
   "name": "resolvePluginOrder",
   "kind": "function",
   "imports": [
-    "import { resolvePluginOrder } from 'react-rtekit';"
+    "import { resolvePluginOrder } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/define.ts",

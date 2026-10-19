@@ -28,7 +28,7 @@
     "changelog": "/react-rtekit/discover-more/changelog/",
     "roadmap": "/react-rtekit/discover-more/roadmap/",
     "source": "https://github.com/kiralygyula92/react-rtekit/tree/main/packages/react-rtekit/src",
-    "npm": "https://www.npmjs.com/package/react-rtekit"
+    "npm": "https://www.npmjs.com/package/@kingtech/react-rtekit"
   },
   "taxonomy": [
     "Core features",
@@ -69,6 +69,6 @@
   "referenceSource": {
     "kind": "typescript-declarations",
     "entry": "packages/react-rtekit/src/index.tsx",
-    "command": "pnpm --filter react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs"
+    "command": "pnpm --filter @kingtech/react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs"
   }
 }

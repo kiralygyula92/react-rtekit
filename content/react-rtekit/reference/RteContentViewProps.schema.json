@@ -2,7 +2,7 @@
   "name": "RteContentViewProps",
   "kind": "interface",
   "imports": [
-    "import { RteContentViewProps } from 'react-rtekit';"
+    "import { RteContentViewProps } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "value": {

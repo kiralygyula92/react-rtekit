@@ -2,7 +2,7 @@
   "name": "RtePortals",
   "kind": "function",
   "imports": [
-    "import { RtePortals } from 'react-rtekit';"
+    "import { RtePortals } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

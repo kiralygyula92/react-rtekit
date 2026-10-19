@@ -2,7 +2,7 @@
   "name": "RteHelperText",
   "kind": "function",
   "imports": [
-    "import { RteHelperText } from 'react-rtekit';"
+    "import { RteHelperText } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

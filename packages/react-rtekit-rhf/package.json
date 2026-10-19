@@ -1,5 +1,5 @@
 {
-  "name": "react-rtekit-rhf",
+  "name": "@kingtech/react-rtekit-rhf",
   "version": "1.0.0",
   "description": "react-hook-form adapter for react-rtekit: <RteField> with isEmpty-aware required validation.",
   "keywords": [
@@ -10,7 +10,7 @@
     "form"
   ],
   "license": "MIT",
-  "author": "kiralygyula92 (https://github.com/kiralygyula92)",
+  "author": "Gyula Kiraly (https://github.com/kiralygyula92)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiralygyula92/react-rtekit.git",
@@ -24,9 +24,7 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE"
+    "CHANGELOG.md"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -50,16 +48,18 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "size": "size-limit",
     "publint": "publint",
-    "attw": "attw --pack . --profile node16"
+    "attw": "attw --pack . --profile node16",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@kingtech/react-rtekit": "workspace:^",
     "react": ">=18.2",
     "react-dom": ">=18.2",
-    "react-hook-form": ">=7.45",
-    "react-rtekit": "workspace:^"
+    "react-hook-form": ">=7.45"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
+    "@kingtech/react-rtekit": "workspace:*",
     "@size-limit/preset-small-lib": "^11.2.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.0",
@@ -68,15 +68,10 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.89.0",
-    "react-rtekit": "workspace:*",
     "size-limit": "^11.2.0",
     "tsup": "^8.5.0"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }

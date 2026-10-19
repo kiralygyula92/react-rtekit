@@ -1,5 +1,11 @@
-import { classicTheme, borderedTheme, compactTheme, darkTheme, lightTheme } from 'react-rtekit';
-import type { RichTextEditorProps } from 'react-rtekit';
+import {
+  classicTheme,
+  borderedTheme,
+  compactTheme,
+  darkTheme,
+  lightTheme,
+} from '@kingtech/react-rtekit';
+import type { RichTextEditorProps } from '@kingtech/react-rtekit';
 import { PLAYGROUND_CONTROLS, type PlaygroundState } from './controls';
 
 /**
@@ -93,14 +99,14 @@ export function generateCode(state: PlaygroundState): string {
   if (localeName && localeName !== 'en') lines.push(`  localization={${localeName}}`);
 
   const imports = [
-    "import { RichTextEditor } from 'react-rtekit';",
-    "import 'react-rtekit/styles.css';",
+    "import { RichTextEditor } from '@kingtech/react-rtekit';",
+    "import '@kingtech/react-rtekit/styles.css';",
   ];
   if (themeName && themeName !== 'light') {
-    imports.splice(1, 0, `import { ${themeName}Theme } from 'react-rtekit';`);
+    imports.splice(1, 0, `import { ${themeName}Theme } from '@kingtech/react-rtekit';`);
   }
   if (localeName && localeName !== 'en') {
-    imports.splice(1, 0, `import { ${localeName} } from 'react-rtekit';`);
+    imports.splice(1, 0, `import { ${localeName} } from '@kingtech/react-rtekit';`);
   }
 
   const element =

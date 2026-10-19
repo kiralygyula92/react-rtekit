@@ -3,7 +3,7 @@ import { definePlugin } from '../core/plugins/define.js';
 /**
  * The inline-mark plugins.
  *
- * Each is a separate module export so `react-rtekit/plugins/marks` can be imported
+ * Each is a separate module export so `@kingtech/react-rtekit/plugins/marks` can be imported
  * piecemeal and a preset that leaves one out does not pay for it. The commands
  * themselves live in the engine adapter; a plugin's job is to declare the feature, its
  * keymap and its sanitizer rules.

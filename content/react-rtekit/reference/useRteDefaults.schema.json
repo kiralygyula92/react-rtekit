@@ -2,7 +2,7 @@
   "name": "useRteDefaults",
   "kind": "function",
   "imports": [
-    "import { useRteDefaults } from 'react-rtekit';"
+    "import { useRteDefaults } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

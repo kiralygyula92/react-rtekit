@@ -38,7 +38,13 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom', 'react/jsx-runtime', 'react-hook-form', 'react-rtekit'],
+  external: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    'react-hook-form',
+    '@kingtech/react-rtekit',
+  ],
   esbuildOptions(options) {
     options.jsx = 'automatic';
   },

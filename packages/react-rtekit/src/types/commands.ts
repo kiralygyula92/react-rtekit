@@ -40,7 +40,7 @@ export interface TableOptions {
  *
  * @example
  * ```ts
- * declare module 'react-rtekit' {
+ * declare module '@kingtech/react-rtekit' {
  *   interface CommandRegistry {
  *     insertSignature: { name?: string };
  *   }

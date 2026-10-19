@@ -2,7 +2,7 @@
   "name": "useFormatState",
   "kind": "function",
   "imports": [
-    "import { useFormatState } from 'react-rtekit';"
+    "import { useFormatState } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

@@ -2,7 +2,7 @@
   "name": "useIsFocused",
   "kind": "function",
   "imports": [
-    "import { useIsFocused } from 'react-rtekit';"
+    "import { useIsFocused } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

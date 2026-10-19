@@ -1,5 +1,5 @@
 /**
- * `react-rtekit`: an accessible, themeable rich-text editor for React.
+ * `@kingtech/react-rtekit`: an accessible, themeable rich-text editor for React.
  *
  * @module
  */

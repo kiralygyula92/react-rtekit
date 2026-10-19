@@ -5,7 +5,7 @@ import {
   htmlToDocument,
   plainTextAlternative,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { DEFAULT_EMAIL_BODY } from '../../fixtures';
 import { CodeBlock } from '../../components/CodeBlock';
 

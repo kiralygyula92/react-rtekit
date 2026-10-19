@@ -8,7 +8,7 @@ import {
   useFormatState,
   useIsEmpty,
   type CommandId,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 
 /**
  * `useEditor` with a UI built from nothing.

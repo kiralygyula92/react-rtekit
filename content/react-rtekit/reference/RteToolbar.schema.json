@@ -2,7 +2,7 @@
   "name": "RteToolbar",
   "kind": "function",
   "imports": [
-    "import { RteToolbar } from 'react-rtekit';"
+    "import { RteToolbar } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

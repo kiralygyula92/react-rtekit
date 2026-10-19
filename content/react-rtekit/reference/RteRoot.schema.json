@@ -2,7 +2,7 @@
   "name": "RteRoot",
   "kind": "function",
   "imports": [
-    "import { RteRoot } from 'react-rtekit';"
+    "import { RteRoot } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

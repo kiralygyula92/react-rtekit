@@ -17,7 +17,7 @@ Every build checks bundle budgets and a separate Playwright config measures inte
 |---|---|
 | `useEditor` — headless | 43 kB |
 | `RichTextEditor` — everything | 72 kB |
-| `react-rtekit/core` — no React | 19 kB |
+| `@kingtech/react-rtekit/core` — no React | 19 kB |
 | `sanitizeHtml` alone | 7 kB |
 | `styles.css` | 9 kB |
 

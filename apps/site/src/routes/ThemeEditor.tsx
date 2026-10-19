@@ -9,7 +9,7 @@ import {
   meetsContrastAA,
   themeToCssVars,
   type ResolvedRteTheme,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../components/CodeBlock';
 
 /**
@@ -186,7 +186,7 @@ export function ThemeEditor() {
 
         <h2>Export</h2>
         <CodeBlock label="createTheme call" testId="theme-export-js">
-          {`import { createTheme, ${base}Theme } from 'react-rtekit';\n\nexport const myTheme = createTheme(${base}Theme, ${JSON.stringify(
+          {`import { createTheme, ${base}Theme } from '@kingtech/react-rtekit';\n\nexport const myTheme = createTheme(${base}Theme, ${JSON.stringify(
             groupOverrides(overrides),
             null,
             2,

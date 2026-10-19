@@ -24,8 +24,8 @@ section: reference
 ## Import
 
 ```ts
-import { UseEditorOptions } from 'react-rtekit';
-import { useEditor } from 'react-rtekit';
+import { UseEditorOptions } from '@kingtech/react-rtekit';
+import { useEditor } from '@kingtech/react-rtekit';
 ```
 
 ## Options

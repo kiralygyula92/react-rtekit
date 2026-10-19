@@ -2,7 +2,7 @@
   "name": "normalizeUrl",
   "kind": "function",
   "imports": [
-    "import { normalizeUrl } from 'react-rtekit';"
+    "import { normalizeUrl } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/sanitize/url.ts",

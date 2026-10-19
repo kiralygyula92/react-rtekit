@@ -2,7 +2,7 @@
   "name": "useRteSlots",
   "kind": "function",
   "imports": [
-    "import { useRteSlots } from 'react-rtekit';"
+    "import { useRteSlots } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

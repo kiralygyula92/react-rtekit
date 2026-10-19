@@ -2,7 +2,7 @@
   "name": "RteTheme",
   "kind": "interface",
   "imports": [
-    "import { RteTheme } from 'react-rtekit';"
+    "import { RteTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "name": {

@@ -2,7 +2,7 @@
   "name": "ImageAttrs",
   "kind": "interface",
   "imports": [
-    "import { ImageAttrs } from 'react-rtekit';"
+    "import { ImageAttrs } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "src": {

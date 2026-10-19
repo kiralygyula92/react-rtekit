@@ -17,7 +17,7 @@ There is no Formik adapter package — the editor wires to a field directly:
 
 ```tsx
 import { useField } from 'formik';
-import { RichTextEditor, isEmptyHtml } from 'react-rtekit';
+import { RichTextEditor, isEmptyHtml } from '@kingtech/react-rtekit';
 
 function BodyField() {
   const [field, meta, helpers] = useField('body');

@@ -2,7 +2,7 @@
   "name": "lightTheme",
   "kind": "variable",
   "imports": [
-    "import { lightTheme } from 'react-rtekit';"
+    "import { lightTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

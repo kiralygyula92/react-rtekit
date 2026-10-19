@@ -2,7 +2,7 @@
   "name": "RteSlots",
   "kind": "interface",
   "imports": [
-    "import { RteSlots } from 'react-rtekit';"
+    "import { RteSlots } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "ToolbarSeparator": {

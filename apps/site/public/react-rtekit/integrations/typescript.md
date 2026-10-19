@@ -24,7 +24,7 @@ The package is written in TypeScript with `strict` on and ships declarations for
 Augment the catalogue, and `editor.exec` accepts it with the right payload:
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface CommandMap {
     toggleHighlight: void;
     insertCallout: { variant: 'info' | 'warning' };
@@ -35,7 +35,7 @@ declare module 'react-rtekit' {
 ## Adding a slot
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface RteSlots {
     CalloutChrome: SlotComponent<{ variant: string }>;
   }

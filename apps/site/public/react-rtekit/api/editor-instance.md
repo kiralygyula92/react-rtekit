@@ -34,7 +34,7 @@ section: reference
 ## Import
 
 ```ts
-import { EditorInstance } from 'react-rtekit';
+import { EditorInstance } from '@kingtech/react-rtekit';
 ```
 
 ## Options

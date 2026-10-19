@@ -2,7 +2,7 @@
   "name": "RtePlugin",
   "kind": "interface",
   "imports": [
-    "import { RtePlugin } from 'react-rtekit';"
+    "import { RtePlugin } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "name": {

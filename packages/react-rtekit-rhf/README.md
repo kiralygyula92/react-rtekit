@@ -1,15 +1,15 @@
 # react-rtekit-rhf
 
 The [react-hook-form](https://react-hook-form.com) adapter for
-[`react-rtekit`](https://www.npmjs.com/package/react-rtekit).
+[`@kingtech/react-rtekit`](https://www.npmjs.com/package/@kingtech/react-rtekit).
 
 ```bash
-pnpm add react-rtekit react-rtekit-rhf
+npm install @kingtech/react-rtekit @kingtech/react-rtekit-rhf
 ```
 
 ```tsx
 import { useForm } from 'react-hook-form';
-import { RteField } from 'react-rtekit-rhf';
+import { RteField } from '@kingtech/react-rtekit-rhf';
 
 function EmailForm() {
   const { control, handleSubmit } = useForm({ defaultValues: { message: '' } });
@@ -33,7 +33,7 @@ function EmailForm() {
 
 ## Why it is a separate package
 
-`react-rtekit` has no form-library dependency, and that is deliberate: the previous
+`@kingtech/react-rtekit` has no form-library dependency, and that is deliberate: the previous
 implementation this library replaces took a required `setValue` prop from
 react-hook-form and could not be used anywhere else. Binding the editor to a form is
 about twenty lines — the

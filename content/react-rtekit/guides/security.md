@@ -47,7 +47,7 @@ No profile and no configuration allows any of these:
 Sanitize again on the server. The client can be bypassed, and a determined caller can POST whatever it likes to your endpoint. `sanitizeHtml` is exported for exactly that:
 
 ```ts
-import { sanitizeHtml } from 'react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit/core';
 
 const safe = sanitizeHtml(untrusted, { sanitize: 'standard' });
 ```
