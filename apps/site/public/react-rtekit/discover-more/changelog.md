@@ -13,6 +13,12 @@ Every user-facing change is recorded with a changeset and released under [Semant
 
 The full changelog is kept in the repository as [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md).
 
+## 1.0.1 (2026-10-19)
+
+### Patch Changes
+
+- Publish from GitHub Actions with provenance. The README no longer mentions the react-hook-form adapter, which was never published. The library's code and API are unchanged.
+
 ## 1.0.0
 
 The initial release. Everything listed under [All features](/react-rtekit/all-features/) ships in it.

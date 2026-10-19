@@ -1,5 +1,11 @@
 # react-rtekit
 
+## 1.0.1
+
+### Patch Changes
+
+- Publish from GitHub Actions with provenance. The README no longer mentions the react-hook-form adapter, which was never published. The library's code and API are unchanged.
+
 ## 1.0.0
 
 The first public release.
