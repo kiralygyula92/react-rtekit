@@ -26,12 +26,12 @@ section: reference
 ## Import
 
 ```ts
-import { createToolbarItem } from 'react-rtekit';
-import { definePlugin } from 'react-rtekit';
-import { featuresOf } from 'react-rtekit';
-import { presets } from 'react-rtekit';
-import { resolvePluginOrder } from 'react-rtekit';
-import { resolvePlugins } from 'react-rtekit';
+import { createToolbarItem } from '@kingtech/react-rtekit';
+import { definePlugin } from '@kingtech/react-rtekit';
+import { featuresOf } from '@kingtech/react-rtekit';
+import { presets } from '@kingtech/react-rtekit';
+import { resolvePluginOrder } from '@kingtech/react-rtekit';
+import { resolvePlugins } from '@kingtech/react-rtekit';
 ```
 
 ## Options

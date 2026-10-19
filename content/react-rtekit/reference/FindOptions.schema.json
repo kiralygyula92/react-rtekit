@@ -2,7 +2,7 @@
   "name": "FindOptions",
   "kind": "interface",
   "imports": [
-    "import { FindOptions } from 'react-rtekit';"
+    "import { FindOptions } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "matchCase": {

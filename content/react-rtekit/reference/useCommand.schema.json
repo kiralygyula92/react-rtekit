@@ -2,7 +2,7 @@
   "name": "useCommand",
   "kind": "function",
   "imports": [
-    "import { useCommand } from 'react-rtekit';"
+    "import { useCommand } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

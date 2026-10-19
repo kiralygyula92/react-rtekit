@@ -2,7 +2,7 @@
   "name": "EditorInstance",
   "kind": "interface",
   "imports": [
-    "import { EditorInstance } from 'react-rtekit';"
+    "import { EditorInstance } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "getHTML": {

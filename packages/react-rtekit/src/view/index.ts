@@ -1,5 +1,5 @@
 /**
- * `react-rtekit/view` — the read-only renderer.
+ * `@kingtech/react-rtekit/view` — the read-only renderer.
  *
  * Renders sanitized stored content with the same content styles as the editor and
  * without loading an engine, which is what previews and list pages should use

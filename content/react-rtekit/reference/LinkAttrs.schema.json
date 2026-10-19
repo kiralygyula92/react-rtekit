@@ -2,7 +2,7 @@
   "name": "LinkAttrs",
   "kind": "interface",
   "imports": [
-    "import { LinkAttrs } from 'react-rtekit';"
+    "import { LinkAttrs } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "href": {

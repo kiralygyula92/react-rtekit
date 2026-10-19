@@ -6,7 +6,7 @@ import {
   type ColorScheme,
   type Density,
   type ResolvedRteTheme,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 

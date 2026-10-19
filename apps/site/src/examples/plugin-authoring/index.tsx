@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RichTextEditor, createToolbarItem, definePlugin } from 'react-rtekit';
+import { RichTextEditor, createToolbarItem, definePlugin } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 import source from './highlight?raw';
 import { highlight } from './highlight';

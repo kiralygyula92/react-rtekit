@@ -2,7 +2,7 @@
   "name": "RteErrorText",
   "kind": "variable",
   "imports": [
-    "import { RteErrorText } from 'react-rtekit';"
+    "import { RteErrorText } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

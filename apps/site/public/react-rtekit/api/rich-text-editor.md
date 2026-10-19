@@ -46,8 +46,8 @@ section: reference
 ## Import
 
 ```ts
-import { RichTextEditor } from 'react-rtekit';
-import { RichTextEditorProps } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import { RichTextEditorProps } from '@kingtech/react-rtekit';
 ```
 
 ## Options

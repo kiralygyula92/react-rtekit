@@ -423,7 +423,7 @@ export function RteFooter({ children }: { children?: ReactNode }) {
  *
  * @example
  * ```tsx
- * import { Rte } from 'react-rtekit';
+ * import { Rte } from '@kingtech/react-rtekit';
  * <Rte.Root editor={editor}><Rte.Content /></Rte.Root>
  * ```
  */

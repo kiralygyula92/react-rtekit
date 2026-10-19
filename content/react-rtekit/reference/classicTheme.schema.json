@@ -2,7 +2,7 @@
   "name": "classicTheme",
   "kind": "variable",
   "imports": [
-    "import { classicTheme } from 'react-rtekit';"
+    "import { classicTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

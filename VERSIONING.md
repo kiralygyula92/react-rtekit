@@ -1,6 +1,6 @@
 # Versioning policy
 
-`react-rtekit` follows [semantic versioning](https://semver.org/). This document says
+`@kingtech/react-rtekit` follows [semantic versioning](https://semver.org/). This document says
 exactly what that covers, because "the public API" means something unusually wide for
 an editor: a rich-text field is styled by its class names, themed by its CSS variables,
 targeted in tests by its data attributes and translated through its message keys. All
@@ -77,8 +77,10 @@ months after the new major is released. See [SECURITY.md](SECURITY.md).
 ## Release process
 
 Every user-visible change carries a [changeset](https://github.com/changesets/changesets).
-Merging to `main` opens a version PR; merging that PR publishes to npm with
-[provenance](https://docs.npmjs.com/generating-provenance-statements) and creates a
-GitHub release. The per-package `CHANGELOG.md` files are generated from the changesets,
-so the release notes are written when the change is made rather than reconstructed
-afterwards.
+A release pull request applies the pending changesets, and a `v*` tag on the merged commit
+stages both packages on npm with
+[provenance](https://docs.npmjs.com/generating-provenance-statements); they go live once a
+maintainer approves them, and the GitHub release carries the changelog section. The
+per-package `CHANGELOG.md` files are generated from the changesets, so the release notes
+are written when the change is made rather than reconstructed afterwards. See
+[RELEASING.md](RELEASING.md).

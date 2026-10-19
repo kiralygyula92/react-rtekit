@@ -2,7 +2,7 @@
   "name": "UploadHandler",
   "kind": "type",
   "imports": [
-    "import { UploadHandler } from 'react-rtekit';"
+    "import { UploadHandler } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "types/config.ts",

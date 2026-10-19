@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RichTextEditor, type RteSlots } from 'react-rtekit';
+import { RichTextEditor, type RteSlots } from '@kingtech/react-rtekit';
 
 /**
  * Five replaced slots.

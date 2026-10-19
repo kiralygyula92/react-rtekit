@@ -31,7 +31,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: React, react-hook-form (for react-rtekit-rhf), bundler / framework, browser and OS.
+      description: React, react-hook-form (for @kingtech/react-rtekit-rhf), bundler / framework, browser and OS.
       placeholder: 'React 19.3, react-hook-form 7.88, Vite 7, Chrome 140 on macOS'
     validations:
       required: true

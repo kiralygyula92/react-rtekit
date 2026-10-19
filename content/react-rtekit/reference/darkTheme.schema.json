@@ -2,7 +2,7 @@
   "name": "darkTheme",
   "kind": "variable",
   "imports": [
-    "import { darkTheme } from 'react-rtekit';"
+    "import { darkTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

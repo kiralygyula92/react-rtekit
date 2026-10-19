@@ -2,7 +2,7 @@
   "name": "RichTextEditor",
   "kind": "function",
   "imports": [
-    "import { RichTextEditor } from 'react-rtekit';"
+    "import { RichTextEditor } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/RichTextEditor.tsx",

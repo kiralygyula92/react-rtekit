@@ -1,5 +1,13 @@
 import { useMemo, useState } from 'react';
-import { RichTextEditor, de, en, es, hu, pseudo, type RteLocalization } from 'react-rtekit';
+import {
+  RichTextEditor,
+  de,
+  en,
+  es,
+  hu,
+  pseudo,
+  type RteLocalization,
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 
 /**

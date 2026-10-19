@@ -2,7 +2,7 @@
   "name": "UseEditorOptions",
   "kind": "interface",
   "imports": [
-    "import { UseEditorOptions } from 'react-rtekit';"
+    "import { UseEditorOptions } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "enableBold": {

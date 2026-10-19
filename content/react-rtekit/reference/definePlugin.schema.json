@@ -2,7 +2,7 @@
   "name": "definePlugin",
   "kind": "function",
   "imports": [
-    "import { definePlugin } from 'react-rtekit';"
+    "import { definePlugin } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/define.ts",

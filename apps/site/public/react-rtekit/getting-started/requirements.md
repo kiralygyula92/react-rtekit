@@ -30,7 +30,7 @@ ESM and CommonJS, with TypeScript declarations for both. `publint` and `are-the-
 
 ## Verify
 
-If your bundler resolves `react-rtekit/styles.css`, the `exports` map is being read correctly.
+If your bundler resolves `@kingtech/react-rtekit/styles.css`, the `exports` map is being read correctly.
 
 ## Next steps
 

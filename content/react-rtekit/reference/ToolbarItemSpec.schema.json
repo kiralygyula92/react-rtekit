@@ -2,7 +2,7 @@
   "name": "ToolbarItemSpec",
   "kind": "interface",
   "imports": [
-    "import { ToolbarItemSpec } from 'react-rtekit';"
+    "import { ToolbarItemSpec } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "name": {

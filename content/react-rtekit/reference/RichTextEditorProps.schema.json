@@ -2,7 +2,7 @@
   "name": "RichTextEditorProps",
   "kind": "interface",
   "imports": [
-    "import { RichTextEditorProps } from 'react-rtekit';"
+    "import { RichTextEditorProps } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "enableBold": {

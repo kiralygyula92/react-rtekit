@@ -2,7 +2,7 @@
   "name": "isEmptyHtml",
   "kind": "function",
   "imports": [
-    "import { isEmptyHtml } from 'react-rtekit';"
+    "import { isEmptyHtml } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/serialize/from-html.ts",

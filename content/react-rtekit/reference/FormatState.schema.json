@@ -2,7 +2,7 @@
   "name": "FormatState",
   "kind": "interface",
   "imports": [
-    "import { FormatState } from 'react-rtekit';"
+    "import { FormatState } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "marks": {

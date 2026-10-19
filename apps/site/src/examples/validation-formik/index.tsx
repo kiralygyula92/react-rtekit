@@ -1,5 +1,5 @@
 import { useField, useFormikContext, Formik, Form } from 'formik';
-import { RichTextEditor, isEmptyHtml, countText } from 'react-rtekit';
+import { RichTextEditor, isEmptyHtml, countText } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

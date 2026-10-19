@@ -2,7 +2,7 @@
   "name": "RteCounter",
   "kind": "variable",
   "imports": [
-    "import { RteCounter } from 'react-rtekit';"
+    "import { RteCounter } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

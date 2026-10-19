@@ -2,7 +2,7 @@
   "name": "useEditor",
   "kind": "function",
   "imports": [
-    "import { useEditor } from 'react-rtekit';"
+    "import { useEditor } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/useEditor.ts",

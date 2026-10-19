@@ -13,7 +13,7 @@ import {
   type EditorInstance,
   type EditorValue,
   type FormatState,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { CodeBlock } from '../components/CodeBlock';
 import {
   PLAYGROUND_CONTROLS,

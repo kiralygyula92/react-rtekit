@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue, type UploadResult } from 'react-rtekit';
+import { RichTextEditor, type EditorValue, type UploadResult } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

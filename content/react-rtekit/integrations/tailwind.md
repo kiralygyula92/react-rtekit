@@ -37,7 +37,7 @@ A slot component has to forward its ref and spread the props it is given: the to
 Apply `prose` to the content area, and turn off the package's own content styling to avoid two opinions about a heading:
 
 ```ts
-import 'react-rtekit/base.css';   // chrome only, no content styles
+import '@kingtech/react-rtekit/base.css';   // chrome only, no content styles
 ```
 
 ## Dark mode

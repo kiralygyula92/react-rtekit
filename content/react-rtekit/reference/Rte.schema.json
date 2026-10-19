@@ -2,7 +2,7 @@
   "name": "Rte",
   "kind": "variable",
   "imports": [
-    "import { Rte } from 'react-rtekit';"
+    "import { Rte } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

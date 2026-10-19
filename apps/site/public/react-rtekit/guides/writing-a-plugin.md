@@ -18,7 +18,7 @@ plugin-authoring
 A plugin is an object. `definePlugin` is an identity function that exists for the inference:
 
 ```tsx
-import { definePlugin } from 'react-rtekit';
+import { definePlugin } from '@kingtech/react-rtekit';
 
 export const highlight = definePlugin({
   name: 'highlight',
@@ -49,7 +49,7 @@ A `dependsOn` that names something absent produces a warning and still loads. A 
 Augment the catalogue so `editor.exec` knows about it:
 
 ```ts
-declare module 'react-rtekit' {
+declare module '@kingtech/react-rtekit' {
   interface CommandMap {
     toggleHighlight: void;
   }

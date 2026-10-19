@@ -2,7 +2,7 @@
   "name": "EditorDocument",
   "kind": "interface",
   "imports": [
-    "import { EditorDocument } from 'react-rtekit';"
+    "import { EditorDocument } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "type": {

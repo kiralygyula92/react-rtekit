@@ -18,7 +18,7 @@ localization
 Five ship — `en`, `hu`, `de`, `es` and `pseudo` — each covering all 153 keys:
 
 ```tsx
-import { RichTextEditor, de } from 'react-rtekit';
+import { RichTextEditor, de } from '@kingtech/react-rtekit';
 
 <RichTextEditor localization={de} />
 ```

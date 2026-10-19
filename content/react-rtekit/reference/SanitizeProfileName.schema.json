@@ -2,7 +2,7 @@
   "name": "SanitizeProfileName",
   "kind": "type",
   "imports": [
-    "import { SanitizeProfileName } from 'react-rtekit';"
+    "import { SanitizeProfileName } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "types/sanitize.ts",

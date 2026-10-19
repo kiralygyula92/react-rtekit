@@ -18,14 +18,14 @@ content-styles
 That is why content styling is a separate stylesheet:
 
 ```ts
-import 'react-rtekit/content.css';   // the prose, on its own
-import 'react-rtekit/styles.css';    // everything, including the above
+import '@kingtech/react-rtekit/content.css';   // the prose, on its own
+import '@kingtech/react-rtekit/styles.css';    // everything, including the above
 ```
 
 Render stored HTML with the same styling using [RteContentView](/react-rtekit/content-view/), which sanitizes and applies the same classes:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 <RteContentView value={storedHtml} />
 ```

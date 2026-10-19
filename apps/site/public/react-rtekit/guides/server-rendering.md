@@ -15,7 +15,7 @@ The engine needs a DOM, so the editor itself is a client component. What the ser
 
 ```tsx
 'use client';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 ```
 
 ## The rule that matters
@@ -33,7 +33,7 @@ An HTML value can be pre-rendered. JSON and Markdown need a converter the server
 If a page only displays content, do not mount an editor at all:
 
 ```tsx
-import { RteContentView } from 'react-rtekit/view';
+import { RteContentView } from '@kingtech/react-rtekit/view';
 
 <RteContentView value={storedHtml} />
 ```

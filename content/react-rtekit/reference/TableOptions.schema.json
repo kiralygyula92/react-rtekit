@@ -2,7 +2,7 @@
   "name": "TableOptions",
   "kind": "interface",
   "imports": [
-    "import { TableOptions } from 'react-rtekit';"
+    "import { TableOptions } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "headerRow": {

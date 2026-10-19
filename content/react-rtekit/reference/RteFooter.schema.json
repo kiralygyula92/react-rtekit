@@ -2,7 +2,7 @@
   "name": "RteFooter",
   "kind": "function",
   "imports": [
-    "import { RteFooter } from 'react-rtekit';"
+    "import { RteFooter } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/parts.tsx",

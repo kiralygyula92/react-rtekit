@@ -2,7 +2,7 @@
   "name": "RteHandlers",
   "kind": "interface",
   "imports": [
-    "import { RteHandlers } from 'react-rtekit';"
+    "import { RteHandlers } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "onBeforeChange": {

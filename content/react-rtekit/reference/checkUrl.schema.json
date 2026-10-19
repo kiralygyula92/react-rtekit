@@ -2,7 +2,7 @@
   "name": "checkUrl",
   "kind": "function",
   "imports": [
-    "import { checkUrl } from 'react-rtekit/core';"
+    "import { checkUrl } from '@kingtech/react-rtekit/core';"
   ],
   "options": {},
   "filename": "core/sanitize/url.ts",

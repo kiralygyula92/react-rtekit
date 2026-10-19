@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { Rte, classicTheme, presets, useEditor } from 'react-rtekit';
+import { Rte, classicTheme, presets, useEditor } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

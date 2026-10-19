@@ -20,17 +20,17 @@ section: getting-started
 One package. React and React DOM are the only peer dependencies, and there is nothing else to install:
 
 ```bash
-npm install react-rtekit
+npm install @kingtech/react-rtekit
 ```
 
 ```bash
-pnpm add react-rtekit
+pnpm add @kingtech/react-rtekit
 ```
 
 Then import the stylesheet once, wherever you import your application's other global CSS:
 
 ```ts
-import 'react-rtekit/styles.css';
+import '@kingtech/react-rtekit/styles.css';
 ```
 
 The stylesheet is plain CSS in a cascade layer. There is no CSS-in-JS runtime, no UI kit and no icon package.
@@ -39,8 +39,8 @@ The stylesheet is plain CSS in a cascade layer. There is no CSS-in-JS runtime, n
 
 ```tsx
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
-import 'react-rtekit/styles.css';
+import { RichTextEditor } from '@kingtech/react-rtekit';
+import '@kingtech/react-rtekit/styles.css';
 
 export function Editor() {
   const [value, setValue] = useState('<p>Hello</p>');

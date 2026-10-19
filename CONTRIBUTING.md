@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve `react-rtekit`! Bug reports, docs fixes and pull requests are all
+Thanks for helping improve `@kingtech/react-rtekit`! Bug reports, docs fixes and pull requests are all
 welcome.
 
 ## Getting started

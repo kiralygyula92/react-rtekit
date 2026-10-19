@@ -1,5 +1,5 @@
 /**
- * `react-rtekit/meta` — runtime metadata for the documentation site.
+ * `@kingtech/react-rtekit/meta` — runtime metadata for the documentation site.
  *
  * The API pages list slots, commands, handlers, toolbar items, tokens, localization
  * keys and icons from *this* object, not from a hand-maintained page, so a symbol

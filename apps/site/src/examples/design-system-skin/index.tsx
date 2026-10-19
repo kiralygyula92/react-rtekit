@@ -4,7 +4,7 @@ import {
   type RteSlots,
   type SlotBaseProps,
   type ToolbarButtonSlotProps,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 
 /**
  * Re-skinning the editor's chrome with a design system's own components.

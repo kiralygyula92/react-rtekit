@@ -30,7 +30,7 @@ The public API is what the `exports` map exposes. Anything reachable only throug
 ## Installing a version
 
 ```bash
-npm install react-rtekit@^1.0.0
+npm install @kingtech/react-rtekit@^1.0.0
 ```
 
 ## Checking the installed version

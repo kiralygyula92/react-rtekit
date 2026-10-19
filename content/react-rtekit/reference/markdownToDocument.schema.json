@@ -2,7 +2,7 @@
   "name": "markdownToDocument",
   "kind": "function",
   "imports": [
-    "import { markdownToDocument } from 'react-rtekit';"
+    "import { markdownToDocument } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/serialize/markdown.ts",

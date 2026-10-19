@@ -2,7 +2,7 @@
   "name": "EditorValue",
   "kind": "type",
   "imports": [
-    "import { EditorValue } from 'react-rtekit';"
+    "import { EditorValue } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "types/common.ts",

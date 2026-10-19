@@ -5,7 +5,7 @@ import {
   htmlToDocument,
   type HtmlProfile,
   type EditorValue,
-} from 'react-rtekit';
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 

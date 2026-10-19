@@ -36,20 +36,20 @@ section: reference
 ## Import
 
 ```ts
-import { useCharacterCount } from 'react-rtekit';
-import { useCommand } from 'react-rtekit';
-import { useEditorContext } from 'react-rtekit';
-import { useEditorState } from 'react-rtekit';
-import { useFormatState } from 'react-rtekit';
-import { useIsEmpty } from 'react-rtekit';
-import { useIsFocused } from 'react-rtekit';
-import { useLocalization } from 'react-rtekit';
-import { useRteConfig } from 'react-rtekit';
-import { useRteDefaults } from 'react-rtekit';
-import { useRteSlots } from 'react-rtekit';
-import { useRteTheme } from 'react-rtekit';
-import { useUpload } from 'react-rtekit';
-import { useValidationError } from 'react-rtekit';
+import { useCharacterCount } from '@kingtech/react-rtekit';
+import { useCommand } from '@kingtech/react-rtekit';
+import { useEditorContext } from '@kingtech/react-rtekit';
+import { useEditorState } from '@kingtech/react-rtekit';
+import { useFormatState } from '@kingtech/react-rtekit';
+import { useIsEmpty } from '@kingtech/react-rtekit';
+import { useIsFocused } from '@kingtech/react-rtekit';
+import { useLocalization } from '@kingtech/react-rtekit';
+import { useRteConfig } from '@kingtech/react-rtekit';
+import { useRteDefaults } from '@kingtech/react-rtekit';
+import { useRteSlots } from '@kingtech/react-rtekit';
+import { useRteTheme } from '@kingtech/react-rtekit';
+import { useUpload } from '@kingtech/react-rtekit';
+import { useValidationError } from '@kingtech/react-rtekit';
 ```
 
 ## Options

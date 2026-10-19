@@ -2,7 +2,7 @@
   "name": "resolvePlugins",
   "kind": "function",
   "imports": [
-    "import { resolvePlugins } from 'react-rtekit';"
+    "import { resolvePlugins } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/presets.ts",

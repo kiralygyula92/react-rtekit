@@ -26,9 +26,9 @@ section: reference
 ## Import
 
 ```ts
-import { RteDefaultsProvider } from 'react-rtekit';
-import { RteLocaleProvider } from 'react-rtekit';
-import { RteThemeProvider } from 'react-rtekit';
+import { RteDefaultsProvider } from '@kingtech/react-rtekit';
+import { RteLocaleProvider } from '@kingtech/react-rtekit';
+import { RteThemeProvider } from '@kingtech/react-rtekit';
 ```
 
 ## Options

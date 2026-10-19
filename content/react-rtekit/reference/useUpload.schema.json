@@ -2,7 +2,7 @@
   "name": "useUpload",
   "kind": "function",
   "imports": [
-    "import { useUpload } from 'react-rtekit';"
+    "import { useUpload } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/hooks.ts",

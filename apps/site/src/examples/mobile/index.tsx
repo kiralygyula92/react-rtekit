@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RichTextEditor, type EditorValue } from 'react-rtekit';
+import { RichTextEditor, type EditorValue } from '@kingtech/react-rtekit';
 
 /**
  * The editor at phone width.

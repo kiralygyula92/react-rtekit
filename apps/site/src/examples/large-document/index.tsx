@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { RichTextEditor, type EditorInstance } from 'react-rtekit';
+import { RichTextEditor, type EditorInstance } from '@kingtech/react-rtekit';
 import { buildLargeDocument } from '../../fixtures';
 
 /**

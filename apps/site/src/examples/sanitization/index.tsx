@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { RteContentView } from 'react-rtekit/view';
-import { sanitizeHtml, type SanitizeProfileName } from 'react-rtekit';
+import { RteContentView } from '@kingtech/react-rtekit/view';
+import { sanitizeHtml, type SanitizeProfileName } from '@kingtech/react-rtekit';
 import { XSS_PAYLOADS } from '../../fixtures';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';

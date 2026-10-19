@@ -2,7 +2,7 @@
   "name": "RteLocalization",
   "kind": "interface",
   "imports": [
-    "import { RteLocalization } from 'react-rtekit';"
+    "import { RteLocalization } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "locale": {

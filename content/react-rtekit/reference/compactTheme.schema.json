@@ -2,7 +2,7 @@
   "name": "compactTheme",
   "kind": "variable",
   "imports": [
-    "import { compactTheme } from 'react-rtekit';"
+    "import { compactTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

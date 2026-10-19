@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { RichTextEditor, type CommandOverrides } from 'react-rtekit';
+import { RichTextEditor, type CommandOverrides } from '@kingtech/react-rtekit';
 import { CodeBlock } from '../../components/CodeBlock';
 
 /**

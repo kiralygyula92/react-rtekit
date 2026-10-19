@@ -2,7 +2,7 @@
   "name": "documentToText",
   "kind": "function",
   "imports": [
-    "import { documentToText } from 'react-rtekit';"
+    "import { documentToText } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/document.ts",

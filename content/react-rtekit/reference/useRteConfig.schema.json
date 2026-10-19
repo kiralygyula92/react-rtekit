@@ -2,7 +2,7 @@
   "name": "useRteConfig",
   "kind": "function",
   "imports": [
-    "import { useRteConfig } from 'react-rtekit';"
+    "import { useRteConfig } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "react/context.ts",

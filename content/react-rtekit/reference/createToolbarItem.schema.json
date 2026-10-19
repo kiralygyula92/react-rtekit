@@ -2,7 +2,7 @@
   "name": "createToolbarItem",
   "kind": "function",
   "imports": [
-    "import { createToolbarItem } from 'react-rtekit';"
+    "import { createToolbarItem } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "core/plugins/define.ts",

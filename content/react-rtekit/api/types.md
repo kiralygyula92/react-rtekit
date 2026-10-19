@@ -58,25 +58,25 @@ section: reference
 ## Import
 
 ```ts
-import { ChangeMeta } from 'react-rtekit';
-import { CommandId } from 'react-rtekit';
-import { EditorDocument } from 'react-rtekit';
-import { EditorValue } from 'react-rtekit';
-import { FindOptions } from 'react-rtekit';
-import { FormatState } from 'react-rtekit';
-import { ImageAttrs } from 'react-rtekit';
-import { LinkAttrs } from 'react-rtekit';
-import { RteHandlers } from 'react-rtekit';
-import { RteIcons } from 'react-rtekit';
-import { RteLocalization } from 'react-rtekit';
-import { RtePlugin } from 'react-rtekit';
-import { RteSlots } from 'react-rtekit';
-import { RteTheme } from 'react-rtekit';
-import { SanitizeConfig } from 'react-rtekit';
-import { SanitizeProfileName } from 'react-rtekit';
-import { TableOptions } from 'react-rtekit';
-import { ToolbarItemSpec } from 'react-rtekit';
-import { UploadHandler } from 'react-rtekit';
+import { ChangeMeta } from '@kingtech/react-rtekit';
+import { CommandId } from '@kingtech/react-rtekit';
+import { EditorDocument } from '@kingtech/react-rtekit';
+import { EditorValue } from '@kingtech/react-rtekit';
+import { FindOptions } from '@kingtech/react-rtekit';
+import { FormatState } from '@kingtech/react-rtekit';
+import { ImageAttrs } from '@kingtech/react-rtekit';
+import { LinkAttrs } from '@kingtech/react-rtekit';
+import { RteHandlers } from '@kingtech/react-rtekit';
+import { RteIcons } from '@kingtech/react-rtekit';
+import { RteLocalization } from '@kingtech/react-rtekit';
+import { RtePlugin } from '@kingtech/react-rtekit';
+import { RteSlots } from '@kingtech/react-rtekit';
+import { RteTheme } from '@kingtech/react-rtekit';
+import { SanitizeConfig } from '@kingtech/react-rtekit';
+import { SanitizeProfileName } from '@kingtech/react-rtekit';
+import { TableOptions } from '@kingtech/react-rtekit';
+import { ToolbarItemSpec } from '@kingtech/react-rtekit';
+import { UploadHandler } from '@kingtech/react-rtekit';
 ```
 
 ## Options

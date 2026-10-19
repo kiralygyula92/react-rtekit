@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { RichTextEditor, documentToHtml, htmlToDocument, type PresetName } from 'react-rtekit';
+import {
+  RichTextEditor,
+  documentToHtml,
+  htmlToDocument,
+  type PresetName,
+} from '@kingtech/react-rtekit';
 import { ChoiceGroup } from '../../components/ChoiceGroup';
 import { CodeBlock } from '../../components/CodeBlock';
 

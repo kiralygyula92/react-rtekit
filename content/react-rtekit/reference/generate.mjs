@@ -23,7 +23,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
  * that the docs and the signatures were written together. After seeding, the strings
  * file owns the prose and this script will never touch that key again.
  *
- * Run: pnpm --filter react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs
+ * Run: pnpm --filter @kingtech/react-rtekit docs:json && node content/react-rtekit/reference/generate.mjs
  */
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -212,7 +212,7 @@ function describeLocaleKey(key, en) {
 const apiJsonPath = path.join(root, 'packages/react-rtekit/api.json');
 if (!existsSync(apiJsonPath)) {
   process.stderr.write(
-    'packages/react-rtekit/api.json is missing.\nRun: pnpm --filter react-rtekit docs:json\n',
+    'packages/react-rtekit/api.json is missing.\nRun: pnpm --filter @kingtech/react-rtekit docs:json\n',
   );
   process.exit(1);
 }
@@ -318,19 +318,19 @@ function defaultTagOf(comment) {
  * Which entry point actually exports a symbol.
  *
  * Read from the built output rather than assumed. Every API page used to say
- * `import { X } from 'react-rtekit'`, which is wrong for everything that lives only in a
- * subpath — `RteContentView` is in `react-rtekit/view`, and five of the sanitizer and
- * Markdown helpers are in `react-rtekit/core`. Six pages documented an import that
+ * `import { X } from '@kingtech/react-rtekit'`, which is wrong for everything that lives only in a
+ * subpath — `RteContentView` is in `@kingtech/react-rtekit/view`, and five of the sanitizer and
+ * Markdown helpers are in `@kingtech/react-rtekit/core`. Six pages documented an import that
  * throws.
  *
  * Types are a separate matter and need no lookup: they are re-exported from the root, so
- * `import type` from `react-rtekit` resolves whatever the runtime entry happens to be.
+ * `import type` from `@kingtech/react-rtekit` resolves whatever the runtime entry happens to be.
  */
 const ENTRY_POINTS = [
-  ['react-rtekit', 'dist/index.js'],
-  ['react-rtekit/core', 'dist/core/index.js'],
-  ['react-rtekit/view', 'dist/view/index.js'],
-  ['react-rtekit/meta', 'dist/meta.js'],
+  ['@kingtech/react-rtekit', 'dist/index.js'],
+  ['@kingtech/react-rtekit/core', 'dist/core/index.js'],
+  ['@kingtech/react-rtekit/view', 'dist/view/index.js'],
+  ['@kingtech/react-rtekit/meta', 'dist/meta.js'],
 ];
 
 /** name -> the first entry point that exports it. */
@@ -347,7 +347,7 @@ for (const [specifier, relative] of ENTRY_POINTS) {
 
 /** The import line for a symbol, naming the entry point that really has it. */
 function importFor(name) {
-  return `import { ${name} } from '${exportedBy.get(name) ?? 'react-rtekit'}';`;
+  return `import { ${name} } from '${exportedBy.get(name) ?? '@kingtech/react-rtekit'}';`;
 }
 
 // ── build the symbol records ─────────────────────────────────────────────────
@@ -415,7 +415,7 @@ for (const [page, spec] of Object.entries(CATALOGUES)) {
     schema: {
       name: spec.title,
       kind: 'catalogue',
-      imports: [`import { meta } from 'react-rtekit/meta';`],
+      imports: [`import { meta } from '@kingtech/react-rtekit/meta';`],
       options: Object.fromEntries(
         entries.map((entry) => {
           const key = typeof entry === 'string' ? entry : entry.name;

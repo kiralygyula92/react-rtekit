@@ -2,7 +2,7 @@
   "name": "SanitizeConfig",
   "kind": "interface",
   "imports": [
-    "import { SanitizeConfig } from 'react-rtekit';"
+    "import { SanitizeConfig } from '@kingtech/react-rtekit';"
   ],
   "options": {
     "allowTags": {

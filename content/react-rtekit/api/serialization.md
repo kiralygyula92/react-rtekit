@@ -28,13 +28,13 @@ section: reference
 ## Import
 
 ```ts
-import { documentToHtml } from 'react-rtekit';
-import { documentToMarkdown } from 'react-rtekit';
-import { documentToText } from 'react-rtekit';
-import { htmlToDocument } from 'react-rtekit';
-import { isEmptyHtml } from 'react-rtekit';
-import { markdownToDocument } from 'react-rtekit';
-import { markdownToHtml } from 'react-rtekit/core';
+import { documentToHtml } from '@kingtech/react-rtekit';
+import { documentToMarkdown } from '@kingtech/react-rtekit';
+import { documentToText } from '@kingtech/react-rtekit';
+import { htmlToDocument } from '@kingtech/react-rtekit';
+import { isEmptyHtml } from '@kingtech/react-rtekit';
+import { markdownToDocument } from '@kingtech/react-rtekit';
+import { markdownToHtml } from '@kingtech/react-rtekit/core';
 ```
 
 ## Options

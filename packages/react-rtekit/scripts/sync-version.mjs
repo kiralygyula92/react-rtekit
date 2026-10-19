@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 /**
  * Writes `src/version.ts` from `package.json`.
  *
- * `VERSION` is a real export — the site prints it, `react-rtekit/meta` carries it, and
+ * `VERSION` is a real export — the site prints it, `@kingtech/react-rtekit/meta` carries it, and
  * a bug report that says "0.0.0" is a bug report nobody can act on. Nothing injected it
  * before: the constant was a literal with a comment claiming otherwise, so it would
  * have stayed at `0.0.0` through every release.

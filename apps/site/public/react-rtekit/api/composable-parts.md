@@ -26,16 +26,16 @@ section: reference
 ## Import
 
 ```ts
-import { Rte } from 'react-rtekit';
-import { RteContent } from 'react-rtekit';
-import { RteCounter } from 'react-rtekit';
-import { RteErrorText } from 'react-rtekit';
-import { RteFooter } from 'react-rtekit';
-import { RteHelperText } from 'react-rtekit';
-import { RteLabel } from 'react-rtekit';
-import { RtePortals } from 'react-rtekit';
-import { RteRoot } from 'react-rtekit';
-import { RteToolbar } from 'react-rtekit';
+import { Rte } from '@kingtech/react-rtekit';
+import { RteContent } from '@kingtech/react-rtekit';
+import { RteCounter } from '@kingtech/react-rtekit';
+import { RteErrorText } from '@kingtech/react-rtekit';
+import { RteFooter } from '@kingtech/react-rtekit';
+import { RteHelperText } from '@kingtech/react-rtekit';
+import { RteLabel } from '@kingtech/react-rtekit';
+import { RtePortals } from '@kingtech/react-rtekit';
+import { RteRoot } from '@kingtech/react-rtekit';
+import { RteToolbar } from '@kingtech/react-rtekit';
 ```
 
 ## Options

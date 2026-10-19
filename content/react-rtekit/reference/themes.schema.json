@@ -2,7 +2,7 @@
   "name": "themes",
   "kind": "variable",
   "imports": [
-    "import { themes } from 'react-rtekit';"
+    "import { themes } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

@@ -27,12 +27,12 @@ section: reference
 ## Import
 
 ```ts
-import { checkUrl } from 'react-rtekit/core';
-import { getProfile } from 'react-rtekit/core';
-import { mergeSanitizeConfig } from 'react-rtekit/core';
-import { normalizeUrl } from 'react-rtekit';
-import { resolveSanitizeConfig } from 'react-rtekit/core';
-import { sanitizeHtml } from 'react-rtekit';
+import { checkUrl } from '@kingtech/react-rtekit/core';
+import { getProfile } from '@kingtech/react-rtekit/core';
+import { mergeSanitizeConfig } from '@kingtech/react-rtekit/core';
+import { normalizeUrl } from '@kingtech/react-rtekit';
+import { resolveSanitizeConfig } from '@kingtech/react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit';
 ```
 
 ## Options

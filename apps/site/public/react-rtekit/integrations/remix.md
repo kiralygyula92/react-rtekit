@@ -12,7 +12,7 @@ section: integrations
 ```tsx
 import { useLoaderData, Form } from '@remix-run/react';
 import { useState } from 'react';
-import { RichTextEditor } from 'react-rtekit';
+import { RichTextEditor } from '@kingtech/react-rtekit';
 
 export default function Edit() {
   const { body } = useLoaderData<typeof loader>();
@@ -33,7 +33,7 @@ The hidden input is what makes a progressive-enhancement submission carry the co
 ## Sanitize in the action
 
 ```ts
-import { sanitizeHtml } from 'react-rtekit/core';
+import { sanitizeHtml } from '@kingtech/react-rtekit/core';
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData();
@@ -43,4 +43,4 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 ```
 
-`react-rtekit/core` has no React and no engine, so importing it in a server action costs about 19 kB rather than the whole component.
+`@kingtech/react-rtekit/core` has no React and no engine, so importing it in a server action costs about 19 kB rather than the whole component.

@@ -2,7 +2,7 @@
   "name": "borderedTheme",
   "kind": "variable",
   "imports": [
-    "import { borderedTheme } from 'react-rtekit';"
+    "import { borderedTheme } from '@kingtech/react-rtekit';"
   ],
   "options": {},
   "filename": "themes/index.ts",

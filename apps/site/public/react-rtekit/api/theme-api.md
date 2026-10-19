@@ -25,13 +25,13 @@ section: reference
 ## Import
 
 ```ts
-import { borderedTheme } from 'react-rtekit';
-import { classicTheme } from 'react-rtekit';
-import { compactTheme } from 'react-rtekit';
-import { createTheme } from 'react-rtekit';
-import { darkTheme } from 'react-rtekit';
-import { lightTheme } from 'react-rtekit';
-import { themes } from 'react-rtekit';
+import { borderedTheme } from '@kingtech/react-rtekit';
+import { classicTheme } from '@kingtech/react-rtekit';
+import { compactTheme } from '@kingtech/react-rtekit';
+import { createTheme } from '@kingtech/react-rtekit';
+import { darkTheme } from '@kingtech/react-rtekit';
+import { lightTheme } from '@kingtech/react-rtekit';
+import { themes } from '@kingtech/react-rtekit';
 ```
 
 ## Options

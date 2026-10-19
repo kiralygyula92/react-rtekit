@@ -19,16 +19,23 @@ permissions:
 env:
   NODE_VERSION: '22'
 
+# Only GitHub-made actions may run in this repository, so pnpm (the version in package.json's
+# `packageManager`) is installed with the runner's npm rather than with pnpm/action-setup.
+# The `build` job id is the status check the main branch ruleset requires: keep it, and give the
+# job no `name`, or the check reports under the new name and pull requests wait forever.
 jobs:
-  # build -> lint -> typecheck -> test -> size, in one job so later steps reuse the build.
-  # The build comes first: the site imports `react-rtekit` through the package's built
-  # declarations, so linting it before they exist types every editor value as `any`.
-  verify:
-    name: Lint, typecheck, test, build, size
+  # build -> lint -> typecheck -> test -> size -> site, in one job so later steps reuse the
+  # build. The build comes first: the site imports `@kingtech/react-rtekit` through the
+  # package's built declarations, so linting it before they exist types every editor value
+  # as `any`.
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -41,6 +48,8 @@ jobs:
       - run: pnpm size
       - name: Package linting on the real tarball
         run: pnpm publint && pnpm attw
+      - name: Build the documentation site
+        run: pnpm build:site
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -54,7 +63,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -72,7 +84,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -87,7 +102,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -106,7 +124,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -140,7 +161,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
+        with:
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -160,7 +184,9 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v6
+          persist-credentials: false
+      - name: Install pnpm
+        run: npm install -g "$(node -p "require('./package.json').packageManager")"
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}

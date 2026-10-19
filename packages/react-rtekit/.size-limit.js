@@ -127,7 +127,7 @@ export default [
     //
     // 17 → 18 kB for 1.0: Markdown link and image destinations are now checked
     // against the same URL policy as HTML, and the CSS check decodes escapes.
-    name: 'react-rtekit/view',
+    name: '@kingtech/react-rtekit/view',
     path: 'dist/view/index.js',
     limit: '18 kB',
     gzip: true,
@@ -139,7 +139,7 @@ export default [
     // token and locale key — which is what the API pages and the site search read. It
     // is not 4 kB of descriptions: enumerating the slots needs the slot table, the
     // tokens need the themes and the keys need the catalogue, so it carries them.
-    name: 'react-rtekit/meta',
+    name: '@kingtech/react-rtekit/meta',
     path: 'dist/meta.js',
     limit: '19 kB',
     gzip: true,
