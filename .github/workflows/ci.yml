@@ -179,7 +179,9 @@ jobs:
   changeset:
     name: Changeset present
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    # A release pull request (`release/vX.Y.Z`) applies the pending changesets with
+    # `pnpm version-packages`, so it has none left by design.
+    if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'release/')
     steps:
       - uses: actions/checkout@v7
         with:
