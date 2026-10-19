@@ -11,7 +11,7 @@ section: integrations
 
 The libraries and frameworks this editor most often sits inside.
 
-- [React Hook Form](/react-rtekit/integrations/react-hook-form/) — the dedicated adapter package.
+- [React Hook Form](/react-rtekit/integrations/react-hook-form/)
 - [Formik](/react-rtekit/integrations/formik/)
 - [Next.js](/react-rtekit/integrations/next-js/)
 - [Remix](/react-rtekit/integrations/remix/)

@@ -20,10 +20,10 @@ site runs at http://localhost:5189.
 
 | Command                              | What it does                                                                                     |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `pnpm build`                         | Builds both packages: ESM + CJS + d.ts (tsup) and CSS (Lightning CSS)                            |
+| `pnpm build`                         | Builds the library: ESM + CJS + d.ts (tsup) and CSS (Lightning CSS)                              |
 | `pnpm lint` / `pnpm format`          | ESLint (type-aware) / Prettier                                                                   |
 | `pnpm typecheck`                     | `tsc --noEmit` in every workspace project                                                        |
-| `pnpm test` / `pnpm test:coverage`   | Vitest: `core` (node), `react` (jsdom), `rhf` (jsdom)                                            |
+| `pnpm test` / `pnpm test:coverage`   | Vitest: `core` (node), `react` (jsdom)                                                           |
 | `pnpm e2e`                           | Playwright against a production build of the site (`FULL_MATRIX=1` for all five browser targets) |
 | `pnpm e2e:perf`                      | The performance budgets, on one browser and one worker                                           |
 | `pnpm size`                          | size-limit budgets                                                                               |

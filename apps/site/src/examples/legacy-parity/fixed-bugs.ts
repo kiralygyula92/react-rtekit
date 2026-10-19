@@ -75,7 +75,7 @@ export const FIXED_BUGS: FixedBug[] = [
   {
     id: 'R12',
     was: 'The value was written twice, through setValue and onChange, and validation lagged.',
-    now: 'One onChange. The form binding lives in @kingtech/react-rtekit-rhf.',
+    now: 'One onChange, which a form library binds to like any controlled input.',
   },
   {
     id: 'R13',

@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/forms/
 title: Forms
-description: Validation, dirty state and submission, with an adapter for React Hook Form and a worked Formik example.
+description: Validation, dirty state and submission, with worked React Hook Form and Formik examples.
 archetype: B
 section: features
 capabilityId: forms

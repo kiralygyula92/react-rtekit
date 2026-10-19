@@ -2,7 +2,7 @@
 pluginId: react-rtekit
 pathname: /react-rtekit/integrations/react-hook-form/
 title: React Hook Form
-description: 'The dedicated adapter package: registration, validation and dirty state.'
+description: Wiring the editor to a React Hook Form field with a Controller, including validation and focus.
 archetype: I
 section: integrations
 ---
@@ -13,28 +13,35 @@ section: integrations
 validation-rhf
 ```
 
-`@kingtech/react-rtekit-rhf` is a separate package so that a project not using React Hook Form does not pay for it:
-
-```bash
-npm install @kingtech/react-rtekit-rhf
-```
+There is no React Hook Form adapter package — the editor is a controlled input, so a `Controller` wires it to a field directly:
 
 ```tsx
-import { useForm } from 'react-hook-form';
-import { RhfRichTextEditor } from '@kingtech/react-rtekit-rhf';
+import { Controller, useForm } from 'react-hook-form';
+import { RichTextEditor, isEmptyHtml } from '@kingtech/react-rtekit';
 
 const { control, handleSubmit } = useForm({ defaultValues: { body: '' } });
 
-<RhfRichTextEditor
-  name="body"
+<Controller
   control={control}
-  label="Message"
-  rules={{ required: 'A message is required' }}
+  name="body"
+  rules={{ validate: (value) => (isEmptyHtml(value) ? 'A message is required' : true) }}
+  render={({ field, fieldState }) => (
+    <RichTextEditor
+      label="Message"
+      value={field.value}
+      onChange={(value) => field.onChange(value)}
+      onBlur={field.onBlur}
+      editorRef={(editor) => {
+        field.ref(editor ? { focus: () => editor.focus('end') } : null);
+      }}
+      error={fieldState.error?.message ?? false}
+    />
+  )}
 />
 ```
 
-## Why an adapter rather than a Controller
+## Why `validate` rather than `required`
 
-The adapter reports emptiness with `isEmpty()` rather than by string comparison. An editor that looks empty contains `<p><br></p>`, so a `required` rule written against the raw value passes when it should not — which is one of the 26 bugs this package was written to fix.
+React Hook Form's `required` is a truthiness check. An editor that looks empty contains `<p><br></p>`, a truthy string, so `required` passes when it should not — which is one of the 26 bugs this library was written to fix. Validate with `isEmptyHtml` instead.
 
-It also maps dirty state to real content changes, so focusing and blurring does not mark a form dirty.
+Pass the value to `field.onChange` and nothing else: also calling `setValue` writes every change twice. Because `value` comes from the form, `reset()` reaches the editor, and `editorRef` lets the form focus the editor when a submit fails.

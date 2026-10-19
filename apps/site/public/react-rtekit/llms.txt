@@ -73,7 +73,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 - [Accessibility](/react-rtekit/accessibility.md): A named textbox, a real ARIA toolbar with roving focus, linked errors, live announcements and AA contrast.
 - [Server rendering](/react-rtekit/server-rendering.md): Renders the content on the server and hydrates without a flash, so the field is not an empty box on first paint.
 - [Performance](/react-rtekit/performance.md): What a large document costs, what is measured on every build, and which props are worth memoising.
-- [Forms](/react-rtekit/forms.md): Validation, dirty state and submission, with an adapter for React Hook Form and a worked Formik example.
+- [Forms](/react-rtekit/forms.md): Validation, dirty state and submission, with worked React Hook Form and Formik examples.
 
 ## Demos
 
@@ -135,7 +135,7 @@ The whole documentation in one file, with the source of every example: [llms-ful
 ## Integrations
 
 - [All integrations](/react-rtekit/integrations.md): Working with the libraries and frameworks this editor most often sits inside.
-- [React Hook Form](/react-rtekit/integrations/react-hook-form.md): The dedicated adapter package: registration, validation and dirty state.
+- [React Hook Form](/react-rtekit/integrations/react-hook-form.md): Wiring the editor to a React Hook Form field with a Controller, including validation and focus.
 - [Formik](/react-rtekit/integrations/formik.md): Wiring the editor to a Formik field, including validation and submission.
 - [Next.js](/react-rtekit/integrations/next-js.md): App Router and Pages Router, client boundaries, and rendering content on the server.
 - [Remix](/react-rtekit/integrations/remix.md): Loading and submitting editor content with Remix's data conventions.
