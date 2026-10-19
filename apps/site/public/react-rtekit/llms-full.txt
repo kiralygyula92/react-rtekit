@@ -6,7 +6,7 @@ React RTE Kit is an accessible, themeable React rich-text editor with no depende
 
 Every page of the documentation at https://react-rtekit.vercel.app/react-rtekit/, in reading order, with the source of every live example inlined where its page shows it. It is generated from the same Markdown as the site, so it says exactly what the site says.
 
-- Package: `@kingtech/react-rtekit` 1.0.0 on npm. Peer dependencies: `react` >=18.2, `react-dom` >=18.2, and nothing else.
+- Package: `@kingtech/react-rtekit` 1.0.1 on npm. Peer dependencies: `react` >=18.2, `react-dom` >=18.2, and nothing else.
 - Page index: https://react-rtekit.vercel.app/react-rtekit/llms.txt — and any single page as Markdown, at its URL with `.md`.
 - 123 pages, 44 examples.
 
@@ -9551,6 +9551,12 @@ Discover more · https://react-rtekit.vercel.app/react-rtekit/discover-more/chan
 Every user-facing change is recorded with a changeset and released under [Semantic Versioning](https://react-rtekit.vercel.app/react-rtekit/getting-started/versions/).
 
 The full changelog is kept in the repository as [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md).
+
+## 1.0.1 (2026-10-19)
+
+### Patch Changes
+
+- Publish from GitHub Actions with provenance. The README no longer mentions the react-hook-form adapter, which was never published. The library's code and API are unchanged.
 
 ## 1.0.0
 
