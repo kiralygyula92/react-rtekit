@@ -1,5 +1,12 @@
 # react-rtekit
 
+## 1.0.2
+
+### Patch Changes
+
+- 3586eac: Toolbar dropdowns (block type, heading, alignment, font and font size) include the option they show in their accessible name, so "Block type Paragraph" rather than "Block type" alone. Speech-input users can now reach them by the text they see (WCAG 2.5.3, label in name).
+- Built with updated development dependencies, including tsup 9 and Vitest 4 (for a security advisory that affected development only). The published entry points and their exports are unchanged.
+
 ## 1.0.1
 
 ### Patch Changes
