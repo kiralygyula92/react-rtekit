@@ -13,6 +13,13 @@ Every user-facing change is recorded with a changeset and released under [Semant
 
 The full changelog is kept in the repository as [CHANGELOG.md](https://github.com/kiralygyula92/react-rtekit/blob/main/packages/react-rtekit/CHANGELOG.md).
 
+## 1.0.2 (2026-10-21)
+
+### Patch Changes
+
+- Toolbar dropdowns (block type, heading, alignment, font and font size) include the option they show in their accessible name, so "Block type Paragraph" rather than "Block type" alone. Speech-input users can now reach them by the text they see (WCAG 2.5.3, label in name).
+- Built with updated development dependencies, including tsup 9 and Vitest 4 (for a security advisory that affected development only). The published entry points and their exports are unchanged.
+
 ## 1.0.1 (2026-10-19)
 
 ### Patch Changes
