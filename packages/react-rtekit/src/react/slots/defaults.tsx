@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 import type {
   RteSlots,
   SlotBaseProps,
@@ -88,11 +88,20 @@ const DefaultToolbarDropdown = forwardRef<
     showLabel: _showLabel,
     command: _command,
     type: _type,
+    'aria-label': ariaLabel,
     ...rest
   },
   ref,
 ) {
   const current = options.find((option) => option.value === value);
+  const id = useId();
+  // The button shows the current option, so its accessible name has to contain that text
+  // (WCAG 2.5.3, label in name): "Block type Paragraph", not "Block type" alone, or a
+  // speech user saying what they see cannot reach it. With no current option the button
+  // shows the label itself, which `aria-label` already matches.
+  const name = current
+    ? { 'aria-labelledby': `${id}-label ${id}-value` }
+    : { 'aria-label': ariaLabel };
   return (
     <button
       ref={ref}
@@ -101,9 +110,17 @@ const DefaultToolbarDropdown = forwardRef<
       data-open={open}
       title={label}
       {...rest}
+      {...name}
     >
+      {current ? (
+        <span id={`${id}-label`} className="rte-visually-hidden">
+          {ariaLabel}
+        </span>
+      ) : null}
       {icon}
-      <span className="rte-toolbar__dropdown-value">{current?.label ?? label}</span>
+      <span id={`${id}-value`} className="rte-toolbar__dropdown-value">
+        {current?.label ?? label}
+      </span>
       {defaultIcons.chevronDown}
     </button>
   );

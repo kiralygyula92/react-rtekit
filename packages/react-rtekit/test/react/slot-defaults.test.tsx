@@ -200,3 +200,50 @@ describe('the slots that had no content at all', () => {
     expect(screen.getByRole('button', { name: 'Delete table' })).toBeInTheDocument();
   });
 });
+
+describe('the toolbar dropdown', () => {
+  /*
+   * Label in name (WCAG 2.5.3). The trigger shows the current option, and an `aria-label`
+   * of "Block type" replaced that text as its name, so a speech user saying "Paragraph",
+   * which is what they can see, reached nothing. axe reports it as
+   * `label-content-name-mismatch`.
+   */
+  const ToolbarDropdown = defaultSlots.ToolbarDropdown;
+  const dropdown = {
+    options: [
+      { value: 'paragraph', label: 'Paragraph' },
+      { value: 'h1', label: 'Heading 1' },
+    ],
+    onSelect: vi.fn(),
+    open: false,
+    onOpenChange: vi.fn(),
+    command: 'setBlockType',
+    active: false,
+    disabled: false,
+    label: 'Block type',
+    icon: null,
+    onMouseDown: vi.fn(),
+    onClick: vi.fn(),
+    'aria-label': 'Block type',
+    'aria-expanded': false,
+    'aria-haspopup': 'menu' as const,
+    tabIndex: 0,
+    type: 'button' as const,
+  };
+
+  it('names itself with the label and the option it shows', () => {
+    render(<ToolbarDropdown {...dropdown} value="h1" />);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveTextContent('Heading 1');
+    expect(button).toHaveAccessibleName('Block type Heading 1');
+  });
+
+  it('falls back to the label, which is then also what it shows', () => {
+    render(<ToolbarDropdown {...dropdown} value={null} />);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveTextContent('Block type');
+    expect(button).toHaveAccessibleName('Block type');
+  });
+});
