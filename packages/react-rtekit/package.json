@@ -132,7 +132,7 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.8",
-    "browserslist": "^4.29.4",
+    "browserslist": "^4.29.5",
     "fast-check": "^4.10.2",
     "lightningcss": "^1.30.2",
     "publint": "^0.3.25",
